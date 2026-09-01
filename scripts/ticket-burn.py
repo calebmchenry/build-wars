@@ -83,6 +83,7 @@ class TicketTarget:
     ticket_dir: Path
     only_epic: str | None = None
     target_path: Path | None = None
+    through_epic: str | None = None
 
 
 @dataclass(frozen=True)
@@ -212,11 +213,17 @@ def find_epic(root: Path, ticket_dir: Path, epic_id: str) -> TicketDoc:
     raise BurnError(f"epic not found in {repo_relative(ticket_dir)}: {epic_id}")
 
 
-def resolve_target(root: Path, target_value: str | None, only_epic: str | None) -> TicketTarget:
+def resolve_target(
+    root: Path,
+    target_value: str | None,
+    only_epic: str | None,
+    through_epic: str | None = None,
+) -> TicketTarget:
     ticket_dir = root / DEFAULT_TICKET_DIR
     target = target_value.strip() if target_value else ""
     target_path: Path | None = None
     target_epic: str | None = None
+    through_epic_id = through_epic.strip() if through_epic else None
     title = "Build Wars Ticket Backlog"
     target_id = "BACKLOG"
 
@@ -262,12 +269,20 @@ def resolve_target(root: Path, target_value: str | None, only_epic: str | None) 
         target_id = epic.id
         title = epic.title
 
+    if through_epic_id:
+        if not EPIC_ID_RE.fullmatch(through_epic_id):
+            raise BurnError(f"--through-epic must be an EPIC-NN id, got {through_epic_id!r}")
+        find_epic(root, ticket_dir, through_epic_id)
+        if target_epic and issue_number(target_epic) > issue_number(through_epic_id):
+            raise BurnError(f"target {target_epic} is after --through-epic {through_epic_id}")
+
     return TicketTarget(
         id=target_id,
         title=title,
         ticket_dir=ticket_dir.resolve(),
         only_epic=target_epic,
         target_path=target_path,
+        through_epic=through_epic_id,
     )
 
 
@@ -282,7 +297,7 @@ def discover_epics(
     epic_by_id = {epic.id: epic for epic in epics}
     selected: list[TicketDoc] = []
     for epic in epics:
-        if target.only_epic and epic.id != target.only_epic:
+        if not target_selects_epic(target, epic):
             continue
         status = epic.status
         if not status:
@@ -306,8 +321,18 @@ def open_target_epics(root: Path, target: TicketTarget) -> list[TicketDoc]:
     return [
         epic
         for epic in epics
-        if (not target.only_epic or epic.id == target.only_epic) and epic.status not in TERMINAL_STATUSES
+        if target_selects_epic(target, epic) and epic.status not in TERMINAL_STATUSES
     ]
+
+
+def target_includes_epic(target: TicketTarget, epic: TicketDoc) -> bool:
+    return not target.through_epic or issue_number(epic.id) <= issue_number(target.through_epic)
+
+
+def target_selects_epic(target: TicketTarget, epic: TicketDoc) -> bool:
+    return target_includes_epic(target, epic) and (
+        not target.only_epic or epic.id == target.only_epic
+    )
 
 
 def dependency_blockers(epic: TicketDoc, epic_by_id: dict[str, TicketDoc]) -> list[str]:
@@ -332,7 +357,7 @@ def no_eligible_reason(
     epic_by_id = {epic.id: epic for epic in epics}
     blockers: list[str] = []
     for epic in epics:
-        if target.only_epic and epic.id != target.only_epic:
+        if not target_selects_epic(target, epic):
             continue
         if epic.status in TERMINAL_STATUSES:
             continue
@@ -478,6 +503,7 @@ def new_state(target: TicketTarget, run_paths: RunPaths) -> dict[str, Any]:
         "target": target.id,
         "target_title": target.title,
         "target_path": repo_relative(target.target_path).as_posix() if target.target_path else None,
+        "through_epic": target.through_epic,
         "ticket_dir": repo_relative(target.ticket_dir).as_posix(),
         "sprint_dir": DEFAULT_SPRINT_DIR.as_posix(),
         "run_dir": repo_relative(run_paths.run_dir).as_posix(),
@@ -1076,7 +1102,7 @@ def write_summary(run_paths: RunPaths, state: dict[str, Any]) -> None:
 
 def run_burn(args: argparse.Namespace) -> int:
     root = repo_root()
-    target = resolve_target(root, args.target, args.epic)
+    target = resolve_target(root, args.target, args.epic, args.through_epic)
 
     if args.status or args.watch:
         return show_status(root, target.id, watch=args.watch, interval=args.watch_interval)
@@ -1365,6 +1391,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         help="ticket backlog directory, EPIC-NN id, epic directory, or EPIC.md path (default: work/tickets)",
     )
     parser.add_argument("--epic", help="limit the run to one EPIC-NN id")
+    parser.add_argument("--through-epic", help="process only epics up to and including this EPIC-NN id")
     parser.add_argument("--include-blocked", action="store_true", help="include blocked epics instead of skipping them")
     parser.add_argument("--ignore-dependencies", action="store_true", help="ignore depends_on gating")
     parser.add_argument("--max-sprints", type=int, help="stop after this many completed sprint executions")

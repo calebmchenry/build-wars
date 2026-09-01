@@ -51,3 +51,5 @@ sprints under `work/sprints`, and stores run logs/state under
 `work/runs/ticket-burn`.
 
 Use `python3 scripts/ticket-burn.py --dry-run` to preview the next eligible epic.
+Use `python3 scripts/ticket-burn.py --through-epic EPIC-07` to stop a backlog
+run after a specific epic while ignoring later open epics for that run.

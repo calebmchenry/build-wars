@@ -88,6 +88,35 @@ class TicketBurnTests(unittest.TestCase):
 
         self.assertEqual([epic.id for epic in epics], ["EPIC-00"])
 
+    def test_through_epic_filters_later_epics(self) -> None:
+        self._write_epic("EPIC-01", "ready")
+        self._write_epic("EPIC-02", "ready")
+        self._write_epic("EPIC-03", "ready")
+        self._write_epic("EPIC-04", "ready")
+        target = ticket_burn.TicketTarget(
+            id="BACKLOG",
+            title="Backlog",
+            ticket_dir=self.tmp / "work/tickets",
+            through_epic="EPIC-03",
+        )
+
+        epics = ticket_burn.discover_epics(self.tmp, target)
+
+        self.assertEqual([epic.id for epic in epics], ["EPIC-01", "EPIC-02", "EPIC-03"])
+
+    def test_through_epic_completion_ignores_later_open_epics(self) -> None:
+        self._write_epic("EPIC-01", "done")
+        self._write_epic("EPIC-02", "ready")
+        target = ticket_burn.TicketTarget(
+            id="BACKLOG",
+            title="Backlog",
+            ticket_dir=self.tmp / "work/tickets",
+            through_epic="EPIC-01",
+        )
+
+        self.assertEqual(ticket_burn.discover_epics(self.tmp, target), [])
+        self.assertEqual(ticket_burn.open_target_epics(self.tmp, target), [])
+
     def test_active_sprints_reads_in_progress_rows(self) -> None:
         ledger = self.tmp / "work/sprints/ledger.tsv"
         ledger.write_text(
@@ -214,6 +243,13 @@ class TicketBurnTests(unittest.TestCase):
         self.assertEqual(target.id, "EPIC-00")
         self.assertEqual(target.title, "Foundation")
         self.assertEqual(target.only_epic, "EPIC-00")
+
+    def test_resolve_target_rejects_target_after_through_epic(self) -> None:
+        self._write_epic("EPIC-07", "backlog")
+        self._write_epic("EPIC-08", "backlog")
+
+        with self.assertRaisesRegex(ticket_burn.BurnError, "after --through-epic"):
+            ticket_burn.resolve_target(self.tmp, "EPIC-08", None, "EPIC-07")
 
     def _write_epic(
         self,
