@@ -28,5 +28,12 @@ data/source-snapshots/*
 !data/source-snapshots/README.md
 data/generated/*
 !data/generated/README.md
+!data/generated/epic-03/
+data/generated/epic-03/*
+!data/generated/epic-03/professions-attributes.catalog.json
+!data/generated/epic-03/professions-attributes.catalog.manifest.json
 data/qa/*
 !data/qa/README.md
+!data/qa/epic-03/
+data/qa/epic-03/*
+!data/qa/epic-03/professions-attributes.catalog.qa.json

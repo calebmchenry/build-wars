@@ -10,10 +10,12 @@ export type {
   RuneId,
   SchemaVersion,
   SkillId,
+  TemplateAttributeId,
+  TemplateProfessionId,
   WeaponId,
   WeaponModifierId
 } from "./ids";
-export { authoredDocumentId, catalogId } from "./ids";
+export { authoredDocumentId, catalogId, templateAttributeId, templateProfessionId } from "./ids";
 export { FOUNDATION_SCHEMA_VERSION, SOURCE_POLICY_SCHEMA_VERSION } from "./source";
 export type {
   ArtifactCommitDecision,
@@ -51,15 +53,53 @@ export type {
   SourceUseDecision
 } from "./source";
 export type {
+  AttributePointRules,
+  AttributeQuestCampaign,
+  AttributeQuestReward,
+  AttributeQuestRewardGroup,
   Attribute,
+  AttributeRankCost,
+  AttributeTemplateCrosswalkRecord,
+  CatalogAttributeRecord,
+  CatalogFieldProvenance,
+  CatalogProfessionRecord,
   CatalogRecord,
+  CatalogSectionDigest,
+  DefaultPveAttributeBudget,
   Insignia,
+  LevelAttributePointTotal,
   Profession,
+  ProfessionAttributeCatalog,
+  ProfessionAttributeProfile,
+  ProfessionCampaign,
+  ProfessionFamily,
+  ProfessionTemplateCrosswalkRecord,
+  PrimaryAttributeEffectSummary,
+  ReservedTemplateIdFact,
   Rune,
   Skill,
   SkillProgression,
-  SkillProgressionBreakpoint
+  SkillProgressionBreakpoint,
+  TemplateCrosswalk,
+  TemplateCrosswalkStatus
 } from "./catalog";
+export {
+  attributeBudgetForLevel,
+  lookupAttributeByName,
+  lookupAttributeTemplateId,
+  lookupProfessionByName,
+  lookupProfessionTemplateId,
+  purchasedRankCost
+} from "./catalog-lookup";
+export type {
+  AttributeTemplateLookupOutcome,
+  KnownTemplateLookupOutcome,
+  NoneTemplateLookupOutcome,
+  ProfessionTemplateLookupOutcome,
+  ReservedTemplateLookupOutcome,
+  UnknownTemplateLookupOutcome,
+  UnsupportedTemplateLookupOutcome
+} from "./catalog-lookup";
 export type {
   ArmorPiece,
   ArmorSlot,

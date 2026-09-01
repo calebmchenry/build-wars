@@ -24,6 +24,14 @@ reviewed, rationale, expiration or re-review trigger when appropriate, and follo
 Generated QA reports remain ignored by default. A future ticket may promote a stable summary document
 only when it contains no prohibited source payload, secret, cached media, or unreviewed copied text.
 
+BW-0305 promotes one machine-readable EPIC-03 QA report:
+
+- `data/qa/epic-03/professions-attributes.catalog.qa.json`
+
+The adjacent `.summary.txt` remains ignored. The QA JSON is release evidence, not runtime app data.
+It records the same source IDs, artifact path, manifest path, generator, fixed timestamp, findings,
+summary counts, and app/public release gates used for promotion.
+
 Unknown copied material, digest mismatch, and unreadable artifacts are non-waivable for public
 release and must be resolved or excluded.
 
@@ -35,3 +43,6 @@ findings require review. Info findings do not block alone.
 
 Blocking regenerate commands write both machine-readable JSON and a bounded `.summary.txt` before
 returning exit code `2`.
+EPIC-03 promotion requires `appConsumptionGate: pass` and `publicReleaseGate: pass`; critical/error
+findings must be absent or closed, and warnings must be resolved, excluded, or accepted with named
+bounded review evidence.

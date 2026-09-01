@@ -24,6 +24,22 @@ Generated JSON remains ignored unless a future explicit ticket proves all of the
 Icon binaries, screenshots, copied PvX/Fandom/community prose, ratings text, usage notes, and page
 bodies are prohibited in this sprint. Synthetic fixture data belongs in `test/fixtures`, not here.
 
+## EPIC-03 Promoted Catalog
+
+BW-0305 approves exactly these generated files:
+
+- `data/generated/epic-03/professions-attributes.catalog.json`
+- `data/generated/epic-03/professions-attributes.catalog.manifest.json`
+
+The catalog contains the profession/attribute runtime data, compact source/provenance references,
+section digests, semantic `catalogVersion`, template crosswalks, allocation rules, manual reviews,
+and metadata-only icon references. The manifest records canonical artifact bytes, source snapshot
+manifest paths, source IDs, record count, digest, QA path, generator, and
+`commitDecision: exact-path-allowlisted`.
+
+The catalog is runtime-eligible but is not imported by `src/app` yet. Runtime code must not read the
+manifest, QA report, source snapshots, Python tooling, or wiki APIs.
+
 ## Determinism
 
 The writer emits UTF-8, LF-terminated, two-space indented JSON with sorted keys, finite numbers only,
@@ -33,6 +49,8 @@ report paths, and `commitDecision: ignored`.
 Fixture mode must produce byte-identical output under fixed inputs and a fixed clock. Live mode may
 change retrieval timestamps and source revisions, but those differences must be explicit in manifests
 and reviewed before promotion.
+The EPIC-03 profile uses fixed-clock fixture and offline replay for deterministic catalog, manifest,
+QA, source ordering, and finding ID generation.
 
 ## Baselines
 

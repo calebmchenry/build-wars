@@ -1,0 +1,17 @@
+==List by installation==
+
+===Core or Prophecies professions===
+*{{w}} [[Warrior]]
+*{{r}} [[Ranger]]
+*{{mo}} [[Monk]]
+*{{n}} [[Necromancer]]
+*{{me}} [[Mesmer]]
+*{{e}} [[Elementalist]]
+
+===Factions campaign professions===
+*{{a}} [[Assassin]]
+*{{rt}} [[Ritualist]]
+
+===Nightfall campaign professions===
+*{{p}} [[Paragon]]
+*{{d}} [[Dervish]]

@@ -17,6 +17,8 @@ import {
   type Skill,
   type SkillProgression,
   type SourceReference,
+  templateAttributeId,
+  templateProfessionId,
   type Weapon,
   type WeaponModifier
 } from "../../src/domain";
@@ -98,6 +100,22 @@ describe("domain contracts", () => {
     const roundTripped = JSON.parse(JSON.stringify(syntheticFoundationBuild)) as Build;
 
     expect(roundTripped.skillBar[0]).toBe(syntheticUnknownSkillId);
+  });
+
+  it("keeps template profession and attribute ID namespaces distinct in JSON", () => {
+    const encoded = JSON.stringify({
+      professionNone: templateProfessionId(0),
+      attributeZero: templateAttributeId(0),
+      unknownProfession: templateProfessionId(9876),
+      unknownAttribute: templateAttributeId(9876)
+    });
+
+    expect(JSON.parse(encoded)).toEqual({
+      professionNone: 0,
+      attributeZero: 0,
+      unknownProfession: 9876,
+      unknownAttribute: 9876
+    });
   });
 
   it("round-trips authored domain data as plain JSON-compatible values", () => {

@@ -28,6 +28,30 @@ class CliTests(unittest.TestCase):
         finally:
             shutil.rmtree(tmp)
 
+    def test_epic03_fixture_profile_command_prints_catalog_summary(self) -> None:
+        tmp = Path(tempfile.mkdtemp(prefix="bw_cli_epic03_test_"))
+        stdout = io.StringIO()
+        try:
+            with contextlib.redirect_stdout(stdout):
+                exit_code = main(
+                    [
+                        "fixture",
+                        "--profile",
+                        "epic-03-professions-attributes",
+                        "--root",
+                        str(tmp),
+                        "--fixture-root",
+                        str(FIXTURE_ROOT),
+                    ]
+                )
+
+            self.assertEqual(exit_code, 0)
+            output = stdout.getvalue()
+            self.assertIn("records: 52", output)
+            self.assertIn("professions-attributes.catalog.qa.json", output)
+        finally:
+            shutil.rmtree(tmp)
+
     def test_live_mode_requires_explicit_network_intent_and_title(self) -> None:
         stderr = io.StringIO()
         with contextlib.redirect_stderr(stderr):

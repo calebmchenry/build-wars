@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .config import FIXTURE_GENERATED_AT, SystemClock
 from .pipeline import PipelineError, PipelineOptions, run_pipeline
+from .profiles import EPIC_03_PROFILE_ID, profile_choices
 from .wikitext import ParserUnavailable
 
 
@@ -24,7 +25,7 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("test/fixtures/data-ingestion"),
         help="Committed minimized fixture input root.",
     )
-    parser.add_argument("--profile", default="guild-wars-wiki", choices=("guild-wars-wiki",))
+    parser.add_argument("--profile", default="guild-wars-wiki", choices=profile_choices())
     parser.add_argument("--clock", choices=("fixed", "now"), default="fixed")
     parser.add_argument("--generated-at", default=None, help="Override generated timestamp in UTC ISO-8601 form.")
     parser.add_argument("--baseline", type=Path, default=None, help="Optional artifact baseline JSON path.")
@@ -43,7 +44,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.mode == "live" and not args.allow_live_network:
         parser.error("live mode requires --allow-live-network")
-    if args.mode == "live" and not args.title:
+    if args.mode == "live" and args.profile != EPIC_03_PROFILE_ID and not args.title:
         parser.error("live mode requires at least one --title")
 
     generated_at = args.generated_at
@@ -56,6 +57,7 @@ def main(argv: list[str] | None = None) -> int:
                 mode=args.mode,
                 output_root=args.root,
                 fixture_root=args.fixture_root,
+                profile=args.profile,
                 generated_at=generated_at,
                 baseline_path=args.baseline,
                 allow_live_network=args.allow_live_network,

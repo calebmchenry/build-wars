@@ -14,3 +14,4 @@ The Compendium is an in-repo documentation system for agents.
 - [Source policy](source-policy.md)
 - [Data QA and release](data-qa-and-release.md)
 - [Data ingestion platform](data-ingestion-platform.md)
+- [Professions and attributes catalog](professions-and-attributes.md)

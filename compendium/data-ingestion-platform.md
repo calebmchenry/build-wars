@@ -50,3 +50,14 @@ adapter flags.
   `data/qa`.
 - Promote runtime data only through a later exact-path ticket that records provenance, QA closeout,
   source-policy disposition, and app/public gate status.
+
+## Registered Profiles
+
+- `guild-wars-wiki`: EPIC-02 skill-ID/parser/icon fixture proof. This remains the default profile
+  for compatibility.
+- `epic-03-professions-attributes`: EPIC-03 professions and attributes catalog. The profile locks
+  source pages, detail pages, page/request/byte caps, exact promoted paths, selected snapshot replay,
+  and metadata-only icon handling.
+
+Default fixture regeneration writes both the EPIC-02 proof and the EPIC-03 fixture catalog. Direct
+EPIC-03 fixture/offline/live commands use `--profile epic-03-professions-attributes`.

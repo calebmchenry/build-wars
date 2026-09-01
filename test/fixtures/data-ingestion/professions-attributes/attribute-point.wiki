@@ -1,0 +1,79 @@
+{| {{STDT}}
+! Character level || Points + || Total
+|-
+| 1 || 0 || 0
+|-
+| 2 || 5 || 5
+|-
+| 3 || 5 || 10
+|-
+| 4 || 5 || 15
+|-
+| 5 || 5 || 20
+|-
+| 6 || 5 || 25
+|-
+| 7 || 5 || 30
+|-
+| 8 || 5 || 35
+|-
+| 9 || 5 || 40
+|-
+| 10 || 5 || 45
+|-
+| 11 || 10 || 55
+|-
+| 12 || 10 || 65
+|-
+| 13 || 10 || 75
+|-
+| 14 || 10 || 85
+|-
+| 15 || 10 || 95
+|-
+| 16 || 15 || 110
+|-
+| 17 || 15 || 125
+|-
+| 18 || 15 || 140
+|-
+| 19 || 15 || 155
+|-
+| 20 || 15 || 170
+|}
+
+== Attribute quests ==
+{| {{STDT}}
+! [[Guild Wars Prophecies|Prophecies]] !! [[Guild Wars Factions|Factions]] !! [[Guild Wars Nightfall|Nightfall]]
+|-
+| [[Forgotten Wisdom]] ([[Sariss Yassith]]) <br /> [[The Hero's Challenge]] ([[Vanyi]]) || [[Lost Treasure]] ([[Raitahn Nem]]) <br /> [[An Unwelcome Guest]] ([[Zunraa]]) || [[Rising in the Ranks: Master Sergeant]] ([[Runduk]]) <br /> [[Rising in the Ranks: First Spear]] ([[Runduk]])
+|}
+
+=== Points required to increase rank ===
+{| {{STDT}}
+! Attribute rank || Cost || Total
+|-
+| 1 || 1 || 1
+|-
+| 2 || 2 || 3
+|-
+| 3 || 3 || 6
+|-
+| 4 || 4 || 10
+|-
+| 5 || 5 || 15
+|-
+| 6 || 6 || 21
+|-
+| 7 || 7 || 28
+|-
+| 8 || 9 || 37
+|-
+| 9 || 11 || 48
+|-
+| 10 || 13 || 61
+|-
+| 11 || 16 || 77
+|-
+| 12 || 20 || 97
+|}

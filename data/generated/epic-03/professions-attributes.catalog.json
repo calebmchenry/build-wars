@@ -1,0 +1,4359 @@
+{
+  "attributePointRules": {
+    "defaultPveLevel20": {
+      "baseAttributePoints": 170,
+      "deferredContexts": [
+        "pvp-characters",
+        "heroes",
+        "runes",
+        "equipment",
+        "consumables",
+        "blessings",
+        "temporary-effects",
+        "campaign-progression",
+        "actual-quest-log-state"
+      ],
+      "level": 20,
+      "maximumQuestBonusPoints": 30,
+      "policy": "level-20-pve-native-character-maximum-applicable-quest-rewards",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute-points:default-pve-level-20"
+        ],
+        "notes": "Derived from the level-20 base total and one maximum native-campaign quest bonus.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute-point:2694166"
+        ]
+      },
+      "totalWithMaximumQuestBonus": 200,
+      "totalWithoutQuestBonus": 170
+    },
+    "levelPointTotals": [
+      {
+        "cumulativeTotal": 0,
+        "earnedAtLevel": 0,
+        "level": 1,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:1"
+          ],
+          "notes": "Parsed from Attribute point level table row 1.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 5,
+        "earnedAtLevel": 5,
+        "level": 2,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:2"
+          ],
+          "notes": "Parsed from Attribute point level table row 2.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 10,
+        "earnedAtLevel": 5,
+        "level": 3,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:3"
+          ],
+          "notes": "Parsed from Attribute point level table row 3.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 15,
+        "earnedAtLevel": 5,
+        "level": 4,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:4"
+          ],
+          "notes": "Parsed from Attribute point level table row 4.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 20,
+        "earnedAtLevel": 5,
+        "level": 5,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:5"
+          ],
+          "notes": "Parsed from Attribute point level table row 5.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 25,
+        "earnedAtLevel": 5,
+        "level": 6,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:6"
+          ],
+          "notes": "Parsed from Attribute point level table row 6.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 30,
+        "earnedAtLevel": 5,
+        "level": 7,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:7"
+          ],
+          "notes": "Parsed from Attribute point level table row 7.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 35,
+        "earnedAtLevel": 5,
+        "level": 8,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:8"
+          ],
+          "notes": "Parsed from Attribute point level table row 8.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 40,
+        "earnedAtLevel": 5,
+        "level": 9,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:9"
+          ],
+          "notes": "Parsed from Attribute point level table row 9.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 45,
+        "earnedAtLevel": 5,
+        "level": 10,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:10"
+          ],
+          "notes": "Parsed from Attribute point level table row 10.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 55,
+        "earnedAtLevel": 10,
+        "level": 11,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:11"
+          ],
+          "notes": "Parsed from Attribute point level table row 11.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 65,
+        "earnedAtLevel": 10,
+        "level": 12,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:12"
+          ],
+          "notes": "Parsed from Attribute point level table row 12.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 75,
+        "earnedAtLevel": 10,
+        "level": 13,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:13"
+          ],
+          "notes": "Parsed from Attribute point level table row 13.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 85,
+        "earnedAtLevel": 10,
+        "level": 14,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:14"
+          ],
+          "notes": "Parsed from Attribute point level table row 14.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 95,
+        "earnedAtLevel": 10,
+        "level": 15,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:15"
+          ],
+          "notes": "Parsed from Attribute point level table row 15.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 110,
+        "earnedAtLevel": 15,
+        "level": 16,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:16"
+          ],
+          "notes": "Parsed from Attribute point level table row 16.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 125,
+        "earnedAtLevel": 15,
+        "level": 17,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:17"
+          ],
+          "notes": "Parsed from Attribute point level table row 17.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 140,
+        "earnedAtLevel": 15,
+        "level": 18,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:18"
+          ],
+          "notes": "Parsed from Attribute point level table row 18.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 155,
+        "earnedAtLevel": 15,
+        "level": 19,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:19"
+          ],
+          "notes": "Parsed from Attribute point level table row 19.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      },
+      {
+        "cumulativeTotal": 170,
+        "earnedAtLevel": 15,
+        "level": 20,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:level:20"
+          ],
+          "notes": "Parsed from Attribute point level table row 20.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        }
+      }
+    ],
+    "maximumApplicableQuestBonus": {
+      "points": 30,
+      "policy": "one-native-campaign",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute-points:maximum-applicable-quest-bonus"
+        ],
+        "notes": "Derived as the maximum one native-campaign quest group reward; origin groups are mutually exclusive.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute-point:2694166"
+        ]
+      }
+    },
+    "purchasedRankCosts": [
+      {
+        "cumulativeCost": 0,
+        "marginalCost": 0,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:0"
+          ],
+          "notes": "Explicit Build Wars zero-rank baseline derived from the purchased-rank table boundary.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 0
+      },
+      {
+        "cumulativeCost": 1,
+        "marginalCost": 1,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:1"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 1.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 1
+      },
+      {
+        "cumulativeCost": 3,
+        "marginalCost": 2,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:2"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 2.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 2
+      },
+      {
+        "cumulativeCost": 6,
+        "marginalCost": 3,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:3"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 3.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 3
+      },
+      {
+        "cumulativeCost": 10,
+        "marginalCost": 4,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:4"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 4.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 4
+      },
+      {
+        "cumulativeCost": 15,
+        "marginalCost": 5,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:5"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 5.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 5
+      },
+      {
+        "cumulativeCost": 21,
+        "marginalCost": 6,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:6"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 6.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 6
+      },
+      {
+        "cumulativeCost": 28,
+        "marginalCost": 7,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:7"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 7.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 7
+      },
+      {
+        "cumulativeCost": 37,
+        "marginalCost": 9,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:8"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 8.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 8
+      },
+      {
+        "cumulativeCost": 48,
+        "marginalCost": 11,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:9"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 9.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 9
+      },
+      {
+        "cumulativeCost": 61,
+        "marginalCost": 13,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:10"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 10.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 10
+      },
+      {
+        "cumulativeCost": 77,
+        "marginalCost": 16,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:11"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 11.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 11
+      },
+      {
+        "cumulativeCost": 97,
+        "marginalCost": 20,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:rank:12"
+          ],
+          "notes": "Parsed from Attribute point purchased-rank table row 12.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "purchasedRank": 12
+      }
+    ],
+    "questRewardGroups": [
+      {
+        "campaign": "factions",
+        "id": "attribute-quest-group:factions:native",
+        "maximumApplicableReward": 30,
+        "mutuallyExclusiveWithGroupIds": [
+          "attribute-quest-group:prophecies:native",
+          "attribute-quest-group:nightfall:native"
+        ],
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:quest-group:factions"
+          ],
+          "notes": "Grouped by native character campaign so mutually exclusive origin paths cannot be double-counted.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "questIds": [
+          "attribute-quest:factions:lost-treasure",
+          "attribute-quest:factions:an-unwelcome-guest"
+        ]
+      },
+      {
+        "campaign": "nightfall",
+        "id": "attribute-quest-group:nightfall:native",
+        "maximumApplicableReward": 30,
+        "mutuallyExclusiveWithGroupIds": [
+          "attribute-quest-group:prophecies:native",
+          "attribute-quest-group:factions:native"
+        ],
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:quest-group:nightfall"
+          ],
+          "notes": "Grouped by native character campaign so mutually exclusive origin paths cannot be double-counted.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "questIds": [
+          "attribute-quest:nightfall:rising-in-the-ranks-master-sergeant",
+          "attribute-quest:nightfall:rising-in-the-ranks-first-spear"
+        ]
+      },
+      {
+        "campaign": "prophecies",
+        "id": "attribute-quest-group:prophecies:native",
+        "maximumApplicableReward": 30,
+        "mutuallyExclusiveWithGroupIds": [
+          "attribute-quest-group:factions:native",
+          "attribute-quest-group:nightfall:native"
+        ],
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:quest-group:prophecies"
+          ],
+          "notes": "Grouped by native character campaign so mutually exclusive origin paths cannot be double-counted.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "questIds": [
+          "attribute-quest:prophecies:forgotten-wisdom",
+          "attribute-quest:prophecies:the-hero-s-challenge"
+        ]
+      }
+    ],
+    "questRewards": [
+      {
+        "campaign": "factions",
+        "id": "attribute-quest:factions:an-unwelcome-guest",
+        "name": "An Unwelcome Guest",
+        "nativeCharacterOnly": true,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:quest:an-unwelcome-guest"
+          ],
+          "notes": "Parsed from the bounded Attribute point quest-reward table; reward value comes from the page's per-quest statement.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "rewardGroupId": "attribute-quest-group:factions:native",
+        "rewardPoints": 15
+      },
+      {
+        "campaign": "factions",
+        "id": "attribute-quest:factions:lost-treasure",
+        "name": "Lost Treasure",
+        "nativeCharacterOnly": true,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:quest:lost-treasure"
+          ],
+          "notes": "Parsed from the bounded Attribute point quest-reward table; reward value comes from the page's per-quest statement.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "rewardGroupId": "attribute-quest-group:factions:native",
+        "rewardPoints": 15
+      },
+      {
+        "campaign": "nightfall",
+        "id": "attribute-quest:nightfall:rising-in-the-ranks-first-spear",
+        "name": "Rising in the Ranks: First Spear",
+        "nativeCharacterOnly": true,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:quest:rising-in-the-ranks-first-spear"
+          ],
+          "notes": "Parsed from the bounded Attribute point quest-reward table; reward value comes from the page's per-quest statement.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "rewardGroupId": "attribute-quest-group:nightfall:native",
+        "rewardPoints": 15
+      },
+      {
+        "campaign": "nightfall",
+        "id": "attribute-quest:nightfall:rising-in-the-ranks-master-sergeant",
+        "name": "Rising in the Ranks: Master Sergeant",
+        "nativeCharacterOnly": true,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:quest:rising-in-the-ranks-master-sergeant"
+          ],
+          "notes": "Parsed from the bounded Attribute point quest-reward table; reward value comes from the page's per-quest statement.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "rewardGroupId": "attribute-quest-group:nightfall:native",
+        "rewardPoints": 15
+      },
+      {
+        "campaign": "prophecies",
+        "id": "attribute-quest:prophecies:forgotten-wisdom",
+        "name": "Forgotten Wisdom",
+        "nativeCharacterOnly": true,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:quest:forgotten-wisdom"
+          ],
+          "notes": "Parsed from the bounded Attribute point quest-reward table; reward value comes from the page's per-quest statement.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "rewardGroupId": "attribute-quest-group:prophecies:native",
+        "rewardPoints": 15
+      },
+      {
+        "campaign": "prophecies",
+        "id": "attribute-quest:prophecies:the-hero-s-challenge",
+        "name": "The Hero's Challenge",
+        "nativeCharacterOnly": true,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:attribute-points:quest:the-hero-s-challenge"
+          ],
+          "notes": "Parsed from the bounded Attribute point quest-reward table; reward value comes from the page's per-quest statement.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:attribute-point:2694166"
+          ]
+        },
+        "rewardGroupId": "attribute-quest-group:prophecies:native",
+        "rewardPoints": 15
+      }
+    ]
+  },
+  "attributes": [
+    {
+      "id": 0,
+      "isPrimary": true,
+      "isPrimaryOnly": true,
+      "name": "Fast Casting",
+      "primaryEffectSummary": {
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:primary-effect-summary:fast-casting"
+          ],
+          "notes": "Original Build Wars summary reviewed at 2026-09-01T00:00:00Z; source prose was not copied.",
+          "reviewIds": [
+            "review:epic-03-primary-effect-summaries:2026-09-01"
+          ],
+          "sourceIds": [
+            "source:gww:attribute:2731620",
+            "source:gww:fast-casting:2734562"
+          ]
+        },
+        "text": "Speeds Mesmer spell and signet use, with PvE recharge support for Mesmer spells."
+      },
+      "professionId": 5,
+      "professionTemplateId": 5,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:0"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 0
+    },
+    {
+      "id": 1,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Illusion Magic",
+      "primaryEffectSummary": null,
+      "professionId": 5,
+      "professionTemplateId": 5,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:1"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 1
+    },
+    {
+      "id": 2,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Domination Magic",
+      "primaryEffectSummary": null,
+      "professionId": 5,
+      "professionTemplateId": 5,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:2"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 2
+    },
+    {
+      "id": 3,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Inspiration Magic",
+      "primaryEffectSummary": null,
+      "professionId": 5,
+      "professionTemplateId": 5,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:3"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 3
+    },
+    {
+      "id": 4,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Blood Magic",
+      "primaryEffectSummary": null,
+      "professionId": 4,
+      "professionTemplateId": 4,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:4"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 4
+    },
+    {
+      "id": 5,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Death Magic",
+      "primaryEffectSummary": null,
+      "professionId": 4,
+      "professionTemplateId": 4,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:5"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 5
+    },
+    {
+      "id": 6,
+      "isPrimary": true,
+      "isPrimaryOnly": true,
+      "name": "Soul Reaping",
+      "primaryEffectSummary": {
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:primary-effect-summary:soul-reaping"
+          ],
+          "notes": "Original Build Wars summary reviewed at 2026-09-01T00:00:00Z; source prose was not copied.",
+          "reviewIds": [
+            "review:epic-03-primary-effect-summaries:2026-09-01"
+          ],
+          "sourceIds": [
+            "source:gww:attribute:2731620",
+            "source:gww:soul-reaping:2734572"
+          ]
+        },
+        "text": "Returns Energy to Necromancers as nearby creatures die."
+      },
+      "professionId": 4,
+      "professionTemplateId": 4,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:6"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 6
+    },
+    {
+      "id": 7,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Curses",
+      "primaryEffectSummary": null,
+      "professionId": 4,
+      "professionTemplateId": 4,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:7"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 7
+    },
+    {
+      "id": 8,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Air Magic",
+      "primaryEffectSummary": null,
+      "professionId": 6,
+      "professionTemplateId": 6,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:8"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 8
+    },
+    {
+      "id": 9,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Earth Magic",
+      "primaryEffectSummary": null,
+      "professionId": 6,
+      "professionTemplateId": 6,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:9"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 9
+    },
+    {
+      "id": 10,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Fire Magic",
+      "primaryEffectSummary": null,
+      "professionId": 6,
+      "professionTemplateId": 6,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:10"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 10
+    },
+    {
+      "id": 11,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Water Magic",
+      "primaryEffectSummary": null,
+      "professionId": 6,
+      "professionTemplateId": 6,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:11"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 11
+    },
+    {
+      "id": 12,
+      "isPrimary": true,
+      "isPrimaryOnly": true,
+      "name": "Energy Storage",
+      "primaryEffectSummary": {
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:primary-effect-summary:energy-storage"
+          ],
+          "notes": "Original Build Wars summary reviewed at 2026-09-01T00:00:00Z; source prose was not copied.",
+          "reviewIds": [
+            "review:epic-03-primary-effect-summaries:2026-09-01"
+          ],
+          "sourceIds": [
+            "source:gww:attribute:2731620",
+            "source:gww:energy-storage:2734559"
+          ]
+        },
+        "text": "Raises an Elementalist primary character's maximum Energy."
+      },
+      "professionId": 6,
+      "professionTemplateId": 6,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:12"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 12
+    },
+    {
+      "id": 13,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Healing Prayers",
+      "primaryEffectSummary": null,
+      "professionId": 3,
+      "professionTemplateId": 3,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:13"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 13
+    },
+    {
+      "id": 14,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Smiting Prayers",
+      "primaryEffectSummary": null,
+      "professionId": 3,
+      "professionTemplateId": 3,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:14"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 14
+    },
+    {
+      "id": 15,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Protection Prayers",
+      "primaryEffectSummary": null,
+      "professionId": 3,
+      "professionTemplateId": 3,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:15"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 15
+    },
+    {
+      "id": 16,
+      "isPrimary": true,
+      "isPrimaryOnly": true,
+      "name": "Divine Favor",
+      "primaryEffectSummary": {
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:primary-effect-summary:divine-favor"
+          ],
+          "notes": "Original Build Wars summary reviewed at 2026-09-01T00:00:00Z; source prose was not copied.",
+          "reviewIds": [
+            "review:epic-03-primary-effect-summaries:2026-09-01"
+          ],
+          "sourceIds": [
+            "source:gww:attribute:2731620",
+            "source:gww:divine-favor:2734565"
+          ]
+        },
+        "text": "Adds extra healing when Monk spells target allies."
+      },
+      "professionId": 3,
+      "professionTemplateId": 3,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:16"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 16
+    },
+    {
+      "id": 17,
+      "isPrimary": true,
+      "isPrimaryOnly": true,
+      "name": "Strength",
+      "primaryEffectSummary": {
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:primary-effect-summary:strength"
+          ],
+          "notes": "Original Build Wars summary reviewed at 2026-09-01T00:00:00Z; source prose was not copied.",
+          "reviewIds": [
+            "review:epic-03-primary-effect-summaries:2026-09-01"
+          ],
+          "sourceIds": [
+            "source:gww:attribute:2731620",
+            "source:gww:strength:2734591"
+          ]
+        },
+        "text": "Improves armor penetration for Warrior attack skills."
+      },
+      "professionId": 1,
+      "professionTemplateId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:17"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 17
+    },
+    {
+      "id": 18,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Axe Mastery",
+      "primaryEffectSummary": null,
+      "professionId": 1,
+      "professionTemplateId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:18"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 18
+    },
+    {
+      "id": 19,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Hammer Mastery",
+      "primaryEffectSummary": null,
+      "professionId": 1,
+      "professionTemplateId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:19"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 19
+    },
+    {
+      "id": 20,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Swordsmanship",
+      "primaryEffectSummary": null,
+      "professionId": 1,
+      "professionTemplateId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:20"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 20
+    },
+    {
+      "id": 21,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Tactics",
+      "primaryEffectSummary": null,
+      "professionId": 1,
+      "professionTemplateId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:21"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 21
+    },
+    {
+      "id": 22,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Beast Mastery",
+      "primaryEffectSummary": null,
+      "professionId": 2,
+      "professionTemplateId": 2,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:22"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 22
+    },
+    {
+      "id": 23,
+      "isPrimary": true,
+      "isPrimaryOnly": true,
+      "name": "Expertise",
+      "primaryEffectSummary": {
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:primary-effect-summary:expertise"
+          ],
+          "notes": "Original Build Wars summary reviewed at 2026-09-01T00:00:00Z; source prose was not copied.",
+          "reviewIds": [
+            "review:epic-03-primary-effect-summaries:2026-09-01"
+          ],
+          "sourceIds": [
+            "source:gww:attribute:2731620",
+            "source:gww:expertise:2709729"
+          ]
+        },
+        "text": "Reduces key Ranger, attack, touch, and ritual skill energy costs."
+      },
+      "professionId": 2,
+      "professionTemplateId": 2,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:23"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 23
+    },
+    {
+      "id": 24,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Wilderness Survival",
+      "primaryEffectSummary": null,
+      "professionId": 2,
+      "professionTemplateId": 2,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:24"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 24
+    },
+    {
+      "id": 25,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Marksmanship",
+      "primaryEffectSummary": null,
+      "professionId": 2,
+      "professionTemplateId": 2,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:25"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 25
+    },
+    {
+      "id": 29,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Dagger Mastery",
+      "primaryEffectSummary": null,
+      "professionId": 7,
+      "professionTemplateId": 7,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:29"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 29
+    },
+    {
+      "id": 30,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Deadly Arts",
+      "primaryEffectSummary": null,
+      "professionId": 7,
+      "professionTemplateId": 7,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:30"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 30
+    },
+    {
+      "id": 31,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Shadow Arts",
+      "primaryEffectSummary": null,
+      "professionId": 7,
+      "professionTemplateId": 7,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:31"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 31
+    },
+    {
+      "id": 32,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Communing",
+      "primaryEffectSummary": null,
+      "professionId": 8,
+      "professionTemplateId": 8,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:32"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 32
+    },
+    {
+      "id": 33,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Restoration Magic",
+      "primaryEffectSummary": null,
+      "professionId": 8,
+      "professionTemplateId": 8,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:33"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 33
+    },
+    {
+      "id": 34,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Channeling Magic",
+      "primaryEffectSummary": null,
+      "professionId": 8,
+      "professionTemplateId": 8,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:34"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 34
+    },
+    {
+      "id": 35,
+      "isPrimary": true,
+      "isPrimaryOnly": true,
+      "name": "Critical Strikes",
+      "primaryEffectSummary": {
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:primary-effect-summary:critical-strikes"
+          ],
+          "notes": "Original Build Wars summary reviewed at 2026-09-01T00:00:00Z; source prose was not copied.",
+          "reviewIds": [
+            "review:epic-03-primary-effect-summaries:2026-09-01"
+          ],
+          "sourceIds": [
+            "source:gww:attribute:2731620",
+            "source:gww:critical-strikes:2734573"
+          ]
+        },
+        "text": "Raises Assassin critical-hit reliability and Energy return from critical hits."
+      },
+      "professionId": 7,
+      "professionTemplateId": 7,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:35"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 35
+    },
+    {
+      "id": 36,
+      "isPrimary": true,
+      "isPrimaryOnly": true,
+      "name": "Spawning Power",
+      "primaryEffectSummary": {
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:primary-effect-summary:spawning-power"
+          ],
+          "notes": "Original Build Wars summary reviewed at 2026-09-01T00:00:00Z; source prose was not copied.",
+          "reviewIds": [
+            "review:epic-03-primary-effect-summaries:2026-09-01"
+          ],
+          "sourceIds": [
+            "source:gww:attribute:2731620",
+            "source:gww:spawning-power:2734580"
+          ]
+        },
+        "text": "Improves Ritualist weapon-spell duration and summoned-creature durability."
+      },
+      "professionId": 8,
+      "professionTemplateId": 8,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:36"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 36
+    },
+    {
+      "id": 37,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Spear Mastery",
+      "primaryEffectSummary": null,
+      "professionId": 9,
+      "professionTemplateId": 9,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:37"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 37
+    },
+    {
+      "id": 38,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Command",
+      "primaryEffectSummary": null,
+      "professionId": 9,
+      "professionTemplateId": 9,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:38"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 38
+    },
+    {
+      "id": 39,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Motivation",
+      "primaryEffectSummary": null,
+      "professionId": 9,
+      "professionTemplateId": 9,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:39"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 39
+    },
+    {
+      "id": 40,
+      "isPrimary": true,
+      "isPrimaryOnly": true,
+      "name": "Leadership",
+      "primaryEffectSummary": {
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:primary-effect-summary:leadership"
+          ],
+          "notes": "Original Build Wars summary reviewed at 2026-09-01T00:00:00Z; source prose was not copied.",
+          "reviewIds": [
+            "review:epic-03-primary-effect-summaries:2026-09-01"
+          ],
+          "sourceIds": [
+            "source:gww:attribute:2731620",
+            "source:gww:leadership:2734584"
+          ]
+        },
+        "text": "Rewards Paragon shouts and chants with Energy based on affected allies."
+      },
+      "professionId": 9,
+      "professionTemplateId": 9,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:40"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 40
+    },
+    {
+      "id": 41,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Scythe Mastery",
+      "primaryEffectSummary": null,
+      "professionId": 10,
+      "professionTemplateId": 10,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:41"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 41
+    },
+    {
+      "id": 42,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Wind Prayers",
+      "primaryEffectSummary": null,
+      "professionId": 10,
+      "professionTemplateId": 10,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:42"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 42
+    },
+    {
+      "id": 43,
+      "isPrimary": false,
+      "isPrimaryOnly": false,
+      "name": "Earth Prayers",
+      "primaryEffectSummary": null,
+      "professionId": 10,
+      "professionTemplateId": 10,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:43"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 43
+    },
+    {
+      "id": 44,
+      "isPrimary": true,
+      "isPrimaryOnly": true,
+      "name": "Mysticism",
+      "primaryEffectSummary": {
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:primary-effect-summary:mysticism"
+          ],
+          "notes": "Original Build Wars summary reviewed at 2026-09-01T00:00:00Z; source prose was not copied.",
+          "reviewIds": [
+            "review:epic-03-primary-effect-summaries:2026-09-01"
+          ],
+          "sourceIds": [
+            "source:gww:attribute:2731620",
+            "source:gww:mysticism:2734586"
+          ]
+        },
+        "text": "Supports Dervish enchantment use and enchanted armor bonuses in PvE."
+      },
+      "professionId": 10,
+      "professionTemplateId": 10,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:attribute:44"
+        ],
+        "notes": "Joined by explicit attribute template ID and bounded Attribute page ownership rows.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 44
+    }
+  ],
+  "catalogVersion": "pa-e5d0d35ad8f30b4c",
+  "generatedArtifactManifest": null,
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "manualReviews": [
+    {
+      "decision": "approved",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": "Bounded Attribute page table.",
+          "reference": "source:gww:attribute:2731620"
+        },
+        {
+          "kind": "ticket",
+          "notes": "Primary effect summary promotion gate.",
+          "reference": "BW-0305"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "review:epic-03-primary-effect-summaries:2026-09-01",
+      "rationale": "Summaries are short original Build Wars wording derived from bounded factual inputs.",
+      "reReviewTrigger": "Any source revision or semantic summary change.",
+      "relatedFindingIds": [],
+      "reviewedAt": "2026-09-01T00:00:00Z",
+      "reviewer": "Build Wars sprint executor",
+      "scope": "EPIC-03 primary attribute effect summaries"
+    },
+    {
+      "decision": "approved",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:assassin:2710558"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:attribute-point:2694166"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:attribute:2731620"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:critical-strikes:2734573"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:dervish:2709815"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:divine-favor:2734565"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:elementalist:2709818"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:energy-storage:2734559"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:epic-03-profession-icons:bbec20cf9c5e"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:expertise:2709729"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:fast-casting:2734562"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:file:file-assassin-tango-icon-200-png:ac70f8e44e4e"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:file:file-dervish-tango-icon-200-png:b361073b7003"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:file:file-elementalist-tango-icon-200-png:34e1e5da8d66"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:file:file-mesmer-tango-icon-200-png:3a4feaf17415"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:file:file-monk-tango-icon-200-png:1988c6ebd759"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:file:file-necromancer-tango-icon-200-png:3bea3db1d3c6"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:file:file-paragon-tango-icon-200-png:fbeeee14a166"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:file:file-ranger-tango-icon-200-png:6ba411e9e217"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:file:file-ritualist-tango-icon-200-png:b5f5444ab6f6"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:file:file-warrior-tango-icon-200-png:33a2b97fd2a4"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:leadership:2734584"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:mesmer:2729950"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:monk:2709820"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:mysticism:2734586"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:necromancer:2709819"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:paragon:2710788"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:profession:2722500"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:ranger:2709821"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:ritualist:2729952"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:skill-template-format:2697657"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:soul-reaping:2734572"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:spawning-power:2734580"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:strength:2734591"
+        },
+        {
+          "kind": "source",
+          "notes": "Selected EPIC-03 snapshot/source reference.",
+          "reference": "source:gww:warrior:2729951"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "review:epic-03-first-baseline:2026-09-01",
+      "rationale": "No prior approved EPIC-03 baseline exists; this promotion records the selected bounded snapshot set and generated artifact as the initial baseline.",
+      "reReviewTrigger": "Any semantic projection, schema, source revision, or promotion path change.",
+      "relatedFindingIds": [],
+      "reviewedAt": "2026-09-01T00:00:00Z",
+      "reviewer": "Build Wars sprint executor",
+      "scope": "EPIC-03 first promoted profession/attribute catalog baseline"
+    }
+  ],
+  "professions": [
+    {
+      "abbreviation": "W",
+      "iconId": "remote-media:gww-icon:warrior",
+      "id": 1,
+      "name": "Warrior",
+      "primaryAttributeId": 17,
+      "primaryAttributeTemplateId": 17,
+      "primaryCreationCampaigns": [
+        "prophecies",
+        "factions",
+        "nightfall"
+      ],
+      "professionFamily": "core",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:profession:warrior"
+        ],
+        "notes": "Joined by explicit profession and attribute template IDs from bounded source pages.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:profession:2722500",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 1
+    },
+    {
+      "abbreviation": "R",
+      "iconId": "remote-media:gww-icon:ranger",
+      "id": 2,
+      "name": "Ranger",
+      "primaryAttributeId": 23,
+      "primaryAttributeTemplateId": 23,
+      "primaryCreationCampaigns": [
+        "prophecies",
+        "factions",
+        "nightfall"
+      ],
+      "professionFamily": "core",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:profession:ranger"
+        ],
+        "notes": "Joined by explicit profession and attribute template IDs from bounded source pages.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:profession:2722500",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 2
+    },
+    {
+      "abbreviation": "Mo",
+      "iconId": "remote-media:gww-icon:monk",
+      "id": 3,
+      "name": "Monk",
+      "primaryAttributeId": 16,
+      "primaryAttributeTemplateId": 16,
+      "primaryCreationCampaigns": [
+        "prophecies",
+        "factions",
+        "nightfall"
+      ],
+      "professionFamily": "core",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:profession:monk"
+        ],
+        "notes": "Joined by explicit profession and attribute template IDs from bounded source pages.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:profession:2722500",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 3
+    },
+    {
+      "abbreviation": "N",
+      "iconId": "remote-media:gww-icon:necromancer",
+      "id": 4,
+      "name": "Necromancer",
+      "primaryAttributeId": 6,
+      "primaryAttributeTemplateId": 6,
+      "primaryCreationCampaigns": [
+        "prophecies",
+        "factions",
+        "nightfall"
+      ],
+      "professionFamily": "core",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:profession:necromancer"
+        ],
+        "notes": "Joined by explicit profession and attribute template IDs from bounded source pages.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:profession:2722500",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 4
+    },
+    {
+      "abbreviation": "Me",
+      "iconId": "remote-media:gww-icon:mesmer",
+      "id": 5,
+      "name": "Mesmer",
+      "primaryAttributeId": 0,
+      "primaryAttributeTemplateId": 0,
+      "primaryCreationCampaigns": [
+        "prophecies",
+        "factions",
+        "nightfall"
+      ],
+      "professionFamily": "core",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:profession:mesmer"
+        ],
+        "notes": "Joined by explicit profession and attribute template IDs from bounded source pages.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:profession:2722500",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 5
+    },
+    {
+      "abbreviation": "E",
+      "iconId": "remote-media:gww-icon:elementalist",
+      "id": 6,
+      "name": "Elementalist",
+      "primaryAttributeId": 12,
+      "primaryAttributeTemplateId": 12,
+      "primaryCreationCampaigns": [
+        "prophecies",
+        "factions",
+        "nightfall"
+      ],
+      "professionFamily": "core",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:profession:elementalist"
+        ],
+        "notes": "Joined by explicit profession and attribute template IDs from bounded source pages.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:profession:2722500",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 6
+    },
+    {
+      "abbreviation": "A",
+      "iconId": "remote-media:gww-icon:assassin",
+      "id": 7,
+      "name": "Assassin",
+      "primaryAttributeId": 35,
+      "primaryAttributeTemplateId": 35,
+      "primaryCreationCampaigns": [
+        "factions"
+      ],
+      "professionFamily": "factions",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:profession:assassin"
+        ],
+        "notes": "Joined by explicit profession and attribute template IDs from bounded source pages.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:profession:2722500",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 7
+    },
+    {
+      "abbreviation": "Rt",
+      "iconId": "remote-media:gww-icon:ritualist",
+      "id": 8,
+      "name": "Ritualist",
+      "primaryAttributeId": 36,
+      "primaryAttributeTemplateId": 36,
+      "primaryCreationCampaigns": [
+        "factions"
+      ],
+      "professionFamily": "factions",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:profession:ritualist"
+        ],
+        "notes": "Joined by explicit profession and attribute template IDs from bounded source pages.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:profession:2722500",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 8
+    },
+    {
+      "abbreviation": "P",
+      "iconId": "remote-media:gww-icon:paragon",
+      "id": 9,
+      "name": "Paragon",
+      "primaryAttributeId": 40,
+      "primaryAttributeTemplateId": 40,
+      "primaryCreationCampaigns": [
+        "nightfall"
+      ],
+      "professionFamily": "nightfall",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:profession:paragon"
+        ],
+        "notes": "Joined by explicit profession and attribute template IDs from bounded source pages.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:profession:2722500",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 9
+    },
+    {
+      "abbreviation": "D",
+      "iconId": "remote-media:gww-icon:dervish",
+      "id": 10,
+      "name": "Dervish",
+      "primaryAttributeId": 44,
+      "primaryAttributeTemplateId": 44,
+      "primaryCreationCampaigns": [
+        "nightfall"
+      ],
+      "professionFamily": "nightfall",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-03:profession:dervish"
+        ],
+        "notes": "Joined by explicit profession and attribute template IDs from bounded source pages.",
+        "reviewIds": [],
+        "sourceIds": [
+          "source:gww:attribute:2731620",
+          "source:gww:profession:2722500",
+          "source:gww:skill-template-format:2697657"
+        ]
+      },
+      "templateId": 10
+    }
+  ],
+  "profile": {
+    "id": "epic-03-professions-attributes",
+    "sourceCaps": {
+      "pageLimit": 32,
+      "parserByteCap": 250000,
+      "requestLimit": 12,
+      "responseByteCap": 2000000
+    },
+    "sourceEpic": "EPIC-03",
+    "sourceTarget": "BACKLOG"
+  },
+  "remoteMedia": [
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/3/34/Assassin-tango-icon-200.png",
+      "fileTitle": "File:Assassin-tango-icon-200.png",
+      "height": 200,
+      "id": "remote-media:gww-icon:assassin",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Assassin.",
+      "remoteSha1": "ac70f8e44e4ea5e22d20785c1a64309394102b3e",
+      "remoteTimestamp": "2007-08-29T21:16:18Z",
+      "sizeBytes": 19890,
+      "sourceId": "source:gww:file:file-assassin-tango-icon-200-png:ac70f8e44e4e",
+      "useDecision": "allowed",
+      "width": 200
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/b/bf/Dervish-tango-icon-200.png",
+      "fileTitle": "File:Dervish-tango-icon-200.png",
+      "height": 200,
+      "id": "remote-media:gww-icon:dervish",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Dervish.",
+      "remoteSha1": "b361073b7003ebc8a5d3cfbd97d82e6cdd95ae6a",
+      "remoteTimestamp": "2009-06-20T00:21:15Z",
+      "sizeBytes": 17335,
+      "sourceId": "source:gww:file:file-dervish-tango-icon-200-png:b361073b7003",
+      "useDecision": "allowed",
+      "width": 200
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/3/3c/Elementalist-tango-icon-200.png",
+      "fileTitle": "File:Elementalist-tango-icon-200.png",
+      "height": 200,
+      "id": "remote-media:gww-icon:elementalist",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Elementalist.",
+      "remoteSha1": "34e1e5da8d6686f92dac773aecc577d411f070be",
+      "remoteTimestamp": "2010-02-21T10:00:54Z",
+      "sizeBytes": 20283,
+      "sourceId": "source:gww:file:file-elementalist-tango-icon-200-png:34e1e5da8d66",
+      "useDecision": "allowed",
+      "width": 200
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/c/cc/Mesmer-tango-icon-200.png",
+      "fileTitle": "File:Mesmer-tango-icon-200.png",
+      "height": 200,
+      "id": "remote-media:gww-icon:mesmer",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Mesmer.",
+      "remoteSha1": "3a4feaf17415e589b227c678d1e426688a297933",
+      "remoteTimestamp": "2007-08-29T21:16:21Z",
+      "sizeBytes": 19961,
+      "sourceId": "source:gww:file:file-mesmer-tango-icon-200-png:3a4feaf17415",
+      "useDecision": "allowed",
+      "width": 200
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/8/86/Monk-tango-icon-200.png",
+      "fileTitle": "File:Monk-tango-icon-200.png",
+      "height": 200,
+      "id": "remote-media:gww-icon:monk",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Monk.",
+      "remoteSha1": "1988c6ebd75961983389887118b612d01617e726",
+      "remoteTimestamp": "2007-08-29T21:16:21Z",
+      "sizeBytes": 11836,
+      "sourceId": "source:gww:file:file-monk-tango-icon-200-png:1988c6ebd759",
+      "useDecision": "allowed",
+      "width": 200
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/a/a8/Necromancer-tango-icon-200.png",
+      "fileTitle": "File:Necromancer-tango-icon-200.png",
+      "height": 200,
+      "id": "remote-media:gww-icon:necromancer",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Necromancer.",
+      "remoteSha1": "3bea3db1d3c65920be864184f836c87b5ab8c83c",
+      "remoteTimestamp": "2007-08-29T21:16:24Z",
+      "sizeBytes": 21262,
+      "sourceId": "source:gww:file:file-necromancer-tango-icon-200-png:3bea3db1d3c6",
+      "useDecision": "allowed",
+      "width": 200
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/2/21/Paragon-tango-icon-200.png",
+      "fileTitle": "File:Paragon-tango-icon-200.png",
+      "height": 200,
+      "id": "remote-media:gww-icon:paragon",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Paragon.",
+      "remoteSha1": "fbeeee14a166410a217d58454f15dd34ac4731cc",
+      "remoteTimestamp": "2007-08-29T21:16:25Z",
+      "sizeBytes": 14585,
+      "sourceId": "source:gww:file:file-paragon-tango-icon-200-png:fbeeee14a166",
+      "useDecision": "allowed",
+      "width": 200
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/4/43/Ranger-tango-icon-200.png",
+      "fileTitle": "File:Ranger-tango-icon-200.png",
+      "height": 200,
+      "id": "remote-media:gww-icon:ranger",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Ranger.",
+      "remoteSha1": "6ba411e9e2176e3bb3496427304a810528f46997",
+      "remoteTimestamp": "2008-01-09T10:33:04Z",
+      "sizeBytes": 15742,
+      "sourceId": "source:gww:file:file-ranger-tango-icon-200-png:6ba411e9e217",
+      "useDecision": "allowed",
+      "width": 200
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/1/15/Ritualist-tango-icon-200.png",
+      "fileTitle": "File:Ritualist-tango-icon-200.png",
+      "height": 200,
+      "id": "remote-media:gww-icon:ritualist",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Ritualist.",
+      "remoteSha1": "b5f5444ab6f6e1f886c850c2a03c92567aa81b8f",
+      "remoteTimestamp": "2007-08-29T21:16:27Z",
+      "sizeBytes": 14735,
+      "sourceId": "source:gww:file:file-ritualist-tango-icon-200-png:b5f5444ab6f6",
+      "useDecision": "allowed",
+      "width": 200
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/8/88/Warrior-tango-icon-200.png",
+      "fileTitle": "File:Warrior-tango-icon-200.png",
+      "height": 200,
+      "id": "remote-media:gww-icon:warrior",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Warrior.",
+      "remoteSha1": "33a2b97fd2a43911a68dbc1b3d360706ea93b8d4",
+      "remoteTimestamp": "2007-08-29T21:16:28Z",
+      "sizeBytes": 13647,
+      "sourceId": "source:gww:file:file-warrior-tango-icon-200-png:33a2b97fd2a4",
+      "useDecision": "allowed",
+      "width": 200
+    }
+  ],
+  "schemaVersion": 1,
+  "sectionDigests": [
+    {
+      "digest": "06b08691f79e1a77feff629f758a876dd5fae0e37db27ce45dac2215cdefdfc8",
+      "section": "templateCrosswalk"
+    },
+    {
+      "digest": "88e3453893080531b42941c6e311c784fa06e8417ebb1b1b75f6b9c448b16cde",
+      "section": "professions"
+    },
+    {
+      "digest": "74823681580f46a48394defdcf92a622cdddccae67003043497df65242999a74",
+      "section": "attributes"
+    },
+    {
+      "digest": "87d6fd2069ad7f824132c7e43068348c5edcb2de36e8ace8c7a8582ff1972253",
+      "section": "attributePointRules"
+    },
+    {
+      "digest": "36e5b6f3fae709ba68b27d5a735bb5ccd0d605638fd8ae584d080033f72b3ea2",
+      "section": "remoteMedia"
+    }
+  ],
+  "snapshotManifestPaths": [
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2694166-c488e2/attribute-point-1230ab5b2b-4c116b9bccedc070.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2697657-6c5f4c/skill-template-format-d5e0d8c79b-c5bdf4cb26e7bbd7.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2709729-08bef7/expertise-2159c8978f-0f8523de2c58e4b5.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2709815-0b0ab4/dervish-9ed6c2932f-1fe924e0e22798d2.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2709818-2ccec5/elementalist-7324bbc611-6984b3da7ba9049d.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2709819-6a9342/necromancer-896ae426e8-d289de10f8cfe7fc.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2709820-18b577/monk-a670c8d297-0c442e0a366f3495.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2709821-3604a6/ranger-e6cd637f95-ef0274539240fe2d.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2710558-8ae154/assassin-c2d31bc82e-e10385c50ed6c486.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2710788-c37f51/paragon-9e582fd936-2284597441ac5ab2.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2722500-c14c9a/profession-13a150e3fd-689064e331f679bc.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2729950-251090/mesmer-297e949036-3d894201237faa0a.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2729951-bbf55a/warrior-eaf0fe0a36-e85d7023bb14d83e.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2729952-b387b4/ritualist-0ede24c03a-d80eeeefc8d601ca.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2731620-07f13b/attribute-1d289028b7-6038039ca69a61a5.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2734559-a61ff3/energy-storage-685a549f08-da5a1bcdb5225999.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2734562-fc07a0/fast-casting-bad826897a-e6219ef97a1ff9e6.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2734565-b7a4fb/divine-favor-5baaf8915e-db76081afbfebdda.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2734572-874146/soul-reaping-145ac92da5-025bd649ef46e20a.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2734573-b8ab9b/critical-strikes-3366a740e8-c2f83e4703262801.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2734580-a4e68c/spawning-power-d6fb12a863-694ce178de972d47.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2734584-b7c7dc/leadership-ec75f79040-9514bb087f5763c8.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2734586-55ab4a/mysticism-9e3d1924f8-f7c79217623c5f5b.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2734591-6897d3/strength-63ee3a1b96-5541a70978f4198f.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-bbec20cf9c5ec993e571c4defe6bb40fd35a4138e4abaad3f4ec7030f019-a7f3cb/epic-03-profession-icon-imageinfo-d2e82e7646-45cfbe3ff8d74d67.manifest.json"
+  ],
+  "sourceShapeProof": {
+    "candidateRowCounts": {
+      "attributeOwnership": 10,
+      "attributePoints": 35,
+      "templateCrosswalk": 53
+    },
+    "checkpointAt": "2026-09-01T00:00:00Z",
+    "detailPages": [
+      "Warrior",
+      "Ranger",
+      "Monk",
+      "Necromancer",
+      "Mesmer",
+      "Elementalist",
+      "Assassin",
+      "Ritualist",
+      "Paragon",
+      "Dervish",
+      "Strength",
+      "Expertise",
+      "Divine Favor",
+      "Soul Reaping",
+      "Fast Casting",
+      "Energy Storage",
+      "Critical Strikes",
+      "Spawning Power",
+      "Leadership",
+      "Mysticism"
+    ],
+    "parserDecision": "mwparserfromhell plus bounded wiki-table/list framing is sufficient for the locked EPIC-03 profile.",
+    "requiredHelper": "bounded-wiki-table-helper",
+    "sourcePages": [
+      "Skill template format",
+      "Profession",
+      "Attribute",
+      "Attribute point"
+    ]
+  },
+  "sources": [
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Assassin",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:assassin:2710558",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 194,
+      "pageTitle": "Assassin",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2710558,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2025-07-16T19:07:09Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Attribute_point",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:attribute-point:2694166",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 10873,
+      "pageTitle": "Attribute point",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2694166,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2024-04-05T15:56:40Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Attribute",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:attribute:2731620",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 57,
+      "pageTitle": "Attribute",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2731620,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-06-26T21:30:44Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Critical_Strikes",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:critical-strikes:2734573",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 2517,
+      "pageTitle": "Critical Strikes",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2734573,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-07-16T03:35:12Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Dervish",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:dervish:2709815",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 580,
+      "pageTitle": "Dervish",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2709815,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2025-07-01T04:56:48Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Divine_Favor",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:divine-favor:2734565",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 2520,
+      "pageTitle": "Divine Favor",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2734565,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-07-16T03:33:30Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Elementalist",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:elementalist:2709818",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 200,
+      "pageTitle": "Elementalist",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2709818,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2025-07-01T04:56:50Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Energy_Storage",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:energy-storage:2734559",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 2516,
+      "pageTitle": "Energy Storage",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2734559,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-07-16T03:31:38Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/EPIC-03_profession_icon_imageinfo",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:epic-03-profession-icons:bbec20cf9c5e",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": "imageinfo:bbec20cf9c5e",
+      "pageTitle": "EPIC-03 profession icon imageinfo",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": "bbec20cf9c5ec993e571c4defe6bb40fd35a4138e4abaad3f4ec7030f01979b9",
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2010-02-21T10:00:54Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Expertise",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:expertise:2709729",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 2532,
+      "pageTitle": "Expertise",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2709729,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2025-07-01T04:55:08Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Fast_Casting",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:fast-casting:2734562",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 2512,
+      "pageTitle": "Fast Casting",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2734562,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-07-16T03:32:32Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/File:Assassin-tango-icon-200.png",
+      "family": "guild-wars-wiki",
+      "fileId": 65662,
+      "fileTitle": "File:Assassin-tango-icon-200.png",
+      "id": "source:gww:file:file-assassin-tango-icon-200-png:ac70f8e44e4e",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Metadata-only file page evidence; no media bytes are cached or bundled.",
+      "pageId": 65662,
+      "pageTitle": null,
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": "ac70f8e44e4ea5e22d20785c1a64309394102b3e",
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2007-08-29T21:16:18Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/File:Dervish-tango-icon-200.png",
+      "family": "guild-wars-wiki",
+      "fileId": 65663,
+      "fileTitle": "File:Dervish-tango-icon-200.png",
+      "id": "source:gww:file:file-dervish-tango-icon-200-png:b361073b7003",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Metadata-only file page evidence; no media bytes are cached or bundled.",
+      "pageId": 65663,
+      "pageTitle": null,
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": "b361073b7003ebc8a5d3cfbd97d82e6cdd95ae6a",
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2009-06-20T00:21:15Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/File:Elementalist-tango-icon-200.png",
+      "family": "guild-wars-wiki",
+      "fileId": 65664,
+      "fileTitle": "File:Elementalist-tango-icon-200.png",
+      "id": "source:gww:file:file-elementalist-tango-icon-200-png:34e1e5da8d66",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Metadata-only file page evidence; no media bytes are cached or bundled.",
+      "pageId": 65664,
+      "pageTitle": null,
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": "34e1e5da8d6686f92dac773aecc577d411f070be",
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2010-02-21T10:00:54Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/File:Mesmer-tango-icon-200.png",
+      "family": "guild-wars-wiki",
+      "fileId": 65665,
+      "fileTitle": "File:Mesmer-tango-icon-200.png",
+      "id": "source:gww:file:file-mesmer-tango-icon-200-png:3a4feaf17415",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Metadata-only file page evidence; no media bytes are cached or bundled.",
+      "pageId": 65665,
+      "pageTitle": null,
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": "3a4feaf17415e589b227c678d1e426688a297933",
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2007-08-29T21:16:21Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/File:Monk-tango-icon-200.png",
+      "family": "guild-wars-wiki",
+      "fileId": 65666,
+      "fileTitle": "File:Monk-tango-icon-200.png",
+      "id": "source:gww:file:file-monk-tango-icon-200-png:1988c6ebd759",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Metadata-only file page evidence; no media bytes are cached or bundled.",
+      "pageId": 65666,
+      "pageTitle": null,
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": "1988c6ebd75961983389887118b612d01617e726",
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2007-08-29T21:16:21Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/File:Necromancer-tango-icon-200.png",
+      "family": "guild-wars-wiki",
+      "fileId": 65668,
+      "fileTitle": "File:Necromancer-tango-icon-200.png",
+      "id": "source:gww:file:file-necromancer-tango-icon-200-png:3bea3db1d3c6",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Metadata-only file page evidence; no media bytes are cached or bundled.",
+      "pageId": 65668,
+      "pageTitle": null,
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": "3bea3db1d3c65920be864184f836c87b5ab8c83c",
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2007-08-29T21:16:24Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/File:Paragon-tango-icon-200.png",
+      "family": "guild-wars-wiki",
+      "fileId": 65669,
+      "fileTitle": "File:Paragon-tango-icon-200.png",
+      "id": "source:gww:file:file-paragon-tango-icon-200-png:fbeeee14a166",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Metadata-only file page evidence; no media bytes are cached or bundled.",
+      "pageId": 65669,
+      "pageTitle": null,
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": "fbeeee14a166410a217d58454f15dd34ac4731cc",
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2007-08-29T21:16:25Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/File:Ranger-tango-icon-200.png",
+      "family": "guild-wars-wiki",
+      "fileId": 65670,
+      "fileTitle": "File:Ranger-tango-icon-200.png",
+      "id": "source:gww:file:file-ranger-tango-icon-200-png:6ba411e9e217",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Metadata-only file page evidence; no media bytes are cached or bundled.",
+      "pageId": 65670,
+      "pageTitle": null,
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": "6ba411e9e2176e3bb3496427304a810528f46997",
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2008-01-09T10:33:04Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/File:Ritualist-tango-icon-200.png",
+      "family": "guild-wars-wiki",
+      "fileId": 65671,
+      "fileTitle": "File:Ritualist-tango-icon-200.png",
+      "id": "source:gww:file:file-ritualist-tango-icon-200-png:b5f5444ab6f6",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Metadata-only file page evidence; no media bytes are cached or bundled.",
+      "pageId": 65671,
+      "pageTitle": null,
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": "b5f5444ab6f6e1f886c850c2a03c92567aa81b8f",
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2007-08-29T21:16:27Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/File:Warrior-tango-icon-200.png",
+      "family": "guild-wars-wiki",
+      "fileId": 65672,
+      "fileTitle": "File:Warrior-tango-icon-200.png",
+      "id": "source:gww:file:file-warrior-tango-icon-200-png:33a2b97fd2a4",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Metadata-only file page evidence; no media bytes are cached or bundled.",
+      "pageId": 65672,
+      "pageTitle": null,
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": "33a2b97fd2a43911a68dbc1b3d360706ea93b8d4",
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2007-08-29T21:16:28Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Leadership",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:leadership:2734584",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 2524,
+      "pageTitle": "Leadership",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2734584,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-07-16T03:36:48Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Mesmer",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:mesmer:2729950",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 207,
+      "pageTitle": "Mesmer",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2729950,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-06-07T13:17:07Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Monk",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:monk:2709820",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 210,
+      "pageTitle": "Monk",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2709820,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2025-07-01T04:56:51Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Mysticism",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:mysticism:2734586",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 2508,
+      "pageTitle": "Mysticism",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2734586,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-07-16T03:37:13Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Necromancer",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:necromancer:2709819",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 211,
+      "pageTitle": "Necromancer",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2709819,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2025-07-01T04:56:51Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Paragon",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:paragon:2710788",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 610,
+      "pageTitle": "Paragon",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2710788,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2025-07-31T21:06:38Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Profession",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:profession:2722500",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 52,
+      "pageTitle": "Profession",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2722500,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-03-04T11:00:10Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Ranger",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:ranger:2709821",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 213,
+      "pageTitle": "Ranger",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2709821,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2025-07-01T04:56:52Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Ritualist",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:ritualist:2729952",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 215,
+      "pageTitle": "Ritualist",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2729952,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-06-07T13:19:21Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Skill_template_format",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:skill-template-format:2697657",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 1461,
+      "pageTitle": "Skill template format",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2697657,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2024-06-12T22:41:46Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Soul_Reaping",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:soul-reaping:2734572",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 2510,
+      "pageTitle": "Soul Reaping",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2734572,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-07-16T03:34:35Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Spawning_Power",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:spawning-power:2734580",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 2526,
+      "pageTitle": "Spawning Power",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2734580,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-07-16T03:36:15Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Strength",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:strength:2734591",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 2534,
+      "pageTitle": "Strength",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2734591,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-07-16T03:37:52Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Warrior",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:warrior:2729951",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 216,
+      "pageTitle": "Warrior",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2729951,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-06-07T13:18:27Z",
+      "useDecision": "allowed"
+    }
+  ],
+  "templateCrosswalk": {
+    "attributeTemplateIds": [
+      {
+        "catalogId": 0,
+        "name": "Fast Casting",
+        "normalizedName": "fast casting",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:0"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 3.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 3,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 0
+      },
+      {
+        "catalogId": 1,
+        "name": "Illusion Magic",
+        "normalizedName": "illusion magic",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:1"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 4.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 4,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 1
+      },
+      {
+        "catalogId": 2,
+        "name": "Domination Magic",
+        "normalizedName": "domination magic",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:2"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 5.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 5,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 2
+      },
+      {
+        "catalogId": 3,
+        "name": "Inspiration Magic",
+        "normalizedName": "inspiration magic",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:3"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 6.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 6,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 3
+      },
+      {
+        "catalogId": 4,
+        "name": "Blood Magic",
+        "normalizedName": "blood magic",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:4"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 7.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 7,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 4
+      },
+      {
+        "catalogId": 5,
+        "name": "Death Magic",
+        "normalizedName": "death magic",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:5"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 8.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 8,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 5
+      },
+      {
+        "catalogId": 6,
+        "name": "Soul Reaping",
+        "normalizedName": "soul reaping",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:6"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 9.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 9,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 6
+      },
+      {
+        "catalogId": 7,
+        "name": "Curses",
+        "normalizedName": "curses",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:7"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 10.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 10,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 7
+      },
+      {
+        "catalogId": 8,
+        "name": "Air Magic",
+        "normalizedName": "air magic",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:8"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 11.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 11,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 8
+      },
+      {
+        "catalogId": 9,
+        "name": "Earth Magic",
+        "normalizedName": "earth magic",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:9"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 12.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 12,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 9
+      },
+      {
+        "catalogId": 10,
+        "name": "Fire Magic",
+        "normalizedName": "fire magic",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:10"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 13.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 13,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 10
+      },
+      {
+        "catalogId": 11,
+        "name": "Water Magic",
+        "normalizedName": "water magic",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:11"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 14.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 14,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 11
+      },
+      {
+        "catalogId": 12,
+        "name": "Energy Storage",
+        "normalizedName": "energy storage",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:12"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 15.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 15,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 12
+      },
+      {
+        "catalogId": 13,
+        "name": "Healing Prayers",
+        "normalizedName": "healing prayers",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:13"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 16.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 16,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 13
+      },
+      {
+        "catalogId": 14,
+        "name": "Smiting Prayers",
+        "normalizedName": "smiting prayers",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:14"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 17.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 17,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 14
+      },
+      {
+        "catalogId": 15,
+        "name": "Protection Prayers",
+        "normalizedName": "protection prayers",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:15"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 18.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 18,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 15
+      },
+      {
+        "catalogId": 16,
+        "name": "Divine Favor",
+        "normalizedName": "divine favor",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:16"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 19.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 19,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 16
+      },
+      {
+        "catalogId": 17,
+        "name": "Strength",
+        "normalizedName": "strength",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:17"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 20.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 20,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 17
+      },
+      {
+        "catalogId": 18,
+        "name": "Axe Mastery",
+        "normalizedName": "axe mastery",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:18"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 21.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 21,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 18
+      },
+      {
+        "catalogId": 19,
+        "name": "Hammer Mastery",
+        "normalizedName": "hammer mastery",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:19"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 22.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 22,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 19
+      },
+      {
+        "catalogId": 20,
+        "name": "Swordsmanship",
+        "normalizedName": "swordsmanship",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:20"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 23.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 23,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 20
+      },
+      {
+        "catalogId": 21,
+        "name": "Tactics",
+        "normalizedName": "tactics",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:21"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 24.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 24,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 21
+      },
+      {
+        "catalogId": 22,
+        "name": "Beast Mastery",
+        "normalizedName": "beast mastery",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:22"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 25.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 25,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 22
+      },
+      {
+        "catalogId": 23,
+        "name": "Expertise",
+        "normalizedName": "expertise",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:23"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 26.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 26,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 23
+      },
+      {
+        "catalogId": 24,
+        "name": "Wilderness Survival",
+        "normalizedName": "wilderness survival",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:24"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 27.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 27,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 24
+      },
+      {
+        "catalogId": 25,
+        "name": "Marksmanship",
+        "normalizedName": "marksmanship",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:25"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 28.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 28,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 25
+      },
+      {
+        "catalogId": 29,
+        "name": "Dagger Mastery",
+        "normalizedName": "dagger mastery",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:29"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 29.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 29,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 29
+      },
+      {
+        "catalogId": 30,
+        "name": "Deadly Arts",
+        "normalizedName": "deadly arts",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:30"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 30.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 30,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 30
+      },
+      {
+        "catalogId": 31,
+        "name": "Shadow Arts",
+        "normalizedName": "shadow arts",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:31"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 31.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 31,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 31
+      },
+      {
+        "catalogId": 32,
+        "name": "Communing",
+        "normalizedName": "communing",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:32"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 32.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 32,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 32
+      },
+      {
+        "catalogId": 33,
+        "name": "Restoration Magic",
+        "normalizedName": "restoration magic",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:33"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 33.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 33,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 33
+      },
+      {
+        "catalogId": 34,
+        "name": "Channeling Magic",
+        "normalizedName": "channeling magic",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:34"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 34.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 34,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 34
+      },
+      {
+        "catalogId": 35,
+        "name": "Critical Strikes",
+        "normalizedName": "critical strikes",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:35"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 35.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 35,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 35
+      },
+      {
+        "catalogId": 36,
+        "name": "Spawning Power",
+        "normalizedName": "spawning power",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:36"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 36.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 36,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 36
+      },
+      {
+        "catalogId": 37,
+        "name": "Spear Mastery",
+        "normalizedName": "spear mastery",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:37"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 37.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 37,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 37
+      },
+      {
+        "catalogId": 38,
+        "name": "Command",
+        "normalizedName": "command",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:38"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 38.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 38,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 38
+      },
+      {
+        "catalogId": 39,
+        "name": "Motivation",
+        "normalizedName": "motivation",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:39"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 39.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 39,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 39
+      },
+      {
+        "catalogId": 40,
+        "name": "Leadership",
+        "normalizedName": "leadership",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:40"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 40.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 40,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 40
+      },
+      {
+        "catalogId": 41,
+        "name": "Scythe Mastery",
+        "normalizedName": "scythe mastery",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:41"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 41.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 41,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 41
+      },
+      {
+        "catalogId": 42,
+        "name": "Wind Prayers",
+        "normalizedName": "wind prayers",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:42"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 42.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 42,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 42
+      },
+      {
+        "catalogId": 43,
+        "name": "Earth Prayers",
+        "normalizedName": "earth prayers",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:43"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 43.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 43,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 43
+      },
+      {
+        "catalogId": 44,
+        "name": "Mysticism",
+        "normalizedName": "mysticism",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute:44"
+          ],
+          "notes": "Parsed from Skill template format attribute index line 44.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 44,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 44
+      }
+    ],
+    "professionTemplateIds": [
+      {
+        "catalogId": null,
+        "name": "None",
+        "normalizedName": "none",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-profession:0"
+          ],
+          "notes": "Parsed from Skill template format profession index line 3.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 3,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "none",
+        "templateId": 0
+      },
+      {
+        "catalogId": 1,
+        "name": "Warrior",
+        "normalizedName": "warrior",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-profession:1"
+          ],
+          "notes": "Parsed from Skill template format profession index line 4.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 4,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 1
+      },
+      {
+        "catalogId": 2,
+        "name": "Ranger",
+        "normalizedName": "ranger",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-profession:2"
+          ],
+          "notes": "Parsed from Skill template format profession index line 5.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 5,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 2
+      },
+      {
+        "catalogId": 3,
+        "name": "Monk",
+        "normalizedName": "monk",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-profession:3"
+          ],
+          "notes": "Parsed from Skill template format profession index line 6.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 6,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 3
+      },
+      {
+        "catalogId": 4,
+        "name": "Necromancer",
+        "normalizedName": "necromancer",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-profession:4"
+          ],
+          "notes": "Parsed from Skill template format profession index line 7.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 7,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 4
+      },
+      {
+        "catalogId": 5,
+        "name": "Mesmer",
+        "normalizedName": "mesmer",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-profession:5"
+          ],
+          "notes": "Parsed from Skill template format profession index line 8.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 8,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 5
+      },
+      {
+        "catalogId": 6,
+        "name": "Elementalist",
+        "normalizedName": "elementalist",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-profession:6"
+          ],
+          "notes": "Parsed from Skill template format profession index line 9.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 9,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 6
+      },
+      {
+        "catalogId": 7,
+        "name": "Assassin",
+        "normalizedName": "assassin",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-profession:7"
+          ],
+          "notes": "Parsed from Skill template format profession index line 10.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 10,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 7
+      },
+      {
+        "catalogId": 8,
+        "name": "Ritualist",
+        "normalizedName": "ritualist",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-profession:8"
+          ],
+          "notes": "Parsed from Skill template format profession index line 11.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 11,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 8
+      },
+      {
+        "catalogId": 9,
+        "name": "Paragon",
+        "normalizedName": "paragon",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-profession:9"
+          ],
+          "notes": "Parsed from Skill template format profession index line 12.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 12,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 9
+      },
+      {
+        "catalogId": 10,
+        "name": "Dervish",
+        "normalizedName": "dervish",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-profession:10"
+          ],
+          "notes": "Parsed from Skill template format profession index line 13.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "sourceRow": {
+          "disposition": "record",
+          "lineNumber": 13,
+          "sourceId": "source:gww:skill-template-format:2697657"
+        },
+        "status": "known",
+        "templateId": 10
+      }
+    ],
+    "reservedTemplateIds": [
+      {
+        "namespace": "attribute",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute-gap:26"
+          ],
+          "notes": "Derived from the bounded template attribute index by preserving a non-contiguous numeric gap.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "reason": "Missing from the verified Skill template format attribute index; preserved as a gap.",
+        "status": "reserved",
+        "templateId": 26
+      },
+      {
+        "namespace": "attribute",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute-gap:27"
+          ],
+          "notes": "Derived from the bounded template attribute index by preserving a non-contiguous numeric gap.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "reason": "Missing from the verified Skill template format attribute index; preserved as a gap.",
+        "status": "reserved",
+        "templateId": 27
+      },
+      {
+        "namespace": "attribute",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-03:template-attribute-gap:28"
+          ],
+          "notes": "Derived from the bounded template attribute index by preserving a non-contiguous numeric gap.",
+          "reviewIds": [],
+          "sourceIds": [
+            "source:gww:skill-template-format:2697657"
+          ]
+        },
+        "reason": "Missing from the verified Skill template format attribute index; preserved as a gap.",
+        "status": "reserved",
+        "templateId": 28
+      }
+    ]
+  }
+}

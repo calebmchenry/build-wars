@@ -35,6 +35,9 @@ installs the pinned Python parser dependency from `scripts/data/requirements.txt
 
 `npm run data:regenerate` runs fixture mode only. It uses committed minimized synthetic fixtures,
 fixed timestamps, and an output root under ignored `work/runs/data-ingestion`.
+The default fixture run preserves the EPIC-02 skill-ID proof and also writes the EPIC-03
+professions/attributes fixture catalog. Run the EPIC-03 profile directly with
+`PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-03-professions-attributes`.
 
 ## Current Scope
 
@@ -50,10 +53,15 @@ Included now:
 - Shared Python ingestion tooling under `scripts/data` for MediaWiki access, snapshots, parser
   proofing, skill-ID enumeration, icon metadata, deterministic artifacts, QA reports, and fixture
   regeneration
+- Runtime-eligible EPIC-03 professions/attributes catalog data at
+  `data/generated/epic-03/professions-attributes.catalog.json`, with an adjacent generated manifest
+  and bounded QA report
 
 Deferred to later epics:
 
 - Template import/export
+- Importing the EPIC-03 catalog into `src/app`, including attribution UI and remote media/privacy
+  decisions
 - Full Guild Wars Wiki or PvX content catalog ingestion
 - Runtime rule validation
 - Local storage and sharing
@@ -83,3 +91,6 @@ Live Guild Wars Wiki refreshes are manual-only through
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --allow-live-network --title "Guild Wars Wiki:Game integration/Skills/0"`
 or a similarly bounded command. Live outputs stay ignored by default and must be reviewed before any
 exact-path promotion ticket can allow them.
+For EPIC-03, the locked profile command is
+`PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-03-professions-attributes --root . --allow-live-network`;
+only the catalog JSON, manifest JSON, and machine-readable QA JSON are exact-path allowlisted.

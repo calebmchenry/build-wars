@@ -182,11 +182,11 @@ def _metadata_diagnostics(metadata: dict[str, Any], page_title: str, source_id: 
                 field_path="/mimeType",
             )
         )
-    if metadata.get("width") != 64 or metadata.get("height") != 64:
+    if (metadata.get("width"), metadata.get("height")) not in {(64, 64), (200, 200)}:
         diagnostics.append(
             _icon_diag(
                 "ICON_NON_64_DIMENSIONS",
-                "Icon metadata did not report 64x64 dimensions",
+                "Icon metadata did not report an approved square icon size",
                 page_title,
                 source_id,
                 severity="warning",

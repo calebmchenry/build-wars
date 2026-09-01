@@ -221,7 +221,6 @@ class MediaWikiClient:
                     "prop": "imageinfo",
                     "titles": "|".join(chunk),
                     "iiprop": "url|mime|size|sha1|timestamp",
-                    "redirects": "1",
                 }
             )
             pages.extend(self._ordered_pages(payload, chunk, diagnostics))

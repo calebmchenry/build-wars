@@ -2,11 +2,21 @@
 id: EPIC-03
 title: Professions and Attributes
 track: content
-status: backlog
+status: done
 priority: critical
 depends_on:
   - EPIC-01
   - EPIC-02
+planned_sprint: SPRINT-004
+completed_sprint: SPRINT-004
+tickets:
+  - BW-0301
+  - BW-0302
+  - BW-0303
+  - BW-0304
+  - BW-0305
+  - BW-0306
+updated: 2026-09-01
 ---
 
 # Professions and Attributes

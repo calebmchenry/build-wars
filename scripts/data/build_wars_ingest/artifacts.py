@@ -40,6 +40,7 @@ def write_generated_artifact(
     source_ids: list[str],
     record_count: int,
     qa_report_path: str | None,
+    commit_decision: str = "ignored",
     notes: str | None = None,
 ) -> tuple[Path, Path, dict[str, Any]]:
     artifact_path, digest = write_canonical_json(root, relative_path, value)
@@ -53,7 +54,7 @@ def write_generated_artifact(
         "recordCount": record_count,
         "digest": digest_wire(digest),
         "qaReportPath": qa_report_path,
-        "commitDecision": "ignored",
+        "commitDecision": commit_decision,
         "notes": notes,
     }
     manifest_path, _ = write_canonical_json(root, relative_path.with_suffix(".manifest.json"), manifest)
@@ -116,6 +117,22 @@ def compare_baseline(current: Any, baseline_path: Path | None, *, artifact_path:
     return []
 
 
+def classify_baseline_diff(current: Any, baseline: Any | None) -> str:
+    if baseline is None:
+        return "first-baseline"
+    if not isinstance(current, dict) or not isinstance(baseline, dict):
+        return "schema"
+    if current.get("schemaVersion") != baseline.get("schemaVersion"):
+        return "schema"
+    if _semantic_projection(current) != _semantic_projection(baseline):
+        return "semantic"
+    if _provenance_projection(current) != _provenance_projection(baseline):
+        return "provenance-only"
+    if canonical_json_bytes(current) != canonical_json_bytes(baseline):
+        return "formatting-or-order"
+    return "unchanged"
+
+
 def confined_path(root: Path, relative_or_absolute: Path) -> Path:
     resolved_root = root.resolve()
     candidate = relative_or_absolute.resolve() if relative_or_absolute.is_absolute() else (resolved_root / relative_or_absolute).resolve()
@@ -166,3 +183,41 @@ def _reject_non_finite(value: Any) -> None:
     elif isinstance(value, dict):
         for item in value.values():
             _reject_non_finite(item)
+
+
+def _semantic_projection(value: Any) -> Any:
+    if isinstance(value, list):
+        return [_semantic_projection(item) for item in value]
+    if isinstance(value, dict):
+        return {
+            key: _semantic_projection(item)
+            for key, item in value.items()
+            if key
+            not in {
+                "generatedAt",
+                "retrievedAt",
+                "sourceRevisionTimestamp",
+                "revisionId",
+                "sources",
+                "snapshotManifestPaths",
+                "provenance",
+                "manualReviews",
+                "sourceShapeProof",
+                "sectionDigests",
+                "catalogVersion",
+                "digest",
+            }
+        }
+    return value
+
+
+def _provenance_projection(value: Any) -> Any:
+    if isinstance(value, list):
+        return [_provenance_projection(item) for item in value]
+    if isinstance(value, dict):
+        return {
+            key: _provenance_projection(item)
+            for key, item in value.items()
+            if key in {"sources", "snapshotManifestPaths", "provenance", "manualReviews", "sourceShapeProof"}
+        } or {key: _provenance_projection(item) for key, item in value.items()}
+    return value

@@ -3,10 +3,12 @@ import { describe, expect, it } from "vitest";
 import {
   SOURCE_POLICY_SCHEMA_VERSION,
   type GeneratedArtifactManifest,
+  type ProfessionAttributeCatalog,
   type QaReport,
   type RemoteMediaMetadata,
   type SourceReference
 } from "../../src/domain";
+import professionsAttributesGolden from "../fixtures/data-ingestion/generated/fixture-professions-attributes.catalog.json";
 import golden from "../fixtures/data-ingestion/generated/fixture-skill-id-map.json";
 
 function first<T>(items: readonly T[], label: string): T {
@@ -102,5 +104,27 @@ describe("data ingestion generated contracts", () => {
       notes: null
     };
     expect(qaReport.sourceIds).toEqual(manifest.sourceIds);
+  });
+
+  it("keeps the EPIC-03 Python catalog aligned with the TypeScript wire contract", () => {
+    const catalog = professionsAttributesGolden as unknown as ProfessionAttributeCatalog;
+    const firstSource = first(catalog.sources, "EPIC-03 source reference");
+    const firstMedia = first(catalog.remoteMedia, "EPIC-03 remote media");
+
+    expect(catalog.schemaVersion).toBe(SOURCE_POLICY_SCHEMA_VERSION);
+    expect(catalog.profile.id).toBe("epic-03-professions-attributes");
+    expect(catalog.professions).toHaveLength(10);
+    expect(catalog.attributes).toHaveLength(42);
+    expect(catalog.templateCrosswalk.professionTemplateIds[0]?.catalogId).toBeNull();
+    expect(catalog.templateCrosswalk.attributeTemplateIds[0]?.templateId).toBe(0);
+    expect(catalog.attributePointRules.defaultPveLevel20.totalWithoutQuestBonus).toBe(170);
+    expect(catalog.attributePointRules.defaultPveLevel20.totalWithMaximumQuestBonus).toBe(200);
+
+    const sourceReference: SourceReference = firstSource;
+    expect(sourceReference.family).toBe("guild-wars-wiki");
+
+    const mediaMetadata: RemoteMediaMetadata = firstMedia;
+    expect(mediaMetadata.kind).toBe("icon");
+    expect(mediaMetadata.cachedBytes).toBe(false);
   });
 });

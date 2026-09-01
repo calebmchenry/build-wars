@@ -26,8 +26,11 @@ This creates `.venv-data/`, which is ignored by Git, and installs the pinned par
 npm run data:test
 npm run data:regenerate
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-03-professions-attributes
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline --profile epic-03-professions-attributes --root .
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --allow-live-network --title "Guild Wars Wiki:Game integration/Skills/0"
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-03-professions-attributes --root . --allow-live-network
 ```
 
 Exit codes:
@@ -47,6 +50,11 @@ Exit codes:
 - `live`: manually fetches named Guild Wars Wiki pages through the shared MediaWiki client. It
   requires `--allow-live-network` and at least one `--title`.
 
+The default `guild-wars-wiki` profile preserves the EPIC-02 skill-ID fixture proof. Fixture mode also
+writes the EPIC-03 professions/attributes fixture catalog as a side effect so `npm run
+data:regenerate` covers both profiles offline. Run `epic-03-professions-attributes` directly for
+fixture, offline, or live catalog work.
+
 ## Source Limits
 
 The Guild Wars Wiki profile fixes the API origin to `https://wiki.guildwars.com/api.php`, uses
@@ -57,6 +65,12 @@ accepts query parameters, not arbitrary URLs, and validates the final origin aft
 Live smoke checks should stay bounded: name the exact pages, inspect request counts, revisions,
 digests, artifact paths, and QA summaries, then delete ignored outputs when they are no longer
 needed.
+
+The EPIC-03 profile is locked to `Skill template format`, `Profession`, `Attribute`,
+`Attribute point`, the ten profession pages, and the ten primary-attribute pages. Its caps are 32
+source pages, 12 requests, the shared response byte cap, and the shared parser byte cap. Live mode
+for this profile uses those names instead of ad hoc `--title` values, then fetches exact profession
+icon `imageinfo` metadata without following file redirects.
 
 ## Pipeline Contract
 
@@ -69,6 +83,30 @@ needed.
 | Validate  | Generated artifact manifest and records              | `QaReport` JSON and bounded text summary in `data/qa`               | Reports provenance gaps, stale/unverified revisions, rights ambiguity, invalid source IDs, copied text, icon metadata gaps, generated diffs, schema/shape errors, and integrity failures. |
 | Promote   | QA report, release scope, and approved artifact list | Exact-path allowlist or excluded artifact                           | Requires a later ticket naming exact paths, review evidence, source-policy disposition, and app/public release gate status before runtime use.                                            |
 
+## EPIC-03 Profile
+
+`epic-03-professions-attributes` normalizes template ID crosswalks, playable professions, all
+template-listed attributes, profession icon metadata, attribute point costs, level point totals,
+quest rewards, default level-20 PvE budgets, source/provenance claims, manual reviews, section
+digests, a semantic `catalogVersion`, and a QA report.
+
+The source-shape checkpoint found simple bullet lists on `Skill template format` and bounded wiki
+tables on `Profession`, `Attribute`, and `Attribute point`. `mwparserfromhell` remains available for
+template-aware parsing, but EPIC-03 uses a small bounded wiki-table/list helper for these locked
+tables and rows.
+
+Exact production paths:
+
+- `data/generated/epic-03/professions-attributes.catalog.json`
+- `data/generated/epic-03/professions-attributes.catalog.manifest.json`
+- `data/qa/epic-03/professions-attributes.catalog.qa.json`
+
+Raw snapshots, snapshot manifests, candidate live/offline outputs outside those paths, text QA
+summaries, icon binaries, thumbnails, screenshots, and copied page bodies remain ignored or absent.
+Offline replay selects the locked EPIC-03 snapshot manifests by source page title; because raw
+snapshots are ignored, historical replay is limited to the local ignored snapshots or a fresh bounded
+live refresh.
+
 ## Artifacts
 
 Default roots under a command `--root` are:
@@ -80,6 +118,9 @@ Default roots under a command `--root` are:
 These roots are ignored by default in the repository. The tracked golden fixture lives under
 `test/fixtures/data-ingestion/generated/fixture-skill-id-map.json` because it is synthetic,
 minimized, provenance-bearing, and used by Python and Vitest contract tests.
+The EPIC-03 synthetic golden fixture lives under
+`test/fixtures/data-ingestion/generated/fixture-professions-attributes.catalog.json` and is generated
+from minimized fixture pages in `test/fixtures/data-ingestion/professions-attributes`.
 
 ## Baselines
 

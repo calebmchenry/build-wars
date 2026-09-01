@@ -7,6 +7,9 @@ export type AuthoredDocumentId = Brand<string, "AuthoredDocumentId">;
 export type CatalogVersionId = Brand<string, "CatalogVersionId">;
 export type SchemaVersion = number;
 
+export type TemplateProfessionId = Brand<number, "TemplateProfessionId">;
+export type TemplateAttributeId = Brand<number, "TemplateAttributeId">;
+
 export type ProfessionId = CatalogId<"Profession">;
 export type AttributeId = CatalogId<"Attribute">;
 export type SkillId = CatalogId<"Skill">;
@@ -18,6 +21,14 @@ export type WeaponModifierId = CatalogId<"WeaponModifier">;
 
 export function catalogId<Scope extends string>(value: number): CatalogId<Scope> {
   return value as CatalogId<Scope>;
+}
+
+export function templateProfessionId(value: number): TemplateProfessionId {
+  return value as TemplateProfessionId;
+}
+
+export function templateAttributeId(value: number): TemplateAttributeId {
+  return value as TemplateAttributeId;
 }
 
 export function authoredDocumentId(value: string): AuthoredDocumentId {

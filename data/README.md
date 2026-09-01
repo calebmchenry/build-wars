@@ -24,6 +24,16 @@ external source revision
 - `qa/` stores generated validation, coverage, manual-review, and release-gate reports. Contents
   stay ignored by default unless a later ticket promotes a stable summary document.
 
+EPIC-03 is the first runtime-eligible catalog exception. The only allowlisted production outputs are:
+
+- `data/generated/epic-03/professions-attributes.catalog.json`
+- `data/generated/epic-03/professions-attributes.catalog.manifest.json`
+- `data/qa/epic-03/professions-attributes.catalog.qa.json`
+
+The EPIC-03 catalog is approved for future runtime consumption, but `src/app` does not import it yet.
+Future selector UI must separately implement attribution, source-policy display, and remote media
+privacy behavior before showing source-derived facts or icons.
+
 ## Commit Rules
 
 Policy README files remain trackable so directory contracts are visible. Synthetic fixtures belong
@@ -41,3 +51,6 @@ Future allowlists must name exact files and any required parent-directory unigno
 `npm run data:regenerate` writes fixture-mode outputs under ignored `work/runs/data-ingestion`.
 Production data in this directory must remain local until a later exact-path promotion ticket
 approves it.
+For EPIC-03, BW-0305 approved the exact paths above after a bounded live refresh, offline replay from
+the selected snapshots, byte-identical repeated fixed-clock generation, source/provenance checks,
+manual review of derived primary-attribute summaries, and passing app/public QA gates.

@@ -1,0 +1,164 @@
+{
+  "pages": [
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Assassin-icon.png",
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "size": 1000,
+          "timestamp": "2026-08-31T14:20:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture/Assassin-icon.png",
+          "width": 64
+        }
+      ],
+      "pageid": 9507,
+      "title": "File:Assassin-icon.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Dervish-icon.png",
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "dddddddddddddddddddddddddddddddddddddddd",
+          "size": 1000,
+          "timestamp": "2026-08-31T14:20:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture/Dervish-icon.png",
+          "width": 64
+        }
+      ],
+      "pageid": 9510,
+      "title": "File:Dervish-icon.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Elementalist-icon.png",
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "size": 1000,
+          "timestamp": "2026-08-31T14:20:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture/Elementalist-icon.png",
+          "width": 64
+        }
+      ],
+      "pageid": 9506,
+      "title": "File:Elementalist-icon.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Mesmer-icon.png",
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "5555555555555555555555555555555555555555",
+          "size": 1000,
+          "timestamp": "2026-08-31T14:20:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture/Mesmer-icon.png",
+          "width": 64
+        }
+      ],
+      "pageid": 9505,
+      "title": "File:Mesmer-icon.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Monk-icon.png",
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "3333333333333333333333333333333333333333",
+          "size": 1000,
+          "timestamp": "2026-08-31T14:20:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture/Monk-icon.png",
+          "width": 64
+        }
+      ],
+      "pageid": 9503,
+      "title": "File:Monk-icon.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Necromancer-icon.png",
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "4444444444444444444444444444444444444444",
+          "size": 1000,
+          "timestamp": "2026-08-31T14:20:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture/Necromancer-icon.png",
+          "width": 64
+        }
+      ],
+      "pageid": 9504,
+      "title": "File:Necromancer-icon.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Paragon-icon.png",
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "9999999999999999999999999999999999999999",
+          "size": 1000,
+          "timestamp": "2026-08-31T14:20:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture/Paragon-icon.png",
+          "width": 64
+        }
+      ],
+      "pageid": 9509,
+      "title": "File:Paragon-icon.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Ranger-icon.png",
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "2222222222222222222222222222222222222222",
+          "size": 1000,
+          "timestamp": "2026-08-31T14:20:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture/Ranger-icon.png",
+          "width": 64
+        }
+      ],
+      "pageid": 9502,
+      "title": "File:Ranger-icon.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Ritualist-icon.png",
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "8888888888888888888888888888888888888888",
+          "size": 1000,
+          "timestamp": "2026-08-31T14:20:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture/Ritualist-icon.png",
+          "width": 64
+        }
+      ],
+      "pageid": 9508,
+      "title": "File:Ritualist-icon.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Warrior-icon.png",
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "1111111111111111111111111111111111111111",
+          "size": 1000,
+          "timestamp": "2026-08-31T14:20:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture/Warrior-icon.png",
+          "width": 64
+        }
+      ],
+      "pageid": 9501,
+      "title": "File:Warrior-icon.png"
+    }
+  ]
+}

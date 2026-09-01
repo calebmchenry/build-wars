@@ -33,6 +33,7 @@ class PipelineTests(unittest.TestCase):
             self.assertEqual(result.artifact_path.read_bytes(), GOLDEN_ARTIFACT.read_bytes())
             self.assertEqual(result.generated["parserProof"]["recommendation"], "accept-mwparserfromhell")
             self.assertEqual(result.generated["iconProof"][0]["cachedBytes"], False)
+            self.assertTrue((tmp / "data/generated/epic-03/professions-attributes.catalog.json").exists())
         finally:
             shutil.rmtree(tmp)
 

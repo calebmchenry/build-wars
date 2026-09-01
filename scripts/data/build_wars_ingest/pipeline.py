@@ -1,18 +1,24 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+import re
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
 
 from .api import MediaWikiClient
 from .artifacts import compare_baseline, write_generated_artifact
+from .attribute_points import extract_attribute_point_rules
 from .config import FIXTURE_GENERATED_AT, GENERATOR_NAME, INGESTION_SCHEMA_VERSION, RuntimeRoots
 from .icons import resolve_icon_metadata
-from .models import Diagnostic, Evidence, source_reference
+from .models import Diagnostic, Evidence, digest_bytes, source_reference
+from .profession_attribute_catalog import assemble_profession_attribute_catalog
+from .professions_attributes import extract_professions_and_attributes
+from .profiles import EPIC_02_PROFILE_ID, EPIC_03_ICON_IMAGEINFO_TITLE, EPIC_03_PROFILE_ID, profile_by_id
 from .qa import build_report, exit_code_for_report, write_report
 from .skill_ids import SkillIdSource, enumerate_skill_ids
 from .snapshots import SnapshotError, SnapshotIdentity, SnapshotStore, SnapshotWriteResult
+from .template_ids import extract_template_crosswalk
 from .wikitext import parse_wikitext
 
 
@@ -25,6 +31,7 @@ class PipelineOptions:
     mode: str
     output_root: Path
     fixture_root: Path
+    profile: str = EPIC_02_PROFILE_ID
     generated_at: str = FIXTURE_GENERATED_AT
     baseline_path: Path | None = None
     allow_live_network: bool = False
@@ -55,6 +62,9 @@ def run_pipeline(options: PipelineOptions) -> PipelineResult:
 
 
 def run_fixture(options: PipelineOptions) -> PipelineResult:
+    if options.profile == EPIC_03_PROFILE_ID:
+        return _run_epic03_fixture(options)
+
     roots = RuntimeRoots.from_root(options.output_root)
     fixtures = _load_fixtures(options.fixture_root)
     snapshot_store = SnapshotStore(roots.snapshot_root)
@@ -179,7 +189,7 @@ def run_fixture(options: PipelineOptions) -> PipelineResult:
         notes="Fixture-mode QA report for EPIC-02 ingestion platform proof artifacts.",
     )
     qa_path, summary_path = write_report(root=roots.qa_root, relative_path=qa_relative, report=report)
-    return PipelineResult(
+    result = PipelineResult(
         artifact_path=artifact_path,
         manifest_path=manifest_path,
         qa_report_path=qa_path,
@@ -190,9 +200,14 @@ def run_fixture(options: PipelineOptions) -> PipelineResult:
         generated=generated,
         qa_report=report,
     )
+    _run_epic03_fixture(replace(options, profile=EPIC_03_PROFILE_ID))
+    return result
 
 
 def run_offline(options: PipelineOptions) -> PipelineResult:
+    if options.profile == EPIC_03_PROFILE_ID:
+        return _run_epic03_offline(options)
+
     roots = RuntimeRoots.from_root(options.output_root)
     manifests = sorted(roots.snapshot_root.glob("**/*.manifest.json"))
     if not manifests:
@@ -305,6 +320,9 @@ def run_offline(options: PipelineOptions) -> PipelineResult:
 
 
 def run_live(options: PipelineOptions) -> PipelineResult:
+    if options.profile == EPIC_03_PROFILE_ID:
+        return _run_epic03_live(options)
+
     if not options.allow_live_network:
         raise PipelineError("Live mode requires --allow-live-network")
     if not options.live_titles:
@@ -387,6 +405,265 @@ def run_live(options: PipelineOptions) -> PipelineResult:
     )
 
 
+def _run_epic03_fixture(options: PipelineOptions) -> PipelineResult:
+    profile = profile_by_id(EPIC_03_PROFILE_ID)
+    roots = RuntimeRoots.from_root(options.output_root)
+    snapshot_store = SnapshotStore(roots.snapshot_root)
+    page_texts = _load_epic03_fixture_pages(options.fixture_root)
+    sources_by_title: dict[str, dict[str, Any]] = {}
+    snapshot_manifest_paths: list[str] = []
+    for index, title in enumerate(profile.source_titles, start=1):
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-03-fixture:{_safe_source_part(title)}:{4000 + index}",
+            page_title=title,
+            page_id=9400 + index,
+            revision_id=4000 + index,
+            source_revision_timestamp=f"2026-08-31T14:0{index}:00Z",
+            retrieved_at=options.generated_at,
+        )
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=9400 + index,
+            revision_id=4000 + index,
+            timestamp=f"2026-08-31T14:0{index}:00Z",
+            retrieved_at=options.generated_at,
+            content=page_texts[title],
+        )
+        sources_by_title[title] = source_ref
+        snapshot_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+
+    imageinfo = json.loads((options.fixture_root / "professions-attributes/imageinfo.json").read_text(encoding="utf-8"))
+    imageinfo_source = _page_source_reference(
+        source_id="source:gww:epic-03-fixture:profession-icons:4010",
+        page_title=EPIC_03_ICON_IMAGEINFO_TITLE,
+        page_id=9410,
+        revision_id=4010,
+        source_revision_timestamp="2026-08-31T14:10:00Z",
+        retrieved_at=options.generated_at,
+        material_class="media-metadata",
+    )
+    imageinfo_snapshot = _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=imageinfo_source,
+        title=EPIC_03_ICON_IMAGEINFO_TITLE,
+        page_id=9410,
+        revision_id=4010,
+        timestamp="2026-08-31T14:10:00Z",
+        retrieved_at=options.generated_at,
+        content=json.dumps({"kind": "mediawiki-imageinfo", "title": EPIC_03_ICON_IMAGEINFO_TITLE, "pages": imageinfo["pages"]}, ensure_ascii=False, sort_keys=True),
+    )
+    sources_by_title[EPIC_03_ICON_IMAGEINFO_TITLE] = imageinfo_source
+    snapshot_manifest_paths.append(_relative_to_root(roots.root, imageinfo_snapshot.manifest_path))
+    profession_pages = {
+        profession: f"{{{{Quotation|game|icon=[[File:{profession}-icon.png|60px]]|Synthetic fixture icon metadata.}}}}"
+        for profession in profile.detail_titles
+        if profession in page_texts.get("Profession", "")
+    }
+    return _write_epic03_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        snapshot_manifest_paths=snapshot_manifest_paths,
+        page_texts=page_texts,
+        sources_by_title=sources_by_title,
+        profession_pages=profession_pages,
+        imageinfo_pages=imageinfo["pages"],
+    )
+
+
+def _run_epic03_live(options: PipelineOptions) -> PipelineResult:
+    if not options.allow_live_network:
+        raise PipelineError("Live EPIC-03 mode requires --allow-live-network")
+    profile = profile_by_id(EPIC_03_PROFILE_ID)
+    roots = RuntimeRoots.from_root(options.output_root)
+    snapshot_store = SnapshotStore(roots.snapshot_root)
+    client = MediaWikiClient()
+    pages, page_diagnostics = client.query_title_revisions(list(profile.all_page_titles))
+    if page_diagnostics:
+        codes = ", ".join(diagnostic.code for diagnostic in page_diagnostics)
+        raise PipelineError(f"Live EPIC-03 source pages had blocking diagnostics: {codes}")
+
+    page_texts: dict[str, str] = {}
+    sources_by_title: dict[str, dict[str, Any]] = {}
+    snapshot_manifest_paths: list[str] = []
+    for page in pages:
+        revision = _first_revision(page)
+        title = str(page.get("title"))
+        revision_id = revision.get("revid")
+        timestamp = revision.get("timestamp")
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:{_safe_source_part(title)}:{revision_id}",
+            page_title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision_id,
+            source_revision_timestamp=timestamp,
+            retrieved_at=options.generated_at,
+        )
+        content = _revision_content(revision)
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision_id,
+            timestamp=timestamp,
+            retrieved_at=options.generated_at,
+            content=content,
+        )
+        page_texts[title] = content
+        sources_by_title[title] = source_ref
+        snapshot_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+
+    profession_pages = {title: page_texts[title] for title in profile.detail_titles if title in page_texts}
+    icon_titles = _profession_icon_titles(profession_pages)
+    imageinfo_pages, image_diagnostics = client.query_imageinfo(icon_titles)
+    if image_diagnostics:
+        codes = ", ".join(diagnostic.code for diagnostic in image_diagnostics)
+        raise PipelineError(f"Live EPIC-03 icon metadata had blocking diagnostics: {codes}")
+    imageinfo_snapshot = _write_imageinfo_snapshot(
+        snapshot_store=snapshot_store,
+        pages=imageinfo_pages,
+        retrieved_at=options.generated_at,
+    )
+    sources_by_title[EPIC_03_ICON_IMAGEINFO_TITLE] = imageinfo_snapshot.manifest["sourceReference"]
+    snapshot_manifest_paths.append(_relative_to_root(roots.root, imageinfo_snapshot.manifest_path))
+    return _write_epic03_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        snapshot_manifest_paths=snapshot_manifest_paths,
+        page_texts=page_texts,
+        sources_by_title=sources_by_title,
+        profession_pages=profession_pages,
+        imageinfo_pages=imageinfo_pages,
+    )
+
+
+def _run_epic03_offline(options: PipelineOptions) -> PipelineResult:
+    profile = profile_by_id(EPIC_03_PROFILE_ID)
+    roots = RuntimeRoots.from_root(options.output_root)
+    snapshot_store = SnapshotStore(roots.snapshot_root)
+    manifests = _selected_epic03_snapshot_manifests(roots.snapshot_root, profile)
+    if not manifests:
+        raise PipelineError(f"No EPIC-03 offline snapshot manifests found under {roots.snapshot_root}")
+
+    page_texts: dict[str, str] = {}
+    sources_by_title: dict[str, dict[str, Any]] = {}
+    imageinfo_pages: list[dict[str, Any]] = []
+    snapshot_manifest_paths: list[str] = []
+    for manifest_path in manifests:
+        try:
+            loaded = snapshot_store.load_snapshot(manifest_path)
+        except SnapshotError as exc:
+            raise PipelineError(f"EPIC-03 offline snapshot failed validation: {exc}") from exc
+        payload = json.loads(loaded.payload.decode("utf-8"))
+        if not isinstance(payload, dict):
+            raise PipelineError("EPIC-03 offline snapshot payload was not an object")
+        source_ref = loaded.manifest.get("sourceReference")
+        if not isinstance(source_ref, dict):
+            raise PipelineError("EPIC-03 offline snapshot manifest was missing sourceReference")
+        title = str(payload.get("title"))
+        sources_by_title[title] = source_ref
+        snapshot_manifest_paths.append(_relative_to_root(roots.root, manifest_path))
+        content = payload.get("content")
+        if title == EPIC_03_ICON_IMAGEINFO_TITLE and isinstance(content, str):
+            icon_payload = json.loads(content)
+            pages = icon_payload.get("pages") if isinstance(icon_payload, dict) else None
+            if isinstance(pages, list):
+                imageinfo_pages = [page for page in pages if isinstance(page, dict)]
+            continue
+        if isinstance(content, str):
+            page_texts[title] = content
+
+    missing = [title for title in profile.source_titles if title not in page_texts]
+    if missing:
+        raise PipelineError(f"EPIC-03 offline snapshots missing required pages: {', '.join(missing)}")
+    profession_pages = {title: page_texts[title] for title in profile.detail_titles if title in page_texts}
+    return _write_epic03_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        snapshot_manifest_paths=snapshot_manifest_paths,
+        page_texts=page_texts,
+        sources_by_title=sources_by_title,
+        profession_pages=profession_pages,
+        imageinfo_pages=imageinfo_pages,
+    )
+
+
+def _write_epic03_catalog_result(
+    *,
+    roots: RuntimeRoots,
+    profile: Any,
+    generated_at: str,
+    snapshot_manifest_paths: list[str],
+    page_texts: dict[str, str],
+    sources_by_title: dict[str, dict[str, Any]],
+    profession_pages: dict[str, str],
+    imageinfo_pages: list[dict[str, Any]],
+) -> PipelineResult:
+    template = extract_template_crosswalk(
+        page_texts["Skill template format"],
+        source_reference=sources_by_title["Skill template format"],
+    )
+    profession_attributes = extract_professions_and_attributes(
+        profession_wikitext=page_texts["Profession"],
+        attribute_wikitext=page_texts["Attribute"],
+        template_crosswalk=template.crosswalk,
+        sources_by_title=sources_by_title,
+        generated_at=generated_at,
+        profession_pages=profession_pages,
+        imageinfo_pages=imageinfo_pages,
+    )
+    attribute_points = extract_attribute_point_rules(
+        page_texts["Attribute point"],
+        source_reference=sources_by_title["Attribute point"],
+    )
+    assembled = assemble_profession_attribute_catalog(
+        profile=profile,
+        generated_at=generated_at,
+        snapshot_manifest_paths=snapshot_manifest_paths,
+        template_extraction=template,
+        profession_attribute_extraction=profession_attributes,
+        attribute_point_extraction=attribute_points,
+    )
+    source_ids = [str(source["id"]) for source in assembled.catalog["sources"]]
+    artifact_path, manifest_path, manifest = write_generated_artifact(
+        root=roots.generated_root,
+        relative_path=profile.generated_relative_path,
+        value=assembled.catalog,
+        generated_at=generated_at,
+        input_snapshot_manifest_paths=snapshot_manifest_paths,
+        source_ids=source_ids,
+        record_count=len(assembled.catalog["professions"]) + len(assembled.catalog["attributes"]),
+        qa_report_path=(Path("data/qa") / profile.qa_relative_path).as_posix(),
+        commit_decision="exact-path-allowlisted",
+        notes="Runtime-eligible EPIC-03 professions and attributes catalog; raw snapshots remain ignored.",
+    )
+    report = build_report(
+        artifact_path=(Path("data/generated") / profile.generated_relative_path).as_posix(),
+        artifact_manifest_path=(Path("data/generated") / profile.generated_relative_path.with_suffix(".manifest.json")).as_posix(),
+        generated_at=generated_at,
+        source_ids=source_ids,
+        diagnostics=assembled.diagnostics,
+        notes="EPIC-03 catalog QA report covering source shape, IDs, ownership, icons, summaries, point rules, provenance, baseline, and artifact gates.",
+    )
+    qa_path, summary_path = write_report(root=roots.qa_root, relative_path=profile.qa_relative_path, report=report)
+    return PipelineResult(
+        artifact_path=artifact_path,
+        manifest_path=manifest_path,
+        qa_report_path=qa_path,
+        qa_summary_path=summary_path,
+        record_count=int(manifest["recordCount"]),
+        finding_count=int(report["summary"]["findingCount"]),
+        exit_code=exit_code_for_report(report),
+        generated=assembled.catalog,
+        qa_report=report,
+    )
+
+
 def _load_fixtures(fixture_root: Path) -> dict[str, Any]:
     try:
         return {
@@ -396,6 +673,89 @@ def _load_fixtures(fixture_root: Path) -> dict[str, Any]:
         }
     except OSError as exc:
         raise PipelineError(f"Fixture input could not be read: {exc}") from exc
+
+
+def _load_epic03_fixture_pages(fixture_root: Path) -> dict[str, str]:
+    base = fixture_root / "professions-attributes"
+    try:
+        return {
+            "Skill template format": (base / "skill-template-format.wiki").read_text(encoding="utf-8"),
+            "Profession": (base / "profession.wiki").read_text(encoding="utf-8"),
+            "Attribute": (base / "attribute.wiki").read_text(encoding="utf-8"),
+            "Attribute point": (base / "attribute-point.wiki").read_text(encoding="utf-8"),
+        }
+    except OSError as exc:
+        raise PipelineError(f"EPIC-03 fixture input could not be read: {exc}") from exc
+
+
+def _selected_epic03_snapshot_manifests(root: Path, profile: Any) -> list[Path]:
+    selected_titles = set(profile.all_page_titles) | {EPIC_03_ICON_IMAGEINFO_TITLE}
+    selected: list[Path] = []
+    for manifest_path in sorted(root.glob("**/*.manifest.json")):
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        source_ref = manifest.get("sourceReference") if isinstance(manifest, dict) else None
+        if not isinstance(source_ref, dict):
+            continue
+        page_title = source_ref.get("pageTitle")
+        if isinstance(page_title, str) and page_title in selected_titles:
+            selected.append(manifest_path)
+    return selected
+
+
+def _write_imageinfo_snapshot(
+    *,
+    snapshot_store: SnapshotStore,
+    pages: list[dict[str, Any]],
+    retrieved_at: str,
+) -> SnapshotWriteResult:
+    payload = {"kind": "mediawiki-imageinfo", "title": EPIC_03_ICON_IMAGEINFO_TITLE, "pages": pages}
+    payload_digest = digest_bytes(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8"))
+    source_ref = _page_source_reference(
+        source_id=f"source:gww:epic-03-profession-icons:{payload_digest[:12]}",
+        page_title=EPIC_03_ICON_IMAGEINFO_TITLE,
+        page_id=f"imageinfo:{payload_digest[:12]}",
+        revision_id=payload_digest,
+        source_revision_timestamp=_latest_imageinfo_timestamp(pages),
+        retrieved_at=retrieved_at,
+        material_class="media-metadata",
+    )
+    return _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=source_ref,
+        title=EPIC_03_ICON_IMAGEINFO_TITLE,
+        page_id=f"imageinfo:{payload_digest[:12]}",
+        revision_id=payload_digest,
+        timestamp=_latest_imageinfo_timestamp(pages),
+        retrieved_at=retrieved_at,
+        content=json.dumps(payload, ensure_ascii=False, sort_keys=True),
+    )
+
+
+def _profession_icon_titles(profession_pages: dict[str, str]) -> list[str]:
+    titles: list[str] = []
+    for wikitext in profession_pages.values():
+        match = re.search(r"icon\s*=\s*\[\[(?:Image|File):([^\]|]+)", wikitext, flags=re.IGNORECASE)
+        if match is not None:
+            titles.append(f"File:{match.group(1).strip()}")
+    return sorted(set(titles))
+
+
+def _latest_imageinfo_timestamp(pages: list[dict[str, Any]]) -> str | None:
+    timestamps: list[str] = []
+    for page in pages:
+        imageinfo = page.get("imageinfo")
+        if isinstance(imageinfo, list) and imageinfo and isinstance(imageinfo[0], dict):
+            timestamp = imageinfo[0].get("timestamp")
+            if isinstance(timestamp, str):
+                timestamps.append(timestamp)
+    return max(timestamps) if timestamps else None
+
+
+def _safe_source_part(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", value.casefold()).strip("-") or "unknown"
 
 
 def _write_page_snapshot(

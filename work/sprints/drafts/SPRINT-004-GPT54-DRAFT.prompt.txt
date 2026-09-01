@@ -1,0 +1,12 @@
+Read `work/sprints/drafts/SPRINT-004-INTENT.md` and the project conventions. Write an independent sprint draft directly to `work/sprints/drafts/SPRINT-004-GPT54-DRAFT.md`.
+
+Optimize for implementation phasing, dependency sequencing, and verification.
+
+Constraints:
+- Do not use skills.
+- Do not run a planning workflow.
+- Do not modify application, ingestion, test, package, or source code.
+- Do not modify ticket files, ledger files, manifests, or other planning artifacts.
+- Output only the markdown sprint document to the requested draft file.
+
+Follow this sprint template structure: Overview, Use Cases, Architecture, Implementation, Files Summary, Definition of Done, Risks & Mitigations, Security Considerations, Dependencies, Open Questions.

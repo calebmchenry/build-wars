@@ -11,6 +11,7 @@ from unittest import mock
 from build_wars_ingest.artifacts import (
     ArtifactError,
     canonical_json_bytes,
+    classify_baseline_diff,
     compare_baseline,
     write_canonical_json,
     write_generated_artifact,
@@ -120,6 +121,25 @@ class ArtifactTests(unittest.TestCase):
         )
         baseline.write_text(json.dumps({"schemaVersion": 1, "records": [{"id": 1}]}), encoding="utf-8")
         self.assertEqual(compare_baseline(current, baseline, artifact_path="out.json")[0].code, "ARTIFACT_BASELINE_DIFF")
+
+    def test_baseline_diff_classifier_distinguishes_first_semantic_and_provenance_changes(self) -> None:
+        current = {
+            "schemaVersion": 1,
+            "catalogVersion": "pa-current",
+            "generatedAt": "2026-09-01T00:00:00Z",
+            "professions": [{"id": 1, "name": "Warrior", "provenance": {"sourceIds": ["source:new"]}}],
+        }
+        provenance_only = {
+            **current,
+            "catalogVersion": "pa-old",
+            "generatedAt": "2026-08-31T00:00:00Z",
+            "professions": [{"id": 1, "name": "Warrior", "provenance": {"sourceIds": ["source:old"]}}],
+        }
+        semantic = {**current, "professions": [{"id": 1, "name": "Warr"}]}
+
+        self.assertEqual(classify_baseline_diff(current, None), "first-baseline")
+        self.assertEqual(classify_baseline_diff(current, semantic), "semantic")
+        self.assertEqual(classify_baseline_diff(current, provenance_only), "provenance-only")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,23 @@
+{| {{STDT|gold}}
+! [[Profession]] !! [[Primary attribute|Primary]] !! Inherent primary effect !! [[Secondary attribute|Secondary]]
+|-
+|{{W}} Warrior || [[Strength]] || Synthetic source-shape proof only. || [[Axe Mastery]]<br> [[Hammer Mastery]]<br> [[Swordsmanship]]<br> [[Tactics]]
+|-
+|{{r}} Ranger || [[Expertise]] || Synthetic source-shape proof only. || [[Beast Mastery]]<br> [[Marksmanship]]<br> [[Wilderness Survival]]
+|-
+|{{Mo}} Monk || [[Divine Favor]] || Synthetic source-shape proof only. || [[Healing Prayers]]<br> [[Protection Prayers]]<br> [[Smiting Prayers]]
+|-
+|{{N}} Necromancer || [[Soul Reaping]] || Synthetic source-shape proof only. || [[Blood Magic]]<br> [[Curses]]<br> [[Death Magic]]
+|-
+|{{Me}} Mesmer || [[Fast Casting]] || Synthetic source-shape proof only. || [[Domination Magic]]<br> [[Illusion Magic]]<br> [[Inspiration Magic]]
+|-
+|{{E}} Elementalist || [[Energy Storage]] || Synthetic source-shape proof only. || [[Air Magic]]<br> [[Earth Magic]]<br> [[Fire Magic]]<br> [[Water Magic]]
+|-
+|{{A}} Assassin || [[Critical Strikes]] || Synthetic source-shape proof only. || [[Dagger Mastery]]<br> [[Deadly Arts]]<br> [[Shadow Arts]]
+|-
+|{{Rt}} Ritualist || [[Spawning Power]] || Synthetic source-shape proof only. || [[Channeling Magic]]<br> [[Communing]]<br> [[Restoration Magic]]
+|-
+|{{P}} Paragon || [[Leadership]] || Synthetic source-shape proof only. || [[Command]]<br> [[Motivation]]<br> [[Spear Mastery]]
+|-
+|{{D}} Dervish || [[Mysticism]] || Synthetic source-shape proof only. || [[Earth Prayers]]<br> [[Scythe Mastery]]<br> [[Wind Prayers]]
+|}
