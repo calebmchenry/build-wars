@@ -1,5 +1,10 @@
-The Compendium is a in repo documentation system for agents.
+The Compendium is an in-repo documentation system for agents.
 
 ## Goals
-* Self healing - keep this documentation up to date
-* Document systems, scripts, design decisions, how to QA a feature, etc
+
+- Self-healing: keep this documentation up to date.
+- Document systems, scripts, design decisions, and QA workflows.
+
+## Decisions
+
+- [Project foundation](decisions/0001-project-foundation.md)

@@ -1,0 +1,15 @@
+coverage/
+data/generated/
+data/qa/
+data/source-snapshots/
+dist/
+node_modules/
+package-lock.json
+prior-art/
+work/roadmap.md
+work/sprints/drafts/
+work/tickets/*/EPIC.md
+work/tickets/README.md
+work/tickets/index.md
+work/runs/
+*.log

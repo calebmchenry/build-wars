@@ -1,3 +1,28 @@
 .DS_Store
 __pycache__/
 *.py[cod]
+
+# Node and build outputs
+node_modules/
+dist/
+coverage/
+.vite/
+*.tsbuildinfo
+
+# Local environment
+.env
+.env.*
+!.env.example
+*.local
+
+# Generated run/log output
+*.log
+work/runs/
+
+# Future raw/generated data artifacts. Keep policy README files tracked.
+data/source-snapshots/*
+!data/source-snapshots/README.md
+data/generated/*
+!data/generated/README.md
+data/qa/*
+!data/qa/README.md
