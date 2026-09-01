@@ -1,0 +1,28 @@
+Fixture may refer to a skill, a PvP split, or a title-rank example.
+
+{{Skill infobox
+| name = Fixture Flame
+| campaign = Core
+| profession = Elementalist
+| attribute = Fire Magic
+| type = Spell
+| energy = 10
+| activation = 2
+| recharge = {{morale-boost recharge|20|10}}
+| image = Fixture Flame.png
+| description = Deals {{gr|5|10|15}} fire damage.
+| unknown fixture = kept for QA
+}}
+
+{{Skill progression
+| attribute = Fire Magic
+| rank = {{gr2|0|5|10|15}}
+| value = {{gr|1|2|3}}
+}}
+
+{{pveversion|{{Skill infobox|name=Fixture Flame (PvE)|recharge=10}}}}
+{{pvpversion|{{Skill infobox|name=Fixture Flame (PvP)|recharge=15}}}}
+{{title-rank progression|title=Fixture Title|max=10|values={{gr|1|2|3}}}}
+
+<!-- parser comment fixture -->
+<nowiki>{{Not parsed as a template}}</nowiki>

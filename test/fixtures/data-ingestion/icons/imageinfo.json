@@ -1,0 +1,36 @@
+{
+  "pages": [
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Quoted_Skill_(PvP).jpg",
+          "height": 64,
+          "mime": "image/jpeg",
+          "sha1": "2222222222222222222222222222222222222222",
+          "size": 4096,
+          "timestamp": "2026-08-30T00:00:00Z",
+          "url": "https://wiki.guildwars.com/images/2/22/Quoted_Skill_%28PvP%29.jpg",
+          "width": 64
+        }
+      ],
+      "pageid": 8002,
+      "title": "File:Quoted Skill (PvP).jpg"
+    },
+    {
+      "imageinfo": [
+        {
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Fixture_Flame.png",
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "1111111111111111111111111111111111111111",
+          "size": 2048,
+          "timestamp": "2026-08-29T00:00:00Z",
+          "url": "https://wiki.guildwars.com/images/1/11/Fixture_Flame.png",
+          "width": 64
+        }
+      ],
+      "pageid": 8001,
+      "title": "File:Fixture Flame.png"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ dist/
 node_modules/
 package-lock.json
 prior-art/
+test/fixtures/data-ingestion/generated/*.json
 work/roadmap.md
 work/sprints/drafts/
 work/tickets/*/EPIC.md

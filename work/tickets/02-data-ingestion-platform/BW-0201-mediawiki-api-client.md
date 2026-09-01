@@ -2,10 +2,13 @@
 id: BW-0201
 title: MediaWiki API Client
 epic: EPIC-02
-status: backlog
+status: done
 priority: critical
 depends_on: []
+planned_sprint: SPRINT-003
+completed_sprint: SPRINT-003
 created: 2026-09-01
+updated: 2026-09-01
 ---
 
 # BW-0201: MediaWiki API Client

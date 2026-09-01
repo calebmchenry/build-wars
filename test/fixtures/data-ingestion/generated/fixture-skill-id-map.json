@@ -1,0 +1,726 @@
+{
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generationId": "epic-02-fixture",
+  "generator": "build-wars-ingest/0.1.0",
+  "iconProof": [
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/1/11/Fixture_Flame.png",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Fixture_Flame.png",
+      "fileTitle": "File:Fixture Flame.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:fixture-flame",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Fixture Flame.",
+      "remoteSha1": "1111111111111111111111111111111111111111",
+      "remoteTimestamp": "2026-08-29T00:00:00Z",
+      "sizeBytes": 2048,
+      "sourceId": "source:gww:icon-imageinfo:3001",
+      "sourceReference": {
+        "canonicalUrl": "https://wiki.guildwars.com/wiki/File_metadata_fixture",
+        "family": "guild-wars-wiki",
+        "fileId": null,
+        "fileTitle": null,
+        "id": "source:gww:icon-imageinfo:3001",
+        "license": null,
+        "materialClass": "media-metadata",
+        "name": "Guild Wars Wiki",
+        "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+        "pageId": 9003,
+        "pageTitle": "File metadata fixture",
+        "retrievedAt": "2026-09-01T00:00:00Z",
+        "revisionId": 3001,
+        "rightsBasis": "contributor-license-declared",
+        "sourceRevisionTimestamp": "2026-08-31T13:00:00Z",
+        "useDecision": "allowed"
+      },
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/2/22/Quoted_Skill_%28PvP%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Quoted_Skill_(PvP).jpg",
+      "fileTitle": "File:Quoted Skill (PvP).jpg",
+      "height": 64,
+      "id": "remote-media:gww-icon:quoted-skill-pvp",
+      "kind": "icon",
+      "mimeType": "image/jpeg",
+      "notes": "Metadata-only icon record for Quoted Skill (PvP).",
+      "remoteSha1": "2222222222222222222222222222222222222222",
+      "remoteTimestamp": "2026-08-30T00:00:00Z",
+      "sizeBytes": 4096,
+      "sourceId": "source:gww:icon-imageinfo:3001",
+      "sourceReference": {
+        "canonicalUrl": "https://wiki.guildwars.com/wiki/File_metadata_fixture",
+        "family": "guild-wars-wiki",
+        "fileId": null,
+        "fileTitle": null,
+        "id": "source:gww:icon-imageinfo:3001",
+        "license": null,
+        "materialClass": "media-metadata",
+        "name": "Guild Wars Wiki",
+        "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+        "pageId": 9003,
+        "pageTitle": "File metadata fixture",
+        "retrievedAt": "2026-09-01T00:00:00Z",
+        "revisionId": 3001,
+        "rightsBasis": "contributor-license-declared",
+        "sourceRevisionTimestamp": "2026-08-31T13:00:00Z",
+        "useDecision": "allowed"
+      },
+      "useDecision": "allowed",
+      "width": 64
+    }
+  ],
+  "parserProof": {
+    "commentCount": 1,
+    "disambiguationPreamble": "Fixture may refer to a skill, a PvP split, or a title-rank example.",
+    "nowikiCount": 1,
+    "recommendation": "accept-mwparserfromhell",
+    "redirectTarget": null,
+    "source": "fixture:wikitext/parser-corpus.wiki",
+    "templateCount": 5,
+    "templates": [
+      {
+        "duplicateParams": [],
+        "index": 0,
+        "normalizedName": "skill infobox",
+        "originalName": "Skill infobox",
+        "params": [
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "name",
+            "rawName": "name",
+            "rawValue": " Fixture Flame\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "campaign",
+            "rawName": "campaign",
+            "rawValue": " Core\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "profession",
+            "rawName": "profession",
+            "rawValue": " Elementalist\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "attribute",
+            "rawName": "attribute",
+            "rawValue": " Fire Magic\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "type",
+            "rawName": "type",
+            "rawValue": " Spell\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "energy",
+            "rawName": "energy",
+            "rawValue": " 10\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "activation",
+            "rawName": "activation",
+            "rawValue": " 2\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [
+              {
+                "duplicateParams": [],
+                "index": 0,
+                "normalizedName": "morale-boost recharge",
+                "originalName": "morale-boost recharge",
+                "params": [
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "1",
+                    "rawName": "1",
+                    "rawValue": "20"
+                  },
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "2",
+                    "rawName": "2",
+                    "rawValue": "10"
+                  }
+                ],
+                "raw": "{{morale-boost recharge|20|10}}"
+              }
+            ],
+            "normalizedName": "recharge",
+            "rawName": "recharge",
+            "rawValue": " {{morale-boost recharge|20|10}}\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "image",
+            "rawName": "image",
+            "rawValue": " Fixture Flame.png\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [
+              {
+                "duplicateParams": [],
+                "index": 0,
+                "normalizedName": "gr",
+                "originalName": "gr",
+                "params": [
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "1",
+                    "rawName": "1",
+                    "rawValue": "5"
+                  },
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "2",
+                    "rawName": "2",
+                    "rawValue": "10"
+                  },
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "3",
+                    "rawName": "3",
+                    "rawValue": "15"
+                  }
+                ],
+                "raw": "{{gr|5|10|15}}"
+              }
+            ],
+            "normalizedName": "description",
+            "rawName": "description",
+            "rawValue": " Deals {{gr|5|10|15}} fire damage.\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "unknown fixture",
+            "rawName": "unknown fixture",
+            "rawValue": " kept for QA\n"
+          }
+        ],
+        "raw": "{{Skill infobox\n| name = Fixture Flame\n| campaign = Core\n| profession = Elementalist\n| attribute = Fire Magic\n| type = Spell\n| energy = 10\n| activation = 2\n| recharge = {{morale-boost recharge|20|10}}\n| image = Fixture Flame.png\n| description = Deals {{gr|5|10|15}} fire damage.\n| unknown fixture = kept for QA\n}}"
+      },
+      {
+        "duplicateParams": [],
+        "index": 1,
+        "normalizedName": "skill progression",
+        "originalName": "Skill progression",
+        "params": [
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "attribute",
+            "rawName": "attribute",
+            "rawValue": " Fire Magic\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [
+              {
+                "duplicateParams": [],
+                "index": 0,
+                "normalizedName": "gr2",
+                "originalName": "gr2",
+                "params": [
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "1",
+                    "rawName": "1",
+                    "rawValue": "0"
+                  },
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "2",
+                    "rawName": "2",
+                    "rawValue": "5"
+                  },
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "3",
+                    "rawName": "3",
+                    "rawValue": "10"
+                  },
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "4",
+                    "rawName": "4",
+                    "rawValue": "15"
+                  }
+                ],
+                "raw": "{{gr2|0|5|10|15}}"
+              }
+            ],
+            "normalizedName": "rank",
+            "rawName": "rank",
+            "rawValue": " {{gr2|0|5|10|15}}\n"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [
+              {
+                "duplicateParams": [],
+                "index": 0,
+                "normalizedName": "gr",
+                "originalName": "gr",
+                "params": [
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "1",
+                    "rawName": "1",
+                    "rawValue": "1"
+                  },
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "2",
+                    "rawName": "2",
+                    "rawValue": "2"
+                  },
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "3",
+                    "rawName": "3",
+                    "rawValue": "3"
+                  }
+                ],
+                "raw": "{{gr|1|2|3}}"
+              }
+            ],
+            "normalizedName": "value",
+            "rawName": "value",
+            "rawValue": " {{gr|1|2|3}}\n"
+          }
+        ],
+        "raw": "{{Skill progression\n| attribute = Fire Magic\n| rank = {{gr2|0|5|10|15}}\n| value = {{gr|1|2|3}}\n}}"
+      },
+      {
+        "duplicateParams": [],
+        "index": 2,
+        "normalizedName": "pveversion",
+        "originalName": "pveversion",
+        "params": [
+          {
+            "isPositional": true,
+            "nestedTemplates": [
+              {
+                "duplicateParams": [],
+                "index": 0,
+                "normalizedName": "skill infobox",
+                "originalName": "Skill infobox",
+                "params": [
+                  {
+                    "isPositional": false,
+                    "nestedTemplates": [],
+                    "normalizedName": "name",
+                    "rawName": "name",
+                    "rawValue": "Fixture Flame (PvE)"
+                  },
+                  {
+                    "isPositional": false,
+                    "nestedTemplates": [],
+                    "normalizedName": "recharge",
+                    "rawName": "recharge",
+                    "rawValue": "10"
+                  }
+                ],
+                "raw": "{{Skill infobox|name=Fixture Flame (PvE)|recharge=10}}"
+              }
+            ],
+            "normalizedName": "1",
+            "rawName": "1",
+            "rawValue": "{{Skill infobox|name=Fixture Flame (PvE)|recharge=10}}"
+          }
+        ],
+        "raw": "{{pveversion|{{Skill infobox|name=Fixture Flame (PvE)|recharge=10}}}}"
+      },
+      {
+        "duplicateParams": [],
+        "index": 3,
+        "normalizedName": "pvpversion",
+        "originalName": "pvpversion",
+        "params": [
+          {
+            "isPositional": true,
+            "nestedTemplates": [
+              {
+                "duplicateParams": [],
+                "index": 0,
+                "normalizedName": "skill infobox",
+                "originalName": "Skill infobox",
+                "params": [
+                  {
+                    "isPositional": false,
+                    "nestedTemplates": [],
+                    "normalizedName": "name",
+                    "rawName": "name",
+                    "rawValue": "Fixture Flame (PvP)"
+                  },
+                  {
+                    "isPositional": false,
+                    "nestedTemplates": [],
+                    "normalizedName": "recharge",
+                    "rawName": "recharge",
+                    "rawValue": "15"
+                  }
+                ],
+                "raw": "{{Skill infobox|name=Fixture Flame (PvP)|recharge=15}}"
+              }
+            ],
+            "normalizedName": "1",
+            "rawName": "1",
+            "rawValue": "{{Skill infobox|name=Fixture Flame (PvP)|recharge=15}}"
+          }
+        ],
+        "raw": "{{pvpversion|{{Skill infobox|name=Fixture Flame (PvP)|recharge=15}}}}"
+      },
+      {
+        "duplicateParams": [],
+        "index": 4,
+        "normalizedName": "title-rank progression",
+        "originalName": "title-rank progression",
+        "params": [
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "title",
+            "rawName": "title",
+            "rawValue": "Fixture Title"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [],
+            "normalizedName": "max",
+            "rawName": "max",
+            "rawValue": "10"
+          },
+          {
+            "isPositional": false,
+            "nestedTemplates": [
+              {
+                "duplicateParams": [],
+                "index": 0,
+                "normalizedName": "gr",
+                "originalName": "gr",
+                "params": [
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "1",
+                    "rawName": "1",
+                    "rawValue": "1"
+                  },
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "2",
+                    "rawName": "2",
+                    "rawValue": "2"
+                  },
+                  {
+                    "isPositional": true,
+                    "nestedTemplates": [],
+                    "normalizedName": "3",
+                    "rawName": "3",
+                    "rawValue": "3"
+                  }
+                ],
+                "raw": "{{gr|1|2|3}}"
+              }
+            ],
+            "normalizedName": "values",
+            "rawName": "values",
+            "rawValue": "{{gr|1|2|3}}"
+          }
+        ],
+        "raw": "{{title-rank progression|title=Fixture Title|max=10|values={{gr|1|2|3}}}}"
+      }
+    ]
+  },
+  "profile": "guild-wars-wiki",
+  "records": [
+    {
+      "id": 1,
+      "lineNumber": 2,
+      "provenance": {
+        "claims": [
+          {
+            "fieldPath": "",
+            "id": "claim:skill-id:1",
+            "materialClass": "factual-metadata",
+            "method": "normalized",
+            "reviewIds": [],
+            "rightsBasis": "contributor-license-declared",
+            "sourceIds": [
+              "source:gww:game-integration-skills-0:1001"
+            ],
+            "transformationNotes": "Parsed from Guild Wars Wiki game integration skill mapping.",
+            "useDecision": "allowed"
+          },
+          {
+            "fieldPath": "/title",
+            "id": "claim:skill-id:1:title",
+            "materialClass": "factual-metadata",
+            "method": "normalized",
+            "reviewIds": [],
+            "rightsBasis": "contributor-license-declared",
+            "sourceIds": [
+              "source:gww:game-integration-skills-0:1001"
+            ],
+            "transformationNotes": "Normalized page title link target without copying page body prose.",
+            "useDecision": "allowed"
+          }
+        ],
+        "manualOverrides": [],
+        "notes": null,
+        "reviews": [],
+        "schemaVersion": 1,
+        "sources": [
+          {
+            "canonicalUrl": "https://wiki.guildwars.com/wiki/Guild_Wars_Wiki:Game_integration/Skills/0",
+            "family": "guild-wars-wiki",
+            "fileId": null,
+            "fileTitle": null,
+            "id": "source:gww:game-integration-skills-0:1001",
+            "license": null,
+            "materialClass": "factual-metadata",
+            "name": "Guild Wars Wiki",
+            "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+            "pageId": 9001,
+            "pageTitle": "Guild Wars Wiki:Game integration/Skills/0",
+            "retrievedAt": "2026-09-01T00:00:00Z",
+            "revisionId": 1001,
+            "rightsBasis": "contributor-license-declared",
+            "sourceRevisionTimestamp": "2026-08-31T12:00:00Z",
+            "useDecision": "allowed"
+          }
+        ]
+      },
+      "skillId": 1,
+      "sourcePage": "Guild Wars Wiki:Game integration/Skills/0",
+      "sourceRevisionId": 1001,
+      "sourceRevisionTimestamp": "2026-08-31T12:00:00Z",
+      "sourceUrl": "https://wiki.guildwars.com/wiki/Guild_Wars_Wiki:Game_integration/Skills/0",
+      "title": "Fixture Flame"
+    },
+    {
+      "id": 2,
+      "lineNumber": 3,
+      "provenance": {
+        "claims": [
+          {
+            "fieldPath": "",
+            "id": "claim:skill-id:2",
+            "materialClass": "factual-metadata",
+            "method": "normalized",
+            "reviewIds": [],
+            "rightsBasis": "contributor-license-declared",
+            "sourceIds": [
+              "source:gww:game-integration-skills-0:1001"
+            ],
+            "transformationNotes": "Parsed from Guild Wars Wiki game integration skill mapping.",
+            "useDecision": "allowed"
+          },
+          {
+            "fieldPath": "/title",
+            "id": "claim:skill-id:2:title",
+            "materialClass": "factual-metadata",
+            "method": "normalized",
+            "reviewIds": [],
+            "rightsBasis": "contributor-license-declared",
+            "sourceIds": [
+              "source:gww:game-integration-skills-0:1001"
+            ],
+            "transformationNotes": "Normalized page title link target without copying page body prose.",
+            "useDecision": "allowed"
+          }
+        ],
+        "manualOverrides": [],
+        "notes": null,
+        "reviews": [],
+        "schemaVersion": 1,
+        "sources": [
+          {
+            "canonicalUrl": "https://wiki.guildwars.com/wiki/Guild_Wars_Wiki:Game_integration/Skills/0",
+            "family": "guild-wars-wiki",
+            "fileId": null,
+            "fileTitle": null,
+            "id": "source:gww:game-integration-skills-0:1001",
+            "license": null,
+            "materialClass": "factual-metadata",
+            "name": "Guild Wars Wiki",
+            "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+            "pageId": 9001,
+            "pageTitle": "Guild Wars Wiki:Game integration/Skills/0",
+            "retrievedAt": "2026-09-01T00:00:00Z",
+            "revisionId": 1001,
+            "rightsBasis": "contributor-license-declared",
+            "sourceRevisionTimestamp": "2026-08-31T12:00:00Z",
+            "useDecision": "allowed"
+          }
+        ]
+      },
+      "skillId": 2,
+      "sourcePage": "Guild Wars Wiki:Game integration/Skills/0",
+      "sourceRevisionId": 1001,
+      "sourceRevisionTimestamp": "2026-08-31T12:00:00Z",
+      "sourceUrl": "https://wiki.guildwars.com/wiki/Guild_Wars_Wiki:Game_integration/Skills/0",
+      "title": "Quoted Skill (PvP)"
+    },
+    {
+      "id": 4,
+      "lineNumber": 4,
+      "provenance": {
+        "claims": [
+          {
+            "fieldPath": "",
+            "id": "claim:skill-id:4",
+            "materialClass": "factual-metadata",
+            "method": "normalized",
+            "reviewIds": [],
+            "rightsBasis": "contributor-license-declared",
+            "sourceIds": [
+              "source:gww:game-integration-skills-0:1001"
+            ],
+            "transformationNotes": "Parsed from Guild Wars Wiki game integration skill mapping.",
+            "useDecision": "allowed"
+          },
+          {
+            "fieldPath": "/title",
+            "id": "claim:skill-id:4:title",
+            "materialClass": "factual-metadata",
+            "method": "normalized",
+            "reviewIds": [],
+            "rightsBasis": "contributor-license-declared",
+            "sourceIds": [
+              "source:gww:game-integration-skills-0:1001"
+            ],
+            "transformationNotes": "Normalized page title link target without copying page body prose.",
+            "useDecision": "allowed"
+          }
+        ],
+        "manualOverrides": [],
+        "notes": null,
+        "reviews": [],
+        "schemaVersion": 1,
+        "sources": [
+          {
+            "canonicalUrl": "https://wiki.guildwars.com/wiki/Guild_Wars_Wiki:Game_integration/Skills/0",
+            "family": "guild-wars-wiki",
+            "fileId": null,
+            "fileTitle": null,
+            "id": "source:gww:game-integration-skills-0:1001",
+            "license": null,
+            "materialClass": "factual-metadata",
+            "name": "Guild Wars Wiki",
+            "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+            "pageId": 9001,
+            "pageTitle": "Guild Wars Wiki:Game integration/Skills/0",
+            "retrievedAt": "2026-09-01T00:00:00Z",
+            "revisionId": 1001,
+            "rightsBasis": "contributor-license-declared",
+            "sourceRevisionTimestamp": "2026-08-31T12:00:00Z",
+            "useDecision": "allowed"
+          }
+        ]
+      },
+      "skillId": 4,
+      "sourcePage": "Guild Wars Wiki:Game integration/Skills/0",
+      "sourceRevisionId": 1001,
+      "sourceRevisionTimestamp": "2026-08-31T12:00:00Z",
+      "sourceUrl": "https://wiki.guildwars.com/wiki/Guild_Wars_Wiki:Game_integration/Skills/0",
+      "title": "Special Effect"
+    }
+  ],
+  "schemaVersion": 1,
+  "snapshotManifestPaths": [
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-1001-fe675f/guild-wars-wiki-game-integration-skills-0-91e64c1c40-6104d4d1dd27d0f0.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2001-85d638/build-wars-parser-fixture-skill-57a98f34b0-d53d947fec4f0319.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-3001-a20c25/file-metadata-fixture-de4fcc8d25-98cc49d7bf5bba3d.manifest.json"
+  ],
+  "sources": [
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Guild_Wars_Wiki:Game_integration/Skills/0",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:game-integration-skills-0:1001",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 9001,
+      "pageTitle": "Guild Wars Wiki:Game integration/Skills/0",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 1001,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-08-31T12:00:00Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/Build_Wars_Parser_Fixture_Skill",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:test-skill-parser:2001",
+      "license": null,
+      "materialClass": "factual-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 9002,
+      "pageTitle": "Build Wars Parser Fixture Skill",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 2001,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-08-31T12:30:00Z",
+      "useDecision": "allowed"
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/wiki/File_metadata_fixture",
+      "family": "guild-wars-wiki",
+      "fileId": null,
+      "fileTitle": null,
+      "id": "source:gww:icon-imageinfo:3001",
+      "license": null,
+      "materialClass": "media-metadata",
+      "name": "Guild Wars Wiki",
+      "notes": "Fixture source reference for EPIC-02 ingestion tooling.",
+      "pageId": 9003,
+      "pageTitle": "File metadata fixture",
+      "retrievedAt": "2026-09-01T00:00:00Z",
+      "revisionId": 3001,
+      "rightsBasis": "contributor-license-declared",
+      "sourceRevisionTimestamp": "2026-08-31T13:00:00Z",
+      "useDecision": "allowed"
+    }
+  ]
+}

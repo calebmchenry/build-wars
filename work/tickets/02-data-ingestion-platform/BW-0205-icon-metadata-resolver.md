@@ -2,13 +2,16 @@
 id: BW-0205
 title: Icon Metadata Resolver
 epic: EPIC-02
-status: backlog
+status: done
 priority: high
 depends_on:
   - BW-0201
   - BW-0202
   - BW-0204
+planned_sprint: SPRINT-003
+completed_sprint: SPRINT-003
 created: 2026-09-01
+updated: 2026-09-01
 ---
 
 # BW-0205: Icon Metadata Resolver

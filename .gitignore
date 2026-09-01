@@ -14,6 +14,9 @@ coverage/
 .env.*
 !.env.example
 *.local
+.venv-data/
+scripts/data/.venv/
+scripts/data/.pytest_cache/
 
 # Generated run/log output
 *.log

@@ -1,12 +1,12 @@
 # Data QA Reports
 
-Future ingestion validation reports belong here. Report contents are ignored by Git; this README
-stays tracked so the directory contract is visible.
+Ingestion validation reports belong here. Report contents are ignored by Git; this README stays
+tracked so the directory contract is visible.
 
 The operational requirements for QA findings, manual review, and release gates live in
 [`compendium/data-qa-and-release.md`](../../compendium/data-qa-and-release.md).
 
-QA reports may contain generated evidence, source snippets, reviewer notes, local paths, and
+QA reports may contain generated evidence, bounded source snippets, reviewer notes, local paths, and
 untrusted source values. They are internal artifacts by default and are not runtime app data.
 
 ## Report Contents
@@ -26,3 +26,12 @@ only when it contains no prohibited source payload, secret, cached media, or unr
 
 Unknown copied material, digest mismatch, and unreadable artifacts are non-waivable for public
 release and must be resolved or excluded.
+
+## Gate Behavior
+
+The EPIC-02 tooling maps diagnostics to the existing `QaFinding` and `QaReport` contracts. Critical
+open findings block app consumption and public release. Error findings block public release. Warning
+findings require review. Info findings do not block alone.
+
+Blocking regenerate commands write both machine-readable JSON and a bounded `.summary.txt` before
+returning exit code `2`.

@@ -2,11 +2,13 @@
 id: EPIC-02
 title: Data Ingestion Platform
 track: functional
-status: backlog
+status: done
 priority: critical
 depends_on:
   - EPIC-00
   - EPIC-01
+planned_sprint: SPRINT-003
+completed_sprint: SPRINT-003
 tickets:
   - BW-0201
   - BW-0202

@@ -1,21 +1,119 @@
 # Data Scripts
 
-Future ingestion and QA scripts live here. They may import public contracts from `src/domain`, read
-raw snapshots from `data/source-snapshots`, write normalized artifacts to `data/generated`, and
-publish validation reports under `data/qa`.
+`scripts/data` contains the EPIC-02 ingestion platform. It is offline tooling, not browser runtime
+code. Runtime app modules must not import this package, fetch source APIs, read raw snapshots, or
+read QA reports.
 
-The intended flow is fetch, snapshot, normalize, validate, and publish. Runtime app code must not
-import from this directory.
+## Setup
 
-## Future Pipeline Contract
+Supported baseline:
 
-| Stage     | Inputs                                               | Outputs                                                              | Required contracts and gates                                                                                                                                                                                    |
-| --------- | ---------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Fetch     | Source profile and canonical URL                     | Raw source payload in `data/source-snapshots`                        | Network clients and freshness profiles are EPIC-02 work. Source values are untrusted.                                                                                                                           |
-| Snapshot  | Raw payload and source metadata                      | `SourceSnapshotManifest` plus ignored raw payload                    | Must record source family, page/file identity, revision identity, source revision timestamp, retrieval timestamp, artifact path, and digest when available.                                                     |
-| Normalize | Snapshot manifest and raw payload                    | Normalized JSON plus `GeneratedArtifactManifest` in `data/generated` | Must attach record or artifact provenance, field claims, transformation notes, and metadata-only media references where allowed.                                                                                |
-| Validate  | Generated artifact manifest and records              | `QaReport` in `data/qa`                                              | Must report provenance gaps, stale/unverified revisions, rights ambiguity, invalid source IDs, manual overrides, copied text, icon metadata gaps, generated diffs, schema/shape errors, and integrity failures. |
-| Publish   | QA report, release scope, and approved artifact list | Release attestation or excluded artifact                             | Must pass app-consumption and public-release gates before runtime use.                                                                                                                                          |
+- Python 3.13 in the current development environment; Python 3.11 or newer should work for the
+  standard-library modules used here.
+- `mwparserfromhell==0.7.2`, pinned in `requirements.txt`.
 
-Runtime schema validation, source fetching, parsers, cache management, and release attestation
-commands are intentionally deferred. This sprint defines the contracts and gates they must use.
+Run setup once after `npm ci`:
+
+```sh
+npm run data:setup
+```
+
+This creates `.venv-data/`, which is ignored by Git, and installs the pinned parser dependency.
+
+## Commands
+
+```sh
+npm run data:test
+npm run data:regenerate
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --allow-live-network --title "Guild Wars Wiki:Game integration/Skills/0"
+```
+
+Exit codes:
+
+- `0`: command completed; warnings may still leave app or public gates in `review-required`.
+- `2`: invalid mode/options, setup failure, missing offline snapshots, or blocking QA gate.
+
+`npm run verify` includes `npm run data:test`, which is fast and offline.
+
+## Modes
+
+- `fixture`: uses committed minimized synthetic fixtures from `test/fixtures/data-ingestion`, a fixed
+  UTC clock, and an output root under ignored `work/runs/data-ingestion`.
+- `offline`: reads existing ignored snapshot manifests from the configured output root without
+  network access. Production snapshots are not committed yet, so this mode is for local
+  investigation after a live refresh.
+- `live`: manually fetches named Guild Wars Wiki pages through the shared MediaWiki client. It
+  requires `--allow-live-network` and at least one `--title`.
+
+## Source Limits
+
+The Guild Wars Wiki profile fixes the API origin to `https://wiki.guildwars.com/api.php`, uses
+GET-only JSON requests, `formatversion=2`, `maxlag=5`, finite timeouts, response byte caps, request
+and page limits, continuation limits, retry budgets, and a descriptive User-Agent. The client
+accepts query parameters, not arbitrary URLs, and validates the final origin after redirects.
+
+Live smoke checks should stay bounded: name the exact pages, inspect request counts, revisions,
+digests, artifact paths, and QA summaries, then delete ignored outputs when they are no longer
+needed.
+
+## Pipeline Contract
+
+| Stage     | Inputs                                               | Outputs                                                             | Required contracts and gates                                                                                                                                                              |
+| --------- | ---------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fetch     | Source profile and query parameters                  | Raw source payload in `data/source-snapshots`                       | Live mode only; source values are untrusted.                                                                                                                                              |
+| Snapshot  | Raw payload and source metadata                      | `SourceSnapshotManifest` plus ignored raw payload                   | Records source family, page/file identity, revision identity, source revision timestamp, retrieval timestamp, artifact path, SHA-256 digest, and ignored retention policy.                |
+| Extract   | Verified snapshot payloads                           | Skill-ID mappings, parser proof, and icon metadata                  | Extractors consume snapshots, not a network client. Nested wiki templates are traversed through `mwparserfromhell`, not regex-only parsing.                                               |
+| Normalize | Extracted records and diagnostics                    | Canonical JSON plus `GeneratedArtifactManifest` in `data/generated` | UTF-8, LF-terminated, two-space indented, key-stable, finite-number-only, stable record order, provenance-bearing, and metadata-only media references where allowed.                      |
+| Validate  | Generated artifact manifest and records              | `QaReport` JSON and bounded text summary in `data/qa`               | Reports provenance gaps, stale/unverified revisions, rights ambiguity, invalid source IDs, copied text, icon metadata gaps, generated diffs, schema/shape errors, and integrity failures. |
+| Promote   | QA report, release scope, and approved artifact list | Exact-path allowlist or excluded artifact                           | Requires a later ticket naming exact paths, review evidence, source-policy disposition, and app/public release gate status before runtime use.                                            |
+
+## Artifacts
+
+Default roots under a command `--root` are:
+
+- `data/source-snapshots`: raw payloads and `SourceSnapshotManifest` JSON.
+- `data/generated`: canonical generated JSON and `GeneratedArtifactManifest` JSON.
+- `data/qa`: machine-readable `QaReport` JSON and `.summary.txt` files.
+
+These roots are ignored by default in the repository. The tracked golden fixture lives under
+`test/fixtures/data-ingestion/generated/fixture-skill-id-map.json` because it is synthetic,
+minimized, provenance-bearing, and used by Python and Vitest contract tests.
+
+## Baselines
+
+Pass `--baseline path/to/artifact.json` to compare generated output with an explicit baseline. No
+baseline produces an info finding. Schema mismatches are errors. Byte differences under the same
+schema are warnings until a release-scope review decides whether the change is expected.
+
+## Parser Decision
+
+`mwparserfromhell` is accepted for the next parser-dependent content work. The fixture corpus covers
+`Skill infobox`, `Skill progression`, `gr`, `gr2`, `title-rank progression`, `pveversion`,
+`pvpversion`, morale-boost recharge, quoted names, punctuation, redirects, disambiguation preambles,
+comments, `<nowiki>`, unknown parameters, duplicate parameters, and wrapper templates. Large or lossy
+inputs produce diagnostics so a future extractor can route hard cases to a bounded fallback.
+
+## Extension Points
+
+Later content epics should add source profiles, snapshot-driven extractors, and QA checks inside
+`build_wars_ingest` rather than creating new API clients or one-off scrapers. Keep profession or
+category pages as optional QA cross-checks for skill IDs; `Guild Wars Wiki:Game integration/Skills/*`
+remains the primary ID authority.
+
+## Troubleshooting
+
+- Missing `mwparserfromhell`: run `npm run data:setup`.
+- PEP 668 pip errors: use the provided virtualenv setup instead of system-wide `pip install`.
+- Missing offline snapshots: run fixture mode or perform a bounded live refresh into an ignored
+  local root.
+- Blocking QA exit: inspect the JSON report and `.summary.txt`; reports are written before exit.
+- Stale generated output: rerun fixture mode with the fixed clock and compare against the golden
+  fixture or an explicit baseline.
+
+## Safe Deletion
+
+Ignored local outputs under `work/runs/data-ingestion`, `data/source-snapshots`, `data/generated`,
+and `data/qa` can be deleted after review when no exact-path ticket has approved them. Do not delete
+tracked README policy files or tracked synthetic fixtures.

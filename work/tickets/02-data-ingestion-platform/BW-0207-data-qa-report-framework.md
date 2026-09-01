@@ -2,14 +2,17 @@
 id: BW-0207
 title: Data QA Report Framework
 epic: EPIC-02
-status: backlog
+status: done
 priority: high
 depends_on:
   - BW-0203
   - BW-0204
   - BW-0205
   - BW-0206
+planned_sprint: SPRINT-003
+completed_sprint: SPRINT-003
 created: 2026-09-01
+updated: 2026-09-01
 ---
 
 # BW-0207: Data QA Report Framework

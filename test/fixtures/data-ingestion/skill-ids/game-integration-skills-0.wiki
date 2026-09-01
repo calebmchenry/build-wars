@@ -1,0 +1,4 @@
+<!-- Synthetic minimized fixture for EPIC-02 skill-id parsing tests. -->
+* [[Game link:Skill 1|Skill 1]] = [[Fixture Flame]]
+* [[Game link:Skill 2|Skill 2]] = [[Quoted Skill (PvP)]]
+* [[Game link:Skill 4|Skill 4]] -> [[Special Effect]]

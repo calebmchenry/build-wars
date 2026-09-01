@@ -2,12 +2,15 @@
 id: BW-0204
 title: Wikitext Template Parser Spike
 epic: EPIC-02
-status: backlog
+status: done
 priority: critical
 depends_on:
   - BW-0201
   - BW-0202
+planned_sprint: SPRINT-003
+completed_sprint: SPRINT-003
 created: 2026-09-01
+updated: 2026-09-01
 ---
 
 # BW-0204: Wikitext Template Parser Spike

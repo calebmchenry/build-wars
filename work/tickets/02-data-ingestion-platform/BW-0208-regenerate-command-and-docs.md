@@ -2,7 +2,7 @@
 id: BW-0208
 title: Regenerate Command and Documentation
 epic: EPIC-02
-status: backlog
+status: done
 priority: critical
 depends_on:
   - BW-0201
@@ -12,7 +12,10 @@ depends_on:
   - BW-0205
   - BW-0206
   - BW-0207
+planned_sprint: SPRINT-003
+completed_sprint: SPRINT-003
 created: 2026-09-01
+updated: 2026-09-01
 ---
 
 # BW-0208: Regenerate Command and Documentation

@@ -2,11 +2,14 @@
 id: BW-0202
 title: Source Snapshot and Provenance Records
 epic: EPIC-02
-status: backlog
+status: done
 priority: critical
 depends_on:
   - BW-0201
+planned_sprint: SPRINT-003
+completed_sprint: SPRINT-003
 created: 2026-09-01
+updated: 2026-09-01
 ---
 
 # BW-0202: Source Snapshot and Provenance Records

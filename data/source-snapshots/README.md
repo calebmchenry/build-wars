@@ -1,12 +1,12 @@
 # Source Snapshots
 
-Future raw source snapshots belong here after EPIC-02 introduces fetchers. Snapshot contents are
-ignored by Git; this README remains tracked as the policy file.
+Raw source snapshots belong here after EPIC-02 live or offline tooling writes them. Snapshot contents
+are ignored by Git; this README remains tracked as the policy file.
 
 ## Allowed Locally
 
 - Raw API responses, page payloads, file metadata payloads, and minimized diagnostic captures created
-  by future ingestion tooling.
+  by ingestion tooling.
 - `SourceSnapshotManifest` records that identify source family, canonical URL, page or file identity,
   revision identity, source revision timestamp, retrieval timestamp, artifact path, digest when
   available, and retention decision.
@@ -19,3 +19,19 @@ review, and a clear test or release need.
 
 Raw snapshots are never consumed directly by runtime app code. Future tooling must treat source URLs,
 filenames, payloads, and evidence as untrusted data.
+
+## Identity And Integrity
+
+Snapshot paths are derived from source family, material kind, validated page/file identity, revision
+identity when available, and content SHA-256. Titles are slugged and digest-suffixed; paths are not
+derived directly from untrusted titles. Loads verify SHA-256 before returning payloads to extractors.
+
+Writes use sibling temporary files and atomic replacement. Identity/content collisions, digest
+mismatches, unreadable artifacts, path traversal, and symlink escapes produce diagnostics and do not
+overwrite existing evidence.
+
+## Refresh And Deletion
+
+Live refresh is manual and requires `--allow-live-network`. Keep refreshes bounded to named pages and
+inspect generated manifests before deleting old local snapshots. Ignored snapshots may be deleted
+when no exact-path promotion ticket or active review needs them.

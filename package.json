@@ -16,9 +16,12 @@
     "typecheck": "tsc -p tsconfig.domain.json && tsc -p tsconfig.app.json && tsc -p tsconfig.node.json",
     "test": "vitest",
     "test:run": "vitest run",
+    "data:setup": "python3 -m venv .venv-data && .venv-data/bin/python -m pip install -r scripts/data/requirements.txt",
+    "data:test": "PYTHONPATH=scripts/data .venv-data/bin/python -m unittest discover -s scripts/data/build_wars_ingest/tests",
+    "data:regenerate": "PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --root work/runs/data-ingestion --fixture-root test/fixtures/data-ingestion",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run test:run && npm run build && python3 -m unittest scripts/test_ticket_burn.py"
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run test:run && npm run build && npm run data:test && python3 -m unittest scripts/test_ticket_burn.py"
   },
   "dependencies": {
     "react": "^19.2.8",
