@@ -7,6 +7,16 @@ priority: critical
 depends_on:
   - EPIC-00
   - EPIC-01
+tickets:
+  - BW-0201
+  - BW-0202
+  - BW-0203
+  - BW-0204
+  - BW-0205
+  - BW-0206
+  - BW-0207
+  - BW-0208
+updated: 2026-09-01
 ---
 
 # Data Ingestion Platform
