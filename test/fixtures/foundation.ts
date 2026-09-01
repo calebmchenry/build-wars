@@ -21,7 +21,7 @@ export const syntheticProfession: Profession = {
   name: "Synthetic Profession",
   abbreviation: "SP",
   primaryAttributeId: syntheticAttributeId,
-  source: null
+  provenance: null
 };
 
 export const syntheticAttribute: Attribute = {
@@ -29,7 +29,7 @@ export const syntheticAttribute: Attribute = {
   name: "Synthetic Attribute",
   professionId: syntheticProfessionId,
   isPrimary: true,
-  source: null
+  provenance: null
 };
 
 export const syntheticSkill: Skill = {
@@ -41,7 +41,7 @@ export const syntheticSkill: Skill = {
     attributeId: syntheticAttributeId,
     breakpoints: [{ rank: 0, values: [1] }]
   },
-  source: null
+  provenance: null
 };
 
 export const syntheticFoundationBuild: Build = {

@@ -2,10 +2,19 @@
 id: EPIC-01
 title: Source Policy and QA
 track: content
-status: backlog
+status: done
 priority: critical
 depends_on:
   - EPIC-00
+planned_sprint: SPRINT-002
+completed_sprint: SPRINT-002
+tickets:
+  - BW-0101
+  - BW-0102
+  - BW-0103
+  - BW-0104
+  - BW-0105
+updated: 2026-09-01
 ---
 
 # Source Policy and QA

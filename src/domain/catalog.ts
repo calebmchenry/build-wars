@@ -1,10 +1,10 @@
 import type { AttributeId, InsigniaId, ProfessionId, RuneId, SkillId } from "./ids";
-import type { SourceProvenance } from "./source";
+import type { RecordProvenance } from "./source";
 
 export interface CatalogRecord<Id> {
   readonly id: Id;
   readonly name: string;
-  readonly source: SourceProvenance | null;
+  readonly provenance: RecordProvenance | null;
 }
 
 export interface Profession extends CatalogRecord<ProfessionId> {

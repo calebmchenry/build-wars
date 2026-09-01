@@ -36,6 +36,8 @@ Included now:
 - Plain-data contracts in `src/domain`
 - Synthetic foundation fixtures in `test/fixtures`
 - Reserved data and ingestion directories
+- Source-policy gate for future source-derived data, media metadata, QA review, and release
+  decisions
 
 Deferred to later epics:
 
@@ -55,3 +57,12 @@ Deferred to later epics:
 - `test/fixtures` contains synthetic non-authoritative fixtures for foundation tests.
 - `work/tickets` and `work/sprints` track ticket-burn planning and execution records.
 - `compendium` stores project decisions and long-lived implementation notes.
+
+## Source Policy Gate
+
+Before future work imports, normalizes, commits, or publishes Guild Wars Wiki, PvX/Fandom,
+community, icon, screenshot, or generated catalog data, it must satisfy the
+[source policy](compendium/source-policy.md). Copied or source-derived runtime data needs
+provenance for source identity, canonical URL, page or file identity where available, revision and
+retrieval facts, material class, rights basis, use decision, and review notes. Ambiguous cases remain
+review-required.

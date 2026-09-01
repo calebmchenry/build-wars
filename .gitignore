@@ -19,7 +19,8 @@ coverage/
 *.log
 work/runs/
 
-# Future raw/generated data artifacts. Keep policy README files tracked.
+# Future raw/generated data artifacts. Keep policy README files tracked. Future generated-data
+# exceptions must be exact-path allowlists with parent-directory unignore rules.
 data/source-snapshots/*
 !data/source-snapshots/README.md
 data/generated/*

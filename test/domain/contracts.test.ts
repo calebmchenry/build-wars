@@ -11,9 +11,12 @@ import {
   type Insignia,
   type PartyBuild,
   type Profession,
+  type RecordProvenance,
+  type RemoteMediaMetadata,
   type Rune,
   type Skill,
   type SkillProgression,
+  type SourceReference,
   type Weapon,
   type WeaponModifier
 } from "../../src/domain";
@@ -57,7 +60,10 @@ describe("domain contracts", () => {
       | Build
       | EquipmentTemplate
       | PartyBuild
-      | Guide;
+      | Guide
+      | SourceReference
+      | RecordProvenance
+      | RemoteMediaMetadata;
 
     const publicModels: PublicModels[] = [
       syntheticProfession,

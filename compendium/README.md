@@ -8,3 +8,8 @@ The Compendium is an in-repo documentation system for agents.
 ## Decisions
 
 - [Project foundation](decisions/0001-project-foundation.md)
+
+## Source And QA
+
+- [Source policy](source-policy.md)
+- [Data QA and release](data-qa-and-release.md)

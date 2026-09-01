@@ -14,8 +14,42 @@ export type {
   WeaponModifierId
 } from "./ids";
 export { authoredDocumentId, catalogId } from "./ids";
-export { FOUNDATION_SCHEMA_VERSION } from "./source";
-export type { AuthoredDocumentRoot, CatalogVersionRef, SourceProvenance } from "./source";
+export { FOUNDATION_SCHEMA_VERSION, SOURCE_POLICY_SCHEMA_VERSION } from "./source";
+export type {
+  ArtifactCommitDecision,
+  ArtifactDigest,
+  AuthoredDocumentRoot,
+  CatalogVersionRef,
+  DigestAlgorithm,
+  GeneratedArtifactManifest,
+  JsonPrimitive,
+  JsonValue,
+  LicenseMetadata,
+  ManualOverride,
+  ManualReview,
+  ManualReviewDecision,
+  ProvenanceClaim,
+  ProvenanceEvidence,
+  ProvenanceMethod,
+  QaFinding,
+  QaFindingCategory,
+  QaFindingDisposition,
+  QaFindingSeverity,
+  QaGateDecision,
+  QaReport,
+  QaReportSummary,
+  QaScope,
+  QaScopeKind,
+  RecordProvenance,
+  RemoteMediaKind,
+  RemoteMediaMetadata,
+  SourceFamily,
+  SourceMaterialClass,
+  SourceReference,
+  SourceRightsBasis,
+  SourceSnapshotManifest,
+  SourceUseDecision
+} from "./source";
 export type {
   Attribute,
   CatalogRecord,
