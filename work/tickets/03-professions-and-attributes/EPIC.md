@@ -1,0 +1,35 @@
+---
+id: EPIC-03
+title: Professions and Attributes
+track: content
+status: backlog
+priority: critical
+depends_on:
+  - EPIC-01
+  - EPIC-02
+---
+
+# Professions and Attributes
+
+## Goal
+
+Catalog all professions and attributes needed for build validation, template compatibility, UI display, and skill scaling.
+
+## Scope
+
+* Ten professions with names, abbreviations, ids, icons, campaign availability, and primary attributes.
+* All attributes with ids from the skill template format.
+* Profession ownership and primary-only restrictions.
+* Attribute point cost table and level-based point totals.
+* Attribute quest metadata and default level-20 assumptions.
+* Inherent primary attribute effect summaries.
+
+## Done When
+
+* Profession and attribute selectors can be generated from data.
+* Template ids map correctly to names and back.
+* Attribute validation has enough data to enforce legal allocations.
+
+## Notes
+
+This is a dependency for almost every functional epic.
