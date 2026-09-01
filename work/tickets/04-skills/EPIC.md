@@ -35,3 +35,7 @@ Catalog every Guild Wars skill with enough structured data for search, display, 
 ## Notes
 
 Skill data is the largest MVP content effort. Use fixtures for tricky cost types: elite, signet, adrenaline, sacrifice, upkeep, overcast, title, and morale-boost recharge.
+
+Build on the `EPIC-02` ingestion pipeline. The initial extraction path should account for the game-integration skill id map, `Skill infobox`, `Skill progression`, `gr`/`gr2`, title-rank progression templates, redirects, disambiguation preambles, PvE/PvP wrapper templates, and explicit PvE/PvP split relationships.
+
+Do not treat wiki-rendered descriptions alone as sufficient. Preserve raw structured fields and enough progression metadata for dynamic tooltips, search, template compatibility, and later balance-update diffs.

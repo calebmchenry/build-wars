@@ -33,3 +33,5 @@ Catalog all professions and attributes needed for build validation, template com
 ## Notes
 
 This is a dependency for almost every functional epic.
+
+Consume the shared snapshot/provenance and normalized-output contracts from `EPIC-02`; do not introduce a profession-specific scraper. Cross-check profession and attribute ids against template compatibility needs before treating the catalog as complete.

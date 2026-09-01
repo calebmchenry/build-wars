@@ -35,3 +35,5 @@ Support the build-code formats players already use so Build Wars can import from
 ## Notes
 
 Do not hand-roll bitstream parsers before evaluating the existing package. Reforged data freshness may matter more than parser novelty.
+
+Cross-check decoded skill ids against the generated catalog from `EPIC-04` and the game-integration id map from `EPIC-02`. Unknown ids should remain round-trippable where practical so imports are not destructively rewritten just because the active catalog is incomplete or stale.
