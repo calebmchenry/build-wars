@@ -10,10 +10,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -p tsconfig.domain.json && tsc -p tsconfig.app.json && tsc -p tsconfig.node.json && vite build",
+    "build": "tsc -p tsconfig.domain.json && tsc -p tsconfig.template-compatibility.json && tsc -p tsconfig.app.json && tsc -p tsconfig.node.json && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "typecheck": "tsc -p tsconfig.domain.json && tsc -p tsconfig.app.json && tsc -p tsconfig.node.json",
+    "typecheck": "tsc -p tsconfig.domain.json && tsc -p tsconfig.template-compatibility.json && tsc -p tsconfig.app.json && tsc -p tsconfig.node.json",
     "test": "vitest",
     "test:run": "vitest run",
     "data:setup": "python3 -m venv .venv-data && .venv-data/bin/python -m pip install -r scripts/data/requirements.txt",
@@ -24,6 +24,7 @@
     "verify": "npm run format:check && npm run lint && npm run typecheck && npm run test:run && npm run build && npm run data:test && python3 -m unittest scripts/test_ticket_burn.py"
   },
   "dependencies": {
+    "@buildwars/gw-templates": "1.1.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

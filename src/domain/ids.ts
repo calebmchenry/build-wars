@@ -10,6 +10,10 @@ export type SchemaVersion = number;
 export type TemplateProfessionId = Brand<number, "TemplateProfessionId">;
 export type TemplateAttributeId = Brand<number, "TemplateAttributeId">;
 export type TemplateSkillId = Brand<number, "TemplateSkillId">;
+export type TemplateEquipmentSlotId = Brand<number, "TemplateEquipmentSlotId">;
+export type TemplateEquipmentItemId = Brand<number, "TemplateEquipmentItemId">;
+export type TemplateEquipmentColorId = Brand<number, "TemplateEquipmentColorId">;
+export type TemplateEquipmentModifierId = Brand<number, "TemplateEquipmentModifierId">;
 
 export type ProfessionId = CatalogId<"Profession">;
 export type AttributeId = CatalogId<"Attribute">;
@@ -34,6 +38,22 @@ export function templateAttributeId(value: number): TemplateAttributeId {
 
 export function templateSkillId(value: number): TemplateSkillId {
   return value as TemplateSkillId;
+}
+
+export function templateEquipmentSlotId(value: number): TemplateEquipmentSlotId {
+  return value as TemplateEquipmentSlotId;
+}
+
+export function templateEquipmentItemId(value: number): TemplateEquipmentItemId {
+  return value as TemplateEquipmentItemId;
+}
+
+export function templateEquipmentColorId(value: number): TemplateEquipmentColorId {
+  return value as TemplateEquipmentColorId;
+}
+
+export function templateEquipmentModifierId(value: number): TemplateEquipmentModifierId {
+  return value as TemplateEquipmentModifierId;
 }
 
 export function authoredDocumentId(value: string): AuthoredDocumentId {

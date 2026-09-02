@@ -62,16 +62,20 @@ Included now:
 - Runtime-eligible EPIC-04 skills catalog data at `data/generated/epic-04/skills.catalog.json`,
   with an adjacent generated manifest and bounded QA report. Runtime code must consume only the
   catalog JSON, not the manifest, QA report, source plans, snapshots, Python tooling, or wiki APIs.
+- Framework-neutral Guild Wars skill and raw equipment template import/export APIs under
+  `src/template-compatibility`, backed by a pinned `@buildwars/gw-templates@1.1.1` adapter.
 
 Deferred to later epics:
 
-- Template import/export
+- Paste dialogs, clipboard flows, local template library persistence, and sharing URLs
 - Importing the EPIC-03 catalog into `src/app`, including attribution UI and remote media/privacy
   decisions
 - Full Guild Wars Wiki or PvX content catalog ingestion
 - Acquisition metadata, guide prose, vendor/drop/quest instructions, and copied source-authored
   skill descriptions in schema v1
 - Runtime rule validation
+- paw-ned2/team template codec support; SPRINT-006 records a Node-floor dependency failure and
+  defers ownership to EPIC-17
 - Local storage and sharing
 - Equipment editor, party builder, guide authoring, PWA behavior, auth, analytics, and deployment
 
@@ -80,6 +84,8 @@ Deferred to later epics:
 - `src/app` contains browser UI code and may import public domain contracts.
 - `src/domain` contains framework-neutral contracts and must not import React, DOM/browser APIs,
   browser storage, network clients, app modules, or data scripts.
+- `src/template-compatibility` contains the framework-neutral template codec adapter and must keep
+  all `@buildwars/gw-templates` calls isolated behind `gw-templates-adapter.ts`.
 - `scripts/data` contains offline/live ingestion and QA tooling. Runtime app code must not import it.
 - `data/source-snapshots`, `data/generated`, and `data/qa` separate raw, normalized, and QA artifacts.
 - `test/fixtures` contains synthetic non-authoritative fixtures for foundation and ingestion tests.
@@ -108,3 +114,20 @@ review the source-plan digest, then run `--stage fetch --source-plan <path>
 --confirm-source-set-digest <digest>`. Offline replay requires the selected `--snapshot-set`
 manifest and remains network-free. EPIC-04 schema v1 preserves unknown authored skill IDs and
 structured costs/progressions, but excludes acquisition and copied description prose.
+
+## Template Compatibility
+
+Template compatibility is available through `src/template-compatibility`.
+
+- Skill templates decode to raw template profession IDs, ordered attribute/rank pairs, exactly eight
+  template skill slots, source metadata, and typed diagnostics.
+- Raw equipment templates decode to deterministic slot, item, color, and modifier facts without
+  semantic equipment catalog joins.
+- Bare codes and `[name;code]` chat wrappers parse and format with bounded, typed failures.
+- Unchanged imports export through exact-source replay; edited/canonical exports only return a code
+  after dependency encode and decode-back field equality prove no modeled data was lost.
+- Skill resolution accepts caller-supplied EPIC-03 and EPIC-04 catalogs and returns a non-mutating
+  view over known, none, reserved, unsupported, dispositioned, empty, and unknown outcomes.
+
+See [Template compatibility](compendium/template-compatibility.md) for dependency qualification,
+limits, fidelity guarantees, and the paw-ned2 deferral record.

@@ -1,0 +1,6 @@
+{
+  "sourceNotes": "paw-ned2 is intentionally deferred in SPRINT-006 because the pinned JavaScript dependency fails the minimal encode/decode ship gate under Node 22.11.0.",
+  "disposition": "deferred",
+  "expectedError": "PAWNED2_DEFERRED",
+  "downstreamOwner": "EPIC-17"
+}

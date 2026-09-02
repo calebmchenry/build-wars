@@ -13,10 +13,17 @@ import {
   type Profession,
   type RecordProvenance,
   type RemoteMediaMetadata,
+  TEMPLATE_COMPATIBILITY_SCHEMA_VERSION,
+  templateEquipmentColorId,
+  templateEquipmentItemId,
+  templateEquipmentModifierId,
+  templateEquipmentSlotId,
   type Rune,
   type Skill,
   type SkillProgression,
   type SourceReference,
+  type SkillTemplateDocument,
+  type EquipmentTemplateDocument,
   templateAttributeId,
   templateProfessionId,
   templateSkillId,
@@ -64,6 +71,8 @@ describe("domain contracts", () => {
       | EquipmentTemplate
       | PartyBuild
       | Guide
+      | SkillTemplateDocument
+      | EquipmentTemplateDocument
       | SourceReference
       | RecordProvenance
       | RemoteMediaMetadata;
@@ -108,6 +117,10 @@ describe("domain contracts", () => {
       professionNone: templateProfessionId(0),
       attributeZero: templateAttributeId(0),
       knownSkill: templateSkillId(1),
+      equipmentSlot: templateEquipmentSlotId(0),
+      equipmentItem: templateEquipmentItemId(279),
+      equipmentColor: templateEquipmentColorId(9),
+      equipmentModifier: templateEquipmentModifierId(190),
       unknownProfession: templateProfessionId(9876),
       unknownAttribute: templateAttributeId(9876),
       unknownSkill: templateSkillId(987654321)
@@ -117,10 +130,69 @@ describe("domain contracts", () => {
       professionNone: 0,
       attributeZero: 0,
       knownSkill: 1,
+      equipmentSlot: 0,
+      equipmentItem: 279,
+      equipmentColor: 9,
+      equipmentModifier: 190,
       unknownProfession: 9876,
       unknownAttribute: 9876,
       unknownSkill: 987654321
     });
+  });
+
+  it("defines plain JSON-compatible template compatibility documents", () => {
+    const skillTemplate: SkillTemplateDocument = {
+      kind: "skill",
+      schemaVersion: TEMPLATE_COMPATIBILITY_SCHEMA_VERSION,
+      source: {
+        inputKind: "bare",
+        templateKind: "skill",
+        originalInput: "OAAQIAAAAAAAAAAAAAAA",
+        originalBareCode: "OAAQIAAAAAAAAAAAAAAA",
+        normalizedDependencyInput: null,
+        templateName: null,
+        semanticFingerprint: "skill-template:v1:test",
+        fidelity: "exact-source"
+      },
+      primaryProfessionId: templateProfessionId(0),
+      secondaryProfessionId: templateProfessionId(0),
+      attributes: [],
+      skillIds: [
+        templateSkillId(0),
+        templateSkillId(0),
+        templateSkillId(0),
+        templateSkillId(0),
+        templateSkillId(0),
+        templateSkillId(0),
+        templateSkillId(0),
+        templateSkillId(0)
+      ]
+    };
+    const equipmentTemplate: EquipmentTemplateDocument = {
+      kind: "equipment",
+      schemaVersion: TEMPLATE_COMPATIBILITY_SCHEMA_VERSION,
+      source: {
+        inputKind: "bare",
+        templateKind: "equipment",
+        originalInput: "PkZwFP9FzSKA",
+        originalBareCode: "PkZwFP9FzSKA",
+        normalizedDependencyInput: null,
+        templateName: null,
+        semanticFingerprint: "equipment-template:v1:test",
+        fidelity: "exact-source"
+      },
+      items: [
+        {
+          slotId: templateEquipmentSlotId(0),
+          itemId: templateEquipmentItemId(279),
+          colorId: templateEquipmentColorId(9),
+          modifierIds: [templateEquipmentModifierId(190)]
+        }
+      ]
+    };
+
+    expectPlainJson(JSON.parse(JSON.stringify(skillTemplate)) as JsonValue);
+    expectPlainJson(JSON.parse(JSON.stringify(equipmentTemplate)) as JsonValue);
   });
 
   it("round-trips authored domain data as plain JSON-compatible values", () => {

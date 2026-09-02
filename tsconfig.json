@@ -2,6 +2,7 @@
   "files": [],
   "references": [
     { "path": "./tsconfig.domain.json" },
+    { "path": "./tsconfig.template-compatibility.json" },
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ]

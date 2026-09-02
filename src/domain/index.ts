@@ -11,6 +11,10 @@ export type {
   SchemaVersion,
   SkillId,
   TemplateAttributeId,
+  TemplateEquipmentColorId,
+  TemplateEquipmentItemId,
+  TemplateEquipmentModifierId,
+  TemplateEquipmentSlotId,
   TemplateProfessionId,
   TemplateSkillId,
   WeaponId,
@@ -19,6 +23,10 @@ export type {
 export {
   authoredDocumentId,
   catalogId,
+  templateEquipmentColorId,
+  templateEquipmentItemId,
+  templateEquipmentModifierId,
+  templateEquipmentSlotId,
   templateAttributeId,
   templateProfessionId,
   templateSkillId
@@ -125,11 +133,13 @@ export {
   lookupSkillById,
   lookupSkillByName,
   lookupSkillTemplateId,
+  lookupSkillTemplateSlot,
   purchasedRankCost,
   resolveSkillModeVariant
 } from "./catalog-lookup";
 export type {
   AttributeTemplateLookupOutcome,
+  EmptySkillSlotLookupOutcome,
   KnownTemplateLookupOutcome,
   NoneTemplateLookupOutcome,
   ProfessionTemplateLookupOutcome,
@@ -137,9 +147,34 @@ export type {
   SkillDispositionLookupOutcome,
   SkillModeVariantOutcome,
   SkillTemplateLookupOutcome,
+  SkillTemplateSlotLookupOutcome,
   UnknownTemplateLookupOutcome,
   UnsupportedTemplateLookupOutcome
 } from "./catalog-lookup";
+export { TEMPLATE_COMPATIBILITY_SCHEMA_VERSION } from "./template";
+export type {
+  EquipmentTemplateDocument,
+  EquipmentTemplateItem,
+  ResolvedSkillTemplateAttribute,
+  ResolvedSkillTemplateView,
+  SkillTemplateAttributeRank,
+  SkillTemplateDocument,
+  TemplateCompatibilityError,
+  TemplateDiagnostic,
+  TemplateDiagnosticSeverity,
+  TemplateErrorCode,
+  TemplateErrorStage,
+  TemplateExportMode,
+  TemplateExportOptions,
+  TemplateExportedCode,
+  TemplateFidelity,
+  TemplateInputKind,
+  TemplateKind,
+  TemplateOperation,
+  TemplateResult,
+  TemplateSkillBar,
+  TemplateSourceEnvelope
+} from "./template";
 export { renderSkillTooltipText } from "./skill-tooltip";
 export type {
   SkillTooltipContext,

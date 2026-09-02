@@ -1,0 +1,43 @@
+{
+  "sourceNotes": "Minimized offline cases. Package examples are copied from the MIT-licensed @buildwars/gw-templates README. Synthetic cases were generated locally from the pinned codec.",
+  "valid": [
+    {
+      "id": "skill-package-assassin-warrior",
+      "source": "package-readme-mit",
+      "input": "OwFj0xfzITOMMMHMie4O0kxZ6PA",
+      "expected": {
+        "primaryProfessionId": 7,
+        "secondaryProfessionId": 1,
+        "attributes": [
+          { "attributeId": 29, "rank": 12 },
+          { "attributeId": 31, "rank": 3 },
+          { "attributeId": 35, "rank": 12 }
+        ],
+        "skillIds": [782, 780, 775, 1954, 952, 2356, 1649, 1018]
+      }
+    },
+    {
+      "id": "skill-all-zero",
+      "source": "synthetic",
+      "input": "OAAQIAAAAAAAAAAAAAAA",
+      "expected": {
+        "primaryProfessionId": 0,
+        "secondaryProfessionId": 0,
+        "attributes": [],
+        "skillIds": [0, 0, 0, 0, 0, 0, 0, 0]
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "id": "wrong-equipment-as-skill",
+      "input": "PkpxFP9FzSqIlpI90MlpIDLfopInVBgpILlLlpIFF",
+      "expectedError": "WRONG_TEMPLATE_KIND"
+    },
+    {
+      "id": "malformed-base64-skill",
+      "input": "not-a-code",
+      "expectedError": "INVALID_CHARACTER_SET"
+    }
+  ]
+}

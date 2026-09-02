@@ -60,6 +60,12 @@ export type SkillDispositionLookupOutcome = {
   readonly disposition: SkillSourceSetDisposition;
 };
 
+export type EmptySkillSlotLookupOutcome = {
+  readonly kind: "empty";
+  readonly templateId: TemplateSkillId;
+  readonly catalogId: null;
+};
+
 export type ProfessionTemplateLookupOutcome =
   | KnownTemplateLookupOutcome<TemplateProfessionId, ProfessionId, CatalogProfessionRecord>
   | NoneTemplateLookupOutcome<TemplateProfessionId>
@@ -77,6 +83,9 @@ export type SkillTemplateLookupOutcome =
   | KnownTemplateLookupOutcome<TemplateSkillId, SkillId, CatalogSkillRecord>
   | SkillDispositionLookupOutcome
   | UnknownTemplateLookupOutcome<TemplateSkillId>;
+
+export type SkillTemplateSlotLookupOutcome =
+  EmptySkillSlotLookupOutcome | SkillTemplateLookupOutcome;
 
 export type SkillModeVariantOutcome =
   | {
@@ -177,6 +186,17 @@ export function lookupSkillTemplateId(
   }
 
   return { kind: "unknown", templateId, catalogId: null };
+}
+
+export function lookupSkillTemplateSlot(
+  catalog: SkillCatalog,
+  templateId: TemplateSkillId
+): SkillTemplateSlotLookupOutcome {
+  if (Number(templateId) === 0) {
+    return { kind: "empty", templateId, catalogId: null };
+  }
+
+  return lookupSkillTemplateId(catalog, templateId);
 }
 
 export function lookupSkillById(

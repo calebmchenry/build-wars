@@ -63,9 +63,17 @@ export default tseslint.config(
           paths: [
             { name: "react", message: "Domain contracts must stay framework-neutral." },
             { name: "react-dom", message: "Domain contracts must stay framework-neutral." },
-            { name: "react/jsx-runtime", message: "Domain contracts must stay framework-neutral." }
+            { name: "react/jsx-runtime", message: "Domain contracts must stay framework-neutral." },
+            {
+              name: "@buildwars/gw-templates",
+              message: "Domain contracts must not import template codec dependencies."
+            }
           ],
           patterns: [
+            {
+              group: ["../template-compatibility/*", "../../template-compatibility/*"],
+              message: "Domain contracts must not import the compatibility adapter."
+            },
             {
               group: ["../app/*", "../../app/*", "src/app/*", "@/app/*"],
               message: "Domain contracts must not import app modules."
@@ -77,6 +85,59 @@ export default tseslint.config(
             {
               group: ["../scripts/data/*", "../../scripts/data/*", "scripts/data/*"],
               message: "Domain contracts must not import data tooling."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    files: ["src/template-compatibility/**/*.ts"],
+    languageOptions: {
+      globals: globals.es2023
+    },
+    rules: {
+      "no-restricted-globals": [
+        "error",
+        { name: "document", message: "Template compatibility must not depend on DOM APIs." },
+        { name: "fetch", message: "Template compatibility must not perform network access." },
+        {
+          name: "localStorage",
+          message: "Template compatibility must not depend on browser storage."
+        },
+        { name: "navigator", message: "Template compatibility must not depend on browser APIs." },
+        {
+          name: "sessionStorage",
+          message: "Template compatibility must not depend on browser storage."
+        },
+        { name: "window", message: "Template compatibility must not depend on DOM APIs." }
+      ],
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            { name: "react", message: "Template compatibility must stay framework-neutral." },
+            { name: "react-dom", message: "Template compatibility must stay framework-neutral." },
+            {
+              name: "react/jsx-runtime",
+              message: "Template compatibility must stay framework-neutral."
+            }
+          ],
+          patterns: [
+            {
+              group: ["../app/*", "../../app/*", "src/app/*", "@/app/*"],
+              message: "Template compatibility must not import app modules."
+            },
+            {
+              group: [
+                "../scripts/data/*",
+                "../../scripts/data/*",
+                "scripts/data/*",
+                "../../data/generated/*",
+                "../../data/qa/*",
+                "../../data/source-snapshots/*"
+              ],
+              message: "Template compatibility must not import generated or ingestion artifacts."
             }
           ]
         }

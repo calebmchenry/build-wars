@@ -1,0 +1,40 @@
+{
+  "sourceNotes": "Minimized offline cases. Package examples are copied from the MIT-licensed @buildwars/gw-templates README. Synthetic cases were generated locally from the pinned codec.",
+  "valid": [
+    {
+      "id": "equipment-package-six-slots",
+      "source": "package-readme-mit",
+      "input": "PkpxFP9FzSqIlpI90MlpIDLfopInVBgpILlLlpIFF",
+      "expected": {
+        "items": [
+          { "slotId": 0, "itemId": 279, "colorId": 9, "modifierIds": [190, 204, 329] },
+          { "slotId": 2, "itemId": 164, "colorId": 9, "modifierIds": [290, 158] },
+          { "slotId": 3, "itemId": 166, "colorId": 9, "modifierIds": [290, 353] },
+          { "slotId": 4, "itemId": 271, "colorId": 9, "modifierIds": [290, 179] },
+          { "slotId": 5, "itemId": 0, "colorId": 9, "modifierIds": [290, 165] },
+          { "slotId": 6, "itemId": 165, "colorId": 9, "modifierIds": [290, 162] }
+        ]
+      }
+    },
+    {
+      "id": "equipment-single-item-canonical",
+      "source": "synthetic",
+      "input": "PkZwFP9FzSKA",
+      "expected": {
+        "items": [{ "slotId": 0, "itemId": 279, "colorId": 9, "modifierIds": [190, 204, 329] }]
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "id": "wrong-skill-as-equipment",
+      "input": "OwFj0xfzITOMMMHMie4O0kxZ6PA",
+      "expectedError": "WRONG_TEMPLATE_KIND"
+    },
+    {
+      "id": "malformed-base64-equipment",
+      "input": "not-a-code",
+      "expectedError": "INVALID_CHARACTER_SET"
+    }
+  ]
+}
