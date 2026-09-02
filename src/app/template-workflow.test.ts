@@ -1,0 +1,79 @@
+import { describe, expect, it } from "vitest";
+
+import { catalogId } from "../domain";
+import { SKILL_TEMPLATE_PACKAGE_EXAMPLE } from "../template-compatibility";
+import { requireReadyCatalogs } from "./catalogs";
+import { playableEditorFixture } from "./editor-fixtures";
+import { selectValidationView } from "./editor-selectors";
+import { createBlankEditorState, editorReducer } from "./editor-state";
+import {
+  evaluateTemplateExport,
+  importSkillTemplateToEditor,
+  projectEditorToSkillTemplate
+} from "./template-workflow";
+
+const catalogs = requireReadyCatalogs();
+
+describe("template workflow", () => {
+  it("imports bare codes transactionally and exposes exact-source replay", () => {
+    const initial = createBlankEditorState();
+    const imported = importSkillTemplateToEditor(SKILL_TEMPLATE_PACKAGE_EXAMPLE, initial, catalogs);
+
+    expect(imported.ok).toBe(true);
+    if (!imported.ok) {
+      throw new Error(imported.error.message);
+    }
+    expect(imported.state.build.mode).toBe("unknown");
+    expect(Number(imported.state.build.primaryProfessionId)).toBe(7);
+
+    const validation = selectValidationView(imported.state, catalogs);
+    expect(validation.exportPolicy.exactSource.available).toBe(true);
+    expect(validation.exportPolicy.exactSource.code?.bareCode).toBe(SKILL_TEMPLATE_PACKAGE_EXAMPLE);
+
+    const failed = importSkillTemplateToEditor("not-a-code", imported.state, catalogs);
+    expect(failed.ok).toBe(false);
+    expect(failed.state).toBe(imported.state);
+  });
+
+  it("derives exact eligibility from reconstructed template fields", () => {
+    const imported = importSkillTemplateToEditor(
+      SKILL_TEMPLATE_PACKAGE_EXAMPLE,
+      createBlankEditorState(),
+      catalogs
+    );
+    if (!imported.ok) {
+      throw new Error(imported.error.message);
+    }
+    const edited = editorReducer(imported.state, {
+      type: "place-skill",
+      slotIndex: 0,
+      skillId: catalogId<"Skill">(1)
+    });
+    const reverted = editorReducer(edited, {
+      type: "place-skill",
+      slotIndex: 0,
+      skillId: catalogId<"Skill">(782)
+    });
+
+    expect(selectValidationView(edited, catalogs).exportPolicy.exactSource.available).toBe(false);
+    expect(selectValidationView(reverted, catalogs).exportPolicy.exactSource.available).toBe(true);
+  });
+
+  it("allows canonical export only after projection and validation gates pass", () => {
+    const state = playableEditorFixture();
+    const validation = selectValidationView(state, catalogs);
+    const exportView = evaluateTemplateExport(state, catalogs, validation.result);
+
+    expect(exportView.canonical.available).toBe(true);
+    expect(exportView.canonical.code?.bareCode.startsWith("O")).toBe(true);
+
+    const blocked = editorReducer(state, {
+      type: "place-skill",
+      slotIndex: 0,
+      skillId: catalogId<"Skill">(-200001)
+    });
+    const projection = projectEditorToSkillTemplate(blocked, catalogs, { allowRawOverlay: false });
+    expect(projection.document).toBeNull();
+    expect(projection.diagnostics[0]?.code).toBe("missing-skill-template-id");
+  });
+});

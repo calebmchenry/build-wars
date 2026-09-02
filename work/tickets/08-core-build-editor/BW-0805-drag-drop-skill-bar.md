@@ -2,11 +2,13 @@
 id: BW-0805
 title: Drag and Drop Skill Bar
 epic: EPIC-08
-status: ready
+status: done
 priority: critical
 depends_on:
   - BW-0802
   - BW-0804
+planned_sprint: SPRINT-009
+completed_sprint: SPRINT-009
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -43,3 +45,9 @@ and clearing.
 ## Verification
 
 - `npm run verify`
+
+## Completion Evidence
+
+Completed in `SPRINT-009`. The editor renders exactly eight slots with place, replace, move, swap,
+clear, internal drag payload validation, and keyboard pick/place/cancel operations while preserving
+raw slot overlays.

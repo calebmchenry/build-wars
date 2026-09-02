@@ -2,10 +2,12 @@
 id: BW-0802
 title: Editor State Model and Fixtures
 epic: EPIC-08
-status: ready
+status: done
 priority: critical
 depends_on:
   - BW-0801
+planned_sprint: SPRINT-009
+completed_sprint: SPRINT-009
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -44,3 +46,9 @@ surface.
 ## Verification
 
 - `npm run verify`
+
+## Completion Evidence
+
+Completed in `SPRINT-009`. `src/app/editor-state.ts`, selectors, workflow helpers, and fixtures cover
+semantic `Build` state, raw template overlays, eight-slot invariants, immutable no-op paths, exact
+fingerprint eligibility, and transactional import behavior.

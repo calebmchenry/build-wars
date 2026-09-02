@@ -2,11 +2,13 @@
 id: BW-0803
 title: Profession Mode and Attribute Editor
 epic: EPIC-08
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-0801
   - BW-0802
+planned_sprint: SPRINT-009
+completed_sprint: SPRINT-009
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -43,3 +45,9 @@ Build the primary, secondary, mode, and attribute controls for the single-charac
 ## Verification
 
 - `npm run verify`
+
+## Completion Evidence
+
+Completed in `SPRINT-009`. The app includes primary/secondary profession controls, PvE/PvP/unknown
+mode selection, catalog-derived attribute rows/rank costs, level and quest-bonus budget controls,
+and validation-aligned point display.

@@ -1,8 +1,8 @@
 # Build Wars
 
 Build Wars is a local-first TypeScript web app for Guild Wars Reforged build tooling. The current
-foundation includes a runnable React/Vite shell, framework-neutral domain contracts, synthetic
-fixtures, source policy, and an offline-first data ingestion platform for future content epics.
+app includes an in-memory single-character build editor, framework-neutral domain contracts,
+template import/export compatibility, source policy, and offline-first promoted catalog data.
 
 ## Prerequisites
 
@@ -66,23 +66,29 @@ Included now:
   `src/template-compatibility`, backed by a pinned `@buildwars/gw-templates@1.1.1` adapter.
 - Pure domain rule-engine APIs for authored builds: `validateBuild` and
   `calculateEffectiveAttributeRank`.
+- A browser-based core build editor under `src/app` for one ephemeral single-character build:
+  profession and mode controls, PvE attribute budgets, deterministic skill search/filter views,
+  an eight-slot skill bar with pointer and keyboard operations, tooltips, validation presentation,
+  and skill-template import/export.
 
 Deferred to later epics:
 
-- Paste dialogs, clipboard flows, local template library persistence, and sharing URLs
-- Importing the EPIC-03 catalog into `src/app`, including attribution UI and remote media/privacy
-  decisions
+- Local template library persistence and sharing URLs
 - Full Guild Wars Wiki or PvX content catalog ingestion
 - Acquisition metadata, guide prose, vendor/drop/quest instructions, and copied source-authored
   skill descriptions in schema v1
 - paw-ned2/team template codec support; SPRINT-006 records a Node-floor dependency failure and
   defers ownership to EPIC-17
 - Local storage and sharing
-- Equipment editor, party builder, guide authoring, PWA behavior, auth, analytics, and deployment
+- Compact runtime catalog derivation, dynamic catalog loading, search workers, virtualization, and
+  remote icon fetching
+- Title ownership, title-rank controls, allegiance selection, rune/headgear/equipment rank effects,
+  equipment editor, party builder, guide authoring, PWA behavior, auth, analytics, and deployment
 
 ## Project Layout
 
 - `src/app` contains browser UI code and may import public domain contracts.
+  Runtime generated catalog imports are isolated to `src/app/catalogs.ts`.
 - `src/domain` contains framework-neutral contracts and must not import React, DOM/browser APIs,
   browser storage, network clients, app modules, or data scripts.
 - `src/template-compatibility` contains the framework-neutral template codec adapter and must keep
@@ -144,3 +150,11 @@ Build validation is available through `src/domain`.
 
 See [Game rule engine](compendium/game-rule-engine.md) for rule defaults, unresolved-ID handling,
 split/mode behavior, duplicate policies, and deferred scope.
+
+## Core Build Editor
+
+The core editor is available in `src/app`. It composes promoted catalog facts through one app-owned
+boundary, shows attribution before source-derived facts, preserves unresolved imported template IDs
+in an app raw overlay, and gates canonical skill-template export on representation, validation, and
+codec fidelity proof. See [Core build editor](compendium/core-build-editor.md) for the interaction
+model, export policy, current performance observation, and deferred scope.

@@ -19,3 +19,4 @@ The Compendium is an in-repo documentation system for agents.
 - [Template compatibility](template-compatibility.md)
 - [Game rule engine](game-rule-engine.md)
 - [Visual prior art](visual-prior-art.md)
+- [Core build editor](core-build-editor.md)

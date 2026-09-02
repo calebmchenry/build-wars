@@ -2,11 +2,13 @@
 id: BW-0804
 title: Skill Browser Search Filters and Views
 epic: EPIC-08
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-0801
   - BW-0802
+planned_sprint: SPRINT-009
+completed_sprint: SPRINT-009
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -43,3 +45,9 @@ Build the skill browser used to find skills for the active build.
 ## Verification
 
 - `npm run verify`
+
+## Completion Evidence
+
+Completed in `SPRINT-009`. The skill browser implements deterministic search, profession,
+attribute, type, elite, availability, and resource-state filters with attribute/name/type grouping
+and list/small-grid/large-grid bounded rendering.

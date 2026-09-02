@@ -2,11 +2,13 @@
 id: BW-0801
 title: App Catalog Boundary and Attribution
 epic: EPIC-08
-status: ready
+status: done
 priority: critical
 depends_on:
   - EPIC-03
   - EPIC-04
+planned_sprint: SPRINT-009
+completed_sprint: SPRINT-009
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -49,3 +51,9 @@ components.
 - `npm run verify`
 - A source scan confirms forbidden generated artifacts and wiki/data scripts are not imported by
   `src/app`.
+
+## Completion Evidence
+
+Completed in `SPRINT-009`. `src/app/catalogs.ts` is the sole generated-catalog import boundary,
+renders attribution-first app views, exposes validation/crosswalk/placeholder views, and passes the
+catalog boundary source scans.

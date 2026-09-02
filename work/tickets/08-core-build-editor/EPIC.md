@@ -2,7 +2,7 @@
 id: EPIC-08
 title: Core Build Editor
 track: functional
-status: ready
+status: done
 priority: high
 depends_on:
   - EPIC-00
@@ -11,6 +11,8 @@ depends_on:
   - EPIC-03
   - EPIC-04
   - EPIC-07
+planned_sprint: SPRINT-009
+completed_sprint: SPRINT-009
 tickets:
   - BW-0801
   - BW-0802
@@ -88,3 +90,11 @@ Build the main single-character editing experience for professions, attributes, 
 ## Notes
 
 This is the likely MVP surface. It should be useful before equipment, guides, or team builds are complete.
+
+## Completion Evidence
+
+Completed in `SPRINT-009`. The shipped editor supports one in-memory single-character build with
+catalog attribution, profession/mode controls, PvE attribute budgeting, deterministic skill browser
+filters, eight-slot pointer and keyboard skill-bar operations, shared skill display/tooltips,
+validation presentation, and skill-template import/export with exact-source and canonical policy
+gates. Final validation: `npm run verify`.

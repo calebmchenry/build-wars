@@ -2,12 +2,14 @@
 id: BW-0807
 title: Template Import Export Dialogs
 epic: EPIC-08
-status: ready
+status: done
 priority: high
 depends_on:
   - EPIC-05
   - BW-0802
   - BW-0805
+planned_sprint: SPRINT-009
+completed_sprint: SPRINT-009
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -48,3 +50,9 @@ Add user-facing skill template import and export controls for the core editor.
 ## Verification
 
 - `npm run verify`
+
+## Completion Evidence
+
+Completed in `SPRINT-009`. Import/export dialogs use EPIC-05 skill-template APIs, preserve raw
+template overlays, exact-replay unchanged imports, block lossy canonical output, and provide
+best-effort copy with selectable fallback text.

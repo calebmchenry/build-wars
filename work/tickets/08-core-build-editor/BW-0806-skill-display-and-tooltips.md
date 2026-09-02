@@ -2,12 +2,14 @@
 id: BW-0806
 title: Skill Display and Tooltips
 epic: EPIC-08
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-0801
   - BW-0802
   - BW-0803
+planned_sprint: SPRINT-009
+completed_sprint: SPRINT-009
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -46,3 +48,9 @@ effective-rank context.
 ## Verification
 
 - `npm run verify`
+
+## Completion Evidence
+
+Completed in `SPRINT-009`. Rows, tiles, bar slots, and tooltips share one skill display projection
+with catalog facts, approved tooltip rendering, structured progression tables, unresolved states,
+and maximum-title-rank labeling.

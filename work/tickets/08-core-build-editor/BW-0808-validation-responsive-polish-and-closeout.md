@@ -2,7 +2,7 @@
 id: BW-0808
 title: Validation Responsive Polish and Closeout
 epic: EPIC-08
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-0803
@@ -10,6 +10,8 @@ depends_on:
   - BW-0805
   - BW-0806
   - BW-0807
+planned_sprint: SPRINT-009
+completed_sprint: SPRINT-009
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -52,3 +54,9 @@ out EPIC-08.
 ## Verification
 
 - `npm run verify`
+
+## Completion Evidence
+
+Completed in `SPRINT-009`. The editor includes global and inline validation presentation,
+responsive layout/focus/overflow states, integration tests, compendium/README documentation, build
+asset measurement, protected-path review, and closeout metadata.
