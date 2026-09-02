@@ -181,6 +181,51 @@ export type {
   SkillTooltipOutcome,
   SkillTooltipUnresolvedReason
 } from "./skill-tooltip";
+export { validateBuild } from "./rule-engine";
+export {
+  createValidationIssue,
+  createValidationResult,
+  relatedEntity,
+  sortValidationIssues,
+  summarizeValidationIssues
+} from "./validation";
+export type {
+  ValidationCatalogVersions,
+  ValidationEntityKind,
+  ValidationEntityReference,
+  ValidationIssue,
+  ValidationIssueCode,
+  ValidationIssueCounts,
+  ValidationIssueInit,
+  ValidationLocation,
+  ValidationPath,
+  ValidationPathSegment,
+  ValidationResult,
+  ValidationRuleId,
+  ValidationSeverity,
+  ValidationTruncation,
+  ValidationTruncationKind
+} from "./validation";
+export type {
+  AttributeBudgetPolicy,
+  BuildValidationInput,
+  BuildValidationOptions,
+  BuildValidationProfile,
+  ProfessionAttributeValidationCatalog,
+  SkillValidationCatalog
+} from "./validation-context";
+export { calculateEffectiveAttributeRank } from "./effective-attribute-rank";
+export type {
+  EffectiveAttributeRankAdjustment,
+  EffectiveAttributeRankAdjustmentKind,
+  EffectiveAttributeRankAppliedAdjustment,
+  EffectiveAttributeRankBaseSource,
+  EffectiveAttributeRankContribution,
+  EffectiveAttributeRankInput,
+  EffectiveAttributeRankResult,
+  EffectiveAttributeRankUnresolvedCode,
+  EffectiveAttributeRankUnresolvedReason
+} from "./effective-attribute-rank";
 export type {
   ArmorPiece,
   ArmorSlot,

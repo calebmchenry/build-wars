@@ -64,6 +64,8 @@ Included now:
   catalog JSON, not the manifest, QA report, source plans, snapshots, Python tooling, or wiki APIs.
 - Framework-neutral Guild Wars skill and raw equipment template import/export APIs under
   `src/template-compatibility`, backed by a pinned `@buildwars/gw-templates@1.1.1` adapter.
+- Pure domain rule-engine APIs for authored builds: `validateBuild` and
+  `calculateEffectiveAttributeRank`.
 
 Deferred to later epics:
 
@@ -73,7 +75,6 @@ Deferred to later epics:
 - Full Guild Wars Wiki or PvX content catalog ingestion
 - Acquisition metadata, guide prose, vendor/drop/quest instructions, and copied source-authored
   skill descriptions in schema v1
-- Runtime rule validation
 - paw-ned2/team template codec support; SPRINT-006 records a Node-floor dependency failure and
   defers ownership to EPIC-17
 - Local storage and sharing
@@ -131,3 +132,15 @@ Template compatibility is available through `src/template-compatibility`.
 
 See [Template compatibility](compendium/template-compatibility.md) for dependency qualification,
 limits, fidelity guarantees, and the paw-ned2 deferral record.
+
+## Game Rule Engine
+
+Build validation is available through `src/domain`.
+
+- `validateBuild` returns deterministic structured issues and separates `valid`, `complete`,
+  `resolved`, and `exhaustive` from export/publish policy.
+- `calculateEffectiveAttributeRank` resolves authored base ranks, optional overrides, and
+  caller-supplied additive adjustments without deriving deferred equipment or title semantics.
+
+See [Game rule engine](compendium/game-rule-engine.md) for rule defaults, unresolved-ID handling,
+split/mode behavior, duplicate policies, and deferred scope.

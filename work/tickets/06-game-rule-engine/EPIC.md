@@ -2,12 +2,14 @@
 id: EPIC-06
 title: Game Rule Engine
 track: functional
-status: backlog
+status: done
 priority: high
 depends_on:
   - EPIC-00
   - EPIC-03
   - EPIC-04
+planned_sprint: SPRINT-007
+completed_sprint: SPRINT-007
 tickets:
   - BW-0601
   - BW-0602
@@ -16,7 +18,7 @@ tickets:
   - BW-0605
   - BW-0606
   - BW-0607
-updated: 2026-09-01
+updated: 2026-09-02
 ---
 
 # Game Rule Engine

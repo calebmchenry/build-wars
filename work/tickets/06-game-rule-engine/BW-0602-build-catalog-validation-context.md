@@ -2,11 +2,14 @@
 id: BW-0602
 title: Build Catalog Validation Context
 epic: EPIC-06
-status: backlog
+status: done
 priority: high
 depends_on:
   - BW-0601
+planned_sprint: SPRINT-007
+completed_sprint: SPRINT-007
 created: 2026-09-01
+updated: 2026-09-02
 ---
 
 # BW-0602: Build Catalog Validation Context

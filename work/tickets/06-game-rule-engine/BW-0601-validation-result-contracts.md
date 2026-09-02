@@ -2,10 +2,13 @@
 id: BW-0601
 title: Validation Result Contracts
 epic: EPIC-06
-status: backlog
+status: done
 priority: high
 depends_on: []
+planned_sprint: SPRINT-007
+completed_sprint: SPRINT-007
 created: 2026-09-01
+updated: 2026-09-02
 ---
 
 # BW-0601: Validation Result Contracts

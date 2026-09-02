@@ -2,7 +2,7 @@
 id: BW-0607
 title: Rule Engine Fixtures and Tests
 epic: EPIC-06
-status: backlog
+status: done
 priority: high
 depends_on:
   - BW-0601
@@ -11,7 +11,10 @@ depends_on:
   - BW-0604
   - BW-0605
   - BW-0606
+planned_sprint: SPRINT-007
+completed_sprint: SPRINT-007
 created: 2026-09-01
+updated: 2026-09-02
 ---
 
 # BW-0607: Rule Engine Fixtures and Tests

@@ -2,12 +2,15 @@
 id: BW-0605
 title: Skill Eligibility and Mode Rules
 epic: EPIC-06
-status: backlog
+status: done
 priority: high
 depends_on:
   - BW-0602
   - BW-0604
+planned_sprint: SPRINT-007
+completed_sprint: SPRINT-007
 created: 2026-09-01
+updated: 2026-09-02
 ---
 
 # BW-0605: Skill Eligibility and Mode Rules
