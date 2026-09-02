@@ -34,6 +34,7 @@ class PipelineTests(unittest.TestCase):
             self.assertEqual(result.generated["parserProof"]["recommendation"], "accept-mwparserfromhell")
             self.assertEqual(result.generated["iconProof"][0]["cachedBytes"], False)
             self.assertTrue((tmp / "data/generated/epic-03/professions-attributes.catalog.json").exists())
+            self.assertTrue((tmp / "data/generated/epic-04/skills.catalog.json").exists())
         finally:
             shutil.rmtree(tmp)
 
@@ -60,6 +61,10 @@ class PipelineTests(unittest.TestCase):
 
             self.assertEqual(first.artifact_path.read_bytes(), second.artifact_path.read_bytes())
             self.assertEqual(first.qa_report["summary"], second.qa_report["summary"])
+            self.assertEqual(
+                (first_root / "data/generated/epic-04/skills.catalog.json").read_bytes(),
+                (second_root / "data/generated/epic-04/skills.catalog.json").read_bytes(),
+            )
         finally:
             shutil.rmtree(first_root)
             shutil.rmtree(second_root)

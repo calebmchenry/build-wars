@@ -34,6 +34,18 @@ The EPIC-03 catalog is approved for future runtime consumption, but `src/app` do
 Future selector UI must separately implement attribution, source-policy display, and remote media
 privacy behavior before showing source-derived facts or icons.
 
+EPIC-04 adds the skills catalog exception. The only allowlisted production outputs are:
+
+- `data/generated/epic-04/skills.catalog.json`
+- `data/generated/epic-04/skills.catalog.manifest.json`
+- `data/qa/epic-04/skills.catalog.qa.json`
+
+Runtime consumers may read only `skills.catalog.json`. They must not read EPIC-04 source plans,
+snapshot-set manifests, raw snapshots, candidate outputs, QA summaries, QA JSON, generated
+manifests, Python ingestion modules, or wiki APIs. Schema v1 excludes acquisition metadata,
+guide/community prose, and copied source-authored descriptions; skill descriptions are
+structured-only unless a later digest-bound review promotes copied text.
+
 ## Commit Rules
 
 Policy README files remain trackable so directory contracts are visible. Synthetic fixtures belong
@@ -54,3 +66,7 @@ approves it.
 For EPIC-03, BW-0305 approved the exact paths above after a bounded live refresh, offline replay from
 the selected snapshots, byte-identical repeated fixed-clock generation, source/provenance checks,
 manual review of derived primary-attribute summaries, and passing app/public QA gates.
+For EPIC-04, BW-0405 approved the exact paths above after live source-set discovery, digest-confirmed
+detail/icon fetch, selected complete snapshot-set replay, byte-identical offline catalog/manifest/QA
+regeneration, structured-only description review, missing-page/icon/join/progression dispositions,
+and passing app/public QA gates.

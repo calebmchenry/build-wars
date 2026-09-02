@@ -3,10 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from .config import DEFAULT_LIMITS
+from .config import DEFAULT_LIMITS, EPIC_04_LIMITS
 
 EPIC_02_PROFILE_ID = "guild-wars-wiki"
 EPIC_03_PROFILE_ID = "epic-03-professions-attributes"
+EPIC_04_PROFILE_ID = "epic-04-skills"
 
 EPIC_03_PROFESSIONS = (
     "Warrior",
@@ -42,6 +43,8 @@ EPIC_03_SOURCE_TITLES = (
 )
 
 EPIC_03_ICON_IMAGEINFO_TITLE = "EPIC-03 profession icon imageinfo"
+EPIC_04_SOURCE_INDEX_TITLE = "Guild Wars Wiki:Game integration/Skills"
+EPIC_04_SKILL_ICON_IMAGEINFO_TITLE = "EPIC-04 skill icon imageinfo"
 
 
 @dataclass(frozen=True)
@@ -58,6 +61,10 @@ class DataIngestionProfile:
     request_limit: int
     response_byte_cap: int
     parser_byte_cap: int
+    media_title_limit: int = 0
+    aggregate_byte_cap: int = 0
+    catalog_byte_cap: int = 0
+    qa_byte_cap: int = 0
 
     @property
     def all_page_titles(self) -> tuple[str, ...]:
@@ -100,9 +107,29 @@ EPIC_03_PROFILE = DataIngestionProfile(
     parser_byte_cap=DEFAULT_LIMITS.max_parser_bytes,
 )
 
+EPIC_04_PROFILE = DataIngestionProfile(
+    id=EPIC_04_PROFILE_ID,
+    source_target="BACKLOG",
+    source_epic="EPIC-04",
+    generated_relative_path=Path("epic-04/skills.catalog.json"),
+    qa_relative_path=Path("epic-04/skills.catalog.qa.json"),
+    fixture_relative_path=Path("generated/fixture-skills.catalog.json"),
+    source_titles=(EPIC_04_SOURCE_INDEX_TITLE,),
+    detail_titles=(),
+    page_limit=EPIC_04_LIMITS.page_limit,
+    request_limit=EPIC_04_LIMITS.request_limit,
+    response_byte_cap=EPIC_04_LIMITS.response_byte_cap,
+    parser_byte_cap=EPIC_04_LIMITS.max_parser_bytes,
+    media_title_limit=256,
+    aggregate_byte_cap=60_000_000,
+    catalog_byte_cap=20_000_000,
+    qa_byte_cap=4_000_000,
+)
+
 PROFILES = {
     EPIC_02_PROFILE.id: EPIC_02_PROFILE,
     EPIC_03_PROFILE.id: EPIC_03_PROFILE,
+    EPIC_04_PROFILE.id: EPIC_04_PROFILE,
 }
 
 

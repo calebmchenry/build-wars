@@ -36,8 +36,11 @@ installs the pinned Python parser dependency from `scripts/data/requirements.txt
 `npm run data:regenerate` runs fixture mode only. It uses committed minimized synthetic fixtures,
 fixed timestamps, and an output root under ignored `work/runs/data-ingestion`.
 The default fixture run preserves the EPIC-02 skill-ID proof and also writes the EPIC-03
-professions/attributes fixture catalog. Run the EPIC-03 profile directly with
+professions/attributes fixture catalog plus the EPIC-04 synthetic skills catalog. Run EPIC-03 and
+EPIC-04 profiles directly with
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-03-professions-attributes`.
+For EPIC-04 use
+`PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-04-skills`.
 
 ## Current Scope
 
@@ -56,6 +59,9 @@ Included now:
 - Runtime-eligible EPIC-03 professions/attributes catalog data at
   `data/generated/epic-03/professions-attributes.catalog.json`, with an adjacent generated manifest
   and bounded QA report
+- Runtime-eligible EPIC-04 skills catalog data at `data/generated/epic-04/skills.catalog.json`,
+  with an adjacent generated manifest and bounded QA report. Runtime code must consume only the
+  catalog JSON, not the manifest, QA report, source plans, snapshots, Python tooling, or wiki APIs.
 
 Deferred to later epics:
 
@@ -63,6 +69,8 @@ Deferred to later epics:
 - Importing the EPIC-03 catalog into `src/app`, including attribution UI and remote media/privacy
   decisions
 - Full Guild Wars Wiki or PvX content catalog ingestion
+- Acquisition metadata, guide prose, vendor/drop/quest instructions, and copied source-authored
+  skill descriptions in schema v1
 - Runtime rule validation
 - Local storage and sharing
 - Equipment editor, party builder, guide authoring, PWA behavior, auth, analytics, and deployment
@@ -94,3 +102,9 @@ exact-path promotion ticket can allow them.
 For EPIC-03, the locked profile command is
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-03-professions-attributes --root . --allow-live-network`;
 only the catalog JSON, manifest JSON, and machine-readable QA JSON are exact-path allowlisted.
+For EPIC-04, live refresh is two-step: first run
+`PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-04-skills --root . --allow-live-network --stage discover`,
+review the source-plan digest, then run `--stage fetch --source-plan <path>
+--confirm-source-set-digest <digest>`. Offline replay requires the selected `--snapshot-set`
+manifest and remains network-free. EPIC-04 schema v1 preserves unknown authored skill IDs and
+structured costs/progressions, but excludes acquisition and copied description prose.

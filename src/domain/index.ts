@@ -12,10 +12,17 @@ export type {
   SkillId,
   TemplateAttributeId,
   TemplateProfessionId,
+  TemplateSkillId,
   WeaponId,
   WeaponModifierId
 } from "./ids";
-export { authoredDocumentId, catalogId, templateAttributeId, templateProfessionId } from "./ids";
+export {
+  authoredDocumentId,
+  catalogId,
+  templateAttributeId,
+  templateProfessionId,
+  templateSkillId
+} from "./ids";
 export { FOUNDATION_SCHEMA_VERSION, SOURCE_POLICY_SCHEMA_VERSION } from "./source";
 export type {
   ArtifactCommitDecision,
@@ -49,6 +56,8 @@ export type {
   SourceMaterialClass,
   SourceReference,
   SourceRightsBasis,
+  SourceSnapshotSetChild,
+  SourceSnapshotSetManifest,
   SourceSnapshotManifest,
   SourceUseDecision
 } from "./source";
@@ -65,6 +74,7 @@ export type {
   CatalogProfessionRecord,
   CatalogRecord,
   CatalogSectionDigest,
+  CatalogSkillRecord,
   DefaultPveAttributeBudget,
   Insignia,
   LevelAttributePointTotal,
@@ -77,9 +87,32 @@ export type {
   PrimaryAttributeEffectSummary,
   ReservedTemplateIdFact,
   Rune,
+  SkillCampaign,
+  SkillCatalog,
+  SkillCatalogDependencySummary,
+  SkillCatalogProfile,
+  SkillClassification,
+  SkillCostProfile,
+  SkillDependencyRef,
+  SkillDescriptionProjection,
+  SkillDescriptionState,
+  SkillDescriptionToken,
+  SkillMode,
+  SkillModeAvailability,
+  SkillModeVariantGroup,
+  SkillPageIdentity,
   Skill,
   SkillProgression,
   SkillProgressionBreakpoint,
+  SkillProgressionSeries,
+  SkillProgressionValueRow,
+  SkillProgressionValueSlot,
+  SkillSourceSetDisposition,
+  SkillSourceSetDispositionKind,
+  SkillSourceSetSummary,
+  SkillTimingProfile,
+  SkillValueState,
+  SkillValueStateKind,
   TemplateCrosswalk,
   TemplateCrosswalkStatus
 } from "./catalog";
@@ -89,7 +122,11 @@ export {
   lookupAttributeTemplateId,
   lookupProfessionByName,
   lookupProfessionTemplateId,
-  purchasedRankCost
+  lookupSkillById,
+  lookupSkillByName,
+  lookupSkillTemplateId,
+  purchasedRankCost,
+  resolveSkillModeVariant
 } from "./catalog-lookup";
 export type {
   AttributeTemplateLookupOutcome,
@@ -97,9 +134,18 @@ export type {
   NoneTemplateLookupOutcome,
   ProfessionTemplateLookupOutcome,
   ReservedTemplateLookupOutcome,
+  SkillDispositionLookupOutcome,
+  SkillModeVariantOutcome,
+  SkillTemplateLookupOutcome,
   UnknownTemplateLookupOutcome,
   UnsupportedTemplateLookupOutcome
 } from "./catalog-lookup";
+export { renderSkillTooltipText } from "./skill-tooltip";
+export type {
+  SkillTooltipContext,
+  SkillTooltipOutcome,
+  SkillTooltipUnresolvedReason
+} from "./skill-tooltip";
 export type {
   ArmorPiece,
   ArmorSlot,

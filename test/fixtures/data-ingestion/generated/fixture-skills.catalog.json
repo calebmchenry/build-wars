@@ -1,0 +1,1302 @@
+{
+  "catalogVersion": "skills-e055a437de3f69ec",
+  "dependencyDigests": [
+    {
+      "artifactDigest": "1cb3f79b7139cf26adbcf40b600094c2860796c60dcd9f1ba75bad694d07c8b4",
+      "catalogVersion": "pa-de7831a31d4be2f5",
+      "id": "epic-03-professions-attributes",
+      "manifestDigest": "1c6379112f9ac9c1d669c6e60e3c045ff7ca52dad8a84b2b494508da4c41e55e",
+      "qaGate": "pass",
+      "sectionDigests": [
+        {
+          "digest": "71727b2ff6b4cd11b70ac5a3425823c96f9e746ef9f0c06b572acf8df22c7644",
+          "section": "templateCrosswalk"
+        },
+        {
+          "digest": "be78d97c2cf7a7138441a382deba5de53a9554496d99a133b889f166df1f06ea",
+          "section": "professions"
+        },
+        {
+          "digest": "12761c5f2ffe70533710096ee8f447df336d6dc1cbf3f9cd16b0e3567f9975dc",
+          "section": "attributes"
+        },
+        {
+          "digest": "c623bd0469178039ae26f07340c5692e8e13fd3f0c5ec0bce2c62b9dd76c19fd",
+          "section": "attributePointRules"
+        },
+        {
+          "digest": "fbb708659ca19a455caa6f4c5cd968d6182fb585707f28587ed56b790eda5295",
+          "section": "remoteMedia"
+        }
+      ]
+    }
+  ],
+  "dispositions": [],
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "profile": {
+    "id": "epic-04-skills",
+    "sourceCaps": {
+      "aggregateByteCap": 60000000,
+      "catalogByteCap": 20000000,
+      "continuationLimit": 20,
+      "detailPageLimit": 4200,
+      "mediaTitleLimit": 256,
+      "parserByteCap": 750000,
+      "qaByteCap": 4000000,
+      "requestLimit": 260,
+      "responseByteCap": 5000000,
+      "retryLimit": 3,
+      "seedPageLimit": 8
+    },
+    "sourceEpic": "EPIC-04",
+    "sourceTarget": "BACKLOG"
+  },
+  "progressionSeries": [
+    {
+      "dependency": {
+        "attributeId": 21,
+        "kind": "attribute",
+        "mode": null,
+        "rankDomain": {
+          "max": 15,
+          "min": 0
+        },
+        "titleKey": null
+      },
+      "id": "progression:skill:1:1",
+      "provenance": {
+        "claimIds": [
+          "claim:skill:1:progression"
+        ],
+        "notes": "Progression values are normalized from bounded structured templates.",
+        "reviewIds": [
+          "review:epic-04-structured-progressions:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:1:5101"
+        ]
+      },
+      "skillId": 1,
+      "sourceForm": "skill progression",
+      "valueSlots": [
+        {
+          "index": 0,
+          "label": "Healing",
+          "unit": null
+        }
+      ],
+      "values": [
+        {
+          "rank": 0,
+          "values": [
+            82
+          ]
+        },
+        {
+          "rank": 1,
+          "values": [
+            88
+          ]
+        },
+        {
+          "rank": 2,
+          "values": [
+            94
+          ]
+        },
+        {
+          "rank": 3,
+          "values": [
+            100
+          ]
+        },
+        {
+          "rank": 4,
+          "values": [
+            106
+          ]
+        },
+        {
+          "rank": 5,
+          "values": [
+            112
+          ]
+        },
+        {
+          "rank": 6,
+          "values": [
+            118
+          ]
+        },
+        {
+          "rank": 7,
+          "values": [
+            124
+          ]
+        },
+        {
+          "rank": 8,
+          "values": [
+            130
+          ]
+        },
+        {
+          "rank": 9,
+          "values": [
+            136
+          ]
+        },
+        {
+          "rank": 10,
+          "values": [
+            142
+          ]
+        },
+        {
+          "rank": 11,
+          "values": [
+            148
+          ]
+        },
+        {
+          "rank": 12,
+          "values": [
+            154
+          ]
+        },
+        {
+          "rank": 13,
+          "values": [
+            160
+          ]
+        },
+        {
+          "rank": 14,
+          "values": [
+            166
+          ]
+        },
+        {
+          "rank": 15,
+          "values": [
+            172
+          ]
+        }
+      ]
+    },
+    {
+      "dependency": {
+        "attributeId": 10,
+        "kind": "attribute",
+        "mode": null,
+        "rankDomain": {
+          "max": 15,
+          "min": 0
+        },
+        "titleKey": null
+      },
+      "id": "progression:skill:2:1",
+      "provenance": {
+        "claimIds": [
+          "claim:skill:2:progression"
+        ],
+        "notes": "Progression values are normalized from bounded structured templates.",
+        "reviewIds": [
+          "review:epic-04-structured-progressions:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:2:5102"
+        ]
+      },
+      "skillId": 2,
+      "sourceForm": "skill progression",
+      "valueSlots": [
+        {
+          "index": 0,
+          "label": "Fire damage",
+          "unit": null
+        }
+      ],
+      "values": [
+        {
+          "rank": 0,
+          "values": [
+            20
+          ]
+        },
+        {
+          "rank": 1,
+          "values": [
+            23
+          ]
+        },
+        {
+          "rank": 2,
+          "values": [
+            26
+          ]
+        },
+        {
+          "rank": 3,
+          "values": [
+            29
+          ]
+        },
+        {
+          "rank": 4,
+          "values": [
+            32
+          ]
+        },
+        {
+          "rank": 5,
+          "values": [
+            35
+          ]
+        },
+        {
+          "rank": 6,
+          "values": [
+            38
+          ]
+        },
+        {
+          "rank": 7,
+          "values": [
+            41
+          ]
+        },
+        {
+          "rank": 8,
+          "values": [
+            44
+          ]
+        },
+        {
+          "rank": 9,
+          "values": [
+            47
+          ]
+        },
+        {
+          "rank": 10,
+          "values": [
+            50
+          ]
+        },
+        {
+          "rank": 11,
+          "values": [
+            53
+          ]
+        },
+        {
+          "rank": 12,
+          "values": [
+            56
+          ]
+        },
+        {
+          "rank": 13,
+          "values": [
+            59
+          ]
+        },
+        {
+          "rank": 14,
+          "values": [
+            62
+          ]
+        },
+        {
+          "rank": 15,
+          "values": [
+            65
+          ]
+        }
+      ]
+    },
+    {
+      "dependency": {
+        "attributeId": null,
+        "kind": "title-rank",
+        "mode": null,
+        "rankDomain": {
+          "max": 12,
+          "min": 0
+        },
+        "titleKey": "title:allegiance-rank"
+      },
+      "id": "progression:skill:3:1",
+      "provenance": {
+        "claimIds": [
+          "claim:skill:3:progression"
+        ],
+        "notes": "Progression values are normalized from bounded structured templates.",
+        "reviewIds": [
+          "review:epic-04-structured-progressions:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:3:5103"
+        ]
+      },
+      "skillId": 3,
+      "sourceForm": "skill progression max12",
+      "valueSlots": [
+        {
+          "index": 0,
+          "label": "Duration",
+          "unit": null
+        }
+      ],
+      "values": [
+        {
+          "rank": 0,
+          "values": [
+            4
+          ]
+        },
+        {
+          "rank": 1,
+          "values": [
+            4.167
+          ]
+        },
+        {
+          "rank": 2,
+          "values": [
+            4.333
+          ]
+        },
+        {
+          "rank": 3,
+          "values": [
+            4.5
+          ]
+        },
+        {
+          "rank": 4,
+          "values": [
+            4.667
+          ]
+        },
+        {
+          "rank": 5,
+          "values": [
+            4.833
+          ]
+        },
+        {
+          "rank": 6,
+          "values": [
+            5
+          ]
+        },
+        {
+          "rank": 7,
+          "values": [
+            5.167
+          ]
+        },
+        {
+          "rank": 8,
+          "values": [
+            5.333
+          ]
+        },
+        {
+          "rank": 9,
+          "values": [
+            5.5
+          ]
+        },
+        {
+          "rank": 10,
+          "values": [
+            5.667
+          ]
+        },
+        {
+          "rank": 11,
+          "values": [
+            5.833
+          ]
+        },
+        {
+          "rank": 12,
+          "values": [
+            6
+          ]
+        }
+      ]
+    }
+  ],
+  "remoteMedia": [
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/flare.png",
+      "fileTitle": "File:Flare.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:flare",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Flare.",
+      "remoteSha1": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "remoteTimestamp": "2026-08-31T16:00:00Z",
+      "sizeBytes": 900,
+      "sourceId": "source:gww:epic-04-fixture:skill:2:5102",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/healing-signet.jpg",
+      "fileTitle": "File:Healing Signet.jpg",
+      "height": 64,
+      "id": "remote-media:gww-icon:healing-signet",
+      "kind": "icon",
+      "mimeType": "image/jpeg",
+      "notes": "Metadata-only icon record for Healing Signet.",
+      "remoteSha1": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "remoteTimestamp": "2026-08-31T16:00:00Z",
+      "sizeBytes": 1000,
+      "sourceId": "source:gww:epic-04-fixture:skill:1:5101",
+      "useDecision": "allowed",
+      "width": 64
+    }
+  ],
+  "schemaVersion": 1,
+  "sectionDigests": [
+    {
+      "digest": "c4904ed8a5e986406269cd89208743ef401a71d2b3e257659249b11774a2c51a",
+      "section": "dependencyDigests"
+    },
+    {
+      "digest": "452d2b10f67adf9a7796b892dbb1978fe954f0d28ae7629f8e94c8c9e3225934",
+      "section": "sourceSet"
+    },
+    {
+      "digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "section": "dispositions"
+    },
+    {
+      "digest": "24d5f1dd867cfe85369f4334dcb4c74a38245530ac21955d17f096b018e6a1e7",
+      "section": "skills"
+    },
+    {
+      "digest": "b86e5fb7d52d84008ddb2415793184e9e2ce26917cae1b2f8152abef0d99203f",
+      "section": "progressionSeries"
+    },
+    {
+      "digest": "febf2f66744ec45ae74eb7d810068a176156cba8bf4afbef239d8aee795f47bf",
+      "section": "splitGroups"
+    },
+    {
+      "digest": "cc0f6b92534e250d1e8ad41e4ee543f619a00c2ae17fa60d8d1b36e44d40d8ce",
+      "section": "remoteMedia"
+    }
+  ],
+  "skills": [
+    {
+      "attributeId": 21,
+      "campaign": "core",
+      "classification": {
+        "common": false,
+        "elite": false,
+        "modeAvailability": "both",
+        "noAttribute": false,
+        "nonPlayer": false,
+        "pveOnly": false,
+        "pvpOnly": false,
+        "sharedPage": false,
+        "special": false,
+        "split": false,
+        "title": false,
+        "unsupported": false
+      },
+      "costs": {
+        "adrenaline": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "energy": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "overcast": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "sacrifice": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "upkeep": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        }
+      },
+      "description": {
+        "limitations": [
+          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
+        ],
+        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
+        "searchText": "Healing Signet Signet Warrior Tactics",
+        "sourceTextDigest": "3bf2cf8a17de1c6bf699210422b95c3190bf78b87acc5e64a8f3a9b789d5b638",
+        "state": "structured-only",
+        "tokens": [
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Skill type: "
+          },
+          {
+            "kind": "literal",
+            "value": "Signet"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Profession: "
+          },
+          {
+            "kind": "literal",
+            "value": "Warrior"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Attribute: "
+          },
+          {
+            "kind": "literal",
+            "value": "Tactics"
+          }
+        ]
+      },
+      "iconId": "remote-media:gww-icon:healing-signet",
+      "id": 1,
+      "name": "Healing Signet",
+      "normalizedName": "healing signet",
+      "pageIdentity": {
+        "canonicalTitle": "Healing Signet",
+        "normalizedTitle": "Healing Signet",
+        "pageId": 9601,
+        "redirectedFrom": null,
+        "requestedTitle": "Healing Signet",
+        "revisionId": 5101,
+        "sourceRevisionTimestamp": "2026-08-31T16:00:00Z"
+      },
+      "professionId": 1,
+      "progressionSeriesIds": [
+        "progression:skill:1:1"
+      ],
+      "provenance": {
+        "claimIds": [
+          "claim:skill:1:infobox"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-04-description-structured-only:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:1:5101"
+        ]
+      },
+      "splitGroupId": null,
+      "templateId": 1,
+      "timings": {
+        "activation": {
+          "source": "2",
+          "state": "number",
+          "text": "2",
+          "unit": null,
+          "value": 2
+        },
+        "moraleBoostRecharge": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "recharge": {
+          "source": "4",
+          "state": "number",
+          "text": "4",
+          "unit": null,
+          "value": 4
+        }
+      },
+      "type": "Signet",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Healing_Signet"
+    },
+    {
+      "attributeId": 10,
+      "campaign": "core",
+      "classification": {
+        "common": false,
+        "elite": false,
+        "modeAvailability": "both",
+        "noAttribute": false,
+        "nonPlayer": false,
+        "pveOnly": false,
+        "pvpOnly": false,
+        "sharedPage": false,
+        "special": false,
+        "split": false,
+        "title": false,
+        "unsupported": false
+      },
+      "costs": {
+        "adrenaline": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "energy": {
+          "source": "5",
+          "state": "number",
+          "text": "5",
+          "unit": null,
+          "value": 5
+        },
+        "overcast": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "sacrifice": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "upkeep": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        }
+      },
+      "description": {
+        "limitations": [
+          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
+        ],
+        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
+        "searchText": "Flare Spell Elementalist Fire Magic",
+        "sourceTextDigest": "1ca80e39a304f418cf33044365275d82fc5f7ea0b67433eb4590d6c7a25245d7",
+        "state": "structured-only",
+        "tokens": [
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Skill type: "
+          },
+          {
+            "kind": "literal",
+            "value": "Spell"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Profession: "
+          },
+          {
+            "kind": "literal",
+            "value": "Elementalist"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Attribute: "
+          },
+          {
+            "kind": "literal",
+            "value": "Fire Magic"
+          }
+        ]
+      },
+      "iconId": "remote-media:gww-icon:flare",
+      "id": 2,
+      "name": "Flare",
+      "normalizedName": "flare",
+      "pageIdentity": {
+        "canonicalTitle": "Flare",
+        "normalizedTitle": "Flare",
+        "pageId": 9602,
+        "redirectedFrom": null,
+        "requestedTitle": "Flare",
+        "revisionId": 5102,
+        "sourceRevisionTimestamp": "2026-08-31T16:00:00Z"
+      },
+      "professionId": 6,
+      "progressionSeriesIds": [
+        "progression:skill:2:1"
+      ],
+      "provenance": {
+        "claimIds": [
+          "claim:skill:2:infobox"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-04-description-structured-only:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:2:5102"
+        ]
+      },
+      "splitGroupId": null,
+      "templateId": 2,
+      "timings": {
+        "activation": {
+          "source": "1",
+          "state": "number",
+          "text": "1",
+          "unit": null,
+          "value": 1
+        },
+        "moraleBoostRecharge": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "recharge": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        }
+      },
+      "type": "Spell",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Flare"
+    },
+    {
+      "attributeId": null,
+      "campaign": "factions",
+      "classification": {
+        "common": false,
+        "elite": false,
+        "modeAvailability": "pve-only",
+        "noAttribute": false,
+        "nonPlayer": false,
+        "pveOnly": true,
+        "pvpOnly": false,
+        "sharedPage": false,
+        "special": true,
+        "split": false,
+        "title": true,
+        "unsupported": false
+      },
+      "costs": {
+        "adrenaline": {
+          "source": "8",
+          "state": "number",
+          "text": "8",
+          "unit": null,
+          "value": 8
+        },
+        "energy": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "overcast": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "sacrifice": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "upkeep": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        }
+      },
+      "description": {
+        "limitations": [
+          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
+        ],
+        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
+        "searchText": "\"Save Yourselves!\" Shout Warrior Allegiance rank",
+        "sourceTextDigest": "b9b297e01afe131ec732f5167b54fe40ec01546bbf4443a1461b88d04917e188",
+        "state": "structured-only",
+        "tokens": [
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Skill type: "
+          },
+          {
+            "kind": "literal",
+            "value": "Shout"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Profession: "
+          },
+          {
+            "kind": "literal",
+            "value": "Warrior"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Attribute: "
+          },
+          {
+            "kind": "literal",
+            "value": "Allegiance rank"
+          }
+        ]
+      },
+      "iconId": null,
+      "id": 3,
+      "name": "\"Save Yourselves!\"",
+      "normalizedName": "\"save yourselves!\"",
+      "pageIdentity": {
+        "canonicalTitle": "\"Save Yourselves!\"",
+        "normalizedTitle": "\"Save Yourselves!\"",
+        "pageId": 9603,
+        "redirectedFrom": null,
+        "requestedTitle": "\"Save Yourselves!\"",
+        "revisionId": 5103,
+        "sourceRevisionTimestamp": "2026-08-31T16:00:00Z"
+      },
+      "professionId": 1,
+      "progressionSeriesIds": [
+        "progression:skill:3:1"
+      ],
+      "provenance": {
+        "claimIds": [
+          "claim:skill:3:infobox"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-04-description-structured-only:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:3:5103"
+        ]
+      },
+      "splitGroupId": null,
+      "templateId": 3,
+      "timings": {
+        "activation": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "moraleBoostRecharge": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "recharge": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        }
+      },
+      "type": "Shout",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/\"Save_Yourselves!\""
+    },
+    {
+      "attributeId": 3,
+      "campaign": "nightfall",
+      "classification": {
+        "common": false,
+        "elite": false,
+        "modeAvailability": "pve-only",
+        "noAttribute": false,
+        "nonPlayer": false,
+        "pveOnly": true,
+        "pvpOnly": false,
+        "sharedPage": false,
+        "special": false,
+        "split": true,
+        "title": false,
+        "unsupported": false
+      },
+      "costs": {
+        "adrenaline": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "energy": {
+          "source": "5",
+          "state": "number",
+          "text": "5",
+          "unit": null,
+          "value": 5
+        },
+        "overcast": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "sacrifice": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "upkeep": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        }
+      },
+      "description": {
+        "limitations": [
+          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
+        ],
+        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
+        "searchText": "Training Beacon (PvE) Spell Mesmer Inspiration Magic",
+        "sourceTextDigest": "46a3108c9628c857acc2e9cc2daf31b8b6c7fbafe43eef74d9c1cf06b142d0c2",
+        "state": "structured-only",
+        "tokens": [
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Skill type: "
+          },
+          {
+            "kind": "literal",
+            "value": "Spell"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Profession: "
+          },
+          {
+            "kind": "literal",
+            "value": "Mesmer"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Attribute: "
+          },
+          {
+            "kind": "literal",
+            "value": "Inspiration Magic"
+          }
+        ]
+      },
+      "iconId": null,
+      "id": 4,
+      "name": "Training Beacon (PvE)",
+      "normalizedName": "training beacon (pve)",
+      "pageIdentity": {
+        "canonicalTitle": "Training Beacon (PvE)",
+        "normalizedTitle": "Training Beacon (PvE)",
+        "pageId": 9604,
+        "redirectedFrom": null,
+        "requestedTitle": "Training Beacon (PvE)",
+        "revisionId": 5104,
+        "sourceRevisionTimestamp": "2026-08-31T16:00:00Z"
+      },
+      "professionId": 5,
+      "progressionSeriesIds": [],
+      "provenance": {
+        "claimIds": [
+          "claim:skill:4:infobox"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-04-description-structured-only:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:4:5104"
+        ]
+      },
+      "splitGroupId": "split:skill:4",
+      "templateId": 4,
+      "timings": {
+        "activation": {
+          "source": "1",
+          "state": "number",
+          "text": "1",
+          "unit": null,
+          "value": 1
+        },
+        "moraleBoostRecharge": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "recharge": {
+          "source": "10",
+          "state": "number",
+          "text": "10",
+          "unit": null,
+          "value": 10
+        }
+      },
+      "type": "Spell",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Training_Beacon_(PvE)"
+    },
+    {
+      "attributeId": 3,
+      "campaign": "nightfall",
+      "classification": {
+        "common": false,
+        "elite": false,
+        "modeAvailability": "pvp-only",
+        "noAttribute": false,
+        "nonPlayer": false,
+        "pveOnly": false,
+        "pvpOnly": true,
+        "sharedPage": false,
+        "special": false,
+        "split": true,
+        "title": false,
+        "unsupported": false
+      },
+      "costs": {
+        "adrenaline": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "energy": {
+          "source": "10",
+          "state": "number",
+          "text": "10",
+          "unit": null,
+          "value": 10
+        },
+        "overcast": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "sacrifice": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "upkeep": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        }
+      },
+      "description": {
+        "limitations": [
+          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
+        ],
+        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
+        "searchText": "Training Beacon (PvP) Spell Mesmer Inspiration Magic",
+        "sourceTextDigest": "77f3d11c1cbeafc3f63f3b028d621fd16053d64cf0e4de098dd33333f4bda647",
+        "state": "structured-only",
+        "tokens": [
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Skill type: "
+          },
+          {
+            "kind": "literal",
+            "value": "Spell"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Profession: "
+          },
+          {
+            "kind": "literal",
+            "value": "Mesmer"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Attribute: "
+          },
+          {
+            "kind": "literal",
+            "value": "Inspiration Magic"
+          }
+        ]
+      },
+      "iconId": null,
+      "id": 5,
+      "name": "Training Beacon (PvP)",
+      "normalizedName": "training beacon (pvp)",
+      "pageIdentity": {
+        "canonicalTitle": "Training Beacon (PvP)",
+        "normalizedTitle": "Training Beacon (PvP)",
+        "pageId": 9605,
+        "redirectedFrom": null,
+        "requestedTitle": "Training Beacon (PvP)",
+        "revisionId": 5105,
+        "sourceRevisionTimestamp": "2026-08-31T16:00:00Z"
+      },
+      "professionId": 5,
+      "progressionSeriesIds": [],
+      "provenance": {
+        "claimIds": [
+          "claim:skill:5:infobox"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-04-description-structured-only:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:5:5105"
+        ]
+      },
+      "splitGroupId": "split:skill:4",
+      "templateId": 5,
+      "timings": {
+        "activation": {
+          "source": "2",
+          "state": "number",
+          "text": "2",
+          "unit": null,
+          "value": 2
+        },
+        "moraleBoostRecharge": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "recharge": {
+          "source": "20",
+          "state": "number",
+          "text": "20",
+          "unit": null,
+          "value": 20
+        }
+      },
+      "type": "Spell",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Training_Beacon_(PvP)"
+    }
+  ],
+  "sourceSet": {
+    "acceptedSeedCount": 5,
+    "catalogRecordCount": 5,
+    "dispositionCount": 0,
+    "indexTitle": "Guild Wars Wiki:Game integration/Skills",
+    "maximumAcceptedId": 5,
+    "minimumAcceptedId": 1,
+    "numericGapCount": 0,
+    "planningAmendment": "SPRINT-005 replaced the missing Guild Wars Wiki:Game integration/Skills/0 source with the live index and linked ranged skill pages.",
+    "rangedPageTitles": [
+      "Guild Wars Wiki:Game integration/Skills/1-10"
+    ],
+    "sourcePlanDigest": "48ef9c4c75e2d9cc1c24ec63ec0fb564af16509b83b4bede8898e4ab0c820ae7",
+    "sourceSetDigest": "14a20a7316bded9328f5d71d90a63178d4a51659a7238ac7614e7e5cacc6112e"
+  },
+  "splitGroups": [
+    {
+      "ambiguity": "none",
+      "id": "split:skill:4",
+      "members": [
+        {
+          "mode": "pve",
+          "skillId": 4
+        },
+        {
+          "mode": "pvp",
+          "skillId": 5
+        }
+      ],
+      "provenance": {
+        "claimIds": [
+          "claim:split:skill:4:mode-variant"
+        ],
+        "notes": "Split relationship inferred only from explicit PvE/PvP title suffix evidence.",
+        "reviewIds": [
+          "review:epic-04-first-baseline:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:4:5104",
+          "source:gww:epic-04-fixture:skill:5:5105"
+        ]
+      }
+    }
+  ]
+}

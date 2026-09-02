@@ -42,6 +42,7 @@ def write_generated_artifact(
     qa_report_path: str | None,
     commit_decision: str = "ignored",
     notes: str | None = None,
+    extra_fields: dict[str, Any] | None = None,
 ) -> tuple[Path, Path, dict[str, Any]]:
     artifact_path, digest = write_canonical_json(root, relative_path, value)
     manifest = {
@@ -57,6 +58,8 @@ def write_generated_artifact(
         "commitDecision": commit_decision,
         "notes": notes,
     }
+    if extra_fields:
+        manifest.update(extra_fields)
     manifest_path, _ = write_canonical_json(root, relative_path.with_suffix(".manifest.json"), manifest)
     return artifact_path, manifest_path, manifest
 

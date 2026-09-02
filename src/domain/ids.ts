@@ -9,6 +9,7 @@ export type SchemaVersion = number;
 
 export type TemplateProfessionId = Brand<number, "TemplateProfessionId">;
 export type TemplateAttributeId = Brand<number, "TemplateAttributeId">;
+export type TemplateSkillId = Brand<number, "TemplateSkillId">;
 
 export type ProfessionId = CatalogId<"Profession">;
 export type AttributeId = CatalogId<"Attribute">;
@@ -29,6 +30,10 @@ export function templateProfessionId(value: number): TemplateProfessionId {
 
 export function templateAttributeId(value: number): TemplateAttributeId {
   return value as TemplateAttributeId;
+}
+
+export function templateSkillId(value: number): TemplateSkillId {
+  return value as TemplateSkillId;
 }
 
 export function authoredDocumentId(value: string): AuthoredDocumentId {

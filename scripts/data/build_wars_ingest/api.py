@@ -240,6 +240,9 @@ class MediaWikiClient:
         by_title = {str(page.get("title")): page for page in pages if isinstance(page, dict)}
         normalized = {}
         redirects = {}
+        response_order = {
+            str(page.get("title")): index for index, page in enumerate(pages) if isinstance(page, dict)
+        }
         if isinstance(query, dict):
             for item in query.get("normalized", []) if isinstance(query.get("normalized"), list) else []:
                 if isinstance(item, dict):
@@ -250,7 +253,8 @@ class MediaWikiClient:
 
         ordered: list[dict[str, Any]] = []
         for title in requested_titles:
-            candidate = redirects.get(normalized.get(title, title), normalized.get(title, title))
+            normalized_title = normalized.get(title, title)
+            candidate = redirects.get(normalized_title, normalized_title)
             page = by_title.get(title) or by_title.get(candidate)
             if page is None or page.get("missing") is True:
                 diagnostics.append(
@@ -264,7 +268,13 @@ class MediaWikiClient:
                     )
                 )
                 continue
-            ordered.append(page)
+            page_copy = dict(page)
+            page_copy["_buildWarsRequestedTitle"] = title
+            page_copy["_buildWarsNormalizedTitle"] = normalized_title
+            page_copy["_buildWarsCanonicalTitle"] = str(page.get("title"))
+            page_copy["_buildWarsRedirectedFrom"] = normalized_title if candidate != normalized_title else None
+            page_copy["_buildWarsResponseIndex"] = response_order.get(str(page.get("title")))
+            ordered.append(page_copy)
         return ordered
 
     def _request_params(self, params: Mapping[str, Any]) -> dict[str, str]:

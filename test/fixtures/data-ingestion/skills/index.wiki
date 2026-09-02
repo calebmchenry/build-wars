@@ -1,0 +1,5 @@
+{| class="plainlinks"
+| The skill list is split by skill id:
+* [[/1-10|1-10]]
+|}
+{{Guild Wars Wiki:Game integration/Index}}

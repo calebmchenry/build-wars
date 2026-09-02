@@ -27,10 +27,14 @@ npm run data:test
 npm run data:regenerate
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-03-professions-attributes
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-04-skills
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline --profile epic-03-professions-attributes --root .
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline --profile epic-04-skills --root . --snapshot-set work/runs/data-ingestion/epic-04/snapshot-sets/<selected>.snapshot-set.json
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --allow-live-network --title "Guild Wars Wiki:Game integration/Skills/0"
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-03-professions-attributes --root . --allow-live-network
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-04-skills --root . --allow-live-network --stage discover
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-04-skills --root . --allow-live-network --stage fetch --source-plan work/runs/data-ingestion/epic-04/source-plans/<digest>.source-plan.json --confirm-source-set-digest <digest>
 ```
 
 Exit codes:
@@ -45,15 +49,16 @@ Exit codes:
 - `fixture`: uses committed minimized synthetic fixtures from `test/fixtures/data-ingestion`, a fixed
   UTC clock, and an output root under ignored `work/runs/data-ingestion`.
 - `offline`: reads existing ignored snapshot manifests from the configured output root without
-  network access. Production snapshots are not committed yet, so this mode is for local
-  investigation after a live refresh.
+  network access. EPIC-04 requires one explicit complete `--snapshot-set` manifest and rejects
+  partial, duplicate, mixed-profile, digest-mismatched, or path-escaping children.
 - `live`: manually fetches named Guild Wars Wiki pages through the shared MediaWiki client. It
   requires `--allow-live-network` and at least one `--title`.
 
 The default `guild-wars-wiki` profile preserves the EPIC-02 skill-ID fixture proof. Fixture mode also
-writes the EPIC-03 professions/attributes fixture catalog as a side effect so `npm run
-data:regenerate` covers both profiles offline. Run `epic-03-professions-attributes` directly for
-fixture, offline, or live catalog work.
+writes the EPIC-03 professions/attributes and EPIC-04 skills fixture catalogs as side effects so
+`npm run data:regenerate` covers all registered production profiles offline. Run
+`epic-03-professions-attributes` or `epic-04-skills` directly for profile-specific fixture,
+offline, or live catalog work.
 
 ## Source Limits
 
@@ -72,12 +77,21 @@ source pages, 12 requests, the shared response byte cap, and the shared parser b
 for this profile uses those names instead of ad hoc `--title` values, then fetches exact profession
 icon `imageinfo` metadata without following file redirects.
 
+The EPIC-04 profile is locked to `Guild Wars Wiki:Game integration/Skills` plus linked ranged pages
+under `Guild Wars Wiki:Game integration/Skills/*`; the missing `/Skills/0` page is blocker history
+only. Discovery fetches only the index and ranged seed pages, writes a digest-bound source plan, and
+stops. Fetch mode requires the exact plan path and `--confirm-source-set-digest`, rechecks source-set
+drift, fetches planned detail pages in deterministic batches, writes one complete
+`SourceSnapshotSetManifest`, and promotes only the exact catalog/manifest/QA paths. CLI options may
+lower smoke-test limits such as `--detail-limit`, but code-owned caps remain the ceiling.
+
 ## Pipeline Contract
 
 | Stage     | Inputs                                               | Outputs                                                             | Required contracts and gates                                                                                                                                                              |
 | --------- | ---------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Fetch     | Source profile and query parameters                  | Raw source payload in `data/source-snapshots`                       | Live mode only; source values are untrusted.                                                                                                                                              |
 | Snapshot  | Raw payload and source metadata                      | `SourceSnapshotManifest` plus ignored raw payload                   | Records source family, page/file identity, revision identity, source revision timestamp, retrieval timestamp, artifact path, SHA-256 digest, and ignored retention policy.                |
+| Replay    | Complete EPIC-04 snapshot-set manifest               | Verified selected snapshot payloads                                 | Requires one profile-bound manifest; rejects partial, duplicate, extra/missing, mixed-profile, digest-mismatched, or path-escaping inputs before catalog assembly.                        |
 | Extract   | Verified snapshot payloads                           | Skill-ID mappings, parser proof, and icon metadata                  | Extractors consume snapshots, not a network client. Nested wiki templates are traversed through `mwparserfromhell`, not regex-only parsing.                                               |
 | Normalize | Extracted records and diagnostics                    | Canonical JSON plus `GeneratedArtifactManifest` in `data/generated` | UTF-8, LF-terminated, two-space indented, key-stable, finite-number-only, stable record order, provenance-bearing, and metadata-only media references where allowed.                      |
 | Validate  | Generated artifact manifest and records              | `QaReport` JSON and bounded text summary in `data/qa`               | Reports provenance gaps, stale/unverified revisions, rights ambiguity, invalid source IDs, copied text, icon metadata gaps, generated diffs, schema/shape errors, and integrity failures. |
@@ -106,6 +120,25 @@ summaries, icon binaries, thumbnails, screenshots, and copied page bodies remain
 Offline replay selects the locked EPIC-03 snapshot manifests by source page title; because raw
 snapshots are ignored, historical replay is limited to the local ignored snapshots or a fresh bounded
 live refresh.
+
+## EPIC-04 Profile
+
+`epic-04-skills` normalizes the Guild Wars skills source set into
+`data/generated/epic-04/skills.catalog.json`. The runtime catalog contains skill IDs, template IDs,
+canonical names, lookup keys, wiki URLs, EPIC-03 profession/attribute joins, campaigns, skill types,
+classification flags, independent cost/timing value states, structured-only description tokens,
+progression series, split groups, nullable metadata-only icons, source-set summary, dispositions,
+section digests, and a semantic `catalogVersion`.
+
+The adjacent manifest owns source-plan path/digest, selected snapshot-set path/digest, child snapshot
+paths, dependency digests, artifact digest, and review records. The QA JSON owns bounded findings and
+release gates. Runtime app code must not read those audit artifacts.
+
+Schema v1 excludes acquisition metadata, guide prose, strategy/usage notes, vendor/drop/quest
+instructions, community content, raw page bodies, rendered HTML, and copied source-authored
+descriptions. Description state is explicit: `reviewed-text`, `structured-only`, `excluded`, or
+`unsupported`; the current promotion uses structured-only runtime text and records source text
+digests for future review invalidation.
 
 ## Artifacts
 

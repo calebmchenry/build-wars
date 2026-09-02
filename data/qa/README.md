@@ -46,3 +46,14 @@ returning exit code `2`.
 EPIC-03 promotion requires `appConsumptionGate: pass` and `publicReleaseGate: pass`; critical/error
 findings must be absent or closed, and warnings must be resolved, excluded, or accepted with named
 bounded review evidence.
+
+BW-0405 promotes one machine-readable EPIC-04 QA report:
+
+- `data/qa/epic-04/skills.catalog.qa.json`
+
+The adjacent `.summary.txt` remains ignored. The QA JSON records source-set accounting, page
+resolution, EPIC-03 joins, infobox fields, cost/timing states, description policy, progression
+coverage, split groups, icon metadata, provenance, output caps, artifact integrity, summary counts,
+and app/public release gates. Missing detail pages, missing icon metadata, unsupported progression
+forms, and non-catalog skill-source shapes must be dispositioned by bounded review evidence before
+promotion can pass.

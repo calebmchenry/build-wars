@@ -52,6 +52,26 @@ and reviewed before promotion.
 The EPIC-03 profile uses fixed-clock fixture and offline replay for deterministic catalog, manifest,
 QA, source ordering, and finding ID generation.
 
+## EPIC-04 Promoted Catalog
+
+BW-0405 approves exactly these generated files:
+
+- `data/generated/epic-04/skills.catalog.json`
+- `data/generated/epic-04/skills.catalog.manifest.json`
+
+The catalog contains runtime-eligible skill facts: source-set summary, reviewed dispositions,
+EPIC-03 dependency digests, skill records, cost/timing states, structured-only description tokens,
+progression series, PvE/PvP split groups, nullable icon IDs, metadata-only remote media references,
+section digests, and semantic `catalogVersion`.
+
+The adjacent manifest records source-plan path/digest, selected snapshot-set path/digest, child
+snapshot manifests, dependency digests, artifact digest, QA path, review records, and
+`commitDecision: exact-path-allowlisted`. Runtime code must not read the manifest, QA report, source
+plans, snapshot-set manifests, raw snapshots, Python tooling, or wiki APIs.
+
+EPIC-04 uses fixed-clock fixture generation and exact snapshot-set offline replay for deterministic
+catalog, manifest, QA, section digest, finding ID, source ordering, and summary count checks.
+
 ## Baselines
 
 Baseline comparison is opt-in. No baseline produces an info finding; schema mismatch blocks public

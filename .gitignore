@@ -32,8 +32,15 @@ data/generated/*
 data/generated/epic-03/*
 !data/generated/epic-03/professions-attributes.catalog.json
 !data/generated/epic-03/professions-attributes.catalog.manifest.json
+!data/generated/epic-04/
+data/generated/epic-04/*
+!data/generated/epic-04/skills.catalog.json
+!data/generated/epic-04/skills.catalog.manifest.json
 data/qa/*
 !data/qa/README.md
 !data/qa/epic-03/
 data/qa/epic-03/*
 !data/qa/epic-03/professions-attributes.catalog.qa.json
+!data/qa/epic-04/
+data/qa/epic-04/*
+!data/qa/epic-04/skills.catalog.qa.json

@@ -188,6 +188,31 @@ export interface SourceSnapshotManifest {
   readonly notes: string | null;
 }
 
+export interface SourceSnapshotSetChild {
+  readonly manifestPath: string;
+  readonly artifactPath: string;
+  readonly digest: ArtifactDigest;
+  readonly sourceId: string;
+  readonly pageTitle: string | null;
+  readonly revisionId: string | number | null;
+}
+
+export interface SourceSnapshotSetManifest {
+  readonly schemaVersion: SchemaVersion;
+  readonly profile: string;
+  readonly sourceTarget: string;
+  readonly sourceEpic: string | null;
+  readonly generatedAt: string;
+  readonly sourcePlanDigest: string;
+  readonly sourceSetDigest: string;
+  readonly completionState: "complete" | "partial" | "superseded";
+  readonly expectedChildCount: number;
+  readonly childSnapshots: readonly SourceSnapshotSetChild[];
+  readonly aggregatePayloadBytes: number;
+  readonly aggregateDigest: ArtifactDigest;
+  readonly notes: string | null;
+}
+
 export interface GeneratedArtifactManifest {
   readonly schemaVersion: SchemaVersion;
   readonly artifactPath: string;

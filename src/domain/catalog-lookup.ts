@@ -1,8 +1,20 @@
-import type { AttributeId, ProfessionId, TemplateAttributeId, TemplateProfessionId } from "./ids";
 import type {
+  AttributeId,
+  ProfessionId,
+  SkillId,
+  TemplateAttributeId,
+  TemplateProfessionId,
+  TemplateSkillId
+} from "./ids";
+import type {
+  CatalogSkillRecord,
   CatalogAttributeRecord,
   CatalogProfessionRecord,
   ProfessionAttributeCatalog,
+  SkillCatalog,
+  SkillMode,
+  SkillModeVariantGroup,
+  SkillSourceSetDisposition,
   ProfessionTemplateCrosswalkRecord,
   ReservedTemplateIdFact
 } from "./catalog";
@@ -41,6 +53,13 @@ export type UnknownTemplateLookupOutcome<TemplateId> = {
   readonly catalogId: null;
 };
 
+export type SkillDispositionLookupOutcome = {
+  readonly kind: "dispositioned";
+  readonly templateId: TemplateSkillId;
+  readonly catalogId: null;
+  readonly disposition: SkillSourceSetDisposition;
+};
+
 export type ProfessionTemplateLookupOutcome =
   | KnownTemplateLookupOutcome<TemplateProfessionId, ProfessionId, CatalogProfessionRecord>
   | NoneTemplateLookupOutcome<TemplateProfessionId>
@@ -53,6 +72,35 @@ export type AttributeTemplateLookupOutcome =
   | ReservedTemplateLookupOutcome<TemplateAttributeId>
   | UnsupportedTemplateLookupOutcome<TemplateAttributeId>
   | UnknownTemplateLookupOutcome<TemplateAttributeId>;
+
+export type SkillTemplateLookupOutcome =
+  | KnownTemplateLookupOutcome<TemplateSkillId, SkillId, CatalogSkillRecord>
+  | SkillDispositionLookupOutcome
+  | UnknownTemplateLookupOutcome<TemplateSkillId>;
+
+export type SkillModeVariantOutcome =
+  | {
+      readonly kind: "single";
+      readonly skill: CatalogSkillRecord;
+      readonly group: null;
+    }
+  | {
+      readonly kind: "variant";
+      readonly skill: CatalogSkillRecord;
+      readonly group: SkillModeVariantGroup;
+      readonly mode: SkillMode;
+    }
+  | {
+      readonly kind: "ambiguous-mode";
+      readonly skill: CatalogSkillRecord;
+      readonly group: SkillModeVariantGroup;
+    }
+  | {
+      readonly kind: "missing-variant";
+      readonly skill: CatalogSkillRecord;
+      readonly group: SkillModeVariantGroup;
+      readonly mode: SkillMode;
+    };
 
 export function lookupProfessionTemplateId(
   catalog: ProfessionAttributeCatalog,
@@ -111,6 +159,33 @@ export function lookupAttributeTemplateId(
   return { kind: "unknown", templateId, catalogId: null };
 }
 
+export function lookupSkillTemplateId(
+  catalog: SkillCatalog,
+  templateId: TemplateSkillId
+): SkillTemplateLookupOutcome {
+  const numericTemplateId = Number(templateId);
+  const record = catalog.skills.find((skill) => Number(skill.templateId) === numericTemplateId);
+  if (record !== undefined) {
+    return { kind: "known", templateId, catalogId: record.id, record };
+  }
+
+  const disposition = catalog.dispositions.find(
+    (candidate) => Number(candidate.templateId) === numericTemplateId
+  );
+  if (disposition !== undefined) {
+    return { kind: "dispositioned", templateId, catalogId: null, disposition };
+  }
+
+  return { kind: "unknown", templateId, catalogId: null };
+}
+
+export function lookupSkillById(
+  catalog: SkillCatalog,
+  skillId: SkillId
+): CatalogSkillRecord | null {
+  return catalog.skills.find((skill) => Number(skill.id) === Number(skillId)) ?? null;
+}
+
 export function lookupProfessionByName(
   catalog: ProfessionAttributeCatalog,
   value: string
@@ -128,6 +203,48 @@ export function lookupAttributeByName(
   value: string
 ): CatalogAttributeRecord | null {
   return collisionSafeLookup(catalog.attributes, value, (record) => [record.name], "attribute");
+}
+
+export function lookupSkillByName(catalog: SkillCatalog, value: string): CatalogSkillRecord | null {
+  return collisionSafeLookup(catalog.skills, value, (record) => [record.name], "skill");
+}
+
+export function resolveSkillModeVariant(
+  catalog: SkillCatalog,
+  skill: CatalogSkillRecord,
+  mode: SkillMode | "unknown"
+): SkillModeVariantOutcome {
+  if (skill.splitGroupId === null) {
+    return { kind: "single", skill, group: null };
+  }
+
+  const group = catalog.splitGroups.find((candidate) => candidate.id === skill.splitGroupId);
+  if (group === undefined || mode === "unknown") {
+    return {
+      kind: "ambiguous-mode",
+      skill,
+      group:
+        group ??
+        ({
+          id: skill.splitGroupId,
+          members: [],
+          ambiguity: "incomplete-counterpart",
+          provenance: { sourceIds: [], claimIds: [], reviewIds: [], notes: "Missing split group." }
+        } satisfies SkillModeVariantGroup)
+    };
+  }
+
+  const member = group.members.find((candidate) => candidate.mode === mode);
+  if (member === undefined) {
+    return { kind: "missing-variant", skill, group, mode };
+  }
+
+  const selected = lookupSkillById(catalog, member.skillId);
+  if (selected === null) {
+    return { kind: "missing-variant", skill, group, mode };
+  }
+
+  return { kind: "variant", skill: selected, group, mode };
 }
 
 export function attributeBudgetForLevel(

@@ -1,0 +1,22 @@
+{{Skill infobox
+| id = 1
+| name = Healing Signet
+| campaign = Core
+| profession = Warrior
+| attribute = Tactics
+| type = Signet
+| activation = 2
+| recharge = 4
+| description = [[Signet]]. You gain {{gr|82|172}} [[Health]].
+| concise description = Signet. You gain {{gr|82|172}} Health.
+}}
+
+{{Skill progression
+| attribute = [[Tactics]]
+| var1 name = [[Heal]]ing
+| var1 at0 = 82
+| var1 at15 = 172
+}}
+
+== Acquisition ==
+* Fixture trainer prose must not enter generated runtime JSON.

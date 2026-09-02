@@ -22,12 +22,15 @@ class ParserUnavailable(RuntimeError):
 DEFAULT_KNOWN_TEMPLATES = {
     "skill infobox",
     "skill progression",
+    "skill progression max10",
+    "skill progression max12",
     "gr",
     "gr2",
     "title-rank progression",
     "pveversion",
     "pvpversion",
     "morale-boost recharge",
+    "skill icon",
     "redirect",
     "disambig",
     "disambiguation",
@@ -50,12 +53,15 @@ DEFAULT_KNOWN_PARAMS = {
         "pvp-only",
     },
     "skill progression": {"attribute", "rank", "value", "progression", "title", "recharge"},
+    "skill progression max10": {"title track", "var1 name", "var1 at0", "var1 at10", "var2 name", "var2 at0", "var2 at10", "var3 name", "var3 at0", "var3 at10"},
+    "skill progression max12": {"title track", "var1 name", "var1 at0", "var1 at12", "var2 name", "var2 at0", "var2 at12", "var3 name", "var3 at0", "var3 at12"},
     "gr": {"1", "2", "3"},
     "gr2": {"1", "2", "3", "4"},
     "title-rank progression": {"title", "max", "values"},
     "pveversion": {"1"},
     "pvpversion": {"1"},
     "morale-boost recharge": {"1", "2"},
+    "skill icon": {"1"},
 }
 
 

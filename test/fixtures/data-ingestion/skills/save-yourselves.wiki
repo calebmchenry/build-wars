@@ -1,0 +1,19 @@
+{{Skill infobox
+| id = 3
+| name = "Save Yourselves!"
+| campaign = Factions
+| profession = Warrior
+| attribute = Allegiance rank
+| pve-only = y
+| type = Shout
+| adrenaline = 8
+| description = [[Shout]]. For {{gr2|4|6}} seconds, allies gain armor.
+| concise description = Shout. For {{gr2|4|6}} seconds, allies gain armor.
+}}
+
+{{Skill progression max12
+| title track = [[Allegiance rank]]
+| var1 name = [[Duration]]
+| var1 at0 = 4
+| var1 at12 = 6
+}}

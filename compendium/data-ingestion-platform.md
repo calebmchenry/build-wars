@@ -17,6 +17,11 @@ reports.
   disambiguation preambles.
 - `skill_ids.py`: game-integration skill-ID extraction from verified snapshots with provenance and
   diagnostics for duplicate, malformed, gap, redirect, and unexpected-shape cases.
+- `skill_source_set.py`: EPIC-04 source-set planning, ranged-page validation, source-plan digests,
+  page-resolution metadata, and complete snapshot-set manifest verification.
+- `skill_infobox.py`, `skill_progression.py`, and `skill_catalog.py`: EPIC-04 skill field,
+  cost/timing, description-state, progression, split-group, dependency, QA, and catalog assembly
+  logic.
 - `icons.py`: metadata-only icon candidate resolution for explicit `image=` values and default
   `File:{title}.jpg` / `File:{title}.png` candidates.
 - `artifacts.py`: canonical JSON and `GeneratedArtifactManifest` writing with digest and baseline
@@ -50,6 +55,9 @@ adapter flags.
   `data/qa`.
 - Promote runtime data only through a later exact-path ticket that records provenance, QA closeout,
   source-policy disposition, and app/public gate status.
+- High-volume EPIC-04 refreshes must use discover first, then digest-confirmed fetch, then exact
+  `--snapshot-set` offline replay. Do not broaden the source graph beyond the approved index and
+  ranged skill pages without a recorded planning amendment.
 
 ## Registered Profiles
 
@@ -58,6 +66,12 @@ adapter flags.
 - `epic-03-professions-attributes`: EPIC-03 professions and attributes catalog. The profile locks
   source pages, detail pages, page/request/byte caps, exact promoted paths, selected snapshot replay,
   and metadata-only icon handling.
+- `epic-04-skills`: EPIC-04 skills catalog. The profile locks the source-set index
+  `Guild Wars Wiki:Game integration/Skills`, linked ranged pages, large finite caps, digest-bound
+  source plans, selected complete snapshot-set replay, exact promoted paths, structured-only
+  description policy, and metadata-only icon handling.
 
 Default fixture regeneration writes both the EPIC-02 proof and the EPIC-03 fixture catalog. Direct
-EPIC-03 fixture/offline/live commands use `--profile epic-03-professions-attributes`.
+fixture regeneration also writes the EPIC-04 fixture catalog. Direct EPIC-03 fixture/offline/live
+commands use `--profile epic-03-professions-attributes`; direct EPIC-04 commands use
+`--profile epic-04-skills`.

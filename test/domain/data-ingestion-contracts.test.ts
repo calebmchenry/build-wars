@@ -6,9 +6,11 @@ import {
   type ProfessionAttributeCatalog,
   type QaReport,
   type RemoteMediaMetadata,
+  type SkillCatalog,
   type SourceReference
 } from "../../src/domain";
 import professionsAttributesGolden from "../fixtures/data-ingestion/generated/fixture-professions-attributes.catalog.json";
+import skillsGolden from "../fixtures/data-ingestion/generated/fixture-skills.catalog.json";
 import golden from "../fixtures/data-ingestion/generated/fixture-skill-id-map.json";
 
 function first<T>(items: readonly T[], label: string): T {
@@ -126,5 +128,19 @@ describe("data ingestion generated contracts", () => {
     const mediaMetadata: RemoteMediaMetadata = firstMedia;
     expect(mediaMetadata.kind).toBe("icon");
     expect(mediaMetadata.cachedBytes).toBe(false);
+  });
+
+  it("keeps the EPIC-04 Python catalog aligned with the TypeScript wire contract", () => {
+    const catalog = skillsGolden as unknown as SkillCatalog;
+    const firstSkill = first(catalog.skills, "EPIC-04 skill");
+
+    expect(catalog.schemaVersion).toBe(SOURCE_POLICY_SCHEMA_VERSION);
+    expect(catalog.profile.id).toBe("epic-04-skills");
+    expect(catalog.dependencyDigests[0]?.id).toBe("epic-03-professions-attributes");
+    expect(catalog.sourceSet.acceptedSeedCount).toBe(catalog.skills.length);
+    expect(firstSkill.templateId).toBe(firstSkill.id);
+    expect(firstSkill.description.state).toBe("structured-only");
+    expect(firstSkill.iconId === null || typeof firstSkill.iconId === "string").toBe(true);
+    expect(catalog.remoteMedia.every((media) => media.cachedBytes === false)).toBe(true);
   });
 });

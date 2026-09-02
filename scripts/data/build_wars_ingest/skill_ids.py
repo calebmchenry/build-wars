@@ -26,6 +26,7 @@ def enumerate_skill_ids(
     source: SkillIdSource,
     min_id: int = 1,
     max_id: int = 100_000,
+    emit_gap_diagnostics: bool = True,
 ) -> tuple[list[dict[str, Any]], list[Diagnostic]]:
     records: list[dict[str, Any]] = []
     diagnostics: list[Diagnostic] = []
@@ -58,7 +59,7 @@ def enumerate_skill_ids(
         if target_title is None:
             diagnostics.append(_diagnostic("SKILL_ID_MISSING_TARGET", "Skill id mapping did not include a target title", source, line_number, line))
             continue
-        if "redirect" in stripped.lower():
+        if "redirect" in stripped.lower() and "redirect=no" not in stripped.lower():
             diagnostics.append(
                 _diagnostic(
                     "SKILL_ID_REDIRECT_AMBIGUITY",
@@ -131,7 +132,8 @@ def enumerate_skill_ids(
 
     unique_records = _dedupe_by_first_id(records)
     unique_records.sort(key=lambda record: (int(record["skillId"]), str(record["title"])))
-    diagnostics.extend(_gap_diagnostics(unique_records, source, min_id=min_id))
+    if emit_gap_diagnostics:
+        diagnostics.extend(_gap_diagnostics(unique_records, source, min_id=min_id))
     return unique_records, sorted(diagnostics, key=lambda item: item.stable_key())
 
 

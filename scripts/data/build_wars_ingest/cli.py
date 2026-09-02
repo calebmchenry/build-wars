@@ -6,7 +6,7 @@ from pathlib import Path
 
 from .config import FIXTURE_GENERATED_AT, SystemClock
 from .pipeline import PipelineError, PipelineOptions, run_pipeline
-from .profiles import EPIC_03_PROFILE_ID, profile_choices
+from .profiles import EPIC_03_PROFILE_ID, EPIC_04_PROFILE_ID, profile_choices
 from .wikitext import ParserUnavailable
 
 
@@ -31,6 +31,25 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--baseline", type=Path, default=None, help="Optional artifact baseline JSON path.")
     parser.add_argument("--allow-live-network", action="store_true", help="Required for live mode.")
     parser.add_argument(
+        "--stage",
+        choices=("catalog", "discover", "fetch"),
+        default="catalog",
+        help="EPIC-04 live stage. Use discover first, then fetch with the confirmed digest.",
+    )
+    parser.add_argument("--source-plan", type=Path, default=None, help="EPIC-04 source plan path.")
+    parser.add_argument(
+        "--confirm-source-set-digest",
+        default=None,
+        help="Exact EPIC-04 source plan digest required for live fetch.",
+    )
+    parser.add_argument("--snapshot-set", type=Path, default=None, help="EPIC-04 offline snapshot-set manifest path.")
+    parser.add_argument(
+        "--detail-limit",
+        type=int,
+        default=None,
+        help="Lower EPIC-04 live fetch detail-page limit for manual smoke tests.",
+    )
+    parser.add_argument(
         "--title",
         action="append",
         default=[],
@@ -44,8 +63,12 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.mode == "live" and not args.allow_live_network:
         parser.error("live mode requires --allow-live-network")
-    if args.mode == "live" and args.profile != EPIC_03_PROFILE_ID and not args.title:
+    if args.mode == "live" and args.profile not in {EPIC_03_PROFILE_ID, EPIC_04_PROFILE_ID} and not args.title:
         parser.error("live mode requires at least one --title")
+    if args.mode == "live" and args.profile == EPIC_04_PROFILE_ID and args.stage == "catalog":
+        parser.error("EPIC-04 live mode requires --stage discover or --stage fetch")
+    if args.mode == "offline" and args.profile == EPIC_04_PROFILE_ID and args.snapshot_set is None:
+        parser.error("EPIC-04 offline mode requires --snapshot-set")
 
     generated_at = args.generated_at
     if generated_at is None:
@@ -62,6 +85,11 @@ def main(argv: list[str] | None = None) -> int:
                 baseline_path=args.baseline,
                 allow_live_network=args.allow_live_network,
                 live_titles=tuple(args.title),
+                stage=args.stage,
+                source_plan_path=args.source_plan,
+                confirm_source_set_digest=args.confirm_source_set_digest,
+                snapshot_set_path=args.snapshot_set,
+                detail_limit=args.detail_limit,
             )
         )
     except ParserUnavailable as exc:

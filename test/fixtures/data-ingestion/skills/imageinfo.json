@@ -1,0 +1,36 @@
+{
+  "pages": [
+    {
+      "title": "File:Healing Signet.jpg",
+      "pageid": 9801,
+      "imageinfo": [
+        {
+          "url": "https://wiki.guildwars.com/images/healing-signet.jpg",
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Healing_Signet.jpg",
+          "mime": "image/jpeg",
+          "width": 64,
+          "height": 64,
+          "size": 1000,
+          "timestamp": "2026-08-31T16:00:00Z",
+          "sha1": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    },
+    {
+      "title": "File:Flare.png",
+      "pageid": 9802,
+      "imageinfo": [
+        {
+          "url": "https://wiki.guildwars.com/images/flare.png",
+          "descriptionurl": "https://wiki.guildwars.com/wiki/File:Flare.png",
+          "mime": "image/png",
+          "width": 64,
+          "height": 64,
+          "size": 900,
+          "timestamp": "2026-08-31T16:00:00Z",
+          "sha1": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ]
+    }
+  ]
+}

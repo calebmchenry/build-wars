@@ -1,0 +1,9 @@
+{| class="plainlinks"
+|-
+|
+* [{{fullurl:Game link:Skill 1|redirect=no}} Skill 1] &rarr; [[Healing Signet]]
+* [{{fullurl:Game link:Skill 2|redirect=no}} Skill 2] &rarr; [[Flare]]
+* [{{fullurl:Game link:Skill 3|redirect=no}} Skill 3] &rarr; [["Save Yourselves!"]]
+* [{{fullurl:Game link:Skill 4|redirect=no}} Skill 4] &rarr; [[Training Beacon (PvE)]]
+* [{{fullurl:Game link:Skill 5|redirect=no}} Skill 5] &rarr; [[Training Beacon (PvP)]]
+|}

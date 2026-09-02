@@ -2,7 +2,13 @@ from __future__ import annotations
 
 import unittest
 
-from build_wars_ingest.profiles import EPIC_02_PROFILE_ID, EPIC_03_PROFILE_ID, profile_by_id, profile_choices
+from build_wars_ingest.profiles import (
+    EPIC_02_PROFILE_ID,
+    EPIC_03_PROFILE_ID,
+    EPIC_04_PROFILE_ID,
+    profile_by_id,
+    profile_choices,
+)
 
 
 class ProfileTests(unittest.TestCase):
@@ -23,6 +29,17 @@ class ProfileTests(unittest.TestCase):
         self.assertIn("Warrior", profile.detail_titles)
         self.assertLessEqual(len(profile.all_page_titles), profile.page_limit)
         self.assertLessEqual(profile.request_limit, 12)
+
+    def test_epic04_profile_uses_approved_index_and_large_bounded_caps(self) -> None:
+        profile = profile_by_id(EPIC_04_PROFILE_ID)
+
+        self.assertEqual(profile.source_epic, "EPIC-04")
+        self.assertEqual(profile.generated_relative_path.as_posix(), "epic-04/skills.catalog.json")
+        self.assertEqual(profile.source_titles, ("Guild Wars Wiki:Game integration/Skills",))
+        self.assertEqual(profile.detail_titles, ())
+        self.assertGreaterEqual(profile.page_limit, 3000)
+        self.assertGreater(profile.media_title_limit, 0)
+        self.assertIn(EPIC_04_PROFILE_ID, profile_choices())
 
 
 if __name__ == "__main__":

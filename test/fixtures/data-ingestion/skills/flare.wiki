@@ -1,0 +1,19 @@
+{{Skill infobox
+| id = 2
+| name = Flare
+| campaign = Core
+| profession = Elementalist
+| attribute = Fire Magic
+| type = Spell
+| energy = 5
+| activation = 1
+| description = [[Spell]]. Target foe takes {{gr|20|65}} fire damage.
+| concise description = Spell. Deals {{gr|20|65}} fire damage.
+}}
+
+{{Skill progression
+| attribute = [[Fire Magic]]
+| var1 name = [[Fire damage]]
+| var1 at0 = 20
+| var1 at15 = 65
+}}

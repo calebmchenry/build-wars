@@ -1,0 +1,14 @@
+{{Skill infobox
+| id = 5
+| name = Training Beacon (PvP)
+| campaign = Nightfall
+| profession = Mesmer
+| attribute = Inspiration Magic
+| pvp-only = y
+| type = Spell
+| energy = 10
+| activation = 2
+| recharge = 20
+| description = [[Spell]]. Fixture PvP split description excluded from runtime text.
+| concise description = Spell. Fixture PvP split description.
+}}

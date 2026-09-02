@@ -7,16 +7,43 @@ from pathlib import Path
 from typing import Any
 
 from .api import MediaWikiClient
-from .artifacts import compare_baseline, write_generated_artifact
+from .artifacts import canonical_json_bytes, compare_baseline, write_generated_artifact
 from .attribute_points import extract_attribute_point_rules
-from .config import FIXTURE_GENERATED_AT, GENERATOR_NAME, INGESTION_SCHEMA_VERSION, RuntimeRoots
-from .icons import resolve_icon_metadata
+from .config import (
+    EPIC_04_LIMITS,
+    FIXTURE_GENERATED_AT,
+    GENERATOR_NAME,
+    INGESTION_SCHEMA_VERSION,
+    RuntimeRoots,
+)
+from .icons import candidate_file_titles, resolve_icon_metadata
 from .models import Diagnostic, Evidence, digest_bytes, source_reference
 from .profession_attribute_catalog import assemble_profession_attribute_catalog
 from .professions_attributes import extract_professions_and_attributes
-from .profiles import EPIC_02_PROFILE_ID, EPIC_03_ICON_IMAGEINFO_TITLE, EPIC_03_PROFILE_ID, profile_by_id
+from .profiles import (
+    EPIC_02_PROFILE_ID,
+    EPIC_03_ICON_IMAGEINFO_TITLE,
+    EPIC_03_PROFILE_ID,
+    EPIC_04_PROFILE_ID,
+    EPIC_04_SKILL_ICON_IMAGEINFO_TITLE,
+    EPIC_04_SOURCE_INDEX_TITLE,
+    profile_by_id,
+)
 from .qa import build_report, exit_code_for_report, write_report
+from .skill_catalog import assemble_skill_catalog, load_epic03_dependency
 from .skill_ids import SkillIdSource, enumerate_skill_ids
+from .skill_source_set import (
+    SkillSourceSetError,
+    build_source_plan,
+    load_snapshot_set,
+    load_source_plan,
+    ranged_titles_from_index,
+    resolution_records_from_pages,
+    source_plan_path as source_plan_output_path,
+    validate_source_plan,
+    write_snapshot_set_manifest,
+    write_source_plan,
+)
 from .snapshots import SnapshotError, SnapshotIdentity, SnapshotStore, SnapshotWriteResult
 from .template_ids import extract_template_crosswalk
 from .wikitext import parse_wikitext
@@ -36,6 +63,11 @@ class PipelineOptions:
     baseline_path: Path | None = None
     allow_live_network: bool = False
     live_titles: tuple[str, ...] = ()
+    stage: str = "catalog"
+    source_plan_path: Path | None = None
+    confirm_source_set_digest: str | None = None
+    snapshot_set_path: Path | None = None
+    detail_limit: int | None = None
 
 
 @dataclass(frozen=True)
@@ -64,6 +96,8 @@ def run_pipeline(options: PipelineOptions) -> PipelineResult:
 def run_fixture(options: PipelineOptions) -> PipelineResult:
     if options.profile == EPIC_03_PROFILE_ID:
         return _run_epic03_fixture(options)
+    if options.profile == EPIC_04_PROFILE_ID:
+        return _run_epic04_fixture(options)
 
     roots = RuntimeRoots.from_root(options.output_root)
     fixtures = _load_fixtures(options.fixture_root)
@@ -201,12 +235,15 @@ def run_fixture(options: PipelineOptions) -> PipelineResult:
         qa_report=report,
     )
     _run_epic03_fixture(replace(options, profile=EPIC_03_PROFILE_ID))
+    _run_epic04_fixture(replace(options, profile=EPIC_04_PROFILE_ID))
     return result
 
 
 def run_offline(options: PipelineOptions) -> PipelineResult:
     if options.profile == EPIC_03_PROFILE_ID:
         return _run_epic03_offline(options)
+    if options.profile == EPIC_04_PROFILE_ID:
+        return _run_epic04_offline(options)
 
     roots = RuntimeRoots.from_root(options.output_root)
     manifests = sorted(roots.snapshot_root.glob("**/*.manifest.json"))
@@ -252,7 +289,7 @@ def run_offline(options: PipelineOptions) -> PipelineResult:
                 )
             )
             continue
-        if "Game integration/Skills" in title and isinstance(source_ref, dict):
+        if title == "Guild Wars Wiki:Game integration/Skills/0" and isinstance(source_ref, dict):
             skill_source = SkillIdSource(
                 source_page=title,
                 source_url=str(source_ref.get("canonicalUrl")),
@@ -322,6 +359,8 @@ def run_offline(options: PipelineOptions) -> PipelineResult:
 def run_live(options: PipelineOptions) -> PipelineResult:
     if options.profile == EPIC_03_PROFILE_ID:
         return _run_epic03_live(options)
+    if options.profile == EPIC_04_PROFILE_ID:
+        return _run_epic04_live(options)
 
     if not options.allow_live_network:
         raise PipelineError("Live mode requires --allow-live-network")
@@ -593,6 +632,535 @@ def _run_epic03_offline(options: PipelineOptions) -> PipelineResult:
     )
 
 
+def _run_epic04_fixture(options: PipelineOptions) -> PipelineResult:
+    profile = profile_by_id(EPIC_04_PROFILE_ID)
+    roots = RuntimeRoots.from_root(options.output_root)
+    if not (roots.generated_root / "epic-03/professions-attributes.catalog.json").exists():
+        _run_epic03_fixture(replace(options, profile=EPIC_03_PROFILE_ID))
+
+    snapshot_store = SnapshotStore(roots.snapshot_root)
+    fixtures = _load_epic04_fixture_pages(options.fixture_root)
+    index_source = _page_source_reference(
+        source_id="source:gww:epic-04-fixture:index:5001",
+        page_title=EPIC_04_SOURCE_INDEX_TITLE,
+        page_id=9501,
+        revision_id=5001,
+        source_revision_timestamp="2026-08-31T15:00:00Z",
+        retrieved_at=options.generated_at,
+    )
+    index_snapshot = _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=index_source,
+        title=EPIC_04_SOURCE_INDEX_TITLE,
+        page_id=9501,
+        revision_id=5001,
+        timestamp="2026-08-31T15:00:00Z",
+        retrieved_at=options.generated_at,
+        content=fixtures["index"],
+    )
+    child_manifest_paths = [_relative_to_root(roots.root, index_snapshot.manifest_path)]
+    index_plan_snapshot = {
+        "title": EPIC_04_SOURCE_INDEX_TITLE,
+        "content": fixtures["index"],
+        "sourceReference": index_source,
+    }
+
+    ranged_titles, ranged_diagnostics = ranged_titles_from_index(fixtures["index"])
+    range_plan_snapshots: list[dict[str, Any]] = []
+    for offset, title in enumerate(ranged_titles, start=1):
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-04-fixture:range:{offset}:50{offset:02d}",
+            page_title=title,
+            page_id=9510 + offset,
+            revision_id=5010 + offset,
+            source_revision_timestamp=f"2026-08-31T15:0{offset}:00Z",
+            retrieved_at=options.generated_at,
+        )
+        content = fixtures["ranges"][title]
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=9510 + offset,
+            revision_id=5010 + offset,
+            timestamp=f"2026-08-31T15:0{offset}:00Z",
+            retrieved_at=options.generated_at,
+            content=content,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        range_plan_snapshots.append({"title": title, "content": content, "sourceReference": source_ref})
+
+    plan_result = build_source_plan(
+        profile=profile,
+        generated_at=options.generated_at,
+        index_snapshot=index_plan_snapshot,
+        range_snapshots=range_plan_snapshots,
+    )
+    plan_path = write_source_plan(roots.root, plan_result.plan)
+    diagnostics = [*ranged_diagnostics, *plan_result.diagnostics]
+
+    detail_pages: list[dict[str, Any]] = []
+    for seed in plan_result.plan["acceptedSeeds"]:
+        title = str(seed["requestedTitle"])
+        content = fixtures["details"][title]
+        revision_id = 5100 + int(seed["skillId"])
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-04-fixture:skill:{seed['skillId']}:{revision_id}",
+            page_title=title,
+            page_id=9600 + int(seed["skillId"]),
+            revision_id=revision_id,
+            source_revision_timestamp="2026-08-31T16:00:00Z",
+            retrieved_at=options.generated_at,
+        )
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=9600 + int(seed["skillId"]),
+            revision_id=revision_id,
+            timestamp="2026-08-31T16:00:00Z",
+            retrieved_at=options.generated_at,
+            content=content,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        detail_pages.append(
+            {
+                **seed,
+                "normalizedTitle": title,
+                "canonicalTitle": title,
+                "redirectedFrom": None,
+                "pageId": 9600 + int(seed["skillId"]),
+                "revisionId": revision_id,
+                "sourceRevisionTimestamp": "2026-08-31T16:00:00Z",
+                "responseIndex": int(seed["skillId"]),
+                "disambiguationPreamble": None,
+                "content": content,
+                "sourceReference": source_ref,
+            }
+        )
+
+    imageinfo_source = _page_source_reference(
+        source_id="source:gww:epic-04-fixture:skill-icons:5200",
+        page_title=EPIC_04_SKILL_ICON_IMAGEINFO_TITLE,
+        page_id=9520,
+        revision_id=5200,
+        source_revision_timestamp="2026-08-31T16:10:00Z",
+        retrieved_at=options.generated_at,
+        material_class="media-metadata",
+    )
+    imageinfo_payload = {
+        "kind": "mediawiki-imageinfo",
+        "title": EPIC_04_SKILL_ICON_IMAGEINFO_TITLE,
+        "pages": fixtures["imageinfo"]["pages"],
+    }
+    imageinfo_snapshot = _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=imageinfo_source,
+        title=EPIC_04_SKILL_ICON_IMAGEINFO_TITLE,
+        page_id=9520,
+        revision_id=5200,
+        timestamp="2026-08-31T16:10:00Z",
+        retrieved_at=options.generated_at,
+        content=json.dumps(imageinfo_payload, ensure_ascii=False, sort_keys=True),
+    )
+    child_manifest_paths.append(_relative_to_root(roots.root, imageinfo_snapshot.manifest_path))
+    snapshot_set_manifest_path = write_snapshot_set_manifest(
+        root=roots.root,
+        profile=profile,
+        source_plan=plan_result.plan,
+        child_manifest_paths=child_manifest_paths,
+        snapshot_store=snapshot_store,
+        completion_state="complete",
+        generated_at=options.generated_at,
+        notes="Complete synthetic EPIC-04 fixture snapshot set.",
+        detail_records=detail_pages,
+    )
+    return _write_epic04_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        source_plan=plan_result.plan,
+        detail_pages=detail_pages,
+        imageinfo_pages=fixtures["imageinfo"]["pages"],
+        snapshot_set_manifest_path=snapshot_set_manifest_path,
+        snapshot_manifest_paths=child_manifest_paths,
+        source_plan_path=plan_path,
+        diagnostics=diagnostics,
+    )
+
+
+def _run_epic04_live(options: PipelineOptions) -> PipelineResult:
+    if not options.allow_live_network:
+        raise PipelineError("Live EPIC-04 mode requires --allow-live-network")
+    profile = profile_by_id(EPIC_04_PROFILE_ID)
+    stage = options.stage
+    if stage not in {"discover", "fetch"}:
+        raise PipelineError("EPIC-04 live mode requires --stage discover or --stage fetch")
+
+    roots = RuntimeRoots.from_root(options.output_root)
+    snapshot_store = SnapshotStore(roots.snapshot_root)
+    discovered = _discover_epic04_source_set(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        snapshot_store=snapshot_store,
+    )
+    if stage == "discover":
+        return discovered
+
+    if options.source_plan_path is None or options.confirm_source_set_digest is None:
+        raise PipelineError("EPIC-04 live fetch requires --source-plan and --confirm-source-set-digest")
+    plan = load_source_plan(options.source_plan_path)
+    try:
+        validate_source_plan(plan, profile=profile, confirm_digest=options.confirm_source_set_digest)
+    except SkillSourceSetError as exc:
+        raise PipelineError(str(exc)) from exc
+    if plan["summary"]["sourceSetDigest"] != discovered.generated["summary"]["sourceSetDigest"]:
+        raise PipelineError("EPIC-04 source-set drift detected between discovery and fetch")
+
+    detail_seeds = list(plan["acceptedSeeds"])
+    if options.detail_limit is not None:
+        detail_seeds = detail_seeds[: options.detail_limit]
+    detail_titles = sorted({str(seed["requestedTitle"]) for seed in detail_seeds})
+    client = MediaWikiClient(limits=EPIC_04_LIMITS)
+    pages, page_diagnostics = client.query_title_revisions(detail_titles)
+    resolved, resolution_diagnostics = resolution_records_from_pages(
+        plan={**plan, "acceptedSeeds": detail_seeds},
+        pages=pages,
+    )
+    child_manifest_paths = list(discovered.generated["snapshotManifestPaths"])
+    detail_pages: list[dict[str, Any]] = []
+    for record in resolved:
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-04-live:skill:{record['pageId']}:{record['revisionId']}",
+            page_title=str(record["canonicalTitle"]),
+            page_id=record["pageId"],
+            revision_id=record["revisionId"],
+            source_revision_timestamp=str(record["sourceRevisionTimestamp"]),
+            retrieved_at=options.generated_at,
+        )
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=str(record["canonicalTitle"]),
+            page_id=record["pageId"],
+            revision_id=record["revisionId"],
+            timestamp=str(record["sourceRevisionTimestamp"]),
+            retrieved_at=options.generated_at,
+            content=str(record["content"]),
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        detail_pages.append({**record, "sourceReference": source_ref})
+
+    imageinfo_pages: list[dict[str, Any]] = []
+    icon_titles = _skill_icon_titles(detail_pages, profile.media_title_limit)
+    if icon_titles:
+        icon_client = MediaWikiClient(limits=EPIC_04_LIMITS)
+        imageinfo_pages, image_diagnostics = icon_client.query_imageinfo(icon_titles)
+        page_diagnostics.extend(image_diagnostics)
+        imageinfo_snapshot = _write_imageinfo_snapshot_for_epic04(
+            snapshot_store=snapshot_store,
+            pages=imageinfo_pages,
+            retrieved_at=options.generated_at,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, imageinfo_snapshot.manifest_path))
+
+    completion_state = "complete" if options.detail_limit is None else "partial"
+    snapshot_set_manifest_path = write_snapshot_set_manifest(
+        root=roots.root,
+        profile=profile,
+        source_plan=plan,
+        child_manifest_paths=child_manifest_paths,
+        snapshot_store=snapshot_store,
+        completion_state=completion_state,
+        generated_at=options.generated_at,
+        notes="EPIC-04 live snapshot set; partial sets cannot promote." if completion_state != "complete" else "Complete EPIC-04 live snapshot set selected for replay.",
+        detail_records=detail_pages,
+    )
+    if completion_state != "complete":
+        raise PipelineError("EPIC-04 live fetch produced a partial snapshot set")
+
+    return _write_epic04_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        source_plan=plan,
+        detail_pages=detail_pages,
+        imageinfo_pages=imageinfo_pages,
+        snapshot_set_manifest_path=snapshot_set_manifest_path,
+        snapshot_manifest_paths=child_manifest_paths,
+        source_plan_path=options.source_plan_path,
+        diagnostics=[],
+    )
+
+
+def _run_epic04_offline(options: PipelineOptions) -> PipelineResult:
+    if options.snapshot_set_path is None:
+        raise PipelineError("EPIC-04 offline replay requires --snapshot-set")
+    profile = profile_by_id(EPIC_04_PROFILE_ID)
+    roots = RuntimeRoots.from_root(options.output_root)
+    try:
+        replay = load_snapshot_set(
+            snapshot_set_manifest_path=options.snapshot_set_path,
+            snapshot_root=roots.snapshot_root,
+            profile=profile,
+        )
+    except SkillSourceSetError as exc:
+        raise PipelineError(str(exc)) from exc
+    source_plan = replay.manifest["sourcePlan"]
+    detail_meta = replay.manifest["detailRecords"]
+    loaded_by_title: dict[str, tuple[dict[str, Any], dict[str, Any]]] = {}
+    imageinfo_pages: list[dict[str, Any]] = []
+    for loaded in replay.loaded_snapshots:
+        payload = json.loads(loaded.payload.decode("utf-8"))
+        if not isinstance(payload, dict):
+            continue
+        title = str(payload.get("title"))
+        source_ref = loaded.manifest.get("sourceReference")
+        if title == EPIC_04_SKILL_ICON_IMAGEINFO_TITLE and isinstance(payload.get("content"), str):
+            icon_payload = json.loads(str(payload["content"]))
+            pages = icon_payload.get("pages") if isinstance(icon_payload, dict) else None
+            if isinstance(pages, list):
+                imageinfo_pages = [page for page in pages if isinstance(page, dict)]
+            continue
+        if isinstance(source_ref, dict):
+            loaded_by_title[title] = (payload, source_ref)
+
+    detail_pages: list[dict[str, Any]] = []
+    for meta in detail_meta:
+        loaded = loaded_by_title.get(str(meta["canonicalTitle"]))
+        if loaded is None:
+            raise PipelineError(f"EPIC-04 snapshot set missing detail payload for {meta['canonicalTitle']}")
+        payload, source_ref = loaded
+        detail_pages.append({**meta, "content": payload.get("content", ""), "sourceReference": source_ref})
+
+    return _write_epic04_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        source_plan=source_plan,
+        detail_pages=detail_pages,
+        imageinfo_pages=imageinfo_pages,
+        snapshot_set_manifest_path=options.snapshot_set_path,
+        snapshot_manifest_paths=[str(child["manifestPath"]) for child in replay.manifest["childSnapshots"]],
+        source_plan_path=None,
+        diagnostics=[],
+    )
+
+
+def _discover_epic04_source_set(
+    *,
+    roots: RuntimeRoots,
+    profile: Any,
+    generated_at: str,
+    snapshot_store: SnapshotStore,
+) -> PipelineResult:
+    client = MediaWikiClient(limits=EPIC_04_LIMITS)
+    index_pages, index_diagnostics = client.query_title_revisions([EPIC_04_SOURCE_INDEX_TITLE])
+    if not index_pages:
+        raise PipelineError("EPIC-04 source-set index could not be fetched")
+    index_page = index_pages[0]
+    index_revision = _first_revision(index_page)
+    index_content = _revision_content(index_revision)
+    index_source = _page_source_reference(
+        source_id=f"source:gww:epic-04-live:index:{index_page.get('pageid')}:{index_revision.get('revid')}",
+        page_title=str(index_page.get("title")),
+        page_id=index_page.get("pageid"),
+        revision_id=index_revision.get("revid"),
+        source_revision_timestamp=index_revision.get("timestamp"),
+        retrieved_at=generated_at,
+    )
+    index_snapshot = _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=index_source,
+        title=str(index_page.get("title")),
+        page_id=index_page.get("pageid"),
+        revision_id=index_revision.get("revid"),
+        timestamp=index_revision.get("timestamp"),
+        retrieved_at=generated_at,
+        content=index_content,
+    )
+    ranged_titles, ranged_diagnostics = ranged_titles_from_index(index_content)
+    range_pages, range_page_diagnostics = client.query_title_revisions(ranged_titles)
+    range_snapshots: list[dict[str, Any]] = []
+    child_manifest_paths = [_relative_to_root(roots.root, index_snapshot.manifest_path)]
+    for page in range_pages:
+        revision = _first_revision(page)
+        title = str(page.get("title"))
+        content = _revision_content(revision)
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-04-live:range:{page.get('pageid')}:{revision.get('revid')}",
+            page_title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision.get("revid"),
+            source_revision_timestamp=revision.get("timestamp"),
+            retrieved_at=generated_at,
+        )
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision.get("revid"),
+            timestamp=revision.get("timestamp"),
+            retrieved_at=generated_at,
+            content=content,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        range_snapshots.append({"title": title, "content": content, "sourceReference": source_ref})
+    plan_result = build_source_plan(
+        profile=profile,
+        generated_at=generated_at,
+        index_snapshot={"title": EPIC_04_SOURCE_INDEX_TITLE, "content": index_content, "sourceReference": index_source},
+        range_snapshots=range_snapshots,
+    )
+    plan_path = write_source_plan(roots.root, plan_result.plan)
+    diagnostics = [*index_diagnostics, *ranged_diagnostics, *range_page_diagnostics, *plan_result.diagnostics]
+    report = build_report(
+        artifact_path=_relative_to_root(roots.root, plan_path),
+        artifact_manifest_path=None,
+        generated_at=generated_at,
+        source_ids=[index_source["id"], *[snapshot["sourceReference"]["id"] for snapshot in range_snapshots]],
+        diagnostics=diagnostics,
+        notes="EPIC-04 discover-only source-plan QA report.",
+    )
+    qa_relative = Path("epic-04/skills.source-plan.qa.json")
+    qa_path, summary_path = write_report(root=roots.qa_root, relative_path=qa_relative, report=report)
+    return PipelineResult(
+        artifact_path=plan_path,
+        manifest_path=plan_path,
+        qa_report_path=qa_path,
+        qa_summary_path=summary_path,
+        record_count=int(plan_result.plan["summary"]["acceptedSeedCount"]),
+        finding_count=int(report["summary"]["findingCount"]),
+        exit_code=exit_code_for_report(report),
+        generated={**plan_result.plan, "snapshotManifestPaths": child_manifest_paths},
+        qa_report=report,
+    )
+
+
+def _write_epic04_catalog_result(
+    *,
+    roots: RuntimeRoots,
+    profile: Any,
+    generated_at: str,
+    source_plan: dict[str, Any],
+    detail_pages: list[dict[str, Any]],
+    imageinfo_pages: list[dict[str, Any]],
+    snapshot_set_manifest_path: Path,
+    snapshot_manifest_paths: list[str],
+    source_plan_path: Path | None,
+    diagnostics: list[Diagnostic],
+) -> PipelineResult:
+    dependency = load_epic03_dependency(roots.root)
+    snapshot_set_digest = digest_bytes(snapshot_set_manifest_path.read_bytes())
+    assembled = assemble_skill_catalog(
+        profile=profile,
+        generated_at=generated_at,
+        source_plan=source_plan,
+        detail_pages=detail_pages,
+        imageinfo_pages=imageinfo_pages,
+        dependency=dependency,
+        snapshot_set_digest=snapshot_set_digest,
+    )
+    all_diagnostics = [*diagnostics, *assembled.diagnostics]
+    catalog_artifact_digest = digest_bytes(canonical_json_bytes(assembled.catalog))
+    catalog_byte_count = len(canonical_json_bytes(assembled.catalog))
+    snapshot_set_manifest = json.loads(snapshot_set_manifest_path.read_text(encoding="utf-8"))
+    manifest_source_plan_path = source_plan_path or source_plan_output_path(
+        roots.root,
+        str(source_plan["summary"]["sourcePlanDigest"]),
+    )
+    if profile.catalog_byte_cap and catalog_byte_count > profile.catalog_byte_cap:
+        all_diagnostics.append(
+            Diagnostic(
+                code="SKILL_CATALOG_BYTE_CAP_EXCEEDED",
+                severity="critical",
+                message=f"Skill catalog size {catalog_byte_count} exceeded cap {profile.catalog_byte_cap}",
+                category="artifact-integrity-mismatch",
+                scope_kind="artifact",
+                artifact_path=(Path("data/generated") / profile.generated_relative_path).as_posix(),
+                disposition="non-waivable",
+            )
+        )
+    source_ids = sorted(
+        {
+            str(child["sourceId"])
+            for child in snapshot_set_manifest.get("childSnapshots", [])
+            if isinstance(child, dict) and child.get("sourceId") is not None
+        }
+    )
+    qa_relative = profile.qa_relative_path
+    unique_snapshot_manifest_paths = sorted(set(snapshot_manifest_paths))
+    artifact_path, manifest_path, manifest = write_generated_artifact(
+        root=roots.generated_root,
+        relative_path=profile.generated_relative_path,
+        value=assembled.catalog,
+        generated_at=generated_at,
+        input_snapshot_manifest_paths=unique_snapshot_manifest_paths,
+        source_ids=source_ids,
+        record_count=len(assembled.catalog["skills"]),
+        qa_report_path=(Path("data/qa") / qa_relative).as_posix(),
+        commit_decision="exact-path-allowlisted",
+        notes="Runtime-eligible EPIC-04 skills catalog; source plans, snapshot-set manifests, raw snapshots, and QA summaries remain ignored.",
+        extra_fields={
+            "sourcePlanPath": _relative_to_root(roots.root, manifest_source_plan_path),
+            "sourcePlanDigest": source_plan["summary"]["sourcePlanDigest"],
+            "sourceSetDigest": source_plan["summary"]["sourceSetDigest"],
+            "selectedSnapshotSetManifestPath": _relative_to_root(roots.root, snapshot_set_manifest_path),
+            "selectedSnapshotSetDigest": snapshot_set_digest,
+            "dependencyDigests": assembled.catalog["dependencyDigests"],
+            "manualReviews": _epic04_manual_reviews(
+                generated_at=generated_at,
+                source_plan=source_plan,
+                snapshot_set_digest=snapshot_set_digest,
+                artifact_digest=catalog_artifact_digest,
+            ),
+        },
+    )
+    report = build_report(
+        artifact_path=(Path("data/generated") / profile.generated_relative_path).as_posix(),
+        artifact_manifest_path=(Path("data/generated") / profile.generated_relative_path.with_suffix(".manifest.json")).as_posix(),
+        generated_at=generated_at,
+        source_ids=source_ids,
+        diagnostics=all_diagnostics,
+        notes="EPIC-04 skills catalog QA report covering source-set accounting, joins, costs, descriptions, progressions, splits, icons, provenance, determinism, and release gates.",
+    )
+    qa_byte_count = len(canonical_json_bytes(report))
+    if profile.qa_byte_cap and qa_byte_count > profile.qa_byte_cap:
+        all_diagnostics.append(
+            Diagnostic(
+                code="SKILL_QA_BYTE_CAP_EXCEEDED",
+                severity="critical",
+                message=f"Skill QA report size {qa_byte_count} exceeded cap {profile.qa_byte_cap}",
+                category="artifact-integrity-mismatch",
+                scope_kind="artifact",
+                artifact_path=(Path("data/qa") / qa_relative).as_posix(),
+                disposition="non-waivable",
+            )
+        )
+        report = build_report(
+            artifact_path=(Path("data/generated") / profile.generated_relative_path).as_posix(),
+            artifact_manifest_path=(Path("data/generated") / profile.generated_relative_path.with_suffix(".manifest.json")).as_posix(),
+            generated_at=generated_at,
+            source_ids=source_ids,
+            diagnostics=all_diagnostics,
+            notes="EPIC-04 skills catalog QA report covering source-set accounting, joins, costs, descriptions, progressions, splits, icons, provenance, determinism, and release gates.",
+        )
+    qa_path, summary_path = write_report(root=roots.qa_root, relative_path=qa_relative, report=report)
+    return PipelineResult(
+        artifact_path=artifact_path,
+        manifest_path=manifest_path,
+        qa_report_path=qa_path,
+        qa_summary_path=summary_path,
+        record_count=int(manifest["recordCount"]),
+        finding_count=int(report["summary"]["findingCount"]),
+        exit_code=exit_code_for_report(report),
+        generated=assembled.catalog,
+        qa_report=report,
+    )
+
+
 def _write_epic03_catalog_result(
     *,
     roots: RuntimeRoots,
@@ -675,6 +1243,30 @@ def _load_fixtures(fixture_root: Path) -> dict[str, Any]:
         raise PipelineError(f"Fixture input could not be read: {exc}") from exc
 
 
+def _load_epic04_fixture_pages(fixture_root: Path) -> dict[str, Any]:
+    base = fixture_root / "skills"
+    try:
+        index = (base / "index.wiki").read_text(encoding="utf-8")
+        ranges = {
+            "Guild Wars Wiki:Game integration/Skills/1-10": (base / "skills-1-10.wiki").read_text(
+                encoding="utf-8"
+            )
+        }
+        details = {
+            "Healing Signet": (base / "healing-signet.wiki").read_text(encoding="utf-8"),
+            "Flare": (base / "flare.wiki").read_text(encoding="utf-8"),
+            "\"Save Yourselves!\"": (base / "save-yourselves.wiki").read_text(encoding="utf-8"),
+            "Training Beacon (PvE)": (base / "training-beacon-pve.wiki").read_text(encoding="utf-8"),
+            "Training Beacon (PvP)": (base / "training-beacon-pvp.wiki").read_text(encoding="utf-8"),
+        }
+        imageinfo = json.loads((base / "imageinfo.json").read_text(encoding="utf-8"))
+        return {"index": index, "ranges": ranges, "details": details, "imageinfo": imageinfo}
+    except OSError as exc:
+        raise PipelineError(f"EPIC-04 fixture input could not be read: {exc}") from exc
+    except json.JSONDecodeError as exc:
+        raise PipelineError(f"EPIC-04 fixture imageinfo JSON could not be parsed: {exc}") from exc
+
+
 def _load_epic03_fixture_pages(fixture_root: Path) -> dict[str, str]:
     base = fixture_root / "professions-attributes"
     try:
@@ -734,6 +1326,35 @@ def _write_imageinfo_snapshot(
     )
 
 
+def _write_imageinfo_snapshot_for_epic04(
+    *,
+    snapshot_store: SnapshotStore,
+    pages: list[dict[str, Any]],
+    retrieved_at: str,
+) -> SnapshotWriteResult:
+    payload = {"kind": "mediawiki-imageinfo", "title": EPIC_04_SKILL_ICON_IMAGEINFO_TITLE, "pages": pages}
+    payload_digest = digest_bytes(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8"))
+    source_ref = _page_source_reference(
+        source_id=f"source:gww:epic-04-skill-icons:{payload_digest[:12]}",
+        page_title=EPIC_04_SKILL_ICON_IMAGEINFO_TITLE,
+        page_id=f"imageinfo:{payload_digest[:12]}",
+        revision_id=payload_digest,
+        source_revision_timestamp=_latest_imageinfo_timestamp(pages) or retrieved_at,
+        retrieved_at=retrieved_at,
+        material_class="media-metadata",
+    )
+    return _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=source_ref,
+        title=EPIC_04_SKILL_ICON_IMAGEINFO_TITLE,
+        page_id=f"imageinfo:{payload_digest[:12]}",
+        revision_id=payload_digest,
+        timestamp=_latest_imageinfo_timestamp(pages) or retrieved_at,
+        retrieved_at=retrieved_at,
+        content=json.dumps(payload, ensure_ascii=False, sort_keys=True),
+    )
+
+
 def _profession_icon_titles(profession_pages: dict[str, str]) -> list[str]:
     titles: list[str] = []
     for wikitext in profession_pages.values():
@@ -741,6 +1362,125 @@ def _profession_icon_titles(profession_pages: dict[str, str]) -> list[str]:
         if match is not None:
             titles.append(f"File:{match.group(1).strip()}")
     return sorted(set(titles))
+
+
+def _skill_icon_titles(detail_pages: list[dict[str, Any]], limit: int) -> list[str]:
+    titles: list[str] = []
+    for detail in detail_pages:
+        if len(titles) >= limit:
+            break
+        explicit = _skill_infobox_image(str(detail.get("content", "")))
+        for candidate in candidate_file_titles(str(detail["canonicalTitle"]), explicit):
+            if candidate not in titles:
+                titles.append(candidate)
+            if len(titles) >= limit:
+                break
+    return titles
+
+
+def _skill_infobox_image(wikitext: str) -> str | None:
+    match = re.search(r"^\s*\|\s*image\s*=\s*([^\n]+)", wikitext, flags=re.IGNORECASE | re.MULTILINE)
+    if match is None:
+        return None
+    value = match.group(1).strip()
+    return value or None
+
+
+def _review_epic04_resolution_diagnostics(diagnostics: list[Diagnostic]) -> list[Diagnostic]:
+    reviewed: list[Diagnostic] = []
+    for diagnostic in diagnostics:
+        if diagnostic.code in {"API_MISSING_PAGE", "SKILL_DETAIL_PAGE_MISSING"}:
+            reviewed.append(
+                Diagnostic(
+                    code=diagnostic.code,
+                    severity=diagnostic.severity,
+                    message=diagnostic.message,
+                    category=diagnostic.category,
+                    scope_kind=diagnostic.scope_kind,
+                    artifact_path=diagnostic.artifact_path,
+                    record_id=diagnostic.record_id,
+                    field_path=diagnostic.field_path,
+                    source_ids=diagnostic.source_ids,
+                    evidence=diagnostic.evidence,
+                    disposition="excluded",
+                )
+            )
+        else:
+            reviewed.append(diagnostic)
+    return reviewed
+
+
+def _epic04_manual_reviews(
+    *,
+    generated_at: str,
+    source_plan: dict[str, Any],
+    snapshot_set_digest: str,
+    artifact_digest: str,
+) -> list[dict[str, Any]]:
+    return [
+        {
+            "id": "review:epic-04-source-set:2026-09-01",
+            "reviewer": "Build Wars sprint executor",
+            "reviewedAt": generated_at,
+            "scope": "EPIC-04 source-set digest and ranged-page amendment",
+            "decision": "approved",
+            "rationale": "The missing /Skills/0 page is retained only as blocker history; the approved live index and ranged pages define the source-set seed authority.",
+            "evidence": [
+                {
+                    "kind": "source",
+                    "reference": str(source_plan["summary"]["sourceSetDigest"]),
+                    "notes": "Digest of source-set index, ranged pages, and accepted seeds.",
+                }
+            ],
+            "relatedFindingIds": [],
+            "followUpTicketIds": [],
+            "expiresAt": None,
+            "reReviewTrigger": "Any source-set index, ranged page revision, accepted seed, or source-plan digest change.",
+        },
+        {
+            "id": "review:epic-04-description-structured-only:2026-09-01",
+            "reviewer": "Build Wars sprint executor",
+            "reviewedAt": generated_at,
+            "scope": "EPIC-04 runtime description policy",
+            "decision": "approved",
+            "rationale": "Source-authored descriptions are not copied into runtime text in schema v1; generated search text uses names and structured factual fields only.",
+            "evidence": [
+                {
+                    "kind": "artifact",
+                    "reference": str(source_plan["summary"]["sourcePlanDigest"]),
+                    "notes": "Description review is invalidated by source-plan, parser, tokenizer, or description-digest changes.",
+                }
+            ],
+            "relatedFindingIds": [],
+            "followUpTicketIds": [],
+            "expiresAt": None,
+            "reReviewTrigger": "Any source revision, normalized description digest, tokenizer, parser, or projection change.",
+        },
+        {
+            "id": "review:epic-04-first-baseline:2026-09-01",
+            "reviewer": "Build Wars sprint executor",
+            "reviewedAt": generated_at,
+            "scope": "EPIC-04 first promoted skills catalog baseline",
+            "decision": "approved",
+            "rationale": "This promotion records the selected bounded snapshot set, EPIC-03 dependency digests, structured-only description policy, generated artifact, and QA state as the first baseline.",
+            "evidence": [
+                {
+                    "kind": "artifact",
+                    "reference": snapshot_set_digest,
+                    "notes": "Selected complete snapshot-set manifest digest.",
+                },
+                {
+                    "kind": "artifact",
+                    "reference": artifact_digest,
+                    "notes": "Generated artifact digest is owned by the adjacent manifest.",
+                },
+            ],
+            "relatedFindingIds": [],
+            "followUpTicketIds": [],
+            "expiresAt": None,
+            "reReviewTrigger": "Any semantic projection, schema, source revision, dependency digest, QA gate, or promotion path change.",
+        },
+    ]
 
 
 def _latest_imageinfo_timestamp(pages: list[dict[str, Any]]) -> str | None:

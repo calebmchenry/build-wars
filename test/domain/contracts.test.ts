@@ -19,6 +19,7 @@ import {
   type SourceReference,
   templateAttributeId,
   templateProfessionId,
+  templateSkillId,
   type Weapon,
   type WeaponModifier
 } from "../../src/domain";
@@ -106,15 +107,19 @@ describe("domain contracts", () => {
     const encoded = JSON.stringify({
       professionNone: templateProfessionId(0),
       attributeZero: templateAttributeId(0),
+      knownSkill: templateSkillId(1),
       unknownProfession: templateProfessionId(9876),
-      unknownAttribute: templateAttributeId(9876)
+      unknownAttribute: templateAttributeId(9876),
+      unknownSkill: templateSkillId(987654321)
     });
 
     expect(JSON.parse(encoded)).toEqual({
       professionNone: 0,
       attributeZero: 0,
+      knownSkill: 1,
       unknownProfession: 9876,
-      unknownAttribute: 9876
+      unknownAttribute: 9876,
+      unknownSkill: 987654321
     });
   });
 
