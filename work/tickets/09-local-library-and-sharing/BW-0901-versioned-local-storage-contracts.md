@@ -2,10 +2,12 @@
 id: BW-0901
 title: Versioned Local Storage Contracts
 epic: EPIC-09
-status: ready
+status: done
 priority: critical
 depends_on:
   - EPIC-08
+planned_sprint: SPRINT-010
+completed_sprint: SPRINT-010
 created: 2026-09-02
 updated: 2026-09-02
 ---

@@ -2,10 +2,12 @@
 id: EPIC-09
 title: Local Library and Sharing
 track: functional
-status: ready
+status: done
 priority: medium
 depends_on:
   - EPIC-08
+planned_sprint: SPRINT-010
+completed_sprint: SPRINT-010
 tickets:
   - BW-0901
   - BW-0902

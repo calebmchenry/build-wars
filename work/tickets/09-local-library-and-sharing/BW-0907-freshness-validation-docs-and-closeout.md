@@ -2,7 +2,7 @@
 id: BW-0907
 title: Freshness Validation Docs and Closeout
 epic: EPIC-09
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-0902
@@ -10,6 +10,8 @@ depends_on:
   - BW-0904
   - BW-0905
   - BW-0906
+planned_sprint: SPRINT-010
+completed_sprint: SPRINT-010
 created: 2026-09-02
 updated: 2026-09-02
 ---

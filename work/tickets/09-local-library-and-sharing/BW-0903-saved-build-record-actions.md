@@ -2,11 +2,13 @@
 id: BW-0903
 title: Saved Build Record Actions
 epic: EPIC-09
-status: ready
+status: done
 priority: critical
 depends_on:
   - BW-0901
   - BW-0902
+planned_sprint: SPRINT-010
+completed_sprint: SPRINT-010
 created: 2026-09-02
 updated: 2026-09-02
 ---

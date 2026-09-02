@@ -1,8 +1,9 @@
 # Build Wars
 
 Build Wars is a local-first TypeScript web app for Guild Wars Reforged build tooling. The current
-app includes an in-memory single-character build editor, framework-neutral domain contracts,
-template import/export compatibility, source policy, and offline-first promoted catalog data.
+app includes a durable browser-local single-character build editor, local saved-build library,
+template-code sharing, backup/restore, framework-neutral domain contracts, template import/export
+compatibility, source policy, and offline-first promoted catalog data.
 
 ## Prerequisites
 
@@ -66,20 +67,22 @@ Included now:
   `src/template-compatibility`, backed by a pinned `@buildwars/gw-templates@1.1.1` adapter.
 - Pure domain rule-engine APIs for authored builds: `validateBuild` and
   `calculateEffectiveAttributeRank`.
-- A browser-based core build editor under `src/app` for one ephemeral single-character build:
+- A browser-based core build editor under `src/app` for one durable single-character workspace:
   profession and mode controls, PvE attribute budgets, deterministic skill search/filter views,
   an eight-slot skill bar with pointer and keyboard operations, tooltips, validation presentation,
   and skill-template import/export.
+- Local library and sharing workflows under `src/app`: one `localStorage` key (`build-wars:v1`),
+  working-draft autosave, explicit saved records, search/filter/sort, tags, favorites, notes,
+  template-code-first share URLs capped at 1,800 characters, and inert JSON whole-library
+  backup/restore.
 
 Deferred to later epics:
 
-- Local template library persistence and sharing URLs
 - Full Guild Wars Wiki or PvX content catalog ingestion
 - Acquisition metadata, guide prose, vendor/drop/quest instructions, and copied source-authored
   skill descriptions in schema v1
 - paw-ned2/team template codec support; SPRINT-006 records a Node-floor dependency failure and
   defers ownership to EPIC-17
-- Local storage and sharing
 - Compact runtime catalog derivation, dynamic catalog loading, search workers, virtualization, and
   remote icon fetching
 - Title ownership, title-rank controls, allegiance selection, rune/headgear/equipment rank effects,
@@ -158,3 +161,22 @@ boundary, shows attribution before source-derived facts, preserves unresolved im
 in an app raw overlay, and gates canonical skill-template export on representation, validation, and
 codec fidelity proof. See [Core build editor](compendium/core-build-editor.md) for the interaction
 model, export policy, current performance observation, and deferred scope.
+
+## Local Library And Sharing
+
+The local workspace persists to browser `localStorage` under exactly one app-owned key:
+`build-wars:v1`. The versioned envelope stores the working draft separately from explicit saved
+records, preserving `Build`, PvE budget controls, raw template overlay/source facts, unresolved
+import IDs, template source/name facts, and saved-with catalog/rule-engine versions. UI-only state is
+not persisted.
+
+Saved records use opaque local IDs, so duplicate names and duplicate build contents are allowed.
+The library panel supports save new, update, save as new, duplicate, delete confirmation, favorite,
+rename, tags, notes, load, search, filters, sorting, share, backup, and restore without accounts,
+backend sync, IndexedDB, service workers, analytics, or remote media fetches.
+
+Single-build sharing uses the existing skill-template codec through hash fragments:
+`#bw=1&code=<bare-skill-template-code>&mode=<optional-mode>`. The full URL is capped at 1,800
+characters and excludes library metadata, catalog snapshots, equipment, party, and guide data.
+Whole-library backup/restore uses inert JSON with previewed merge/replace behavior and skipped
+record reports. See [Local library and sharing](compendium/local-library-and-sharing.md).

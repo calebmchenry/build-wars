@@ -20,9 +20,10 @@ to image, CSS, preload, canvas, or fetch paths.
 
 ## Editor And Raw Template State
 
-`src/app/editor-state.ts` owns the ephemeral editor reducer. Refresh may discard state. The reducer
-keeps a semantic domain `Build` beside an app raw-template overlay for imported facts that may not
-resolve to catalog IDs.
+`src/app/editor-state.ts` owns the editor reducer for the active single-character draft. EPIC-09 now
+persists only the durable projection of that draft through the app workspace layer; transient UI
+state remains ephemeral. The reducer keeps a semantic domain `Build` beside an app raw-template
+overlay for imported facts that may not resolve to catalog IDs.
 
 Overlay entries are field-addressed for professions, attribute rows, and skill-bar slots. Replacing
 or clearing a targeted field clears only that overlay entry. Slot move and swap operations move the
@@ -95,7 +96,8 @@ later evidence-backed ticket changes the architecture.
 
 ## Deferred Scope
 
-EPIC-09 owns local library persistence, storage migrations, tags, favorites, backup/restore, share
-URLs, and saved template workflows. EPIC-15 owns title rank state, title ownership, and allegiance
-configuration. Later epics own equipment, party/hero builds, guide authoring, recommendations,
-remote icon loading, analytics, auth, deployment, and PWA behavior.
+Local library persistence, storage migrations, tags, favorites, backup/restore, share URLs, and
+saved template workflows are documented in [Local library and sharing](local-library-and-sharing.md).
+EPIC-15 owns title rank state, title ownership, and allegiance configuration. Later epics own
+equipment, party/hero builds, guide authoring, recommendations, remote icon loading, analytics,
+auth, deployment, and PWA behavior.

@@ -9,7 +9,8 @@ import { createBlankEditorState, editorReducer } from "./editor-state";
 import {
   evaluateTemplateExport,
   importSkillTemplateToEditor,
-  projectEditorToSkillTemplate
+  projectEditorToSkillTemplate,
+  selectShareTemplateExport
 } from "./template-workflow";
 
 const catalogs = requireReadyCatalogs();
@@ -75,5 +76,42 @@ describe("template workflow", () => {
     const projection = projectEditorToSkillTemplate(blocked, catalogs, { allowRawOverlay: false });
     expect(projection.document).toBeNull();
     expect(projection.diagnostics[0]?.code).toBe("missing-skill-template-id");
+  });
+
+  it("selects share output from exact source first, then proven canonical output", () => {
+    const imported = importSkillTemplateToEditor(
+      SKILL_TEMPLATE_PACKAGE_EXAMPLE,
+      createBlankEditorState(),
+      catalogs
+    );
+    if (!imported.ok) {
+      throw new Error(imported.error.message);
+    }
+
+    const exact = selectShareTemplateExport(
+      selectValidationView(imported.state, catalogs).exportPolicy
+    );
+    const canonical = selectShareTemplateExport(
+      selectValidationView(playableEditorFixture(), catalogs).exportPolicy
+    );
+    const blocked = selectShareTemplateExport(
+      selectValidationView(
+        editorReducer(playableEditorFixture(), {
+          type: "place-skill",
+          slotIndex: 0,
+          skillId: catalogId<"Skill">(-200001)
+        }),
+        catalogs
+      ).exportPolicy
+    );
+
+    expect(exact).toMatchObject({
+      ok: true,
+      source: "exact-source",
+      bareCode: SKILL_TEMPLATE_PACKAGE_EXAMPLE
+    });
+    expect(canonical.ok ? canonical.source : null).toBe("canonical");
+    expect(blocked.ok).toBe(false);
+    expect(blocked.ok ? [] : blocked.blockedReasons.length).toBeGreaterThan(0);
   });
 });

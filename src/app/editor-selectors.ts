@@ -26,6 +26,7 @@ import type {
   ResourceFilterKind,
   ResourceFilterValue
 } from "./editor-state";
+import type { PersistedCatalogFacts } from "./persistence-schema";
 import { evaluateTemplateExport, type ExportWorkflowView } from "./template-workflow";
 
 export interface AttributeBudgetView {
@@ -61,6 +62,13 @@ export interface ValidationView {
   readonly result: ValidationResult;
   readonly appDiagnostics: readonly AppDiagnostic[];
   readonly exportPolicy: ExportWorkflowView;
+}
+
+export type CatalogFreshnessStatus = "fresh" | "stale" | "unknown";
+
+export interface CatalogFreshnessView {
+  readonly status: CatalogFreshnessStatus;
+  readonly messages: readonly string[];
 }
 
 export interface SkillBrowserGroupView {
@@ -163,6 +171,37 @@ export function selectAttributeBudgetPolicy(state: EditorState): AttributeBudget
     level: state.pveBudget.level,
     questBonus: state.pveBudget.questBonus
   };
+}
+
+export function selectCatalogFreshnessView(
+  savedWith: PersistedCatalogFacts,
+  currentFacts: PersistedCatalogFacts
+): CatalogFreshnessView {
+  const messages: string[] = [];
+  compareCatalogFact(
+    messages,
+    "profession/attribute catalog",
+    savedWith.professionAttributeCatalogVersion,
+    currentFacts.professionAttributeCatalogVersion
+  );
+  compareCatalogFact(
+    messages,
+    "skill catalog",
+    savedWith.skillCatalogVersion,
+    currentFacts.skillCatalogVersion
+  );
+  compareCatalogFact(
+    messages,
+    "rule engine",
+    savedWith.ruleEngineVersion,
+    currentFacts.ruleEngineVersion
+  );
+  if (messages.some((message) => message.includes("unknown"))) {
+    return { status: "unknown", messages };
+  }
+  return messages.length === 0
+    ? { status: "fresh", messages: ["Catalog facts match current data."] }
+    : { status: "stale", messages };
 }
 
 export function selectAttributeBudgetView(
@@ -510,6 +549,21 @@ function selectedProfessionIds(state: EditorState): ReadonlySet<number> {
     selected.add(Number(state.build.secondaryProfessionId));
   }
   return selected;
+}
+
+function compareCatalogFact(
+  messages: string[],
+  label: string,
+  saved: string | null,
+  current: string | null
+): void {
+  if (saved === null || current === null) {
+    messages.push(`${label} freshness is unknown.`);
+    return;
+  }
+  if (saved !== current) {
+    messages.push(`${label} changed from ${saved} to ${current}.`);
+  }
 }
 
 function professionNameForAttribute(

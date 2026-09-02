@@ -2,10 +2,12 @@
 id: BW-0904
 title: Library Panel Search Filters and Sorting
 epic: EPIC-09
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-0903
+planned_sprint: SPRINT-010
+completed_sprint: SPRINT-010
 created: 2026-09-02
 updated: 2026-09-02
 ---

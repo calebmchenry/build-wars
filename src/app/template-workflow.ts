@@ -82,6 +82,19 @@ export interface ExportWorkflowView {
   readonly projectionDiagnostics: readonly TemplateProjectionDiagnostic[];
 }
 
+export type ShareTemplateExportResult =
+  | {
+      readonly ok: true;
+      readonly source: "exact-source" | "canonical";
+      readonly bareCode: string;
+      readonly templateText: string;
+      readonly fidelity: string;
+    }
+  | {
+      readonly ok: false;
+      readonly blockedReasons: readonly string[];
+    };
+
 export function importSkillTemplateToEditor(
   input: string,
   currentState: EditorState,
@@ -128,6 +141,35 @@ export function evaluateTemplateExport(
     exactSource: exact,
     canonical,
     projectionDiagnostics: canonicalProjection.diagnostics
+  };
+}
+
+export function selectShareTemplateExport(policy: ExportWorkflowView): ShareTemplateExportResult {
+  if (policy.exactSource.available && policy.exactSource.code !== null) {
+    return {
+      ok: true,
+      source: "exact-source",
+      bareCode: policy.exactSource.code.bareCode,
+      templateText: policy.exactSource.code.code,
+      fidelity: policy.exactSource.code.fidelity
+    };
+  }
+  if (policy.canonical.available && policy.canonical.code !== null) {
+    return {
+      ok: true,
+      source: "canonical",
+      bareCode: policy.canonical.code.bareCode,
+      templateText: policy.canonical.code.code,
+      fidelity: policy.canonical.code.fidelity
+    };
+  }
+  return {
+    ok: false,
+    blockedReasons: [
+      ...policy.exactSource.blockedReasons,
+      ...policy.canonical.blockedReasons,
+      ...policy.projectionDiagnostics.map((diagnostic) => diagnostic.message)
+    ]
   };
 }
 

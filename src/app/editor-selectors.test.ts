@@ -4,6 +4,7 @@ import { catalogId } from "../domain";
 import { requireReadyCatalogs } from "./catalogs";
 import { playableEditorFixture } from "./editor-fixtures";
 import {
+  selectCatalogFreshnessView,
   selectAttributeBudgetPolicy,
   selectAttributeBudgetView,
   selectAttributeRows,
@@ -128,5 +129,34 @@ describe("editor selectors", () => {
     expect(view.kind === "known" ? view.assumptions.join(" ") : "").toContain(
       "maximum title rank 12"
     );
+  });
+
+  it("separates catalog freshness from validity and resolution checks", () => {
+    const current = {
+      buildCatalogVersion: null,
+      professionAttributeCatalogVersion: "pa-current",
+      skillCatalogVersion: "skills-current",
+      ruleEngineVersion: "rule-engine:v1"
+    };
+
+    expect(selectCatalogFreshnessView(current, current).status).toBe("fresh");
+    expect(
+      selectCatalogFreshnessView(
+        {
+          ...current,
+          skillCatalogVersion: "skills-old"
+        },
+        current
+      ).status
+    ).toBe("stale");
+    expect(
+      selectCatalogFreshnessView(
+        {
+          ...current,
+          skillCatalogVersion: null
+        },
+        current
+      ).status
+    ).toBe("unknown");
   });
 });

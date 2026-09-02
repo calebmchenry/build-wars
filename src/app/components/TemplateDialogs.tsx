@@ -9,12 +9,14 @@ export function TemplateControls({
   state,
   catalogs,
   validation,
-  dispatch
+  dispatch,
+  requestDraftReplacement
 }: {
   readonly state: EditorState;
   readonly catalogs: AppCatalogViews;
   readonly validation: ValidationView;
   readonly dispatch: Dispatch<EditorAction>;
+  readonly requestDraftReplacement?: () => "cancel" | "discard";
 }) {
   return (
     <section className="editor-panel template-panel" aria-labelledby="template-title">
@@ -39,7 +41,12 @@ export function TemplateControls({
             ? "Canonical export available."
             : "Canonical export blocked until validation and projection gates pass."}
       </p>
-      <ImportDialog state={state} catalogs={catalogs} dispatch={dispatch} />
+      <ImportDialog
+        state={state}
+        catalogs={catalogs}
+        dispatch={dispatch}
+        requestDraftReplacement={requestDraftReplacement}
+      />
       <ExportDialog state={state} validation={validation} dispatch={dispatch} />
     </section>
   );
@@ -48,11 +55,13 @@ export function TemplateControls({
 function ImportDialog({
   state,
   catalogs,
-  dispatch
+  dispatch,
+  requestDraftReplacement
 }: {
   readonly state: EditorState;
   readonly catalogs: AppCatalogViews;
   readonly dispatch: Dispatch<EditorAction>;
+  readonly requestDraftReplacement: (() => "cancel" | "discard") | undefined;
 }) {
   if (state.dialogs.open !== "import") {
     return null;
@@ -80,6 +89,9 @@ function ImportDialog({
               catalogs
             );
             if (imported.ok) {
+              if ((requestDraftReplacement?.() ?? "discard") === "cancel") {
+                return;
+              }
               dispatch({
                 type: "replace-state",
                 state: { ...imported.state, dialogs: { ...imported.state.dialogs, open: null } }
