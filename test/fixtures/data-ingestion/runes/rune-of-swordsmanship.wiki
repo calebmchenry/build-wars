@@ -1,0 +1,16 @@
+{{Item infobox
+| image = [[Image:Rune Warrior Minor.png]] [[Image:Rune Warrior Major.png]] [[Image:Rune Warrior Sup.png]]
+| name = Rune of Swordsmanship
+| type = [[Rune]]
+| bonus = + [[Swordsmanship]]<br>(- [[Health]])
+| value = 25 {{gold}}<br>50 {{gold}}<br>100 {{gold}}
+| profession = Warrior
+| stackable = n
+}}
+Runes of Swordsmanship provide fixture attribute bonuses for Swordsmanship.
+
+*A Warrior Rune of Minor Swordsmanship provides +1 Swordsmanship.
+*A Warrior Rune of Major Swordsmanship provides +2 Swordsmanship and -35 health.
+*A Warrior Rune of Superior Swordsmanship provides +3 Swordsmanship and -75 health.
+
+The Swordsmanship bonus is non-stacking, but the health penalty stacks.

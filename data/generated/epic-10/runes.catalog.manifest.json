@@ -1,0 +1,227 @@
+{
+  "artifactPath": "epic-10/runes.catalog.json",
+  "commitDecision": "exact-path-allowlisted",
+  "dependencyDigests": [
+    {
+      "artifactDigest": "7a397140d346dbfd1e28e1076132fa209628678682fa2c21322ac91f1807f9fa",
+      "catalogVersion": "pa-e5d0d35ad8f30b4c",
+      "id": "epic-03-professions-attributes",
+      "manifestDigest": "e449ea6b13a165108858be039ca6feabaf45dd592cf5e54cd9fee7c125c75289",
+      "qaGate": "pass",
+      "sectionDigests": [
+        {
+          "digest": "06b08691f79e1a77feff629f758a876dd5fae0e37db27ce45dac2215cdefdfc8",
+          "section": "templateCrosswalk"
+        },
+        {
+          "digest": "88e3453893080531b42941c6e311c784fa06e8417ebb1b1b75f6b9c448b16cde",
+          "section": "professions"
+        },
+        {
+          "digest": "74823681580f46a48394defdcf92a622cdddccae67003043497df65242999a74",
+          "section": "attributes"
+        },
+        {
+          "digest": "87d6fd2069ad7f824132c7e43068348c5edcb2de36e8ace8c7a8582ff1972253",
+          "section": "attributePointRules"
+        },
+        {
+          "digest": "36e5b6f3fae709ba68b27d5a735bb5ccd0d605638fd8ae584d080033f72b3ea2",
+          "section": "remoteMedia"
+        }
+      ]
+    }
+  ],
+  "digest": {
+    "algorithm": "sha256",
+    "notes": null,
+    "value": "805d3468abd89a8b6e8211478fb12c993af3ce89080543450b3e34278161470b"
+  },
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "inputSnapshotManifestPaths": [
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2640203-cfece9/rune-of-attunement-87e9d1388c-e67a34a19a7c85e1.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2648026-6eb5c2/rune-of-vitae-770251a2bb-f38d37f21ac655a9.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2684875-f93dda/rune-f55862c603-dd511842f638b048.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692049-6644b2/rune-of-healing-prayers-17ba059dc8-6d7d814e5635c4c8.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692064-fc2bf3/rune-of-vigor-268b773dd5-2e6637ce9d221c2e.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692081-080494/rune-of-absorption-fdd1844655-f297c2c1817df43a.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692082-d42dc7/rune-of-air-magic-b3c78a26fc-e77e0c8a73f9b86b.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692083-a0fe39/rune-of-axe-mastery-f084a18abd-e72144d0f0976999.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692084-12b8e2/rune-of-beast-mastery-4d6c2fdd92-2b188a6431aa8929.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692085-8f3669/rune-of-blood-magic-2e09febf46-4e0566b14072c053.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692086-a7d915/rune-of-channeling-magic-03baf61234-092a6c7a2daa0f1b.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692087-621c90/rune-of-command-b4d39b113c-509e0b372a9e0d15.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692088-dbfdb5/rune-of-communing-b9d3ab2417-ab4f4ca4cc343c78.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692089-f8859b/rune-of-critical-strikes-97b40e2e27-12aa60f5f65054c2.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692090-cb4312/rune-of-curses-64ff17d7ac-258ed4d76e57fbc0.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692091-d935d0/rune-of-dagger-mastery-26a37cc4f1-55635b70eb2b518b.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692092-6c75e3/rune-of-deadly-arts-56d25397a4-ae82b31073ec7bf5.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692093-bf0cc2/rune-of-death-magic-3f855bf573-8984ff453b7ba00c.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692094-5fd176/rune-of-divine-favor-9191349c38-1d6c08c567eeec17.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692096-3899c2/rune-of-domination-magic-8c3831c4eb-aab005cac3a3ba75.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692097-0975eb/rune-of-earth-magic-40361007d2-b368117b72860748.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692098-5f306a/rune-of-earth-prayers-d3665afac4-46ebbf37dfe8d04a.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692099-c51525/rune-of-energy-storage-58a5db21ed-4d900b9e5d4fe3aa.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692100-195584/rune-of-expertise-0bcb0acd97-c0d81a16f37ccdf5.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692101-7ec2ae/rune-of-fast-casting-362bbe032c-8663ec1969840681.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692102-163a78/rune-of-fire-magic-7bf6fe2f51-a5ac324ab47d21da.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692103-d8190b/rune-of-hammer-mastery-73ab4c3d33-4f9cf21d98434f99.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692104-f27b16/rune-of-illusion-magic-b7adba5d86-c01bb0ba81e6c706.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692105-d0c060/rune-of-inspiration-magic-090b834e7f-d5aa436413c41bec.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692106-118a9b/rune-of-leadership-c7ccc2bde3-2a185ed8f0bac9be.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692107-bb720d/rune-of-marksmanship-cde2405794-0cfd619de96c1906.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692108-3cd42e/rune-of-motivation-ab36842cbe-7858dfde33b8b703.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692109-028810/rune-of-mysticism-060b804323-fd656ef915bd8a26.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692110-a85418/rune-of-protection-prayers-4b8b152e29-10d2d5dfdde92017.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692111-367895/rune-of-restoration-magic-531bde96bc-149bfd8606bf09c9.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692112-dd5953/rune-of-scythe-mastery-784bcf25e7-b3bd53b7db4989a6.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692113-884914/rune-of-shadow-arts-3518c567de-f0bbc838c7ce0b5d.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692114-e4aa58/rune-of-smiting-prayers-6e0eca951a-b663ceb779f41be4.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692115-457c4d/rune-of-soul-reaping-477afd1f54-9bc78903708b125e.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692116-a53a09/rune-of-spawning-power-8523dbb9a2-8719ae3793e290a8.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692117-46365b/rune-of-spear-mastery-f9516f4dcf-2607f199b25ccec3.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692118-81fa90/rune-of-strength-b361fea061-b28d2b474c7cb2a4.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692120-5d0f3a/rune-of-tactics-65b5e97171-1838f05d739f2ecf.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692121-65d252/rune-of-water-magic-03cd998865-b765b447a0b5ebde.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692122-8306d7/rune-of-wilderness-survival-e162ca6ee1-1dd8721d62390aa7.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2692123-8a71d6/rune-of-wind-prayers-01c6e9b5c1-b93e1ac467b06c02.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2699196-a214d7/rune-of-restoration-fd854693ad-1a1ad453aa60ad94.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2702808-d1ea79/rune-of-clarity-1d0be61f63-519d5b53b1472d7f.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2702902-599b51/rune-of-purity-d2a93b3996-6c1209f027de3956.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2702903-a7e9c6/rune-of-recovery-9a43872a9d-4289e8087c195a2b.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2712710-922067/attribute-bonus-65e26d900f-eea44cb9a7151112.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2728058-ce9a3b/equipment-template-format-5e1bfe722e-f954cb20a6edd6b3.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2729304-2c1f97/rune-of-swordsmanship-e9c47a1130-e97010334bdcf07e.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-f1fe01997b9cba42346218bd3bc2db0f940f6680a16e41bc04807572b526-1af9d5/epic-10-rune-icon-imageinfo-f58ad1c947-121ad1897ee21234.manifest.json"
+  ],
+  "manualReviews": [
+    {
+      "decision": "approved",
+      "evidence": [
+        {
+          "kind": "artifact",
+          "notes": "Digest of seed source pages, accepted modifier rows, detail titles, and compact dispositions.",
+          "reference": "904d3d4133966e6104fdd460d549982fec27375f4b96fa20a5340d0f5493d504"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "review:epic-10-source-set:2026-09-02",
+      "rationale": "The finite hybrid source authority uses equipment-template modifier IDs for identity and the Rune/Attribute bonus pages for inventory, stacking, and headgear evidence.",
+      "reReviewTrigger": "Any source revision, source-set digest, accepted modifier ID, or source-plan digest change.",
+      "relatedFindingIds": [],
+      "reviewedAt": "2026-09-01T00:00:00Z",
+      "reviewer": "Build Wars sprint executor",
+      "scope": "EPIC-10 source authority, source-plan digest, and armor-rune inventory accounting"
+    },
+    {
+      "decision": "approved",
+      "evidence": [
+        {
+          "kind": "artifact",
+          "notes": "Effect semantics are invalidated by source-plan, rank/family parser, or normalized effect changes.",
+          "reference": "0b780669e665a4df0c9d4819250ab469f1e3e9eeb7a7524e10b1ac16634277ff"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "review:epic-10-effect-semantics:2026-09-02",
+      "rationale": "Schema v1 records arithmetic only for source-clear attribute, health, energy, absorption, and condition-duration facts; ambiguous full-stat composition remains deferred.",
+      "reReviewTrigger": "Any rune family/rank/effect parser or reviewed source evidence change.",
+      "relatedFindingIds": [],
+      "reviewedAt": "2026-09-01T00:00:00Z",
+      "reviewer": "Build Wars sprint executor",
+      "scope": "EPIC-10 rune effect and stacking semantics"
+    },
+    {
+      "decision": "approved",
+      "evidence": [
+        {
+          "kind": "artifact",
+          "notes": "Selected complete snapshot-set manifest digest.",
+          "reference": "98fea6b02b64cef1c156ffa633ed9101b53bf5b0e174862f220e13d2f684ea2d"
+        },
+        {
+          "kind": "artifact",
+          "notes": "Generated catalog digest is owned by the adjacent manifest.",
+          "reference": "805d3468abd89a8b6e8211478fb12c993af3ce89080543450b3e34278161470b"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "review:epic-10-first-baseline:2026-09-02",
+      "rationale": "This promotion records the selected complete snapshot set, EPIC-03 dependency digests, generated runtime catalog, artifact digest, and QA gate state as the first baseline.",
+      "reReviewTrigger": "Any semantic projection, schema, source revision, dependency digest, QA gate, or promotion path change.",
+      "relatedFindingIds": [],
+      "reviewedAt": "2026-09-01T00:00:00Z",
+      "reviewer": "Build Wars sprint executor",
+      "scope": "EPIC-10 first promoted rune catalog baseline"
+    }
+  ],
+  "notes": "Runtime-eligible EPIC-10 rune catalog; source plans, snapshot-set manifests, raw snapshots, QA summaries, and icon bytes remain ignored.",
+  "qaReportPath": "data/qa/epic-10/runes.catalog.qa.json",
+  "recordCount": 138,
+  "schemaVersion": 1,
+  "selectedSnapshotSetDigest": "98fea6b02b64cef1c156ffa633ed9101b53bf5b0e174862f220e13d2f684ea2d",
+  "selectedSnapshotSetManifestPath": "work/runs/data-ingestion/epic-10/snapshot-sets/runes-0b8ddfe23b032052.snapshot-set.json",
+  "sourceIds": [
+    "source:gww:epic-10-live:rune:41037:2648026",
+    "source:gww:epic-10-live:rune:41388:2640203",
+    "source:gww:epic-10-live:rune:41398:2702903",
+    "source:gww:epic-10-live:rune:41401:2699196",
+    "source:gww:epic-10-live:rune:41402:2702808",
+    "source:gww:epic-10-live:rune:41403:2702902",
+    "source:gww:epic-10-live:rune:43150:2692102",
+    "source:gww:epic-10-live:rune:43154:2692121",
+    "source:gww:epic-10-live:rune:43155:2692097",
+    "source:gww:epic-10-live:rune:43156:2692082",
+    "source:gww:epic-10-live:rune:43157:2692099",
+    "source:gww:epic-10-live:rune:43180:2692064",
+    "source:gww:epic-10-live:rune:43185:2692081",
+    "source:gww:epic-10-live:rune:43457:2692120",
+    "source:gww:epic-10-live:rune:43464:2692118",
+    "source:gww:epic-10-live:rune:43468:2729304",
+    "source:gww:epic-10-live:rune:43478:2692083",
+    "source:gww:epic-10-live:rune:43479:2692103",
+    "source:gww:epic-10-live:rune:43496:2692090",
+    "source:gww:epic-10-live:rune:43518:2692115",
+    "source:gww:epic-10-live:rune:43525:2692085",
+    "source:gww:epic-10-live:rune:43526:2692098",
+    "source:gww:epic-10-live:rune:43531:2692109",
+    "source:gww:epic-10-live:rune:43534:2692112",
+    "source:gww:epic-10-live:rune:43535:2692123",
+    "source:gww:epic-10-live:rune:43536:2692106",
+    "source:gww:epic-10-live:rune:43537:2692087",
+    "source:gww:epic-10-live:rune:43538:2692093",
+    "source:gww:epic-10-live:rune:43545:2692108",
+    "source:gww:epic-10-live:rune:43546:2692117",
+    "source:gww:epic-10-live:rune:44742:2692100",
+    "source:gww:epic-10-live:rune:44750:2692084",
+    "source:gww:epic-10-live:rune:44757:2692107",
+    "source:gww:epic-10-live:rune:44764:2692122",
+    "source:gww:epic-10-live:rune:44772:2692094",
+    "source:gww:epic-10-live:rune:44780:2692049",
+    "source:gww:epic-10-live:rune:44787:2692114",
+    "source:gww:epic-10-live:rune:44795:2692110",
+    "source:gww:epic-10-live:rune:44824:2692101",
+    "source:gww:epic-10-live:rune:44831:2692104",
+    "source:gww:epic-10-live:rune:44838:2692105",
+    "source:gww:epic-10-live:rune:44839:2692096",
+    "source:gww:epic-10-live:rune:45114:2692113",
+    "source:gww:epic-10-live:rune:45122:2692092",
+    "source:gww:epic-10-live:rune:45129:2692091",
+    "source:gww:epic-10-live:rune:45136:2692089",
+    "source:gww:epic-10-live:rune:45145:2692116",
+    "source:gww:epic-10-live:rune:45152:2692111",
+    "source:gww:epic-10-live:rune:45160:2692086",
+    "source:gww:epic-10-live:rune:45168:2692088",
+    "source:gww:epic-10-live:seed:attribute-bonus:2712710",
+    "source:gww:epic-10-live:seed:equipment-template-format:2728058",
+    "source:gww:epic-10-live:seed:rune:2684875",
+    "source:gww:epic-10-rune-icons:f1fe01997b9c"
+  ],
+  "sourcePlanDigest": "0b780669e665a4df0c9d4819250ab469f1e3e9eeb7a7524e10b1ac16634277ff",
+  "sourcePlanPath": "work/runs/data-ingestion/epic-10/source-plans/runes-0b780669e665a4df.source-plan.json",
+  "sourceSetDigest": "904d3d4133966e6104fdd460d549982fec27375f4b96fa20a5340d0f5493d504"
+}

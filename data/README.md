@@ -46,6 +46,19 @@ manifests, Python ingestion modules, or wiki APIs. Schema v1 excludes acquisitio
 guide/community prose, and copied source-authored descriptions; skill descriptions are
 structured-only unless a later digest-bound review promotes copied text.
 
+EPIC-10 adds the runes catalog exception. The only allowlisted production outputs are:
+
+- `data/generated/epic-10/runes.catalog.json`
+- `data/generated/epic-10/runes.catalog.manifest.json`
+- `data/qa/epic-10/runes.catalog.qa.json`
+
+Runtime consumers may read only `runes.catalog.json`. They must not read EPIC-10 source plans,
+snapshot-set manifests, raw snapshots, candidate outputs, QA summaries, QA JSON, generated
+manifests, Python ingestion modules, wiki APIs, or icon bytes. The catalog anchors accepted runes to
+verified equipment template modifier IDs, uses EPIC-03 profession/attribute joins, stores
+effect-level stacking, keeps headgear as a handoff fact, and leaves armor legality, equipment UI,
+title effects, and full stat totals to later epics.
+
 ## Commit Rules
 
 Policy README files remain trackable so directory contracts are visible. Synthetic fixtures belong
@@ -70,3 +83,7 @@ For EPIC-04, BW-0405 approved the exact paths above after live source-set discov
 detail/icon fetch, selected complete snapshot-set replay, byte-identical offline catalog/manifest/QA
 regeneration, structured-only description review, missing-page/icon/join/progression dispositions,
 and passing app/public QA gates.
+For EPIC-10, BW-1005 approved the exact paths above after live source-set discovery,
+digest-confirmed detail/icon metadata fetch, selected complete snapshot-set replay, byte-identical
+offline catalog/manifest/QA regeneration, source authority review, first-baseline review,
+dispositioned icon-dimension warnings, and passing app/public QA gates.

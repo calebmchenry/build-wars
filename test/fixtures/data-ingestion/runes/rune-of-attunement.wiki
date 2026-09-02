@@ -1,0 +1,10 @@
+{{Item infobox
+| image = [[Image:Rune All Minor.png]]
+| name = Rune of Attunement
+| type = [[Rune]]
+| bonus = +2 [[Energy]]
+| profession = Any
+| stackable = n
+| rarity = common
+}}
+Rune of Attunement provides a fixture energy bonus.

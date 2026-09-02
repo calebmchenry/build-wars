@@ -2,10 +2,12 @@
 id: BW-1006
 title: Rune Runtime Docs and Closeout
 epic: EPIC-10
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1005
+planned_sprint: SPRINT-011
+completed_sprint: SPRINT-011
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -41,3 +43,13 @@ Document the promoted rune catalog, downstream integration contract, and EPIC-10
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- SPRINT-011 updated README/data/script/compendium docs, created
+  `compendium/runes-catalog.md`, recorded downstream EPIC-13/14/15/17/20/21 handoffs, and kept
+  `src/app`, editor behavior, local persistence, sharing, backup/restore, template compatibility,
+  and EPIC-03/04 promoted artifacts unchanged.
+- Validation passed: `npm run data:regenerate`, direct fixed-clock EPIC-10 fixture regeneration,
+  `npm run verify`, `rg -n 'EPIC-10|BW-100[1-6]|SPRINT-011' work/tickets/10-runes work/sprints`,
+  and `git status --short`.

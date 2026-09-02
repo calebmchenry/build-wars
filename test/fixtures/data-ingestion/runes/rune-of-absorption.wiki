@@ -1,0 +1,9 @@
+{{Item infobox
+| image = [[Image:Rune Warrior Minor.png]] [[Image:Rune Warrior Major.png]] [[Image:Rune Warrior Sup.png]]
+| name = Rune of Absorption
+| type = [[Rune]]
+| bonus = Reduces physical damage
+| profession = Warrior
+| stackable = n
+}}
+Runes of Absorption provide fixture physical damage reduction facts.

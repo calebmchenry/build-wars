@@ -1,6 +1,15 @@
 import { describe, expect, it } from "vitest";
 
-import { calculateEffectiveAttributeRank, catalogId, type AttributeId } from "../../src/domain";
+import {
+  calculateEffectiveAttributeRank,
+  catalogId,
+  summarizeAttributeRuneEffects,
+  templateEquipmentModifierId,
+  type AttributeId,
+  type CatalogFieldProvenance,
+  type CatalogRuneRecord,
+  type RuneCatalog
+} from "../../src/domain";
 import { attributeIds, professionAttributeCatalog } from "../fixtures/rule-engine/catalogs";
 import { attributes, buildFixture } from "../fixtures/rule-engine/builds";
 
@@ -105,6 +114,31 @@ describe("effective attribute rank calculator", () => {
     ]);
   });
 
+  it("accepts rune adjustments produced by the rune helper without owning stacking rules", () => {
+    const summary = summarizeAttributeRuneEffects(
+      runeCatalogForAttribute(attributeIds.tactics, [
+        attributeRune(69, attributeIds.tactics, 2, -35),
+        attributeRune(95, attributeIds.tactics, 3, -75)
+      ]),
+      [
+        { sourceKey: "head", runeId: catalogId<"Rune">(69) },
+        { sourceKey: "chest", runeId: catalogId<"Rune">(95) }
+      ]
+    );
+    const result = calculateEffectiveAttributeRank({
+      build: buildFixture({ attributes: attributes([attributeIds.tactics, 8]) }),
+      professionAttributes: professionAttributeCatalog,
+      attributeId: attributeIds.tactics,
+      adjustments: summary.rankAdjustments
+    });
+
+    expect(summary.rankAdjustments).toEqual([
+      { kind: "rune", amount: 3, sourceId: "chest", label: "Rune 95" }
+    ]);
+    expect(summary.totalAttributeRuneHealthDelta).toBe(-110);
+    expect(result).toMatchObject({ kind: "resolved", finalRank: 11 });
+  });
+
   it("rejects invalid overrides, invalid adjustments, overflow, and negative final ranks", () => {
     const invalidOverride = calculateEffectiveAttributeRank({
       build: buildFixture({ attributes: attributes([attributeIds.tactics, 8]) }),
@@ -143,4 +177,114 @@ function reasonCodes(
   result: ReturnType<typeof calculateEffectiveAttributeRank>
 ): readonly string[] {
   return result.kind === "unresolved" ? result.reasons.map((reason) => reason.code) : [];
+}
+
+const runeProvenance: CatalogFieldProvenance = {
+  sourceIds: ["source:test"],
+  claimIds: ["claim:test"],
+  reviewIds: ["review:test"],
+  notes: null
+};
+
+function attributeRune(
+  id: number,
+  attributeId: AttributeId,
+  amount: number,
+  penalty: number
+): CatalogRuneRecord {
+  return {
+    id: catalogId<"Rune">(id),
+    templateModifierId: templateEquipmentModifierId(id),
+    name: `Rune ${id}`,
+    normalizedName: `rune-${id}`,
+    wikiUrl: "https://wiki.guildwars.com/wiki/Rune",
+    pageIdentity: {
+      requestedTitle: `Rune ${id}`,
+      normalizedTitle: `Rune ${id}`,
+      canonicalTitle: "Rune",
+      pageId: 1,
+      revisionId: 2,
+      sourceRevisionTimestamp: "2026-08-31T00:00:00Z",
+      redirectedFrom: null
+    },
+    familyKey: `attribute:${Number(attributeId)}`,
+    familyKind: "attribute",
+    familyRank: amount === 3 ? "superior" : amount === 2 ? "major" : "minor",
+    rarityTier: amount === 3 ? "superior" : amount === 2 ? "major" : "minor",
+    eligibility: "profession-armor",
+    professionId: catalogId<"Profession">(1),
+    affectedAttributeId: attributeId,
+    effects: [
+      {
+        kind: "attribute-rank",
+        attributeId,
+        amount,
+        unit: "rank",
+        target: "attribute",
+        stacking: { rule: "highest", groupKey: `attribute:${Number(attributeId)}`, notes: null },
+        provenance: runeProvenance
+      },
+      {
+        kind: "maximum-health-delta",
+        amount: penalty,
+        unit: "health",
+        target: "character",
+        stacking: { rule: "sum", groupKey: `attribute-health-penalty:${id}`, notes: null },
+        provenance: runeProvenance
+      }
+    ],
+    headgearInteraction: "attribute-linked",
+    displayState: "structured-only",
+    iconId: null,
+    provenance: runeProvenance
+  };
+}
+
+function runeCatalogForAttribute(
+  attributeId: AttributeId,
+  runes: readonly CatalogRuneRecord[]
+): RuneCatalog {
+  return {
+    schemaVersion: 1,
+    catalogVersion: "test",
+    sectionDigests: [],
+    generatedAt: "2026-09-01T00:00:00Z",
+    generator: "test",
+    profile: {
+      id: "epic-10-runes",
+      sourceTarget: "BACKLOG",
+      sourceEpic: "EPIC-10",
+      sourceCaps: {
+        seedPageLimit: 3,
+        detailPageLimit: 180,
+        mediaTitleLimit: 160,
+        requestLimit: 80,
+        retryLimit: 3,
+        continuationLimit: 10,
+        responseByteCap: 1,
+        parserByteCap: 1,
+        aggregateByteCap: 1,
+        catalogByteCap: 1,
+        qaByteCap: 1
+      }
+    },
+    dependencyDigests: [],
+    sourceSet: {
+      seedTitles: [],
+      detailPageTitles: [],
+      sourceSetDigest: `attribute:${Number(attributeId)}`,
+      sourcePlanDigest: `attribute:${Number(attributeId)}`,
+      acceptedRuneCount: runes.length,
+      relationshipCount: 0,
+      exclusionCount: 0,
+      unsupportedCount: 0,
+      blockingFindingCount: 0,
+      sourceAuthority: "test",
+      idPolicy: "test",
+      planningAmendment: null
+    },
+    dispositions: [],
+    runes,
+    remoteMedia: []
+  };
 }

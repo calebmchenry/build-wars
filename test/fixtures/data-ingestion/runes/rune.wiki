@@ -1,0 +1,52 @@
+A rune is a type of armor upgrade component for fixture testing.
+
+==Armor runes==
+Fixture armor runes are represented by profession-specific and profession-independent families.
+
+==List of armor runes==
+The positive effects of attribute runes do not stack with runes of the same attribute. The negative health effects do stack. Runes of Vigor do not stack. Runes of Vitae and Attunement stack.
+
+{| class="wikitable"
+! Name !! Rarity !! Stats
+|-
+! colspan="3" | Profession-specific runes
+|-
+| <Profession> Rune of Minor <Attribute> || Minor / Blue || <Attribute> +1 (Non-stacking)
+|-
+| <Profession> Rune of Major <Attribute> || Major / Purple || <Attribute> +2 (Non-stacking) Health -35
+|-
+| <Profession> Rune of Superior <Attribute> || Superior / Gold || <Attribute> +3 (Non-stacking) Health -75
+|-
+| [[Warrior Rune of Minor Absorption]] || Minor / Blue || Reduces physical damage by 1 (Non-stacking)
+|-
+| [[Warrior Rune of Major Absorption]] || Major / Purple || Reduces physical damage by 2 (Non-stacking)
+|-
+| [[Warrior Rune of Superior Absorption]] || Superior / Gold || Reduces physical damage by 3 (Non-stacking)
+|-
+! colspan="3" | Profession-independent runes
+|-
+| [[Rune of Minor Vigor]] || Minor / Blue || Health +30 (Non-stacking)
+|-
+| [[Rune of Major Vigor]] || Major / Purple || Health +41 (Non-stacking)
+|-
+| [[Rune of Superior Vigor]] || Superior / Gold || Health +50 (Non-stacking)
+|-
+| [[Rune of Attunement]] || Minor / Blue || Energy +2
+|-
+| [[Rune of Vitae]] || Minor / Blue || Health +10
+|-
+| [[Rune of Clarity]] || Major / Purple || Reduces Blind and Weakness duration by 20% (Non-stacking)
+|-
+| [[Rune of Purity]] || Major / Purple || Reduces Disease and Poison duration by 20% (Non-stacking)
+|-
+| [[Rune of Recovery]] || Major / Purple || Reduces Dazed and Deep Wound duration by 20% (Non-stacking)
+|-
+| [[Rune of Restoration]] || Major / Purple || Reduces Bleeding and Crippled duration by 20% (Non-stacking)
+|}
+
+==Container runes==
+[[Rune of Holding]], [[Superior Rune of Holding]], and [[Rune of Belt Holding]] are container upgrades, not armor runes.
+
+== Notes ==
+* Attribute-enhancing runes stack with headpieces but not with each other.
+* Condition-reducing runes compose with other condition-reducing effects outside this catalog.

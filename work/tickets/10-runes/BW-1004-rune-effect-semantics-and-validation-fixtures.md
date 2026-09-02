@@ -2,11 +2,13 @@
 id: BW-1004
 title: Rune Effect Semantics and Validation Fixtures
 epic: EPIC-10
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1001
   - BW-1003
+planned_sprint: SPRINT-011
+completed_sprint: SPRINT-011
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -46,3 +48,12 @@ stat display.
 - `npm run typecheck`
 - Focused domain tests for rune effect and stacking fixtures
 - Focused Python tests for semantic normalization
+
+## Closeout Evidence
+
+- SPRINT-011 added table-driven rune semantics for attribute ranks, health, energy, absorption, and
+  condition reductions, plus `summarizeAttributeRuneEffects` for highest rank bonuses with
+  independently counted attribute-rune health penalties.
+- Validation passed: `npm run typecheck`,
+  `npm run test:run -- test/domain/rune-effects.test.ts test/domain/effective-attribute-rank.test.ts test/domain/rune-catalog.test.ts`,
+  and `PYTHONPATH=scripts/data .venv-data/bin/python -m unittest build_wars_ingest.tests.test_rune_semantics build_wars_ingest.tests.test_rune_catalog`.

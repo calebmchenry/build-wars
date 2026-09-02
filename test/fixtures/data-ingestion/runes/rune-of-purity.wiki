@@ -1,0 +1,10 @@
+{{Item infobox
+| image = [[Image:Rune All Major.png]]
+| name = Rune of Purity
+| type = [[Rune]]
+| bonus = -20% duration of<br>[[Disease]] and [[Poison]]
+| profession = Any
+| stackable = n
+| rarity = uncommon
+}}
+Rune of Purity provides fixture condition duration facts.

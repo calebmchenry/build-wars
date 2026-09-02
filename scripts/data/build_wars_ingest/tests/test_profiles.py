@@ -6,6 +6,7 @@ from build_wars_ingest.profiles import (
     EPIC_02_PROFILE_ID,
     EPIC_03_PROFILE_ID,
     EPIC_04_PROFILE_ID,
+    EPIC_10_PROFILE_ID,
     profile_by_id,
     profile_choices,
 )
@@ -40,6 +41,18 @@ class ProfileTests(unittest.TestCase):
         self.assertGreaterEqual(profile.page_limit, 3000)
         self.assertGreater(profile.media_title_limit, 0)
         self.assertIn(EPIC_04_PROFILE_ID, profile_choices())
+
+    def test_epic10_profile_uses_bounded_source_authority_and_exact_paths(self) -> None:
+        profile = profile_by_id(EPIC_10_PROFILE_ID)
+
+        self.assertEqual(profile.source_epic, "EPIC-10")
+        self.assertEqual(profile.generated_relative_path.as_posix(), "epic-10/runes.catalog.json")
+        self.assertEqual(profile.qa_relative_path.as_posix(), "epic-10/runes.catalog.qa.json")
+        self.assertEqual(profile.source_titles, ("Equipment template format", "Rune", "Attribute bonus"))
+        self.assertEqual(profile.detail_titles, ())
+        self.assertGreaterEqual(profile.page_limit, 138)
+        self.assertGreater(profile.media_title_limit, 0)
+        self.assertIn(EPIC_10_PROFILE_ID, profile_choices())
 
 
 if __name__ == "__main__":

@@ -2,12 +2,14 @@
 id: BW-1005
 title: Rune Catalog QA and Exact-Path Promotion
 epic: EPIC-10
-status: ready
+status: done
 priority: critical
 depends_on:
   - BW-1002
   - BW-1003
   - BW-1004
+planned_sprint: SPRINT-011
+completed_sprint: SPRINT-011
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -52,3 +54,18 @@ explicit exact paths.
 - Run EPIC-10 fixture regeneration twice and prove byte-identical output under a fixed clock
 - Run EPIC-10 offline replay from selected snapshots
 - Run a bounded manual live refresh only if source/network conditions are available
+
+## Closeout Evidence
+
+- SPRINT-011 promoted `data/generated/epic-10/runes.catalog.json`,
+  `data/generated/epic-10/runes.catalog.manifest.json`, and
+  `data/qa/epic-10/runes.catalog.qa.json` from a digest-confirmed live source plan and selected
+  complete snapshot-set replay.
+- Production catalog evidence: 138 runes, `catalogVersion: runes-58a277f62fe92f2a`,
+  `sourceSetDigest: 904d3d4133966e6104fdd460d549982fec27375f4b96fa20a5340d0f5493d504`,
+  selected snapshot-set digest `98fea6b02b64cef1c156ffa633ed9101b53bf5b0e174862f220e13d2f684ea2d`,
+  `appConsumptionGate: pass`, and `publicReleaseGate: pass`.
+- Validation passed: fixed-clock fixture A/B byte comparison, live discover/fetch, two
+  byte-identical fixed-clock offline replays, `git check-ignore -v` for promoted paths and ignored
+  byproducts, the phase-5 Python subset, and
+  `npm run test:run -- test/domain/data-ingestion-contracts.test.ts test/domain/rune-catalog.test.ts test/domain/rune-effects.test.ts`.

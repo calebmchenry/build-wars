@@ -1,0 +1,13 @@
+{{Item infobox
+| image = [[Image:Rune Ritualist Minor.png]] [[Image:Rune Ritualist Major.png]] [[Image:Rune Ritualist Sup.png]]
+| name = Rune of Restoration Magic
+| type = [[Rune]]
+| bonus = + [[Restoration Magic]]<br>(- [[Health]])
+| profession = Ritualist
+| stackable = n
+}}
+Runes of Restoration Magic provide fixture attribute bonuses for Restoration Magic.
+
+*A Ritualist Rune of Minor Restoration Magic provides +1 Restoration Magic.
+*A Ritualist Rune of Major Restoration Magic provides +2 Restoration Magic and -35 health.
+*A Ritualist Rune of Superior Restoration Magic provides +3 Restoration Magic and -75 health.

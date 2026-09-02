@@ -2,10 +2,12 @@
 id: BW-1002
 title: Rune Source Set and Page Resolution
 epic: EPIC-10
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1001
+planned_sprint: SPRINT-011
+completed_sprint: SPRINT-011
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -43,3 +45,12 @@ deterministic rune catalog generation.
 
 - Focused Python tests for EPIC-10 source-plan generation and fixture source resolution
 - Documented fixture regenerate command added by the implementation sprint
+
+## Closeout Evidence
+
+- SPRINT-011 added deterministic rune source planning, candidate accounting, page-resolution
+  metadata, digest-confirmed fetch validation, complete snapshot-set manifests, offline replay
+  rejection, and synthetic rune source fixtures.
+- Validation passed: `PYTHONPATH=scripts/data .venv-data/bin/python -m unittest build_wars_ingest.tests.test_rune_source_set build_wars_ingest.tests.test_skill_source_set`,
+  `PYTHONPATH=scripts/data .venv-data/bin/python -m unittest build_wars_ingest.tests.test_pipeline build_wars_ingest.tests.test_cli`,
+  and fixed-clock EPIC-10 fixture regeneration.

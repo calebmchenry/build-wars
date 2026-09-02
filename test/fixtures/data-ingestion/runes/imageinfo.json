@@ -1,0 +1,139 @@
+{
+  "pages": [
+    {
+      "imageinfo": [
+        {
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "1111111111111111111111111111111111111111",
+          "size": 1000,
+          "timestamp": "2026-08-31T18:00:00Z",
+          "url": "https://wiki.guildwars.com/images/Rune_Warrior_Minor.png",
+          "width": 64
+        }
+      ],
+      "pageid": 1,
+      "title": "File:Rune Warrior Minor.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "2222222222222222222222222222222222222222",
+          "size": 1001,
+          "timestamp": "2026-08-31T18:00:00Z",
+          "url": "https://wiki.guildwars.com/images/Rune_Warrior_Major.png",
+          "width": 64
+        }
+      ],
+      "pageid": 2,
+      "title": "File:Rune Warrior Major.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "3333333333333333333333333333333333333333",
+          "size": 1002,
+          "timestamp": "2026-08-31T18:00:00Z",
+          "url": "https://wiki.guildwars.com/images/Rune_Warrior_Sup.png",
+          "width": 64
+        }
+      ],
+      "pageid": 3,
+      "title": "File:Rune Warrior Sup.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "4444444444444444444444444444444444444444",
+          "size": 1003,
+          "timestamp": "2026-08-31T18:00:00Z",
+          "url": "https://wiki.guildwars.com/images/Rune_Ritualist_Minor.png",
+          "width": 64
+        }
+      ],
+      "pageid": 4,
+      "title": "File:Rune Ritualist Minor.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "5555555555555555555555555555555555555555",
+          "size": 1004,
+          "timestamp": "2026-08-31T18:00:00Z",
+          "url": "https://wiki.guildwars.com/images/Rune_Ritualist_Major.png",
+          "width": 64
+        }
+      ],
+      "pageid": 5,
+      "title": "File:Rune Ritualist Major.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "6666666666666666666666666666666666666666",
+          "size": 1005,
+          "timestamp": "2026-08-31T18:00:00Z",
+          "url": "https://wiki.guildwars.com/images/Rune_Ritualist_Sup.png",
+          "width": 64
+        }
+      ],
+      "pageid": 6,
+      "title": "File:Rune Ritualist Sup.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "7777777777777777777777777777777777777777",
+          "size": 1006,
+          "timestamp": "2026-08-31T18:00:00Z",
+          "url": "https://wiki.guildwars.com/images/Rune_All_Minor.png",
+          "width": 64
+        }
+      ],
+      "pageid": 7,
+      "title": "File:Rune All Minor.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "8888888888888888888888888888888888888888",
+          "size": 1007,
+          "timestamp": "2026-08-31T18:00:00Z",
+          "url": "https://wiki.guildwars.com/images/Rune_All_Major.png",
+          "width": 64
+        }
+      ],
+      "pageid": 8,
+      "title": "File:Rune All Major.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "9999999999999999999999999999999999999999",
+          "size": 1008,
+          "timestamp": "2026-08-31T18:00:00Z",
+          "url": "https://wiki.guildwars.com/images/Rune_All_Sup.png",
+          "width": 64
+        }
+      ],
+      "pageid": 9,
+      "title": "File:Rune All Sup.png"
+    }
+  ]
+}

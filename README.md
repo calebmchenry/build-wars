@@ -37,11 +37,13 @@ installs the pinned Python parser dependency from `scripts/data/requirements.txt
 `npm run data:regenerate` runs fixture mode only. It uses committed minimized synthetic fixtures,
 fixed timestamps, and an output root under ignored `work/runs/data-ingestion`.
 The default fixture run preserves the EPIC-02 skill-ID proof and also writes the EPIC-03
-professions/attributes fixture catalog plus the EPIC-04 synthetic skills catalog. Run EPIC-03 and
-EPIC-04 profiles directly with
+professions/attributes fixture catalog, the EPIC-04 synthetic skills catalog, and the EPIC-10
+synthetic runes catalog. Run EPIC-03, EPIC-04, and EPIC-10 profiles directly with
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-03-professions-attributes`.
 For EPIC-04 use
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-04-skills`.
+For EPIC-10 use
+`PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-10-runes`.
 
 ## Current Scope
 
@@ -63,6 +65,10 @@ Included now:
 - Runtime-eligible EPIC-04 skills catalog data at `data/generated/epic-04/skills.catalog.json`,
   with an adjacent generated manifest and bounded QA report. Runtime code must consume only the
   catalog JSON, not the manifest, QA report, source plans, snapshots, Python tooling, or wiki APIs.
+- Runtime-eligible EPIC-10 runes catalog data at `data/generated/epic-10/runes.catalog.json`,
+  with an adjacent generated manifest and bounded QA report. Runtime code must consume only the
+  catalog JSON; manifests, QA reports, source plans, snapshot sets, raw snapshots, QA summaries,
+  review evidence, icon bytes, Python tooling, and wiki APIs remain non-runtime.
 - Framework-neutral Guild Wars skill and raw equipment template import/export APIs under
   `src/template-compatibility`, backed by a pinned `@buildwars/gw-templates@1.1.1` adapter.
 - Pure domain rule-engine APIs for authored builds: `validateBuild` and
@@ -85,8 +91,9 @@ Deferred to later epics:
   defers ownership to EPIC-17
 - Compact runtime catalog derivation, dynamic catalog loading, search workers, virtualization, and
   remote icon fetching
-- Title ownership, title-rank controls, allegiance selection, rune/headgear/equipment rank effects,
-  equipment editor, party builder, guide authoring, PWA behavior, auth, analytics, and deployment
+- Title ownership, title-rank controls, allegiance selection, armor/headgear/equipment legality,
+  full stat aggregation, equipment editor, party builder, guide authoring, PWA behavior, auth,
+  analytics, and deployment
 
 ## Project Layout
 
@@ -124,6 +131,12 @@ review the source-plan digest, then run `--stage fetch --source-plan <path>
 --confirm-source-set-digest <digest>`. Offline replay requires the selected `--snapshot-set`
 manifest and remains network-free. EPIC-04 schema v1 preserves unknown authored skill IDs and
 structured costs/progressions, but excludes acquisition and copied description prose.
+For EPIC-10, live refresh follows the same two-step pattern with `--profile epic-10-runes`. The
+finite source authority is `Equipment template format`, `Rune`, `Attribute bonus`, verified rune
+detail pages, metadata-only icon `imageinfo`, and the promoted EPIC-03 catalog. Accepted rune IDs
+are anchored to verified `TemplateEquipmentModifierId` values. Offline replay requires one complete
+selected EPIC-10 snapshot-set manifest; source plans, snapshot sets, raw snapshots, QA summaries, and
+icon bytes remain ignored.
 
 ## Template Compatibility
 
@@ -150,6 +163,9 @@ Build validation is available through `src/domain`.
   `resolved`, and `exhaustive` from export/publish policy.
 - `calculateEffectiveAttributeRank` resolves authored base ranks, optional overrides, and
   caller-supplied additive adjustments without deriving deferred equipment or title semantics.
+- `summarizeAttributeRuneEffects` derives caller-supplied rune rank adjustments and independent
+  attribute-rune health penalties from a runtime rune catalog without owning armor slots, legality,
+  headgear bonuses, or full stat totals.
 
 See [Game rule engine](compendium/game-rule-engine.md) for rule defaults, unresolved-ID handling,
 split/mode behavior, duplicate policies, and deferred scope.

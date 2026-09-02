@@ -1,0 +1,1859 @@
+{
+  "catalogVersion": "runes-8f9074f44ea7ee7d",
+  "dependencyDigests": [
+    {
+      "artifactDigest": "1cb3f79b7139cf26adbcf40b600094c2860796c60dcd9f1ba75bad694d07c8b4",
+      "catalogVersion": "pa-de7831a31d4be2f5",
+      "id": "epic-03-professions-attributes",
+      "manifestDigest": "1c6379112f9ac9c1d669c6e60e3c045ff7ca52dad8a84b2b494508da4c41e55e",
+      "qaGate": "pass",
+      "sectionDigests": [
+        {
+          "digest": "71727b2ff6b4cd11b70ac5a3425823c96f9e746ef9f0c06b572acf8df22c7644",
+          "section": "templateCrosswalk"
+        },
+        {
+          "digest": "be78d97c2cf7a7138441a382deba5de53a9554496d99a133b889f166df1f06ea",
+          "section": "professions"
+        },
+        {
+          "digest": "12761c5f2ffe70533710096ee8f447df336d6dc1cbf3f9cd16b0e3567f9975dc",
+          "section": "attributes"
+        },
+        {
+          "digest": "c623bd0469178039ae26f07340c5692e8e13fd3f0c5ec0bce2c62b9dd76c19fd",
+          "section": "attributePointRules"
+        },
+        {
+          "digest": "fbb708659ca19a455caa6f4c5cd968d6182fb585707f28587ed56b790eda5295",
+          "section": "remoteMedia"
+        }
+      ]
+    }
+  ],
+  "dispositions": [
+    {
+      "id": "disposition:rune:rune-of-belt-holding:explicit-exclusion",
+      "kind": "explicit-exclusion",
+      "provenance": {
+        "claimIds": [
+          "claim:rune-source-set:rune-of-belt-holding:explicit-exclusion"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:6002"
+        ]
+      },
+      "reason": "Container rune upgrades bags or belt pouches and is not a player armor rune.",
+      "requestedTitle": "Rune of Belt Holding",
+      "reviewId": "review:epic-10-source-set:2026-09-02",
+      "templateModifierId": null
+    },
+    {
+      "id": "disposition:rune:rune-of-holding:explicit-exclusion",
+      "kind": "explicit-exclusion",
+      "provenance": {
+        "claimIds": [
+          "claim:rune-source-set:rune-of-holding:explicit-exclusion"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:6002"
+        ]
+      },
+      "reason": "Container rune upgrades bags or belt pouches and is not a player armor rune.",
+      "requestedTitle": "Rune of Holding",
+      "reviewId": "review:epic-10-source-set:2026-09-02",
+      "templateModifierId": null
+    },
+    {
+      "id": "disposition:rune:superior-rune-of-holding:explicit-exclusion",
+      "kind": "explicit-exclusion",
+      "provenance": {
+        "claimIds": [
+          "claim:rune-source-set:superior-rune-of-holding:explicit-exclusion"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:6002"
+        ]
+      },
+      "reason": "Container rune upgrades bags or belt pouches and is not a player armor rune.",
+      "requestedTitle": "Superior Rune of Holding",
+      "reviewId": "review:epic-10-source-set:2026-09-02",
+      "templateModifierId": null
+    },
+    {
+      "id": "disposition:rune:profession-rune-of-major-attribute:supported-relationship",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:rune-source-set:profession-rune-of-major-attribute:supported-relationship"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:6002"
+        ]
+      },
+      "reason": "Rune inventory row is an abstract family pattern resolved through equipment-template modifier rows.",
+      "requestedTitle": "<Profession> Rune of Major <Attribute>",
+      "reviewId": "review:epic-10-source-set:2026-09-02",
+      "templateModifierId": null
+    },
+    {
+      "id": "disposition:rune:profession-rune-of-minor-attribute:supported-relationship",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:rune-source-set:profession-rune-of-minor-attribute:supported-relationship"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:6002"
+        ]
+      },
+      "reason": "Rune inventory row is an abstract family pattern resolved through equipment-template modifier rows.",
+      "requestedTitle": "<Profession> Rune of Minor <Attribute>",
+      "reviewId": "review:epic-10-source-set:2026-09-02",
+      "templateModifierId": null
+    },
+    {
+      "id": "disposition:rune:profession-rune-of-superior-attribute:supported-relationship",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:rune-source-set:profession-rune-of-superior-attribute:supported-relationship"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:6002"
+        ]
+      },
+      "reason": "Rune inventory row is an abstract family pattern resolved through equipment-template modifier rows.",
+      "requestedTitle": "<Profession> Rune of Superior <Attribute>",
+      "reviewId": "review:epic-10-source-set:2026-09-02",
+      "templateModifierId": null
+    },
+    {
+      "id": "disposition:rune:warrior-rune-of-major-absorption:supported-relationship",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:rune-source-set:warrior-rune-of-major-absorption:supported-relationship"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:6002"
+        ]
+      },
+      "reason": "Rune inventory display title maps to Rune-of form used by equipment-template modifier IDs.",
+      "requestedTitle": "Warrior Rune of Major Absorption",
+      "reviewId": "review:epic-10-source-set:2026-09-02",
+      "templateModifierId": null
+    },
+    {
+      "id": "disposition:rune:warrior-rune-of-minor-absorption:supported-relationship",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:rune-source-set:warrior-rune-of-minor-absorption:supported-relationship"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:6002"
+        ]
+      },
+      "reason": "Rune inventory display title maps to Rune-of form used by equipment-template modifier IDs.",
+      "requestedTitle": "Warrior Rune of Minor Absorption",
+      "reviewId": "review:epic-10-source-set:2026-09-02",
+      "templateModifierId": null
+    },
+    {
+      "id": "disposition:rune:warrior-rune-of-superior-absorption:supported-relationship",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:rune-source-set:warrior-rune-of-superior-absorption:supported-relationship"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:6002"
+        ]
+      },
+      "reason": "Rune inventory display title maps to Rune-of form used by equipment-template modifier IDs.",
+      "requestedTitle": "Warrior Rune of Superior Absorption",
+      "reviewId": "review:epic-10-source-set:2026-09-02",
+      "templateModifierId": null
+    },
+    {
+      "id": "disposition:rune:390:unsupported",
+      "kind": "unsupported",
+      "provenance": {
+        "claimIds": [
+          "claim:rune-source-set:rune-of-mystery:unsupported"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:equipment-template-format:6001"
+        ]
+      },
+      "reason": "Rune-like equipment modifier row could not be represented by EPIC-10 schema v1.",
+      "requestedTitle": "Rune of Mystery",
+      "reviewId": "review:epic-10-source-set:2026-09-02",
+      "templateModifierId": 390
+    }
+  ],
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "profile": {
+    "id": "epic-10-runes",
+    "sourceCaps": {
+      "aggregateByteCap": 10000000,
+      "catalogByteCap": 2000000,
+      "continuationLimit": 10,
+      "detailPageLimit": 180,
+      "mediaTitleLimit": 160,
+      "parserByteCap": 750000,
+      "qaByteCap": 1000000,
+      "requestLimit": 80,
+      "responseByteCap": 5000000,
+      "retryLimit": 3,
+      "seedPageLimit": 3
+    },
+    "sourceEpic": "EPIC-10",
+    "sourceTarget": "BACKLOG"
+  },
+  "remoteMedia": [
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_All_Minor.png",
+      "fileTitle": "File:Rune All Minor.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-attunement",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Attunement.",
+      "remoteSha1": "7777777777777777777777777777777777777777",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1006,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-attunement:6105",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_All_Major.png",
+      "fileTitle": "File:Rune All Major.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-clarity",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Clarity.",
+      "remoteSha1": "8888888888888888888888888888888888888888",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1007,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-clarity:6109",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_Warrior_Major.png",
+      "fileTitle": "File:Rune Warrior Major.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-major-absorption",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Major Absorption.",
+      "remoteSha1": "2222222222222222222222222222222222222222",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1001,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-absorption:6103",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_Ritualist_Major.png",
+      "fileTitle": "File:Rune Ritualist Major.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-major-restoration-magic",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Major Restoration Magic.",
+      "remoteSha1": "5555555555555555555555555555555555555555",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1004,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-restoration-magic:6104",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_Warrior_Major.png",
+      "fileTitle": "File:Rune Warrior Major.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-major-swordsmanship",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Major Swordsmanship.",
+      "remoteSha1": "2222222222222222222222222222222222222222",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1001,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-swordsmanship:6101",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_All_Major.png",
+      "fileTitle": "File:Rune All Major.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-major-vigor",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Major Vigor.",
+      "remoteSha1": "8888888888888888888888888888888888888888",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1007,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-vigor:6102",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_Warrior_Minor.png",
+      "fileTitle": "File:Rune Warrior Minor.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-minor-absorption",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Minor Absorption.",
+      "remoteSha1": "1111111111111111111111111111111111111111",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1000,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-absorption:6103",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_Ritualist_Minor.png",
+      "fileTitle": "File:Rune Ritualist Minor.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-minor-restoration-magic",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Minor Restoration Magic.",
+      "remoteSha1": "4444444444444444444444444444444444444444",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1003,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-restoration-magic:6104",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_Warrior_Minor.png",
+      "fileTitle": "File:Rune Warrior Minor.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-minor-swordsmanship",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Minor Swordsmanship.",
+      "remoteSha1": "1111111111111111111111111111111111111111",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1000,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-swordsmanship:6101",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_All_Minor.png",
+      "fileTitle": "File:Rune All Minor.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-minor-vigor",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Minor Vigor.",
+      "remoteSha1": "7777777777777777777777777777777777777777",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1006,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-vigor:6102",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_All_Major.png",
+      "fileTitle": "File:Rune All Major.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-purity",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Purity.",
+      "remoteSha1": "8888888888888888888888888888888888888888",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1007,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-purity:6110",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_All_Major.png",
+      "fileTitle": "File:Rune All Major.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-recovery",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Recovery.",
+      "remoteSha1": "8888888888888888888888888888888888888888",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1007,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-recovery:6107",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_All_Major.png",
+      "fileTitle": "File:Rune All Major.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-restoration",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Restoration.",
+      "remoteSha1": "8888888888888888888888888888888888888888",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1007,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-restoration:6108",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_Warrior_Sup.png",
+      "fileTitle": "File:Rune Warrior Sup.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-superior-absorption",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Superior Absorption.",
+      "remoteSha1": "3333333333333333333333333333333333333333",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1002,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-absorption:6103",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_Ritualist_Sup.png",
+      "fileTitle": "File:Rune Ritualist Sup.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-superior-restoration-magic",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Superior Restoration Magic.",
+      "remoteSha1": "6666666666666666666666666666666666666666",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1005,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-restoration-magic:6104",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_Warrior_Sup.png",
+      "fileTitle": "File:Rune Warrior Sup.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-superior-swordsmanship",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Superior Swordsmanship.",
+      "remoteSha1": "3333333333333333333333333333333333333333",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1002,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-swordsmanship:6101",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_All_Sup.png",
+      "fileTitle": "File:Rune All Sup.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-superior-vigor",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Superior Vigor.",
+      "remoteSha1": "9999999999999999999999999999999999999999",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1008,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-vigor:6102",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/Rune_All_Minor.png",
+      "fileTitle": "File:Rune All Minor.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:rune-of-vitae",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Rune of Vitae.",
+      "remoteSha1": "7777777777777777777777777777777777777777",
+      "remoteTimestamp": "2026-08-31T18:00:00Z",
+      "sizeBytes": 1006,
+      "sourceId": "source:gww:epic-10-fixture:rune:rune-of-vitae:6106",
+      "useDecision": "allowed",
+      "width": 64
+    }
+  ],
+  "runes": [
+    {
+      "affectedAttributeId": 20,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 1,
+          "attributeId": 20,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:43:effect:attribute-rank"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-swordsmanship:6101"
+            ]
+          },
+          "stacking": {
+            "groupKey": "attribute:20",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        }
+      ],
+      "eligibility": "profession-armor",
+      "familyKey": "attribute:swordsmanship",
+      "familyKind": "attribute",
+      "familyRank": "minor",
+      "headgearInteraction": "attribute-linked",
+      "iconId": "remote-media:gww-icon:rune-of-minor-swordsmanship",
+      "id": 43,
+      "name": "Rune of Minor Swordsmanship",
+      "normalizedName": "rune-of-minor-swordsmanship",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Swordsmanship",
+        "normalizedTitle": "Rune of Minor Swordsmanship",
+        "pageId": 9801,
+        "redirectedFrom": "Rune of Minor Swordsmanship",
+        "requestedTitle": "Rune of Minor Swordsmanship",
+        "revisionId": 6101,
+        "sourceRevisionTimestamp": "2026-08-31T18:01:00Z"
+      },
+      "professionId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:43:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-swordsmanship:6101"
+        ]
+      },
+      "rarityTier": "minor",
+      "templateModifierId": 43,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Swordsmanship"
+    },
+    {
+      "affectedAttributeId": 20,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 2,
+          "attributeId": 20,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:69:effect:attribute-rank"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-swordsmanship:6101"
+            ]
+          },
+          "stacking": {
+            "groupKey": "attribute:20",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        },
+        {
+          "amount": -35,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:69:effect:maximum-health-delta"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-swordsmanship:6101"
+            ]
+          },
+          "stacking": {
+            "groupKey": "attribute-health-penalty:69",
+            "notes": null,
+            "rule": "sum"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ],
+      "eligibility": "profession-armor",
+      "familyKey": "attribute:swordsmanship",
+      "familyKind": "attribute",
+      "familyRank": "major",
+      "headgearInteraction": "attribute-linked",
+      "iconId": "remote-media:gww-icon:rune-of-major-swordsmanship",
+      "id": 69,
+      "name": "Rune of Major Swordsmanship",
+      "normalizedName": "rune-of-major-swordsmanship",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Swordsmanship",
+        "normalizedTitle": "Rune of Major Swordsmanship",
+        "pageId": 9801,
+        "redirectedFrom": "Rune of Major Swordsmanship",
+        "requestedTitle": "Rune of Major Swordsmanship",
+        "revisionId": 6101,
+        "sourceRevisionTimestamp": "2026-08-31T18:01:00Z"
+      },
+      "professionId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:69:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-swordsmanship:6101"
+        ]
+      },
+      "rarityTier": "major",
+      "templateModifierId": 69,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Swordsmanship"
+    },
+    {
+      "affectedAttributeId": 20,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 3,
+          "attributeId": 20,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:95:effect:attribute-rank"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-swordsmanship:6101"
+            ]
+          },
+          "stacking": {
+            "groupKey": "attribute:20",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        },
+        {
+          "amount": -75,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:95:effect:maximum-health-delta"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-swordsmanship:6101"
+            ]
+          },
+          "stacking": {
+            "groupKey": "attribute-health-penalty:95",
+            "notes": null,
+            "rule": "sum"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ],
+      "eligibility": "profession-armor",
+      "familyKey": "attribute:swordsmanship",
+      "familyKind": "attribute",
+      "familyRank": "superior",
+      "headgearInteraction": "attribute-linked",
+      "iconId": "remote-media:gww-icon:rune-of-superior-swordsmanship",
+      "id": 95,
+      "name": "Rune of Superior Swordsmanship",
+      "normalizedName": "rune-of-superior-swordsmanship",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Swordsmanship",
+        "normalizedTitle": "Rune of Superior Swordsmanship",
+        "pageId": 9801,
+        "redirectedFrom": "Rune of Superior Swordsmanship",
+        "requestedTitle": "Rune of Superior Swordsmanship",
+        "revisionId": 6101,
+        "sourceRevisionTimestamp": "2026-08-31T18:01:00Z"
+      },
+      "professionId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:95:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-swordsmanship:6101"
+        ]
+      },
+      "rarityTier": "superior",
+      "templateModifierId": 95,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Swordsmanship"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 30,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:156:effect:maximum-health-delta"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-vigor:6102"
+            ]
+          },
+          "stacking": {
+            "groupKey": "health:vigor",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ],
+      "eligibility": "universal-armor",
+      "familyKey": "vigor",
+      "familyKind": "vigor",
+      "familyRank": "minor",
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-minor-vigor",
+      "id": 156,
+      "name": "Rune of Minor Vigor",
+      "normalizedName": "rune-of-minor-vigor",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Vigor",
+        "normalizedTitle": "Rune of Minor Vigor",
+        "pageId": 9802,
+        "redirectedFrom": "Rune of Minor Vigor",
+        "requestedTitle": "Rune of Minor Vigor",
+        "revisionId": 6102,
+        "sourceRevisionTimestamp": "2026-08-31T18:02:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:156:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-vigor:6102"
+        ]
+      },
+      "rarityTier": "minor",
+      "templateModifierId": 156,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Vigor"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 41,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:157:effect:maximum-health-delta"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-vigor:6102"
+            ]
+          },
+          "stacking": {
+            "groupKey": "health:vigor",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ],
+      "eligibility": "universal-armor",
+      "familyKey": "vigor",
+      "familyKind": "vigor",
+      "familyRank": "major",
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-major-vigor",
+      "id": 157,
+      "name": "Rune of Major Vigor",
+      "normalizedName": "rune-of-major-vigor",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Vigor",
+        "normalizedTitle": "Rune of Major Vigor",
+        "pageId": 9802,
+        "redirectedFrom": "Rune of Major Vigor",
+        "requestedTitle": "Rune of Major Vigor",
+        "revisionId": 6102,
+        "sourceRevisionTimestamp": "2026-08-31T18:02:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:157:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-vigor:6102"
+        ]
+      },
+      "rarityTier": "major",
+      "templateModifierId": 157,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Vigor"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 50,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:158:effect:maximum-health-delta"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-vigor:6102"
+            ]
+          },
+          "stacking": {
+            "groupKey": "health:vigor",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ],
+      "eligibility": "universal-armor",
+      "familyKey": "vigor",
+      "familyKind": "vigor",
+      "familyRank": "superior",
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-superior-vigor",
+      "id": 158,
+      "name": "Rune of Superior Vigor",
+      "normalizedName": "rune-of-superior-vigor",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Vigor",
+        "normalizedTitle": "Rune of Superior Vigor",
+        "pageId": 9802,
+        "redirectedFrom": "Rune of Superior Vigor",
+        "requestedTitle": "Rune of Superior Vigor",
+        "revisionId": 6102,
+        "sourceRevisionTimestamp": "2026-08-31T18:02:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:158:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-vigor:6102"
+        ]
+      },
+      "rarityTier": "superior",
+      "templateModifierId": 158,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Vigor"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 1,
+          "damageScope": "physical",
+          "kind": "physical-damage-reduction",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:159:effect:physical-damage-reduction"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-absorption:6103"
+            ]
+          },
+          "stacking": {
+            "groupKey": "physical-damage:absorption",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "physical-damage",
+          "unit": "damage"
+        }
+      ],
+      "eligibility": "profession-armor",
+      "familyKey": "absorption",
+      "familyKind": "absorption",
+      "familyRank": "minor",
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-minor-absorption",
+      "id": 159,
+      "name": "Rune of Minor Absorption",
+      "normalizedName": "rune-of-minor-absorption",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Absorption",
+        "normalizedTitle": "Rune of Minor Absorption",
+        "pageId": 9803,
+        "redirectedFrom": "Rune of Minor Absorption",
+        "requestedTitle": "Rune of Minor Absorption",
+        "revisionId": 6103,
+        "sourceRevisionTimestamp": "2026-08-31T18:03:00Z"
+      },
+      "professionId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:159:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-absorption:6103"
+        ]
+      },
+      "rarityTier": "minor",
+      "templateModifierId": 159,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Absorption"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 2,
+          "damageScope": "physical",
+          "kind": "physical-damage-reduction",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:160:effect:physical-damage-reduction"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-absorption:6103"
+            ]
+          },
+          "stacking": {
+            "groupKey": "physical-damage:absorption",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "physical-damage",
+          "unit": "damage"
+        }
+      ],
+      "eligibility": "profession-armor",
+      "familyKey": "absorption",
+      "familyKind": "absorption",
+      "familyRank": "major",
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-major-absorption",
+      "id": 160,
+      "name": "Rune of Major Absorption",
+      "normalizedName": "rune-of-major-absorption",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Absorption",
+        "normalizedTitle": "Rune of Major Absorption",
+        "pageId": 9803,
+        "redirectedFrom": "Rune of Major Absorption",
+        "requestedTitle": "Rune of Major Absorption",
+        "revisionId": 6103,
+        "sourceRevisionTimestamp": "2026-08-31T18:03:00Z"
+      },
+      "professionId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:160:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-absorption:6103"
+        ]
+      },
+      "rarityTier": "major",
+      "templateModifierId": 160,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Absorption"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 3,
+          "damageScope": "physical",
+          "kind": "physical-damage-reduction",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:161:effect:physical-damage-reduction"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-absorption:6103"
+            ]
+          },
+          "stacking": {
+            "groupKey": "physical-damage:absorption",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "physical-damage",
+          "unit": "damage"
+        }
+      ],
+      "eligibility": "profession-armor",
+      "familyKey": "absorption",
+      "familyKind": "absorption",
+      "familyRank": "superior",
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-superior-absorption",
+      "id": 161,
+      "name": "Rune of Superior Absorption",
+      "normalizedName": "rune-of-superior-absorption",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Absorption",
+        "normalizedTitle": "Rune of Superior Absorption",
+        "pageId": 9803,
+        "redirectedFrom": "Rune of Superior Absorption",
+        "requestedTitle": "Rune of Superior Absorption",
+        "revisionId": 6103,
+        "sourceRevisionTimestamp": "2026-08-31T18:03:00Z"
+      },
+      "professionId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:161:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-absorption:6103"
+        ]
+      },
+      "rarityTier": "superior",
+      "templateModifierId": 161,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Absorption"
+    },
+    {
+      "affectedAttributeId": 33,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 1,
+          "attributeId": 33,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:167:effect:attribute-rank"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-restoration-magic:6104"
+            ]
+          },
+          "stacking": {
+            "groupKey": "attribute:33",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        }
+      ],
+      "eligibility": "profession-armor",
+      "familyKey": "attribute:restoration-magic",
+      "familyKind": "attribute",
+      "familyRank": "minor",
+      "headgearInteraction": "attribute-linked",
+      "iconId": "remote-media:gww-icon:rune-of-minor-restoration-magic",
+      "id": 167,
+      "name": "Rune of Minor Restoration Magic",
+      "normalizedName": "rune-of-minor-restoration-magic",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Restoration Magic",
+        "normalizedTitle": "Rune of Minor Restoration Magic",
+        "pageId": 9804,
+        "redirectedFrom": "Rune of Minor Restoration Magic",
+        "requestedTitle": "Rune of Minor Restoration Magic",
+        "revisionId": 6104,
+        "sourceRevisionTimestamp": "2026-08-31T18:04:00Z"
+      },
+      "professionId": 8,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:167:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-restoration-magic:6104"
+        ]
+      },
+      "rarityTier": "minor",
+      "templateModifierId": 167,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Restoration_Magic"
+    },
+    {
+      "affectedAttributeId": 33,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 2,
+          "attributeId": 33,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:175:effect:attribute-rank"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-restoration-magic:6104"
+            ]
+          },
+          "stacking": {
+            "groupKey": "attribute:33",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        },
+        {
+          "amount": -35,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:175:effect:maximum-health-delta"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-restoration-magic:6104"
+            ]
+          },
+          "stacking": {
+            "groupKey": "attribute-health-penalty:175",
+            "notes": null,
+            "rule": "sum"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ],
+      "eligibility": "profession-armor",
+      "familyKey": "attribute:restoration-magic",
+      "familyKind": "attribute",
+      "familyRank": "major",
+      "headgearInteraction": "attribute-linked",
+      "iconId": "remote-media:gww-icon:rune-of-major-restoration-magic",
+      "id": 175,
+      "name": "Rune of Major Restoration Magic",
+      "normalizedName": "rune-of-major-restoration-magic",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Restoration Magic",
+        "normalizedTitle": "Rune of Major Restoration Magic",
+        "pageId": 9804,
+        "redirectedFrom": "Rune of Major Restoration Magic",
+        "requestedTitle": "Rune of Major Restoration Magic",
+        "revisionId": 6104,
+        "sourceRevisionTimestamp": "2026-08-31T18:04:00Z"
+      },
+      "professionId": 8,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:175:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-restoration-magic:6104"
+        ]
+      },
+      "rarityTier": "major",
+      "templateModifierId": 175,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Restoration_Magic"
+    },
+    {
+      "affectedAttributeId": 33,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 3,
+          "attributeId": 33,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:183:effect:attribute-rank"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-restoration-magic:6104"
+            ]
+          },
+          "stacking": {
+            "groupKey": "attribute:33",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        },
+        {
+          "amount": -75,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:183:effect:maximum-health-delta"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-restoration-magic:6104"
+            ]
+          },
+          "stacking": {
+            "groupKey": "attribute-health-penalty:183",
+            "notes": null,
+            "rule": "sum"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ],
+      "eligibility": "profession-armor",
+      "familyKey": "attribute:restoration-magic",
+      "familyKind": "attribute",
+      "familyRank": "superior",
+      "headgearInteraction": "attribute-linked",
+      "iconId": "remote-media:gww-icon:rune-of-superior-restoration-magic",
+      "id": 183,
+      "name": "Rune of Superior Restoration Magic",
+      "normalizedName": "rune-of-superior-restoration-magic",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Restoration Magic",
+        "normalizedTitle": "Rune of Superior Restoration Magic",
+        "pageId": 9804,
+        "redirectedFrom": "Rune of Superior Restoration Magic",
+        "requestedTitle": "Rune of Superior Restoration Magic",
+        "revisionId": 6104,
+        "sourceRevisionTimestamp": "2026-08-31T18:04:00Z"
+      },
+      "professionId": 8,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:183:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-restoration-magic:6104"
+        ]
+      },
+      "rarityTier": "superior",
+      "templateModifierId": 183,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Restoration_Magic"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 2,
+          "kind": "maximum-energy-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:352:effect:maximum-energy-delta"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-attunement:6105"
+            ]
+          },
+          "stacking": {
+            "groupKey": "energy:attunement",
+            "notes": null,
+            "rule": "sum"
+          },
+          "target": "character",
+          "unit": "energy"
+        }
+      ],
+      "eligibility": "universal-armor",
+      "familyKey": "attunement",
+      "familyKind": "attunement",
+      "familyRank": null,
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-attunement",
+      "id": 352,
+      "name": "Rune of Attunement",
+      "normalizedName": "rune-of-attunement",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Attunement",
+        "normalizedTitle": "Rune of Attunement",
+        "pageId": 9805,
+        "redirectedFrom": null,
+        "requestedTitle": "Rune of Attunement",
+        "revisionId": 6105,
+        "sourceRevisionTimestamp": "2026-08-31T18:05:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:352:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-attunement:6105"
+        ]
+      },
+      "rarityTier": "minor",
+      "templateModifierId": 352,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Attunement"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "amount": 10,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:rune:353:effect:maximum-health-delta"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-vitae:6106"
+            ]
+          },
+          "stacking": {
+            "groupKey": "health:vitae",
+            "notes": null,
+            "rule": "sum"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ],
+      "eligibility": "universal-armor",
+      "familyKey": "vitae",
+      "familyKind": "vitae",
+      "familyRank": null,
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-vitae",
+      "id": 353,
+      "name": "Rune of Vitae",
+      "normalizedName": "rune-of-vitae",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Vitae",
+        "normalizedTitle": "Rune of Vitae",
+        "pageId": 9806,
+        "redirectedFrom": null,
+        "requestedTitle": "Rune of Vitae",
+        "revisionId": 6106,
+        "sourceRevisionTimestamp": "2026-08-31T18:06:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:353:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-vitae:6106"
+        ]
+      },
+      "rarityTier": "minor",
+      "templateModifierId": 353,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Vitae"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "conditions": [
+            "dazed",
+            "deep-wound"
+          ],
+          "kind": "condition-duration-reduction",
+          "percentage": 20,
+          "provenance": {
+            "claimIds": [
+              "claim:rune:354:effect:condition-duration"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-recovery:6107"
+            ]
+          },
+          "stacking": {
+            "groupKey": "condition-duration:condition:recovery",
+            "notes": "Same rune family is non-stacking; cross-system condition composition remains deferred.",
+            "rule": "highest"
+          },
+          "target": "condition-duration",
+          "unit": "percent"
+        }
+      ],
+      "eligibility": "universal-armor",
+      "familyKey": "condition:recovery",
+      "familyKind": "condition-reduction",
+      "familyRank": null,
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-recovery",
+      "id": 354,
+      "name": "Rune of Recovery",
+      "normalizedName": "rune-of-recovery",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Recovery",
+        "normalizedTitle": "Rune of Recovery",
+        "pageId": 9807,
+        "redirectedFrom": null,
+        "requestedTitle": "Rune of Recovery",
+        "revisionId": 6107,
+        "sourceRevisionTimestamp": "2026-08-31T18:07:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:354:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-recovery:6107"
+        ]
+      },
+      "rarityTier": "major",
+      "templateModifierId": 354,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Recovery"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "conditions": [
+            "bleeding",
+            "crippled"
+          ],
+          "kind": "condition-duration-reduction",
+          "percentage": 20,
+          "provenance": {
+            "claimIds": [
+              "claim:rune:355:effect:condition-duration"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-restoration:6108"
+            ]
+          },
+          "stacking": {
+            "groupKey": "condition-duration:condition:restoration",
+            "notes": "Same rune family is non-stacking; cross-system condition composition remains deferred.",
+            "rule": "highest"
+          },
+          "target": "condition-duration",
+          "unit": "percent"
+        }
+      ],
+      "eligibility": "universal-armor",
+      "familyKey": "condition:restoration",
+      "familyKind": "condition-reduction",
+      "familyRank": null,
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-restoration",
+      "id": 355,
+      "name": "Rune of Restoration",
+      "normalizedName": "rune-of-restoration",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Restoration",
+        "normalizedTitle": "Rune of Restoration",
+        "pageId": 9808,
+        "redirectedFrom": null,
+        "requestedTitle": "Rune of Restoration",
+        "revisionId": 6108,
+        "sourceRevisionTimestamp": "2026-08-31T18:08:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:355:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-restoration:6108"
+        ]
+      },
+      "rarityTier": "major",
+      "templateModifierId": 355,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Restoration"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "conditions": [
+            "blind",
+            "weakness"
+          ],
+          "kind": "condition-duration-reduction",
+          "percentage": 20,
+          "provenance": {
+            "claimIds": [
+              "claim:rune:356:effect:condition-duration"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-clarity:6109"
+            ]
+          },
+          "stacking": {
+            "groupKey": "condition-duration:condition:clarity",
+            "notes": "Same rune family is non-stacking; cross-system condition composition remains deferred.",
+            "rule": "highest"
+          },
+          "target": "condition-duration",
+          "unit": "percent"
+        }
+      ],
+      "eligibility": "universal-armor",
+      "familyKey": "condition:clarity",
+      "familyKind": "condition-reduction",
+      "familyRank": null,
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-clarity",
+      "id": 356,
+      "name": "Rune of Clarity",
+      "normalizedName": "rune-of-clarity",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Clarity",
+        "normalizedTitle": "Rune of Clarity",
+        "pageId": 9809,
+        "redirectedFrom": null,
+        "requestedTitle": "Rune of Clarity",
+        "revisionId": 6109,
+        "sourceRevisionTimestamp": "2026-08-31T18:09:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:356:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-clarity:6109"
+        ]
+      },
+      "rarityTier": "major",
+      "templateModifierId": 356,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Clarity"
+    },
+    {
+      "affectedAttributeId": null,
+      "displayState": "structured-only",
+      "effects": [
+        {
+          "conditions": [
+            "disease",
+            "poison"
+          ],
+          "kind": "condition-duration-reduction",
+          "percentage": 20,
+          "provenance": {
+            "claimIds": [
+              "claim:rune:357:effect:condition-duration"
+            ],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": [
+              "review:epic-10-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-10-fixture:rune:rune-of-purity:6110"
+            ]
+          },
+          "stacking": {
+            "groupKey": "condition-duration:condition:purity",
+            "notes": "Same rune family is non-stacking; cross-system condition composition remains deferred.",
+            "rule": "highest"
+          },
+          "target": "condition-duration",
+          "unit": "percent"
+        }
+      ],
+      "eligibility": "universal-armor",
+      "familyKey": "condition:purity",
+      "familyKind": "condition-reduction",
+      "familyRank": null,
+      "headgearInteraction": "not-applicable",
+      "iconId": "remote-media:gww-icon:rune-of-purity",
+      "id": 357,
+      "name": "Rune of Purity",
+      "normalizedName": "rune-of-purity",
+      "pageIdentity": {
+        "canonicalTitle": "Rune of Purity",
+        "normalizedTitle": "Rune of Purity",
+        "pageId": 9810,
+        "redirectedFrom": null,
+        "requestedTitle": "Rune of Purity",
+        "revisionId": 6110,
+        "sourceRevisionTimestamp": "2026-08-31T18:10:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:rune:357:identity"
+        ],
+        "notes": "Parsed from digest-bound EPIC-10 source snapshot.",
+        "reviewIds": [
+          "review:epic-10-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-10-fixture:rune:rune-of-purity:6110"
+        ]
+      },
+      "rarityTier": "major",
+      "templateModifierId": 357,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Rune_of_Purity"
+    }
+  ],
+  "schemaVersion": 1,
+  "sectionDigests": [
+    {
+      "digest": "c4904ed8a5e986406269cd89208743ef401a71d2b3e257659249b11774a2c51a",
+      "section": "dependencyDigests"
+    },
+    {
+      "digest": "2e057596ca400291fc31626f85ac3df76fcfb550363abbe2cdd8155c925bd8ad",
+      "section": "sourceSet"
+    },
+    {
+      "digest": "dda41fdc5670613945baf34fdd0387016d5c03e9e12b6ed943769c4d7b9b730f",
+      "section": "dispositions"
+    },
+    {
+      "digest": "0b43668d3cde093a8d151a2a6969fae2a4133a79d6e25ecb04d23b99fc1f7853",
+      "section": "runes"
+    },
+    {
+      "digest": "0fa14e54d090be18a456d6a3a5747dc914ad6a51daf1fee7cb148bb9b1d3dc1b",
+      "section": "remoteMedia"
+    }
+  ],
+  "sourceSet": {
+    "acceptedRuneCount": 18,
+    "blockingFindingCount": 0,
+    "detailPageTitles": [
+      "Rune of Attunement",
+      "Rune of Clarity",
+      "Rune of Major Absorption",
+      "Rune of Major Restoration Magic",
+      "Rune of Major Swordsmanship",
+      "Rune of Major Vigor",
+      "Rune of Minor Absorption",
+      "Rune of Minor Restoration Magic",
+      "Rune of Minor Swordsmanship",
+      "Rune of Minor Vigor",
+      "Rune of Purity",
+      "Rune of Recovery",
+      "Rune of Restoration",
+      "Rune of Superior Absorption",
+      "Rune of Superior Restoration Magic",
+      "Rune of Superior Swordsmanship",
+      "Rune of Superior Vigor",
+      "Rune of Vitae"
+    ],
+    "exclusionCount": 3,
+    "idPolicy": "Accepted player-usable armor runes require a unique verified templateModifierId.",
+    "planningAmendment": null,
+    "relationshipCount": 6,
+    "seedTitles": [
+      "Equipment template format",
+      "Rune",
+      "Attribute bonus"
+    ],
+    "sourceAuthority": "Equipment template modifier rows are the ID authority; Rune and Attribute bonus pages provide finite inventory, stacking, and headgear evidence; detail pages provide page identity.",
+    "sourcePlanDigest": "25c0e45070f87241724ba921d02b445477cfc2b774bd2504edd8969a9c3fe3d8",
+    "sourceSetDigest": "072f050ba688ef435cf09a9cf11a3796e456a69a54c1f3956ea5e272d85c1458",
+    "unsupportedCount": 1
+  }
+}

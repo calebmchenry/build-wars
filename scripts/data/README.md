@@ -28,13 +28,17 @@ npm run data:regenerate
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-03-professions-attributes
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-04-skills
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-10-runes
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline --profile epic-03-professions-attributes --root .
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline --profile epic-04-skills --root . --snapshot-set work/runs/data-ingestion/epic-04/snapshot-sets/<selected>.snapshot-set.json
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline --profile epic-10-runes --root . --snapshot-set work/runs/data-ingestion/epic-10/snapshot-sets/<selected>.snapshot-set.json
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --allow-live-network --title "Guild Wars Wiki:Game integration/Skills/0"
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-03-professions-attributes --root . --allow-live-network
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-04-skills --root . --allow-live-network --stage discover
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-04-skills --root . --allow-live-network --stage fetch --source-plan work/runs/data-ingestion/epic-04/source-plans/<digest>.source-plan.json --confirm-source-set-digest <digest>
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-10-runes --root . --allow-live-network --stage discover
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-10-runes --root . --allow-live-network --stage fetch --source-plan work/runs/data-ingestion/epic-10/source-plans/<digest>.source-plan.json --confirm-source-set-digest <source-set-digest>
 ```
 
 Exit codes:
@@ -49,16 +53,17 @@ Exit codes:
 - `fixture`: uses committed minimized synthetic fixtures from `test/fixtures/data-ingestion`, a fixed
   UTC clock, and an output root under ignored `work/runs/data-ingestion`.
 - `offline`: reads existing ignored snapshot manifests from the configured output root without
-  network access. EPIC-04 requires one explicit complete `--snapshot-set` manifest and rejects
+  network access. EPIC-04 and EPIC-10 require one explicit complete `--snapshot-set` manifest and reject
   partial, duplicate, mixed-profile, digest-mismatched, or path-escaping children.
 - `live`: manually fetches named Guild Wars Wiki pages through the shared MediaWiki client. It
-  requires `--allow-live-network` and at least one `--title`.
+  requires `--allow-live-network` and at least one `--title` unless the selected profile owns its
+  fixed source graph.
 
 The default `guild-wars-wiki` profile preserves the EPIC-02 skill-ID fixture proof. Fixture mode also
-writes the EPIC-03 professions/attributes and EPIC-04 skills fixture catalogs as side effects so
+writes the EPIC-03 professions/attributes, EPIC-04 skills, and EPIC-10 runes fixture catalogs as side effects so
 `npm run data:regenerate` covers all registered production profiles offline. Run
-`epic-03-professions-attributes` or `epic-04-skills` directly for profile-specific fixture,
-offline, or live catalog work.
+`epic-03-professions-attributes`, `epic-04-skills`, or `epic-10-runes` directly for
+profile-specific fixture, offline, or live catalog work.
 
 ## Source Limits
 
@@ -85,13 +90,22 @@ drift, fetches planned detail pages in deterministic batches, writes one complet
 `SourceSnapshotSetManifest`, and promotes only the exact catalog/manifest/QA paths. CLI options may
 lower smoke-test limits such as `--detail-limit`, but code-owned caps remain the ceiling.
 
+The EPIC-10 profile is locked to `Equipment template format`, `Rune`, and `Attribute bonus` as seed
+authority pages, the promoted EPIC-03 catalog as the profession/attribute dependency, verified rune
+detail pages, and metadata-only rune icon `imageinfo`. Discovery writes a digest-bound source plan
+that accounts for accepted armor runes, supported relationships, explicit exclusions, unsupported
+rows, and blocking findings. Fetch mode requires the reviewed plan path and exact source-set digest,
+rechecks drift, fetches only planned detail pages and icon metadata, writes one complete
+snapshot-set manifest, and promotes only `data/generated/epic-10/runes.catalog.json`, its adjacent
+manifest, and `data/qa/epic-10/runes.catalog.qa.json`.
+
 ## Pipeline Contract
 
 | Stage     | Inputs                                               | Outputs                                                             | Required contracts and gates                                                                                                                                                              |
 | --------- | ---------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Fetch     | Source profile and query parameters                  | Raw source payload in `data/source-snapshots`                       | Live mode only; source values are untrusted.                                                                                                                                              |
 | Snapshot  | Raw payload and source metadata                      | `SourceSnapshotManifest` plus ignored raw payload                   | Records source family, page/file identity, revision identity, source revision timestamp, retrieval timestamp, artifact path, SHA-256 digest, and ignored retention policy.                |
-| Replay    | Complete EPIC-04 snapshot-set manifest               | Verified selected snapshot payloads                                 | Requires one profile-bound manifest; rejects partial, duplicate, extra/missing, mixed-profile, digest-mismatched, or path-escaping inputs before catalog assembly.                        |
+| Replay    | Complete selected snapshot-set manifest              | Verified selected snapshot payloads                                 | EPIC-04 and EPIC-10 require one profile-bound manifest; rejects partial, duplicate, extra/missing, mixed-profile, digest-mismatched, or path-escaping inputs before catalog assembly.     |
 | Extract   | Verified snapshot payloads                           | Skill-ID mappings, parser proof, and icon metadata                  | Extractors consume snapshots, not a network client. Nested wiki templates are traversed through `mwparserfromhell`, not regex-only parsing.                                               |
 | Normalize | Extracted records and diagnostics                    | Canonical JSON plus `GeneratedArtifactManifest` in `data/generated` | UTF-8, LF-terminated, two-space indented, key-stable, finite-number-only, stable record order, provenance-bearing, and metadata-only media references where allowed.                      |
 | Validate  | Generated artifact manifest and records              | `QaReport` JSON and bounded text summary in `data/qa`               | Reports provenance gaps, stale/unverified revisions, rights ambiguity, invalid source IDs, copied text, icon metadata gaps, generated diffs, schema/shape errors, and integrity failures. |
@@ -140,6 +154,21 @@ descriptions. Description state is explicit: `reviewed-text`, `structured-only`,
 `unsupported`; the current promotion uses structured-only runtime text and records source text
 digests for future review invalidation.
 
+## EPIC-10 Profile
+
+`epic-10-runes` normalizes Guild Wars armor rune facts into
+`data/generated/epic-10/runes.catalog.json`. The runtime catalog contains source-set summary,
+compact dispositions, EPIC-03 dependency digests, rune records, verified template modifier IDs,
+family/rank/tier fields, profession and affected-attribute joins, typed effect-level stacking,
+headgear handoff facts, nullable metadata-only icons, section digests, and a semantic
+`catalogVersion`.
+
+Schema v1 excludes armor shell legality, equipment editor state, title/allegiance effects, full
+health/energy/stat totals, raw page bodies, copied source-authored long prose, source plans,
+snapshot-set manifests, QA summaries, icon bytes, thumbnails, screenshots, and runtime wiki access.
+Attribute rune bonuses use highest-per-attribute stacking while verified major/superior health
+penalties remain independently countable by equipped occurrence.
+
 ## Artifacts
 
 Default roots under a command `--root` are:
@@ -154,6 +183,9 @@ minimized, provenance-bearing, and used by Python and Vitest contract tests.
 The EPIC-03 synthetic golden fixture lives under
 `test/fixtures/data-ingestion/generated/fixture-professions-attributes.catalog.json` and is generated
 from minimized fixture pages in `test/fixtures/data-ingestion/professions-attributes`.
+The EPIC-04 and EPIC-10 synthetic golden fixtures live under
+`test/fixtures/data-ingestion/generated/fixture-skills.catalog.json` and
+`test/fixtures/data-ingestion/generated/fixture-runes.catalog.json`.
 
 ## Baselines
 

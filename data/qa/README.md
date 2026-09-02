@@ -57,3 +57,14 @@ coverage, split groups, icon metadata, provenance, output caps, artifact integri
 and app/public release gates. Missing detail pages, missing icon metadata, unsupported progression
 forms, and non-catalog skill-source shapes must be dispositioned by bounded review evidence before
 promotion can pass.
+
+BW-1005 promotes one machine-readable EPIC-10 QA report:
+
+- `data/qa/epic-10/runes.catalog.qa.json`
+
+The adjacent `.summary.txt` remains ignored. The QA JSON records source authority review,
+source-set accounting, page resolution, EPIC-03 joins, rune family/rank coverage, verified template
+modifier IDs, effects, effect-level stacking, headgear handoff facts, icon metadata, copied-text
+policy, output caps, artifact integrity, summary counts, and app/public release gates. Live
+promotion accepted the bounded `ICON_NON_64_DIMENSIONS` warning class for remote icon metadata while
+keeping `cachedBytes: false` and storing no icon binaries.

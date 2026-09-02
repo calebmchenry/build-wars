@@ -22,6 +22,9 @@ reports.
 - `skill_infobox.py`, `skill_progression.py`, and `skill_catalog.py`: EPIC-04 skill field,
   cost/timing, description-state, progression, split-group, dependency, QA, and catalog assembly
   logic.
+- `rune_source_set.py`, `rune_extractor.py`, `rune_semantics.py`, and `rune_catalog.py`: EPIC-10
+  source authority planning, rune page resolution, EPIC-03 joins, typed effect/stacking semantics,
+  headgear handoff facts, QA, and catalog assembly logic.
 - `icons.py`: metadata-only icon candidate resolution for explicit `image=` values and default
   `File:{title}.jpg` / `File:{title}.png` candidates.
 - `artifacts.py`: canonical JSON and `GeneratedArtifactManifest` writing with digest and baseline
@@ -58,6 +61,10 @@ adapter flags.
 - High-volume EPIC-04 refreshes must use discover first, then digest-confirmed fetch, then exact
   `--snapshot-set` offline replay. Do not broaden the source graph beyond the approved index and
   ranged skill pages without a recorded planning amendment.
+- EPIC-10 refreshes must use the locked `Equipment template format`, `Rune`, and `Attribute bonus`
+  authority pages, the reviewed source-set digest, planned rune detail pages, metadata-only
+  `imageinfo`, and selected complete snapshot-set replay. Do not replace this with a category crawl
+  or source-provided URLs without a recorded planning amendment.
 
 ## Registered Profiles
 
@@ -70,8 +77,11 @@ adapter flags.
   `Guild Wars Wiki:Game integration/Skills`, linked ranged pages, large finite caps, digest-bound
   source plans, selected complete snapshot-set replay, exact promoted paths, structured-only
   description policy, and metadata-only icon handling.
+- `epic-10-runes`: EPIC-10 runes catalog. The profile locks three seed authority pages, the EPIC-03
+  dependency, finite detail-page and icon metadata caps, digest-bound source plans, selected
+  complete snapshot-set replay, exact promoted paths, effect-level stacking, and metadata-only icon
+  handling.
 
-Default fixture regeneration writes both the EPIC-02 proof and the EPIC-03 fixture catalog. Direct
-fixture regeneration also writes the EPIC-04 fixture catalog. Direct EPIC-03 fixture/offline/live
-commands use `--profile epic-03-professions-attributes`; direct EPIC-04 commands use
-`--profile epic-04-skills`.
+Default fixture regeneration writes the EPIC-02 proof plus the EPIC-03, EPIC-04, and EPIC-10
+fixture catalogs. Direct profile commands use `--profile epic-03-professions-attributes`,
+`--profile epic-04-skills`, or `--profile epic-10-runes`.

@@ -5,6 +5,9 @@
 - `validateBuild(input)` returns a deterministic `ValidationResult`.
 - `calculateEffectiveAttributeRank(input)` returns either a resolved rank breakdown or typed
   unresolved reasons.
+- `summarizeAttributeRuneEffects(catalog, equippedEntries)` converts caller-owned equipped rune
+  instances into highest-per-attribute rank adjustments plus independently counted attribute-rune
+  health penalties.
 
 Production rule-engine modules do not import React, DOM/browser APIs, browser storage, network
 clients, app modules, generated catalog JSON, manifests, QA reports, source snapshots, Python data
@@ -91,6 +94,13 @@ typed unresolved result instead of throwing or clamping.
 Headgear, rune, weapon, title, temporary-effect, and manual adjustment semantics are not derived
 from equipment or title catalogs in this sprint. Later epics own stacking policy and ownership
 validation.
+
+`summarizeAttributeRuneEffects` is the narrow EPIC-10 bridge for attribute runes only. It accepts
+runtime rune catalog data plus caller-provided equipped instance keys, reports unknown IDs,
+duplicate source keys, malformed records, note-only/unknown effects, and non-attribute deferrals,
+then returns `EffectiveAttributeRankAdjustment`-compatible rune adjustments. It does not choose armor
+slots, validate armor legality, apply headgear bonuses, aggregate Vigor/Vitae/Attunement/Absorption,
+calculate full health or energy totals, read generated files, or mutate caller data.
 
 ## Deferred Scope
 

@@ -1,0 +1,10 @@
+{{Item infobox
+| image = [[Image:Rune All Major.png]]
+| name = Rune of Recovery
+| type = [[Rune]]
+| bonus = -20% duration of<br>[[Dazed]] and [[Deep Wound]]
+| profession = Any
+| stackable = n
+| rarity = uncommon
+}}
+Rune of Recovery provides fixture condition duration facts.

@@ -76,6 +76,30 @@ class CliTests(unittest.TestCase):
         finally:
             shutil.rmtree(tmp)
 
+    def test_epic10_fixture_profile_command_prints_catalog_summary(self) -> None:
+        tmp = Path(tempfile.mkdtemp(prefix="bw_cli_epic10_test_"))
+        stdout = io.StringIO()
+        try:
+            with contextlib.redirect_stdout(stdout):
+                exit_code = main(
+                    [
+                        "fixture",
+                        "--profile",
+                        "epic-10-runes",
+                        "--root",
+                        str(tmp),
+                        "--fixture-root",
+                        str(FIXTURE_ROOT),
+                    ]
+                )
+
+            self.assertEqual(exit_code, 0)
+            output = stdout.getvalue()
+            self.assertIn("records: 18", output)
+            self.assertIn("runes.catalog.qa.json", output)
+        finally:
+            shutil.rmtree(tmp)
+
     def test_live_mode_requires_explicit_network_intent_and_title(self) -> None:
         stderr = io.StringIO()
         with contextlib.redirect_stderr(stderr):
@@ -85,6 +109,10 @@ class CliTests(unittest.TestCase):
                 main(["live", "--allow-live-network"])
             with self.assertRaises(SystemExit):
                 main(["live", "--profile", "epic-04-skills", "--allow-live-network"])
+            with self.assertRaises(SystemExit):
+                main(["live", "--profile", "epic-10-runes", "--allow-live-network"])
+            with self.assertRaises(SystemExit):
+                main(["offline", "--profile", "epic-10-runes"])
 
     def test_blocking_baseline_mismatch_writes_qa_report_before_nonzero_exit(self) -> None:
         tmp = Path(tempfile.mkdtemp(prefix="bw_cli_block_test_"))

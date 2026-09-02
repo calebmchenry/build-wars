@@ -1,0 +1,25 @@
+== Modifier IDs ==
+*13 - Icy Sword Hilt
+*43 - Rune of Minor Swordsmanship ([[Warrior]])
+*69 - Rune of Major Swordsmanship ([[Warrior]])
+*95 - Rune of Superior Swordsmanship ([[Warrior]])
+*156 - Rune of Minor Vigor
+*157 - Rune of Major Vigor
+*158 - Rune of Superior Vigor
+*159 - Rune of Minor Absorption ([[Warrior]])
+*160 - Rune of Major Absorption ([[Warrior]])
+*161 - Rune of Superior Absorption ([[Warrior]])
+*167 - Rune of Minor Restoration Magic ([[Ritualist]])
+*175 - Rune of Major Restoration Magic ([[Ritualist]])
+*183 - Rune of Superior Restoration Magic ([[Ritualist]])
+*290 - Survivor Insignia
+*352 - Rune of Attunement
+*353 - Rune of Vitae
+*354 - Rune of Recovery
+*355 - Rune of Restoration
+*356 - Rune of Clarity
+*357 - Rune of Purity
+*390 - Rune of Mystery
+
+== See also ==
+*[[Skill Template format|Skill template format]]

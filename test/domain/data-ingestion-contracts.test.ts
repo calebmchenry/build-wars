@@ -6,10 +6,12 @@ import {
   type ProfessionAttributeCatalog,
   type QaReport,
   type RemoteMediaMetadata,
+  type RuneCatalog,
   type SkillCatalog,
   type SourceReference
 } from "../../src/domain";
 import professionsAttributesGolden from "../fixtures/data-ingestion/generated/fixture-professions-attributes.catalog.json";
+import runesGolden from "../fixtures/data-ingestion/generated/fixture-runes.catalog.json";
 import skillsGolden from "../fixtures/data-ingestion/generated/fixture-skills.catalog.json";
 import golden from "../fixtures/data-ingestion/generated/fixture-skill-id-map.json";
 
@@ -141,6 +143,25 @@ describe("data ingestion generated contracts", () => {
     expect(firstSkill.templateId).toBe(firstSkill.id);
     expect(firstSkill.description.state).toBe("structured-only");
     expect(firstSkill.iconId === null || typeof firstSkill.iconId === "string").toBe(true);
+    expect(catalog.remoteMedia.every((media) => media.cachedBytes === false)).toBe(true);
+  });
+
+  it("keeps the EPIC-10 Python rune catalog aligned with the TypeScript wire contract", () => {
+    const catalog = runesGolden as unknown as RuneCatalog;
+    const superiorSword = catalog.runes.find(
+      (rune) => rune.name === "Rune of Superior Swordsmanship"
+    );
+
+    expect(catalog.schemaVersion).toBe(SOURCE_POLICY_SCHEMA_VERSION);
+    expect(catalog.profile.id).toBe("epic-10-runes");
+    expect(catalog.dependencyDigests[0]?.id).toBe("epic-03-professions-attributes");
+    expect(catalog.sourceSet.acceptedRuneCount).toBe(catalog.runes.length);
+    expect(catalog.sourceSet.blockingFindingCount).toBe(0);
+    expect(superiorSword?.templateModifierId).toBe(95);
+    expect(superiorSword?.effects.map((effect) => effect.kind)).toEqual([
+      "attribute-rank",
+      "maximum-health-delta"
+    ]);
     expect(catalog.remoteMedia.every((media) => media.cachedBytes === false)).toBe(true);
   });
 });

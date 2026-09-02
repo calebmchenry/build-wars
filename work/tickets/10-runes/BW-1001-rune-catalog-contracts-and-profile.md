@@ -2,9 +2,11 @@
 id: BW-1001
 title: Rune Catalog Contracts and EPIC-10 Profile
 epic: EPIC-10
-status: ready
+status: done
 priority: critical
 depends_on: []
+planned_sprint: SPRINT-011
+completed_sprint: SPRINT-011
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -47,3 +49,11 @@ rune facts without adding equipment UI.
 - `npm run typecheck`
 - Focused Vitest contract tests for rune catalog records and effect variants
 - Focused Python profile tests proving existing content profiles still work
+
+## Closeout Evidence
+
+- SPRINT-011 added the framework-neutral `RuneCatalog`/`CatalogRuneRecord` contracts, effect-level
+  stacking types, rune lookup helpers, and `epic-10-runes` profile/CLI routing.
+- Validation passed: `npm run typecheck`,
+  `npm run test:run -- test/domain/contracts.test.ts test/domain/rune-catalog.test.ts test/domain/data-ingestion-contracts.test.ts`,
+  and `PYTHONPATH=scripts/data .venv-data/bin/python -m unittest build_wars_ingest.tests.test_profiles build_wars_ingest.tests.test_cli`.

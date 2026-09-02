@@ -1,0 +1,4132 @@
+{
+  "appConsumptionGate": "pass",
+  "artifactManifestPath": "data/generated/epic-10/runes.catalog.manifest.json",
+  "artifactPath": "data/generated/epic-10/runes.catalog.json",
+  "findings": [
+    {
+      "category": "copied-text-without-attribution",
+      "code": "RUNE_COPIED_PROSE_EXCLUDED",
+      "disposition": "resolved",
+      "evidence": [
+        {
+          "kind": "review-note",
+          "notes": "Source prose remains outside runtime JSON.",
+          "reference": "review:epic-10-effect-semantics:2026-09-02"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:rune_copied_prose_excluded:95c35f22a262",
+      "rationale": "Runtime rune records use structured effects and exclude source-authored long prose.",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": "data/generated/epic-10/runes.catalog.json",
+        "fieldPath": null,
+        "kind": "release",
+        "recordId": null,
+        "sourceIds": []
+      },
+      "severity": "info"
+    },
+    {
+      "category": "manual-override",
+      "code": "RUNE_SOURCE_AUTHORITY_REVIEW",
+      "disposition": "resolved",
+      "evidence": [
+        {
+          "kind": "review-note",
+          "notes": "Source graph is digest-bound and finite.",
+          "reference": "review:epic-10-source-set:2026-09-02"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:rune_source_authority_review:545bbf2173e4",
+      "rationale": "Finite EPIC-10 source authority was reviewed before catalog promotion.",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": "data/generated/epic-10/runes.catalog.json",
+        "fieldPath": null,
+        "kind": "release",
+        "recordId": null,
+        "sourceIds": []
+      },
+      "severity": "info"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Attunement"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:fba6b0889e0d",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Attunement",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:41388:2640203"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Clarity"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:3f08becb96f1",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Clarity",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:41402:2702808"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Absorption"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:20ed1187c84f",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Absorption",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43185:2692081"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Air Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:9bb8bd9b9169",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Air Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43156:2692082"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Axe Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:03e51bc0cbae",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Axe Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43478:2692083"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Beast Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:d09b802f0527",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Beast Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44750:2692084"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Blood Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:2da076446c1c",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Blood Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43525:2692085"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Channeling Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:9ac989c65eaa",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Channeling Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45160:2692086"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Command"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:9b6453928f2d",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Command",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43537:2692087"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Communing"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:8ca976caa3f7",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Communing",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45168:2692088"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Critical Strikes"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:25d1cccacdfd",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Critical Strikes",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45136:2692089"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Curses"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:ec5211dd9237",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Curses",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43496:2692090"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Dagger Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:9d8578afc952",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Dagger Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45129:2692091"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Deadly Arts"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:d663f3442e31",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Deadly Arts",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45122:2692092"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Death Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:4b9d6637a353",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Death Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43538:2692093"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Divine Favor"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:3c6b95317737",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Divine Favor",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44772:2692094"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Domination Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:7b93b051f77d",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Domination Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44839:2692096"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Earth Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:b5350dc5b58b",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Earth Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43155:2692097"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Earth Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:d41c832d8509",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Earth Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43526:2692098"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Energy Storage"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:c28501d6a1c4",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Energy Storage",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43157:2692099"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Expertise"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:1ff192d474f2",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Expertise",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44742:2692100"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Fast Casting"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:8448a67700d7",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Fast Casting",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44824:2692101"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Fire Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:641ca4c7c46a",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Fire Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43150:2692102"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Hammer Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:9a32d382e933",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Hammer Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43479:2692103"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Healing Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:9640f0b4e16b",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Healing Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44780:2692049"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Illusion Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:5c94e9d6a11a",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Illusion Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44831:2692104"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Inspiration Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:9bcec0778bc9",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Inspiration Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44838:2692105"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Leadership"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:211c88bf9f08",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Leadership",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43536:2692106"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Marksmanship"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:5550972d1746",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Marksmanship",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44757:2692107"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Motivation"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:7f2103a594b2",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Motivation",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43545:2692108"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Mysticism"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:a825e31fd88a",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Mysticism",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43531:2692109"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Protection Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:ab1605bd2576",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Protection Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44795:2692110"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Restoration Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:439ab45bc830",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Restoration Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45152:2692111"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Scythe Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:1f4544524762",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Scythe Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43534:2692112"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Shadow Arts"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:bc88023a5d90",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Shadow Arts",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45114:2692113"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Smiting Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:841896f4e943",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Smiting Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44787:2692114"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Soul Reaping"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:50fe0921c3e3",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Soul Reaping",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43518:2692115"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Spawning Power"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:6623d2ff2866",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Spawning Power",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45145:2692116"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Spear Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:0f07497a52c1",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Spear Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43546:2692117"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Strength"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:9fbd5757fd3b",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Strength",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43464:2692118"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Swordsmanship"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:e253023d4b8e",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Swordsmanship",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43468:2729304"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Tactics"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:a32777811df0",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Tactics",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43457:2692120"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Vigor"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:9a645bd9a182",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Vigor",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43180:2692064"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Water Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:f07928d00229",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Water Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43154:2692121"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Wilderness Survival"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:d4cffbc2bbe9",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Wilderness Survival",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44764:2692122"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Major Wind Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:e097eb513836",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Major Wind Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43535:2692123"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Absorption"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:2b3fad664c68",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Absorption",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43185:2692081"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Air Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:f7ccc5fde809",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Air Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43156:2692082"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Axe Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:27d52b3446ab",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Axe Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43478:2692083"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Beast Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:a86a80e2a901",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Beast Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44750:2692084"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Blood Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:d9158a9233be",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Blood Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43525:2692085"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Channeling Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:19656bbec39c",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Channeling Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45160:2692086"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Command"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:218bdd5633a3",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Command",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43537:2692087"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Communing"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:c6b593e379cf",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Communing",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45168:2692088"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Critical Strikes"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:60e854b1830b",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Critical Strikes",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45136:2692089"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Curses"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:f0f3e1d5ee46",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Curses",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43496:2692090"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Dagger Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:3cb4466b7d37",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Dagger Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45129:2692091"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Deadly Arts"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:e37a14876b54",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Deadly Arts",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45122:2692092"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Death Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:8d717a41776b",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Death Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43538:2692093"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Divine Favor"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:adc930624b3d",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Divine Favor",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44772:2692094"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Domination Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:5f3bb3d66289",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Domination Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44839:2692096"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Earth Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:15be195b27d9",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Earth Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43155:2692097"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Earth Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:9d77ca0fbba7",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Earth Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43526:2692098"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Energy Storage"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:34e1b48bf594",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Energy Storage",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43157:2692099"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Expertise"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:c1936eafef98",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Expertise",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44742:2692100"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Fast Casting"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:1cd9e3f84290",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Fast Casting",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44824:2692101"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Fire Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:f3d90d8ed44c",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Fire Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43150:2692102"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Hammer Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:3696afaeb98c",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Hammer Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43479:2692103"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Healing Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:cc986edb27e2",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Healing Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44780:2692049"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Illusion Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:c50524782583",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Illusion Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44831:2692104"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Inspiration Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:a9e0d3c8513c",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Inspiration Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44838:2692105"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Leadership"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:e51f9545fbbf",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Leadership",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43536:2692106"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Marksmanship"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:12756e2035bb",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Marksmanship",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44757:2692107"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Motivation"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:ca2b92cea4fc",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Motivation",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43545:2692108"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Mysticism"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:1fa7624799fd",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Mysticism",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43531:2692109"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Protection Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:e0beefebc221",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Protection Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44795:2692110"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Restoration Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:fbaf8178ac17",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Restoration Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45152:2692111"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Scythe Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:ca02b34b1143",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Scythe Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43534:2692112"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Shadow Arts"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:f9b32c4dee64",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Shadow Arts",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45114:2692113"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Smiting Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:028f7ed13699",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Smiting Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44787:2692114"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Soul Reaping"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:a407e8bd6b5a",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Soul Reaping",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43518:2692115"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Spawning Power"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:58fb97e8f9b9",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Spawning Power",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45145:2692116"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Spear Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:f2fd06f4fcc5",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Spear Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43546:2692117"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Strength"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:f3b2dbe88730",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Strength",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43464:2692118"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Swordsmanship"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:0b6531dc2f9a",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Swordsmanship",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43468:2729304"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Tactics"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:8caabf3f23a2",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Tactics",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43457:2692120"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Vigor"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:6a3c4271e439",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Vigor",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43180:2692064"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Water Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:258a809f335e",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Water Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43154:2692121"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Wilderness Survival"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:2099324bd521",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Wilderness Survival",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44764:2692122"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Minor Wind Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:22fe45619190",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Minor Wind Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43535:2692123"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Purity"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:e4c32f08a60a",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Purity",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:41403:2702902"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Recovery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:6a1f1417d34d",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Recovery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:41398:2702903"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Restoration"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:793f4173c1a1",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Restoration",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:41401:2699196"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Absorption"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:858728a4f2af",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Absorption",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43185:2692081"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Air Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:84765e3edfa8",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Air Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43156:2692082"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Axe Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:7078686f6d22",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Axe Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43478:2692083"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Beast Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:c654a82e3038",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Beast Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44750:2692084"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Blood Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:99426e8ef2e7",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Blood Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43525:2692085"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Channeling Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:bbd02ba9b4df",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Channeling Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45160:2692086"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Command"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:51db90d7aaf8",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Command",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43537:2692087"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Communing"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:8a27bec3bcbc",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Communing",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45168:2692088"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Critical Strikes"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:098cee198eed",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Critical Strikes",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45136:2692089"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Curses"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:bcb4289d880c",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Curses",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43496:2692090"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Dagger Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:552b9832547b",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Dagger Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45129:2692091"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Deadly Arts"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:d58d42ec01a2",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Deadly Arts",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45122:2692092"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Death Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:1c990dacf40c",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Death Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43538:2692093"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Divine Favor"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:36e6621ee159",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Divine Favor",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44772:2692094"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Domination Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:23dbc20e1a3c",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Domination Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44839:2692096"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Earth Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:10d87f05c341",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Earth Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43155:2692097"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Earth Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:45bc43a500ed",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Earth Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43526:2692098"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Energy Storage"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:d6adeddf16f7",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Energy Storage",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43157:2692099"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Expertise"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:d0ab5f601134",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Expertise",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44742:2692100"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Fast Casting"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:d85f57395b91",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Fast Casting",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44824:2692101"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Fire Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:2e2970d669f3",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Fire Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43150:2692102"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Hammer Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:21ca71904150",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Hammer Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43479:2692103"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Healing Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:1bebbe1c553c",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Healing Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44780:2692049"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Illusion Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:7235247d479c",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Illusion Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44831:2692104"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Inspiration Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:840d16c0a035",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Inspiration Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44838:2692105"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Leadership"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:01e4c57517d9",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Leadership",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43536:2692106"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Marksmanship"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:236c4077d4e9",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Marksmanship",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44757:2692107"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Motivation"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:653bfa83730b",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Motivation",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43545:2692108"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Mysticism"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:0fa6b84274ef",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Mysticism",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43531:2692109"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Protection Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:b4e0cd4a7103",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Protection Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44795:2692110"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Restoration Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:9a91829b5de2",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Restoration Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45152:2692111"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Scythe Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:6d8218889c1a",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Scythe Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43534:2692112"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Shadow Arts"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:acdc3313065d",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Shadow Arts",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45114:2692113"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Smiting Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:0aea3b10f9e8",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Smiting Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44787:2692114"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Soul Reaping"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:d47fa4748874",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Soul Reaping",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43518:2692115"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Spawning Power"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:7f2d51648f90",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Spawning Power",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:45145:2692116"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Spear Mastery"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:6cd2b956792e",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Spear Mastery",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43546:2692117"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Strength"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:af205fa76e01",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Strength",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43464:2692118"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Swordsmanship"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:39e1cfdcd6aa",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Swordsmanship",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43468:2729304"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Tactics"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:db2da18bb6dc",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Tactics",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43457:2692120"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Vigor"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:ff20590b9448",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Vigor",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43180:2692064"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Water Magic"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:dbdfcf689d1d",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Water Magic",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43154:2692121"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Wilderness Survival"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:1777349d8713",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Wilderness Survival",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:44764:2692122"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Superior Wind Prayers"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:03f012fbd43b",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Superior Wind Prayers",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:43535:2692123"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Rune of Vitae"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:bca87af6f4a7",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Rune of Vitae",
+        "sourceIds": [
+          "source:gww:epic-10-live:rune:41037:2648026"
+        ]
+      },
+      "severity": "warning"
+    }
+  ],
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "notes": "EPIC-10 rune catalog QA report covering source accounting, IDs, joins, effects, stackability, headgear handoff, icons, copied-text policy, artifact integrity, determinism, and release gates.",
+  "publicReleaseGate": "pass",
+  "schemaVersion": 1,
+  "sourceIds": [
+    "source:gww:epic-10-live:rune:41037:2648026",
+    "source:gww:epic-10-live:rune:41388:2640203",
+    "source:gww:epic-10-live:rune:41398:2702903",
+    "source:gww:epic-10-live:rune:41401:2699196",
+    "source:gww:epic-10-live:rune:41402:2702808",
+    "source:gww:epic-10-live:rune:41403:2702902",
+    "source:gww:epic-10-live:rune:43150:2692102",
+    "source:gww:epic-10-live:rune:43154:2692121",
+    "source:gww:epic-10-live:rune:43155:2692097",
+    "source:gww:epic-10-live:rune:43156:2692082",
+    "source:gww:epic-10-live:rune:43157:2692099",
+    "source:gww:epic-10-live:rune:43180:2692064",
+    "source:gww:epic-10-live:rune:43185:2692081",
+    "source:gww:epic-10-live:rune:43457:2692120",
+    "source:gww:epic-10-live:rune:43464:2692118",
+    "source:gww:epic-10-live:rune:43468:2729304",
+    "source:gww:epic-10-live:rune:43478:2692083",
+    "source:gww:epic-10-live:rune:43479:2692103",
+    "source:gww:epic-10-live:rune:43496:2692090",
+    "source:gww:epic-10-live:rune:43518:2692115",
+    "source:gww:epic-10-live:rune:43525:2692085",
+    "source:gww:epic-10-live:rune:43526:2692098",
+    "source:gww:epic-10-live:rune:43531:2692109",
+    "source:gww:epic-10-live:rune:43534:2692112",
+    "source:gww:epic-10-live:rune:43535:2692123",
+    "source:gww:epic-10-live:rune:43536:2692106",
+    "source:gww:epic-10-live:rune:43537:2692087",
+    "source:gww:epic-10-live:rune:43538:2692093",
+    "source:gww:epic-10-live:rune:43545:2692108",
+    "source:gww:epic-10-live:rune:43546:2692117",
+    "source:gww:epic-10-live:rune:44742:2692100",
+    "source:gww:epic-10-live:rune:44750:2692084",
+    "source:gww:epic-10-live:rune:44757:2692107",
+    "source:gww:epic-10-live:rune:44764:2692122",
+    "source:gww:epic-10-live:rune:44772:2692094",
+    "source:gww:epic-10-live:rune:44780:2692049",
+    "source:gww:epic-10-live:rune:44787:2692114",
+    "source:gww:epic-10-live:rune:44795:2692110",
+    "source:gww:epic-10-live:rune:44824:2692101",
+    "source:gww:epic-10-live:rune:44831:2692104",
+    "source:gww:epic-10-live:rune:44838:2692105",
+    "source:gww:epic-10-live:rune:44839:2692096",
+    "source:gww:epic-10-live:rune:45114:2692113",
+    "source:gww:epic-10-live:rune:45122:2692092",
+    "source:gww:epic-10-live:rune:45129:2692091",
+    "source:gww:epic-10-live:rune:45136:2692089",
+    "source:gww:epic-10-live:rune:45145:2692116",
+    "source:gww:epic-10-live:rune:45152:2692111",
+    "source:gww:epic-10-live:rune:45160:2692086",
+    "source:gww:epic-10-live:rune:45168:2692088",
+    "source:gww:epic-10-live:seed:attribute-bonus:2712710",
+    "source:gww:epic-10-live:seed:equipment-template-format:2728058",
+    "source:gww:epic-10-live:seed:rune:2684875",
+    "source:gww:epic-10-rune-icons:f1fe01997b9c"
+  ],
+  "summary": {
+    "criticalCount": 0,
+    "errorCount": 0,
+    "findingCount": 140,
+    "infoCount": 2,
+    "openBlockingCount": 0,
+    "warningCount": 138
+  }
+}

@@ -6,6 +6,7 @@ import {
   type ArmorPiece,
   type Attribute,
   type Build,
+  type CatalogRuneRecord,
   type EquipmentTemplate,
   type Guide,
   type Insignia,
@@ -19,6 +20,7 @@ import {
   templateEquipmentModifierId,
   templateEquipmentSlotId,
   type Rune,
+  type RuneCatalog,
   type Skill,
   type SkillProgression,
   type SourceReference,
@@ -75,7 +77,9 @@ describe("domain contracts", () => {
       | EquipmentTemplateDocument
       | SourceReference
       | RecordProvenance
-      | RemoteMediaMetadata;
+      | RemoteMediaMetadata
+      | CatalogRuneRecord
+      | RuneCatalog;
 
     const publicModels: PublicModels[] = [
       syntheticProfession,

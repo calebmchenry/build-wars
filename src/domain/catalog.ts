@@ -7,6 +7,7 @@ import type {
   SchemaVersion,
   SkillId,
   TemplateAttributeId,
+  TemplateEquipmentModifierId,
   TemplateProfessionId,
   TemplateSkillId
 } from "./ids";
@@ -434,6 +435,193 @@ export interface SkillCatalog {
   readonly skills: readonly CatalogSkillRecord[];
   readonly progressionSeries: readonly SkillProgressionSeries[];
   readonly splitGroups: readonly SkillModeVariantGroup[];
+  readonly remoteMedia: readonly RemoteMediaMetadata[];
+}
+
+export interface RuneCatalogProfile {
+  readonly id: "epic-10-runes";
+  readonly sourceTarget: "BACKLOG";
+  readonly sourceEpic: "EPIC-10";
+  readonly sourceCaps: {
+    readonly seedPageLimit: number;
+    readonly detailPageLimit: number;
+    readonly mediaTitleLimit: number;
+    readonly requestLimit: number;
+    readonly retryLimit: number;
+    readonly continuationLimit: number;
+    readonly responseByteCap: number;
+    readonly parserByteCap: number;
+    readonly aggregateByteCap: number;
+    readonly catalogByteCap: number;
+    readonly qaByteCap: number;
+  };
+}
+
+export type RuneFamilyKind =
+  "attribute" | "vigor" | "vitae" | "attunement" | "absorption" | "condition-reduction" | "other";
+export type RuneFamilyRank = "minor" | "major" | "superior";
+export type RuneEligibility = "profession-armor" | "universal-armor" | "unknown";
+export type RuneDisplayState = "structured-only" | "reviewed-short-text" | "excluded";
+export type RuneHeadgearInteraction = "attribute-linked" | "not-applicable" | "unknown";
+export type RuneEffectStackingRule = "sum" | "highest" | "separate" | "unknown";
+export type RuneSourceSetDispositionKind =
+  "accepted-rune" | "supported-relationship" | "explicit-exclusion" | "unsupported" | "blocked";
+
+export interface RunePageIdentity {
+  readonly requestedTitle: string;
+  readonly normalizedTitle: string;
+  readonly canonicalTitle: string;
+  readonly pageId: number | string | null;
+  readonly revisionId: number | string | null;
+  readonly sourceRevisionTimestamp: string | null;
+  readonly redirectedFrom: string | null;
+}
+
+export interface RuneEffectStacking {
+  readonly rule: RuneEffectStackingRule;
+  readonly groupKey: string;
+  readonly notes: string | null;
+}
+
+export interface AttributeRankRuneEffect {
+  readonly kind: "attribute-rank";
+  readonly attributeId: AttributeId;
+  readonly amount: number;
+  readonly unit: "rank";
+  readonly target: "attribute";
+  readonly stacking: RuneEffectStacking;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface MaximumHealthDeltaRuneEffect {
+  readonly kind: "maximum-health-delta";
+  readonly amount: number;
+  readonly unit: "health";
+  readonly target: "character";
+  readonly stacking: RuneEffectStacking;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface MaximumEnergyDeltaRuneEffect {
+  readonly kind: "maximum-energy-delta";
+  readonly amount: number;
+  readonly unit: "energy";
+  readonly target: "character";
+  readonly stacking: RuneEffectStacking;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface PhysicalDamageReductionRuneEffect {
+  readonly kind: "physical-damage-reduction";
+  readonly amount: number;
+  readonly unit: "damage";
+  readonly target: "physical-damage";
+  readonly damageScope: "physical";
+  readonly stacking: RuneEffectStacking;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface ConditionDurationReductionRuneEffect {
+  readonly kind: "condition-duration-reduction";
+  readonly percentage: number;
+  readonly unit: "percent";
+  readonly target: "condition-duration";
+  readonly conditions: readonly string[];
+  readonly stacking: RuneEffectStacking;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface NoteOnlyRuneEffect {
+  readonly kind: "note-only";
+  readonly noteCode: string;
+  readonly text: string;
+  readonly stacking: RuneEffectStacking;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface UnknownRuneEffect {
+  readonly kind: "unknown";
+  readonly sourceField: string;
+  readonly reason: string;
+  readonly stacking: RuneEffectStacking;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export type RuneEffect =
+  | AttributeRankRuneEffect
+  | MaximumHealthDeltaRuneEffect
+  | MaximumEnergyDeltaRuneEffect
+  | PhysicalDamageReductionRuneEffect
+  | ConditionDurationReductionRuneEffect
+  | NoteOnlyRuneEffect
+  | UnknownRuneEffect;
+
+export interface RuneSourceSetDisposition {
+  readonly id: string;
+  readonly templateModifierId: TemplateEquipmentModifierId | null;
+  readonly requestedTitle: string;
+  readonly kind: RuneSourceSetDispositionKind;
+  readonly reason: string;
+  readonly reviewId: string | null;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface RuneSourceSetSummary {
+  readonly seedTitles: readonly string[];
+  readonly detailPageTitles: readonly string[];
+  readonly sourceSetDigest: string;
+  readonly sourcePlanDigest: string;
+  readonly acceptedRuneCount: number;
+  readonly relationshipCount: number;
+  readonly exclusionCount: number;
+  readonly unsupportedCount: number;
+  readonly blockingFindingCount: number;
+  readonly sourceAuthority: string;
+  readonly idPolicy: string;
+  readonly planningAmendment: string | null;
+}
+
+export interface RuneCatalogDependencySummary {
+  readonly id: "epic-03-professions-attributes";
+  readonly catalogVersion: string;
+  readonly artifactDigest: string;
+  readonly manifestDigest: string;
+  readonly qaGate: "pass";
+  readonly sectionDigests: readonly CatalogSectionDigest[];
+}
+
+export interface CatalogRuneRecord {
+  readonly id: RuneId;
+  readonly templateModifierId: TemplateEquipmentModifierId;
+  readonly name: string;
+  readonly normalizedName: string;
+  readonly wikiUrl: string;
+  readonly pageIdentity: RunePageIdentity;
+  readonly familyKey: string;
+  readonly familyKind: RuneFamilyKind;
+  readonly familyRank: RuneFamilyRank | null;
+  readonly rarityTier: RuneFamilyRank | null;
+  readonly eligibility: RuneEligibility;
+  readonly professionId: ProfessionId | null;
+  readonly affectedAttributeId: AttributeId | null;
+  readonly effects: readonly RuneEffect[];
+  readonly headgearInteraction: RuneHeadgearInteraction;
+  readonly displayState: RuneDisplayState;
+  readonly iconId: string | null;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface RuneCatalog {
+  readonly schemaVersion: SchemaVersion;
+  readonly catalogVersion: CatalogVersionId | string;
+  readonly sectionDigests: readonly CatalogSectionDigest[];
+  readonly generatedAt: string;
+  readonly generator: string;
+  readonly profile: RuneCatalogProfile;
+  readonly dependencyDigests: readonly RuneCatalogDependencySummary[];
+  readonly sourceSet: RuneSourceSetSummary;
+  readonly dispositions: readonly RuneSourceSetDisposition[];
+  readonly runes: readonly CatalogRuneRecord[];
   readonly remoteMedia: readonly RemoteMediaMetadata[];
 }
 

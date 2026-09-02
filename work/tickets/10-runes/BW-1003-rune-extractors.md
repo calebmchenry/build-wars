@@ -2,11 +2,13 @@
 id: BW-1003
 title: Rune Extractors
 epic: EPIC-10
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1001
   - BW-1002
+planned_sprint: SPRINT-011
+completed_sprint: SPRINT-011
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -43,3 +45,11 @@ Extract normalized rune records from the accepted EPIC-10 source set.
 
 - Focused Python extractor tests for EPIC-10 fixtures
 - Fixed-clock fixture regeneration for EPIC-10 output
+
+## Closeout Evidence
+
+- SPRINT-011 added snapshot-only rune extraction, same-page multi-rank handling, EPIC-03
+  profession/attribute joins, Restoration versus Restoration Magic separation, metadata-only icon
+  resolution, source identity preservation, and copied-prose exclusion.
+- Validation passed: `PYTHONPATH=scripts/data .venv-data/bin/python -m unittest build_wars_ingest.tests.test_rune_extractor build_wars_ingest.tests.test_icons`,
+  `npm run test:run -- test/domain/rune-catalog.test.ts`, and `npm run data:test`.

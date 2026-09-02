@@ -3,11 +3,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from .config import DEFAULT_LIMITS, EPIC_04_LIMITS
+from .config import DEFAULT_LIMITS, EPIC_04_LIMITS, EPIC_10_LIMITS
 
 EPIC_02_PROFILE_ID = "guild-wars-wiki"
 EPIC_03_PROFILE_ID = "epic-03-professions-attributes"
 EPIC_04_PROFILE_ID = "epic-04-skills"
+EPIC_10_PROFILE_ID = "epic-10-runes"
 
 EPIC_03_PROFESSIONS = (
     "Warrior",
@@ -45,6 +46,12 @@ EPIC_03_SOURCE_TITLES = (
 EPIC_03_ICON_IMAGEINFO_TITLE = "EPIC-03 profession icon imageinfo"
 EPIC_04_SOURCE_INDEX_TITLE = "Guild Wars Wiki:Game integration/Skills"
 EPIC_04_SKILL_ICON_IMAGEINFO_TITLE = "EPIC-04 skill icon imageinfo"
+EPIC_10_SOURCE_TITLES = (
+    "Equipment template format",
+    "Rune",
+    "Attribute bonus",
+)
+EPIC_10_RUNE_ICON_IMAGEINFO_TITLE = "EPIC-10 rune icon imageinfo"
 
 
 @dataclass(frozen=True)
@@ -126,10 +133,30 @@ EPIC_04_PROFILE = DataIngestionProfile(
     qa_byte_cap=4_000_000,
 )
 
+EPIC_10_PROFILE = DataIngestionProfile(
+    id=EPIC_10_PROFILE_ID,
+    source_target="BACKLOG",
+    source_epic="EPIC-10",
+    generated_relative_path=Path("epic-10/runes.catalog.json"),
+    qa_relative_path=Path("epic-10/runes.catalog.qa.json"),
+    fixture_relative_path=Path("generated/fixture-runes.catalog.json"),
+    source_titles=EPIC_10_SOURCE_TITLES,
+    detail_titles=(),
+    page_limit=EPIC_10_LIMITS.page_limit,
+    request_limit=EPIC_10_LIMITS.request_limit,
+    response_byte_cap=EPIC_10_LIMITS.response_byte_cap,
+    parser_byte_cap=EPIC_10_LIMITS.max_parser_bytes,
+    media_title_limit=160,
+    aggregate_byte_cap=10_000_000,
+    catalog_byte_cap=2_000_000,
+    qa_byte_cap=1_000_000,
+)
+
 PROFILES = {
     EPIC_02_PROFILE.id: EPIC_02_PROFILE,
     EPIC_03_PROFILE.id: EPIC_03_PROFILE,
     EPIC_04_PROFILE.id: EPIC_04_PROFILE,
+    EPIC_10_PROFILE.id: EPIC_10_PROFILE,
 }
 
 

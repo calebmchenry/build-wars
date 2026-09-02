@@ -1,0 +1,9 @@
+{{Item infobox
+| image = [[Image:Rune All Minor.png]] [[Image:Rune All Major.png]] [[Image:Rune All Sup.png]]
+| name = Rune of Vigor
+| type = [[Rune]]
+| bonus = + [[Health]]
+| profession = Any
+| stackable = n
+}}
+Runes of Vigor provide fixture maximum health bonuses that do not stack with each other.

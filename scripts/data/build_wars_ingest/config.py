@@ -42,6 +42,15 @@ EPIC_04_LIMITS = IngestLimits(
     request_limit=260,
     max_parser_bytes=750_000,
 )
+EPIC_10_LIMITS = IngestLimits(
+    response_byte_cap=5_000_000,
+    max_retries=3,
+    max_continuation_pages=10,
+    batch_size=50,
+    page_limit=180,
+    request_limit=80,
+    max_parser_bytes=750_000,
+)
 GUILD_WARS_WIKI_PROFILE = SourceProfile(
     name="guild-wars-wiki",
     api_endpoint=GUILD_WARS_WIKI_API,

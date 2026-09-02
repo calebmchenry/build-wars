@@ -1,0 +1,10 @@
+{{Item infobox
+| image = [[Image:Rune All Major.png]]
+| name = Rune of Clarity
+| type = [[Rune]]
+| bonus = -20% duration of<br>[[Blind]] and [[Weakness]]
+| profession = Any
+| stackable = n
+| rarity = uncommon
+}}
+Rune of Clarity provides fixture condition duration facts.

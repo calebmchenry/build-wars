@@ -1,0 +1,10 @@
+{{Item infobox
+| image = [[Image:Rune All Minor.png]]
+| name = Rune of Vitae
+| type = [[Rune]]
+| bonus = +10 [[Health]]
+| profession = Any
+| stackable = n
+| rarity = common
+}}
+Rune of Vitae provides a fixture health bonus.

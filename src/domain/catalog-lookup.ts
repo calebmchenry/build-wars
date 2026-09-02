@@ -1,16 +1,21 @@
 import type {
   AttributeId,
   ProfessionId,
+  RuneId,
   SkillId,
   TemplateAttributeId,
+  TemplateEquipmentModifierId,
   TemplateProfessionId,
   TemplateSkillId
 } from "./ids";
 import type {
+  CatalogRuneRecord,
   CatalogSkillRecord,
   CatalogAttributeRecord,
   CatalogProfessionRecord,
   ProfessionAttributeCatalog,
+  RuneCatalog,
+  RuneSourceSetDisposition,
   SkillCatalog,
   SkillMode,
   SkillModeVariantGroup,
@@ -60,6 +65,13 @@ export type SkillDispositionLookupOutcome = {
   readonly disposition: SkillSourceSetDisposition;
 };
 
+export type RuneDispositionLookupOutcome = {
+  readonly kind: "dispositioned";
+  readonly templateId: TemplateEquipmentModifierId;
+  readonly catalogId: null;
+  readonly disposition: RuneSourceSetDisposition;
+};
+
 export type EmptySkillSlotLookupOutcome = {
   readonly kind: "empty";
   readonly templateId: TemplateSkillId;
@@ -83,6 +95,11 @@ export type SkillTemplateLookupOutcome =
   | KnownTemplateLookupOutcome<TemplateSkillId, SkillId, CatalogSkillRecord>
   | SkillDispositionLookupOutcome
   | UnknownTemplateLookupOutcome<TemplateSkillId>;
+
+export type RuneTemplateModifierLookupOutcome =
+  | KnownTemplateLookupOutcome<TemplateEquipmentModifierId, RuneId, CatalogRuneRecord>
+  | RuneDispositionLookupOutcome
+  | UnknownTemplateLookupOutcome<TemplateEquipmentModifierId>;
 
 export type SkillTemplateSlotLookupOutcome =
   EmptySkillSlotLookupOutcome | SkillTemplateLookupOutcome;
@@ -188,6 +205,32 @@ export function lookupSkillTemplateId(
   return { kind: "unknown", templateId, catalogId: null };
 }
 
+export function lookupRuneTemplateModifierId(
+  catalog: RuneCatalog,
+  templateId: TemplateEquipmentModifierId
+): RuneTemplateModifierLookupOutcome {
+  const numericTemplateId = Number(templateId);
+  const records = catalog.runes.filter(
+    (rune) => Number(rune.templateModifierId) === numericTemplateId
+  );
+  if (records.length > 1) {
+    throw new Error(`Ambiguous rune template modifier ID: ${numericTemplateId}`);
+  }
+  const record = records[0];
+  if (record !== undefined) {
+    return { kind: "known", templateId, catalogId: record.id, record };
+  }
+
+  const disposition = catalog.dispositions.find(
+    (candidate) => Number(candidate.templateModifierId) === numericTemplateId
+  );
+  if (disposition !== undefined) {
+    return { kind: "dispositioned", templateId, catalogId: null, disposition };
+  }
+
+  return { kind: "unknown", templateId, catalogId: null };
+}
+
 export function lookupSkillTemplateSlot(
   catalog: SkillCatalog,
   templateId: TemplateSkillId
@@ -204,6 +247,10 @@ export function lookupSkillById(
   skillId: SkillId
 ): CatalogSkillRecord | null {
   return catalog.skills.find((skill) => Number(skill.id) === Number(skillId)) ?? null;
+}
+
+export function lookupRuneById(catalog: RuneCatalog, runeId: RuneId): CatalogRuneRecord | null {
+  return catalog.runes.find((rune) => Number(rune.id) === Number(runeId)) ?? null;
 }
 
 export function lookupProfessionByName(
@@ -227,6 +274,10 @@ export function lookupAttributeByName(
 
 export function lookupSkillByName(catalog: SkillCatalog, value: string): CatalogSkillRecord | null {
   return collisionSafeLookup(catalog.skills, value, (record) => [record.name], "skill");
+}
+
+export function lookupRuneByName(catalog: RuneCatalog, value: string): CatalogRuneRecord | null {
+  return collisionSafeLookup(catalog.runes, value, (record) => [record.name], "rune");
 }
 
 export function resolveSkillModeVariant(

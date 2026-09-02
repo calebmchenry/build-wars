@@ -1,0 +1,3 @@
+An attribute bonus is an armor function that provides an attribute +1 bonus on headgear.
+
+Some headgear has a bonus to the attribute of the rune applied to it. EPIC-10 records that as a handoff fact only.

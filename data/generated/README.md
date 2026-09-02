@@ -72,6 +72,28 @@ plans, snapshot-set manifests, raw snapshots, Python tooling, or wiki APIs.
 EPIC-04 uses fixed-clock fixture generation and exact snapshot-set offline replay for deterministic
 catalog, manifest, QA, section digest, finding ID, source ordering, and summary count checks.
 
+## EPIC-10 Promoted Catalog
+
+BW-1005 approves exactly these generated files:
+
+- `data/generated/epic-10/runes.catalog.json`
+- `data/generated/epic-10/runes.catalog.manifest.json`
+
+The catalog contains runtime-eligible rune facts: source-set summary, compact dispositions, EPIC-03
+dependency digests, rune records, template modifier ID crosswalks, family/rank/tier fields,
+profession and affected-attribute joins, typed effects, effect-level stacking, headgear handoff
+facts, nullable icon IDs, metadata-only remote media references, section digests, and semantic
+`catalogVersion`.
+
+The adjacent manifest records source-plan path/digest, source-set digest, selected snapshot-set
+path/digest, child snapshot manifests, dependency digests, artifact digest, QA path, review records,
+and `commitDecision: exact-path-allowlisted`. Runtime code must not read the manifest, QA report,
+source plans, snapshot-set manifests, raw snapshots, Python tooling, wiki APIs, or icon bytes.
+
+EPIC-10 uses fixed-clock fixture generation and exact selected snapshot-set offline replay for
+deterministic catalog, manifest, QA, section digest, finding ID, source ordering, and summary count
+checks.
+
 ## Baselines
 
 Baseline comparison is opt-in. No baseline produces an info finding; schema mismatch blocks public

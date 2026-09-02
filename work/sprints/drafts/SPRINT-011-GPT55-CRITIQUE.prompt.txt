@@ -1,0 +1,17 @@
+Read the sprint drafts at `work/sprints/drafts/SPRINT-011-GPT56SOL-DRAFT.md` and
+`work/sprints/drafts/SPRINT-011-GPT54-DRAFT.md`. Write one combined critique to
+`work/sprints/drafts/SPRINT-011-GPT55-CRITIQUE.md`.
+
+Do not read or critique `work/sprints/drafts/SPRINT-011-GPT55-DRAFT.md`.
+Focus on architecture assumptions, scope creep risk, hidden complexity, and missing alternative
+designs.
+
+If one listed draft is missing, critique the available draft and note the missing artifact.
+Do not use skills.
+Do not run a planning workflow.
+Do not modify implementation code.
+Output only markdown.
+
+For each reviewed draft, identify strengths, weaknesses, gaps in risk analysis, missing edge cases,
+and Definition of Done completeness. Then compare the two drafts and call out merge
+recommendations.

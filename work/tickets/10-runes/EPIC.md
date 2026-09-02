@@ -2,12 +2,14 @@
 id: EPIC-10
 title: Runes
 track: content
-status: ready
+status: done
 priority: high
 depends_on:
   - EPIC-01
   - EPIC-02
   - EPIC-03
+planned_sprint: SPRINT-011
+completed_sprint: SPRINT-011
 tickets:
   - BW-1001
   - BW-1002
@@ -77,3 +79,15 @@ Rune behavior is mechanically important and easy to get subtly wrong. Keep expli
 * `BW-1005`: Rune catalog QA, deterministic generation, review gates, and exact-path promotion.
 * `BW-1006`: Runtime integration notes, downstream contracts for equipment/title work, docs, and
   closeout.
+
+## Completion Evidence
+
+SPRINT-011 completed BW-1001 through BW-1006. It promoted the runtime rune catalog at
+`data/generated/epic-10/runes.catalog.json` with its adjacent manifest and machine-readable QA
+report, backed by source authority review, digest-confirmed live fetch, selected complete
+snapshot-set replay, two byte-identical fixed-clock offline replays, and `npm run verify`.
+
+The catalog contains 138 runtime-eligible rune records with verified equipment template modifier
+IDs, EPIC-03 profession/attribute joins, typed effect-level stacking, metadata-only icon references,
+and headgear handoff facts. Armor legality, equipment UI, title effects, and full stat aggregation
+remain delegated to later epics.

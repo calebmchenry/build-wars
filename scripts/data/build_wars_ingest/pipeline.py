@@ -11,6 +11,7 @@ from .artifacts import canonical_json_bytes, compare_baseline, write_generated_a
 from .attribute_points import extract_attribute_point_rules
 from .config import (
     EPIC_04_LIMITS,
+    EPIC_10_LIMITS,
     FIXTURE_GENERATED_AT,
     GENERATOR_NAME,
     INGESTION_SCHEMA_VERSION,
@@ -27,9 +28,24 @@ from .profiles import (
     EPIC_04_PROFILE_ID,
     EPIC_04_SKILL_ICON_IMAGEINFO_TITLE,
     EPIC_04_SOURCE_INDEX_TITLE,
+    EPIC_10_PROFILE_ID,
+    EPIC_10_RUNE_ICON_IMAGEINFO_TITLE,
     profile_by_id,
 )
 from .qa import build_report, exit_code_for_report, write_report
+from .rune_catalog import assemble_rune_catalog, manual_reviews as rune_manual_reviews
+from .rune_source_set import (
+    RuneSourceSetError,
+    build_source_plan as build_rune_source_plan,
+    load_snapshot_set as load_rune_snapshot_set,
+    load_source_plan as load_rune_source_plan,
+    page_snapshot_from_loaded as rune_page_snapshot_from_loaded,
+    resolution_records_from_pages as rune_resolution_records_from_pages,
+    source_plan_path as rune_source_plan_output_path,
+    validate_source_plan as validate_rune_source_plan,
+    write_snapshot_set_manifest as write_rune_snapshot_set_manifest,
+    write_source_plan as write_rune_source_plan,
+)
 from .skill_catalog import assemble_skill_catalog, load_epic03_dependency
 from .skill_ids import SkillIdSource, enumerate_skill_ids
 from .skill_source_set import (
@@ -98,6 +114,8 @@ def run_fixture(options: PipelineOptions) -> PipelineResult:
         return _run_epic03_fixture(options)
     if options.profile == EPIC_04_PROFILE_ID:
         return _run_epic04_fixture(options)
+    if options.profile == EPIC_10_PROFILE_ID:
+        return _run_epic10_fixture(options)
 
     roots = RuntimeRoots.from_root(options.output_root)
     fixtures = _load_fixtures(options.fixture_root)
@@ -236,6 +254,7 @@ def run_fixture(options: PipelineOptions) -> PipelineResult:
     )
     _run_epic03_fixture(replace(options, profile=EPIC_03_PROFILE_ID))
     _run_epic04_fixture(replace(options, profile=EPIC_04_PROFILE_ID))
+    _run_epic10_fixture(replace(options, profile=EPIC_10_PROFILE_ID))
     return result
 
 
@@ -244,6 +263,8 @@ def run_offline(options: PipelineOptions) -> PipelineResult:
         return _run_epic03_offline(options)
     if options.profile == EPIC_04_PROFILE_ID:
         return _run_epic04_offline(options)
+    if options.profile == EPIC_10_PROFILE_ID:
+        return _run_epic10_offline(options)
 
     roots = RuntimeRoots.from_root(options.output_root)
     manifests = sorted(roots.snapshot_root.glob("**/*.manifest.json"))
@@ -361,6 +382,8 @@ def run_live(options: PipelineOptions) -> PipelineResult:
         return _run_epic03_live(options)
     if options.profile == EPIC_04_PROFILE_ID:
         return _run_epic04_live(options)
+    if options.profile == EPIC_10_PROFILE_ID:
+        return _run_epic10_live(options)
 
     if not options.allow_live_network:
         raise PipelineError("Live mode requires --allow-live-network")
@@ -948,6 +971,502 @@ def _run_epic04_offline(options: PipelineOptions) -> PipelineResult:
     )
 
 
+def _run_epic10_fixture(options: PipelineOptions) -> PipelineResult:
+    profile = profile_by_id(EPIC_10_PROFILE_ID)
+    roots = RuntimeRoots.from_root(options.output_root)
+    if not (roots.generated_root / "epic-03/professions-attributes.catalog.json").exists():
+        _run_epic03_fixture(replace(options, profile=EPIC_03_PROFILE_ID))
+
+    dependency = load_epic03_dependency(roots.root)
+    snapshot_store = SnapshotStore(roots.snapshot_root)
+    fixtures = _load_epic10_fixture_pages(options.fixture_root)
+    source_snapshots: list[dict[str, Any]] = []
+    child_manifest_paths: list[str] = []
+    for index, title in enumerate(profile.source_titles, start=1):
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-10-fixture:{_safe_source_part(title)}:{6000 + index}",
+            page_title=title,
+            page_id=9700 + index,
+            revision_id=6000 + index,
+            source_revision_timestamp=f"2026-08-31T17:0{index}:00Z",
+            retrieved_at=options.generated_at,
+        )
+        content = fixtures["sources"][title]
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=9700 + index,
+            revision_id=6000 + index,
+            timestamp=f"2026-08-31T17:0{index}:00Z",
+            retrieved_at=options.generated_at,
+            content=content,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        source_snapshots.append({"title": title, "content": content, "sourceReference": source_ref})
+
+    plan_result = build_rune_source_plan(
+        profile=profile,
+        generated_at=options.generated_at,
+        source_snapshots=source_snapshots,
+        dependency=dependency,
+    )
+    plan_path = write_rune_source_plan(roots.root, plan_result.plan)
+    diagnostics = [*plan_result.diagnostics]
+
+    detail_pages: list[dict[str, Any]] = []
+    canonical_source_refs: dict[str, dict[str, Any]] = {}
+    canonical_indexes: dict[str, int] = {}
+    for seed in plan_result.plan["acceptedSeeds"]:
+        canonical_title = _epic10_fixture_canonical_title(seed)
+        if canonical_title not in canonical_indexes:
+            canonical_indexes[canonical_title] = len(canonical_indexes) + 1
+        index = canonical_indexes[canonical_title]
+        source_ref = canonical_source_refs.get(canonical_title)
+        if source_ref is None:
+            source_ref = _page_source_reference(
+                source_id=f"source:gww:epic-10-fixture:rune:{_safe_source_part(canonical_title)}:{6100 + index}",
+                page_title=canonical_title,
+                page_id=9800 + index,
+                revision_id=6100 + index,
+                source_revision_timestamp=f"2026-08-31T18:{index % 60:02d}:00Z",
+                retrieved_at=options.generated_at,
+            )
+            canonical_source_refs[canonical_title] = source_ref
+        content = _epic10_fixture_detail_content(fixtures, canonical_title)
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=canonical_title,
+            page_id=9800 + index,
+            revision_id=6100 + index,
+            timestamp=f"2026-08-31T18:{index % 60:02d}:00Z",
+            retrieved_at=options.generated_at,
+            content=content,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        detail_pages.append(
+            {
+                **seed,
+                "normalizedTitle": str(seed["detailTitle"]),
+                "canonicalTitle": canonical_title,
+                "redirectedFrom": str(seed["detailTitle"]) if canonical_title != seed["detailTitle"] else None,
+                "pageId": 9800 + index,
+                "revisionId": 6100 + index,
+                "sourceRevisionTimestamp": f"2026-08-31T18:{index % 60:02d}:00Z",
+                "responseIndex": int(seed["templateModifierId"]),
+                "disambiguationPreamble": None,
+                "content": content,
+                "sourceReference": source_ref,
+            }
+        )
+
+    imageinfo_source = _page_source_reference(
+        source_id="source:gww:epic-10-fixture:rune-icons:6200",
+        page_title=EPIC_10_RUNE_ICON_IMAGEINFO_TITLE,
+        page_id=9820,
+        revision_id=6200,
+        source_revision_timestamp="2026-08-31T18:59:00Z",
+        retrieved_at=options.generated_at,
+        material_class="media-metadata",
+    )
+    imageinfo_payload = {
+        "kind": "mediawiki-imageinfo",
+        "title": EPIC_10_RUNE_ICON_IMAGEINFO_TITLE,
+        "pages": fixtures["imageinfo"]["pages"],
+    }
+    imageinfo_snapshot = _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=imageinfo_source,
+        title=EPIC_10_RUNE_ICON_IMAGEINFO_TITLE,
+        page_id=9820,
+        revision_id=6200,
+        timestamp="2026-08-31T18:59:00Z",
+        retrieved_at=options.generated_at,
+        content=json.dumps(imageinfo_payload, ensure_ascii=False, sort_keys=True),
+    )
+    child_manifest_paths.append(_relative_to_root(roots.root, imageinfo_snapshot.manifest_path))
+    snapshot_set_manifest_path = write_rune_snapshot_set_manifest(
+        root=roots.root,
+        profile=profile,
+        source_plan=plan_result.plan,
+        child_manifest_paths=child_manifest_paths,
+        snapshot_store=snapshot_store,
+        completion_state="complete",
+        generated_at=options.generated_at,
+        notes="Complete synthetic EPIC-10 fixture snapshot set.",
+        detail_records=detail_pages,
+    )
+    return _write_epic10_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        source_plan=plan_result.plan,
+        detail_pages=detail_pages,
+        imageinfo_pages=fixtures["imageinfo"]["pages"],
+        snapshot_set_manifest_path=snapshot_set_manifest_path,
+        snapshot_manifest_paths=child_manifest_paths,
+        source_plan_path=plan_path,
+        diagnostics=diagnostics,
+    )
+
+
+def _run_epic10_live(options: PipelineOptions) -> PipelineResult:
+    if not options.allow_live_network:
+        raise PipelineError("Live EPIC-10 mode requires --allow-live-network")
+    profile = profile_by_id(EPIC_10_PROFILE_ID)
+    stage = options.stage
+    if stage not in {"discover", "fetch"}:
+        raise PipelineError("EPIC-10 live mode requires --stage discover or --stage fetch")
+
+    roots = RuntimeRoots.from_root(options.output_root)
+    snapshot_store = SnapshotStore(roots.snapshot_root)
+    discovered = _discover_epic10_source_set(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        snapshot_store=snapshot_store,
+    )
+    if stage == "discover":
+        return discovered
+
+    if options.source_plan_path is None or options.confirm_source_set_digest is None:
+        raise PipelineError("EPIC-10 live fetch requires --source-plan and --confirm-source-set-digest")
+    plan = load_rune_source_plan(options.source_plan_path)
+    try:
+        validate_rune_source_plan(
+            plan,
+            profile=profile,
+            confirm_source_set_digest=options.confirm_source_set_digest,
+        )
+    except RuneSourceSetError as exc:
+        raise PipelineError(str(exc)) from exc
+    if plan["summary"]["sourceSetDigest"] != discovered.generated["summary"]["sourceSetDigest"]:
+        raise PipelineError("EPIC-10 source-set drift detected between discovery and fetch")
+
+    detail_seeds = list(plan["acceptedSeeds"])
+    if options.detail_limit is not None:
+        detail_seeds = detail_seeds[: options.detail_limit]
+    detail_titles = sorted({str(seed["detailTitle"]) for seed in detail_seeds})
+    client = MediaWikiClient(limits=EPIC_10_LIMITS)
+    pages, page_diagnostics = client.query_title_revisions(detail_titles)
+    resolved, resolution_diagnostics = rune_resolution_records_from_pages(
+        plan={**plan, "acceptedSeeds": detail_seeds},
+        pages=pages,
+    )
+    child_manifest_paths = list(discovered.generated["snapshotManifestPaths"])
+    detail_pages: list[dict[str, Any]] = []
+    for record in resolved:
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-10-live:rune:{record['pageId']}:{record['revisionId']}",
+            page_title=str(record["canonicalTitle"]),
+            page_id=record["pageId"],
+            revision_id=record["revisionId"],
+            source_revision_timestamp=str(record["sourceRevisionTimestamp"]),
+            retrieved_at=options.generated_at,
+        )
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=str(record["canonicalTitle"]),
+            page_id=record["pageId"],
+            revision_id=record["revisionId"],
+            timestamp=str(record["sourceRevisionTimestamp"]),
+            retrieved_at=options.generated_at,
+            content=str(record["content"]),
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        detail_pages.append({**record, "sourceReference": source_ref})
+
+    imageinfo_pages: list[dict[str, Any]] = []
+    icon_titles = _rune_icon_titles(detail_pages, profile.media_title_limit)
+    if icon_titles:
+        icon_client = MediaWikiClient(limits=EPIC_10_LIMITS)
+        imageinfo_pages, image_diagnostics = icon_client.query_imageinfo(icon_titles)
+        page_diagnostics.extend(image_diagnostics)
+        imageinfo_snapshot = _write_imageinfo_snapshot_for_epic10(
+            snapshot_store=snapshot_store,
+            pages=imageinfo_pages,
+            retrieved_at=options.generated_at,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, imageinfo_snapshot.manifest_path))
+
+    completion_state = "complete" if options.detail_limit is None else "partial"
+    snapshot_set_manifest_path = write_rune_snapshot_set_manifest(
+        root=roots.root,
+        profile=profile,
+        source_plan=plan,
+        child_manifest_paths=child_manifest_paths,
+        snapshot_store=snapshot_store,
+        completion_state=completion_state,
+        generated_at=options.generated_at,
+        notes="EPIC-10 live snapshot set; partial sets cannot promote." if completion_state != "complete" else "Complete EPIC-10 live snapshot set selected for replay.",
+        detail_records=detail_pages,
+    )
+    if completion_state != "complete":
+        raise PipelineError("EPIC-10 live fetch produced a partial snapshot set")
+
+    return _write_epic10_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        source_plan=plan,
+        detail_pages=detail_pages,
+        imageinfo_pages=imageinfo_pages,
+        snapshot_set_manifest_path=snapshot_set_manifest_path,
+        snapshot_manifest_paths=child_manifest_paths,
+        source_plan_path=options.source_plan_path,
+        diagnostics=[*page_diagnostics, *resolution_diagnostics],
+    )
+
+
+def _run_epic10_offline(options: PipelineOptions) -> PipelineResult:
+    if options.snapshot_set_path is None:
+        raise PipelineError("EPIC-10 offline replay requires --snapshot-set")
+    profile = profile_by_id(EPIC_10_PROFILE_ID)
+    roots = RuntimeRoots.from_root(options.output_root)
+    try:
+        replay = load_rune_snapshot_set(
+            snapshot_set_manifest_path=options.snapshot_set_path,
+            snapshot_root=roots.snapshot_root,
+            profile=profile,
+        )
+    except RuneSourceSetError as exc:
+        raise PipelineError(str(exc)) from exc
+    source_plan = replay.manifest["sourcePlan"]
+    detail_meta = replay.manifest["detailRecords"]
+    loaded_by_title: dict[str, tuple[dict[str, Any], dict[str, Any]]] = {}
+    imageinfo_pages: list[dict[str, Any]] = []
+    for loaded in replay.loaded_snapshots:
+        payload = json.loads(loaded.payload.decode("utf-8"))
+        if not isinstance(payload, dict):
+            continue
+        title = str(payload.get("title"))
+        source_ref = loaded.manifest.get("sourceReference")
+        if title == EPIC_10_RUNE_ICON_IMAGEINFO_TITLE and isinstance(payload.get("content"), str):
+            icon_payload = json.loads(str(payload["content"]))
+            pages = icon_payload.get("pages") if isinstance(icon_payload, dict) else None
+            if isinstance(pages, list):
+                imageinfo_pages = [page for page in pages if isinstance(page, dict)]
+            continue
+        if isinstance(source_ref, dict):
+            loaded_by_title[title] = (payload, source_ref)
+
+    detail_pages: list[dict[str, Any]] = []
+    for meta in detail_meta:
+        loaded = loaded_by_title.get(str(meta["canonicalTitle"]))
+        if loaded is None:
+            raise PipelineError(f"EPIC-10 snapshot set missing detail payload for {meta['canonicalTitle']}")
+        payload, source_ref = loaded
+        detail_pages.append({**meta, "content": payload.get("content", ""), "sourceReference": source_ref})
+
+    return _write_epic10_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        source_plan=source_plan,
+        detail_pages=detail_pages,
+        imageinfo_pages=imageinfo_pages,
+        snapshot_set_manifest_path=options.snapshot_set_path,
+        snapshot_manifest_paths=[str(child["manifestPath"]) for child in replay.manifest["childSnapshots"]],
+        source_plan_path=None,
+        diagnostics=[],
+    )
+
+
+def _discover_epic10_source_set(
+    *,
+    roots: RuntimeRoots,
+    profile: Any,
+    generated_at: str,
+    snapshot_store: SnapshotStore,
+) -> PipelineResult:
+    dependency = load_epic03_dependency(roots.root)
+    client = MediaWikiClient(limits=EPIC_10_LIMITS)
+    source_pages, source_diagnostics = client.query_title_revisions(list(profile.source_titles))
+    if len(source_pages) != len(profile.source_titles):
+        raise PipelineError("EPIC-10 source authority pages could not all be fetched")
+
+    source_snapshots: list[dict[str, Any]] = []
+    child_manifest_paths: list[str] = []
+    for page in source_pages:
+        revision = _first_revision(page)
+        title = str(page.get("title"))
+        content = _revision_content(revision)
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-10-live:seed:{_safe_source_part(title)}:{revision.get('revid')}",
+            page_title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision.get("revid"),
+            source_revision_timestamp=revision.get("timestamp"),
+            retrieved_at=generated_at,
+        )
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision.get("revid"),
+            timestamp=revision.get("timestamp"),
+            retrieved_at=generated_at,
+            content=content,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        source_snapshots.append({"title": title, "content": content, "sourceReference": source_ref})
+
+    plan_result = build_rune_source_plan(
+        profile=profile,
+        generated_at=generated_at,
+        source_snapshots=source_snapshots,
+        dependency=dependency,
+    )
+    plan_path = write_rune_source_plan(roots.root, plan_result.plan)
+    diagnostics = [*source_diagnostics, *plan_result.diagnostics]
+    report = build_report(
+        artifact_path=_relative_to_root(roots.root, plan_path),
+        artifact_manifest_path=None,
+        generated_at=generated_at,
+        source_ids=[snapshot["sourceReference"]["id"] for snapshot in source_snapshots],
+        diagnostics=diagnostics,
+        notes="EPIC-10 discover-only source-plan QA report.",
+    )
+    qa_relative = Path("epic-10/runes.source-plan.qa.json")
+    qa_path, summary_path = write_report(root=roots.qa_root, relative_path=qa_relative, report=report)
+    return PipelineResult(
+        artifact_path=plan_path,
+        manifest_path=plan_path,
+        qa_report_path=qa_path,
+        qa_summary_path=summary_path,
+        record_count=int(plan_result.plan["summary"]["acceptedRuneCount"]),
+        finding_count=int(report["summary"]["findingCount"]),
+        exit_code=exit_code_for_report(report),
+        generated={**plan_result.plan, "snapshotManifestPaths": child_manifest_paths},
+        qa_report=report,
+    )
+
+
+def _write_epic10_catalog_result(
+    *,
+    roots: RuntimeRoots,
+    profile: Any,
+    generated_at: str,
+    source_plan: dict[str, Any],
+    detail_pages: list[dict[str, Any]],
+    imageinfo_pages: list[dict[str, Any]],
+    snapshot_set_manifest_path: Path,
+    snapshot_manifest_paths: list[str],
+    source_plan_path: Path | None,
+    diagnostics: list[Diagnostic],
+) -> PipelineResult:
+    dependency = load_epic03_dependency(roots.root)
+    snapshot_set_digest = digest_bytes(snapshot_set_manifest_path.read_bytes())
+    assembled = assemble_rune_catalog(
+        profile=profile,
+        generated_at=generated_at,
+        source_plan=source_plan,
+        detail_pages=detail_pages,
+        imageinfo_pages=imageinfo_pages,
+        dependency=dependency,
+        snapshot_set_digest=snapshot_set_digest,
+    )
+    all_diagnostics = [*diagnostics, *assembled.diagnostics]
+    catalog_artifact_digest = digest_bytes(canonical_json_bytes(assembled.catalog))
+    catalog_byte_count = len(canonical_json_bytes(assembled.catalog))
+    snapshot_set_manifest = json.loads(snapshot_set_manifest_path.read_text(encoding="utf-8"))
+    manifest_source_plan_path = source_plan_path or rune_source_plan_output_path(
+        roots.root,
+        str(source_plan["summary"]["sourcePlanDigest"]),
+    )
+    if profile.catalog_byte_cap and catalog_byte_count > profile.catalog_byte_cap:
+        all_diagnostics.append(
+            Diagnostic(
+                code="RUNE_CATALOG_BYTE_CAP_EXCEEDED",
+                severity="critical",
+                message=f"Rune catalog size {catalog_byte_count} exceeded cap {profile.catalog_byte_cap}",
+                category="artifact-integrity-mismatch",
+                scope_kind="artifact",
+                artifact_path=(Path("data/generated") / profile.generated_relative_path).as_posix(),
+                disposition="non-waivable",
+            )
+        )
+    source_ids = sorted(
+        {
+            str(child["sourceId"])
+            for child in snapshot_set_manifest.get("childSnapshots", [])
+            if isinstance(child, dict) and child.get("sourceId") is not None
+        }
+    )
+    qa_relative = profile.qa_relative_path
+    unique_snapshot_manifest_paths = sorted(set(snapshot_manifest_paths))
+    artifact_path, manifest_path, manifest = write_generated_artifact(
+        root=roots.generated_root,
+        relative_path=profile.generated_relative_path,
+        value=assembled.catalog,
+        generated_at=generated_at,
+        input_snapshot_manifest_paths=unique_snapshot_manifest_paths,
+        source_ids=source_ids,
+        record_count=len(assembled.catalog["runes"]),
+        qa_report_path=(Path("data/qa") / qa_relative).as_posix(),
+        commit_decision="exact-path-allowlisted",
+        notes="Runtime-eligible EPIC-10 rune catalog; source plans, snapshot-set manifests, raw snapshots, QA summaries, and icon bytes remain ignored.",
+        extra_fields={
+            "sourcePlanPath": _relative_to_root(roots.root, manifest_source_plan_path),
+            "sourcePlanDigest": source_plan["summary"]["sourcePlanDigest"],
+            "sourceSetDigest": source_plan["summary"]["sourceSetDigest"],
+            "selectedSnapshotSetManifestPath": _relative_to_root(roots.root, snapshot_set_manifest_path),
+            "selectedSnapshotSetDigest": snapshot_set_digest,
+            "dependencyDigests": assembled.catalog["dependencyDigests"],
+            "manualReviews": rune_manual_reviews(
+                generated_at=generated_at,
+                source_plan=source_plan,
+                snapshot_set_digest=snapshot_set_digest,
+                artifact_digest=catalog_artifact_digest,
+            ),
+        },
+    )
+    report = build_report(
+        artifact_path=(Path("data/generated") / profile.generated_relative_path).as_posix(),
+        artifact_manifest_path=(Path("data/generated") / profile.generated_relative_path.with_suffix(".manifest.json")).as_posix(),
+        generated_at=generated_at,
+        source_ids=source_ids,
+        diagnostics=all_diagnostics,
+        notes="EPIC-10 rune catalog QA report covering source accounting, IDs, joins, effects, stackability, headgear handoff, icons, copied-text policy, artifact integrity, determinism, and release gates.",
+    )
+    qa_byte_count = len(canonical_json_bytes(report))
+    if profile.qa_byte_cap and qa_byte_count > profile.qa_byte_cap:
+        all_diagnostics.append(
+            Diagnostic(
+                code="RUNE_QA_BYTE_CAP_EXCEEDED",
+                severity="critical",
+                message=f"Rune QA report size {qa_byte_count} exceeded cap {profile.qa_byte_cap}",
+                category="artifact-integrity-mismatch",
+                scope_kind="artifact",
+                artifact_path=(Path("data/qa") / qa_relative).as_posix(),
+                disposition="non-waivable",
+            )
+        )
+        report = build_report(
+            artifact_path=(Path("data/generated") / profile.generated_relative_path).as_posix(),
+            artifact_manifest_path=(Path("data/generated") / profile.generated_relative_path.with_suffix(".manifest.json")).as_posix(),
+            generated_at=generated_at,
+            source_ids=source_ids,
+            diagnostics=all_diagnostics,
+            notes="EPIC-10 rune catalog QA report covering source accounting, IDs, joins, effects, stackability, headgear handoff, icons, copied-text policy, artifact integrity, determinism, and release gates.",
+        )
+    qa_path, summary_path = write_report(root=roots.qa_root, relative_path=qa_relative, report=report)
+    return PipelineResult(
+        artifact_path=artifact_path,
+        manifest_path=manifest_path,
+        qa_report_path=qa_path,
+        qa_summary_path=summary_path,
+        record_count=int(manifest["recordCount"]),
+        finding_count=int(report["summary"]["findingCount"]),
+        exit_code=exit_code_for_report(report),
+        generated=assembled.catalog,
+        qa_report=report,
+    )
+
+
 def _discover_epic04_source_set(
     *,
     roots: RuntimeRoots,
@@ -1267,6 +1786,51 @@ def _load_epic04_fixture_pages(fixture_root: Path) -> dict[str, Any]:
         raise PipelineError(f"EPIC-04 fixture imageinfo JSON could not be parsed: {exc}") from exc
 
 
+def _load_epic10_fixture_pages(fixture_root: Path) -> dict[str, Any]:
+    base = fixture_root / "runes"
+    try:
+        sources = {
+            "Equipment template format": (base / "equipment-template-format.wiki").read_text(encoding="utf-8"),
+            "Rune": (base / "rune.wiki").read_text(encoding="utf-8"),
+            "Attribute bonus": (base / "attribute-bonus.wiki").read_text(encoding="utf-8"),
+        }
+        details = {
+            "Rune of Swordsmanship": (base / "rune-of-swordsmanship.wiki").read_text(encoding="utf-8"),
+            "Rune of Restoration Magic": (base / "rune-of-restoration-magic.wiki").read_text(encoding="utf-8"),
+            "Rune of Vigor": (base / "rune-of-vigor.wiki").read_text(encoding="utf-8"),
+            "Rune of Absorption": (base / "rune-of-absorption.wiki").read_text(encoding="utf-8"),
+            "Rune of Attunement": (base / "rune-of-attunement.wiki").read_text(encoding="utf-8"),
+            "Rune of Vitae": (base / "rune-of-vitae.wiki").read_text(encoding="utf-8"),
+            "Rune of Recovery": (base / "rune-of-recovery.wiki").read_text(encoding="utf-8"),
+            "Rune of Restoration": (base / "rune-of-restoration.wiki").read_text(encoding="utf-8"),
+            "Rune of Clarity": (base / "rune-of-clarity.wiki").read_text(encoding="utf-8"),
+            "Rune of Purity": (base / "rune-of-purity.wiki").read_text(encoding="utf-8"),
+        }
+        imageinfo = json.loads((base / "imageinfo.json").read_text(encoding="utf-8"))
+        return {"sources": sources, "details": details, "imageinfo": imageinfo}
+    except OSError as exc:
+        raise PipelineError(f"EPIC-10 fixture input could not be read: {exc}") from exc
+    except json.JSONDecodeError as exc:
+        raise PipelineError(f"EPIC-10 fixture imageinfo JSON could not be parsed: {exc}") from exc
+
+
+def _epic10_fixture_canonical_title(seed: dict[str, Any]) -> str:
+    family_kind = str(seed["familyKind"])
+    rank = seed.get("familyRank")
+    if family_kind == "attribute":
+        return f"Rune of {seed['familyLabel']}"
+    if family_kind in {"vigor", "absorption"} and rank in {"minor", "major", "superior"}:
+        return f"Rune of {seed['familyLabel']}"
+    return str(seed["detailTitle"])
+
+
+def _epic10_fixture_detail_content(fixtures: dict[str, Any], canonical_title: str) -> str:
+    try:
+        return str(fixtures["details"][canonical_title])
+    except KeyError as exc:
+        raise PipelineError(f"EPIC-10 fixture detail page missing for {canonical_title}") from exc
+
+
 def _load_epic03_fixture_pages(fixture_root: Path) -> dict[str, str]:
     base = fixture_root / "professions-attributes"
     try:
@@ -1355,6 +1919,35 @@ def _write_imageinfo_snapshot_for_epic04(
     )
 
 
+def _write_imageinfo_snapshot_for_epic10(
+    *,
+    snapshot_store: SnapshotStore,
+    pages: list[dict[str, Any]],
+    retrieved_at: str,
+) -> SnapshotWriteResult:
+    payload = {"kind": "mediawiki-imageinfo", "title": EPIC_10_RUNE_ICON_IMAGEINFO_TITLE, "pages": pages}
+    payload_digest = digest_bytes(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8"))
+    source_ref = _page_source_reference(
+        source_id=f"source:gww:epic-10-rune-icons:{payload_digest[:12]}",
+        page_title=EPIC_10_RUNE_ICON_IMAGEINFO_TITLE,
+        page_id=f"imageinfo:{payload_digest[:12]}",
+        revision_id=payload_digest,
+        source_revision_timestamp=_latest_imageinfo_timestamp(pages) or retrieved_at,
+        retrieved_at=retrieved_at,
+        material_class="media-metadata",
+    )
+    return _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=source_ref,
+        title=EPIC_10_RUNE_ICON_IMAGEINFO_TITLE,
+        page_id=f"imageinfo:{payload_digest[:12]}",
+        revision_id=payload_digest,
+        timestamp=_latest_imageinfo_timestamp(pages) or retrieved_at,
+        retrieved_at=retrieved_at,
+        content=json.dumps(payload, ensure_ascii=False, sort_keys=True),
+    )
+
+
 def _profession_icon_titles(profession_pages: dict[str, str]) -> list[str]:
     titles: list[str] = []
     for wikitext in profession_pages.values():
@@ -1376,6 +1969,31 @@ def _skill_icon_titles(detail_pages: list[dict[str, Any]], limit: int) -> list[s
             if len(titles) >= limit:
                 break
     return titles
+
+
+def _rune_icon_titles(detail_pages: list[dict[str, Any]], limit: int) -> list[str]:
+    titles: list[str] = []
+    seen: set[str] = set()
+    for detail in detail_pages:
+        if len(titles) >= limit:
+            break
+        for title in _rune_infobox_images(str(detail.get("content", ""))):
+            if title not in seen:
+                seen.add(title)
+                titles.append(title)
+            if len(titles) >= limit:
+                break
+    return titles
+
+
+def _rune_infobox_images(wikitext: str) -> list[str]:
+    match = re.search(r"^\s*\|\s*image\s*=\s*([^\n]+)", wikitext, flags=re.IGNORECASE | re.MULTILINE)
+    if match is None:
+        return []
+    result = []
+    for file_match in re.finditer(r"\[\[(?:Image|File):([^|\]]+)", match.group(1), flags=re.IGNORECASE):
+        result.append(f"File:{file_match.group(1).strip()}")
+    return result
 
 
 def _skill_infobox_image(wikitext: str) -> str | None:
