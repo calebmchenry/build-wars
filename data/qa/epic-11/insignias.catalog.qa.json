@@ -1,0 +1,1430 @@
+{
+  "appConsumptionGate": "pass",
+  "artifactManifestPath": "data/generated/epic-11/insignias.catalog.manifest.json",
+  "artifactPath": "data/generated/epic-11/insignias.catalog.json",
+  "findings": [
+    {
+      "category": "copied-text-without-attribution",
+      "code": "INSIGNIA_COPIED_PROSE_EXCLUDED",
+      "disposition": "resolved",
+      "evidence": [
+        {
+          "kind": "review-note",
+          "notes": "Source prose remains outside runtime JSON.",
+          "reference": "review:epic-11-effect-semantics:2026-09-02"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_copied_prose_excluded:8e8ff0ab94d6",
+      "rationale": "Runtime insignia records use structured effects and exclude source-authored long prose.",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": "data/generated/epic-11/insignias.catalog.json",
+        "fieldPath": null,
+        "kind": "release",
+        "recordId": null,
+        "sourceIds": []
+      },
+      "severity": "info"
+    },
+    {
+      "category": "manual-override",
+      "code": "INSIGNIA_SOURCE_AUTHORITY_REVIEW",
+      "disposition": "resolved",
+      "evidence": [
+        {
+          "kind": "review-note",
+          "notes": "Source graph is digest-bound and finite.",
+          "reference": "review:epic-11-source-set:2026-09-02"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_source_authority_review:0dc409f94436",
+      "rationale": "Finite EPIC-11 source authority was reviewed before catalog promotion.",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": "data/generated/epic-11/insignias.catalog.json",
+        "fieldPath": null,
+        "kind": "release",
+        "recordId": null,
+        "sourceIds": []
+      },
+      "severity": "info"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_NON_64_DIMENSIONS",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Radiant Insignia"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_non_64_dimensions:77c3bed222fb",
+      "rationale": "Icon metadata did not report an approved square icon size",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/width",
+        "kind": "record",
+        "recordId": "Radiant Insignia",
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4625:2594771"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4623:2452606"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:d0bb45209e4f",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 290,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4623:2452606"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4626:2438860"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:0ff245e401f7",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 292,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4626:2438860"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4627:2377064"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:1f75e187b376",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 293,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4627:2377064"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4628:2643366"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:9b922061ab81",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 294,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4628:2643366"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4633:2709783"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:1050e48dd0f0",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 295,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4633:2709783"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4635:2353018"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:b303c9e93666",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 296,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4635:2353018"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4793:2683167"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:151a732136ce",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 297,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4793:2683167"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4794:2683168"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:dd8aa95c87d2",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 298,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4794:2683168"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4795:2683169"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:410dea53c76e",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 299,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4795:2683169"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4797:2683170"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:dd787c3c8b3c",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 300,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4797:2683170"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4596:2378196"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:98844da584fc",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 301,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4596:2378196"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4952:2679965"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:1bf57c49e2b3",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 302,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4952:2679965"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4953:2457060"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:269ec021a92e",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 303,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4953:2457060"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4956:2378200"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:492a59d31206",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 304,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4956:2378200"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4957:2378206"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:3a0f7c21dd8c",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 305,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4957:2378206"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4958:888027"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:c45510ca33c6",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 306,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4958:888027"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4684:2378178"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:5aebd8bf99a7",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 307,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4684:2378178"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4685:2378188"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:e126b5464d48",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 308,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4685:2378188"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4686:2378177"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:b7600389071d",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 309,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4686:2378177"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4687:2378180"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:06080669f41b",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 310,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4687:2378180"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4649:2378149"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:b89c54aecf5e",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 311,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4649:2378149"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4650:888020"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:33db7a341548",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 312,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4650:888020"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4801:2438861"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:029dd30278d5",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 313,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4801:2438861"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4807:2693406"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:2154b06a36fb",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 314,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4807:2693406"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4802:2616030"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:86f897454aea",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 315,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4802:2616030"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4803:2378148"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:7a8f229f01f2",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 316,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4803:2378148"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4804:2378151"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:e08b8f215aeb",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 317,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4804:2378151"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4815:2378174"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:80dbd16c6bfc",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 318,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4815:2378174"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4816:2378176"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:3204e9388e6a",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 319,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4816:2378176"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4817:2378179"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:f2a7f9439260",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 320,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4817:2378179"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4818:2428008"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:12cb9374ecf7",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 321,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4818:2428008"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4782:2683171"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:be3122ab21be",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 322,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4782:2683171"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4791:2727496"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:0b8a2837de24",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 323,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4791:2727496"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4792:2683173"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:e606065c290a",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 324,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4792:2683173"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4599:2683165"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:e6e4c44c091c",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 358,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4599:2683165"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4601:2683160"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:b9aa62925e49",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 359,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4601:2683160"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4959:2683164"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:f11963efab98",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 360,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4959:2683164"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4688:2683166"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:0941e02a13a3",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 361,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4688:2683166"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4652:2683163"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:642e25e52716",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 362,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4652:2683163"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4819:2683161"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:a6a08ea1de16",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 363,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4819:2683161"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4820:2683162"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:ac021df7f167",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 364,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4820:2683162"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4639:2664411"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:9be0a83da7c8",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 365,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4639:2664411"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4642:2591367"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:67f80f1c932d",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 366,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4642:2591367"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "INSIGNIA_ICON_FIELD_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-11-live:insignia:4645:2411114"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:insignia_icon_field_missing:2a3ee3d3e21c",
+      "rationale": "Insignia detail page did not provide an infobox image or render field",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": 367,
+        "sourceIds": [
+          "source:gww:epic-11-live:insignia:4645:2411114"
+        ]
+      },
+      "severity": "warning"
+    }
+  ],
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "notes": "EPIC-11 insignia catalog QA report covering source accounting, IDs, crosswalks, joins, restrictions, modes, slots, effects, conditions, locality, combination, copied text, media metadata, caps, baselines, gates, and artifact integrity.",
+  "publicReleaseGate": "pass",
+  "schemaVersion": 1,
+  "sourceIds": [
+    "source:gww:epic-11-insignia-icons:b44300325461",
+    "source:gww:epic-11-live:insignia:4596:2378196",
+    "source:gww:epic-11-live:insignia:4599:2683165",
+    "source:gww:epic-11-live:insignia:4601:2683160",
+    "source:gww:epic-11-live:insignia:4623:2452606",
+    "source:gww:epic-11-live:insignia:4625:2594771",
+    "source:gww:epic-11-live:insignia:4626:2438860",
+    "source:gww:epic-11-live:insignia:4627:2377064",
+    "source:gww:epic-11-live:insignia:4628:2643366",
+    "source:gww:epic-11-live:insignia:4633:2709783",
+    "source:gww:epic-11-live:insignia:4635:2353018",
+    "source:gww:epic-11-live:insignia:4639:2664411",
+    "source:gww:epic-11-live:insignia:4642:2591367",
+    "source:gww:epic-11-live:insignia:4645:2411114",
+    "source:gww:epic-11-live:insignia:4649:2378149",
+    "source:gww:epic-11-live:insignia:4650:888020",
+    "source:gww:epic-11-live:insignia:4652:2683163",
+    "source:gww:epic-11-live:insignia:4684:2378178",
+    "source:gww:epic-11-live:insignia:4685:2378188",
+    "source:gww:epic-11-live:insignia:4686:2378177",
+    "source:gww:epic-11-live:insignia:4687:2378180",
+    "source:gww:epic-11-live:insignia:4688:2683166",
+    "source:gww:epic-11-live:insignia:4782:2683171",
+    "source:gww:epic-11-live:insignia:4791:2727496",
+    "source:gww:epic-11-live:insignia:4792:2683173",
+    "source:gww:epic-11-live:insignia:4793:2683167",
+    "source:gww:epic-11-live:insignia:4794:2683168",
+    "source:gww:epic-11-live:insignia:4795:2683169",
+    "source:gww:epic-11-live:insignia:4797:2683170",
+    "source:gww:epic-11-live:insignia:4801:2438861",
+    "source:gww:epic-11-live:insignia:4802:2616030",
+    "source:gww:epic-11-live:insignia:4803:2378148",
+    "source:gww:epic-11-live:insignia:4804:2378151",
+    "source:gww:epic-11-live:insignia:4807:2693406",
+    "source:gww:epic-11-live:insignia:4815:2378174",
+    "source:gww:epic-11-live:insignia:4816:2378176",
+    "source:gww:epic-11-live:insignia:4817:2378179",
+    "source:gww:epic-11-live:insignia:4818:2428008",
+    "source:gww:epic-11-live:insignia:4819:2683161",
+    "source:gww:epic-11-live:insignia:4820:2683162",
+    "source:gww:epic-11-live:insignia:4952:2679965",
+    "source:gww:epic-11-live:insignia:4953:2457060",
+    "source:gww:epic-11-live:insignia:4956:2378200",
+    "source:gww:epic-11-live:insignia:4957:2378206",
+    "source:gww:epic-11-live:insignia:4958:888027",
+    "source:gww:epic-11-live:insignia:4959:2683164",
+    "source:gww:epic-11-live:seed:effect-stacking:2722942",
+    "source:gww:epic-11-live:seed:equipment-template-format:2728058",
+    "source:gww:epic-11-live:seed:insignia:2722620"
+  ],
+  "summary": {
+    "criticalCount": 0,
+    "errorCount": 0,
+    "findingCount": 47,
+    "infoCount": 2,
+    "openBlockingCount": 0,
+    "warningCount": 45
+  }
+}

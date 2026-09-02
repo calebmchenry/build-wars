@@ -59,6 +59,20 @@ verified equipment template modifier IDs, uses EPIC-03 profession/attribute join
 effect-level stacking, keeps headgear as a handoff fact, and leaves armor legality, equipment UI,
 title effects, and full stat totals to later epics.
 
+EPIC-11 adds the insignias catalog exception. The only allowlisted production outputs are:
+
+- `data/generated/epic-11/insignias.catalog.json`
+- `data/generated/epic-11/insignias.catalog.manifest.json`
+- `data/qa/epic-11/insignias.catalog.qa.json`
+
+Runtime consumers may read only `insignias.catalog.json`. They must not read EPIC-11 source plans,
+snapshot-set manifests, raw snapshots, candidate outputs, QA summaries, QA JSON, generated
+manifests, Python ingestion modules, wiki APIs, or icon bytes. The catalog uses schema-owned
+registry-backed `InsigniaId` values, verified equipment template modifier crosswalks, EPIC-03
+profession joins, exact per-slot effect outcomes, inert conditions, metadata-only remote media, and
+leaves armor legality, equipment UI, template resolution, condition evaluation, hit-location
+behavior, rune/insignia composition, and full stat totals to later epics.
+
 ## Commit Rules
 
 Policy README files remain trackable so directory contracts are visible. Synthetic fixtures belong
@@ -87,3 +101,7 @@ For EPIC-10, BW-1005 approved the exact paths above after live source-set discov
 digest-confirmed detail/icon metadata fetch, selected complete snapshot-set replay, byte-identical
 offline catalog/manifest/QA regeneration, source authority review, first-baseline review,
 dispositioned icon-dimension warnings, and passing app/public QA gates.
+For EPIC-11, BW-1105 approved the exact paths above after live source-set discovery,
+digest-confirmed detail/icon metadata fetch, selected complete snapshot-set replay, byte-identical
+offline catalog/manifest/QA regeneration, source authority review, first-baseline review,
+dispositioned metadata-only icon warnings, and passing app/public QA gates.

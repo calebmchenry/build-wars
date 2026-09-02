@@ -1,0 +1,8 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = [[Energy]] +3 (on chest armor)<br>[[Energy]] +2 (on leg armor)<br>[[Energy]] +1 (on other armor)
+| profession = Any
+| stackable = n
+| campaign = [[Core]]
+| render = [[File:Fixture Radiant Insignia.png|100px]]
+}}

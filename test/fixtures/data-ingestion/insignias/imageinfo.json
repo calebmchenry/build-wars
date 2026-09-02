@@ -1,0 +1,36 @@
+{
+  "pages": [
+    {
+      "imageinfo": [
+        {
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "1111111111111111111111111111111111111111",
+          "size": 1200,
+          "timestamp": "2026-08-31T20:50:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture-survivor-insignia.png",
+          "width": 64
+        }
+      ],
+      "ns": 6,
+      "pageid": 11001,
+      "title": "File:Fixture Survivor Insignia.png"
+    },
+    {
+      "imageinfo": [
+        {
+          "height": 64,
+          "mime": "image/png",
+          "sha1": "2222222222222222222222222222222222222222",
+          "size": 1180,
+          "timestamp": "2026-08-31T20:51:00Z",
+          "url": "https://wiki.guildwars.com/images/fixture-radiant-insignia.png",
+          "width": 64
+        }
+      ],
+      "ns": 6,
+      "pageid": 11002,
+      "title": "File:Fixture Radiant Insignia.png"
+    }
+  ]
+}

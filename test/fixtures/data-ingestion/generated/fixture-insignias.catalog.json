@@ -1,0 +1,4662 @@
+{
+  "catalogVersion": "insignias-92e0642d5b00c1ce",
+  "dependencyDigests": [
+    {
+      "artifactDigest": "1cb3f79b7139cf26adbcf40b600094c2860796c60dcd9f1ba75bad694d07c8b4",
+      "catalogVersion": "pa-de7831a31d4be2f5",
+      "id": "epic-03-professions-attributes",
+      "manifestDigest": "1c6379112f9ac9c1d669c6e60e3c045ff7ca52dad8a84b2b494508da4c41e55e",
+      "qaGate": "pass",
+      "sectionDigests": [
+        {
+          "digest": "71727b2ff6b4cd11b70ac5a3425823c96f9e746ef9f0c06b572acf8df22c7644",
+          "section": "templateCrosswalk"
+        },
+        {
+          "digest": "be78d97c2cf7a7138441a382deba5de53a9554496d99a133b889f166df1f06ea",
+          "section": "professions"
+        },
+        {
+          "digest": "12761c5f2ffe70533710096ee8f447df336d6dc1cbf3f9cd16b0e3567f9975dc",
+          "section": "attributes"
+        },
+        {
+          "digest": "c623bd0469178039ae26f07340c5692e8e13fd3f0c5ec0bce2c62b9dd76c19fd",
+          "section": "attributePointRules"
+        },
+        {
+          "digest": "fbb708659ca19a455caa6f4c5cd968d6182fb585707f28587ed56b790eda5295",
+          "section": "remoteMedia"
+        }
+      ]
+    }
+  ],
+  "dispositions": [
+    {
+      "id": "insignia-disposition:289",
+      "insigniaId": null,
+      "kind": "explicit-exclusion",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-source-set:289"
+        ],
+        "notes": "Inscription-like armor or weapon modifier row is outside EPIC-11 insignia scope.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:equipment-template-format:7001"
+        ]
+      },
+      "reason": "Inscription-like armor or weapon modifier row is outside EPIC-11 insignia scope.",
+      "requestedTitle": "\"To the Pain!\"",
+      "reviewId": "review:epic-11-source-set:2026-09-02",
+      "templateModifierId": 289
+    },
+    {
+      "id": "insignia-disposition:325",
+      "insigniaId": null,
+      "kind": "explicit-exclusion",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-source-set:325"
+        ],
+        "notes": "Inscription-like armor or weapon modifier row is outside EPIC-11 insignia scope.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:equipment-template-format:7001"
+        ]
+      },
+      "reason": "Inscription-like armor or weapon modifier row is outside EPIC-11 insignia scope.",
+      "requestedTitle": "\"Faith is My Shield\"",
+      "reviewId": "review:epic-11-source-set:2026-09-02",
+      "templateModifierId": 325
+    },
+    {
+      "id": "insignia-disposition:effect-stacking",
+      "insigniaId": null,
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-source-set:effect-stacking"
+        ],
+        "notes": "Mechanics source approved for effect locality and combination policy; not a catalog record.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003"
+        ]
+      },
+      "reason": "Mechanics source approved for effect locality and combination policy; not a catalog record.",
+      "requestedTitle": "Effect stacking",
+      "reviewId": "review:epic-11-source-set:2026-09-02",
+      "templateModifierId": null
+    }
+  ],
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "identityRegistry": {
+    "digest": "6e60cbc1047c19d3d3897c8b3d5304fe3468dbe0771aa25b8159b772b8047955",
+    "policy": "IDs are never allocated from response order or array order, are not reused after promotion, and require review for rename, tombstone, split, merge, or supersession changes.",
+    "recordCount": 45,
+    "registryVersion": 1,
+    "tombstoneCount": 0
+  },
+  "insignias": [
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "common",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "character",
+          "combination": {
+            "groupKey": "health:insignia",
+            "notes": null,
+            "rule": "sum"
+          },
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:290:condition:always"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:survivor-insignia:7101"
+              ]
+            }
+          },
+          "id": "insignia:290:health",
+          "kind": "maximum-health-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:290:maximum-health-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:survivor-insignia:7101"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 15,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:290:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:survivor-insignia:7101"
+                ]
+              },
+              "unit": "health"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:290:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:survivor-insignia:7101"
+                ]
+              },
+              "unit": "health"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:290:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:survivor-insignia:7101"
+                ]
+              },
+              "unit": "health"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:290:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:survivor-insignia:7101"
+                ]
+              },
+              "unit": "health"
+            },
+            "legs": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:290:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:survivor-insignia:7101"
+                ]
+              },
+              "unit": "health"
+            }
+          },
+          "unit": "health"
+        }
+      ],
+      "familyKey": "survivor",
+      "iconId": "remote-media:gww-icon:survivor-insignia",
+      "id": 290,
+      "modeAvailability": "both",
+      "name": "Survivor Insignia",
+      "normalizedName": "survivor-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Survivor Insignia",
+        "normalizedTitle": "Survivor Insignia",
+        "pageId": 10001,
+        "redirectedFrom": null,
+        "requestedTitle": "Survivor Insignia",
+        "revisionId": 7101,
+        "sourceRevisionTimestamp": "2026-08-31T20:01:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:290"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:survivor-insignia:7101"
+        ]
+      },
+      "sourceKey": "equipment-modifier:290",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:290:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:survivor-insignia:7101"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 290
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Survivor_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "common",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "character",
+          "combination": {
+            "groupKey": "energy:insignia",
+            "notes": null,
+            "rule": "sum"
+          },
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:291:condition:always"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:radiant-insignia:7102"
+              ]
+            }
+          },
+          "id": "insignia:291:energy",
+          "kind": "maximum-energy-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:291:maximum-energy-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:radiant-insignia:7102"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 3,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:291:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:radiant-insignia:7102"
+                ]
+              },
+              "unit": "energy"
+            },
+            "feet": {
+              "amount": 1,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:291:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:radiant-insignia:7102"
+                ]
+              },
+              "unit": "energy"
+            },
+            "hands": {
+              "amount": 1,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:291:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:radiant-insignia:7102"
+                ]
+              },
+              "unit": "energy"
+            },
+            "head": {
+              "amount": 1,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:291:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:radiant-insignia:7102"
+                ]
+              },
+              "unit": "energy"
+            },
+            "legs": {
+              "amount": 2,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:291:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:radiant-insignia:7102"
+                ]
+              },
+              "unit": "energy"
+            }
+          },
+          "unit": "energy"
+        }
+      ],
+      "familyKey": "radiant",
+      "iconId": "remote-media:gww-icon:radiant-insignia",
+      "id": 291,
+      "modeAvailability": "both",
+      "name": "Radiant Insignia",
+      "normalizedName": "radiant-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Radiant Insignia",
+        "normalizedTitle": "Radiant Insignia",
+        "pageId": 10002,
+        "redirectedFrom": null,
+        "requestedTitle": "Radiant Insignia",
+        "revisionId": 7102,
+        "sourceRevisionTimestamp": "2026-08-31T20:02:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:291"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:radiant-insignia:7102"
+        ]
+      },
+      "sourceKey": "equipment-modifier:291",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:291:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:radiant-insignia:7102"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 291
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Radiant_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "common",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:292:1",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": "equal",
+            "count": null,
+            "damageType": "physical",
+            "effectKind": "incoming-damage",
+            "kind": "predicate",
+            "predicate": "incoming-damage-type",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:292:condition:incoming-damage-type"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:stalwart-insignia:7103"
+              ]
+            },
+            "text": "vs. physical damage"
+          },
+          "damageScope": "physical",
+          "id": "insignia:292:armor-1",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:292:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:stalwart-insignia:7103"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:292:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:stalwart-insignia:7103"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:292:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:stalwart-insignia:7103"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:292:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:stalwart-insignia:7103"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:292:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:stalwart-insignia:7103"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:292:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:stalwart-insignia:7103"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        }
+      ],
+      "familyKey": "stalwart",
+      "iconId": null,
+      "id": 292,
+      "modeAvailability": "both",
+      "name": "Stalwart Insignia",
+      "normalizedName": "stalwart-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Stalwart Insignia",
+        "normalizedTitle": "Stalwart Insignia",
+        "pageId": 10003,
+        "redirectedFrom": null,
+        "requestedTitle": "Stalwart Insignia",
+        "revisionId": 7103,
+        "sourceRevisionTimestamp": "2026-08-31T20:03:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:292"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:stalwart-insignia:7103"
+        ]
+      },
+      "sourceKey": "equipment-modifier:292",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:292:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:stalwart-insignia:7103"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 292
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Stalwart_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "common",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:294:1",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": null,
+            "count": null,
+            "damageType": null,
+            "effectKind": "enchantment",
+            "kind": "predicate",
+            "predicate": "affected-by-enchantment",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:294:condition:affected-by-enchantment"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:blessed-insignia:7104"
+              ]
+            },
+            "text": "while affected by an Enchantment Spell"
+          },
+          "damageScope": null,
+          "id": "insignia:294:armor-1",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:294:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:blessed-insignia:7104"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:294:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:blessed-insignia:7104"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:294:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:blessed-insignia:7104"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:294:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:blessed-insignia:7104"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:294:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:blessed-insignia:7104"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:294:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:blessed-insignia:7104"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        }
+      ],
+      "familyKey": "blessed",
+      "iconId": null,
+      "id": 294,
+      "modeAvailability": "both",
+      "name": "Blessed Insignia",
+      "normalizedName": "blessed-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Blessed Insignia",
+        "normalizedTitle": "Blessed Insignia",
+        "pageId": 10004,
+        "redirectedFrom": null,
+        "requestedTitle": "Blessed Insignia",
+        "revisionId": 7104,
+        "sourceRevisionTimestamp": "2026-08-31T20:04:00Z"
+      },
+      "professionId": null,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:294"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:blessed-insignia:7104"
+        ]
+      },
+      "sourceKey": "equipment-modifier:294",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:294:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:blessed-insignia:7104"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 294
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Blessed_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "profession-specific",
+      "displayState": "reviewed-short-text",
+      "effectCompleteness": "note-only",
+      "effects": [
+        {
+          "combination": {
+            "groupKey": "note:302:corpse-casting-time",
+            "notes": null,
+            "rule": "non-stacking"
+          },
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:302:condition:always"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:bloodstained-insignia:7105"
+              ]
+            }
+          },
+          "id": "insignia:302:corpse-casting-time",
+          "kind": "note-only",
+          "modeAvailability": "both",
+          "noteCode": "activation-time-deferred",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:302:note-only"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:bloodstained-insignia:7105"
+            ]
+          },
+          "text": "Casting-time modifier for corpse-exploiting spells is retained as a reviewed note in schema v1."
+        }
+      ],
+      "familyKey": "bloodstained",
+      "iconId": null,
+      "id": 302,
+      "modeAvailability": "both",
+      "name": "Bloodstained Insignia",
+      "normalizedName": "bloodstained-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Bloodstained Insignia",
+        "normalizedTitle": "Bloodstained Insignia",
+        "pageId": 10005,
+        "redirectedFrom": null,
+        "requestedTitle": "Bloodstained Insignia",
+        "revisionId": 7105,
+        "sourceRevisionTimestamp": "2026-08-31T20:05:00Z"
+      },
+      "professionId": 4,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:302"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:bloodstained-insignia:7105"
+        ]
+      },
+      "sourceKey": "equipment-modifier:302",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:302:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:bloodstained-insignia:7105"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 302
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Bloodstained_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "profession-specific",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "event-local",
+          "combination": {
+            "groupKey": "incoming-damage:holy",
+            "notes": null,
+            "rule": "sum"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": "equal",
+            "count": null,
+            "damageType": "holy",
+            "effectKind": "incoming-damage",
+            "kind": "predicate",
+            "predicate": "incoming-damage-type",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:303:condition:incoming-damage-type"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+              ]
+            },
+            "text": "incoming holy damage"
+          },
+          "damageScope": "holy",
+          "id": "insignia:303:incoming-holy-damage",
+          "kind": "incoming-damage-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:303:incoming-damage-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 6,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:303:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+                ]
+              },
+              "unit": "damage"
+            },
+            "feet": {
+              "amount": 2,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:303:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+                ]
+              },
+              "unit": "damage"
+            },
+            "hands": {
+              "amount": 2,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:303:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+                ]
+              },
+              "unit": "damage"
+            },
+            "head": {
+              "amount": 2,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:303:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+                ]
+              },
+              "unit": "damage"
+            },
+            "legs": {
+              "amount": 4,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:303:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+                ]
+              },
+              "unit": "damage"
+            }
+          },
+          "unit": "damage"
+        },
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:303:1",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:303:condition:always"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+              ]
+            }
+          },
+          "damageScope": null,
+          "id": "insignia:303:armor-1",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:303:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:303:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:303:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:303:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:303:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 10,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:303:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        }
+      ],
+      "familyKey": "tormentor",
+      "iconId": null,
+      "id": 303,
+      "modeAvailability": "both",
+      "name": "Tormentor's Insignia",
+      "normalizedName": "tormentor-s-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Tormentor's Insignia",
+        "normalizedTitle": "Tormentor's Insignia",
+        "pageId": 10006,
+        "redirectedFrom": null,
+        "requestedTitle": "Tormentor's Insignia",
+        "revisionId": 7106,
+        "sourceRevisionTimestamp": "2026-08-31T20:06:00Z"
+      },
+      "professionId": 4,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:303"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+        ]
+      },
+      "sourceKey": "equipment-modifier:303",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:303:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:tormentor-s-insignia:7106"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 303
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Tormentor's_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "profession-specific",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "event-local",
+          "combination": {
+            "groupKey": "incoming-damage:physical:313",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": "equal",
+            "count": null,
+            "damageType": "physical",
+            "effectKind": "incoming-damage",
+            "kind": "predicate",
+            "predicate": "incoming-damage-type",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:313:condition:incoming-damage-type"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:knight-s-insignia:7107"
+              ]
+            },
+            "text": "incoming physical damage"
+          },
+          "damageScope": "physical",
+          "id": "insignia:313:incoming-physical-damage",
+          "kind": "incoming-damage-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:313:incoming-damage-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:knight-s-insignia:7107"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": -3,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:313:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:knight-s-insignia:7107"
+                ]
+              },
+              "unit": "damage"
+            },
+            "feet": {
+              "amount": -3,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:313:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:knight-s-insignia:7107"
+                ]
+              },
+              "unit": "damage"
+            },
+            "hands": {
+              "amount": -3,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:313:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:knight-s-insignia:7107"
+                ]
+              },
+              "unit": "damage"
+            },
+            "head": {
+              "amount": -3,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:313:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:knight-s-insignia:7107"
+                ]
+              },
+              "unit": "damage"
+            },
+            "legs": {
+              "amount": -3,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:313:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:knight-s-insignia:7107"
+                ]
+              },
+              "unit": "damage"
+            }
+          },
+          "unit": "damage"
+        }
+      ],
+      "familyKey": "knight",
+      "iconId": null,
+      "id": 313,
+      "modeAvailability": "both",
+      "name": "Knight's Insignia",
+      "normalizedName": "knight-s-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Knight's Insignia",
+        "normalizedTitle": "Knight's Insignia",
+        "pageId": 10007,
+        "redirectedFrom": null,
+        "requestedTitle": "Knight's Insignia",
+        "revisionId": 7107,
+        "sourceRevisionTimestamp": "2026-08-31T20:07:00Z"
+      },
+      "professionId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:313"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:knight-s-insignia:7107"
+        ]
+      },
+      "sourceKey": "equipment-modifier:313",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:313:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:knight-s-insignia:7107"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 313
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Knight's_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "profession-specific",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:314:1",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:314:condition:always"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+              ]
+            }
+          },
+          "damageScope": null,
+          "id": "insignia:314:armor-1",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:314:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": -20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": -20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": -20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": -20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": -20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        },
+        {
+          "applicationScope": "character",
+          "combination": {
+            "groupKey": "duration:hex:insignia",
+            "notes": null,
+            "rule": "non-stacking"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": null,
+            "count": null,
+            "damageType": null,
+            "effectKind": "hex",
+            "kind": "predicate",
+            "predicate": "affected-by-hex",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:314:condition:affected-by-hex"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+              ]
+            },
+            "text": "hex durations on you"
+          },
+          "id": "insignia:314:hex-duration",
+          "kind": "duration-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:314:duration-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": -20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "percent"
+            },
+            "feet": {
+              "amount": -20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "percent"
+            },
+            "hands": {
+              "amount": -20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "percent"
+            },
+            "head": {
+              "amount": -20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "percent"
+            },
+            "legs": {
+              "amount": -20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "percent"
+            }
+          },
+          "subject": "hex-duration",
+          "unit": "percent"
+        },
+        {
+          "applicationScope": "character",
+          "combination": {
+            "groupKey": "outgoing-damage:insignia",
+            "notes": null,
+            "rule": "non-stacking"
+          },
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:314:condition:always"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+              ]
+            }
+          },
+          "id": "insignia:314:outgoing-damage",
+          "kind": "outgoing-damage-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:314:outgoing-damage-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": -5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "percent"
+            },
+            "feet": {
+              "amount": -5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "percent"
+            },
+            "hands": {
+              "amount": -5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "percent"
+            },
+            "head": {
+              "amount": -5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "percent"
+            },
+            "legs": {
+              "amount": -5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:314:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+                ]
+              },
+              "unit": "percent"
+            }
+          },
+          "subject": "all-damage",
+          "unit": "percent"
+        }
+      ],
+      "familyKey": "lieutenant",
+      "iconId": null,
+      "id": 314,
+      "modeAvailability": "both",
+      "name": "Lieutenant's Insignia",
+      "normalizedName": "lieutenant-s-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Lieutenant's Insignia",
+        "normalizedTitle": "Lieutenant's Insignia",
+        "pageId": 10008,
+        "redirectedFrom": null,
+        "requestedTitle": "Lieutenant's Insignia",
+        "revisionId": 7108,
+        "sourceRevisionTimestamp": "2026-08-31T20:08:00Z"
+      },
+      "professionId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:314"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+        ]
+      },
+      "sourceKey": "equipment-modifier:314",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:314:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:lieutenant-s-insignia:7108"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 314
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Lieutenant's_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "profession-specific",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "event-local",
+          "combination": {
+            "groupKey": "duration:knockdown:insignia",
+            "notes": null,
+            "rule": "non-stacking"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": "at-least",
+            "count": 3,
+            "damageType": null,
+            "effectKind": "knockdown",
+            "kind": "predicate",
+            "predicate": "knockdown-duration-cap",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:315:condition:knockdown-duration-cap"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:stonefist-insignia:7109"
+              ]
+            },
+            "text": "knockdown duration; maximum source cap retained"
+          },
+          "id": "insignia:315:knockdown-duration",
+          "kind": "duration-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:315:duration-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:stonefist-insignia:7109"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 1,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:315:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:stonefist-insignia:7109"
+                ]
+              },
+              "unit": "seconds"
+            },
+            "feet": {
+              "amount": 1,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:315:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:stonefist-insignia:7109"
+                ]
+              },
+              "unit": "seconds"
+            },
+            "hands": {
+              "amount": 1,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:315:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:stonefist-insignia:7109"
+                ]
+              },
+              "unit": "seconds"
+            },
+            "head": {
+              "amount": 1,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:315:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:stonefist-insignia:7109"
+                ]
+              },
+              "unit": "seconds"
+            },
+            "legs": {
+              "amount": 1,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:315:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:stonefist-insignia:7109"
+                ]
+              },
+              "unit": "seconds"
+            }
+          },
+          "subject": "knockdown",
+          "unit": "seconds"
+        }
+      ],
+      "familyKey": "stonefist",
+      "iconId": null,
+      "id": 315,
+      "modeAvailability": "both",
+      "name": "Stonefist Insignia",
+      "normalizedName": "stonefist-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Stonefist Insignia",
+        "normalizedTitle": "Stonefist Insignia",
+        "pageId": 10009,
+        "redirectedFrom": null,
+        "requestedTitle": "Stonefist Insignia",
+        "revisionId": 7109,
+        "sourceRevisionTimestamp": "2026-08-31T20:09:00Z"
+      },
+      "professionId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:315"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:stonefist-insignia:7109"
+        ]
+      },
+      "sourceKey": "equipment-modifier:315",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:315:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:stonefist-insignia:7109"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 315
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Stonefist_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "profession-specific",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:317:1",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": 17,
+            "attributeName": "Strength",
+            "comparator": "at-least",
+            "count": 13,
+            "damageType": "elemental",
+            "effectKind": "attribute-rank",
+            "kind": "predicate",
+            "predicate": "attribute-rank-at-least",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:317:condition:attribute-rank-at-least"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:sentinel-s-insignia:7110"
+              ]
+            },
+            "text": "Requires 13 Strength, vs. elemental damage"
+          },
+          "damageScope": "elemental",
+          "id": "insignia:317:armor-1",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:317:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:sentinel-s-insignia:7110"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:317:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:sentinel-s-insignia:7110"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:317:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:sentinel-s-insignia:7110"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:317:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:sentinel-s-insignia:7110"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:317:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:sentinel-s-insignia:7110"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 20,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:317:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:sentinel-s-insignia:7110"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        }
+      ],
+      "familyKey": "sentinel",
+      "iconId": null,
+      "id": 317,
+      "modeAvailability": "both",
+      "name": "Sentinel's Insignia",
+      "normalizedName": "sentinel-s-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Sentinel's Insignia",
+        "normalizedTitle": "Sentinel's Insignia",
+        "pageId": 10010,
+        "redirectedFrom": null,
+        "requestedTitle": "Sentinel's Insignia",
+        "revisionId": 7110,
+        "sourceRevisionTimestamp": "2026-08-31T20:10:00Z"
+      },
+      "professionId": 1,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:317"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:sentinel-s-insignia:7110"
+        ]
+      },
+      "sourceKey": "equipment-modifier:317",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:317:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:sentinel-s-insignia:7110"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 317
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Sentinel's_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "profession-specific",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:361:1",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": 8,
+            "attributeName": "Air Magic",
+            "comparator": "at-least",
+            "count": 9,
+            "damageType": null,
+            "effectKind": "attribute-rank",
+            "kind": "predicate",
+            "predicate": "attribute-rank-at-least",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:361:condition:attribute-rank-at-least"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+              ]
+            },
+            "text": "requires 9 Air Magic"
+          },
+          "damageScope": null,
+          "id": "insignia:361:armor-1",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:361:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        },
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:361:2",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": 9,
+            "attributeName": "Earth Magic",
+            "comparator": "at-least",
+            "count": 9,
+            "damageType": "earth",
+            "effectKind": "attribute-rank",
+            "kind": "predicate",
+            "predicate": "attribute-rank-at-least",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:361:condition:attribute-rank-at-least"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+              ]
+            },
+            "text": "requires 9 Earth Magic"
+          },
+          "damageScope": "earth",
+          "id": "insignia:361:armor-2",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:361:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        },
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:361:3",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": 10,
+            "attributeName": "Fire Magic",
+            "comparator": "at-least",
+            "count": 9,
+            "damageType": "fire",
+            "effectKind": "attribute-rank",
+            "kind": "predicate",
+            "predicate": "attribute-rank-at-least",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:361:condition:attribute-rank-at-least"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+              ]
+            },
+            "text": "requires 9 Fire Magic"
+          },
+          "damageScope": "fire",
+          "id": "insignia:361:armor-3",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:361:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        },
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:361:4",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": 11,
+            "attributeName": "Water Magic",
+            "comparator": "at-least",
+            "count": 9,
+            "damageType": null,
+            "effectKind": "attribute-rank",
+            "kind": "predicate",
+            "predicate": "attribute-rank-at-least",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:361:condition:attribute-rank-at-least"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+              ]
+            },
+            "text": "requires 9 Water Magic"
+          },
+          "damageScope": null,
+          "id": "insignia:361:armor-4",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:361:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:361:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        }
+      ],
+      "familyKey": "prismatic",
+      "iconId": null,
+      "id": 361,
+      "modeAvailability": "both",
+      "name": "Prismatic Insignia",
+      "normalizedName": "prismatic-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Prismatic Insignia",
+        "normalizedTitle": "Prismatic Insignia",
+        "pageId": 10011,
+        "redirectedFrom": null,
+        "requestedTitle": "Prismatic Insignia",
+        "revisionId": 7111,
+        "sourceRevisionTimestamp": "2026-08-31T20:11:00Z"
+      },
+      "professionId": 6,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:361"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+        ]
+      },
+      "sourceKey": "equipment-modifier:361",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:361:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:prismatic-insignia:7111"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 361
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Prismatic_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "profession-specific",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:362:1",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": "at-least",
+            "count": 1,
+            "damageType": null,
+            "effectKind": "skill",
+            "kind": "predicate",
+            "predicate": "recharging-skills-at-least",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:362:condition:recharging-skills-at-least"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+              ]
+            },
+            "text": "while recharging 1 or more skills"
+          },
+          "damageScope": null,
+          "id": "insignia:362:armor-1",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:362:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        },
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:362:2",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": "at-least",
+            "count": 3,
+            "damageType": null,
+            "effectKind": "skill",
+            "kind": "predicate",
+            "predicate": "recharging-skills-at-least",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:362:condition:recharging-skills-at-least"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+              ]
+            },
+            "text": "while recharging 3 or more skills"
+          },
+          "damageScope": null,
+          "id": "insignia:362:armor-2",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:362:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        },
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:362:3",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": "at-least",
+            "count": 5,
+            "damageType": null,
+            "effectKind": "skill",
+            "kind": "predicate",
+            "predicate": "recharging-skills-at-least",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:362:condition:recharging-skills-at-least"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+              ]
+            },
+            "text": "while recharging 5 or more skills"
+          },
+          "damageScope": null,
+          "id": "insignia:362:armor-3",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:362:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:362:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        }
+      ],
+      "familyKey": "anchorite",
+      "iconId": null,
+      "id": 362,
+      "modeAvailability": "both",
+      "name": "Anchorite's Insignia",
+      "normalizedName": "anchorite-s-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Anchorite's Insignia",
+        "normalizedTitle": "Anchorite's Insignia",
+        "pageId": 10012,
+        "redirectedFrom": null,
+        "requestedTitle": "Anchorite's Insignia",
+        "revisionId": 7112,
+        "sourceRevisionTimestamp": "2026-08-31T20:12:00Z"
+      },
+      "professionId": 3,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:362"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+        ]
+      },
+      "sourceKey": "equipment-modifier:362",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:362:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:anchorite-s-insignia:7112"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 362
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Anchorite's_Insignia"
+    },
+    {
+      "applicableSlots": [
+        "head",
+        "chest",
+        "hands",
+        "legs",
+        "feet"
+      ],
+      "availability": "profession-specific",
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:365:1",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": "at-least",
+            "count": 1,
+            "damageType": null,
+            "effectKind": "enchantment",
+            "kind": "predicate",
+            "predicate": "affected-by-enchantment",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:365:condition:affected-by-enchantment"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+              ]
+            },
+            "text": "while affected by 1 or more Enchantment Spells"
+          },
+          "damageScope": null,
+          "id": "insignia:365:armor-1",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:365:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        },
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:365:2",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": "at-least",
+            "count": 2,
+            "damageType": null,
+            "effectKind": "enchantment",
+            "kind": "predicate",
+            "predicate": "affected-by-enchantment",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:365:condition:affected-by-enchantment"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+              ]
+            },
+            "text": "while affected by 2 or more Enchantment Spells"
+          },
+          "damageScope": null,
+          "id": "insignia:365:armor-2",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:365:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        },
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:365:3",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": "at-least",
+            "count": 3,
+            "damageType": null,
+            "effectKind": "enchantment",
+            "kind": "predicate",
+            "predicate": "affected-by-enchantment",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:365:condition:affected-by-enchantment"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+              ]
+            },
+            "text": "while affected by 3 or more Enchantment Spells"
+          },
+          "damageScope": null,
+          "id": "insignia:365:armor-3",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:365:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        },
+        {
+          "applicationScope": "armor-piece-local",
+          "combination": {
+            "groupKey": "armor:365:4",
+            "notes": null,
+            "rule": "local-only"
+          },
+          "condition": {
+            "attributeId": null,
+            "attributeName": null,
+            "comparator": "at-least",
+            "count": 4,
+            "damageType": null,
+            "effectKind": "enchantment",
+            "kind": "predicate",
+            "predicate": "affected-by-enchantment",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-11-effect:365:condition:affected-by-enchantment"
+              ],
+              "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+              "reviewIds": [
+                "review:epic-11-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-11-fixture:effect-stacking:7003",
+                "source:gww:epic-11-fixture:insignia:7002",
+                "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+              ]
+            },
+            "text": "while affected by 4 or more Enchantment Spells"
+          },
+          "damageScope": null,
+          "id": "insignia:365:armor-4",
+          "kind": "armor-rating-delta",
+          "modeAvailability": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:365:armor-rating-delta"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+            ]
+          },
+          "slotOutcomes": {
+            "chest": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:chest"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "feet": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:feet"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "hands": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:hands"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "head": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:head"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            },
+            "legs": {
+              "amount": 5,
+              "kind": "value",
+              "precision": "integer",
+              "provenance": {
+                "claimIds": [
+                  "claim:epic-11-effect:365:slot:legs"
+                ],
+                "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+                "reviewIds": [
+                  "review:epic-11-effect-semantics:2026-09-02"
+                ],
+                "sourceIds": [
+                  "source:gww:epic-11-fixture:effect-stacking:7003",
+                  "source:gww:epic-11-fixture:insignia:7002",
+                  "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+                ]
+              },
+              "unit": "armor"
+            }
+          },
+          "unit": "armor"
+        }
+      ],
+      "familyKey": "windwalker",
+      "iconId": null,
+      "id": 365,
+      "modeAvailability": "both",
+      "name": "Windwalker Insignia",
+      "normalizedName": "windwalker-insignia",
+      "pageIdentity": {
+        "canonicalTitle": "Windwalker Insignia",
+        "normalizedTitle": "Windwalker Insignia",
+        "pageId": 10013,
+        "redirectedFrom": null,
+        "requestedTitle": "Windwalker Insignia",
+        "revisionId": 7113,
+        "sourceRevisionTimestamp": "2026-08-31T20:13:00Z"
+      },
+      "professionId": 10,
+      "provenance": {
+        "claimIds": [
+          "claim:epic-11-insignia:365"
+        ],
+        "notes": "Parsed from digest-bound EPIC-11 source snapshot.",
+        "reviewIds": [
+          "review:epic-11-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-11-fixture:effect-stacking:7003",
+          "source:gww:epic-11-fixture:insignia:7002",
+          "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+        ]
+      },
+      "sourceKey": "equipment-modifier:365",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-11-effect:365:template-modifier-crosswalk"
+            ],
+            "notes": "Source-clear arithmetic is projected per armor slot; conditions remain inert data.",
+            "reviewIds": [
+              "review:epic-11-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-11-fixture:effect-stacking:7003",
+              "source:gww:epic-11-fixture:insignia:7002",
+              "source:gww:epic-11-fixture:insignia:windwalker-insignia:7113"
+            ]
+          },
+          "scope": "armor-prefix",
+          "status": "active",
+          "templateModifierId": 365
+        }
+      ],
+      "variantKey": null,
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Windwalker_Insignia"
+    }
+  ],
+  "profile": {
+    "id": "epic-11-insignias",
+    "sourceCaps": {
+      "aggregateByteCap": 10000000,
+      "catalogByteCap": 2000000,
+      "continuationLimit": 10,
+      "detailPageLimit": 64,
+      "mediaTitleLimit": 64,
+      "parserByteCap": 750000,
+      "qaByteCap": 1000000,
+      "requestLimit": 48,
+      "responseByteCap": 5000000,
+      "retryLimit": 3,
+      "seedPageLimit": 3
+    },
+    "sourceEpic": "EPIC-11",
+    "sourceTarget": "BACKLOG"
+  },
+  "remoteMedia": [
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/fixture-radiant-insignia.png",
+      "fileTitle": "File:Fixture Radiant Insignia.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:radiant-insignia",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Radiant Insignia.",
+      "remoteSha1": "2222222222222222222222222222222222222222",
+      "remoteTimestamp": "2026-08-31T20:51:00Z",
+      "sizeBytes": 1180,
+      "sourceId": "source:gww:epic-11-fixture:insignia:radiant-insignia:7102",
+      "useDecision": "allowed",
+      "width": 64
+    },
+    {
+      "cachedBytes": false,
+      "canonicalUrl": "https://wiki.guildwars.com/images/fixture-survivor-insignia.png",
+      "fileTitle": "File:Fixture Survivor Insignia.png",
+      "height": 64,
+      "id": "remote-media:gww-icon:survivor-insignia",
+      "kind": "icon",
+      "mimeType": "image/png",
+      "notes": "Metadata-only icon record for Survivor Insignia.",
+      "remoteSha1": "1111111111111111111111111111111111111111",
+      "remoteTimestamp": "2026-08-31T20:50:00Z",
+      "sizeBytes": 1200,
+      "sourceId": "source:gww:epic-11-fixture:insignia:survivor-insignia:7101",
+      "useDecision": "allowed",
+      "width": 64
+    }
+  ],
+  "schemaVersion": 1,
+  "sectionDigests": [
+    {
+      "digest": "c4904ed8a5e986406269cd89208743ef401a71d2b3e257659249b11774a2c51a",
+      "section": "dependencyDigests"
+    },
+    {
+      "digest": "bf7e076a01c0b6b32bc28c424457cc07515c75dd5c4dcb6f95409b90c2451df1",
+      "section": "sourceSet"
+    },
+    {
+      "digest": "fea49ca3f736189cb14c6e6b9d9905007729d0dcfd28cb5a819675df7051e32a",
+      "section": "identityRegistry"
+    },
+    {
+      "digest": "b068e6b35ddd58ff0e22e8b665785a5351e933c93ef297433e023632e79c6d9a",
+      "section": "dispositions"
+    },
+    {
+      "digest": "88bca5d6e1d96e02432c29138d4d1c8cc1335ed898b13892a1a4bd50c8958c99",
+      "section": "insignias"
+    },
+    {
+      "digest": "c7a08d616d3a6dcaa94e633a6cd32f2ab2ee8ea0018892dd1b465ebad368b2d5",
+      "section": "remoteMedia"
+    }
+  ],
+  "sourceSet": {
+    "acceptedInsigniaCount": 13,
+    "blockingFindingCount": 0,
+    "detailPageTitles": [
+      "Anchorite's Insignia",
+      "Blessed Insignia",
+      "Bloodstained Insignia",
+      "Knight's Insignia",
+      "Lieutenant's Insignia",
+      "Prismatic Insignia",
+      "Radiant Insignia",
+      "Sentinel's Insignia",
+      "Stalwart Insignia",
+      "Stonefist Insignia",
+      "Survivor Insignia",
+      "Tormentor's Insignia",
+      "Windwalker Insignia"
+    ],
+    "exclusionCount": 2,
+    "idPolicy": "Public InsigniaId values are schema-owned registry allocations. Production v1 accepted player-usable records require exactly one active verified armor-prefix TemplateEquipmentModifierId crosswalk.",
+    "identityRegistryDigest": "6e60cbc1047c19d3d3897c8b3d5304fe3468dbe0771aa25b8159b772b8047955",
+    "planningAmendment": null,
+    "relationshipCount": 1,
+    "seedTitles": [
+      "Equipment template format",
+      "Insignia",
+      "Effect stacking"
+    ],
+    "sourceAuthority": "Equipment template modifier rows identify player-usable armor-prefix insignia candidates; the Insignia overview supplies common/profession grouping and source-visible bonuses; verified detail pages supply page identity, restrictions, slot/effect facts, and optional metadata-only media references; Effect stacking supplies locality and combination mechanics.",
+    "sourcePlanDigest": "f0e3ff3ca6044687d7b55bb62964de4a5b06f1f7295e851901ed08bb149f4447",
+    "sourceSetDigest": "db19fca3818aba512550a49705693ebe25c682f4e69cbbf06eedbdd07c0ffb1e",
+    "unsupportedCount": 0
+  }
+}

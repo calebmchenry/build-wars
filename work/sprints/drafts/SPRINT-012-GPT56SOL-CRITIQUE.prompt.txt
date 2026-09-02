@@ -1,0 +1,20 @@
+Read the sprint drafts at `work/sprints/drafts/SPRINT-012-GPT55-DRAFT.md` and
+`work/sprints/drafts/SPRINT-012-GPT54-DRAFT.md`. Write one combined critique to
+`work/sprints/drafts/SPRINT-012-GPT56SOL-CRITIQUE.md`.
+
+Do not read or critique `work/sprints/drafts/SPRINT-012-GPT56SOL-DRAFT.md`.
+Focus on solution coherence, strategic trade-offs, cross-draft contradictions, long-range
+architecture risk, unresolved assumptions, source authority, identity policy, slot-scaling
+semantics, and promotion gates.
+
+Constraints:
+- Do not use skills.
+- Do not run a planning workflow.
+- Do not modify implementation code.
+- Do not create commits.
+- Do not modify files outside `work/sprints/drafts/SPRINT-012-GPT56SOL-CRITIQUE.md`.
+- Output only markdown to the target file.
+
+For each reviewed draft, identify strengths, weaknesses, gaps in risk analysis, missing edge cases,
+and Definition of Done completeness. Then compare the two drafts and call out merge
+recommendations.

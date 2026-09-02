@@ -2,11 +2,13 @@
 id: BW-1104
 title: Insignia Effect Semantics and Slot Scaling
 epic: EPIC-11
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1101
   - BW-1103
+planned_sprint: SPRINT-012
+completed_sprint: SPRINT-012
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -47,3 +49,15 @@ and stat display.
 - `npm run typecheck`
 - Focused domain tests for insignia effect and slot-scaling fixtures
 - Focused Python tests for semantic normalization
+
+## Closeout Evidence
+
+- SPRINT-012 added table-driven insignia semantic normalization for health, energy, armor rating,
+  incoming damage, duration, outgoing damage, note-only, and unknown effects.
+- Numeric effects expose tagged outcomes for all five armor slots, and
+  `resolveInsigniaEffectsForArmorSlot(record, slot)` projects one record/slot without legality,
+  condition evaluation, aggregation, rune composition, or totals.
+- Validation passed: `npm run typecheck`,
+  `PYTHONPATH=scripts/data .venv-data/bin/python -m unittest
+build_wars_ingest.tests.test_insignia_semantics build_wars_ingest.tests.test_insignia_catalog`,
+  and the focused insignia domain Vitest subset.

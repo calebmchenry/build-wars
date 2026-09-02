@@ -2,12 +2,14 @@
 id: EPIC-11
 title: Insignias
 track: content
-status: ready
+status: done
 priority: high
 depends_on:
   - EPIC-01
   - EPIC-02
   - EPIC-03
+planned_sprint: SPRINT-012
+completed_sprint: SPRINT-012
 tickets:
   - BW-1101
   - BW-1102
@@ -73,3 +75,16 @@ Insignias often depend on combat state. Treat many effects as notes unless a rel
 * `BW-1105`: Insignia catalog QA, deterministic generation, review gates, and exact-path promotion.
 * `BW-1106`: Runtime integration notes, downstream contracts for equipment/stat work, docs, and
   closeout.
+
+## Completion Evidence
+
+SPRINT-012 completed BW-1101 through BW-1106. It promoted the runtime insignia catalog at
+`data/generated/epic-11/insignias.catalog.json` with its adjacent manifest and machine-readable QA
+report, backed by source authority review, digest-confirmed live fetch, selected complete
+snapshot-set replay, two byte-identical fixed-clock offline replays, and `npm run verify`.
+
+The catalog contains 45 runtime-eligible insignia records with schema-owned registry IDs, verified
+equipment template modifier crosswalks, EPIC-03 profession joins, exact tagged per-slot outcomes,
+typed conditions/locality/combination facts, and metadata-only icon references. Armor legality,
+equipment UI, semantic template resolution, condition evaluation, rune/insignia composition, and
+full stat aggregation remain delegated to later epics.

@@ -1,0 +1,7 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = [[Armor rating|Armor]] +10 (vs. [[physical damage]])
+| profession = Any
+| stackable = n
+| campaign = [[Core]]
+}}

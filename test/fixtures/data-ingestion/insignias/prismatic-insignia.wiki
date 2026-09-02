@@ -1,0 +1,7 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = [[Armor rating|Armor]] +5 (requires 9 [[Air Magic]])<br>[[Armor rating|Armor]] +5 (requires 9 [[Earth Magic]])<br>[[Armor rating|Armor]] +5 (requires 9 [[Fire Magic]])<br>[[Armor rating|Armor]] +5 (requires 9 [[Water Magic]])
+| profession = Elementalist
+| stackable = n
+| campaign = [[Core]]
+}}

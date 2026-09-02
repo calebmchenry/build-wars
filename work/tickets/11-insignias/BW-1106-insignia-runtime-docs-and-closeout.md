@@ -2,10 +2,12 @@
 id: BW-1106
 title: Insignia Runtime Docs and Closeout
 epic: EPIC-11
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1105
+planned_sprint: SPRINT-012
+completed_sprint: SPRINT-012
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -42,3 +44,13 @@ scope.
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- SPRINT-012 updated README, data/script docs, `compendium/data-ingestion-platform.md`,
+  `compendium/game-rule-engine.md`, created `compendium/insignias-catalog.md`, recorded
+  downstream EPIC-13/14/17/20/21 handoffs, and kept `src/app`, editor behavior, local persistence,
+  sharing, backup/restore, template compatibility, and EPIC-03/04/10 promoted artifacts unchanged.
+- Validation passed: `npm run data:regenerate`, direct fixed-clock EPIC-11 fixture regeneration,
+  `npm run verify`, `rg -n 'EPIC-11|BW-110[1-6]|SPRINT-012' work/tickets/11-insignias
+work/sprints`, and `git status --short`.

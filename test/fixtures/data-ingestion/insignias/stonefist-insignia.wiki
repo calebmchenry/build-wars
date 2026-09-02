@@ -1,0 +1,7 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = Increases [[knockdown]] time on foes by 1 second. (Maximum: 3 seconds)
+| profession = Warrior
+| stackable = n
+| campaign = [[Core]]
+}}

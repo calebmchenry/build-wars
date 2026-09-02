@@ -8,6 +8,8 @@
 - `summarizeAttributeRuneEffects(catalog, equippedEntries)` converts caller-owned equipped rune
   instances into highest-per-attribute rank adjustments plus independently counted attribute-rune
   health penalties.
+- `resolveInsigniaEffectsForArmorSlot(record, slot)` projects one insignia record onto one armor
+  slot with tagged value/not-applicable/unresolved outcomes.
 
 Production rule-engine modules do not import React, DOM/browser APIs, browser storage, network
 clients, app modules, generated catalog JSON, manifests, QA reports, source snapshots, Python data
@@ -102,8 +104,16 @@ then returns `EffectiveAttributeRankAdjustment`-compatible rune adjustments. It 
 slots, validate armor legality, apply headgear bonuses, aggregate Vigor/Vitae/Attunement/Absorption,
 calculate full health or energy totals, read generated files, or mutate caller data.
 
+`resolveInsigniaEffectsForArmorSlot` is the narrow EPIC-11 bridge for per-slot insignia facts only.
+It accepts one runtime insignia record plus one `ArmorSlot`, returns resolved slot outcomes and
+typed unresolved reasons, and preserves note-only or unknown effects. It does not choose armor,
+validate armor/profession/mode legality, evaluate conditions, aggregate multiple armor pieces,
+compose rune/title/weapon effects, apply hit-location probabilities, calculate totals, read
+generated files, or mutate caller data.
+
 ## Deferred Scope
 
-Title ownership, title rank, allegiance side, equipment, rune, insignia, armor, weapon, modifier,
-hero, party, recommendation, guide, UI, storage, and export/publish policy validation remain
-deferred. Later domains should add built-in rule modules that emit the same issue/result contract.
+Title ownership, title rank, allegiance side, equipment, armor legality, condition evaluation,
+rune/insignia composition, weapon, modifier, hero, party, recommendation, guide, UI, storage, and
+export/publish policy validation remain deferred. Later domains should add built-in rule modules
+that emit the same issue/result contract.

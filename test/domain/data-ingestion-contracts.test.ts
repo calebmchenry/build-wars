@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   SOURCE_POLICY_SCHEMA_VERSION,
   type GeneratedArtifactManifest,
+  type InsigniaCatalog,
   type ProfessionAttributeCatalog,
   type QaReport,
   type RemoteMediaMetadata,
@@ -12,6 +13,7 @@ import {
 } from "../../src/domain";
 import professionsAttributesGolden from "../fixtures/data-ingestion/generated/fixture-professions-attributes.catalog.json";
 import runesGolden from "../fixtures/data-ingestion/generated/fixture-runes.catalog.json";
+import insigniasGolden from "../fixtures/data-ingestion/generated/fixture-insignias.catalog.json";
 import skillsGolden from "../fixtures/data-ingestion/generated/fixture-skills.catalog.json";
 import golden from "../fixtures/data-ingestion/generated/fixture-skill-id-map.json";
 
@@ -162,6 +164,24 @@ describe("data ingestion generated contracts", () => {
       "attribute-rank",
       "maximum-health-delta"
     ]);
+    expect(catalog.remoteMedia.every((media) => media.cachedBytes === false)).toBe(true);
+  });
+
+  it("keeps the EPIC-11 Python insignia catalog aligned with the TypeScript wire contract", () => {
+    const catalog = insigniasGolden as unknown as InsigniaCatalog;
+    const survivor = catalog.insignias.find((insignia) => insignia.name === "Survivor Insignia");
+    const bloodstained = catalog.insignias.find(
+      (insignia) => insignia.name === "Bloodstained Insignia"
+    );
+
+    expect(catalog.schemaVersion).toBe(SOURCE_POLICY_SCHEMA_VERSION);
+    expect(catalog.profile.id).toBe("epic-11-insignias");
+    expect(catalog.dependencyDigests[0]?.id).toBe("epic-03-professions-attributes");
+    expect(catalog.sourceSet.acceptedInsigniaCount).toBe(catalog.insignias.length);
+    expect(catalog.sourceSet.blockingFindingCount).toBe(0);
+    expect(survivor?.templateModifiers[0]?.templateModifierId).toBe(290);
+    expect(survivor?.effects[0]?.kind).toBe("maximum-health-delta");
+    expect(bloodstained?.effectCompleteness).toBe("note-only");
     expect(catalog.remoteMedia.every((media) => media.cachedBytes === false)).toBe(true);
   });
 });

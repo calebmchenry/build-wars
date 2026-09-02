@@ -6,6 +6,7 @@ import {
   type ArmorPiece,
   type Attribute,
   type Build,
+  type CatalogInsigniaRecord,
   type CatalogRuneRecord,
   type EquipmentTemplate,
   type Guide,
@@ -21,6 +22,7 @@ import {
   templateEquipmentSlotId,
   type Rune,
   type RuneCatalog,
+  type InsigniaCatalog,
   type Skill,
   type SkillProgression,
   type SourceReference,
@@ -78,6 +80,8 @@ describe("domain contracts", () => {
       | SourceReference
       | RecordProvenance
       | RemoteMediaMetadata
+      | CatalogInsigniaRecord
+      | InsigniaCatalog
       | CatalogRuneRecord
       | RuneCatalog;
 

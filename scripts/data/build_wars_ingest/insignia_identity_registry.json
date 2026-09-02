@@ -1,0 +1,278 @@
+{
+  "notes": "Initial EPIC-11 production baseline. Public InsigniaId values are schema-owned registry allocations; template equipment modifier IDs remain separate active crosswalk facts.",
+  "policy": "IDs are never allocated from response order or array order, are not reused after promotion, and require review for rename, tombstone, split, merge, or supersession changes.",
+  "records": [
+    {
+      "id": 290,
+      "sourceKey": "equipment-modifier:290",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 291,
+      "sourceKey": "equipment-modifier:291",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 292,
+      "sourceKey": "equipment-modifier:292",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 293,
+      "sourceKey": "equipment-modifier:293",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 294,
+      "sourceKey": "equipment-modifier:294",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 295,
+      "sourceKey": "equipment-modifier:295",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 296,
+      "sourceKey": "equipment-modifier:296",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 297,
+      "sourceKey": "equipment-modifier:297",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 298,
+      "sourceKey": "equipment-modifier:298",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 299,
+      "sourceKey": "equipment-modifier:299",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 300,
+      "sourceKey": "equipment-modifier:300",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 301,
+      "sourceKey": "equipment-modifier:301",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 302,
+      "sourceKey": "equipment-modifier:302",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 303,
+      "sourceKey": "equipment-modifier:303",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 304,
+      "sourceKey": "equipment-modifier:304",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 305,
+      "sourceKey": "equipment-modifier:305",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 306,
+      "sourceKey": "equipment-modifier:306",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 307,
+      "sourceKey": "equipment-modifier:307",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 308,
+      "sourceKey": "equipment-modifier:308",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 309,
+      "sourceKey": "equipment-modifier:309",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 310,
+      "sourceKey": "equipment-modifier:310",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 311,
+      "sourceKey": "equipment-modifier:311",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 312,
+      "sourceKey": "equipment-modifier:312",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 313,
+      "sourceKey": "equipment-modifier:313",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 314,
+      "sourceKey": "equipment-modifier:314",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 315,
+      "sourceKey": "equipment-modifier:315",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 316,
+      "sourceKey": "equipment-modifier:316",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 317,
+      "sourceKey": "equipment-modifier:317",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 318,
+      "sourceKey": "equipment-modifier:318",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 319,
+      "sourceKey": "equipment-modifier:319",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 320,
+      "sourceKey": "equipment-modifier:320",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 321,
+      "sourceKey": "equipment-modifier:321",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 322,
+      "sourceKey": "equipment-modifier:322",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 323,
+      "sourceKey": "equipment-modifier:323",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 324,
+      "sourceKey": "equipment-modifier:324",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 358,
+      "sourceKey": "equipment-modifier:358",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 359,
+      "sourceKey": "equipment-modifier:359",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 360,
+      "sourceKey": "equipment-modifier:360",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 361,
+      "sourceKey": "equipment-modifier:361",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 362,
+      "sourceKey": "equipment-modifier:362",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 363,
+      "sourceKey": "equipment-modifier:363",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 364,
+      "sourceKey": "equipment-modifier:364",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 365,
+      "sourceKey": "equipment-modifier:365",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 366,
+      "sourceKey": "equipment-modifier:366",
+      "status": "active",
+      "variantKey": null
+    },
+    {
+      "id": 367,
+      "sourceKey": "equipment-modifier:367",
+      "status": "active",
+      "variantKey": null
+    }
+  ],
+  "registryVersion": 1,
+  "tombstones": []
+}

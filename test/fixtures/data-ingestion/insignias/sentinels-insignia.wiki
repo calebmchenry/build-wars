@@ -1,0 +1,7 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = [[Armor rating|Armor]] +20 (Requires 13 [[Strength]], vs. [[elemental damage]])
+| profession = Warrior
+| stackable = n
+| campaign = [[Core]]
+}}

@@ -1,0 +1,7 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = [[Armor rating|Armor]] +10<br>[[Holy damage]] you receive increased by 6 (on chest armor)<br>[[Holy damage]] you receive increased by 4 (on leg armor)<br>[[Holy damage]] you receive increased by 2 (on other armor)
+| profession = Necromancer
+| stackable = n
+| campaign = [[Core]]
+}}

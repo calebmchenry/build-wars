@@ -1,0 +1,7 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = Received [[physical damage]] -3
+| profession = Warrior
+| stackable = n
+| campaign = [[Core]]
+}}

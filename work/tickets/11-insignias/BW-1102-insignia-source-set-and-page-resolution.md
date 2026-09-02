@@ -2,10 +2,12 @@
 id: BW-1102
 title: Insignia Source Set and Page Resolution
 epic: EPIC-11
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1101
+planned_sprint: SPRINT-012
+completed_sprint: SPRINT-012
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -43,3 +45,14 @@ deterministic insignia catalog generation.
 
 - Focused Python tests for EPIC-11 source-plan generation and fixture source resolution
 - Documented fixture regenerate command added by the implementation sprint
+
+## Closeout Evidence
+
+- SPRINT-012 added EPIC-11 source-set planning, identity-registry validation, source-plan digesting,
+  digest-confirmed fetch, complete snapshot-set replay checks, and minimized synthetic insignia
+  fixtures.
+- Live discover accepted 45 records with `sourcePlanDigest:
+fd133929a6d3a066287e65f2ed767ea13349562e5943f6ca5bb8f661aa95cfe2` and `sourceSetDigest:
+61daebff66fc2d573e5df701d47e3165639f699f71a0b38514e01bb8045c7ee7`.
+- Validation passed: the EPIC-11 source-set/protocol/identity/pipeline/CLI Python subset, the
+  EPIC-04/10 source-set regression subset, and direct EPIC-11 fixed-clock fixture regeneration.

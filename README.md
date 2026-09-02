@@ -37,13 +37,16 @@ installs the pinned Python parser dependency from `scripts/data/requirements.txt
 `npm run data:regenerate` runs fixture mode only. It uses committed minimized synthetic fixtures,
 fixed timestamps, and an output root under ignored `work/runs/data-ingestion`.
 The default fixture run preserves the EPIC-02 skill-ID proof and also writes the EPIC-03
-professions/attributes fixture catalog, the EPIC-04 synthetic skills catalog, and the EPIC-10
-synthetic runes catalog. Run EPIC-03, EPIC-04, and EPIC-10 profiles directly with
+professions/attributes fixture catalog, the EPIC-04 synthetic skills catalog, the EPIC-10
+synthetic runes catalog, and the EPIC-11 synthetic insignias catalog. Run EPIC-03, EPIC-04,
+EPIC-10, and EPIC-11 profiles directly with
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-03-professions-attributes`.
 For EPIC-04 use
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-04-skills`.
 For EPIC-10 use
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-10-runes`.
+For EPIC-11 use
+`PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-11-insignias`.
 
 ## Current Scope
 
@@ -69,6 +72,11 @@ Included now:
   with an adjacent generated manifest and bounded QA report. Runtime code must consume only the
   catalog JSON; manifests, QA reports, source plans, snapshot sets, raw snapshots, QA summaries,
   review evidence, icon bytes, Python tooling, and wiki APIs remain non-runtime.
+- Runtime-eligible EPIC-11 insignias catalog data at
+  `data/generated/epic-11/insignias.catalog.json`, with an adjacent generated manifest and bounded
+  QA report. Runtime code must consume only the catalog JSON; manifests, QA reports, source plans,
+  snapshot sets, raw snapshots, QA summaries, review evidence, icon bytes, Python tooling, and wiki
+  APIs remain non-runtime.
 - Framework-neutral Guild Wars skill and raw equipment template import/export APIs under
   `src/template-compatibility`, backed by a pinned `@buildwars/gw-templates@1.1.1` adapter.
 - Pure domain rule-engine APIs for authored builds: `validateBuild` and
@@ -137,6 +145,13 @@ detail pages, metadata-only icon `imageinfo`, and the promoted EPIC-03 catalog. 
 are anchored to verified `TemplateEquipmentModifierId` values. Offline replay requires one complete
 selected EPIC-10 snapshot-set manifest; source plans, snapshot sets, raw snapshots, QA summaries, and
 icon bytes remain ignored.
+For EPIC-11, live refresh follows the same two-step pattern with `--profile epic-11-insignias`. The
+finite source authority is `Equipment template format`, `Insignia`, `Effect stacking`, verified
+insignia detail pages, metadata-only icon `imageinfo`, and the promoted EPIC-03 catalog. Public
+`InsigniaId` values are schema-owned registry allocations, while each accepted production record has
+one active verified armor-prefix `TemplateEquipmentModifierId` crosswalk. Offline replay requires one
+complete selected EPIC-11 snapshot-set manifest; source plans, snapshot sets, raw snapshots, QA
+summaries, review evidence, and icon bytes remain ignored.
 
 ## Template Compatibility
 
@@ -166,6 +181,9 @@ Build validation is available through `src/domain`.
 - `summarizeAttributeRuneEffects` derives caller-supplied rune rank adjustments and independent
   attribute-rune health penalties from a runtime rune catalog without owning armor slots, legality,
   headgear bonuses, or full stat totals.
+- `resolveInsigniaEffectsForArmorSlot` projects one insignia record onto one armor slot without
+  owning armor legality, condition evaluation, rune composition, hit-location behavior, or full stat
+  totals.
 
 See [Game rule engine](compendium/game-rule-engine.md) for rule defaults, unresolved-ID handling,
 split/mode behavior, duplicate policies, and deferred scope.

@@ -1,5 +1,6 @@
 import type {
   AttributeId,
+  InsigniaId,
   ProfessionId,
   RuneId,
   SkillId,
@@ -10,9 +11,12 @@ import type {
 } from "./ids";
 import type {
   CatalogRuneRecord,
+  CatalogInsigniaRecord,
   CatalogSkillRecord,
   CatalogAttributeRecord,
   CatalogProfessionRecord,
+  InsigniaCatalog,
+  InsigniaSourceSetDisposition,
   ProfessionAttributeCatalog,
   RuneCatalog,
   RuneSourceSetDisposition,
@@ -72,6 +76,20 @@ export type RuneDispositionLookupOutcome = {
   readonly disposition: RuneSourceSetDisposition;
 };
 
+export type InsigniaDispositionLookupOutcome = {
+  readonly kind: "dispositioned";
+  readonly templateId: TemplateEquipmentModifierId;
+  readonly catalogId: null;
+  readonly disposition: InsigniaSourceSetDisposition;
+};
+
+export type AmbiguousInsigniaTemplateLookupOutcome = {
+  readonly kind: "ambiguous";
+  readonly templateId: TemplateEquipmentModifierId;
+  readonly catalogId: null;
+  readonly records: readonly CatalogInsigniaRecord[];
+};
+
 export type EmptySkillSlotLookupOutcome = {
   readonly kind: "empty";
   readonly templateId: TemplateSkillId;
@@ -99,6 +117,12 @@ export type SkillTemplateLookupOutcome =
 export type RuneTemplateModifierLookupOutcome =
   | KnownTemplateLookupOutcome<TemplateEquipmentModifierId, RuneId, CatalogRuneRecord>
   | RuneDispositionLookupOutcome
+  | UnknownTemplateLookupOutcome<TemplateEquipmentModifierId>;
+
+export type InsigniaTemplateModifierLookupOutcome =
+  | KnownTemplateLookupOutcome<TemplateEquipmentModifierId, InsigniaId, CatalogInsigniaRecord>
+  | AmbiguousInsigniaTemplateLookupOutcome
+  | InsigniaDispositionLookupOutcome
   | UnknownTemplateLookupOutcome<TemplateEquipmentModifierId>;
 
 export type SkillTemplateSlotLookupOutcome =
@@ -231,6 +255,37 @@ export function lookupRuneTemplateModifierId(
   return { kind: "unknown", templateId, catalogId: null };
 }
 
+export function lookupInsigniaTemplateModifierId(
+  catalog: InsigniaCatalog,
+  templateId: TemplateEquipmentModifierId
+): InsigniaTemplateModifierLookupOutcome {
+  const numericTemplateId = Number(templateId);
+  const records = catalog.insignias.filter((insignia) =>
+    insignia.templateModifiers.some(
+      (crosswalk) =>
+        Number(crosswalk.templateModifierId) === numericTemplateId &&
+        crosswalk.status === "active" &&
+        crosswalk.scope === "armor-prefix"
+    )
+  );
+  if (records.length > 1) {
+    return { kind: "ambiguous", templateId, catalogId: null, records };
+  }
+  const record = records[0];
+  if (record !== undefined) {
+    return { kind: "known", templateId, catalogId: record.id, record };
+  }
+
+  const disposition = catalog.dispositions.find(
+    (candidate) => Number(candidate.templateModifierId) === numericTemplateId
+  );
+  if (disposition !== undefined) {
+    return { kind: "dispositioned", templateId, catalogId: null, disposition };
+  }
+
+  return { kind: "unknown", templateId, catalogId: null };
+}
+
 export function lookupSkillTemplateSlot(
   catalog: SkillCatalog,
   templateId: TemplateSkillId
@@ -251,6 +306,13 @@ export function lookupSkillById(
 
 export function lookupRuneById(catalog: RuneCatalog, runeId: RuneId): CatalogRuneRecord | null {
   return catalog.runes.find((rune) => Number(rune.id) === Number(runeId)) ?? null;
+}
+
+export function lookupInsigniaById(
+  catalog: InsigniaCatalog,
+  insigniaId: InsigniaId
+): CatalogInsigniaRecord | null {
+  return catalog.insignias.find((insignia) => Number(insignia.id) === Number(insigniaId)) ?? null;
 }
 
 export function lookupProfessionByName(
@@ -278,6 +340,18 @@ export function lookupSkillByName(catalog: SkillCatalog, value: string): Catalog
 
 export function lookupRuneByName(catalog: RuneCatalog, value: string): CatalogRuneRecord | null {
   return collisionSafeLookup(catalog.runes, value, (record) => [record.name], "rune");
+}
+
+export function lookupInsigniaByName(
+  catalog: InsigniaCatalog,
+  value: string
+): CatalogInsigniaRecord | null {
+  return collisionSafeLookup(
+    catalog.insignias,
+    value,
+    (record) => [record.name, record.normalizedName],
+    "insignia"
+  );
 }
 
 export function resolveSkillModeVariant(

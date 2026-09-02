@@ -2,11 +2,13 @@
 id: BW-1103
 title: Insignia Extractors
 epic: EPIC-11
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1101
   - BW-1102
+planned_sprint: SPRINT-012
+completed_sprint: SPRINT-012
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -44,3 +46,14 @@ Extract normalized insignia records from the accepted EPIC-11 source set.
 
 - Focused Python extractor tests for EPIC-11 fixtures
 - Fixed-clock fixture regeneration for EPIC-11 output
+
+## Closeout Evidence
+
+- SPRINT-012 added snapshot-only insignia extraction for infobox fields, names, page identity,
+  restrictions, slots, raw effects, source `arms` to domain `hands` normalization, EPIC-03 joins,
+  and nullable metadata-only icon references.
+- Item `Stackable` is retained as raw extraction evidence and does not populate runtime
+  effect-combination fields.
+- Validation passed: `PYTHONPATH=scripts/data .venv-data/bin/python -m unittest
+build_wars_ingest.tests.test_insignia_extractor build_wars_ingest.tests.test_icons`,
+  `npm run test:run -- test/domain/insignia-catalog.test.ts`, and `npm run data:test`.

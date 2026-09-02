@@ -1,0 +1,16 @@
+== Modifier IDs ==
+*289 - "To the Pain!"
+*290 - Survivor Insignia
+*291 - Radiant Insignia
+*292 - Stalwart Insignia
+*294 - Blessed Insignia
+*302 - Bloodstained Insignia ([[Necromancer]])
+*303 - Tormentor's Insignia ([[Necromancer]])
+*313 - Knight's Insignia ([[Warrior]])
+*314 - Lieutenant's Insignia ([[Warrior]])
+*315 - Stonefist Insignia ([[Warrior]])
+*317 - Sentinel's Insignia ([[Warrior]])
+*361 - Prismatic Insignia ([[Elementalist]])
+*362 - Anchorite's Insignia ([[Monk]])
+*365 - Windwalker Insignia ([[Dervish]])
+*325 - "Faith is My Shield"

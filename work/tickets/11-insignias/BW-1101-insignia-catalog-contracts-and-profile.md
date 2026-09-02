@@ -2,9 +2,11 @@
 id: BW-1101
 title: Insignia Catalog Contracts and EPIC-11 Profile
 epic: EPIC-11
-status: ready
+status: done
 priority: critical
 depends_on: []
+planned_sprint: SPRINT-012
+completed_sprint: SPRINT-012
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -47,3 +49,14 @@ armor prefix upgrade facts.
 - `npm run typecheck`
 - Focused Vitest contract tests for insignia catalog records and effect variants
 - Focused Python profile tests proving existing content profiles still work
+
+## Closeout Evidence
+
+- SPRINT-012 added the framework-neutral `InsigniaCatalog`, `CatalogInsigniaRecord`, source-set,
+  identity-registry, crosswalk, effect, condition, locality, combination, display, and unresolved
+  contracts under `src/domain`.
+- The EPIC-11 profile `epic-11-insignias` is registered for fixture/offline/live modes with bounded
+  caps, EPIC-03 dependency handling, and metadata-only icon policy.
+- Validation passed: `npm run typecheck`,
+  `npm run test:run -- test/domain/contracts.test.ts test/domain/insignia-catalog.test.ts test/domain/insignia-effects.test.ts test/domain/data-ingestion-contracts.test.ts`,
+  and `PYTHONPATH=scripts/data .venv-data/bin/python -m unittest build_wars_ingest.tests.test_profiles build_wars_ingest.tests.test_cli`.

@@ -2,12 +2,14 @@
 id: BW-1105
 title: Insignia Catalog QA and Exact-Path Promotion
 epic: EPIC-11
-status: ready
+status: done
 priority: critical
 depends_on:
   - BW-1102
   - BW-1103
   - BW-1104
+planned_sprint: SPRINT-012
+completed_sprint: SPRINT-012
 created: 2026-09-02
 updated: 2026-09-02
 ---
@@ -52,3 +54,19 @@ explicit exact paths.
 - Run EPIC-11 fixture regeneration twice and prove byte-identical output under a fixed clock
 - Run EPIC-11 offline replay from selected snapshots
 - Run a bounded manual live refresh only if source/network conditions are available
+
+## Closeout Evidence
+
+- SPRINT-012 promoted `data/generated/epic-11/insignias.catalog.json`,
+  `data/generated/epic-11/insignias.catalog.manifest.json`, and
+  `data/qa/epic-11/insignias.catalog.qa.json` from a digest-confirmed live source plan and selected
+  complete snapshot-set replay.
+- Production catalog evidence: 45 insignias, `catalogVersion:
+insignias-82c6a01111a45119`, `sourceSetDigest:
+61daebff66fc2d573e5df701d47e3165639f699f71a0b38514e01bb8045c7ee7`, selected snapshot-set
+  digest `eb8578922e61ae5ef5908f2d604d4ed289e4d31468d5d4c174cd1ca38154aaa6`,
+  `appConsumptionGate: pass`, and `publicReleaseGate: pass`.
+- Validation passed: fixed-clock fixture A/B byte comparison, live discover/fetch, two
+  byte-identical fixed-clock offline replays, `git check-ignore -v` for promoted paths and ignored
+  byproducts, the phase-5 Python subset, and
+  `npm run test:run -- test/domain/data-ingestion-contracts.test.ts test/domain/insignia-catalog.test.ts test/domain/insignia-effects.test.ts`.

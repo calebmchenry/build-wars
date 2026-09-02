@@ -1,0 +1,5 @@
+== Equipment bonuses ==
+
+* Most armor bonuses stack unless a source says non-stacking.
+* Armor rating and damage reduction bonuses from insignia on body armor are local to the armor piece.
+* Health and energy bonuses on armor stack.

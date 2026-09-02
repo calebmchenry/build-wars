@@ -1,0 +1,49 @@
+==Core==
+{| {{STDT}}
+|- style="background:#FDB;"
+! Name || Bonus
+|-
+| colspan="2" |
+==={{any}} Common===
+|-
+| [[Survivor Insignia|Survivor]] || Health +15 (on chest armor)<br>Health +10 (on leg armor)<br>Health +5 (on other armor)
+|-
+| [[Radiant Insignia|Radiant]] || Energy +3 (on chest armor)<br>Energy +2 (on leg armor)<br>Energy +1 (on other armor)
+|-
+| [[Stalwart Insignia|Stalwart]] || Armor +10 (vs. [[physical damage]])
+|-
+| [[Blessed Insignia|Blessed]] || Armor +10 (while affected by an [[Enchantment Spell]])
+|-
+| colspan="2" |
+==={{w}} Warrior===
+|-
+| [[Knight's Insignia|Knight's]] || Received [[physical damage]] -3
+|-
+| [[Lieutenant's Insignia|Lieutenant's]] || Reduces [[Hex]] durations on you by 20% and damage dealt by you by 5% (Non-stacking)<br>Armor -20
+|-
+| [[Stonefist Insignia|Stonefist]] || Increases [[knockdown]] time on foes by 1 second. (Maximum: 3 seconds)
+|-
+| [[Sentinel's Insignia|Sentinel's]] || Armor +20 (Requires 13 [[Strength]], vs. [[elemental damage]])
+|-
+| colspan="2" |
+==={{n}} Necromancer===
+|-
+| [[Bloodstained Insignia|Bloodstained]] || Reduces casting time of spells that exploit corpses by 25% (Non-stacking)
+|-
+| [[Tormentor's Insignia|Tormentor's]] || Armor +10<br>Holy damage you receive increased by 6 (on chest armor)<br>Holy damage you receive increased by 4 (on leg armor)<br>Holy damage you receive increased by 2 (on other armor)
+|-
+| colspan="2" |
+==={{e}} Elementalist===
+|-
+| [[Prismatic Insignia|Prismatic]] || Armor +5 (requires 9 [[Air Magic]])<br>Armor +5 (requires 9 [[Earth Magic]])<br>Armor +5 (requires 9 [[Fire Magic]])<br>Armor +5 (requires 9 [[Water Magic]])
+|-
+| colspan="2" |
+==={{mo}} Monk===
+|-
+| [[Anchorite's Insignia|Anchorite's]] || Armor +5 (while recharging 1 or more skills)<br>Armor +5 (while recharging 3 or more skills)<br>Armor +5 (while recharging 5 or more skills)
+|-
+| colspan="2" |
+==={{d}} Dervish===
+|-
+| [[Windwalker Insignia|Windwalker]] || Armor +5 (while affected by 1 or more Enchantment Spells)<br>Armor +5 (while affected by 2 or more Enchantment Spells)<br>Armor +5 (while affected by 3 or more Enchantment Spells)<br>Armor +5 (while affected by 4 or more Enchantment Spells)
+|}

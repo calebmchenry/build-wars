@@ -3,12 +3,13 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from .config import DEFAULT_LIMITS, EPIC_04_LIMITS, EPIC_10_LIMITS
+from .config import DEFAULT_LIMITS, EPIC_04_LIMITS, EPIC_10_LIMITS, EPIC_11_LIMITS
 
 EPIC_02_PROFILE_ID = "guild-wars-wiki"
 EPIC_03_PROFILE_ID = "epic-03-professions-attributes"
 EPIC_04_PROFILE_ID = "epic-04-skills"
 EPIC_10_PROFILE_ID = "epic-10-runes"
+EPIC_11_PROFILE_ID = "epic-11-insignias"
 
 EPIC_03_PROFESSIONS = (
     "Warrior",
@@ -52,6 +53,12 @@ EPIC_10_SOURCE_TITLES = (
     "Attribute bonus",
 )
 EPIC_10_RUNE_ICON_IMAGEINFO_TITLE = "EPIC-10 rune icon imageinfo"
+EPIC_11_SOURCE_TITLES = (
+    "Equipment template format",
+    "Insignia",
+    "Effect stacking",
+)
+EPIC_11_INSIGNIA_ICON_IMAGEINFO_TITLE = "EPIC-11 insignia icon imageinfo"
 
 
 @dataclass(frozen=True)
@@ -152,11 +159,31 @@ EPIC_10_PROFILE = DataIngestionProfile(
     qa_byte_cap=1_000_000,
 )
 
+EPIC_11_PROFILE = DataIngestionProfile(
+    id=EPIC_11_PROFILE_ID,
+    source_target="BACKLOG",
+    source_epic="EPIC-11",
+    generated_relative_path=Path("epic-11/insignias.catalog.json"),
+    qa_relative_path=Path("epic-11/insignias.catalog.qa.json"),
+    fixture_relative_path=Path("generated/fixture-insignias.catalog.json"),
+    source_titles=EPIC_11_SOURCE_TITLES,
+    detail_titles=(),
+    page_limit=EPIC_11_LIMITS.page_limit,
+    request_limit=EPIC_11_LIMITS.request_limit,
+    response_byte_cap=EPIC_11_LIMITS.response_byte_cap,
+    parser_byte_cap=EPIC_11_LIMITS.max_parser_bytes,
+    media_title_limit=64,
+    aggregate_byte_cap=10_000_000,
+    catalog_byte_cap=2_000_000,
+    qa_byte_cap=1_000_000,
+)
+
 PROFILES = {
     EPIC_02_PROFILE.id: EPIC_02_PROFILE,
     EPIC_03_PROFILE.id: EPIC_03_PROFILE,
     EPIC_04_PROFILE.id: EPIC_04_PROFILE,
     EPIC_10_PROFILE.id: EPIC_10_PROFILE,
+    EPIC_11_PROFILE.id: EPIC_11_PROFILE,
 }
 
 

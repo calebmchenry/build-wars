@@ -1,0 +1,7 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = Reduces casting time of spells that exploit corpses by 25% (Non-stacking)
+| profession = Necromancer
+| stackable = n
+| campaign = [[Core]]
+}}

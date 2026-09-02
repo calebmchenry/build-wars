@@ -40,6 +40,10 @@ data/generated/epic-04/*
 data/generated/epic-10/*
 !data/generated/epic-10/runes.catalog.json
 !data/generated/epic-10/runes.catalog.manifest.json
+!data/generated/epic-11/
+data/generated/epic-11/*
+!data/generated/epic-11/insignias.catalog.json
+!data/generated/epic-11/insignias.catalog.manifest.json
 data/qa/*
 !data/qa/README.md
 !data/qa/epic-03/
@@ -51,3 +55,6 @@ data/qa/epic-04/*
 !data/qa/epic-10/
 data/qa/epic-10/*
 !data/qa/epic-10/runes.catalog.qa.json
+!data/qa/epic-11/
+data/qa/epic-11/*
+!data/qa/epic-11/insignias.catalog.qa.json

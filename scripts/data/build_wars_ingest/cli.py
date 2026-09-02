@@ -6,7 +6,13 @@ from pathlib import Path
 
 from .config import FIXTURE_GENERATED_AT, SystemClock
 from .pipeline import PipelineError, PipelineOptions, run_pipeline
-from .profiles import EPIC_03_PROFILE_ID, EPIC_04_PROFILE_ID, EPIC_10_PROFILE_ID, profile_choices
+from .profiles import (
+    EPIC_03_PROFILE_ID,
+    EPIC_04_PROFILE_ID,
+    EPIC_10_PROFILE_ID,
+    EPIC_11_PROFILE_ID,
+    profile_choices,
+)
 from .wikitext import ParserUnavailable
 
 
@@ -34,20 +40,25 @@ def build_parser() -> argparse.ArgumentParser:
         "--stage",
         choices=("catalog", "discover", "fetch"),
         default="catalog",
-        help="EPIC-04/EPIC-10 live stage. Use discover first, then fetch with the confirmed digest.",
+        help="EPIC-04/EPIC-10/EPIC-11 live stage. Use discover first, then fetch with the confirmed digest.",
     )
-    parser.add_argument("--source-plan", type=Path, default=None, help="EPIC-04/EPIC-10 source plan path.")
+    parser.add_argument("--source-plan", type=Path, default=None, help="EPIC-04/EPIC-10/EPIC-11 source plan path.")
     parser.add_argument(
         "--confirm-source-set-digest",
         default=None,
-        help="Exact EPIC-04 source-plan digest or EPIC-10 source-set digest required for live fetch.",
+        help="Exact EPIC-04 source-plan digest or EPIC-10/EPIC-11 source-set digest required for live fetch.",
     )
-    parser.add_argument("--snapshot-set", type=Path, default=None, help="EPIC-04/EPIC-10 offline snapshot-set manifest path.")
+    parser.add_argument(
+        "--snapshot-set",
+        type=Path,
+        default=None,
+        help="EPIC-04/EPIC-10/EPIC-11 offline snapshot-set manifest path.",
+    )
     parser.add_argument(
         "--detail-limit",
         type=int,
         default=None,
-        help="Lower EPIC-04/EPIC-10 live fetch detail-page limit for manual smoke tests.",
+        help="Lower EPIC-04/EPIC-10/EPIC-11 live fetch detail-page limit for manual smoke tests.",
     )
     parser.add_argument(
         "--title",
@@ -63,11 +74,12 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.mode == "live" and not args.allow_live_network:
         parser.error("live mode requires --allow-live-network")
-    if args.mode == "live" and args.profile not in {EPIC_03_PROFILE_ID, EPIC_04_PROFILE_ID, EPIC_10_PROFILE_ID} and not args.title:
+    staged_profiles = {EPIC_04_PROFILE_ID, EPIC_10_PROFILE_ID, EPIC_11_PROFILE_ID}
+    if args.mode == "live" and args.profile not in {EPIC_03_PROFILE_ID, *staged_profiles} and not args.title:
         parser.error("live mode requires at least one --title")
-    if args.mode == "live" and args.profile in {EPIC_04_PROFILE_ID, EPIC_10_PROFILE_ID} and args.stage == "catalog":
+    if args.mode == "live" and args.profile in staged_profiles and args.stage == "catalog":
         parser.error(f"{args.profile} live mode requires --stage discover or --stage fetch")
-    if args.mode == "offline" and args.profile in {EPIC_04_PROFILE_ID, EPIC_10_PROFILE_ID} and args.snapshot_set is None:
+    if args.mode == "offline" and args.profile in staged_profiles and args.snapshot_set is None:
         parser.error(f"{args.profile} offline mode requires --snapshot-set")
 
     generated_at = args.generated_at

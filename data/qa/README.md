@@ -68,3 +68,15 @@ modifier IDs, effects, effect-level stacking, headgear handoff facts, icon metad
 policy, output caps, artifact integrity, summary counts, and app/public release gates. Live
 promotion accepted the bounded `ICON_NON_64_DIMENSIONS` warning class for remote icon metadata while
 keeping `cachedBytes: false` and storing no icon binaries.
+
+BW-1105 promotes one machine-readable EPIC-11 QA report:
+
+- `data/qa/epic-11/insignias.catalog.qa.json`
+
+The adjacent `.summary.txt` remains ignored. The QA JSON records source authority review,
+source-set accounting, page resolution, EPIC-03 joins, identity-registry coverage, verified template
+modifier crosswalks, availability and profession restrictions, mode facts, slot applicability,
+effect completeness, exact per-slot outcomes, inert conditions, locality, combination rules, icon
+metadata, copied-text policy, output caps, artifact integrity, summary counts, and app/public
+release gates. Live promotion accepted bounded metadata-only icon warnings while keeping
+`cachedBytes: false` and storing no icon binaries.

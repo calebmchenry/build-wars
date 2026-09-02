@@ -1,0 +1,7 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = Reduces [[Hex]] durations on you by 20% and damage dealt by you by 5% (Non-stacking)<br>[[Armor rating|Armor]] -20
+| profession = Warrior
+| stackable = n
+| campaign = [[Core]]
+}}

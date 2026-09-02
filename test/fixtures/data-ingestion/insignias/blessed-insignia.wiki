@@ -1,0 +1,7 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = [[Armor rating|Armor]] +10 (while affected by an [[Enchantment Spell]])
+| profession = Any
+| stackable = n
+| campaign = [[Core]]
+}}

@@ -94,6 +94,29 @@ EPIC-10 uses fixed-clock fixture generation and exact selected snapshot-set offl
 deterministic catalog, manifest, QA, section digest, finding ID, source ordering, and summary count
 checks.
 
+## EPIC-11 Promoted Catalog
+
+BW-1105 approves exactly these generated files:
+
+- `data/generated/epic-11/insignias.catalog.json`
+- `data/generated/epic-11/insignias.catalog.manifest.json`
+
+The catalog contains runtime-eligible insignia facts: source-set authority facts, compact
+dispositions, identity-registry facts, EPIC-03 dependency digests, insignia records, verified
+template modifier ID crosswalks, profession restrictions, mode facts, applicable armor slots, typed
+effects, exact tagged per-slot outcomes, inert conditions, effect-level locality and combination
+metadata, nullable icon IDs, metadata-only remote media references, section digests, and semantic
+`catalogVersion`.
+
+The adjacent manifest records source-plan path/digest, source-set digest, selected snapshot-set
+path/digest, child snapshot manifests, dependency digests, artifact digest, QA path, review records,
+and `commitDecision: exact-path-allowlisted`. Runtime code must not read the manifest, QA report,
+source plans, snapshot-set manifests, raw snapshots, Python tooling, wiki APIs, or icon bytes.
+
+EPIC-11 uses fixed-clock fixture generation and exact selected snapshot-set offline replay for
+deterministic catalog, manifest, QA, section digest, finding ID, source ordering, source-set
+disposition, identity registry, and effect-order checks.
+
 ## Baselines
 
 Baseline comparison is opt-in. No baseline produces an info finding; schema mismatch blocks public

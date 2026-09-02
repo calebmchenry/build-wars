@@ -1,0 +1,222 @@
+{
+  "artifactPath": "epic-11/insignias.catalog.json",
+  "commitDecision": "exact-path-allowlisted",
+  "dependencyDigests": [
+    {
+      "artifactDigest": "7a397140d346dbfd1e28e1076132fa209628678682fa2c21322ac91f1807f9fa",
+      "catalogVersion": "pa-e5d0d35ad8f30b4c",
+      "id": "epic-03-professions-attributes",
+      "manifestDigest": "e449ea6b13a165108858be039ca6feabaf45dd592cf5e54cd9fee7c125c75289",
+      "qaGate": "pass",
+      "sectionDigests": [
+        {
+          "digest": "06b08691f79e1a77feff629f758a876dd5fae0e37db27ce45dac2215cdefdfc8",
+          "section": "templateCrosswalk"
+        },
+        {
+          "digest": "88e3453893080531b42941c6e311c784fa06e8417ebb1b1b75f6b9c448b16cde",
+          "section": "professions"
+        },
+        {
+          "digest": "74823681580f46a48394defdcf92a622cdddccae67003043497df65242999a74",
+          "section": "attributes"
+        },
+        {
+          "digest": "87d6fd2069ad7f824132c7e43068348c5edcb2de36e8ace8c7a8582ff1972253",
+          "section": "attributePointRules"
+        },
+        {
+          "digest": "36e5b6f3fae709ba68b27d5a735bb5ccd0d605638fd8ae584d080033f72b3ea2",
+          "section": "remoteMedia"
+        }
+      ]
+    }
+  ],
+  "digest": {
+    "algorithm": "sha256",
+    "notes": null,
+    "value": "230892b6b48433c83dd51c5d30562e594f202fb120293c46ad658ca3c8528cfb"
+  },
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "identityRegistryDigest": "6e60cbc1047c19d3d3897c8b3d5304fe3468dbe0771aa25b8159b772b8047955",
+  "inputSnapshotManifestPaths": [
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2353018-6a71db/sentry-s-insignia-c4cbdc4d3c-2a4529789630e3b5.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2377064-1d0572/brawler-s-insignia-e393f6e36e-49109da44435a45d.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378148-9caaf4/dreadnought-insignia-6ce92d8712-176e6ba0dd0f6a2a.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378149-7bd4f0/wanderer-s-insignia-0f641d219f-c57c2a4a36a9afa7.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378151-b682d5/sentinel-s-insignia-451800b640-702b91a72db4d6db.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378174-6e7a1a/frostbound-insignia-7b0638f053-e8b89457517c11e6.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378176-a29d1d/pyrebound-insignia-4061952ea2-e13a0619ae6ca38e.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378177-d537a7/pyromancer-insignia-c5773799c7-9a1161dccfec5f64.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378178-8a038f/hydromancer-insignia-b6e8217955-e3e8988e09732d9b.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378179-14003e/stormbound-insignia-d3628226f6-6319d85ff23d6570.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378180-c46aec/aeromancer-insignia-d982f3c1f6-b2656a733d9d60f1.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378188-923b39/geomancer-insignia-b24a542fad-9810edb48bc2a2fb.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378196-691af6/virtuoso-s-insignia-213640eb3a-3c358c9a5052e395.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378200-247694/bonelace-insignia-995617d10e-1ec069aa39601214.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2378206-c0ea4a/minion-master-s-insignia-21bdf64b8b-cb0a711df666f7e9.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2411114-478375/centurion-s-insignia-a0287b3d32-68fb3c6f8c787bf5.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2428008-5122ea/scout-s-insignia-15e58c4be0-eb7cf2b19c3fbfa0.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2438860-eef3f1/stalwart-insignia-ff92c2d4c9-5fbcfae0fc8d9509.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2438861-dce8ca/knight-s-insignia-4cd606a3aa-b3502b55844e19b0.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2452606-07642e/survivor-insignia-0c7f3d72ff-60fcf4ce3d4e3625.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2457060-17a09c/tormentor-s-insignia-2d1807ee36-9ee5f6b9171301a0.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2591367-445323/forsaken-insignia-df059099b9-08bb5693766beb02.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2594771-df6e95/radiant-insignia-b9ff2a77c1-7794a50f0ba46cee.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2616030-ecc5e4/stonefist-insignia-17add6f00d-6675b966b008cdba.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2643366-c6c6b2/blessed-insignia-67bf33bf63-1bbec7ca5e1621ae.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2664411-9c0360/windwalker-insignia-5f69a6c2a2-1fe99d739f7fe618.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2679965-f8ffb4/bloodstained-insignia-f3a5b8208a-7934d8a1bbdfe607.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683160-6f1208/prodigy-s-insignia-eb975741ac-c3d85135b4927bf7.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683161-561585/earthbound-insignia-6ce8acfb54-0ad47ffd1a122b54.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683162-abb674/beastmaster-s-insignia-91adc8bec2-203c3fb258e8112d.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683163-383f76/anchorite-s-insignia-e880190bd1-24c4528d33d567d3.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683164-49d327/undertaker-s-insignia-ec03508599-80328adea7773505.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683165-209b8b/artificer-s-insignia-9f3d8737a3-e38ac61e79d55e13.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683166-24f178/prismatic-insignia-2acdc61533-7ab0d353ca7b2378.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683167-05e570/vanguard-s-insignia-c9ebf06f1b-9a175bbb4fc9ff44.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683168-e57f9a/infiltrator-s-insignia-0d30ed0134-2c6be80d66bba367.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683169-13b8de/saboteur-s-insignia-36d846b291-13e72289c2a3bf13.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683170-449110/nightstalker-s-insignia-701f95bb09-9b9d564a41d25ac5.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683171-3139ef/shaman-s-insignia-129b99bb6b-d97e16f313511b52.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2683173-6d7a64/mystic-s-insignia-5080199741-ca73f1f26b8301d7.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2693406-4a47f2/lieutenant-s-insignia-a2a5781886-3dba25012be82aa6.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2709783-d3657a/herald-s-insignia-92ddfe57a3-aee31f575ee44be0.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2722620-c24eaa/insignia-4968b9905f-d1043afcb042c750.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2722942-5a1609/effect-stacking-89aa7a1adf-bc9dc325c417bcd7.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2727496-25b156/ghost-forge-insignia-bed2a9153d-b4ce9c8a3cf95bee.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2728058-ce9a3b/equipment-template-format-5e1bfe722e-f954cb20a6edd6b3.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-888020-b6f37f/disciple-s-insignia-20a478654d-da366d81977eeb30.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-888027-bd7b5a/blighter-s-insignia-4897ded9e1-af189052932138fb.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-b44300325461150843f9b1df457eca923cc6a8542e4ddc4aef8f50cd2a3d-d05ddd/epic-11-insignia-icon-imageinfo-5c85d1f4d7-3d1a4c4c11b779c2.manifest.json"
+  ],
+  "manualReviews": [
+    {
+      "decision": "approved",
+      "evidence": [
+        {
+          "kind": "artifact",
+          "notes": "Digest of source pages, accepted modifier rows, detail titles, compact dispositions, dependency, and identity-registry facts.",
+          "reference": "61daebff66fc2d573e5df701d47e3165639f699f71a0b38514e01bb8045c7ee7"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "review:epic-11-source-set:2026-09-02",
+      "rationale": "The finite hybrid source authority reconciles equipment-template modifier rows, the Insignia overview, verified detail pages, metadata-only icon facts, Effect stacking mechanics, and EPIC-03 joins.",
+      "reReviewTrigger": "Any source revision, source-set digest, identity-registry digest, accepted modifier ID, or source-plan digest change.",
+      "relatedFindingIds": [],
+      "reviewedAt": "2026-09-01T00:00:00Z",
+      "reviewer": "Build Wars sprint executor",
+      "scope": "EPIC-11 source authority, source-shape checkpoint, identity policy, and source-plan digest"
+    },
+    {
+      "decision": "approved",
+      "evidence": [
+        {
+          "kind": "artifact",
+          "notes": "Effect semantics are invalidated by source-plan, detail-page, predicate vocabulary, or normalized effect changes.",
+          "reference": "fd133929a6d3a066287e65f2ed767ea13349562e5943f6ca5bb8f661aa95cfe2"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "review:epic-11-effect-semantics:2026-09-02",
+      "rationale": "Schema v1 records source-clear arithmetic as exact per-slot outcomes, keeps combat-state predicates inert, separates item stackability from effect combination, and defers unsupported behavior as notes or unknown effects.",
+      "reReviewTrigger": "Any effect parser, slot-map parser, predicate vocabulary, locality, combination, or reviewed source evidence change.",
+      "relatedFindingIds": [],
+      "reviewedAt": "2026-09-01T00:00:00Z",
+      "reviewer": "Build Wars sprint executor",
+      "scope": "EPIC-11 insignia effect, slot-scaling, condition, locality, and combination semantics"
+    },
+    {
+      "decision": "approved",
+      "evidence": [
+        {
+          "kind": "artifact",
+          "notes": "Selected complete snapshot-set manifest digest.",
+          "reference": "eb8578922e61ae5ef5908f2d604d4ed289e4d31468d5d4c174cd1ca38154aaa6"
+        },
+        {
+          "kind": "artifact",
+          "notes": "Generated catalog digest is owned by the adjacent manifest.",
+          "reference": "230892b6b48433c83dd51c5d30562e594f202fb120293c46ad658ca3c8528cfb"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "review:epic-11-first-baseline:2026-09-02",
+      "rationale": "This promotion records the selected complete snapshot set, identity registry digest, EPIC-03 dependency digests, generated runtime catalog, artifact digest, and QA gate state as the first baseline.",
+      "reReviewTrigger": "Any semantic projection, schema, source revision, dependency digest, QA gate, identity registry, or promotion path change.",
+      "relatedFindingIds": [],
+      "reviewedAt": "2026-09-01T00:00:00Z",
+      "reviewer": "Build Wars sprint executor",
+      "scope": "EPIC-11 first promoted insignia catalog baseline"
+    }
+  ],
+  "notes": "Runtime-eligible EPIC-11 insignia catalog; source plans, snapshot-set manifests, raw snapshots, QA summaries, review evidence, and icon bytes remain ignored.",
+  "qaReportPath": "data/qa/epic-11/insignias.catalog.qa.json",
+  "recordCount": 45,
+  "retentionDecision": {
+    "longTermReproduction": "Requires the retained ignored snapshot set or a fresh bounded live acquisition and review.",
+    "selectedEvidence": "local-ignored-snapshot-set"
+  },
+  "schemaVersion": 1,
+  "selectedSnapshotSetDigest": "eb8578922e61ae5ef5908f2d604d4ed289e4d31468d5d4c174cd1ca38154aaa6",
+  "selectedSnapshotSetManifestPath": "work/runs/data-ingestion/epic-11/snapshot-sets/insignias-9e1c44e9d5e25f15.snapshot-set.json",
+  "sourceIds": [
+    "source:gww:epic-11-insignia-icons:b44300325461",
+    "source:gww:epic-11-live:insignia:4596:2378196",
+    "source:gww:epic-11-live:insignia:4599:2683165",
+    "source:gww:epic-11-live:insignia:4601:2683160",
+    "source:gww:epic-11-live:insignia:4623:2452606",
+    "source:gww:epic-11-live:insignia:4625:2594771",
+    "source:gww:epic-11-live:insignia:4626:2438860",
+    "source:gww:epic-11-live:insignia:4627:2377064",
+    "source:gww:epic-11-live:insignia:4628:2643366",
+    "source:gww:epic-11-live:insignia:4633:2709783",
+    "source:gww:epic-11-live:insignia:4635:2353018",
+    "source:gww:epic-11-live:insignia:4639:2664411",
+    "source:gww:epic-11-live:insignia:4642:2591367",
+    "source:gww:epic-11-live:insignia:4645:2411114",
+    "source:gww:epic-11-live:insignia:4649:2378149",
+    "source:gww:epic-11-live:insignia:4650:888020",
+    "source:gww:epic-11-live:insignia:4652:2683163",
+    "source:gww:epic-11-live:insignia:4684:2378178",
+    "source:gww:epic-11-live:insignia:4685:2378188",
+    "source:gww:epic-11-live:insignia:4686:2378177",
+    "source:gww:epic-11-live:insignia:4687:2378180",
+    "source:gww:epic-11-live:insignia:4688:2683166",
+    "source:gww:epic-11-live:insignia:4782:2683171",
+    "source:gww:epic-11-live:insignia:4791:2727496",
+    "source:gww:epic-11-live:insignia:4792:2683173",
+    "source:gww:epic-11-live:insignia:4793:2683167",
+    "source:gww:epic-11-live:insignia:4794:2683168",
+    "source:gww:epic-11-live:insignia:4795:2683169",
+    "source:gww:epic-11-live:insignia:4797:2683170",
+    "source:gww:epic-11-live:insignia:4801:2438861",
+    "source:gww:epic-11-live:insignia:4802:2616030",
+    "source:gww:epic-11-live:insignia:4803:2378148",
+    "source:gww:epic-11-live:insignia:4804:2378151",
+    "source:gww:epic-11-live:insignia:4807:2693406",
+    "source:gww:epic-11-live:insignia:4815:2378174",
+    "source:gww:epic-11-live:insignia:4816:2378176",
+    "source:gww:epic-11-live:insignia:4817:2378179",
+    "source:gww:epic-11-live:insignia:4818:2428008",
+    "source:gww:epic-11-live:insignia:4819:2683161",
+    "source:gww:epic-11-live:insignia:4820:2683162",
+    "source:gww:epic-11-live:insignia:4952:2679965",
+    "source:gww:epic-11-live:insignia:4953:2457060",
+    "source:gww:epic-11-live:insignia:4956:2378200",
+    "source:gww:epic-11-live:insignia:4957:2378206",
+    "source:gww:epic-11-live:insignia:4958:888027",
+    "source:gww:epic-11-live:insignia:4959:2683164",
+    "source:gww:epic-11-live:seed:effect-stacking:2722942",
+    "source:gww:epic-11-live:seed:equipment-template-format:2728058",
+    "source:gww:epic-11-live:seed:insignia:2722620"
+  ],
+  "sourcePlanDigest": "fd133929a6d3a066287e65f2ed767ea13349562e5943f6ca5bb8f661aa95cfe2",
+  "sourcePlanPath": "work/runs/data-ingestion/epic-11/source-plans/insignias-fd133929a6d3a066.source-plan.json",
+  "sourceSetDigest": "61daebff66fc2d573e5df701d47e3165639f699f71a0b38514e01bb8045c7ee7"
+}

@@ -1,0 +1,15 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = [[Health]] +15 (on chest armor)<br>[[Health]] +10 (on leg armor)<br>[[Health]] +5 (on other armor)
+| profession = Any
+| stackable = n
+| campaign = [[Core]]
+| render = [[File:Fixture Survivor Insignia.png|100px]]
+}}
+
+==Stats==
+{| class="fixture"
+! Head !! Chest !! Arms !! Legs !! Feet
+|-
+| +5 || +15 || +5 || +10 || +5
+|}

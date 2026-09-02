@@ -1,0 +1,7 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = [[Armor rating|Armor]] +5 (while affected by 1 or more Enchantment Spells)<br>[[Armor rating|Armor]] +5 (while affected by 2 or more Enchantment Spells)<br>[[Armor rating|Armor]] +5 (while affected by 3 or more Enchantment Spells)<br>[[Armor rating|Armor]] +5 (while affected by 4 or more Enchantment Spells)
+| profession = Dervish
+| stackable = n
+| campaign = [[Nightfall]]
+}}

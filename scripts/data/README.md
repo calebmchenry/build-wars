@@ -29,16 +29,20 @@ PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-03-professions-attributes
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-04-skills
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-10-runes
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-11-insignias
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline --profile epic-03-professions-attributes --root .
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline --profile epic-04-skills --root . --snapshot-set work/runs/data-ingestion/epic-04/snapshot-sets/<selected>.snapshot-set.json
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline --profile epic-10-runes --root . --snapshot-set work/runs/data-ingestion/epic-10/snapshot-sets/<selected>.snapshot-set.json
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py offline --profile epic-11-insignias --root . --snapshot-set work/runs/data-ingestion/epic-11/snapshot-sets/<selected>.snapshot-set.json
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --allow-live-network --title "Guild Wars Wiki:Game integration/Skills/0"
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-03-professions-attributes --root . --allow-live-network
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-04-skills --root . --allow-live-network --stage discover
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-04-skills --root . --allow-live-network --stage fetch --source-plan work/runs/data-ingestion/epic-04/source-plans/<digest>.source-plan.json --confirm-source-set-digest <digest>
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-10-runes --root . --allow-live-network --stage discover
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-10-runes --root . --allow-live-network --stage fetch --source-plan work/runs/data-ingestion/epic-10/source-plans/<digest>.source-plan.json --confirm-source-set-digest <source-set-digest>
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-11-insignias --root . --allow-live-network --stage discover
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-11-insignias --root . --allow-live-network --stage fetch --source-plan work/runs/data-ingestion/epic-11/source-plans/<digest>.source-plan.json --confirm-source-set-digest <source-set-digest>
 ```
 
 Exit codes:
@@ -53,17 +57,18 @@ Exit codes:
 - `fixture`: uses committed minimized synthetic fixtures from `test/fixtures/data-ingestion`, a fixed
   UTC clock, and an output root under ignored `work/runs/data-ingestion`.
 - `offline`: reads existing ignored snapshot manifests from the configured output root without
-  network access. EPIC-04 and EPIC-10 require one explicit complete `--snapshot-set` manifest and reject
-  partial, duplicate, mixed-profile, digest-mismatched, or path-escaping children.
+  network access. EPIC-04, EPIC-10, and EPIC-11 require one explicit complete `--snapshot-set`
+  manifest and reject partial, duplicate, mixed-profile, digest-mismatched, or path-escaping
+  children.
 - `live`: manually fetches named Guild Wars Wiki pages through the shared MediaWiki client. It
   requires `--allow-live-network` and at least one `--title` unless the selected profile owns its
   fixed source graph.
 
 The default `guild-wars-wiki` profile preserves the EPIC-02 skill-ID fixture proof. Fixture mode also
-writes the EPIC-03 professions/attributes, EPIC-04 skills, and EPIC-10 runes fixture catalogs as side effects so
-`npm run data:regenerate` covers all registered production profiles offline. Run
-`epic-03-professions-attributes`, `epic-04-skills`, or `epic-10-runes` directly for
-profile-specific fixture, offline, or live catalog work.
+writes the EPIC-03 professions/attributes, EPIC-04 skills, EPIC-10 runes, and EPIC-11 insignias
+fixture catalogs as side effects so `npm run data:regenerate` covers all registered production
+profiles offline. Run `epic-03-professions-attributes`, `epic-04-skills`, `epic-10-runes`, or
+`epic-11-insignias` directly for profile-specific fixture, offline, or live catalog work.
 
 ## Source Limits
 
@@ -99,17 +104,27 @@ rechecks drift, fetches only planned detail pages and icon metadata, writes one 
 snapshot-set manifest, and promotes only `data/generated/epic-10/runes.catalog.json`, its adjacent
 manifest, and `data/qa/epic-10/runes.catalog.qa.json`.
 
+The EPIC-11 profile is locked to `Equipment template format`, `Insignia`, and `Effect stacking` as
+seed authority pages, the promoted EPIC-03 catalog as the profession dependency, verified insignia
+detail pages, and metadata-only insignia icon `imageinfo`. Discovery writes a digest-bound source
+plan that accounts for accepted insignias, supported mechanics relationships, explicit exclusions,
+unsupported rows, current caps, identity-registry digest, and blocking findings. Fetch mode requires
+the reviewed plan path and exact source-set digest, rechecks drift, fetches only planned detail pages
+and icon metadata, writes one complete snapshot-set manifest, and promotes only
+`data/generated/epic-11/insignias.catalog.json`, its adjacent manifest, and
+`data/qa/epic-11/insignias.catalog.qa.json`.
+
 ## Pipeline Contract
 
-| Stage     | Inputs                                               | Outputs                                                             | Required contracts and gates                                                                                                                                                              |
-| --------- | ---------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Fetch     | Source profile and query parameters                  | Raw source payload in `data/source-snapshots`                       | Live mode only; source values are untrusted.                                                                                                                                              |
-| Snapshot  | Raw payload and source metadata                      | `SourceSnapshotManifest` plus ignored raw payload                   | Records source family, page/file identity, revision identity, source revision timestamp, retrieval timestamp, artifact path, SHA-256 digest, and ignored retention policy.                |
-| Replay    | Complete selected snapshot-set manifest              | Verified selected snapshot payloads                                 | EPIC-04 and EPIC-10 require one profile-bound manifest; rejects partial, duplicate, extra/missing, mixed-profile, digest-mismatched, or path-escaping inputs before catalog assembly.     |
-| Extract   | Verified snapshot payloads                           | Skill-ID mappings, parser proof, and icon metadata                  | Extractors consume snapshots, not a network client. Nested wiki templates are traversed through `mwparserfromhell`, not regex-only parsing.                                               |
-| Normalize | Extracted records and diagnostics                    | Canonical JSON plus `GeneratedArtifactManifest` in `data/generated` | UTF-8, LF-terminated, two-space indented, key-stable, finite-number-only, stable record order, provenance-bearing, and metadata-only media references where allowed.                      |
-| Validate  | Generated artifact manifest and records              | `QaReport` JSON and bounded text summary in `data/qa`               | Reports provenance gaps, stale/unverified revisions, rights ambiguity, invalid source IDs, copied text, icon metadata gaps, generated diffs, schema/shape errors, and integrity failures. |
-| Promote   | QA report, release scope, and approved artifact list | Exact-path allowlist or excluded artifact                           | Requires a later ticket naming exact paths, review evidence, source-policy disposition, and app/public release gate status before runtime use.                                            |
+| Stage     | Inputs                                               | Outputs                                                             | Required contracts and gates                                                                                                                                                                    |
+| --------- | ---------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fetch     | Source profile and query parameters                  | Raw source payload in `data/source-snapshots`                       | Live mode only; source values are untrusted.                                                                                                                                                    |
+| Snapshot  | Raw payload and source metadata                      | `SourceSnapshotManifest` plus ignored raw payload                   | Records source family, page/file identity, revision identity, source revision timestamp, retrieval timestamp, artifact path, SHA-256 digest, and ignored retention policy.                      |
+| Replay    | Complete selected snapshot-set manifest              | Verified selected snapshot payloads                                 | EPIC-04, EPIC-10, and EPIC-11 require one profile-bound manifest; rejects partial, duplicate, extra/missing, mixed-profile, digest-mismatched, or path-escaping inputs before catalog assembly. |
+| Extract   | Verified snapshot payloads                           | Skill-ID mappings, parser proof, and icon metadata                  | Extractors consume snapshots, not a network client. Nested wiki templates are traversed through `mwparserfromhell`, not regex-only parsing.                                                     |
+| Normalize | Extracted records and diagnostics                    | Canonical JSON plus `GeneratedArtifactManifest` in `data/generated` | UTF-8, LF-terminated, two-space indented, key-stable, finite-number-only, stable record order, provenance-bearing, and metadata-only media references where allowed.                            |
+| Validate  | Generated artifact manifest and records              | `QaReport` JSON and bounded text summary in `data/qa`               | Reports provenance gaps, stale/unverified revisions, rights ambiguity, invalid source IDs, copied text, icon metadata gaps, generated diffs, schema/shape errors, and integrity failures.       |
+| Promote   | QA report, release scope, and approved artifact list | Exact-path allowlist or excluded artifact                           | Requires a later ticket naming exact paths, review evidence, source-policy disposition, and app/public release gate status before runtime use.                                                  |
 
 ## EPIC-03 Profile
 
@@ -169,6 +184,27 @@ snapshot-set manifests, QA summaries, icon bytes, thumbnails, screenshots, and r
 Attribute rune bonuses use highest-per-attribute stacking while verified major/superior health
 penalties remain independently countable by equipped occurrence.
 
+## EPIC-11 Profile
+
+`epic-11-insignias` normalizes Guild Wars armor insignia facts into
+`data/generated/epic-11/insignias.catalog.json`. The runtime catalog contains source-set authority
+facts, compact dispositions, identity-registry facts, EPIC-03 dependency digests, insignia records,
+verified template modifier ID crosswalks, profession restrictions, mode facts, applicable armor
+slots, typed effects, exact tagged per-slot outcomes, inert conditions, effect-level locality and
+combination metadata, nullable icon IDs, metadata-only remote media references, section digests, and
+a semantic `catalogVersion`.
+
+Schema v1 excludes armor shell legality, equipment editor state, template-code resolution,
+condition evaluation, hit-location math, rune/insignia composition, full stat totals, acquisition
+prose, raw page bodies, MediaWiki HTML, copied long prose, icon bytes, thumbnails, screenshots, and
+runtime source access. Public `InsigniaId` values are schema-owned registry allocations; accepted
+production records also carry exactly one active verified armor-prefix `TemplateEquipmentModifierId`
+crosswalk.
+
+The profile uses fixed-clock fixture generation and exact selected snapshot-set offline replay for
+deterministic catalog, manifest, QA, section digest, finding ID, source ordering, source-set
+disposition, identity registry, and effect-order checks.
+
 ## Artifacts
 
 Default roots under a command `--root` are:
@@ -183,9 +219,10 @@ minimized, provenance-bearing, and used by Python and Vitest contract tests.
 The EPIC-03 synthetic golden fixture lives under
 `test/fixtures/data-ingestion/generated/fixture-professions-attributes.catalog.json` and is generated
 from minimized fixture pages in `test/fixtures/data-ingestion/professions-attributes`.
-The EPIC-04 and EPIC-10 synthetic golden fixtures live under
+The EPIC-04, EPIC-10, and EPIC-11 synthetic golden fixtures live under
 `test/fixtures/data-ingestion/generated/fixture-skills.catalog.json` and
-`test/fixtures/data-ingestion/generated/fixture-runes.catalog.json`.
+`test/fixtures/data-ingestion/generated/fixture-runes.catalog.json`, and
+`test/fixtures/data-ingestion/generated/fixture-insignias.catalog.json`.
 
 ## Baselines
 
@@ -221,5 +258,6 @@ remains the primary ID authority.
 ## Safe Deletion
 
 Ignored local outputs under `work/runs/data-ingestion`, `data/source-snapshots`, `data/generated`,
-and `data/qa` can be deleted after review when no exact-path ticket has approved them. Do not delete
-tracked README policy files or tracked synthetic fixtures.
+and `data/qa` can be deleted after review when no exact-path ticket has approved them. EPIC-11
+production replay requires either the retained selected local snapshot set or a fresh bounded live
+discover/fetch and review. Do not delete tracked README policy files or tracked synthetic fixtures.

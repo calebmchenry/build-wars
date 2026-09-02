@@ -1,0 +1,7 @@
+{{item infobox
+| type = [[Insignia]]
+| bonus = [[Armor rating|Armor]] +5 (while recharging 1 or more skills)<br>[[Armor rating|Armor]] +5 (while recharging 3 or more skills)<br>[[Armor rating|Armor]] +5 (while recharging 5 or more skills)
+| profession = Monk
+| stackable = n
+| campaign = [[Core]]
+}}

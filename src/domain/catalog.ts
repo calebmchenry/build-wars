@@ -18,6 +18,7 @@ import type {
   RemoteMediaMetadata,
   SourceReference
 } from "./source";
+import type { ArmorSlot } from "./equipment";
 
 export interface CatalogRecord<Id> {
   readonly id: Id;
@@ -622,6 +623,308 @@ export interface RuneCatalog {
   readonly sourceSet: RuneSourceSetSummary;
   readonly dispositions: readonly RuneSourceSetDisposition[];
   readonly runes: readonly CatalogRuneRecord[];
+  readonly remoteMedia: readonly RemoteMediaMetadata[];
+}
+
+export interface InsigniaCatalogProfile {
+  readonly id: "epic-11-insignias";
+  readonly sourceTarget: "BACKLOG";
+  readonly sourceEpic: "EPIC-11";
+  readonly sourceCaps: {
+    readonly seedPageLimit: number;
+    readonly detailPageLimit: number;
+    readonly mediaTitleLimit: number;
+    readonly requestLimit: number;
+    readonly retryLimit: number;
+    readonly continuationLimit: number;
+    readonly responseByteCap: number;
+    readonly parserByteCap: number;
+    readonly aggregateByteCap: number;
+    readonly catalogByteCap: number;
+    readonly qaByteCap: number;
+  };
+}
+
+export type InsigniaAvailability = "common" | "profession-specific" | "unknown";
+export type InsigniaModeAvailability = "both" | "pve-only" | "pvp-only" | "unknown";
+export type InsigniaTemplateModifierCrosswalkStatus =
+  "active" | "historical" | "unsupported" | "ambiguous";
+export type InsigniaTemplateModifierScope = "armor-prefix";
+export type InsigniaSourceSetDispositionKind =
+  "accepted-insignia" | "supported-relationship" | "explicit-exclusion" | "unsupported" | "blocked";
+export type InsigniaEffectCompleteness = "structured" | "mixed" | "note-only" | "unknown";
+export type InsigniaDisplayState = "structured-only" | "reviewed-short-text" | "excluded";
+export type InsigniaEffectKind =
+  | "maximum-health-delta"
+  | "maximum-energy-delta"
+  | "armor-rating-delta"
+  | "incoming-damage-delta"
+  | "duration-delta"
+  | "outgoing-damage-delta"
+  | "note-only"
+  | "unknown";
+export type InsigniaEffectUnit = "health" | "energy" | "armor" | "damage" | "percent" | "seconds";
+export type InsigniaApplicationScope =
+  "character" | "armor-piece-local" | "event-local" | "unknown";
+export type InsigniaEffectCombinationRule =
+  "sum" | "highest" | "non-stacking" | "local-only" | "separate" | "unknown";
+export type InsigniaConditionPredicateKind =
+  | "incoming-damage-type"
+  | "while-attacking"
+  | "affected-by-enchantment"
+  | "holding-bundle"
+  | "in-stance"
+  | "using-preparation"
+  | "pet-alive"
+  | "affected-by-condition"
+  | "affected-by-hex"
+  | "affected-by-weapon-spell"
+  | "activating-skills"
+  | "recharging-skills-at-least"
+  | "controlling-minions-at-least"
+  | "controlling-spirits-at-least"
+  | "health-percent-below"
+  | "not-affected-by-enchantment"
+  | "affected-by-shout-echo-or-chant"
+  | "attribute-rank-at-least"
+  | "equipped-signet-count"
+  | "corpse-exploit-spell"
+  | "knockdown-duration-cap";
+export type InsigniaConditionComparator = "at-least" | "below" | "equal" | "per" | null;
+export type InsigniaSlotOutcomeKind = "value" | "not-applicable" | "unresolved";
+
+export interface InsigniaPageIdentity {
+  readonly requestedTitle: string;
+  readonly normalizedTitle: string;
+  readonly canonicalTitle: string;
+  readonly pageId: number | string | null;
+  readonly revisionId: number | string | null;
+  readonly sourceRevisionTimestamp: string | null;
+  readonly redirectedFrom: string | null;
+}
+
+export interface InsigniaTemplateModifierCrosswalk {
+  readonly templateModifierId: TemplateEquipmentModifierId;
+  readonly status: InsigniaTemplateModifierCrosswalkStatus;
+  readonly mode: InsigniaModeAvailability;
+  readonly scope: InsigniaTemplateModifierScope;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface InsigniaAlwaysCondition {
+  readonly kind: "always";
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface InsigniaPredicateCondition {
+  readonly kind: "predicate";
+  readonly predicate: InsigniaConditionPredicateKind;
+  readonly comparator: InsigniaConditionComparator;
+  readonly count: number | null;
+  readonly attributeId: AttributeId | null;
+  readonly attributeName: string | null;
+  readonly damageType: string | null;
+  readonly effectKind: string | null;
+  readonly text: string;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface InsigniaDeferredCondition {
+  readonly kind: "deferred";
+  readonly code: string;
+  readonly text: string;
+  readonly reason: string;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export type InsigniaCondition =
+  InsigniaAlwaysCondition | InsigniaPredicateCondition | InsigniaDeferredCondition;
+
+export interface InsigniaEffectCombination {
+  readonly rule: InsigniaEffectCombinationRule;
+  readonly groupKey: string;
+  readonly notes: string | null;
+}
+
+export interface InsigniaSlotValueOutcome {
+  readonly kind: "value";
+  readonly amount: number;
+  readonly unit: InsigniaEffectUnit;
+  readonly precision: "integer" | "decimal";
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface InsigniaSlotNotApplicableOutcome {
+  readonly kind: "not-applicable";
+  readonly reason: string;
+}
+
+export interface InsigniaSlotUnresolvedOutcome {
+  readonly kind: "unresolved";
+  readonly reason: string;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export type InsigniaSlotOutcome =
+  InsigniaSlotValueOutcome | InsigniaSlotNotApplicableOutcome | InsigniaSlotUnresolvedOutcome;
+
+export type InsigniaSlotOutcomes = {
+  readonly [Slot in ArmorSlot]: InsigniaSlotOutcome;
+};
+
+export interface BaseNumericInsigniaEffect {
+  readonly id: string;
+  readonly modeAvailability: InsigniaModeAvailability;
+  readonly applicationScope: InsigniaApplicationScope;
+  readonly condition: InsigniaCondition;
+  readonly combination: InsigniaEffectCombination;
+  readonly slotOutcomes: InsigniaSlotOutcomes;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface MaximumHealthDeltaInsigniaEffect extends BaseNumericInsigniaEffect {
+  readonly kind: "maximum-health-delta";
+  readonly unit: "health";
+}
+
+export interface MaximumEnergyDeltaInsigniaEffect extends BaseNumericInsigniaEffect {
+  readonly kind: "maximum-energy-delta";
+  readonly unit: "energy";
+}
+
+export interface ArmorRatingDeltaInsigniaEffect extends BaseNumericInsigniaEffect {
+  readonly kind: "armor-rating-delta";
+  readonly unit: "armor";
+  readonly damageScope: string | null;
+}
+
+export interface IncomingDamageDeltaInsigniaEffect extends BaseNumericInsigniaEffect {
+  readonly kind: "incoming-damage-delta";
+  readonly unit: "damage";
+  readonly damageScope: string | null;
+}
+
+export interface DurationDeltaInsigniaEffect extends BaseNumericInsigniaEffect {
+  readonly kind: "duration-delta";
+  readonly unit: "percent" | "seconds";
+  readonly subject: string;
+}
+
+export interface OutgoingDamageDeltaInsigniaEffect extends BaseNumericInsigniaEffect {
+  readonly kind: "outgoing-damage-delta";
+  readonly unit: "percent" | "damage";
+  readonly subject: string;
+}
+
+export interface NoteOnlyInsigniaEffect {
+  readonly id: string;
+  readonly kind: "note-only";
+  readonly noteCode: string;
+  readonly text: string;
+  readonly modeAvailability: InsigniaModeAvailability;
+  readonly condition: InsigniaCondition;
+  readonly combination: InsigniaEffectCombination;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface UnknownInsigniaEffect {
+  readonly id: string;
+  readonly kind: "unknown";
+  readonly sourceField: string;
+  readonly reason: string;
+  readonly modeAvailability: InsigniaModeAvailability;
+  readonly condition: InsigniaCondition;
+  readonly combination: InsigniaEffectCombination;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export type InsigniaEffect =
+  | MaximumHealthDeltaInsigniaEffect
+  | MaximumEnergyDeltaInsigniaEffect
+  | ArmorRatingDeltaInsigniaEffect
+  | IncomingDamageDeltaInsigniaEffect
+  | DurationDeltaInsigniaEffect
+  | OutgoingDamageDeltaInsigniaEffect
+  | NoteOnlyInsigniaEffect
+  | UnknownInsigniaEffect;
+
+export interface InsigniaSourceSetDisposition {
+  readonly id: string;
+  readonly insigniaId: InsigniaId | null;
+  readonly templateModifierId: TemplateEquipmentModifierId | null;
+  readonly requestedTitle: string;
+  readonly kind: InsigniaSourceSetDispositionKind;
+  readonly reason: string;
+  readonly reviewId: string | null;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface InsigniaSourceSetSummary {
+  readonly seedTitles: readonly string[];
+  readonly detailPageTitles: readonly string[];
+  readonly sourceSetDigest: string;
+  readonly sourcePlanDigest: string;
+  readonly acceptedInsigniaCount: number;
+  readonly relationshipCount: number;
+  readonly exclusionCount: number;
+  readonly unsupportedCount: number;
+  readonly blockingFindingCount: number;
+  readonly sourceAuthority: string;
+  readonly idPolicy: string;
+  readonly identityRegistryDigest: string;
+  readonly planningAmendment: string | null;
+}
+
+export interface InsigniaCatalogDependencySummary {
+  readonly id: "epic-03-professions-attributes";
+  readonly catalogVersion: string;
+  readonly artifactDigest: string;
+  readonly manifestDigest: string;
+  readonly qaGate: "pass";
+  readonly sectionDigests: readonly CatalogSectionDigest[];
+}
+
+export interface InsigniaIdentityRegistrySummary {
+  readonly registryVersion: 1;
+  readonly recordCount: number;
+  readonly tombstoneCount: number;
+  readonly digest: string;
+  readonly policy: string;
+}
+
+export interface CatalogInsigniaRecord {
+  readonly id: InsigniaId;
+  readonly sourceKey: string;
+  readonly variantKey: string | null;
+  readonly name: string;
+  readonly normalizedName: string;
+  readonly wikiUrl: string;
+  readonly pageIdentity: InsigniaPageIdentity;
+  readonly familyKey: string;
+  readonly availability: InsigniaAvailability;
+  readonly professionId: ProfessionId | null;
+  readonly modeAvailability: InsigniaModeAvailability;
+  readonly applicableSlots: readonly ArmorSlot[];
+  readonly templateModifiers: readonly InsigniaTemplateModifierCrosswalk[];
+  readonly effects: readonly InsigniaEffect[];
+  readonly effectCompleteness: InsigniaEffectCompleteness;
+  readonly displayState: InsigniaDisplayState;
+  readonly iconId: string | null;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface InsigniaCatalog {
+  readonly schemaVersion: SchemaVersion;
+  readonly catalogVersion: CatalogVersionId | string;
+  readonly sectionDigests: readonly CatalogSectionDigest[];
+  readonly generatedAt: string;
+  readonly generator: string;
+  readonly profile: InsigniaCatalogProfile;
+  readonly dependencyDigests: readonly InsigniaCatalogDependencySummary[];
+  readonly sourceSet: InsigniaSourceSetSummary;
+  readonly identityRegistry: InsigniaIdentityRegistrySummary;
+  readonly dispositions: readonly InsigniaSourceSetDisposition[];
+  readonly insignias: readonly CatalogInsigniaRecord[];
   readonly remoteMedia: readonly RemoteMediaMetadata[];
 }
 
