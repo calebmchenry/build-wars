@@ -30,6 +30,11 @@ reports.
   authority planning, identity-registry validation, selected snapshot-set replay checks, insignia
   page resolution, EPIC-03 joins, typed per-slot effect semantics, inert conditions, QA, and catalog
   assembly logic.
+- `weapon_source_set.py`, `weapon_identity.py`, `weapon_base_extractor.py`,
+  `weapon_mod_extractor.py`, `weapon_semantics.py`, and `weapon_catalog.py`: EPIC-12 source
+  authority planning, identity-registry validation, selected snapshot-set replay checks, weapon base
+  and modifier page resolution, EPIC-03 joins, typed effect semantics, compatibility inputs, QA, and
+  paired catalog assembly logic.
 - `icons.py`: metadata-only icon candidate resolution for explicit `image=` values and default
   `File:{title}.jpg` / `File:{title}.png` candidates.
 - `artifacts.py`: canonical JSON and `GeneratedArtifactManifest` writing with digest and baseline
@@ -75,6 +80,11 @@ adapter flags.
   metadata-only `imageinfo`, the EPIC-03 dependency, and selected complete snapshot-set replay. Do
   not replace this with a category crawl, source-provided URLs, hand-authored IDs, or prose-derived
   arithmetic without a recorded planning amendment.
+- EPIC-12 refreshes must use the locked `Equipment template format`, `Weapon`, `Weapon upgrade`,
+  and `Inscription` authority pages, the reviewed source-set digest, planned weapon/modifier detail
+  pages, metadata-only `imageinfo`, the EPIC-03 dependency, and selected complete snapshot-set
+  replay. Do not replace this with a category crawl, source-provided URLs, raw-template-derived
+  public IDs, or prose-derived arithmetic without a recorded planning amendment.
 
 ## Registered Profiles
 
@@ -96,7 +106,14 @@ adapter flags.
   registry-backed public IDs, selected complete snapshot-set replay, exact promoted paths, per-slot
   effect semantics, inert conditions, effect-level locality/combination metadata, and metadata-only
   icon handling.
+- `epic-12-weapons-and-mods`: EPIC-12 weapons and mods catalogs. The profile locks four seed
+  authority pages, the EPIC-03 dependency, finite detail-page and icon metadata caps, digest-bound
+  source plans, registry-backed public IDs, selected complete snapshot-set replay, exact promoted
+  paired paths, raw template crosswalks, tagged damage/requirement/applicability/effect states,
+  compatibility inputs, and metadata-only icon handling.
 
 Default fixture regeneration writes the EPIC-02 proof plus the EPIC-03, EPIC-04, EPIC-10, and
-EPIC-11 fixture catalogs. Direct profile commands use `--profile epic-03-professions-attributes`,
-`--profile epic-04-skills`, `--profile epic-10-runes`, or `--profile epic-11-insignias`.
+EPIC-11 fixture catalogs and the EPIC-12 fixture catalogs. Direct profile commands use
+`--profile epic-03-professions-attributes`, `--profile epic-04-skills`,
+`--profile epic-10-runes`, `--profile epic-11-insignias`, or
+`--profile epic-12-weapons-and-mods`.

@@ -1,0 +1,2 @@
+{{BuildWars weapon facts|requirement=Requires 12 Dagger Mastery}}
+Synthetic daggers detail fixture.

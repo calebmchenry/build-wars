@@ -2,11 +2,13 @@
 id: BW-1201
 title: Weapon and Mod Catalog Contracts and EPIC-12 Profile
 epic: EPIC-12
-status: ready
+status: done
 priority: critical
 depends_on: []
+planned_sprint: SPRINT-013
+completed_sprint: SPRINT-013
 created: 2026-09-02
-updated: 2026-09-02
+updated: 2026-09-03
 ---
 
 # BW-1201: Weapon and Mod Catalog Contracts and EPIC-12 Profile
@@ -48,3 +50,13 @@ requirements, upgrade components, inscriptions, and modifier constraints.
 - `npm run typecheck`
 - Focused Vitest contract tests for weapon, upgrade, effect, and compatibility variants
 - Focused Python profile tests proving existing content profiles still work
+
+## Closeout Evidence
+
+- SPRINT-013 added framework-neutral `WeaponBaseCatalog` and `WeaponModCatalog` contracts,
+  registry-backed public ID summaries, release-set facts, tagged damage/requirement/applicability
+  states, raw template crosswalk states, runtime dispositions, lookup outcomes, and effect variants.
+- Added the `epic-12-weapons-and-mods` ingestion profile with fixture, discover, fetch, and selected
+  offline replay support.
+- Validation passed: `npm run typecheck`, focused EPIC-12 Vitest contract coverage, and focused
+  Python profile/CLI/pipeline coverage.

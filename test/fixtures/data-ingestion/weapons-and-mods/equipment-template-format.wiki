@@ -1,0 +1,23 @@
+== Weapon item fixtures ==
+{{BuildWars weapon item|201|Axe|axe|main-hand|one-handed}}
+{{BuildWars weapon item|279|Sword|sword|main-hand|one-handed}}
+{{BuildWars weapon item|202|Hammer|hammer|two-hand|two-handed}}
+{{BuildWars weapon item|203|Longbow|longbow|two-hand|two-handed}}
+{{BuildWars weapon item|204|Daggers|daggers|main-hand|one-handed}}
+{{BuildWars weapon item|205|Scythe|scythe|two-hand|two-handed}}
+{{BuildWars weapon item|206|Spear|spear|main-hand|one-handed}}
+{{BuildWars weapon item|207|Wand|wand|main-hand|one-handed}}
+{{BuildWars weapon item|208|Staff|staff|two-hand|two-handed}}
+{{BuildWars weapon item|209|Focus|focus|off-hand|off-hand}}
+{{BuildWars weapon item|210|Shield|shield|off-hand|off-hand}}
+
+== Weapon modifier fixtures ==
+{{BuildWars weapon modifier|190|Sundering Weapon Prefix|weapon-prefix|prefix}}
+{{BuildWars weapon modifier|204|Fortitude Weapon Suffix|weapon-suffix|suffix}}
+{{BuildWars weapon modifier|329|I Have the Power!|inscription|inscription}}
+{{BuildWars weapon modifier|391|Fiery Weapon Prefix|weapon-prefix|prefix}}
+{{BuildWars weapon modifier|392|Insightful Staff Head|staff-head|staff-head}}
+{{BuildWars weapon modifier|393|Staff Wrapping of Enchanting|staff-wrapping|staff-wrapping}}
+{{BuildWars weapon modifier|394|Shield Handle of Fortitude|shield-offhand|shield-handle}}
+{{BuildWars weapon modifier|395|Focus Core of Aptitude|caster|focus-core}}
+{{BuildWars weapon modifier|396|Weapon Mastery Suffix|weapon-suffix|suffix}}

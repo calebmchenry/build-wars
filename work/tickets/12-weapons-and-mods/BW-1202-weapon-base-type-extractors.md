@@ -2,12 +2,14 @@
 id: BW-1202
 title: Weapon Base-Type Source Resolution and Extractors
 epic: EPIC-12
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1201
+planned_sprint: SPRINT-013
+completed_sprint: SPRINT-013
 created: 2026-09-02
-updated: 2026-09-02
+updated: 2026-09-03
 ---
 
 # BW-1202: Weapon Base-Type Source Resolution and Extractors
@@ -44,3 +46,13 @@ Resolve and extract weapon base-type records needed for practical equipment mode
 
 - Focused Python extractor tests for EPIC-12 weapon fixtures
 - Fixed-clock fixture regeneration for EPIC-12 output
+
+## Closeout Evidence
+
+- SPRINT-013 added source-set planning and weapon base extraction for 11 runtime-eligible weapon
+  bases: axe, sword, hammer, longbow, daggers, scythe, spear, wand, staff, focus, and shield.
+- Extracted records include page identity, family/equip/handedness facts, tagged damage, tagged
+  EPIC-03 requirement joins, allowed modifier slots, active template item crosswalks, and compact
+  provenance.
+- Validation passed: EPIC-12 fixture regeneration, focused weapon source-set/base extractor tests,
+  and selected production snapshot replay.

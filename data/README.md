@@ -73,6 +73,23 @@ profession joins, exact per-slot effect outcomes, inert conditions, metadata-onl
 leaves armor legality, equipment UI, template resolution, condition evaluation, hit-location
 behavior, rune/insignia composition, and full stat totals to later epics.
 
+EPIC-12 adds the weapons and mods catalog exception. The only allowlisted production outputs are:
+
+- `data/generated/epic-12/weapons.catalog.json`
+- `data/generated/epic-12/weapons.catalog.manifest.json`
+- `data/generated/epic-12/weapon-mods.catalog.json`
+- `data/generated/epic-12/weapon-mods.catalog.manifest.json`
+- `data/qa/epic-12/weapons.catalog.qa.json`
+- `data/qa/epic-12/weapon-mods.catalog.qa.json`
+
+Runtime consumers may read only `weapons.catalog.json` and `weapon-mods.catalog.json`. They must not
+read EPIC-12 source plans, snapshot-set manifests, raw snapshots, candidate outputs, QA summaries,
+QA JSON, generated manifests, Python ingestion modules, wiki APIs, or icon bytes. The catalogs use
+schema-owned `WeaponId` and `WeaponModifierId` registries, raw equipment template crosswalks,
+EPIC-03 profession/attribute joins, tagged damage/requirement/applicability/effect states, compact
+runtime dispositions, metadata-only remote media, and leave equipment editing, set legality,
+inventory persistence, semantic import UI, and full stat/effect aggregation to later epics.
+
 ## Commit Rules
 
 Policy README files remain trackable so directory contracts are visible. Synthetic fixtures belong
@@ -105,3 +122,7 @@ For EPIC-11, BW-1105 approved the exact paths above after live source-set discov
 digest-confirmed detail/icon metadata fetch, selected complete snapshot-set replay, byte-identical
 offline catalog/manifest/QA regeneration, source authority review, first-baseline review,
 dispositioned metadata-only icon warnings, and passing app/public QA gates.
+For EPIC-12, BW-1206 approved the exact paths above after live source-set discovery,
+digest-confirmed detail/icon metadata fetch, selected complete snapshot-set replay, byte-identical
+offline catalog/manifest/QA regeneration, source authority review, effect-semantics review,
+first-baseline review, counterpart release-set checks, and passing app/public QA gates.

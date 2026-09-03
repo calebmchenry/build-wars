@@ -1,0 +1,2 @@
+{{BuildWars weapon facts|requirement=Requires 12 Marksmanship}}
+Synthetic longbow detail fixture.

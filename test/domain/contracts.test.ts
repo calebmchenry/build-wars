@@ -8,6 +8,8 @@ import {
   type Build,
   type CatalogInsigniaRecord,
   type CatalogRuneRecord,
+  type CatalogWeaponBaseRecord,
+  type CatalogWeaponModRecord,
   type EquipmentTemplate,
   type Guide,
   type Insignia,
@@ -32,6 +34,8 @@ import {
   templateProfessionId,
   templateSkillId,
   type Weapon,
+  type WeaponBaseCatalog,
+  type WeaponModCatalog,
   type WeaponModifier
 } from "../../src/domain";
 import {
@@ -83,7 +87,11 @@ describe("domain contracts", () => {
       | CatalogInsigniaRecord
       | InsigniaCatalog
       | CatalogRuneRecord
-      | RuneCatalog;
+      | RuneCatalog
+      | CatalogWeaponBaseRecord
+      | WeaponBaseCatalog
+      | CatalogWeaponModRecord
+      | WeaponModCatalog;
 
     const publicModels: PublicModels[] = [
       syntheticProfession,

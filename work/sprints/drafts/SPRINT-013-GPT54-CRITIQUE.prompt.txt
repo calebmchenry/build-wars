@@ -1,0 +1,23 @@
+Read these sprint drafts:
+
+- `work/sprints/drafts/SPRINT-013-GPT56SOL-DRAFT.md`
+- `work/sprints/drafts/SPRINT-013-GPT55-DRAFT.md`
+
+Write one combined critique. The parent Codex invocation will capture your final response to
+`work/sprints/drafts/SPRINT-013-GPT54-CRITIQUE.md`; do not edit repository files yourself.
+
+Do not read or critique `work/sprints/drafts/SPRINT-013-GPT54-DRAFT.md`.
+
+Focus on sequencing, dependency ordering, verification strategy, Definition of Done completeness,
+and whether promotion gates are realistic and testable.
+
+Constraints:
+
+- Do not use skills.
+- Do not run a planning workflow.
+- Do not modify application code, data scripts, generated data, ticket files, or sprint files.
+- Output only markdown.
+
+For each reviewed draft, identify strengths, weaknesses, gaps in risk analysis, missing edge cases,
+and Definition of Done completeness. Then compare the two drafts and call out merge
+recommendations.

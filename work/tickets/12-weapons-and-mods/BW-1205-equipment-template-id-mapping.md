@@ -2,15 +2,17 @@
 id: BW-1205
 title: Equipment Template ID Mapping
 epic: EPIC-12
-status: ready
+status: done
 priority: high
 depends_on:
   - EPIC-05
   - BW-1202
   - BW-1203
   - BW-1204
+planned_sprint: SPRINT-013
+completed_sprint: SPRINT-013
 created: 2026-09-02
-updated: 2026-09-02
+updated: 2026-09-03
 ---
 
 # BW-1205: Equipment Template ID Mapping
@@ -48,3 +50,13 @@ records without losing unsupported raw facts.
 - `npm run typecheck`
 - Focused Vitest tests for raw equipment template resolution and unresolved-ID preservation
 - Existing EPIC-05 equipment-template tests
+
+## Closeout Evidence
+
+- SPRINT-013 added pure catalog lookup helpers for raw `TemplateEquipmentItemId` and
+  `TemplateEquipmentModifierId` values, returning known, ambiguous, dispositioned, or unknown
+  outcomes without mutating decoded equipment documents.
+- Covered known item `279`, known modifiers `190`, `204`, and `329`, dispositioned item `0`,
+  dispositioned modifier `290`, ambiguous item `999001`, and unknown future IDs.
+- Validation passed: focused template lookup Vitest coverage plus existing raw equipment-template
+  exact-source and canonical export guardrails.

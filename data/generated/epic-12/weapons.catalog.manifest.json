@@ -1,0 +1,141 @@
+{
+  "artifactPath": "epic-12/weapons.catalog.json",
+  "commitDecision": "exact-path-allowlisted",
+  "counterpartArtifactPath": "data/generated/epic-12/weapon-mods.catalog.json",
+  "dependencyDigests": [
+    {
+      "artifactDigest": "7a397140d346dbfd1e28e1076132fa209628678682fa2c21322ac91f1807f9fa",
+      "catalogVersion": "pa-e5d0d35ad8f30b4c",
+      "id": "epic-03-professions-attributes",
+      "manifestDigest": "e449ea6b13a165108858be039ca6feabaf45dd592cf5e54cd9fee7c125c75289",
+      "qaGate": "pass",
+      "sectionDigests": [
+        {
+          "digest": "06b08691f79e1a77feff629f758a876dd5fae0e37db27ce45dac2215cdefdfc8",
+          "section": "templateCrosswalk"
+        },
+        {
+          "digest": "88e3453893080531b42941c6e311c784fa06e8417ebb1b1b75f6b9c448b16cde",
+          "section": "professions"
+        },
+        {
+          "digest": "74823681580f46a48394defdcf92a622cdddccae67003043497df65242999a74",
+          "section": "attributes"
+        },
+        {
+          "digest": "87d6fd2069ad7f824132c7e43068348c5edcb2de36e8ace8c7a8582ff1972253",
+          "section": "attributePointRules"
+        },
+        {
+          "digest": "36e5b6f3fae709ba68b27d5a735bb5ccd0d605638fd8ae584d080033f72b3ea2",
+          "section": "remoteMedia"
+        }
+      ]
+    }
+  ],
+  "digest": {
+    "algorithm": "sha256",
+    "notes": null,
+    "value": "813b1e2ff117331accd2c5ceb4d7577cbe2684789cccf341f2ce1dd66bda581e"
+  },
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "inputSnapshotManifestPaths": [
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2688414-db7b64/staff-head-9f9842baa9-15b004a9ccbe8399.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2703508-ca3c8b/longbow-31b2fb624d-73dc60d1cbd9396b.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2712293-ffb1d6/axe-9e28648fe9-19552122246544a3.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2712294-142467/sword-d0b9cd97fa-23a6d4f05450e8af.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2712296-8f7128/hammer-c157cbf647-c1a98712d1f9dce5.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2713480-7bfb39/scythe-6a45cdfbff-3ddab95634141e72.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2717550-10657d/staff-681927e34b-eb6ce1edbf92a853.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2720645-510ee7/wand-3e7962d21c-dd4166373b1d9d67.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2722689-d1fecf/daggers-72d13cd454-bbc6534f90b5fb19.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2723363-690c7b/focus-item-f1a386ee78-d4a26e93e984622d.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2723391-c55026/shield-480d4be7d6-2646658f86637c6c.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2727609-ca079c/weapon-1710782c5d-2a141315d9c3fcd2.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2728058-ce9a3b/equipment-template-format-5e1bfe722e-f954cb20a6edd6b3.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2734944-f0436f/spear-c71c66ea7e-42b8960e213e5f41.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2735699-277567/inscription-cfb1ac0c80-cd0c6003c3984229.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2739358-f15699/staff-wrapping-99845f3140-f53d521ffc67217b.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2739359-99c231/upgrade-component-a3a296d5fc-a337ccb1dd99687c.manifest.json",
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2739359-99c231/weapon-upgrade-1d1064ab2f-c8ad5a55d80a1e5a.manifest.json"
+  ],
+  "manualReviews": [
+    {
+      "decision": "approved",
+      "id": "review:epic-12-source-set:2026-09-02",
+      "rationale": "The finite source authority uses Equipment template format, Weapon, Weapon upgrade, Inscription, reviewed family/detail pages, metadata-only media policy, and EPIC-03 joins.",
+      "reviewedAt": "2026-09-01T00:00:00Z",
+      "reviewer": "build-wars-sprint-execute",
+      "scope": "epic-12-source-set",
+      "sourcePlanDigest": "4412e6dfb5893f5f77dc760add44c7edbbd808aa1da075159e51daf1bcc09291",
+      "sourceSetDigest": "bb7d16a292c8705d9a76b196f9128e98c1a42032c8407e0ee43f29cf91cb5142"
+    },
+    {
+      "decision": "approved",
+      "id": "review:epic-12-effect-semantics:2026-09-02",
+      "rationale": "Closed numeric and chance facts are structured; hard mastery and conditional behavior remains note-only or unknown for EPIC-21.",
+      "reviewedAt": "2026-09-01T00:00:00Z",
+      "reviewer": "build-wars-sprint-execute",
+      "scope": "epic-12-effect-semantics"
+    },
+    {
+      "decision": "approved",
+      "id": "review:epic-12-first-baseline:2026-09-02",
+      "rationale": "The first baseline checked base/mod counts, template crosswalks, release-set identity, copied text policy, QA gates, and selected snapshot evidence.",
+      "reviewedAt": "2026-09-01T00:00:00Z",
+      "reviewer": "build-wars-sprint-execute",
+      "scope": "epic-12-first-baseline",
+      "selectedSnapshotSetDigest": "4d8f6333dca3fff5f4b95d3634faed34fc4e39a634e2aa9f5b4ead45312c8495",
+      "weaponArtifactDigest": "813b1e2ff117331accd2c5ceb4d7577cbe2684789cccf341f2ce1dd66bda581e",
+      "weaponModArtifactDigest": "131c92ed4c9fe840425ca6d41de7e71273076d5c0a7fb8cc91f3269c2cd6963b"
+    }
+  ],
+  "notes": "Runtime-eligible EPIC-12 weapon base catalog; source plans, snapshot-set manifests, raw snapshots, QA summaries, review evidence, and media bytes remain ignored.",
+  "qaReportPath": "data/qa/epic-12/weapons.catalog.qa.json",
+  "recordCount": 11,
+  "releaseSet": {
+    "catalogSetDigest": "60ed5c4dc82576648eb5af453295109db5caf3a725fa5b2dd02e3ae03e8f30ad",
+    "catalogSetVersion": "weapon-mods-set-60ed5c4dc8257664",
+    "profile": "epic-12-weapons-and-mods",
+    "qaGate": "pass",
+    "selectedEvidenceDigest": "4d8f6333dca3fff5f4b95d3634faed34fc4e39a634e2aa9f5b4ead45312c8495",
+    "sourceAuthorityVersion": "epic-12-source-authority-v1",
+    "sourcePlanDigest": "4412e6dfb5893f5f77dc760add44c7edbbd808aa1da075159e51daf1bcc09291",
+    "sourceSetDigest": "bb7d16a292c8705d9a76b196f9128e98c1a42032c8407e0ee43f29cf91cb5142",
+    "weaponCatalogDigest": "c0746ccb020fe4d19ce24ffff662fe1cc74a9fff833f44f65d56b594806ff435",
+    "weaponCatalogVersion": "weapons-3f7389e0935e67dd",
+    "weaponModCatalogDigest": "c51af84bb8d0fd55cfc34cb5389f4c16834b1a4621268db6b1ebd65012dd64b5",
+    "weaponModCatalogVersion": "weapon-mods-6beb6758addc464a"
+  },
+  "retentionDecision": {
+    "longTermReproduction": "Requires the retained ignored snapshot set or a fresh bounded live acquisition and review.",
+    "selectedEvidence": "local-ignored-snapshot-set"
+  },
+  "schemaVersion": 1,
+  "selectedSnapshotSetDigest": "4d8f6333dca3fff5f4b95d3634faed34fc4e39a634e2aa9f5b4ead45312c8495",
+  "selectedSnapshotSetManifestPath": "work/runs/data-ingestion/epic-12/snapshot-sets/weapons-mods-08d861a9be8830fd.snapshot-set.json",
+  "sourceIds": [
+    "source:gww:epic-10-live:seed:equipment-template-format:2728058",
+    "source:gww:epic-12-live:detail:128:2712294",
+    "source:gww:epic-12-live:detail:129:2712293",
+    "source:gww:epic-12-live:detail:130:2734944",
+    "source:gww:epic-12-live:detail:132098:2703508",
+    "source:gww:epic-12-live:detail:132:2712296",
+    "source:gww:epic-12-live:detail:134:2722689",
+    "source:gww:epic-12-live:detail:135:2713480",
+    "source:gww:epic-12-live:detail:295:2739359",
+    "source:gww:epic-12-live:detail:402:2723391",
+    "source:gww:epic-12-live:detail:403:2717550",
+    "source:gww:epic-12-live:detail:405:2723363",
+    "source:gww:epic-12-live:detail:407:2720645",
+    "source:gww:epic-12-live:detail:5923:2688414",
+    "source:gww:epic-12-live:detail:5925:2739358",
+    "source:gww:epic-12-live:seed:inscription:2735699",
+    "source:gww:epic-12-live:seed:weapon-upgrade:2739359",
+    "source:gww:epic-12-live:seed:weapon:2727609"
+  ],
+  "sourcePlanDigest": "4412e6dfb5893f5f77dc760add44c7edbbd808aa1da075159e51daf1bcc09291",
+  "sourcePlanPath": "work/runs/data-ingestion/epic-12/source-plans/weapons-mods-4412e6dfb5893f5f.source-plan.json",
+  "sourceSetDigest": "bb7d16a292c8705d9a76b196f9128e98c1a42032c8407e0ee43f29cf91cb5142"
+}

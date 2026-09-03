@@ -1,0 +1,62 @@
+{
+  "namespace": "weapon-modifier",
+  "policy": "Public WeaponModifierId values are schema-owned registry allocations keyed by reviewed sourceKey and variantKey. IDs are never allocated from source order, template modifier IDs, or display names, and tombstoned IDs are not reused.",
+  "records": [
+    {
+      "id": 1001,
+      "sourceKey": "weapon-modifier:sundering-prefix",
+      "status": "active",
+      "variantKey": "sundering-prefix"
+    },
+    {
+      "id": 1002,
+      "sourceKey": "weapon-modifier:fortitude-suffix",
+      "status": "active",
+      "variantKey": "fortitude-suffix"
+    },
+    {
+      "id": 1003,
+      "sourceKey": "weapon-modifier:i-have-the-power-inscription",
+      "status": "active",
+      "variantKey": "i-have-the-power-inscription"
+    },
+    {
+      "id": 1004,
+      "sourceKey": "weapon-modifier:fiery-prefix",
+      "status": "active",
+      "variantKey": "fiery-prefix"
+    },
+    {
+      "id": 1005,
+      "sourceKey": "weapon-modifier:staff-head-insightful",
+      "status": "active",
+      "variantKey": "staff-head-insightful"
+    },
+    {
+      "id": 1006,
+      "sourceKey": "weapon-modifier:staff-wrapping-enchanting",
+      "status": "active",
+      "variantKey": "staff-wrapping-enchanting"
+    },
+    {
+      "id": 1007,
+      "sourceKey": "weapon-modifier:shield-handle-fortitude",
+      "status": "active",
+      "variantKey": "shield-handle-fortitude"
+    },
+    {
+      "id": 1008,
+      "sourceKey": "weapon-modifier:focus-core-aptitude",
+      "status": "active",
+      "variantKey": "focus-core-aptitude"
+    },
+    {
+      "id": 1009,
+      "sourceKey": "weapon-modifier:mastery-chance-suffix",
+      "status": "active",
+      "variantKey": "mastery-chance-suffix"
+    }
+  ],
+  "registryVersion": 1,
+  "tombstones": []
+}

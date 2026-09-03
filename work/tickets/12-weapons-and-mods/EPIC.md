@@ -2,13 +2,15 @@
 id: EPIC-12
 title: Weapons and Mods
 track: content
-status: ready
+status: done
 priority: high
 depends_on:
   - EPIC-01
   - EPIC-02
   - EPIC-03
   - EPIC-05
+planned_sprint: SPRINT-013
+completed_sprint: SPRINT-013
 tickets:
   - BW-1201
   - BW-1202
@@ -17,7 +19,7 @@ tickets:
   - BW-1205
   - BW-1206
   - BW-1207
-updated: 2026-09-02
+updated: 2026-09-03
 ---
 
 # Weapons and Mods
@@ -83,3 +85,19 @@ Weapon data is one of the more complicated content areas. Start with PvP equipme
 * `BW-1206`: Weapons/mods catalog QA, deterministic generation, review gates, and exact-path
   promotion.
 * `BW-1207`: Runtime integration notes, downstream contracts for EPIC-13/14, docs, and closeout.
+
+## Completion Evidence
+
+SPRINT-013 completed BW-1201 through BW-1207. It promoted runtime weapon and modifier catalogs at
+`data/generated/epic-12/weapons.catalog.json` and
+`data/generated/epic-12/weapon-mods.catalog.json` with adjacent manifests and machine-readable QA
+reports, backed by source authority review, digest-confirmed live fetch, selected complete
+snapshot-set replay, two byte-identical fixed-clock offline replays, and `npm run verify`.
+
+The catalog release contains 11 weapon bases and 9 weapon modifiers with schema-owned registry IDs,
+raw equipment template item/modifier crosswalks, EPIC-03 requirement joins, tagged
+damage/requirement/applicability/effect states, compact runtime dispositions, and metadata-only icon
+references. The domain layer can explain one-base/one-modifier compatibility and resolve known,
+ambiguous, dispositioned, and unknown raw template IDs without changing EPIC-05 exact-source replay.
+Equipment editing, full set legality, semantic import UI, search/tooltips, and stat/effect
+aggregation remain delegated to later epics.

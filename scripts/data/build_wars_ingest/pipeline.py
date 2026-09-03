@@ -13,6 +13,7 @@ from .config import (
     EPIC_04_LIMITS,
     EPIC_10_LIMITS,
     EPIC_11_LIMITS,
+    EPIC_12_LIMITS,
     FIXTURE_GENERATED_AT,
     GENERATOR_NAME,
     INGESTION_SCHEMA_VERSION,
@@ -46,6 +47,10 @@ from .profiles import (
     EPIC_10_RUNE_ICON_IMAGEINFO_TITLE,
     EPIC_11_INSIGNIA_ICON_IMAGEINFO_TITLE,
     EPIC_11_PROFILE_ID,
+    EPIC_12_PROFILE_ID,
+    EPIC_12_SOURCE_TITLES,
+    EPIC_12_WEAPON_MODS_QA_RELATIVE_PATH,
+    EPIC_12_WEAPON_MODS_RELATIVE_PATH,
     profile_by_id,
 )
 from .qa import build_report, exit_code_for_report, write_report
@@ -61,6 +66,21 @@ from .rune_source_set import (
     validate_source_plan as validate_rune_source_plan,
     write_snapshot_set_manifest as write_rune_snapshot_set_manifest,
     write_source_plan as write_rune_source_plan,
+)
+from .weapon_catalog import assemble_weapon_catalogs, manual_reviews as weapon_manual_reviews
+from .weapon_base_extractor import icon_titles_from_detail_pages as weapon_base_icon_titles_from_detail_pages
+from .weapon_mod_extractor import icon_titles_from_detail_pages as weapon_mod_icon_titles_from_detail_pages
+from .weapon_source_set import (
+    EPIC_12_ICON_IMAGEINFO_TITLE as WEAPON_ICON_IMAGEINFO_TITLE,
+    WeaponSourceSetError,
+    build_source_plan as build_weapon_source_plan,
+    load_snapshot_set as load_weapon_snapshot_set,
+    load_source_plan as load_weapon_source_plan,
+    resolution_records_from_pages as weapon_resolution_records_from_pages,
+    source_plan_path as weapon_source_plan_output_path,
+    validate_source_plan as validate_weapon_source_plan,
+    write_snapshot_set_manifest as write_weapon_snapshot_set_manifest,
+    write_source_plan as write_weapon_source_plan,
 )
 from .skill_catalog import SkillCatalogError, assemble_skill_catalog, load_epic03_dependency
 from .skill_ids import SkillIdSource, enumerate_skill_ids
@@ -134,6 +154,8 @@ def run_fixture(options: PipelineOptions) -> PipelineResult:
         return _run_epic10_fixture(options)
     if options.profile == EPIC_11_PROFILE_ID:
         return _run_epic11_fixture(options)
+    if options.profile == EPIC_12_PROFILE_ID:
+        return _run_epic12_fixture(options)
 
     roots = RuntimeRoots.from_root(options.output_root)
     fixtures = _load_fixtures(options.fixture_root)
@@ -274,6 +296,7 @@ def run_fixture(options: PipelineOptions) -> PipelineResult:
     _run_epic04_fixture(replace(options, profile=EPIC_04_PROFILE_ID))
     _run_epic10_fixture(replace(options, profile=EPIC_10_PROFILE_ID))
     _run_epic11_fixture(replace(options, profile=EPIC_11_PROFILE_ID))
+    _run_epic12_fixture(replace(options, profile=EPIC_12_PROFILE_ID))
     return result
 
 
@@ -286,6 +309,8 @@ def run_offline(options: PipelineOptions) -> PipelineResult:
         return _run_epic10_offline(options)
     if options.profile == EPIC_11_PROFILE_ID:
         return _run_epic11_offline(options)
+    if options.profile == EPIC_12_PROFILE_ID:
+        return _run_epic12_offline(options)
 
     roots = RuntimeRoots.from_root(options.output_root)
     manifests = sorted(roots.snapshot_root.glob("**/*.manifest.json"))
@@ -407,6 +432,8 @@ def run_live(options: PipelineOptions) -> PipelineResult:
         return _run_epic10_live(options)
     if options.profile == EPIC_11_PROFILE_ID:
         return _run_epic11_live(options)
+    if options.profile == EPIC_12_PROFILE_ID:
+        return _run_epic12_live(options)
 
     if not options.allow_live_network:
         raise PipelineError("Live mode requires --allow-live-network")
@@ -1592,6 +1619,587 @@ def _run_epic11_offline(options: PipelineOptions) -> PipelineResult:
     )
 
 
+def _run_epic12_fixture(options: PipelineOptions) -> PipelineResult:
+    profile = profile_by_id(EPIC_12_PROFILE_ID)
+    roots = RuntimeRoots.from_root(options.output_root)
+    if not (roots.generated_root / "epic-03/professions-attributes.catalog.json").exists():
+        _run_epic03_fixture(replace(options, profile=EPIC_03_PROFILE_ID))
+
+    dependency = _load_epic03_dependency_for_epic11(roots.root)
+    snapshot_store = SnapshotStore(roots.snapshot_root)
+    fixtures = _load_epic12_fixture_pages(options.fixture_root)
+    source_snapshots: list[dict[str, Any]] = []
+    child_manifest_paths: list[str] = []
+    for index, title in enumerate(profile.source_titles, start=1):
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-12-fixture:{_safe_source_part(title)}:{8000 + index}",
+            page_title=title,
+            page_id=11000 + index,
+            revision_id=8000 + index,
+            source_revision_timestamp=f"2026-08-31T21:0{index}:00Z",
+            retrieved_at=options.generated_at,
+        )
+        content = fixtures["sources"][title]
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=11000 + index,
+            revision_id=8000 + index,
+            timestamp=f"2026-08-31T21:0{index}:00Z",
+            retrieved_at=options.generated_at,
+            content=content,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        source_snapshots.append({"title": title, "content": content, "sourceReference": source_ref})
+
+    plan_result = build_weapon_source_plan(
+        profile=profile,
+        generated_at=options.generated_at,
+        source_snapshots=source_snapshots,
+        dependency=dependency,
+    )
+    plan_path = write_weapon_source_plan(roots.root, plan_result.plan)
+    diagnostics = [*plan_result.diagnostics]
+    detail_pages: dict[str, list[dict[str, Any]]] = {"weaponBases": [], "weaponModifiers": []}
+    detail_snapshots: dict[str, tuple[dict[str, Any], dict[str, Any]]] = {}
+    for index, title in enumerate(plan_result.plan["detailPageTitles"], start=1):
+        content = _epic12_fixture_detail_content(fixtures, str(title))
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-12-fixture:detail:{_safe_source_part(str(title))}:{8100 + index}",
+            page_title=str(title),
+            page_id=11100 + index,
+            revision_id=8100 + index,
+            source_revision_timestamp=f"2026-08-31T22:{index % 60:02d}:00Z",
+            retrieved_at=options.generated_at,
+        )
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=str(title),
+            page_id=11100 + index,
+            revision_id=8100 + index,
+            timestamp=f"2026-08-31T22:{index % 60:02d}:00Z",
+            retrieved_at=options.generated_at,
+            content=content,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        detail_snapshots[str(title)] = (
+            {
+                "normalizedTitle": str(title),
+                "canonicalTitle": str(title),
+                "redirectedFrom": None,
+                "pageId": 11100 + index,
+                "revisionId": 8100 + index,
+                "sourceRevisionTimestamp": f"2026-08-31T22:{index % 60:02d}:00Z",
+                "responseIndex": index,
+                "disambiguationPreamble": None,
+                "content": content,
+            },
+            source_ref,
+        )
+    for collection_key, output_key in (("acceptedWeaponBases", "weaponBases"), ("acceptedWeaponModifiers", "weaponModifiers")):
+        for seed in plan_result.plan[collection_key]:
+            detail_meta, source_ref = detail_snapshots[str(seed["detailTitle"])]
+            detail_pages[output_key].append({**seed, **detail_meta, "sourceReference": source_ref})
+
+    imageinfo_source = _page_source_reference(
+        source_id="source:gww:epic-12-fixture:weapon-icons:8200",
+        page_title=WEAPON_ICON_IMAGEINFO_TITLE,
+        page_id=11220,
+        revision_id=8200,
+        source_revision_timestamp="2026-08-31T22:59:00Z",
+        retrieved_at=options.generated_at,
+        material_class="media-metadata",
+    )
+    imageinfo_payload = {
+        "kind": "mediawiki-imageinfo",
+        "title": WEAPON_ICON_IMAGEINFO_TITLE,
+        "pages": fixtures["imageinfo"]["pages"],
+    }
+    imageinfo_snapshot = _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=imageinfo_source,
+        title=WEAPON_ICON_IMAGEINFO_TITLE,
+        page_id=11220,
+        revision_id=8200,
+        timestamp="2026-08-31T22:59:00Z",
+        retrieved_at=options.generated_at,
+        content=json.dumps(imageinfo_payload, ensure_ascii=False, sort_keys=True),
+    )
+    child_manifest_paths.append(_relative_to_root(roots.root, imageinfo_snapshot.manifest_path))
+    snapshot_set_manifest_path = write_weapon_snapshot_set_manifest(
+        root=roots.root,
+        profile=profile,
+        source_plan=plan_result.plan,
+        child_manifest_paths=child_manifest_paths,
+        snapshot_store=snapshot_store,
+        completion_state="complete",
+        generated_at=options.generated_at,
+        notes="Complete synthetic EPIC-12 fixture snapshot set.",
+        detail_records=detail_pages,
+    )
+    return _write_epic12_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        source_plan=plan_result.plan,
+        detail_pages=detail_pages,
+        imageinfo_pages=fixtures["imageinfo"]["pages"],
+        snapshot_set_manifest_path=snapshot_set_manifest_path,
+        snapshot_manifest_paths=child_manifest_paths,
+        source_plan_path=plan_path,
+        diagnostics=diagnostics,
+    )
+
+
+def _run_epic12_live(options: PipelineOptions) -> PipelineResult:
+    if not options.allow_live_network:
+        raise PipelineError("Live EPIC-12 mode requires --allow-live-network")
+    profile = profile_by_id(EPIC_12_PROFILE_ID)
+    stage = options.stage
+    if stage not in {"discover", "fetch"}:
+        raise PipelineError("EPIC-12 live mode requires --stage discover or --stage fetch")
+
+    roots = RuntimeRoots.from_root(options.output_root)
+    snapshot_store = SnapshotStore(roots.snapshot_root)
+    discovered = _discover_epic12_source_set(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        snapshot_store=snapshot_store,
+    )
+    if stage == "discover":
+        return discovered
+
+    if options.source_plan_path is None or options.confirm_source_set_digest is None:
+        raise PipelineError("EPIC-12 live fetch requires --source-plan and --confirm-source-set-digest")
+    plan = load_weapon_source_plan(options.source_plan_path)
+    try:
+        validate_weapon_source_plan(
+            plan,
+            profile=profile,
+            confirm_source_set_digest=options.confirm_source_set_digest,
+        )
+    except WeaponSourceSetError as exc:
+        raise PipelineError(str(exc)) from exc
+    if plan["summary"]["sourceSetDigest"] != discovered.generated["summary"]["sourceSetDigest"]:
+        raise PipelineError("EPIC-12 source-set drift detected between discovery and fetch")
+
+    detail_titles = list(plan["detailPageTitles"])
+    if options.detail_limit is not None:
+        detail_titles = detail_titles[: options.detail_limit]
+    client = MediaWikiClient(limits=EPIC_12_LIMITS)
+    pages, page_diagnostics = client.query_title_revisions([str(title) for title in detail_titles])
+    resolved, resolution_diagnostics = weapon_resolution_records_from_pages(
+        plan=plan,
+        pages=pages,
+    )
+    child_manifest_paths = list(discovered.generated["snapshotManifestPaths"])
+    detail_pages: dict[str, list[dict[str, Any]]] = {"weaponBases": [], "weaponModifiers": []}
+    seed_source_refs_by_title: dict[str, dict[str, Any]] = {}
+    for manifest_path in child_manifest_paths:
+        try:
+            loaded = snapshot_store.load_snapshot(roots.root / manifest_path)
+        except SnapshotError as exc:
+            raise PipelineError(f"EPIC-12 seed snapshot failed validation during fetch: {exc}") from exc
+        payload = json.loads(loaded.payload.decode("utf-8"))
+        source_ref = loaded.manifest.get("sourceReference")
+        if isinstance(payload, dict) and isinstance(source_ref, dict):
+            seed_source_refs_by_title[str(payload.get("title"))] = source_ref
+    source_refs_by_title: dict[str, dict[str, Any]] = {}
+    snapshot_paths_by_title: dict[str, str] = {}
+    for output_key in ("weaponBases", "weaponModifiers"):
+        for record in resolved[output_key]:
+            canonical_title = str(record["canonicalTitle"])
+            source_ref = source_refs_by_title.get(canonical_title)
+            if source_ref is None:
+                seed_source_ref = seed_source_refs_by_title.get(canonical_title)
+                if seed_source_ref is not None:
+                    if str(seed_source_ref.get("revisionId")) != str(record["revisionId"]):
+                        raise PipelineError(f"EPIC-12 seed/detail revision drift for {canonical_title}")
+                    source_ref = seed_source_ref
+                else:
+                    source_ref = _page_source_reference(
+                        source_id=f"source:gww:epic-12-live:detail:{record['pageId']}:{record['revisionId']}",
+                        page_title=canonical_title,
+                        page_id=record["pageId"],
+                        revision_id=record["revisionId"],
+                        source_revision_timestamp=str(record["sourceRevisionTimestamp"]),
+                        retrieved_at=options.generated_at,
+                    )
+                    snapshot = _write_page_snapshot(
+                        snapshot_store=snapshot_store,
+                        source_reference=source_ref,
+                        title=canonical_title,
+                        page_id=record["pageId"],
+                        revision_id=record["revisionId"],
+                        timestamp=str(record["sourceRevisionTimestamp"]),
+                        retrieved_at=options.generated_at,
+                        content=str(record["content"]),
+                    )
+                    snapshot_paths_by_title[canonical_title] = _relative_to_root(roots.root, snapshot.manifest_path)
+                source_refs_by_title[canonical_title] = source_ref
+                if canonical_title in snapshot_paths_by_title:
+                    child_manifest_paths.append(snapshot_paths_by_title[canonical_title])
+            detail_pages[output_key].append({**record, "sourceReference": source_ref})
+
+    imageinfo_pages: list[dict[str, Any]] = []
+    icon_titles = sorted(
+        set(weapon_base_icon_titles_from_detail_pages(detail_pages["weaponBases"], profile.media_title_limit))
+        | set(weapon_mod_icon_titles_from_detail_pages(detail_pages["weaponModifiers"], profile.media_title_limit))
+    )[: profile.media_title_limit]
+    if icon_titles:
+        icon_client = MediaWikiClient(limits=EPIC_12_LIMITS)
+        imageinfo_pages, image_diagnostics = icon_client.query_imageinfo(icon_titles)
+        page_diagnostics.extend(image_diagnostics)
+        imageinfo_snapshot = _write_imageinfo_snapshot_for_epic12(
+            snapshot_store=snapshot_store,
+            pages=imageinfo_pages,
+            retrieved_at=options.generated_at,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, imageinfo_snapshot.manifest_path))
+
+    completion_state = "complete" if options.detail_limit is None else "partial"
+    snapshot_set_manifest_path = write_weapon_snapshot_set_manifest(
+        root=roots.root,
+        profile=profile,
+        source_plan=plan,
+        child_manifest_paths=child_manifest_paths,
+        snapshot_store=snapshot_store,
+        completion_state=completion_state,
+        generated_at=options.generated_at,
+        notes="EPIC-12 live snapshot set; partial sets cannot promote." if completion_state != "complete" else "Complete EPIC-12 live snapshot set selected for replay.",
+        detail_records=detail_pages,
+    )
+    if completion_state != "complete":
+        raise PipelineError("EPIC-12 live fetch produced a partial snapshot set")
+
+    return _write_epic12_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        source_plan=plan,
+        detail_pages=detail_pages,
+        imageinfo_pages=imageinfo_pages,
+        snapshot_set_manifest_path=snapshot_set_manifest_path,
+        snapshot_manifest_paths=child_manifest_paths,
+        source_plan_path=options.source_plan_path,
+        diagnostics=[*page_diagnostics, *resolution_diagnostics],
+    )
+
+
+def _run_epic12_offline(options: PipelineOptions) -> PipelineResult:
+    if options.snapshot_set_path is None:
+        raise PipelineError("EPIC-12 offline replay requires --snapshot-set")
+    profile = profile_by_id(EPIC_12_PROFILE_ID)
+    roots = RuntimeRoots.from_root(options.output_root)
+    try:
+        replay = load_weapon_snapshot_set(
+            snapshot_set_manifest_path=options.snapshot_set_path,
+            snapshot_root=roots.snapshot_root,
+            profile=profile,
+        )
+    except WeaponSourceSetError as exc:
+        raise PipelineError(str(exc)) from exc
+    source_plan = replay.manifest["sourcePlan"]
+    detail_meta = replay.manifest["detailRecords"]
+    loaded_by_title: dict[str, tuple[dict[str, Any], dict[str, Any]]] = {}
+    imageinfo_pages: list[dict[str, Any]] = []
+    for loaded in replay.loaded_snapshots:
+        payload = json.loads(loaded.payload.decode("utf-8"))
+        if not isinstance(payload, dict):
+            continue
+        title = str(payload.get("title"))
+        source_ref = loaded.manifest.get("sourceReference")
+        if title == WEAPON_ICON_IMAGEINFO_TITLE and isinstance(payload.get("content"), str):
+            icon_payload = json.loads(str(payload["content"]))
+            pages = icon_payload.get("pages") if isinstance(icon_payload, dict) else None
+            if isinstance(pages, list):
+                imageinfo_pages = [page for page in pages if isinstance(page, dict)]
+            continue
+        if isinstance(source_ref, dict):
+            loaded_by_title[title] = (payload, source_ref)
+
+    detail_pages: dict[str, list[dict[str, Any]]] = {"weaponBases": [], "weaponModifiers": []}
+    for input_key, output_key in (("weaponBases", "weaponBases"), ("weaponModifiers", "weaponModifiers")):
+        for meta in detail_meta[input_key]:
+            loaded = loaded_by_title.get(str(meta["canonicalTitle"]))
+            if loaded is None:
+                raise PipelineError(f"EPIC-12 snapshot set missing detail payload for {meta['canonicalTitle']}")
+            payload, source_ref = loaded
+            seed = _seed_for_detail_record(source_plan, str(meta["sourceKey"]), output_key)
+            detail_pages[output_key].append({**seed, **meta, "content": payload.get("content", ""), "sourceReference": source_ref})
+
+    return _write_epic12_catalog_result(
+        roots=roots,
+        profile=profile,
+        generated_at=options.generated_at,
+        source_plan=source_plan,
+        detail_pages=detail_pages,
+        imageinfo_pages=imageinfo_pages,
+        snapshot_set_manifest_path=options.snapshot_set_path,
+        snapshot_manifest_paths=[str(child["manifestPath"]) for child in replay.manifest["childSnapshots"]],
+        source_plan_path=None,
+        diagnostics=[],
+    )
+
+
+def _discover_epic12_source_set(
+    *,
+    roots: RuntimeRoots,
+    profile: Any,
+    generated_at: str,
+    snapshot_store: SnapshotStore,
+) -> PipelineResult:
+    dependency = _load_epic03_dependency_for_epic11(roots.root)
+    client = MediaWikiClient(limits=EPIC_12_LIMITS)
+    source_pages, source_diagnostics = client.query_title_revisions(list(profile.source_titles))
+    if len(source_pages) != len(profile.source_titles):
+        raise PipelineError("EPIC-12 source authority pages could not all be fetched")
+
+    source_snapshots: list[dict[str, Any]] = []
+    child_manifest_paths: list[str] = []
+    for page in source_pages:
+        revision = _first_revision(page)
+        title = str(page.get("_buildWarsRequestedTitle") or page.get("title"))
+        content = _revision_content(revision)
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-12-live:seed:{_safe_source_part(title)}:{revision.get('revid')}",
+            page_title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision.get("revid"),
+            source_revision_timestamp=revision.get("timestamp"),
+            retrieved_at=generated_at,
+        )
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision.get("revid"),
+            timestamp=revision.get("timestamp"),
+            retrieved_at=generated_at,
+            content=content,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        source_snapshots.append({"title": title, "content": content, "sourceReference": source_ref})
+
+    plan_result = build_weapon_source_plan(
+        profile=profile,
+        generated_at=generated_at,
+        source_snapshots=source_snapshots,
+        dependency=dependency,
+    )
+    plan_path = write_weapon_source_plan(roots.root, plan_result.plan)
+    diagnostics = [*source_diagnostics, *plan_result.diagnostics]
+    report = build_report(
+        artifact_path=_relative_to_root(roots.root, plan_path),
+        artifact_manifest_path=None,
+        generated_at=generated_at,
+        source_ids=[snapshot["sourceReference"]["id"] for snapshot in source_snapshots],
+        diagnostics=diagnostics,
+        notes="EPIC-12 discover-only source-plan QA report.",
+    )
+    qa_relative = Path("epic-12/weapons-mods.source-plan.qa.json")
+    qa_path, summary_path = write_report(root=roots.qa_root, relative_path=qa_relative, report=report)
+    return PipelineResult(
+        artifact_path=plan_path,
+        manifest_path=plan_path,
+        qa_report_path=qa_path,
+        qa_summary_path=summary_path,
+        record_count=int(plan_result.plan["summary"]["acceptedWeaponBaseCount"]) + int(plan_result.plan["summary"]["acceptedWeaponModifierCount"]),
+        finding_count=int(report["summary"]["findingCount"]),
+        exit_code=exit_code_for_report(report),
+        generated={**plan_result.plan, "snapshotManifestPaths": child_manifest_paths},
+        qa_report=report,
+    )
+
+
+def _write_epic12_catalog_result(
+    *,
+    roots: RuntimeRoots,
+    profile: Any,
+    generated_at: str,
+    source_plan: dict[str, Any],
+    detail_pages: dict[str, list[dict[str, Any]]],
+    imageinfo_pages: list[dict[str, Any]],
+    snapshot_set_manifest_path: Path,
+    snapshot_manifest_paths: list[str],
+    source_plan_path: Path | None,
+    diagnostics: list[Diagnostic],
+) -> PipelineResult:
+    dependency = _load_epic03_dependency_for_epic11(roots.root)
+    snapshot_set_digest = digest_bytes(snapshot_set_manifest_path.read_bytes())
+    assembled = assemble_weapon_catalogs(
+        profile=profile,
+        generated_at=generated_at,
+        source_plan=source_plan,
+        base_detail_pages=detail_pages["weaponBases"],
+        modifier_detail_pages=detail_pages["weaponModifiers"],
+        imageinfo_pages=imageinfo_pages,
+        dependency=dependency,
+        snapshot_set_digest=snapshot_set_digest,
+    )
+    all_diagnostics = [*diagnostics, *assembled.diagnostics]
+    weapon_catalog_bytes = canonical_json_bytes(assembled.weapons_catalog)
+    weapon_mod_catalog_bytes = canonical_json_bytes(assembled.weapon_mods_catalog)
+    weapon_artifact_digest = digest_bytes(weapon_catalog_bytes)
+    weapon_mod_artifact_digest = digest_bytes(weapon_mod_catalog_bytes)
+    snapshot_set_manifest = json.loads(snapshot_set_manifest_path.read_text(encoding="utf-8"))
+    manifest_source_plan_path = source_plan_path or weapon_source_plan_output_path(
+        roots.root,
+        str(source_plan["summary"]["sourcePlanDigest"]),
+    )
+    if profile.catalog_byte_cap and len(weapon_catalog_bytes) > profile.catalog_byte_cap:
+        all_diagnostics.append(
+            Diagnostic(
+                code="WEAPON_CATALOG_BYTE_CAP_EXCEEDED",
+                severity="critical",
+                message=f"Weapon catalog size {len(weapon_catalog_bytes)} exceeded cap {profile.catalog_byte_cap}",
+                category="artifact-integrity-mismatch",
+                scope_kind="artifact",
+                artifact_path=(Path("data/generated") / profile.generated_relative_path).as_posix(),
+                disposition="non-waivable",
+            )
+        )
+    if profile.catalog_byte_cap and len(weapon_mod_catalog_bytes) > profile.catalog_byte_cap:
+        all_diagnostics.append(
+            Diagnostic(
+                code="WEAPON_MOD_CATALOG_BYTE_CAP_EXCEEDED",
+                severity="critical",
+                message=f"Weapon modifier catalog size {len(weapon_mod_catalog_bytes)} exceeded cap {profile.catalog_byte_cap}",
+                category="artifact-integrity-mismatch",
+                scope_kind="artifact",
+                artifact_path=(Path("data/generated") / EPIC_12_WEAPON_MODS_RELATIVE_PATH).as_posix(),
+                disposition="non-waivable",
+            )
+        )
+    source_ids = sorted(
+        {
+            str(child["sourceId"])
+            for child in snapshot_set_manifest.get("childSnapshots", [])
+            if isinstance(child, dict) and child.get("sourceId") is not None
+        }
+    )
+    unique_snapshot_manifest_paths = sorted(set(snapshot_manifest_paths))
+    reviews = weapon_manual_reviews(
+        generated_at=generated_at,
+        source_plan=source_plan,
+        snapshot_set_digest=snapshot_set_digest,
+        weapon_artifact_digest=weapon_artifact_digest,
+        weapon_mod_artifact_digest=weapon_mod_artifact_digest,
+    )
+    common_extra = {
+        "sourcePlanPath": _relative_to_root(roots.root, manifest_source_plan_path),
+        "sourcePlanDigest": source_plan["summary"]["sourcePlanDigest"],
+        "sourceSetDigest": source_plan["summary"]["sourceSetDigest"],
+        "selectedSnapshotSetManifestPath": _relative_to_root(roots.root, snapshot_set_manifest_path),
+        "selectedSnapshotSetDigest": snapshot_set_digest,
+        "releaseSet": assembled.weapons_catalog["releaseSet"],
+        "dependencyDigests": assembled.weapons_catalog["dependencyDigests"],
+        "manualReviews": reviews,
+        "retentionDecision": {
+            "selectedEvidence": "local-ignored-snapshot-set",
+            "longTermReproduction": "Requires the retained ignored snapshot set or a fresh bounded live acquisition and review.",
+        },
+    }
+    weapon_artifact_path, weapon_manifest_path, weapon_manifest = write_generated_artifact(
+        root=roots.generated_root,
+        relative_path=profile.generated_relative_path,
+        value=assembled.weapons_catalog,
+        generated_at=generated_at,
+        input_snapshot_manifest_paths=unique_snapshot_manifest_paths,
+        source_ids=source_ids,
+        record_count=len(assembled.weapons_catalog["weaponBases"]),
+        qa_report_path=(Path("data/qa") / profile.qa_relative_path).as_posix(),
+        commit_decision="exact-path-allowlisted",
+        notes="Runtime-eligible EPIC-12 weapon base catalog; source plans, snapshot-set manifests, raw snapshots, QA summaries, review evidence, and media bytes remain ignored.",
+        extra_fields={**common_extra, "counterpartArtifactPath": (Path("data/generated") / EPIC_12_WEAPON_MODS_RELATIVE_PATH).as_posix()},
+    )
+    weapon_mod_artifact_path, weapon_mod_manifest_path, weapon_mod_manifest = write_generated_artifact(
+        root=roots.generated_root,
+        relative_path=EPIC_12_WEAPON_MODS_RELATIVE_PATH,
+        value=assembled.weapon_mods_catalog,
+        generated_at=generated_at,
+        input_snapshot_manifest_paths=unique_snapshot_manifest_paths,
+        source_ids=source_ids,
+        record_count=len(assembled.weapon_mods_catalog["weaponMods"]),
+        qa_report_path=(Path("data/qa") / EPIC_12_WEAPON_MODS_QA_RELATIVE_PATH).as_posix(),
+        commit_decision="exact-path-allowlisted",
+        notes="Runtime-eligible EPIC-12 weapon modifier catalog; source plans, snapshot-set manifests, raw snapshots, QA summaries, review evidence, and media bytes remain ignored.",
+        extra_fields={**common_extra, "counterpartArtifactPath": (Path("data/generated") / profile.generated_relative_path).as_posix()},
+    )
+    weapon_report = build_report(
+        artifact_path=(Path("data/generated") / profile.generated_relative_path).as_posix(),
+        artifact_manifest_path=(Path("data/generated") / profile.generated_relative_path.with_suffix(".manifest.json")).as_posix(),
+        generated_at=generated_at,
+        source_ids=source_ids,
+        diagnostics=all_diagnostics,
+        notes="EPIC-12 weapon base catalog QA report covering source accounting, IDs, crosswalks, joins, damage, requirements, compatibility, copied text, media metadata, caps, counterpart digests, and artifact integrity.",
+    )
+    weapon_mod_report = build_report(
+        artifact_path=(Path("data/generated") / EPIC_12_WEAPON_MODS_RELATIVE_PATH).as_posix(),
+        artifact_manifest_path=(Path("data/generated") / EPIC_12_WEAPON_MODS_RELATIVE_PATH.with_suffix(".manifest.json")).as_posix(),
+        generated_at=generated_at,
+        source_ids=source_ids,
+        diagnostics=all_diagnostics,
+        notes="EPIC-12 weapon modifier catalog QA report covering source accounting, IDs, crosswalks, applicability, effects, compatibility, copied text, media metadata, caps, counterpart digests, and artifact integrity.",
+    )
+    qa_byte_count = len(canonical_json_bytes(weapon_report)) + len(canonical_json_bytes(weapon_mod_report))
+    if profile.qa_byte_cap and qa_byte_count > profile.qa_byte_cap * 2:
+        all_diagnostics.append(
+            Diagnostic(
+                code="WEAPON_QA_BYTE_CAP_EXCEEDED",
+                severity="critical",
+                message=f"Combined EPIC-12 QA report size {qa_byte_count} exceeded cap {profile.qa_byte_cap * 2}",
+                category="artifact-integrity-mismatch",
+                scope_kind="artifact",
+                artifact_path="data/qa/epic-12",
+                disposition="non-waivable",
+            )
+        )
+        weapon_report = build_report(
+            artifact_path=(Path("data/generated") / profile.generated_relative_path).as_posix(),
+            artifact_manifest_path=(Path("data/generated") / profile.generated_relative_path.with_suffix(".manifest.json")).as_posix(),
+            generated_at=generated_at,
+            source_ids=source_ids,
+            diagnostics=all_diagnostics,
+            notes="EPIC-12 weapon base catalog QA report covering source accounting, IDs, crosswalks, joins, damage, requirements, compatibility, copied text, media metadata, caps, counterpart digests, and artifact integrity.",
+        )
+        weapon_mod_report = build_report(
+            artifact_path=(Path("data/generated") / EPIC_12_WEAPON_MODS_RELATIVE_PATH).as_posix(),
+            artifact_manifest_path=(Path("data/generated") / EPIC_12_WEAPON_MODS_RELATIVE_PATH.with_suffix(".manifest.json")).as_posix(),
+            generated_at=generated_at,
+            source_ids=source_ids,
+            diagnostics=all_diagnostics,
+            notes="EPIC-12 weapon modifier catalog QA report covering source accounting, IDs, crosswalks, applicability, effects, compatibility, copied text, media metadata, caps, counterpart digests, and artifact integrity.",
+        )
+    weapon_qa_path, weapon_summary_path = write_report(root=roots.qa_root, relative_path=profile.qa_relative_path, report=weapon_report)
+    write_report(root=roots.qa_root, relative_path=EPIC_12_WEAPON_MODS_QA_RELATIVE_PATH, report=weapon_mod_report)
+    exit_code = max(exit_code_for_report(weapon_report), exit_code_for_report(weapon_mod_report))
+    return PipelineResult(
+        artifact_path=weapon_artifact_path,
+        manifest_path=weapon_manifest_path,
+        qa_report_path=weapon_qa_path,
+        qa_summary_path=weapon_summary_path,
+        record_count=int(weapon_manifest["recordCount"]) + int(weapon_mod_manifest["recordCount"]),
+        finding_count=int(weapon_report["summary"]["findingCount"]) + int(weapon_mod_report["summary"]["findingCount"]),
+        exit_code=exit_code,
+        generated={
+            "weapons": assembled.weapons_catalog,
+            "weaponMods": assembled.weapon_mods_catalog,
+            "artifacts": {
+                "weapons": weapon_artifact_path.as_posix(),
+                "weaponMods": weapon_mod_artifact_path.as_posix(),
+                "weaponManifest": weapon_manifest_path.as_posix(),
+                "weaponModManifest": weapon_mod_manifest_path.as_posix(),
+            },
+        },
+        qa_report=weapon_report,
+    )
+
+
 def _discover_epic10_source_set(
     *,
     roots: RuntimeRoots,
@@ -2361,6 +2969,40 @@ def _load_epic11_fixture_pages(fixture_root: Path) -> dict[str, Any]:
         raise PipelineError(f"EPIC-11 fixture imageinfo JSON could not be parsed: {exc}") from exc
 
 
+def _load_epic12_fixture_pages(fixture_root: Path) -> dict[str, Any]:
+    base = fixture_root / "weapons-and-mods"
+    try:
+        sources = {
+            "Equipment template format": (base / "equipment-template-format.wiki").read_text(encoding="utf-8"),
+            "Weapon": (base / "weapon.wiki").read_text(encoding="utf-8"),
+            "Weapon upgrade": (base / "weapon-upgrade.wiki").read_text(encoding="utf-8"),
+            "Inscription": (base / "inscription.wiki").read_text(encoding="utf-8"),
+        }
+        details = {
+            "Axe": (base / "axe.wiki").read_text(encoding="utf-8"),
+            "Sword": (base / "sword.wiki").read_text(encoding="utf-8"),
+            "Hammer": (base / "hammer.wiki").read_text(encoding="utf-8"),
+            "Longbow": (base / "longbow.wiki").read_text(encoding="utf-8"),
+            "Daggers": (base / "daggers.wiki").read_text(encoding="utf-8"),
+            "Scythe": (base / "scythe.wiki").read_text(encoding="utf-8"),
+            "Spear": (base / "spear.wiki").read_text(encoding="utf-8"),
+            "Wand": (base / "wand.wiki").read_text(encoding="utf-8"),
+            "Staff": (base / "staff.wiki").read_text(encoding="utf-8"),
+            "Focus item": (base / "focus-item.wiki").read_text(encoding="utf-8"),
+            "Shield": (base / "shield.wiki").read_text(encoding="utf-8"),
+            "Upgrade component": (base / "upgrade-component.wiki").read_text(encoding="utf-8"),
+            "Inscription": (base / "inscription-detail.wiki").read_text(encoding="utf-8"),
+            "Staff Head": (base / "staff-head.wiki").read_text(encoding="utf-8"),
+            "Staff Wrapping": (base / "staff-wrapping.wiki").read_text(encoding="utf-8"),
+        }
+        imageinfo = json.loads((base / "imageinfo.json").read_text(encoding="utf-8"))
+        return {"sources": sources, "details": details, "imageinfo": imageinfo}
+    except OSError as exc:
+        raise PipelineError(f"EPIC-12 fixture input could not be read: {exc}") from exc
+    except json.JSONDecodeError as exc:
+        raise PipelineError(f"EPIC-12 fixture imageinfo JSON could not be parsed: {exc}") from exc
+
+
 def _epic10_fixture_canonical_title(seed: dict[str, Any]) -> str:
     family_kind = str(seed["familyKind"])
     rank = seed.get("familyRank")
@@ -2383,6 +3025,21 @@ def _epic11_fixture_detail_content(fixtures: dict[str, Any], canonical_title: st
         return str(fixtures["details"][canonical_title])
     except KeyError as exc:
         raise PipelineError(f"EPIC-11 fixture detail page missing for {canonical_title}") from exc
+
+
+def _epic12_fixture_detail_content(fixtures: dict[str, Any], canonical_title: str) -> str:
+    try:
+        return str(fixtures["details"][canonical_title])
+    except KeyError as exc:
+        raise PipelineError(f"EPIC-12 fixture detail page missing for {canonical_title}") from exc
+
+
+def _seed_for_detail_record(source_plan: dict[str, Any], source_key: str, output_key: str) -> dict[str, Any]:
+    collection_key = "acceptedWeaponBases" if output_key == "weaponBases" else "acceptedWeaponModifiers"
+    for seed in source_plan[collection_key]:
+        if str(seed["sourceKey"]) == source_key:
+            return seed
+    raise PipelineError(f"EPIC-12 snapshot set detail record did not match source plan: {source_key}")
 
 
 def _load_epic03_fixture_pages(fixture_root: Path) -> dict[str, str]:
@@ -2533,6 +3190,35 @@ def _write_imageinfo_snapshot_for_epic11(
         snapshot_store=snapshot_store,
         source_reference=source_ref,
         title=EPIC_11_INSIGNIA_ICON_IMAGEINFO_TITLE,
+        page_id=f"imageinfo:{payload_digest[:12]}",
+        revision_id=payload_digest,
+        timestamp=_latest_imageinfo_timestamp(pages) or retrieved_at,
+        retrieved_at=retrieved_at,
+        content=json.dumps(payload, ensure_ascii=False, sort_keys=True),
+    )
+
+
+def _write_imageinfo_snapshot_for_epic12(
+    *,
+    snapshot_store: SnapshotStore,
+    pages: list[dict[str, Any]],
+    retrieved_at: str,
+) -> SnapshotWriteResult:
+    payload = {"kind": "mediawiki-imageinfo", "title": WEAPON_ICON_IMAGEINFO_TITLE, "pages": pages}
+    payload_digest = digest_bytes(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8"))
+    source_ref = _page_source_reference(
+        source_id=f"source:gww:epic-12-weapon-icons:{payload_digest[:12]}",
+        page_title=WEAPON_ICON_IMAGEINFO_TITLE,
+        page_id=f"imageinfo:{payload_digest[:12]}",
+        revision_id=payload_digest,
+        source_revision_timestamp=_latest_imageinfo_timestamp(pages) or retrieved_at,
+        retrieved_at=retrieved_at,
+        material_class="media-metadata",
+    )
+    return _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=source_ref,
+        title=WEAPON_ICON_IMAGEINFO_TITLE,
         page_id=f"imageinfo:{payload_digest[:12]}",
         revision_id=payload_digest,
         timestamp=_latest_imageinfo_timestamp(pages) or retrieved_at,

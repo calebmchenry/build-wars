@@ -1,0 +1,14 @@
+== Build Wars fixture weapon authority ==
+This synthetic page lists representative weapon-family facts for EPIC-12 tests without copied wiki prose.
+
+* [[Axe]]
+* [[Sword]]
+* [[Hammer]]
+* [[Longbow]]
+* [[Daggers]]
+* [[Scythe]]
+* [[Spear]]
+* [[Wand]]
+* [[Staff]]
+* [[Focus item]]
+* [[Shield]]

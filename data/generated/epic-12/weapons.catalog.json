@@ -1,0 +1,2055 @@
+{
+  "catalogSetDigest": "60ed5c4dc82576648eb5af453295109db5caf3a725fa5b2dd02e3ae03e8f30ad",
+  "catalogSetVersion": "weapon-mods-set-60ed5c4dc8257664",
+  "catalogVersion": "weapons-3f7389e0935e67dd",
+  "dependencyDigests": [
+    {
+      "artifactDigest": "7a397140d346dbfd1e28e1076132fa209628678682fa2c21322ac91f1807f9fa",
+      "catalogVersion": "pa-e5d0d35ad8f30b4c",
+      "id": "epic-03-professions-attributes",
+      "manifestDigest": "e449ea6b13a165108858be039ca6feabaf45dd592cf5e54cd9fee7c125c75289",
+      "qaGate": "pass",
+      "sectionDigests": [
+        {
+          "digest": "06b08691f79e1a77feff629f758a876dd5fae0e37db27ce45dac2215cdefdfc8",
+          "section": "templateCrosswalk"
+        },
+        {
+          "digest": "88e3453893080531b42941c6e311c784fa06e8417ebb1b1b75f6b9c448b16cde",
+          "section": "professions"
+        },
+        {
+          "digest": "74823681580f46a48394defdcf92a622cdddccae67003043497df65242999a74",
+          "section": "attributes"
+        },
+        {
+          "digest": "87d6fd2069ad7f824132c7e43068348c5edcb2de36e8ace8c7a8582ff1972253",
+          "section": "attributePointRules"
+        },
+        {
+          "digest": "36e5b6f3fae709ba68b27d5a735bb5ccd0d605638fd8ae584d080033f72b3ea2",
+          "section": "remoteMedia"
+        }
+      ]
+    }
+  ],
+  "dispositions": [
+    {
+      "id": "weapon-disposition:999001",
+      "kind": "ambiguous",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:999001"
+        ],
+        "notes": "Ambiguous raw item IDs remain visible without allocating new public WeaponId records.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058"
+        ]
+      },
+      "reason": "Ambiguous raw item IDs remain visible without allocating new public WeaponId records.",
+      "requestedTitle": "Ambiguous weapon skin placeholder",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": 999001,
+      "templateModifierId": null,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:290",
+      "kind": "explicit-exclusion",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:290"
+        ],
+        "notes": "Template modifier ID 290 belongs to EPIC-11 armor insignia ownership and remains outside EPIC-12 weapon modifiers.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058"
+        ]
+      },
+      "reason": "Template modifier ID 290 belongs to EPIC-11 armor insignia ownership and remains outside EPIC-12 weapon modifiers.",
+      "requestedTitle": "Armor-owned insignia modifier",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": null,
+      "templateModifierId": 290,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:158",
+      "kind": "historical",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:158"
+        ],
+        "notes": "Historical or retired raw modifier IDs are retained as dispositions until a reviewed source reactivates them.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058"
+        ]
+      },
+      "reason": "Historical or retired raw modifier IDs are retained as dispositions until a reviewed source reactivates them.",
+      "requestedTitle": "Historical weapon modifier placeholder",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": null,
+      "templateModifierId": 158,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:inscription",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:inscription"
+        ],
+        "notes": "Inscription page is source authority for inscription slot behavior and not a standalone record.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:seed:inscription:2735699"
+        ]
+      },
+      "reason": "Inscription page is source authority for inscription slot behavior and not a standalone record.",
+      "requestedTitle": "Inscription",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": null,
+      "templateModifierId": null,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:weapon",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:weapon"
+        ],
+        "notes": "Weapon overview is source authority for family/equip-role vocabulary and not a runtime record.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "reason": "Weapon overview is source authority for family/equip-role vocabulary and not a runtime record.",
+      "requestedTitle": "Weapon",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": null,
+      "templateModifierId": null,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:weapon-upgrade",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:weapon-upgrade"
+        ],
+        "notes": "Upgrade component page is source authority for modifier slot families and not a standalone record.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:seed:weapon-upgrade:2739359"
+        ]
+      },
+      "reason": "Upgrade component page is source authority for modifier slot families and not a standalone record.",
+      "requestedTitle": "Weapon upgrade",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": null,
+      "templateModifierId": null,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:empty-equipment-template-item",
+      "kind": "unsupported",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:empty-equipment-template-item"
+        ],
+        "notes": "Template item ID 0 is preserved as raw empty/unsupported equipment input, not a weapon base.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058"
+        ]
+      },
+      "reason": "Template item ID 0 is preserved as raw empty/unsupported equipment input, not a weapon base.",
+      "requestedTitle": "Empty equipment-template item",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": 0,
+      "templateModifierId": null,
+      "weaponId": null,
+      "weaponModifierId": null
+    }
+  ],
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "identityRegistry": {
+    "digest": "d7e54a43f621bce8722499e28cc54ed02a85d4bdd645a06821e59ba00bf6cd40",
+    "namespace": "weapon-base",
+    "policy": "Public WeaponId values are schema-owned registry allocations keyed by reviewed sourceKey and variantKey. IDs are never allocated from source order, template item IDs, or display names, and tombstoned IDs are not reused.",
+    "recordCount": 11,
+    "registryVersion": 1,
+    "tombstoneCount": 0
+  },
+  "profile": {
+    "id": "epic-12-weapons-and-mods",
+    "sourceCaps": {
+      "aggregateByteCap": 25000000,
+      "continuationLimit": 10,
+      "detailPageLimit": 220,
+      "mediaTitleLimit": 220,
+      "parserByteCap": 750000,
+      "qaByteCap": 2000000,
+      "requestLimit": 120,
+      "responseByteCap": 5000000,
+      "retryLimit": 3,
+      "seedPageLimit": 4,
+      "weaponCatalogByteCap": 4000000,
+      "weaponModCatalogByteCap": 4000000
+    },
+    "sourceEpic": "EPIC-12",
+    "sourceTarget": "BACKLOG"
+  },
+  "releaseSet": {
+    "catalogSetDigest": "60ed5c4dc82576648eb5af453295109db5caf3a725fa5b2dd02e3ae03e8f30ad",
+    "catalogSetVersion": "weapon-mods-set-60ed5c4dc8257664",
+    "profile": "epic-12-weapons-and-mods",
+    "qaGate": "pass",
+    "selectedEvidenceDigest": "4d8f6333dca3fff5f4b95d3634faed34fc4e39a634e2aa9f5b4ead45312c8495",
+    "sourceAuthorityVersion": "epic-12-source-authority-v1",
+    "sourcePlanDigest": "4412e6dfb5893f5f77dc760add44c7edbbd808aa1da075159e51daf1bcc09291",
+    "sourceSetDigest": "bb7d16a292c8705d9a76b196f9128e98c1a42032c8407e0ee43f29cf91cb5142",
+    "weaponCatalogDigest": "c0746ccb020fe4d19ce24ffff662fe1cc74a9fff833f44f65d56b594806ff435",
+    "weaponCatalogVersion": "weapons-3f7389e0935e67dd",
+    "weaponModCatalogDigest": "c51af84bb8d0fd55cfc34cb5389f4c16834b1a4621268db6b1ebd65012dd64b5",
+    "weaponModCatalogVersion": "weapon-mods-6beb6758addc464a"
+  },
+  "remoteMedia": [],
+  "schemaVersion": 1,
+  "sectionDigests": [
+    {
+      "digest": "906e4063abf7d06a9c98839462fd2e1a852e169389a8a4a58eabf9765655ea4e",
+      "section": "dependencyDigests"
+    },
+    {
+      "digest": "acf070c176d268d97676135abe0207856b632a8c5d338b859616cadbda7995cd",
+      "section": "sourceSet"
+    },
+    {
+      "digest": "a93eabef31ddc168f7bdaaad88fa37b4a84a0bce7bd4f9dacb894229114e4dd8",
+      "section": "releaseSet"
+    },
+    {
+      "digest": "2cc64cca37c474a4e82e84d41e27eff3349583b8ed619e14651d4bb92e58d8c8",
+      "section": "identityRegistry"
+    },
+    {
+      "digest": "468a0b8bf754b4e9736cce465c6d64009febbec2f253900b741150d60f6159ff",
+      "section": "dispositions"
+    },
+    {
+      "digest": "9c9eddac3f7bc2e6fc473ac13df5a0c2eafe70bc8f8a8fabd6b8e654f22d79e9",
+      "section": "weaponBases"
+    },
+    {
+      "digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "section": "remoteMedia"
+    }
+  ],
+  "sourceSet": {
+    "acceptedWeaponBaseCount": 11,
+    "acceptedWeaponModifierCount": 9,
+    "ambiguousCount": 1,
+    "baseIdentityRegistryDigest": "d7e54a43f621bce8722499e28cc54ed02a85d4bdd645a06821e59ba00bf6cd40",
+    "blockingFindingCount": 0,
+    "detailPageTitles": [
+      "Axe",
+      "Daggers",
+      "Focus item",
+      "Hammer",
+      "Inscription",
+      "Longbow",
+      "Scythe",
+      "Shield",
+      "Spear",
+      "Staff",
+      "Staff Head",
+      "Staff Wrapping",
+      "Sword",
+      "Upgrade component",
+      "Wand"
+    ],
+    "exclusionCount": 1,
+    "historicalCount": 1,
+    "idPolicy": "Public WeaponId and WeaponModifierId values are schema-owned registry allocations keyed by reviewed sourceKey and variantKey. Raw template item/modifier IDs are crosswalk facts only.",
+    "modIdentityRegistryDigest": "c0455d02a0152bf14d48de8578c5cf988e368f281ee9fbe7b9a5353c5986650d",
+    "planningAmendment": null,
+    "relationshipCount": 3,
+    "seedTitles": [
+      "Equipment template format",
+      "Weapon",
+      "Weapon upgrade",
+      "Inscription"
+    ],
+    "selectedEvidence": "complete-selected-snapshot-set",
+    "selectedEvidenceDigest": "4d8f6333dca3fff5f4b95d3634faed34fc4e39a634e2aa9f5b4ead45312c8495",
+    "sourceAuthority": "Equipment template format supplies raw item/modifier ID row evidence; Weapon and reviewed weapon-family pages supply family, handedness, damage, requirement, mode, and slot facts; Weapon upgrade, Inscription, Staff Head, and Staff Wrapping pages supply modifier slot, applicability, and mechanics facts; EPIC-03 supplies profession/attribute joins.",
+    "sourceAuthorityVersion": "epic-12-source-authority-v1",
+    "sourcePlanDigest": "4412e6dfb5893f5f77dc760add44c7edbbd808aa1da075159e51daf1bcc09291",
+    "sourceSetDigest": "bb7d16a292c8705d9a76b196f9128e98c1a42032c8407e0ee43f29cf91cb5142",
+    "unsupportedCount": 1
+  },
+  "weaponBases": [
+    {
+      "allowedModifierSlots": [
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-prefix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:axe:slot:prefix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:129:2712293",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "prefix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-suffix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:axe:slot:suffix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:129:2712293",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "suffix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "inscription"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:axe:slot:inscription"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:129:2712293",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "inscription"
+        }
+      ],
+      "damage": {
+        "damageType": "slashing",
+        "kind": "fixed-range",
+        "maximum": 28,
+        "minimum": 6,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:1:damage"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:129:2712293"
+          ]
+        }
+      },
+      "displayState": "structured-only",
+      "equipRole": "main-hand",
+      "family": "Axe",
+      "familyKey": "axe",
+      "handedness": "one-handed",
+      "iconId": null,
+      "id": 1,
+      "modeAvailability": "both",
+      "name": "Axe",
+      "normalizedName": "axe",
+      "pageIdentity": {
+        "canonicalTitle": "Axe",
+        "normalizedTitle": "Axe",
+        "pageId": 129,
+        "redirectedFrom": null,
+        "requestedTitle": "Axe",
+        "revisionId": 2712293,
+        "sourceRevisionTimestamp": "2025-09-15T20:13:14Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-base:weapon-base:axe:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:detail:129:2712293",
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "requirement": {
+        "attributeId": 18,
+        "attributeName": "Axe Mastery",
+        "kind": "attribute-rank",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:1:requirement"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:129:2712293"
+          ]
+        },
+        "rank": 12
+      },
+      "sourceKey": "weapon-base:axe",
+      "templateItems": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:axe:template-item:201"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:129:2712293",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "sourceScope": "pvp-template-base",
+          "status": "active",
+          "templateItemId": 201
+        }
+      ],
+      "variant": null,
+      "variantKey": "axe",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Axe"
+    },
+    {
+      "allowedModifierSlots": [
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-prefix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:sword:slot:prefix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:128:2712294",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "prefix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-suffix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:sword:slot:suffix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:128:2712294",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "suffix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "inscription"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:sword:slot:inscription"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:128:2712294",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "inscription"
+        }
+      ],
+      "damage": {
+        "damageType": "slashing",
+        "kind": "fixed-range",
+        "maximum": 22,
+        "minimum": 15,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:2:damage"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:128:2712294"
+          ]
+        }
+      },
+      "displayState": "structured-only",
+      "equipRole": "main-hand",
+      "family": "Sword",
+      "familyKey": "sword",
+      "handedness": "one-handed",
+      "iconId": null,
+      "id": 2,
+      "modeAvailability": "both",
+      "name": "Sword",
+      "normalizedName": "sword",
+      "pageIdentity": {
+        "canonicalTitle": "Sword",
+        "normalizedTitle": "Sword",
+        "pageId": 128,
+        "redirectedFrom": null,
+        "requestedTitle": "Sword",
+        "revisionId": 2712294,
+        "sourceRevisionTimestamp": "2025-09-15T20:13:25Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-base:weapon-base:sword:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:detail:128:2712294",
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "requirement": {
+        "attributeId": 20,
+        "attributeName": "Swordsmanship",
+        "kind": "attribute-rank",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:2:requirement"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:128:2712294"
+          ]
+        },
+        "rank": 12
+      },
+      "sourceKey": "weapon-base:sword",
+      "templateItems": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:sword:template-item:279"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:128:2712294",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "sourceScope": "pvp-template-base",
+          "status": "active",
+          "templateItemId": 279
+        }
+      ],
+      "variant": null,
+      "variantKey": "sword",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Sword"
+    },
+    {
+      "allowedModifierSlots": [
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-prefix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:hammer:slot:prefix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:132:2712296",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "prefix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-suffix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:hammer:slot:suffix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:132:2712296",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "suffix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "inscription"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:hammer:slot:inscription"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:132:2712296",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "inscription"
+        }
+      ],
+      "damage": {
+        "damageType": "blunt",
+        "kind": "fixed-range",
+        "maximum": 35,
+        "minimum": 19,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:3:damage"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:132:2712296"
+          ]
+        }
+      },
+      "displayState": "structured-only",
+      "equipRole": "two-hand",
+      "family": "Hammer",
+      "familyKey": "hammer",
+      "handedness": "two-handed",
+      "iconId": null,
+      "id": 3,
+      "modeAvailability": "both",
+      "name": "Hammer",
+      "normalizedName": "hammer",
+      "pageIdentity": {
+        "canonicalTitle": "Hammer",
+        "normalizedTitle": "Hammer",
+        "pageId": 132,
+        "redirectedFrom": null,
+        "requestedTitle": "Hammer",
+        "revisionId": 2712296,
+        "sourceRevisionTimestamp": "2025-09-15T20:13:56Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-base:weapon-base:hammer:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:detail:132:2712296",
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "requirement": {
+        "attributeId": 19,
+        "attributeName": "Hammer Mastery",
+        "kind": "attribute-rank",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:3:requirement"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:132:2712296"
+          ]
+        },
+        "rank": 12
+      },
+      "sourceKey": "weapon-base:hammer",
+      "templateItems": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:hammer:template-item:202"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:132:2712296",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "sourceScope": "pvp-template-base",
+          "status": "active",
+          "templateItemId": 202
+        }
+      ],
+      "variant": null,
+      "variantKey": "hammer",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Hammer"
+    },
+    {
+      "allowedModifierSlots": [
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-prefix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:longbow:slot:prefix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:132098:2703508",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "prefix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-suffix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:longbow:slot:suffix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:132098:2703508",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "suffix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "inscription"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:longbow:slot:inscription"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:132098:2703508",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "inscription"
+        }
+      ],
+      "damage": {
+        "damageType": "piercing",
+        "kind": "fixed-range",
+        "maximum": 28,
+        "minimum": 15,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:4:damage"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:132098:2703508"
+          ]
+        }
+      },
+      "displayState": "structured-only",
+      "equipRole": "two-hand",
+      "family": "Bow",
+      "familyKey": "longbow",
+      "handedness": "two-handed",
+      "iconId": null,
+      "id": 4,
+      "modeAvailability": "both",
+      "name": "Longbow",
+      "normalizedName": "longbow",
+      "pageIdentity": {
+        "canonicalTitle": "Longbow",
+        "normalizedTitle": "Longbow",
+        "pageId": 132098,
+        "redirectedFrom": null,
+        "requestedTitle": "Longbow",
+        "revisionId": 2703508,
+        "sourceRevisionTimestamp": "2025-03-06T15:10:19Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-base:weapon-base:longbow:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:detail:132098:2703508",
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "requirement": {
+        "attributeId": 25,
+        "attributeName": "Marksmanship",
+        "kind": "attribute-rank",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:4:requirement"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:132098:2703508"
+          ]
+        },
+        "rank": 12
+      },
+      "sourceKey": "weapon-base:longbow",
+      "templateItems": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:longbow:template-item:203"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:132098:2703508",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "sourceScope": "pvp-template-base",
+          "status": "active",
+          "templateItemId": 203
+        }
+      ],
+      "variant": "longbow",
+      "variantKey": "longbow",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Longbow"
+    },
+    {
+      "allowedModifierSlots": [
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-prefix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:daggers:slot:prefix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:134:2722689",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "prefix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-suffix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:daggers:slot:suffix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:134:2722689",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "suffix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "inscription"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:daggers:slot:inscription"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:134:2722689",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "inscription"
+        }
+      ],
+      "damage": {
+        "damageType": "piercing",
+        "kind": "fixed-range",
+        "maximum": 17,
+        "minimum": 7,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:5:damage"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:134:2722689"
+          ]
+        }
+      },
+      "displayState": "structured-only",
+      "equipRole": "main-hand",
+      "family": "Daggers",
+      "familyKey": "daggers",
+      "handedness": "one-handed",
+      "iconId": null,
+      "id": 5,
+      "modeAvailability": "both",
+      "name": "Daggers",
+      "normalizedName": "daggers",
+      "pageIdentity": {
+        "canonicalTitle": "Daggers",
+        "normalizedTitle": "Daggers",
+        "pageId": 134,
+        "redirectedFrom": null,
+        "requestedTitle": "Daggers",
+        "revisionId": 2722689,
+        "sourceRevisionTimestamp": "2026-03-08T14:31:33Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-base:weapon-base:daggers:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:detail:134:2722689",
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "requirement": {
+        "attributeId": 29,
+        "attributeName": "Dagger Mastery",
+        "kind": "attribute-rank",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:5:requirement"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:134:2722689"
+          ]
+        },
+        "rank": 12
+      },
+      "sourceKey": "weapon-base:daggers",
+      "templateItems": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:daggers:template-item:204"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:134:2722689",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "sourceScope": "pvp-template-base",
+          "status": "active",
+          "templateItemId": 204
+        }
+      ],
+      "variant": null,
+      "variantKey": "daggers",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Daggers"
+    },
+    {
+      "allowedModifierSlots": [
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-prefix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:scythe:slot:prefix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:135:2713480",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "prefix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-suffix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:scythe:slot:suffix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:135:2713480",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "suffix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "inscription"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:scythe:slot:inscription"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:135:2713480",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "inscription"
+        }
+      ],
+      "damage": {
+        "damageType": "slashing",
+        "kind": "fixed-range",
+        "maximum": 41,
+        "minimum": 9,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:6:damage"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:135:2713480"
+          ]
+        }
+      },
+      "displayState": "structured-only",
+      "equipRole": "two-hand",
+      "family": "Scythe",
+      "familyKey": "scythe",
+      "handedness": "two-handed",
+      "iconId": null,
+      "id": 6,
+      "modeAvailability": "both",
+      "name": "Scythe",
+      "normalizedName": "scythe",
+      "pageIdentity": {
+        "canonicalTitle": "Scythe",
+        "normalizedTitle": "Scythe",
+        "pageId": 135,
+        "redirectedFrom": null,
+        "requestedTitle": "Scythe",
+        "revisionId": 2713480,
+        "sourceRevisionTimestamp": "2025-11-26T14:04:34Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-base:weapon-base:scythe:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:detail:135:2713480",
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "requirement": {
+        "attributeId": 41,
+        "attributeName": "Scythe Mastery",
+        "kind": "attribute-rank",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:6:requirement"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:135:2713480"
+          ]
+        },
+        "rank": 12
+      },
+      "sourceKey": "weapon-base:scythe",
+      "templateItems": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:scythe:template-item:205"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:135:2713480",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "sourceScope": "pvp-template-base",
+          "status": "active",
+          "templateItemId": 205
+        }
+      ],
+      "variant": null,
+      "variantKey": "scythe",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Scythe"
+    },
+    {
+      "allowedModifierSlots": [
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-prefix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:spear:slot:prefix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:130:2734944",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "prefix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-suffix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:spear:slot:suffix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:130:2734944",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "suffix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "inscription"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:spear:slot:inscription"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:130:2734944",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "inscription"
+        }
+      ],
+      "damage": {
+        "damageType": "piercing",
+        "kind": "fixed-range",
+        "maximum": 27,
+        "minimum": 14,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:7:damage"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:130:2734944"
+          ]
+        }
+      },
+      "displayState": "structured-only",
+      "equipRole": "main-hand",
+      "family": "Spear",
+      "familyKey": "spear",
+      "handedness": "one-handed",
+      "iconId": null,
+      "id": 7,
+      "modeAvailability": "both",
+      "name": "Spear",
+      "normalizedName": "spear",
+      "pageIdentity": {
+        "canonicalTitle": "Spear",
+        "normalizedTitle": "Spear",
+        "pageId": 130,
+        "redirectedFrom": null,
+        "requestedTitle": "Spear",
+        "revisionId": 2734944,
+        "sourceRevisionTimestamp": "2026-07-20T02:10:26Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-base:weapon-base:spear:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:detail:130:2734944",
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "requirement": {
+        "attributeId": 37,
+        "attributeName": "Spear Mastery",
+        "kind": "attribute-rank",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:7:requirement"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:130:2734944"
+          ]
+        },
+        "rank": 12
+      },
+      "sourceKey": "weapon-base:spear",
+      "templateItems": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:spear:template-item:206"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:130:2734944",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "sourceScope": "pvp-template-base",
+          "status": "active",
+          "templateItemId": 206
+        }
+      ],
+      "variant": null,
+      "variantKey": "spear",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Spear"
+    },
+    {
+      "allowedModifierSlots": [
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-prefix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:wand:slot:prefix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:407:2720645",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "prefix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "weapon-suffix"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:wand:slot:suffix"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:407:2720645",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "suffix"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "inscription"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:wand:slot:inscription"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:407:2720645",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "inscription"
+        }
+      ],
+      "damage": {
+        "damageType": "elemental",
+        "kind": "fixed-range",
+        "maximum": 22,
+        "minimum": 11,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:8:damage"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:407:2720645"
+          ]
+        }
+      },
+      "displayState": "structured-only",
+      "equipRole": "main-hand",
+      "family": "Wand",
+      "familyKey": "wand",
+      "handedness": "one-handed",
+      "iconId": null,
+      "id": 8,
+      "modeAvailability": "both",
+      "name": "Wand",
+      "normalizedName": "wand",
+      "pageIdentity": {
+        "canonicalTitle": "Wand",
+        "normalizedTitle": "Wand",
+        "pageId": 407,
+        "redirectedFrom": null,
+        "requestedTitle": "Wand",
+        "revisionId": 2720645,
+        "sourceRevisionTimestamp": "2026-02-07T09:17:01Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-base:weapon-base:wand:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:detail:407:2720645",
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "requirement": {
+        "attributeId": 12,
+        "attributeName": "Energy Storage",
+        "kind": "attribute-rank",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:8:requirement"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:407:2720645"
+          ]
+        },
+        "rank": 12
+      },
+      "sourceKey": "weapon-base:wand",
+      "templateItems": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:wand:template-item:207"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:407:2720645",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "sourceScope": "pvp-template-base",
+          "status": "active",
+          "templateItemId": 207
+        }
+      ],
+      "variant": null,
+      "variantKey": "wand",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Wand"
+    },
+    {
+      "allowedModifierSlots": [
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "staff-head"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:staff:slot:staff-head"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:403:2717550",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "staff-head"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "staff-wrapping"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:staff:slot:staff-wrapping"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:403:2717550",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "staff-wrapping"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "inscription"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:staff:slot:inscription"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:403:2717550",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "inscription"
+        }
+      ],
+      "damage": {
+        "damageType": "elemental",
+        "kind": "fixed-range",
+        "maximum": 22,
+        "minimum": 11,
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:9:damage"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:403:2717550"
+          ]
+        }
+      },
+      "displayState": "structured-only",
+      "equipRole": "two-hand",
+      "family": "Staff",
+      "familyKey": "staff",
+      "handedness": "two-handed",
+      "iconId": null,
+      "id": 9,
+      "modeAvailability": "both",
+      "name": "Staff",
+      "normalizedName": "staff",
+      "pageIdentity": {
+        "canonicalTitle": "Staff",
+        "normalizedTitle": "Staff",
+        "pageId": 403,
+        "redirectedFrom": null,
+        "requestedTitle": "Staff",
+        "revisionId": 2717550,
+        "sourceRevisionTimestamp": "2026-01-08T04:39:18Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-base:weapon-base:staff:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:detail:403:2717550",
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "requirement": {
+        "attributeId": 12,
+        "attributeName": "Energy Storage",
+        "kind": "attribute-rank",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:9:requirement"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:403:2717550"
+          ]
+        },
+        "rank": 12
+      },
+      "sourceKey": "weapon-base:staff",
+      "templateItems": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:staff:template-item:208"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:403:2717550",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "sourceScope": "pvp-template-base",
+          "status": "active",
+          "templateItemId": 208
+        }
+      ],
+      "variant": null,
+      "variantKey": "staff",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Staff"
+    },
+    {
+      "allowedModifierSlots": [
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "caster"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:focus:slot:focus-core"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:405:2723363",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "focus-core"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "inscription"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:focus:slot:inscription"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:405:2723363",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "inscription"
+        }
+      ],
+      "damage": {
+        "kind": "not-applicable",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:10:damage"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:405:2723363"
+          ]
+        },
+        "reason": "Focus items are off-hand caster equipment, not weapon-damage sources."
+      },
+      "displayState": "structured-only",
+      "equipRole": "off-hand",
+      "family": "Focus",
+      "familyKey": "focus",
+      "handedness": "off-hand",
+      "iconId": null,
+      "id": 10,
+      "modeAvailability": "both",
+      "name": "Focus",
+      "normalizedName": "focus",
+      "pageIdentity": {
+        "canonicalTitle": "Focus item",
+        "normalizedTitle": "Focus item",
+        "pageId": 405,
+        "redirectedFrom": null,
+        "requestedTitle": "Focus item",
+        "revisionId": 2723363,
+        "sourceRevisionTimestamp": "2026-03-27T22:37:34Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-base:weapon-base:focus:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:detail:405:2723363",
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "requirement": {
+        "attributeId": 12,
+        "attributeName": "Energy Storage",
+        "kind": "attribute-rank",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:10:requirement"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:405:2723363"
+          ]
+        },
+        "rank": 12
+      },
+      "sourceKey": "weapon-base:focus",
+      "templateItems": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:focus:template-item:209"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:405:2723363",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "sourceScope": "pvp-template-base",
+          "status": "active",
+          "templateItemId": 209
+        }
+      ],
+      "variant": null,
+      "variantKey": "focus",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Focus_item"
+    },
+    {
+      "allowedModifierSlots": [
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "shield-offhand"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:shield:slot:shield-handle"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:402:2723391",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "shield-handle"
+        },
+        {
+          "cardinality": "zero-or-one",
+          "compatibleModifierFamilies": [
+            "inscription"
+          ],
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:shield:slot:inscription"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:402:2723391",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "slot": "inscription"
+        }
+      ],
+      "damage": {
+        "kind": "not-applicable",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:11:damage"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:402:2723391"
+          ]
+        },
+        "reason": "Shields supply armor/effects instead of weapon damage."
+      },
+      "displayState": "structured-only",
+      "equipRole": "off-hand",
+      "family": "Shield",
+      "familyKey": "shield",
+      "handedness": "off-hand",
+      "iconId": null,
+      "id": 11,
+      "modeAvailability": "both",
+      "name": "Shield",
+      "normalizedName": "shield",
+      "pageIdentity": {
+        "canonicalTitle": "Shield",
+        "normalizedTitle": "Shield",
+        "pageId": 402,
+        "redirectedFrom": null,
+        "requestedTitle": "Shield",
+        "revisionId": 2723391,
+        "sourceRevisionTimestamp": "2026-03-28T17:14:45Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-base:weapon-base:shield:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-live:detail:402:2723391",
+          "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+          "source:gww:epic-12-live:seed:weapon:2727609"
+        ]
+      },
+      "requirement": {
+        "attributeId": 17,
+        "attributeName": "Strength",
+        "kind": "attribute-rank",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-base:11:requirement"
+          ],
+          "notes": "Field uses source-plan precedence approved in EPIC-12 source-shape checkpoint.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-live:detail:402:2723391"
+          ]
+        },
+        "rank": 12
+      },
+      "sourceKey": "weapon-base:shield",
+      "templateItems": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-base:weapon-base:shield:template-item:210"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-live:detail:402:2723391",
+              "source:gww:epic-12-live:seed:equipment-template-format:2728058",
+              "source:gww:epic-12-live:seed:weapon:2727609"
+            ]
+          },
+          "sourceScope": "pvp-template-base",
+          "status": "active",
+          "templateItemId": 210
+        }
+      ],
+      "variant": null,
+      "variantKey": "shield",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Shield"
+    }
+  ]
+}

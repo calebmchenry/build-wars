@@ -1,0 +1,30 @@
+Read `work/sprints/drafts/SPRINT-013-INTENT.md` and the project conventions.
+
+Write an independent sprint draft for `SPRINT-013 Weapons and Mods Catalog`.
+The parent Codex invocation will capture your final response to
+`work/sprints/drafts/SPRINT-013-GPT54-DRAFT.md`; do not edit repository files yourself.
+
+Optimize for implementation phasing, dependency sequencing, and verification strategy.
+
+Constraints:
+
+- Do not use skills.
+- Do not run a planning workflow.
+- Do not modify application code, data scripts, generated data, ticket files, or sprint files.
+- Output only the markdown sprint document.
+- Keep the sprint executable under the non-interactive ticket-burn contract.
+- Respect the source-policy, ingestion, runtime-import, and exact-path promotion boundaries in the
+  intent.
+
+Follow this sprint structure:
+
+- Overview
+- Use Cases
+- Architecture
+- Implementation
+- Files Summary
+- Definition of Done
+- Risks & Mitigations
+- Security Considerations
+- Dependencies
+- Open Questions

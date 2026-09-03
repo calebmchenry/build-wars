@@ -5,16 +5,24 @@ import type {
   RuneId,
   SkillId,
   TemplateAttributeId,
+  TemplateEquipmentItemId,
   TemplateEquipmentModifierId,
   TemplateProfessionId,
-  TemplateSkillId
+  TemplateSkillId,
+  WeaponId,
+  WeaponModifierId
 } from "./ids";
 import type {
+  CatalogWeaponBaseRecord,
+  CatalogWeaponModRecord,
   CatalogRuneRecord,
   CatalogInsigniaRecord,
   CatalogSkillRecord,
   CatalogAttributeRecord,
   CatalogProfessionRecord,
+  WeaponBaseCatalog,
+  WeaponModCatalog,
+  WeaponSourceSetDisposition,
   InsigniaCatalog,
   InsigniaSourceSetDisposition,
   ProfessionAttributeCatalog,
@@ -90,6 +98,27 @@ export type AmbiguousInsigniaTemplateLookupOutcome = {
   readonly records: readonly CatalogInsigniaRecord[];
 };
 
+export type WeaponDispositionLookupOutcome<TemplateId> = {
+  readonly kind: "dispositioned";
+  readonly templateId: TemplateId;
+  readonly catalogId: null;
+  readonly disposition: WeaponSourceSetDisposition;
+};
+
+export type AmbiguousWeaponTemplateItemLookupOutcome = {
+  readonly kind: "ambiguous";
+  readonly templateId: TemplateEquipmentItemId;
+  readonly catalogId: null;
+  readonly records: readonly CatalogWeaponBaseRecord[];
+};
+
+export type AmbiguousWeaponModifierTemplateLookupOutcome = {
+  readonly kind: "ambiguous";
+  readonly templateId: TemplateEquipmentModifierId;
+  readonly catalogId: null;
+  readonly records: readonly CatalogWeaponModRecord[];
+};
+
 export type EmptySkillSlotLookupOutcome = {
   readonly kind: "empty";
   readonly templateId: TemplateSkillId;
@@ -123,6 +152,22 @@ export type InsigniaTemplateModifierLookupOutcome =
   | KnownTemplateLookupOutcome<TemplateEquipmentModifierId, InsigniaId, CatalogInsigniaRecord>
   | AmbiguousInsigniaTemplateLookupOutcome
   | InsigniaDispositionLookupOutcome
+  | UnknownTemplateLookupOutcome<TemplateEquipmentModifierId>;
+
+export type WeaponTemplateItemLookupOutcome =
+  | KnownTemplateLookupOutcome<TemplateEquipmentItemId, WeaponId, CatalogWeaponBaseRecord>
+  | AmbiguousWeaponTemplateItemLookupOutcome
+  | WeaponDispositionLookupOutcome<TemplateEquipmentItemId>
+  | UnknownTemplateLookupOutcome<TemplateEquipmentItemId>;
+
+export type WeaponTemplateModifierLookupOutcome =
+  | KnownTemplateLookupOutcome<
+      TemplateEquipmentModifierId,
+      WeaponModifierId,
+      CatalogWeaponModRecord
+    >
+  | AmbiguousWeaponModifierTemplateLookupOutcome
+  | WeaponDispositionLookupOutcome<TemplateEquipmentModifierId>
   | UnknownTemplateLookupOutcome<TemplateEquipmentModifierId>;
 
 export type SkillTemplateSlotLookupOutcome =
@@ -286,6 +331,64 @@ export function lookupInsigniaTemplateModifierId(
   return { kind: "unknown", templateId, catalogId: null };
 }
 
+export function lookupWeaponTemplateItemId(
+  catalog: WeaponBaseCatalog,
+  templateId: TemplateEquipmentItemId
+): WeaponTemplateItemLookupOutcome {
+  const numericTemplateId = Number(templateId);
+  const records = catalog.weaponBases.filter((weapon) =>
+    weapon.templateItems.some(
+      (crosswalk) =>
+        Number(crosswalk.templateItemId) === numericTemplateId && crosswalk.status === "active"
+    )
+  );
+  if (records.length > 1) {
+    return { kind: "ambiguous", templateId, catalogId: null, records };
+  }
+  const record = records[0];
+  if (record !== undefined) {
+    return { kind: "known", templateId, catalogId: record.id, record };
+  }
+
+  const disposition = catalog.dispositions.find(
+    (candidate) => Number(candidate.templateItemId) === numericTemplateId
+  );
+  if (disposition !== undefined) {
+    return { kind: "dispositioned", templateId, catalogId: null, disposition };
+  }
+
+  return { kind: "unknown", templateId, catalogId: null };
+}
+
+export function lookupWeaponTemplateModifierId(
+  catalog: WeaponModCatalog,
+  templateId: TemplateEquipmentModifierId
+): WeaponTemplateModifierLookupOutcome {
+  const numericTemplateId = Number(templateId);
+  const records = catalog.weaponMods.filter((modifier) =>
+    modifier.templateModifiers.some(
+      (crosswalk) =>
+        Number(crosswalk.templateModifierId) === numericTemplateId && crosswalk.status === "active"
+    )
+  );
+  if (records.length > 1) {
+    return { kind: "ambiguous", templateId, catalogId: null, records };
+  }
+  const record = records[0];
+  if (record !== undefined) {
+    return { kind: "known", templateId, catalogId: record.id, record };
+  }
+
+  const disposition = catalog.dispositions.find(
+    (candidate) => Number(candidate.templateModifierId) === numericTemplateId
+  );
+  if (disposition !== undefined) {
+    return { kind: "dispositioned", templateId, catalogId: null, disposition };
+  }
+
+  return { kind: "unknown", templateId, catalogId: null };
+}
+
 export function lookupSkillTemplateSlot(
   catalog: SkillCatalog,
   templateId: TemplateSkillId
@@ -313,6 +416,20 @@ export function lookupInsigniaById(
   insigniaId: InsigniaId
 ): CatalogInsigniaRecord | null {
   return catalog.insignias.find((insignia) => Number(insignia.id) === Number(insigniaId)) ?? null;
+}
+
+export function lookupWeaponBaseById(
+  catalog: WeaponBaseCatalog,
+  weaponId: WeaponId
+): CatalogWeaponBaseRecord | null {
+  return catalog.weaponBases.find((weapon) => Number(weapon.id) === Number(weaponId)) ?? null;
+}
+
+export function lookupWeaponModById(
+  catalog: WeaponModCatalog,
+  modifierId: WeaponModifierId
+): CatalogWeaponModRecord | null {
+  return catalog.weaponMods.find((modifier) => Number(modifier.id) === Number(modifierId)) ?? null;
 }
 
 export function lookupProfessionByName(
@@ -351,6 +468,30 @@ export function lookupInsigniaByName(
     value,
     (record) => [record.name, record.normalizedName],
     "insignia"
+  );
+}
+
+export function lookupWeaponBaseByName(
+  catalog: WeaponBaseCatalog,
+  value: string
+): CatalogWeaponBaseRecord | null {
+  return collisionSafeLookup(
+    catalog.weaponBases,
+    value,
+    (record) => [record.name, record.normalizedName],
+    "weapon base"
+  );
+}
+
+export function lookupWeaponModByName(
+  catalog: WeaponModCatalog,
+  value: string
+): CatalogWeaponModRecord | null {
+  return collisionSafeLookup(
+    catalog.weaponMods,
+    value,
+    (record) => [record.name, record.normalizedName],
+    "weapon modifier"
   );
 }
 

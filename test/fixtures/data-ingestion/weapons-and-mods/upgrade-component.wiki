@@ -1,0 +1,2 @@
+== Build Wars fixture upgrade component detail ==
+Structured modifier effects are provided by the reviewed EPIC-12 source plan.

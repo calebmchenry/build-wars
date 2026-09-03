@@ -38,8 +38,8 @@ installs the pinned Python parser dependency from `scripts/data/requirements.txt
 fixed timestamps, and an output root under ignored `work/runs/data-ingestion`.
 The default fixture run preserves the EPIC-02 skill-ID proof and also writes the EPIC-03
 professions/attributes fixture catalog, the EPIC-04 synthetic skills catalog, the EPIC-10
-synthetic runes catalog, and the EPIC-11 synthetic insignias catalog. Run EPIC-03, EPIC-04,
-EPIC-10, and EPIC-11 profiles directly with
+synthetic runes catalog, the EPIC-11 synthetic insignias catalog, and the EPIC-12 synthetic weapons
+and mods catalogs. Run EPIC-03, EPIC-04, EPIC-10, EPIC-11, and EPIC-12 profiles directly with
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-03-professions-attributes`.
 For EPIC-04 use
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-04-skills`.
@@ -47,6 +47,8 @@ For EPIC-10 use
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-10-runes`.
 For EPIC-11 use
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-11-insignias`.
+For EPIC-12 use
+`PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-12-weapons-and-mods`.
 
 ## Current Scope
 
@@ -77,6 +79,12 @@ Included now:
   QA report. Runtime code must consume only the catalog JSON; manifests, QA reports, source plans,
   snapshot sets, raw snapshots, QA summaries, review evidence, icon bytes, Python tooling, and wiki
   APIs remain non-runtime.
+- Runtime-eligible EPIC-12 weapons and mods catalog data at
+  `data/generated/epic-12/weapons.catalog.json` and
+  `data/generated/epic-12/weapon-mods.catalog.json`, with adjacent generated manifests and bounded
+  QA reports. Runtime code must consume only the catalog JSON files; manifests, QA reports, source
+  plans, snapshot sets, raw snapshots, QA summaries, review evidence, icon bytes, Python tooling,
+  and wiki APIs remain non-runtime.
 - Framework-neutral Guild Wars skill and raw equipment template import/export APIs under
   `src/template-compatibility`, backed by a pinned `@buildwars/gw-templates@1.1.1` adapter.
 - Pure domain rule-engine APIs for authored builds: `validateBuild` and
@@ -152,6 +160,13 @@ insignia detail pages, metadata-only icon `imageinfo`, and the promoted EPIC-03 
 one active verified armor-prefix `TemplateEquipmentModifierId` crosswalk. Offline replay requires one
 complete selected EPIC-11 snapshot-set manifest; source plans, snapshot sets, raw snapshots, QA
 summaries, review evidence, and icon bytes remain ignored.
+For EPIC-12, live refresh follows the same two-step pattern with
+`--profile epic-12-weapons-and-mods`. The finite source authority is `Equipment template format`,
+`Weapon`, `Weapon upgrade`, `Inscription`, verified weapon/modifier detail pages, metadata-only icon
+`imageinfo`, and the promoted EPIC-03 catalog. Public `WeaponId` and `WeaponModifierId` values are
+schema-owned registry allocations, while raw template item/modifier IDs are crosswalk facts and
+lookup inputs. Offline replay requires one complete selected EPIC-12 snapshot-set manifest; source
+plans, snapshot sets, raw snapshots, QA summaries, review evidence, and icon bytes remain ignored.
 
 ## Template Compatibility
 
@@ -166,6 +181,8 @@ Template compatibility is available through `src/template-compatibility`.
   after dependency encode and decode-back field equality prove no modeled data was lost.
 - Skill resolution accepts caller-supplied EPIC-03 and EPIC-04 catalogs and returns a non-mutating
   view over known, none, reserved, unsupported, dispositioned, empty, and unknown outcomes.
+- Weapon and modifier lookup helpers accept caller-supplied EPIC-12 catalogs and return known,
+  dispositioned, ambiguous, or unknown outcomes without mutating decoded raw equipment documents.
 
 See [Template compatibility](compendium/template-compatibility.md) for dependency qualification,
 limits, fidelity guarantees, and the paw-ned2 deferral record.
@@ -184,6 +201,9 @@ Build validation is available through `src/domain`.
 - `resolveInsigniaEffectsForArmorSlot` projects one insignia record onto one armor slot without
   owning armor legality, condition evaluation, rune composition, hit-location behavior, or full stat
   totals.
+- `explainWeaponModCompatibility` checks one weapon base and one modifier against static EPIC-12
+  family, mode, slot, and applicability facts. Set-level equipment legality and effect aggregation
+  remain deferred.
 
 See [Game rule engine](compendium/game-rule-engine.md) for rule defaults, unresolved-ID handling,
 split/mode behavior, duplicate policies, and deferred scope.

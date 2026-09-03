@@ -2,14 +2,16 @@
 id: BW-1204
 title: Weapon/Mod Effect and Compatibility Semantics
 epic: EPIC-12
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1201
   - BW-1202
   - BW-1203
+planned_sprint: SPRINT-013
+completed_sprint: SPRINT-013
 created: 2026-09-02
-updated: 2026-09-02
+updated: 2026-09-03
 ---
 
 # BW-1204: Weapon/Mod Effect and Compatibility Semantics
@@ -47,3 +49,13 @@ validation.
 - `npm run typecheck`
 - Focused domain tests for weapon/mod compatibility fixtures
 - Focused Python tests for semantic normalization
+
+## Closeout Evidence
+
+- SPRINT-013 added semantic normalization for numeric, damage-type conversion, chance, note-only,
+  and unknown weapon modifier effects.
+- Added `explainWeaponModCompatibility(base, modifier)` with reason-coded compatible,
+  incompatible, and indeterminate outcomes for one-base/one-modifier family, mode, slot, and
+  applicability facts.
+- Validation passed: `npm run typecheck`, focused compatibility Vitest tests, and focused Python
+  semantic-normalization tests.

@@ -1,0 +1,39 @@
+{
+  "appConsumptionGate": "pass",
+  "artifactManifestPath": "data/generated/epic-12/weapons.catalog.manifest.json",
+  "artifactPath": "data/generated/epic-12/weapons.catalog.json",
+  "findings": [],
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "notes": "EPIC-12 weapon base catalog QA report covering source accounting, IDs, crosswalks, joins, damage, requirements, compatibility, copied text, media metadata, caps, counterpart digests, and artifact integrity.",
+  "publicReleaseGate": "pass",
+  "schemaVersion": 1,
+  "sourceIds": [
+    "source:gww:epic-10-live:seed:equipment-template-format:2728058",
+    "source:gww:epic-12-live:detail:128:2712294",
+    "source:gww:epic-12-live:detail:129:2712293",
+    "source:gww:epic-12-live:detail:130:2734944",
+    "source:gww:epic-12-live:detail:132098:2703508",
+    "source:gww:epic-12-live:detail:132:2712296",
+    "source:gww:epic-12-live:detail:134:2722689",
+    "source:gww:epic-12-live:detail:135:2713480",
+    "source:gww:epic-12-live:detail:295:2739359",
+    "source:gww:epic-12-live:detail:402:2723391",
+    "source:gww:epic-12-live:detail:403:2717550",
+    "source:gww:epic-12-live:detail:405:2723363",
+    "source:gww:epic-12-live:detail:407:2720645",
+    "source:gww:epic-12-live:detail:5923:2688414",
+    "source:gww:epic-12-live:detail:5925:2739358",
+    "source:gww:epic-12-live:seed:inscription:2735699",
+    "source:gww:epic-12-live:seed:weapon-upgrade:2739359",
+    "source:gww:epic-12-live:seed:weapon:2727609"
+  ],
+  "summary": {
+    "criticalCount": 0,
+    "errorCount": 0,
+    "findingCount": 0,
+    "infoCount": 0,
+    "openBlockingCount": 0,
+    "warningCount": 0
+  }
+}

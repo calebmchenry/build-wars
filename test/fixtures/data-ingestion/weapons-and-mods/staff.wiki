@@ -1,0 +1,2 @@
+{{BuildWars weapon facts|requirement=Requires 12 Energy Storage}}
+Synthetic staff detail fixture.

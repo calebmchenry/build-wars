@@ -1,0 +1,74 @@
+{
+  "namespace": "weapon-base",
+  "policy": "Public WeaponId values are schema-owned registry allocations keyed by reviewed sourceKey and variantKey. IDs are never allocated from source order, template item IDs, or display names, and tombstoned IDs are not reused.",
+  "records": [
+    {
+      "id": 1,
+      "sourceKey": "weapon-base:axe",
+      "status": "active",
+      "variantKey": "axe"
+    },
+    {
+      "id": 2,
+      "sourceKey": "weapon-base:sword",
+      "status": "active",
+      "variantKey": "sword"
+    },
+    {
+      "id": 3,
+      "sourceKey": "weapon-base:hammer",
+      "status": "active",
+      "variantKey": "hammer"
+    },
+    {
+      "id": 4,
+      "sourceKey": "weapon-base:longbow",
+      "status": "active",
+      "variantKey": "longbow"
+    },
+    {
+      "id": 5,
+      "sourceKey": "weapon-base:daggers",
+      "status": "active",
+      "variantKey": "daggers"
+    },
+    {
+      "id": 6,
+      "sourceKey": "weapon-base:scythe",
+      "status": "active",
+      "variantKey": "scythe"
+    },
+    {
+      "id": 7,
+      "sourceKey": "weapon-base:spear",
+      "status": "active",
+      "variantKey": "spear"
+    },
+    {
+      "id": 8,
+      "sourceKey": "weapon-base:wand",
+      "status": "active",
+      "variantKey": "wand"
+    },
+    {
+      "id": 9,
+      "sourceKey": "weapon-base:staff",
+      "status": "active",
+      "variantKey": "staff"
+    },
+    {
+      "id": 10,
+      "sourceKey": "weapon-base:focus",
+      "status": "active",
+      "variantKey": "focus"
+    },
+    {
+      "id": 11,
+      "sourceKey": "weapon-base:shield",
+      "status": "active",
+      "variantKey": "shield"
+    }
+  ],
+  "registryVersion": 1,
+  "tombstones": []
+}

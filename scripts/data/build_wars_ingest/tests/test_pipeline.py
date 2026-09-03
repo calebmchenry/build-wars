@@ -37,6 +37,8 @@ class PipelineTests(unittest.TestCase):
             self.assertTrue((tmp / "data/generated/epic-04/skills.catalog.json").exists())
             self.assertTrue((tmp / "data/generated/epic-10/runes.catalog.json").exists())
             self.assertTrue((tmp / "data/generated/epic-11/insignias.catalog.json").exists())
+            self.assertTrue((tmp / "data/generated/epic-12/weapons.catalog.json").exists())
+            self.assertTrue((tmp / "data/generated/epic-12/weapon-mods.catalog.json").exists())
         finally:
             shutil.rmtree(tmp)
 
@@ -74,6 +76,14 @@ class PipelineTests(unittest.TestCase):
             self.assertEqual(
                 (first_root / "data/generated/epic-11/insignias.catalog.json").read_bytes(),
                 (second_root / "data/generated/epic-11/insignias.catalog.json").read_bytes(),
+            )
+            self.assertEqual(
+                (first_root / "data/generated/epic-12/weapons.catalog.json").read_bytes(),
+                (second_root / "data/generated/epic-12/weapons.catalog.json").read_bytes(),
+            )
+            self.assertEqual(
+                (first_root / "data/generated/epic-12/weapon-mods.catalog.json").read_bytes(),
+                (second_root / "data/generated/epic-12/weapon-mods.catalog.json").read_bytes(),
             )
         finally:
             shutil.rmtree(first_root)

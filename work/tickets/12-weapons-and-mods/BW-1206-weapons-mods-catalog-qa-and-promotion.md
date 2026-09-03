@@ -2,15 +2,17 @@
 id: BW-1206
 title: Weapons/Mods Catalog QA and Exact-Path Promotion
 epic: EPIC-12
-status: ready
+status: done
 priority: critical
 depends_on:
   - BW-1202
   - BW-1203
   - BW-1204
   - BW-1205
+planned_sprint: SPRINT-013
+completed_sprint: SPRINT-013
 created: 2026-09-02
-updated: 2026-09-02
+updated: 2026-09-03
 ---
 
 # BW-1206: Weapons/Mods Catalog QA and Exact-Path Promotion
@@ -57,3 +59,21 @@ reports under explicit exact paths.
 - Run EPIC-12 fixture regeneration twice and prove byte-identical output under a fixed clock
 - Run EPIC-12 offline replay from selected snapshots
 - Run a bounded manual live refresh only if source/network conditions are available
+
+## Closeout Evidence
+
+- SPRINT-013 promoted `data/generated/epic-12/weapons.catalog.json`,
+  `data/generated/epic-12/weapons.catalog.manifest.json`,
+  `data/generated/epic-12/weapon-mods.catalog.json`,
+  `data/generated/epic-12/weapon-mods.catalog.manifest.json`,
+  `data/qa/epic-12/weapons.catalog.qa.json`, and
+  `data/qa/epic-12/weapon-mods.catalog.qa.json`.
+- Production release evidence: 11 weapon bases, 9 weapon modifiers, `catalogSetVersion:
+weapon-mods-set-60ed5c4dc8257664`, weapon catalog version `weapons-3f7389e0935e67dd`, modifier
+  catalog version `weapon-mods-6beb6758addc464a`, `sourceSetDigest:
+bb7d16a292c8705d9a76b196f9128e98c1a42032c8407e0ee43f29cf91cb5142`, and selected snapshot-set
+  digest `4d8f6333dca3fff5f4b95d3634faed34fc4e39a634e2aa9f5b4ead45312c8495`.
+- Both QA reports have `appConsumptionGate: pass`, `publicReleaseGate: pass`, and zero findings.
+  Validation passed: live discover/fetch, selected offline replay twice, live/offline byte
+  comparison, offline A/B byte comparison, fixture A/B byte comparison, `.gitignore` allowlist
+  checks, focused EPIC-12 tests, and `npm run verify`.

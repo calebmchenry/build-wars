@@ -9,11 +9,15 @@ import {
   type RemoteMediaMetadata,
   type RuneCatalog,
   type SkillCatalog,
-  type SourceReference
+  type SourceReference,
+  type WeaponBaseCatalog,
+  type WeaponModCatalog
 } from "../../src/domain";
 import professionsAttributesGolden from "../fixtures/data-ingestion/generated/fixture-professions-attributes.catalog.json";
 import runesGolden from "../fixtures/data-ingestion/generated/fixture-runes.catalog.json";
 import insigniasGolden from "../fixtures/data-ingestion/generated/fixture-insignias.catalog.json";
+import weaponModsGolden from "../fixtures/data-ingestion/generated/fixture-weapon-mods.catalog.json";
+import weaponsGolden from "../fixtures/data-ingestion/generated/fixture-weapons.catalog.json";
 import skillsGolden from "../fixtures/data-ingestion/generated/fixture-skills.catalog.json";
 import golden from "../fixtures/data-ingestion/generated/fixture-skill-id-map.json";
 
@@ -183,5 +187,29 @@ describe("data ingestion generated contracts", () => {
     expect(survivor?.effects[0]?.kind).toBe("maximum-health-delta");
     expect(bloodstained?.effectCompleteness).toBe("note-only");
     expect(catalog.remoteMedia.every((media) => media.cachedBytes === false)).toBe(true);
+  });
+
+  it("keeps the EPIC-12 Python weapon and modifier catalogs aligned with the TypeScript wire contract", () => {
+    const weapons = weaponsGolden as unknown as WeaponBaseCatalog;
+    const weaponMods = weaponModsGolden as unknown as WeaponModCatalog;
+    const sword = weapons.weaponBases.find((weapon) => weapon.name === "Sword");
+    const inscription = weaponMods.weaponMods.find(
+      (modifier) => modifier.name === "I Have the Power!"
+    );
+
+    expect(weapons.schemaVersion).toBe(SOURCE_POLICY_SCHEMA_VERSION);
+    expect(weapons.profile.id).toBe("epic-12-weapons-and-mods");
+    expect(weaponMods.profile.id).toBe("epic-12-weapons-and-mods");
+    expect(weapons.catalogSetDigest).toBe(weaponMods.catalogSetDigest);
+    expect(weapons.releaseSet.weaponModCatalogVersion).toBe(weaponMods.catalogVersion);
+    expect(weaponMods.releaseSet.weaponCatalogVersion).toBe(weapons.catalogVersion);
+    expect(weapons.sourceSet.acceptedWeaponBaseCount).toBe(weapons.weaponBases.length);
+    expect(weaponMods.sourceSet.acceptedWeaponModifierCount).toBe(weaponMods.weaponMods.length);
+    expect(sword?.templateItems[0]?.templateItemId).toBe(279);
+    expect(sword?.requirement.kind).toBe("attribute-rank");
+    expect(inscription?.templateModifiers[0]?.templateModifierId).toBe(329);
+    expect(inscription?.effects[0]?.kind).toBe("maximum-energy-delta");
+    expect(weapons.remoteMedia.every((media) => media.cachedBytes === false)).toBe(true);
+    expect(weaponMods.remoteMedia.every((media) => media.cachedBytes === false)).toBe(true);
   });
 });

@@ -80,3 +80,16 @@ effect completeness, exact per-slot outcomes, inert conditions, locality, combin
 metadata, copied-text policy, output caps, artifact integrity, summary counts, and app/public
 release gates. Live promotion accepted bounded metadata-only icon warnings while keeping
 `cachedBytes: false` and storing no icon binaries.
+
+BW-1206 promotes two machine-readable EPIC-12 QA reports:
+
+- `data/qa/epic-12/weapons.catalog.qa.json`
+- `data/qa/epic-12/weapon-mods.catalog.qa.json`
+
+The adjacent `.summary.txt` files remain ignored. The QA JSON records source authority review,
+source-set accounting, page resolution, EPIC-03 joins, identity-registry coverage, raw template
+item/modifier crosswalks, weapon damage and requirement states, allowed modifier slots, modifier
+families, applicability, effect completeness, compatibility inputs, copied-text policy, output caps,
+counterpart release-set integrity, artifact integrity, summary counts, and app/public release
+gates. Live promotion stores metadata-only media references with `cachedBytes: false` and no icon
+binaries.

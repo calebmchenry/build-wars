@@ -1,0 +1,2 @@
+== Build Wars fixture inscription detail ==
+Structured inscription effects are provided by the reviewed EPIC-12 source plan.

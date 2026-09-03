@@ -1,0 +1,2 @@
+== Build Wars fixture inscription authority ==
+This synthetic page names one generic inscription case and keeps inscription behavior separate from other modifier slots.

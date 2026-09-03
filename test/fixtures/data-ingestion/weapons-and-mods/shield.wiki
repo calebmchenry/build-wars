@@ -1,0 +1,2 @@
+{{BuildWars weapon facts|requirement=Requires 12 Strength}}
+Synthetic shield and shield-handle detail fixture.

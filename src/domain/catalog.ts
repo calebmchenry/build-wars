@@ -8,8 +8,11 @@ import type {
   SkillId,
   TemplateAttributeId,
   TemplateEquipmentModifierId,
+  TemplateEquipmentItemId,
   TemplateProfessionId,
-  TemplateSkillId
+  TemplateSkillId,
+  WeaponId,
+  WeaponModifierId
 } from "./ids";
 import type {
   GeneratedArtifactManifest,
@@ -925,6 +928,421 @@ export interface InsigniaCatalog {
   readonly identityRegistry: InsigniaIdentityRegistrySummary;
   readonly dispositions: readonly InsigniaSourceSetDisposition[];
   readonly insignias: readonly CatalogInsigniaRecord[];
+  readonly remoteMedia: readonly RemoteMediaMetadata[];
+}
+
+export interface WeaponAndModCatalogProfile {
+  readonly id: "epic-12-weapons-and-mods";
+  readonly sourceTarget: "BACKLOG";
+  readonly sourceEpic: "EPIC-12";
+  readonly sourceCaps: {
+    readonly seedPageLimit: number;
+    readonly detailPageLimit: number;
+    readonly mediaTitleLimit: number;
+    readonly requestLimit: number;
+    readonly retryLimit: number;
+    readonly continuationLimit: number;
+    readonly responseByteCap: number;
+    readonly parserByteCap: number;
+    readonly aggregateByteCap: number;
+    readonly weaponCatalogByteCap: number;
+    readonly weaponModCatalogByteCap: number;
+    readonly qaByteCap: number;
+  };
+}
+
+export type WeaponModeAvailability = "both" | "pve-only" | "pvp-only" | "unknown";
+export type WeaponEquipRole = "main-hand" | "off-hand" | "two-hand";
+export type WeaponHandedness = "one-handed" | "two-handed" | "off-hand";
+export type WeaponBaseDisplayState = "structured-only" | "reviewed-short-text" | "excluded";
+export type WeaponModDisplayState = "structured-only" | "reviewed-short-text" | "excluded";
+export type WeaponRequirementStateKind = "attribute-rank" | "none" | "unresolved";
+export type WeaponDamageStateKind = "fixed-range" | "not-applicable" | "unresolved";
+export type WeaponModApplicabilityKind =
+  "specific-families" | "universal" | "not-applicable" | "unresolved";
+export type WeaponCompatibilityKind = "compatible" | "incompatible" | "indeterminate";
+export type WeaponEffectCompleteness = "structured" | "mixed" | "note-only" | "unknown";
+export type WeaponTemplateItemCrosswalkStatus =
+  "active" | "historical" | "unsupported" | "ambiguous";
+export type WeaponModTemplateModifierCrosswalkStatus =
+  "active" | "historical" | "unsupported" | "ambiguous";
+export type WeaponTemplateItemSourceScope = "weapon-base" | "pvp-template-base" | "unknown";
+export type WeaponModTemplateModifierSourceScope =
+  | "weapon-prefix"
+  | "weapon-suffix"
+  | "inscription"
+  | "staff-head"
+  | "staff-wrapping"
+  | "shield-offhand"
+  | "caster"
+  | "unknown";
+export type WeaponModifierSlot =
+  | "prefix"
+  | "suffix"
+  | "inscription"
+  | "staff-head"
+  | "staff-wrapping"
+  | "shield-handle"
+  | "focus-core"
+  | "caster"
+  | "intrinsic";
+export type WeaponModifierFamily =
+  | "weapon-prefix"
+  | "weapon-suffix"
+  | "inscription"
+  | "staff-head"
+  | "staff-wrapping"
+  | "shield-offhand"
+  | "caster"
+  | "unknown";
+export type WeaponSourceSetDispositionKind =
+  | "accepted-weapon-base"
+  | "accepted-weapon-modifier"
+  | "supported-relationship"
+  | "explicit-exclusion"
+  | "unsupported"
+  | "ambiguous"
+  | "historical"
+  | "blocked";
+export type WeaponModEffectKind =
+  | "damage-delta"
+  | "damage-type-conversion"
+  | "attribute-rank"
+  | "maximum-health-delta"
+  | "maximum-energy-delta"
+  | "armor-rating-delta"
+  | "armor-penetration"
+  | "casting-time-chance"
+  | "skill-recharge-chance"
+  | "enchantment-duration-delta"
+  | "stance-duration-delta"
+  | "condition-duration-delta"
+  | "note-only"
+  | "unknown";
+export type WeaponEffectUnit =
+  "damage" | "rank" | "health" | "energy" | "armor" | "percent" | "seconds";
+
+export interface WeaponPageIdentity {
+  readonly requestedTitle: string;
+  readonly normalizedTitle: string;
+  readonly canonicalTitle: string;
+  readonly pageId: number | string | null;
+  readonly revisionId: number | string | null;
+  readonly sourceRevisionTimestamp: string | null;
+  readonly redirectedFrom: string | null;
+}
+
+export interface WeaponTemplateItemCrosswalk {
+  readonly templateItemId: TemplateEquipmentItemId;
+  readonly status: WeaponTemplateItemCrosswalkStatus;
+  readonly mode: WeaponModeAvailability;
+  readonly sourceScope: WeaponTemplateItemSourceScope;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponModTemplateModifierCrosswalk {
+  readonly templateModifierId: TemplateEquipmentModifierId;
+  readonly status: WeaponModTemplateModifierCrosswalkStatus;
+  readonly mode: WeaponModeAvailability;
+  readonly sourceScope: WeaponModTemplateModifierSourceScope;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponFixedDamage {
+  readonly kind: "fixed-range";
+  readonly minimum: number;
+  readonly maximum: number;
+  readonly damageType: string;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponNotApplicableDamage {
+  readonly kind: "not-applicable";
+  readonly reason: string;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponUnresolvedDamage {
+  readonly kind: "unresolved";
+  readonly reason: string;
+  readonly sourceText: string | null;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export type WeaponDamage = WeaponFixedDamage | WeaponNotApplicableDamage | WeaponUnresolvedDamage;
+
+export interface WeaponAttributeRequirement {
+  readonly kind: "attribute-rank";
+  readonly attributeId: AttributeId;
+  readonly attributeName: string;
+  readonly rank: number;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponNoRequirement {
+  readonly kind: "none";
+  readonly reason: string;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponUnresolvedRequirement {
+  readonly kind: "unresolved";
+  readonly reason: string;
+  readonly attributeName: string | null;
+  readonly rank: number | null;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export type WeaponRequirement =
+  WeaponAttributeRequirement | WeaponNoRequirement | WeaponUnresolvedRequirement;
+
+export interface WeaponAllowedModifierSlot {
+  readonly slot: WeaponModifierSlot;
+  readonly cardinality: "zero-or-one" | "one" | "zero-or-more" | "not-applicable" | "unknown";
+  readonly compatibleModifierFamilies: readonly WeaponModifierFamily[];
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponSpecificFamilyApplicability {
+  readonly kind: "specific-families";
+  readonly familyKeys: readonly string[];
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponUniversalApplicability {
+  readonly kind: "universal";
+  readonly reason: string;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponNotApplicableApplicability {
+  readonly kind: "not-applicable";
+  readonly reason: string;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponUnresolvedApplicability {
+  readonly kind: "unresolved";
+  readonly reason: string;
+  readonly sourceText: string | null;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export type WeaponModApplicability =
+  | WeaponSpecificFamilyApplicability
+  | WeaponUniversalApplicability
+  | WeaponNotApplicableApplicability
+  | WeaponUnresolvedApplicability;
+
+export interface WeaponConditionPredicate {
+  readonly kind: "always" | "predicate" | "deferred";
+  readonly text: string | null;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponModBaseEffect {
+  readonly kind: WeaponModEffectKind;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponNumericEffect extends WeaponModBaseEffect {
+  readonly kind:
+    | "damage-delta"
+    | "attribute-rank"
+    | "maximum-health-delta"
+    | "maximum-energy-delta"
+    | "armor-rating-delta"
+    | "armor-penetration"
+    | "enchantment-duration-delta"
+    | "stance-duration-delta"
+    | "condition-duration-delta";
+  readonly amount: number;
+  readonly unit: WeaponEffectUnit;
+  readonly target: string;
+  readonly condition: WeaponConditionPredicate;
+}
+
+export interface WeaponDamageTypeConversionEffect extends WeaponModBaseEffect {
+  readonly kind: "damage-type-conversion";
+  readonly damageType: string;
+  readonly scope: "weapon-damage" | "unknown";
+  readonly condition: WeaponConditionPredicate;
+}
+
+export interface WeaponChanceEffect extends WeaponModBaseEffect {
+  readonly kind: "casting-time-chance" | "skill-recharge-chance";
+  readonly probabilityPercent: number;
+  readonly magnitudePercent: number;
+  readonly subject: string;
+  readonly scope: string;
+  readonly condition: WeaponConditionPredicate;
+}
+
+export interface WeaponNoteOnlyEffect extends WeaponModBaseEffect {
+  readonly kind: "note-only";
+  readonly noteCode: string;
+  readonly text: string;
+}
+
+export interface WeaponUnknownEffect extends WeaponModBaseEffect {
+  readonly kind: "unknown";
+  readonly sourceField: string;
+  readonly reason: string;
+}
+
+export type WeaponModEffect =
+  | WeaponNumericEffect
+  | WeaponDamageTypeConversionEffect
+  | WeaponChanceEffect
+  | WeaponNoteOnlyEffect
+  | WeaponUnknownEffect;
+
+export interface WeaponCatalogSetSummary {
+  readonly catalogSetVersion: string;
+  readonly catalogSetDigest: string;
+  readonly sourceSetDigest: string;
+  readonly sourcePlanDigest: string;
+  readonly sourceAuthorityVersion: string;
+  readonly selectedEvidenceDigest: string;
+  readonly profile: "epic-12-weapons-and-mods";
+  readonly weaponCatalogVersion: string;
+  readonly weaponModCatalogVersion: string;
+  readonly weaponCatalogDigest: string;
+  readonly weaponModCatalogDigest: string;
+  readonly qaGate: "pass";
+}
+
+export interface WeaponSourceSetSummary {
+  readonly seedTitles: readonly string[];
+  readonly detailPageTitles: readonly string[];
+  readonly sourceSetDigest: string;
+  readonly sourcePlanDigest: string;
+  readonly sourceAuthorityVersion: string;
+  readonly sourceAuthority: string;
+  readonly idPolicy: string;
+  readonly baseIdentityRegistryDigest: string;
+  readonly modIdentityRegistryDigest: string;
+  readonly acceptedWeaponBaseCount: number;
+  readonly acceptedWeaponModifierCount: number;
+  readonly relationshipCount: number;
+  readonly exclusionCount: number;
+  readonly unsupportedCount: number;
+  readonly ambiguousCount: number;
+  readonly historicalCount: number;
+  readonly blockingFindingCount: number;
+  readonly selectedEvidence: string;
+  readonly planningAmendment: string | null;
+}
+
+export interface WeaponCatalogDependencySummary {
+  readonly id: "epic-03-professions-attributes";
+  readonly catalogVersion: string;
+  readonly artifactDigest: string;
+  readonly manifestDigest: string;
+  readonly qaGate: "pass";
+  readonly sectionDigests: readonly CatalogSectionDigest[];
+}
+
+export interface WeaponIdentityRegistrySummary {
+  readonly namespace: "weapon-base" | "weapon-modifier";
+  readonly registryVersion: 1;
+  readonly recordCount: number;
+  readonly tombstoneCount: number;
+  readonly digest: string;
+  readonly policy: string;
+}
+
+export interface WeaponSourceSetDisposition {
+  readonly id: string;
+  readonly weaponId: WeaponId | null;
+  readonly weaponModifierId: WeaponModifierId | null;
+  readonly templateItemId: TemplateEquipmentItemId | null;
+  readonly templateModifierId: TemplateEquipmentModifierId | null;
+  readonly requestedTitle: string;
+  readonly kind: WeaponSourceSetDispositionKind;
+  readonly reason: string;
+  readonly reviewId: string | null;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface CatalogWeaponBaseRecord {
+  readonly id: WeaponId;
+  readonly sourceKey: string;
+  readonly variantKey: string;
+  readonly name: string;
+  readonly normalizedName: string;
+  readonly wikiUrl: string;
+  readonly pageIdentity: WeaponPageIdentity;
+  readonly familyKey: string;
+  readonly family: string;
+  readonly variant: string | null;
+  readonly equipRole: WeaponEquipRole;
+  readonly handedness: WeaponHandedness;
+  readonly modeAvailability: WeaponModeAvailability;
+  readonly damage: WeaponDamage;
+  readonly requirement: WeaponRequirement;
+  readonly allowedModifierSlots: readonly WeaponAllowedModifierSlot[];
+  readonly templateItems: readonly WeaponTemplateItemCrosswalk[];
+  readonly displayState: WeaponBaseDisplayState;
+  readonly iconId: string | null;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface CatalogWeaponModRecord {
+  readonly id: WeaponModifierId;
+  readonly sourceKey: string;
+  readonly variantKey: string;
+  readonly name: string;
+  readonly normalizedName: string;
+  readonly wikiUrl: string;
+  readonly pageIdentity: WeaponPageIdentity;
+  readonly familyKey: string;
+  readonly family: WeaponModifierFamily;
+  readonly occupiedSlot: WeaponModifierSlot;
+  readonly applicableWeaponFamilies: readonly string[];
+  readonly applicability: WeaponModApplicability;
+  readonly modeAvailability: WeaponModeAvailability;
+  readonly templateModifiers: readonly WeaponModTemplateModifierCrosswalk[];
+  readonly effects: readonly WeaponModEffect[];
+  readonly effectCompleteness: WeaponEffectCompleteness;
+  readonly displayState: WeaponModDisplayState;
+  readonly iconId: string | null;
+  readonly provenance: CatalogFieldProvenance;
+}
+
+export interface WeaponBaseCatalog {
+  readonly schemaVersion: SchemaVersion;
+  readonly catalogVersion: CatalogVersionId | string;
+  readonly catalogSetVersion: string;
+  readonly catalogSetDigest: string;
+  readonly sectionDigests: readonly CatalogSectionDigest[];
+  readonly generatedAt: string;
+  readonly generator: string;
+  readonly profile: WeaponAndModCatalogProfile;
+  readonly dependencyDigests: readonly WeaponCatalogDependencySummary[];
+  readonly sourceSet: WeaponSourceSetSummary;
+  readonly releaseSet: WeaponCatalogSetSummary;
+  readonly identityRegistry: WeaponIdentityRegistrySummary;
+  readonly dispositions: readonly WeaponSourceSetDisposition[];
+  readonly weaponBases: readonly CatalogWeaponBaseRecord[];
+  readonly remoteMedia: readonly RemoteMediaMetadata[];
+}
+
+export interface WeaponModCatalog {
+  readonly schemaVersion: SchemaVersion;
+  readonly catalogVersion: CatalogVersionId | string;
+  readonly catalogSetVersion: string;
+  readonly catalogSetDigest: string;
+  readonly sectionDigests: readonly CatalogSectionDigest[];
+  readonly generatedAt: string;
+  readonly generator: string;
+  readonly profile: WeaponAndModCatalogProfile;
+  readonly dependencyDigests: readonly WeaponCatalogDependencySummary[];
+  readonly sourceSet: WeaponSourceSetSummary;
+  readonly releaseSet: WeaponCatalogSetSummary;
+  readonly identityRegistry: WeaponIdentityRegistrySummary;
+  readonly dispositions: readonly WeaponSourceSetDisposition[];
+  readonly weaponMods: readonly CatalogWeaponModRecord[];
   readonly remoteMedia: readonly RemoteMediaMetadata[];
 }
 

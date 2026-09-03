@@ -124,6 +124,31 @@ class CliTests(unittest.TestCase):
         finally:
             shutil.rmtree(tmp)
 
+    def test_epic12_fixture_profile_command_prints_catalog_summary(self) -> None:
+        tmp = Path(tempfile.mkdtemp(prefix="bw_cli_epic12_test_"))
+        stdout = io.StringIO()
+        try:
+            with contextlib.redirect_stdout(stdout):
+                exit_code = main(
+                    [
+                        "fixture",
+                        "--profile",
+                        "epic-12-weapons-and-mods",
+                        "--root",
+                        str(tmp),
+                        "--fixture-root",
+                        str(FIXTURE_ROOT),
+                    ]
+                )
+
+            self.assertEqual(exit_code, 0)
+            output = stdout.getvalue()
+            self.assertIn("records: 20", output)
+            self.assertIn("weapons.catalog.qa.json", output)
+            self.assertTrue((tmp / "data/generated/epic-12/weapon-mods.catalog.json").exists())
+        finally:
+            shutil.rmtree(tmp)
+
     def test_live_mode_requires_explicit_network_intent_and_title(self) -> None:
         stderr = io.StringIO()
         with contextlib.redirect_stderr(stderr):
@@ -138,9 +163,13 @@ class CliTests(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 main(["live", "--profile", "epic-11-insignias", "--allow-live-network"])
             with self.assertRaises(SystemExit):
+                main(["live", "--profile", "epic-12-weapons-and-mods", "--allow-live-network"])
+            with self.assertRaises(SystemExit):
                 main(["offline", "--profile", "epic-10-runes"])
             with self.assertRaises(SystemExit):
                 main(["offline", "--profile", "epic-11-insignias"])
+            with self.assertRaises(SystemExit):
+                main(["offline", "--profile", "epic-12-weapons-and-mods"])
 
     def test_blocking_baseline_mismatch_writes_qa_report_before_nonzero_exit(self) -> None:
         tmp = Path(tempfile.mkdtemp(prefix="bw_cli_block_test_"))

@@ -1,0 +1,1423 @@
+{
+  "catalogSetDigest": "e0b54057f9708d2cef50839e918066b29552f088d477f6178657b5ef9cdc49b2",
+  "catalogSetVersion": "weapon-mods-set-e0b54057f9708d2c",
+  "catalogVersion": "weapon-mods-49401e6c3fae543b",
+  "dependencyDigests": [
+    {
+      "artifactDigest": "1cb3f79b7139cf26adbcf40b600094c2860796c60dcd9f1ba75bad694d07c8b4",
+      "catalogVersion": "pa-de7831a31d4be2f5",
+      "id": "epic-03-professions-attributes",
+      "manifestDigest": "1c6379112f9ac9c1d669c6e60e3c045ff7ca52dad8a84b2b494508da4c41e55e",
+      "qaGate": "pass",
+      "sectionDigests": [
+        {
+          "digest": "71727b2ff6b4cd11b70ac5a3425823c96f9e746ef9f0c06b572acf8df22c7644",
+          "section": "templateCrosswalk"
+        },
+        {
+          "digest": "be78d97c2cf7a7138441a382deba5de53a9554496d99a133b889f166df1f06ea",
+          "section": "professions"
+        },
+        {
+          "digest": "12761c5f2ffe70533710096ee8f447df336d6dc1cbf3f9cd16b0e3567f9975dc",
+          "section": "attributes"
+        },
+        {
+          "digest": "c623bd0469178039ae26f07340c5692e8e13fd3f0c5ec0bce2c62b9dd76c19fd",
+          "section": "attributePointRules"
+        },
+        {
+          "digest": "fbb708659ca19a455caa6f4c5cd968d6182fb585707f28587ed56b790eda5295",
+          "section": "remoteMedia"
+        }
+      ]
+    }
+  ],
+  "dispositions": [
+    {
+      "id": "weapon-disposition:999001",
+      "kind": "ambiguous",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:999001"
+        ],
+        "notes": "Ambiguous raw item IDs remain visible without allocating new public WeaponId records.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:equipment-template-format:8001"
+        ]
+      },
+      "reason": "Ambiguous raw item IDs remain visible without allocating new public WeaponId records.",
+      "requestedTitle": "Ambiguous weapon skin placeholder",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": 999001,
+      "templateModifierId": null,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:290",
+      "kind": "explicit-exclusion",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:290"
+        ],
+        "notes": "Template modifier ID 290 belongs to EPIC-11 armor insignia ownership and remains outside EPIC-12 weapon modifiers.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:equipment-template-format:8001"
+        ]
+      },
+      "reason": "Template modifier ID 290 belongs to EPIC-11 armor insignia ownership and remains outside EPIC-12 weapon modifiers.",
+      "requestedTitle": "Armor-owned insignia modifier",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": null,
+      "templateModifierId": 290,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:158",
+      "kind": "historical",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:158"
+        ],
+        "notes": "Historical or retired raw modifier IDs are retained as dispositions until a reviewed source reactivates them.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:equipment-template-format:8001"
+        ]
+      },
+      "reason": "Historical or retired raw modifier IDs are retained as dispositions until a reviewed source reactivates them.",
+      "requestedTitle": "Historical weapon modifier placeholder",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": null,
+      "templateModifierId": 158,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:inscription",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:inscription"
+        ],
+        "notes": "Inscription page is source authority for inscription slot behavior and not a standalone record.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:inscription:8004"
+        ]
+      },
+      "reason": "Inscription page is source authority for inscription slot behavior and not a standalone record.",
+      "requestedTitle": "Inscription",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": null,
+      "templateModifierId": null,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:weapon",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:weapon"
+        ],
+        "notes": "Weapon overview is source authority for family/equip-role vocabulary and not a runtime record.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:weapon:8002"
+        ]
+      },
+      "reason": "Weapon overview is source authority for family/equip-role vocabulary and not a runtime record.",
+      "requestedTitle": "Weapon",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": null,
+      "templateModifierId": null,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:weapon-upgrade",
+      "kind": "supported-relationship",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:weapon-upgrade"
+        ],
+        "notes": "Upgrade component page is source authority for modifier slot families and not a standalone record.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:weapon-upgrade:8003"
+        ]
+      },
+      "reason": "Upgrade component page is source authority for modifier slot families and not a standalone record.",
+      "requestedTitle": "Weapon upgrade",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": null,
+      "templateModifierId": null,
+      "weaponId": null,
+      "weaponModifierId": null
+    },
+    {
+      "id": "weapon-disposition:empty-equipment-template-item",
+      "kind": "unsupported",
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-source-set:empty-equipment-template-item"
+        ],
+        "notes": "Template item ID 0 is preserved as raw empty/unsupported equipment input, not a weapon base.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:equipment-template-format:8001"
+        ]
+      },
+      "reason": "Template item ID 0 is preserved as raw empty/unsupported equipment input, not a weapon base.",
+      "requestedTitle": "Empty equipment-template item",
+      "reviewId": "review:epic-12-source-set:2026-09-02",
+      "templateItemId": 0,
+      "templateModifierId": null,
+      "weaponId": null,
+      "weaponModifierId": null
+    }
+  ],
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "generator": "build-wars-ingest/0.1.0",
+  "identityRegistry": {
+    "digest": "c0455d02a0152bf14d48de8578c5cf988e368f281ee9fbe7b9a5353c5986650d",
+    "namespace": "weapon-modifier",
+    "policy": "Public WeaponModifierId values are schema-owned registry allocations keyed by reviewed sourceKey and variantKey. IDs are never allocated from source order, template modifier IDs, or display names, and tombstoned IDs are not reused.",
+    "recordCount": 9,
+    "registryVersion": 1,
+    "tombstoneCount": 0
+  },
+  "profile": {
+    "id": "epic-12-weapons-and-mods",
+    "sourceCaps": {
+      "aggregateByteCap": 25000000,
+      "continuationLimit": 10,
+      "detailPageLimit": 220,
+      "mediaTitleLimit": 220,
+      "parserByteCap": 750000,
+      "qaByteCap": 2000000,
+      "requestLimit": 120,
+      "responseByteCap": 5000000,
+      "retryLimit": 3,
+      "seedPageLimit": 4,
+      "weaponCatalogByteCap": 4000000,
+      "weaponModCatalogByteCap": 4000000
+    },
+    "sourceEpic": "EPIC-12",
+    "sourceTarget": "BACKLOG"
+  },
+  "releaseSet": {
+    "catalogSetDigest": "e0b54057f9708d2cef50839e918066b29552f088d477f6178657b5ef9cdc49b2",
+    "catalogSetVersion": "weapon-mods-set-e0b54057f9708d2c",
+    "profile": "epic-12-weapons-and-mods",
+    "qaGate": "pass",
+    "selectedEvidenceDigest": "a492efbb3b18038188b281fefdf5b916326441b15d68c11f019f27167764ca02",
+    "sourceAuthorityVersion": "epic-12-source-authority-v1",
+    "sourcePlanDigest": "7124493e4a0c3377195d87c1ffa6165a6a70553fb4a13bc81f47eba459d4b57b",
+    "sourceSetDigest": "5622049b9282fffa2fe0513b274256162e76bbf1f8ff2c2aa726545d8602abbe",
+    "weaponCatalogDigest": "0636a67dc4f681a1b27a5d350a923dd5aa0e08dd23e21dde32279a76c08dfb28",
+    "weaponCatalogVersion": "weapons-3bea6ee24ede6328",
+    "weaponModCatalogDigest": "e20e3ee431db46b55fcfda331327c3ed7b5f72a38c8bdbf1e4d0f00354d14dfc",
+    "weaponModCatalogVersion": "weapon-mods-49401e6c3fae543b"
+  },
+  "remoteMedia": [],
+  "schemaVersion": 1,
+  "sectionDigests": [
+    {
+      "digest": "c4904ed8a5e986406269cd89208743ef401a71d2b3e257659249b11774a2c51a",
+      "section": "dependencyDigests"
+    },
+    {
+      "digest": "46b228ed11cf48b8b2c4adc242524c77d81dcc486772ef2041d5975370c89593",
+      "section": "sourceSet"
+    },
+    {
+      "digest": "1f35e85d1f76604be579e2004a6949121a2873679523c703a3d114df6da1351d",
+      "section": "releaseSet"
+    },
+    {
+      "digest": "fa0580f57d97947f660f6e3025af02774659dd7c2c9eb68ae67d567bd78234d7",
+      "section": "identityRegistry"
+    },
+    {
+      "digest": "da24bbf793ad6a10dee0a8eedb831166212c0a67d1def9bd8e59cff047bf52d5",
+      "section": "dispositions"
+    },
+    {
+      "digest": "c342e0f6a082d5e4c40a65c23a34ac5bacb413acf546f210c9d7929c1959453d",
+      "section": "weaponMods"
+    },
+    {
+      "digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "section": "remoteMedia"
+    }
+  ],
+  "sourceSet": {
+    "acceptedWeaponBaseCount": 11,
+    "acceptedWeaponModifierCount": 9,
+    "ambiguousCount": 1,
+    "baseIdentityRegistryDigest": "d7e54a43f621bce8722499e28cc54ed02a85d4bdd645a06821e59ba00bf6cd40",
+    "blockingFindingCount": 0,
+    "detailPageTitles": [
+      "Axe",
+      "Daggers",
+      "Focus item",
+      "Hammer",
+      "Inscription",
+      "Longbow",
+      "Scythe",
+      "Shield",
+      "Spear",
+      "Staff",
+      "Staff Head",
+      "Staff Wrapping",
+      "Sword",
+      "Upgrade component",
+      "Wand"
+    ],
+    "exclusionCount": 1,
+    "historicalCount": 1,
+    "idPolicy": "Public WeaponId and WeaponModifierId values are schema-owned registry allocations keyed by reviewed sourceKey and variantKey. Raw template item/modifier IDs are crosswalk facts only.",
+    "modIdentityRegistryDigest": "c0455d02a0152bf14d48de8578c5cf988e368f281ee9fbe7b9a5353c5986650d",
+    "planningAmendment": null,
+    "relationshipCount": 3,
+    "seedTitles": [
+      "Equipment template format",
+      "Weapon",
+      "Weapon upgrade",
+      "Inscription"
+    ],
+    "selectedEvidence": "complete-selected-snapshot-set",
+    "selectedEvidenceDigest": "a492efbb3b18038188b281fefdf5b916326441b15d68c11f019f27167764ca02",
+    "sourceAuthority": "Equipment template format supplies raw item/modifier ID row evidence; Weapon and reviewed weapon-family pages supply family, handedness, damage, requirement, mode, and slot facts; Weapon upgrade, Inscription, Staff Head, and Staff Wrapping pages supply modifier slot, applicability, and mechanics facts; EPIC-03 supplies profession/attribute joins.",
+    "sourceAuthorityVersion": "epic-12-source-authority-v1",
+    "sourcePlanDigest": "7124493e4a0c3377195d87c1ffa6165a6a70553fb4a13bc81f47eba459d4b57b",
+    "sourceSetDigest": "5622049b9282fffa2fe0513b274256162e76bbf1f8ff2c2aa726545d8602abbe",
+    "unsupportedCount": 1
+  },
+  "weaponMods": [
+    {
+      "applicability": {
+        "familyKeys": [
+          "axe",
+          "sword",
+          "hammer",
+          "longbow",
+          "daggers",
+          "scythe",
+          "spear"
+        ],
+        "kind": "specific-families",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-mod:weapon-modifier:sundering-prefix:applicability"
+          ],
+          "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+            "source:gww:epic-12-fixture:equipment-template-format:8001",
+            "source:gww:epic-12-fixture:weapon-upgrade:8003"
+          ]
+        }
+      },
+      "applicableWeaponFamilies": [
+        "axe",
+        "sword",
+        "hammer",
+        "longbow",
+        "daggers",
+        "scythe",
+        "spear"
+      ],
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "amount": 20,
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-12-weapon-mod:weapon-modifier:sundering-prefix:condition:0"
+              ],
+              "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+              "reviewIds": [
+                "review:epic-12-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+                "source:gww:epic-12-fixture:equipment-template-format:8001",
+                "source:gww:epic-12-fixture:weapon-upgrade:8003"
+              ]
+            },
+            "text": null
+          },
+          "kind": "armor-penetration",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:sundering-prefix:armor-penetration:1"
+            ],
+            "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+            "reviewIds": [
+              "review:epic-12-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "target": "weapon-damage",
+          "unit": "percent"
+        }
+      ],
+      "family": "weapon-prefix",
+      "familyKey": "sundering",
+      "iconId": null,
+      "id": 1001,
+      "modeAvailability": "both",
+      "name": "Sundering Weapon Prefix",
+      "normalizedName": "sundering-weapon-prefix",
+      "occupiedSlot": "prefix",
+      "pageIdentity": {
+        "canonicalTitle": "Upgrade component",
+        "normalizedTitle": "Upgrade component",
+        "pageId": 11114,
+        "redirectedFrom": null,
+        "requestedTitle": "Upgrade component",
+        "revisionId": 8114,
+        "sourceRevisionTimestamp": "2026-08-31T22:14:00Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-mod:weapon-modifier:sundering-prefix:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+          "source:gww:epic-12-fixture:equipment-template-format:8001",
+          "source:gww:epic-12-fixture:weapon-upgrade:8003"
+        ]
+      },
+      "sourceKey": "weapon-modifier:sundering-prefix",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:sundering-prefix:template-modifier:190"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "sourceScope": "weapon-prefix",
+          "status": "active",
+          "templateModifierId": 190
+        }
+      ],
+      "variantKey": "sundering-prefix",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Upgrade_component"
+    },
+    {
+      "applicability": {
+        "kind": "universal",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-mod:weapon-modifier:fortitude-suffix:applicability"
+          ],
+          "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+            "source:gww:epic-12-fixture:equipment-template-format:8001",
+            "source:gww:epic-12-fixture:weapon-upgrade:8003"
+          ]
+        },
+        "reason": "Reviewed v1 suffix fixture is usable across modeled weapon/offhand records."
+      },
+      "applicableWeaponFamilies": [],
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "amount": 30,
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-12-weapon-mod:weapon-modifier:fortitude-suffix:condition:0"
+              ],
+              "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+              "reviewIds": [
+                "review:epic-12-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+                "source:gww:epic-12-fixture:equipment-template-format:8001",
+                "source:gww:epic-12-fixture:weapon-upgrade:8003"
+              ]
+            },
+            "text": null
+          },
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:fortitude-suffix:maximum-health-delta:1"
+            ],
+            "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+            "reviewIds": [
+              "review:epic-12-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ],
+      "family": "weapon-suffix",
+      "familyKey": "fortitude",
+      "iconId": null,
+      "id": 1002,
+      "modeAvailability": "both",
+      "name": "Fortitude Weapon Suffix",
+      "normalizedName": "fortitude-weapon-suffix",
+      "occupiedSlot": "suffix",
+      "pageIdentity": {
+        "canonicalTitle": "Upgrade component",
+        "normalizedTitle": "Upgrade component",
+        "pageId": 11114,
+        "redirectedFrom": null,
+        "requestedTitle": "Upgrade component",
+        "revisionId": 8114,
+        "sourceRevisionTimestamp": "2026-08-31T22:14:00Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-mod:weapon-modifier:fortitude-suffix:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+          "source:gww:epic-12-fixture:equipment-template-format:8001",
+          "source:gww:epic-12-fixture:weapon-upgrade:8003"
+        ]
+      },
+      "sourceKey": "weapon-modifier:fortitude-suffix",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:fortitude-suffix:template-modifier:204"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "sourceScope": "weapon-suffix",
+          "status": "active",
+          "templateModifierId": 204
+        }
+      ],
+      "variantKey": "fortitude-suffix",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Upgrade_component"
+    },
+    {
+      "applicability": {
+        "kind": "universal",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-mod:weapon-modifier:i-have-the-power-inscription:applicability"
+          ],
+          "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-fixture:detail:inscription:8105",
+            "source:gww:epic-12-fixture:equipment-template-format:8001",
+            "source:gww:epic-12-fixture:inscription:8004"
+          ]
+        },
+        "reason": "Reviewed inscription fixture is a generic inscription compatibility case."
+      },
+      "applicableWeaponFamilies": [],
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "amount": 5,
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-12-weapon-mod:weapon-modifier:i-have-the-power-inscription:condition:0"
+              ],
+              "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+              "reviewIds": [
+                "review:epic-12-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-12-fixture:detail:inscription:8105",
+                "source:gww:epic-12-fixture:equipment-template-format:8001",
+                "source:gww:epic-12-fixture:inscription:8004"
+              ]
+            },
+            "text": null
+          },
+          "kind": "maximum-energy-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:i-have-the-power-inscription:maximum-energy-delta:1"
+            ],
+            "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+            "reviewIds": [
+              "review:epic-12-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:inscription:8105",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:inscription:8004"
+            ]
+          },
+          "target": "character",
+          "unit": "energy"
+        }
+      ],
+      "family": "inscription",
+      "familyKey": "inscription:i-have-the-power",
+      "iconId": null,
+      "id": 1003,
+      "modeAvailability": "both",
+      "name": "I Have the Power!",
+      "normalizedName": "i-have-the-power",
+      "occupiedSlot": "inscription",
+      "pageIdentity": {
+        "canonicalTitle": "Inscription",
+        "normalizedTitle": "Inscription",
+        "pageId": 11105,
+        "redirectedFrom": null,
+        "requestedTitle": "Inscription",
+        "revisionId": 8105,
+        "sourceRevisionTimestamp": "2026-08-31T22:05:00Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-mod:weapon-modifier:i-have-the-power-inscription:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:detail:inscription:8105",
+          "source:gww:epic-12-fixture:equipment-template-format:8001",
+          "source:gww:epic-12-fixture:inscription:8004"
+        ]
+      },
+      "sourceKey": "weapon-modifier:i-have-the-power-inscription",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:i-have-the-power-inscription:template-modifier:329"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:inscription:8105",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:inscription:8004"
+            ]
+          },
+          "sourceScope": "inscription",
+          "status": "active",
+          "templateModifierId": 329
+        }
+      ],
+      "variantKey": "i-have-the-power-inscription",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Inscription"
+    },
+    {
+      "applicability": {
+        "familyKeys": [
+          "axe",
+          "sword",
+          "hammer",
+          "longbow",
+          "daggers",
+          "scythe",
+          "spear"
+        ],
+        "kind": "specific-families",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-mod:weapon-modifier:fiery-prefix:applicability"
+          ],
+          "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+            "source:gww:epic-12-fixture:equipment-template-format:8001",
+            "source:gww:epic-12-fixture:weapon-upgrade:8003"
+          ]
+        }
+      },
+      "applicableWeaponFamilies": [
+        "axe",
+        "sword",
+        "hammer",
+        "longbow",
+        "daggers",
+        "scythe",
+        "spear"
+      ],
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-12-weapon-mod:weapon-modifier:fiery-prefix:condition:0"
+              ],
+              "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+              "reviewIds": [
+                "review:epic-12-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+                "source:gww:epic-12-fixture:equipment-template-format:8001",
+                "source:gww:epic-12-fixture:weapon-upgrade:8003"
+              ]
+            },
+            "text": null
+          },
+          "damageType": "fire",
+          "kind": "damage-type-conversion",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:fiery-prefix:damage-type-conversion:1"
+            ],
+            "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+            "reviewIds": [
+              "review:epic-12-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "scope": "weapon-damage"
+        }
+      ],
+      "family": "weapon-prefix",
+      "familyKey": "fiery",
+      "iconId": null,
+      "id": 1004,
+      "modeAvailability": "both",
+      "name": "Fiery Weapon Prefix",
+      "normalizedName": "fiery-weapon-prefix",
+      "occupiedSlot": "prefix",
+      "pageIdentity": {
+        "canonicalTitle": "Upgrade component",
+        "normalizedTitle": "Upgrade component",
+        "pageId": 11114,
+        "redirectedFrom": null,
+        "requestedTitle": "Upgrade component",
+        "revisionId": 8114,
+        "sourceRevisionTimestamp": "2026-08-31T22:14:00Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-mod:weapon-modifier:fiery-prefix:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+          "source:gww:epic-12-fixture:equipment-template-format:8001",
+          "source:gww:epic-12-fixture:weapon-upgrade:8003"
+        ]
+      },
+      "sourceKey": "weapon-modifier:fiery-prefix",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:fiery-prefix:template-modifier:391"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "sourceScope": "weapon-prefix",
+          "status": "active",
+          "templateModifierId": 391
+        }
+      ],
+      "variantKey": "fiery-prefix",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Upgrade_component"
+    },
+    {
+      "applicability": {
+        "familyKeys": [
+          "staff"
+        ],
+        "kind": "specific-families",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-mod:weapon-modifier:staff-head-insightful:applicability"
+          ],
+          "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-fixture:detail:staff-head:8111",
+            "source:gww:epic-12-fixture:equipment-template-format:8001",
+            "source:gww:epic-12-fixture:weapon-upgrade:8003"
+          ]
+        }
+      },
+      "applicableWeaponFamilies": [
+        "staff"
+      ],
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "amount": 5,
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-12-weapon-mod:weapon-modifier:staff-head-insightful:condition:0"
+              ],
+              "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+              "reviewIds": [
+                "review:epic-12-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-12-fixture:detail:staff-head:8111",
+                "source:gww:epic-12-fixture:equipment-template-format:8001",
+                "source:gww:epic-12-fixture:weapon-upgrade:8003"
+              ]
+            },
+            "text": null
+          },
+          "kind": "maximum-energy-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:staff-head-insightful:maximum-energy-delta:1"
+            ],
+            "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+            "reviewIds": [
+              "review:epic-12-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:staff-head:8111",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "target": "character",
+          "unit": "energy"
+        }
+      ],
+      "family": "staff-head",
+      "familyKey": "staff-head:insightful",
+      "iconId": null,
+      "id": 1005,
+      "modeAvailability": "both",
+      "name": "Insightful Staff Head",
+      "normalizedName": "insightful-staff-head",
+      "occupiedSlot": "staff-head",
+      "pageIdentity": {
+        "canonicalTitle": "Staff Head",
+        "normalizedTitle": "Staff Head",
+        "pageId": 11111,
+        "redirectedFrom": null,
+        "requestedTitle": "Staff Head",
+        "revisionId": 8111,
+        "sourceRevisionTimestamp": "2026-08-31T22:11:00Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-mod:weapon-modifier:staff-head-insightful:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:detail:staff-head:8111",
+          "source:gww:epic-12-fixture:equipment-template-format:8001",
+          "source:gww:epic-12-fixture:weapon-upgrade:8003"
+        ]
+      },
+      "sourceKey": "weapon-modifier:staff-head-insightful",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:staff-head-insightful:template-modifier:392"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:staff-head:8111",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "sourceScope": "staff-head",
+          "status": "active",
+          "templateModifierId": 392
+        }
+      ],
+      "variantKey": "staff-head-insightful",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Staff_Head"
+    },
+    {
+      "applicability": {
+        "familyKeys": [
+          "staff"
+        ],
+        "kind": "specific-families",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-mod:weapon-modifier:staff-wrapping-enchanting:applicability"
+          ],
+          "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-fixture:detail:staff-wrapping:8112",
+            "source:gww:epic-12-fixture:equipment-template-format:8001",
+            "source:gww:epic-12-fixture:weapon-upgrade:8003"
+          ]
+        }
+      },
+      "applicableWeaponFamilies": [
+        "staff"
+      ],
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "amount": 20,
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-12-weapon-mod:weapon-modifier:staff-wrapping-enchanting:condition:0"
+              ],
+              "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+              "reviewIds": [
+                "review:epic-12-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-12-fixture:detail:staff-wrapping:8112",
+                "source:gww:epic-12-fixture:equipment-template-format:8001",
+                "source:gww:epic-12-fixture:weapon-upgrade:8003"
+              ]
+            },
+            "text": null
+          },
+          "kind": "enchantment-duration-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:staff-wrapping-enchanting:enchantment-duration-delta:1"
+            ],
+            "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+            "reviewIds": [
+              "review:epic-12-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:staff-wrapping:8112",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "target": "enchantment-duration",
+          "unit": "percent"
+        }
+      ],
+      "family": "staff-wrapping",
+      "familyKey": "staff-wrapping:enchanting",
+      "iconId": null,
+      "id": 1006,
+      "modeAvailability": "both",
+      "name": "Staff Wrapping of Enchanting",
+      "normalizedName": "staff-wrapping-of-enchanting",
+      "occupiedSlot": "staff-wrapping",
+      "pageIdentity": {
+        "canonicalTitle": "Staff Wrapping",
+        "normalizedTitle": "Staff Wrapping",
+        "pageId": 11112,
+        "redirectedFrom": null,
+        "requestedTitle": "Staff Wrapping",
+        "revisionId": 8112,
+        "sourceRevisionTimestamp": "2026-08-31T22:12:00Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-mod:weapon-modifier:staff-wrapping-enchanting:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:detail:staff-wrapping:8112",
+          "source:gww:epic-12-fixture:equipment-template-format:8001",
+          "source:gww:epic-12-fixture:weapon-upgrade:8003"
+        ]
+      },
+      "sourceKey": "weapon-modifier:staff-wrapping-enchanting",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:staff-wrapping-enchanting:template-modifier:393"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:staff-wrapping:8112",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "sourceScope": "staff-wrapping",
+          "status": "active",
+          "templateModifierId": 393
+        }
+      ],
+      "variantKey": "staff-wrapping-enchanting",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Staff_Wrapping"
+    },
+    {
+      "applicability": {
+        "familyKeys": [
+          "shield"
+        ],
+        "kind": "specific-families",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-mod:weapon-modifier:shield-handle-fortitude:applicability"
+          ],
+          "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-fixture:detail:shield:8108",
+            "source:gww:epic-12-fixture:equipment-template-format:8001",
+            "source:gww:epic-12-fixture:weapon-upgrade:8003"
+          ]
+        }
+      },
+      "applicableWeaponFamilies": [
+        "shield"
+      ],
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "amount": 30,
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-12-weapon-mod:weapon-modifier:shield-handle-fortitude:condition:0"
+              ],
+              "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+              "reviewIds": [
+                "review:epic-12-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-12-fixture:detail:shield:8108",
+                "source:gww:epic-12-fixture:equipment-template-format:8001",
+                "source:gww:epic-12-fixture:weapon-upgrade:8003"
+              ]
+            },
+            "text": null
+          },
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:shield-handle-fortitude:maximum-health-delta:1"
+            ],
+            "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+            "reviewIds": [
+              "review:epic-12-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:shield:8108",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ],
+      "family": "shield-offhand",
+      "familyKey": "shield-handle:fortitude",
+      "iconId": null,
+      "id": 1007,
+      "modeAvailability": "both",
+      "name": "Shield Handle of Fortitude",
+      "normalizedName": "shield-handle-of-fortitude",
+      "occupiedSlot": "shield-handle",
+      "pageIdentity": {
+        "canonicalTitle": "Shield",
+        "normalizedTitle": "Shield",
+        "pageId": 11108,
+        "redirectedFrom": null,
+        "requestedTitle": "Shield",
+        "revisionId": 8108,
+        "sourceRevisionTimestamp": "2026-08-31T22:08:00Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-mod:weapon-modifier:shield-handle-fortitude:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:detail:shield:8108",
+          "source:gww:epic-12-fixture:equipment-template-format:8001",
+          "source:gww:epic-12-fixture:weapon-upgrade:8003"
+        ]
+      },
+      "sourceKey": "weapon-modifier:shield-handle-fortitude",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:shield-handle-fortitude:template-modifier:394"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:shield:8108",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "sourceScope": "shield-offhand",
+          "status": "active",
+          "templateModifierId": 394
+        }
+      ],
+      "variantKey": "shield-handle-fortitude",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Shield"
+    },
+    {
+      "applicability": {
+        "familyKeys": [
+          "focus"
+        ],
+        "kind": "specific-families",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-mod:weapon-modifier:focus-core-aptitude:applicability"
+          ],
+          "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-fixture:detail:focus-item:8103",
+            "source:gww:epic-12-fixture:equipment-template-format:8001",
+            "source:gww:epic-12-fixture:weapon-upgrade:8003"
+          ]
+        }
+      },
+      "applicableWeaponFamilies": [
+        "focus"
+      ],
+      "displayState": "structured-only",
+      "effectCompleteness": "structured",
+      "effects": [
+        {
+          "condition": {
+            "kind": "always",
+            "provenance": {
+              "claimIds": [
+                "claim:epic-12-weapon-mod:weapon-modifier:focus-core-aptitude:condition:0"
+              ],
+              "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+              "reviewIds": [
+                "review:epic-12-effect-semantics:2026-09-02"
+              ],
+              "sourceIds": [
+                "source:gww:epic-12-fixture:detail:focus-item:8103",
+                "source:gww:epic-12-fixture:equipment-template-format:8001",
+                "source:gww:epic-12-fixture:weapon-upgrade:8003"
+              ]
+            },
+            "text": null
+          },
+          "kind": "casting-time-chance",
+          "magnitudePercent": 50,
+          "probabilityPercent": 20,
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:focus-core-aptitude:casting-time-chance:1"
+            ],
+            "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+            "reviewIds": [
+              "review:epic-12-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:focus-item:8103",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "scope": "equipped-focus",
+          "subject": "spells"
+        }
+      ],
+      "family": "caster",
+      "familyKey": "focus-core:aptitude",
+      "iconId": null,
+      "id": 1008,
+      "modeAvailability": "both",
+      "name": "Focus Core of Aptitude",
+      "normalizedName": "focus-core-of-aptitude",
+      "occupiedSlot": "focus-core",
+      "pageIdentity": {
+        "canonicalTitle": "Focus item",
+        "normalizedTitle": "Focus item",
+        "pageId": 11103,
+        "redirectedFrom": null,
+        "requestedTitle": "Focus item",
+        "revisionId": 8103,
+        "sourceRevisionTimestamp": "2026-08-31T22:03:00Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-mod:weapon-modifier:focus-core-aptitude:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:detail:focus-item:8103",
+          "source:gww:epic-12-fixture:equipment-template-format:8001",
+          "source:gww:epic-12-fixture:weapon-upgrade:8003"
+        ]
+      },
+      "sourceKey": "weapon-modifier:focus-core-aptitude",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:focus-core-aptitude:template-modifier:395"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:focus-item:8103",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "sourceScope": "caster",
+          "status": "active",
+          "templateModifierId": 395
+        }
+      ],
+      "variantKey": "focus-core-aptitude",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Focus_item"
+    },
+    {
+      "applicability": {
+        "familyKeys": [
+          "sword"
+        ],
+        "kind": "specific-families",
+        "provenance": {
+          "claimIds": [
+            "claim:epic-12-weapon-mod:weapon-modifier:mastery-chance-suffix:applicability"
+          ],
+          "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+          "reviewIds": [
+            "review:epic-12-source-set:2026-09-02"
+          ],
+          "sourceIds": [
+            "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+            "source:gww:epic-12-fixture:equipment-template-format:8001",
+            "source:gww:epic-12-fixture:weapon-upgrade:8003"
+          ]
+        }
+      },
+      "applicableWeaponFamilies": [
+        "sword"
+      ],
+      "displayState": "reviewed-short-text",
+      "effectCompleteness": "note-only",
+      "effects": [
+        {
+          "kind": "note-only",
+          "noteCode": "mastery-effect-deferred",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:mastery-chance-suffix:note-only:1"
+            ],
+            "notes": "Effect semantics are normalized from reviewed EPIC-12 raw facts.",
+            "reviewIds": [
+              "review:epic-12-effect-semantics:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "text": "Chance-based mastery behavior is preserved for EPIC-21 instead of guessed arithmetic."
+        }
+      ],
+      "family": "weapon-suffix",
+      "familyKey": "mastery-chance",
+      "iconId": null,
+      "id": 1009,
+      "modeAvailability": "both",
+      "name": "Weapon Mastery Suffix",
+      "normalizedName": "weapon-mastery-suffix",
+      "occupiedSlot": "suffix",
+      "pageIdentity": {
+        "canonicalTitle": "Upgrade component",
+        "normalizedTitle": "Upgrade component",
+        "pageId": 11114,
+        "redirectedFrom": null,
+        "requestedTitle": "Upgrade component",
+        "revisionId": 8114,
+        "sourceRevisionTimestamp": "2026-08-31T22:14:00Z"
+      },
+      "provenance": {
+        "claimIds": [
+          "claim:epic-12-weapon-mod:weapon-modifier:mastery-chance-suffix:record"
+        ],
+        "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+        "reviewIds": [
+          "review:epic-12-source-set:2026-09-02"
+        ],
+        "sourceIds": [
+          "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+          "source:gww:epic-12-fixture:equipment-template-format:8001",
+          "source:gww:epic-12-fixture:weapon-upgrade:8003"
+        ]
+      },
+      "sourceKey": "weapon-modifier:mastery-chance-suffix",
+      "templateModifiers": [
+        {
+          "mode": "both",
+          "provenance": {
+            "claimIds": [
+              "claim:epic-12-weapon-mod:weapon-modifier:mastery-chance-suffix:template-modifier:396"
+            ],
+            "notes": "Parsed from digest-bound EPIC-12 source snapshot and reviewed source-plan facts.",
+            "reviewIds": [
+              "review:epic-12-source-set:2026-09-02"
+            ],
+            "sourceIds": [
+              "source:gww:epic-12-fixture:detail:upgrade-component:8114",
+              "source:gww:epic-12-fixture:equipment-template-format:8001",
+              "source:gww:epic-12-fixture:weapon-upgrade:8003"
+            ]
+          },
+          "sourceScope": "weapon-suffix",
+          "status": "active",
+          "templateModifierId": 396
+        }
+      ],
+      "variantKey": "mastery-chance-suffix",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/Upgrade_component"
+    }
+  ]
+}

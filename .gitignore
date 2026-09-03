@@ -44,6 +44,12 @@ data/generated/epic-10/*
 data/generated/epic-11/*
 !data/generated/epic-11/insignias.catalog.json
 !data/generated/epic-11/insignias.catalog.manifest.json
+!data/generated/epic-12/
+data/generated/epic-12/*
+!data/generated/epic-12/weapons.catalog.json
+!data/generated/epic-12/weapons.catalog.manifest.json
+!data/generated/epic-12/weapon-mods.catalog.json
+!data/generated/epic-12/weapon-mods.catalog.manifest.json
 data/qa/*
 !data/qa/README.md
 !data/qa/epic-03/
@@ -58,3 +64,7 @@ data/qa/epic-10/*
 !data/qa/epic-11/
 data/qa/epic-11/*
 !data/qa/epic-11/insignias.catalog.qa.json
+!data/qa/epic-12/
+data/qa/epic-12/*
+!data/qa/epic-12/weapons.catalog.qa.json
+!data/qa/epic-12/weapon-mods.catalog.qa.json

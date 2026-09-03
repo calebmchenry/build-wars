@@ -1,0 +1,9 @@
+== Build Wars fixture upgrade authority ==
+This synthetic page names representative prefix, suffix, staff, shield, and caster modifier families.
+
+* weapon prefix
+* weapon suffix
+* staff head
+* staff wrapping
+* shield handle
+* focus core

@@ -2,12 +2,14 @@
 id: BW-1203
 title: Upgrade Component and Inscription Sources
 epic: EPIC-12
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1201
+planned_sprint: SPRINT-013
+completed_sprint: SPRINT-013
 created: 2026-09-02
-updated: 2026-09-02
+updated: 2026-09-03
 ---
 
 # BW-1203: Upgrade Component and Inscription Sources
@@ -46,3 +48,14 @@ equipment-template resolution.
 
 - Focused Python extractor tests for EPIC-12 upgrade and inscription fixtures
 - Fixed-clock fixture regeneration for EPIC-12 output
+
+## Closeout Evidence
+
+- SPRINT-013 added modifier extraction for 9 runtime-eligible weapon modifiers covering prefix,
+  suffix, inscription, staff head, staff wrapping, shield handle, focus core, chance, and note-only
+  behavior cases.
+- Extracted records include page identity, modifier family, occupied slot, applicability,
+  raw template modifier crosswalks, raw effect fields, effect completeness inputs, and compact
+  provenance.
+- Validation passed: EPIC-12 fixture regeneration, focused modifier extractor tests, and selected
+  production snapshot replay.

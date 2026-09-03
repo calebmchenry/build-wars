@@ -2,12 +2,14 @@
 id: BW-1207
 title: Weapons/Mods Runtime Docs and Closeout
 epic: EPIC-12
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1206
+planned_sprint: SPRINT-013
+completed_sprint: SPRINT-013
 created: 2026-09-02
-updated: 2026-09-02
+updated: 2026-09-03
 ---
 
 # BW-1207: Weapons/Mods Runtime Docs and Closeout
@@ -42,3 +44,13 @@ scope.
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- SPRINT-013 updated README, data docs, data-script docs, source-snapshot/QA/generated artifact
+  docs, compendium data-ingestion notes, and added `compendium/weapons-and-mods-catalog.md`.
+- Documentation records exact runtime artifact paths, fixture/live/offline commands, runtime/audit
+  boundaries, source authority, identity policy, lookup outcomes, compatibility helper scope, and
+  EPIC-13/14/17/20/21 handoffs.
+- Current editor, local persistence, sharing, backup/restore, EPIC-03/04/10/11 runtime catalogs, and
+  EPIC-05 raw equipment-template decode/export behavior remain unchanged.

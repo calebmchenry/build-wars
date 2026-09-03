@@ -1,0 +1,2 @@
+{{BuildWars weapon facts|required=Requires 12 Axe Mastery}}
+Synthetic axe detail fixture.

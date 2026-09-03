@@ -117,6 +117,37 @@ EPIC-11 uses fixed-clock fixture generation and exact selected snapshot-set offl
 deterministic catalog, manifest, QA, section digest, finding ID, source ordering, source-set
 disposition, identity registry, and effect-order checks.
 
+## EPIC-12 Promoted Catalogs
+
+BW-1206 approves exactly these generated files:
+
+- `data/generated/epic-12/weapons.catalog.json`
+- `data/generated/epic-12/weapons.catalog.manifest.json`
+- `data/generated/epic-12/weapon-mods.catalog.json`
+- `data/generated/epic-12/weapon-mods.catalog.manifest.json`
+
+The weapon catalog contains runtime-eligible weapon base facts: source-set summary, compact
+dispositions, identity-registry facts, EPIC-03 dependency digests, family/equip/handedness facts,
+tagged damage and requirement states, allowed modifier slots, active raw template item crosswalks,
+nullable icon IDs, metadata-only remote media references, section digests, and semantic
+`catalogVersion`.
+
+The modifier catalog contains runtime-eligible weapon modifier facts: source-set summary, compact
+dispositions, identity-registry facts, EPIC-03 dependency digests, modifier family and occupied slot
+facts, applicability facts, active raw template modifier crosswalks, typed effects, effect
+completeness, nullable icon IDs, metadata-only remote media references, section digests, and
+semantic `catalogVersion`.
+
+Both catalogs share one release set. The adjacent manifests record source-plan path/digest,
+source-set digest, selected snapshot-set path/digest, child snapshot manifests, dependency digests,
+artifact digest, counterpart artifact path, QA path, review records, and
+`commitDecision: exact-path-allowlisted`. Runtime code must not read manifests, QA reports, source
+plans, snapshot-set manifests, raw snapshots, Python tooling, wiki APIs, or icon bytes.
+
+EPIC-12 uses fixed-clock fixture generation and exact selected snapshot-set offline replay for
+deterministic catalog, manifest, QA, section digest, source ordering, source-set disposition,
+identity registry, effect semantics, and counterpart release-set checks.
+
 ## Baselines
 
 Baseline comparison is opt-in. No baseline produces an info finding; schema mismatch blocks public

@@ -3,13 +3,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from .config import DEFAULT_LIMITS, EPIC_04_LIMITS, EPIC_10_LIMITS, EPIC_11_LIMITS
+from .config import DEFAULT_LIMITS, EPIC_04_LIMITS, EPIC_10_LIMITS, EPIC_11_LIMITS, EPIC_12_LIMITS
 
 EPIC_02_PROFILE_ID = "guild-wars-wiki"
 EPIC_03_PROFILE_ID = "epic-03-professions-attributes"
 EPIC_04_PROFILE_ID = "epic-04-skills"
 EPIC_10_PROFILE_ID = "epic-10-runes"
 EPIC_11_PROFILE_ID = "epic-11-insignias"
+EPIC_12_PROFILE_ID = "epic-12-weapons-and-mods"
 
 EPIC_03_PROFESSIONS = (
     "Warrior",
@@ -59,6 +60,14 @@ EPIC_11_SOURCE_TITLES = (
     "Effect stacking",
 )
 EPIC_11_INSIGNIA_ICON_IMAGEINFO_TITLE = "EPIC-11 insignia icon imageinfo"
+EPIC_12_SOURCE_TITLES = (
+    "Equipment template format",
+    "Weapon",
+    "Weapon upgrade",
+    "Inscription",
+)
+EPIC_12_WEAPON_MODS_RELATIVE_PATH = Path("epic-12/weapon-mods.catalog.json")
+EPIC_12_WEAPON_MODS_QA_RELATIVE_PATH = Path("epic-12/weapon-mods.catalog.qa.json")
 
 
 @dataclass(frozen=True)
@@ -178,12 +187,32 @@ EPIC_11_PROFILE = DataIngestionProfile(
     qa_byte_cap=1_000_000,
 )
 
+EPIC_12_PROFILE = DataIngestionProfile(
+    id=EPIC_12_PROFILE_ID,
+    source_target="BACKLOG",
+    source_epic="EPIC-12",
+    generated_relative_path=Path("epic-12/weapons.catalog.json"),
+    qa_relative_path=Path("epic-12/weapons.catalog.qa.json"),
+    fixture_relative_path=Path("generated/fixture-weapons.catalog.json"),
+    source_titles=EPIC_12_SOURCE_TITLES,
+    detail_titles=(),
+    page_limit=EPIC_12_LIMITS.page_limit,
+    request_limit=EPIC_12_LIMITS.request_limit,
+    response_byte_cap=EPIC_12_LIMITS.response_byte_cap,
+    parser_byte_cap=EPIC_12_LIMITS.max_parser_bytes,
+    media_title_limit=220,
+    aggregate_byte_cap=25_000_000,
+    catalog_byte_cap=4_000_000,
+    qa_byte_cap=2_000_000,
+)
+
 PROFILES = {
     EPIC_02_PROFILE.id: EPIC_02_PROFILE,
     EPIC_03_PROFILE.id: EPIC_03_PROFILE,
     EPIC_04_PROFILE.id: EPIC_04_PROFILE,
     EPIC_10_PROFILE.id: EPIC_10_PROFILE,
     EPIC_11_PROFILE.id: EPIC_11_PROFILE,
+    EPIC_12_PROFILE.id: EPIC_12_PROFILE,
 }
 
 
