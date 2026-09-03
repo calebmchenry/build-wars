@@ -22,10 +22,7 @@ Epics are ordered roughly by implementation dependency. The `track` column keeps
 | 15 | functional | [Title Rank Controls and PvE-only](15-title-tracks-and-pve-only/EPIC.md) | Default title-scaled skills to max rank and provide compact controls for user rank overrides. |
 | 16 | functional | [Multi-Build Workspace](16-heroes-and-henchmen/EPIC.md) | View, compare, edit, duplicate, and save multiple complete build loadouts together. |
 | 17 | functional | [Party Semantics and Sharing](17-party-and-hero-builder/EPIC.md) | Add party labels, ordering, validation, and sharing on top of multi-build workspaces. |
-| 18 | content | [Community Build Knowledge](18-community-build-knowledge/EPIC.md) | Model PvX/GW1 Builds style metadata, variants, ratings, usage, counters, and synergy. |
-| 19 | functional | [Guide Authoring](19-guide-authoring/EPIC.md) | Write guides with embedded builds, variants, equipment, and skill links. |
-| 20 | functional | [Search and Discovery](20-search-and-discovery/EPIC.md) | Search and filter skills, builds, guides, parties, and imported community metadata. |
-| 21 | functional | [Advanced Analysis](21-advanced-analysis/EPIC.md) | Add revision awareness, breakpoint helpers, warnings, and deeper build analysis. |
+| 18 | functional | [Focused Build Composer](18-focused-build-composer/EPIC.md) | Refocus the primary app experience around creating, importing, editing, and exporting a single build. |
 
 ## Suggested First Milestone
 
@@ -38,5 +35,6 @@ Epics are ordered roughly by implementation dependency. The `track` column keeps
 7. `EPIC-06 Game Rule Engine`
 8. `EPIC-07 Visual Prior Art`
 9. `EPIC-08 Core Build Editor`
+10. `EPIC-18 Focused Build Composer`
 
 This gets to a useful single-character skill/attribute builder before expanding into exhaustive equipment, parties, guides, and analysis.

@@ -208,7 +208,18 @@ Research date: 2026-09-01
   * Cache app shell and static game data.
   * Make data freshness visible.
 
-## Phase 6: Guides and build knowledge
+## Product Pivot: Focused Build Composer
+
+After completing the original builder, equipment, library, multi-build, and
+party epics, the next milestone is to simplify the product around the core
+single-build workflow. The focused composer should make create/import/export
+build editing the default first-screen experience and defer equipment, saved
+builds, party tools, guides, discovery, and advanced analysis until the primary
+composer feels right.
+
+See `compendium/build-composer-use-case.md` and `work/tickets/18-focused-build-composer/EPIC.md`.
+
+## Deferred: Guides and build knowledge
 
 * Add guide authoring.
   * Simple markdown or lightweight rich text.
