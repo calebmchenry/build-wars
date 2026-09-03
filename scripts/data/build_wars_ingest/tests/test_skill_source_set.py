@@ -5,10 +5,11 @@ import unittest
 from pathlib import Path
 
 from build_wars_ingest.models import source_reference
-from build_wars_ingest.profiles import EPIC_04_PROFILE_ID, profile_by_id
+from build_wars_ingest.profiles import EPIC_04_PROFESSION_SKILL_LISTS, EPIC_04_PROFILE_ID, profile_by_id
 from build_wars_ingest.skill_source_set import (
     SkillSourceSetError,
     build_source_plan,
+    profession_skill_rows_from_rendered_html,
     ranged_titles_from_index,
     source_plan_digest,
     validate_source_plan,
@@ -28,6 +29,20 @@ def source(title: str, revision_id: int) -> dict[str, object]:
         source_revision_timestamp="2026-08-31T00:00:00Z",
         retrieved_at="2026-09-01T00:00:00Z",
     )
+
+
+def fixture_profession_list_snapshots() -> list[dict[str, object]]:
+    snapshots: list[dict[str, object]] = []
+    for profession_id, slug, title in EPIC_04_PROFESSION_SKILL_LISTS:
+        snapshots.append(
+            {
+                "title": title,
+                "content": (FIXTURE_ROOT / f"skills/list-{slug}.html").read_text(encoding="utf-8"),
+                "sourceReference": source(title, 100 + profession_id),
+                "professionId": profession_id,
+            }
+        )
+    return snapshots
 
 
 class SkillSourceSetTests(unittest.TestCase):
@@ -59,11 +74,129 @@ class SkillSourceSetTests(unittest.TestCase):
                     "sourceReference": source("Guild Wars Wiki:Game integration/Skills/1-10", 2),
                 }
             ],
+            profession_list_snapshots=fixture_profession_list_snapshots(),
         )
 
         self.assertEqual(result.plan["summary"]["acceptedSeedCount"], 5)
         self.assertEqual([seed["skillId"] for seed in result.plan["acceptedSeeds"]], [1, 2, 3, 4, 5])
+        self.assertEqual(result.plan["summary"]["professionSkillRowCount"], 5)
+        self.assertEqual(result.plan["summary"]["rangeSeedCount"], 5)
+        self.assertEqual(result.plan["summary"]["rangeOnlySeedCount"], 0)
         self.assertEqual(result.plan["summary"]["sourcePlanDigest"], source_plan_digest(result.plan))
+        validate_source_plan(
+            result.plan,
+            profile=profile,
+            confirm_digest=result.plan["summary"]["sourcePlanDigest"],
+        )
+
+    def test_profession_lists_are_the_promoted_seed_authority(self) -> None:
+        profile = profile_by_id(EPIC_04_PROFILE_ID)
+        index_text = (FIXTURE_ROOT / "skills/index.wiki").read_text(encoding="utf-8")
+        range_text = (FIXTURE_ROOT / "skills/skills-1-10.wiki").read_text(encoding="utf-8")
+        profession_html = """
+            <table class="sortable"><tbody>
+            <tr data-name=""><th>icon</th><th><a href="/wiki/Healing_Signet" title="Healing Signet">Healing Signet</a></th></tr>
+            </tbody></table>
+            """
+
+        result = build_source_plan(
+            profile=profile,
+            generated_at="2026-09-01T00:00:00Z",
+            index_snapshot={
+                "title": "Guild Wars Wiki:Game integration/Skills",
+                "content": index_text,
+                "sourceReference": source("Guild Wars Wiki:Game integration/Skills", 1),
+            },
+            range_snapshots=[
+                {
+                    "title": "Guild Wars Wiki:Game integration/Skills/1-10",
+                    "content": range_text,
+                    "sourceReference": source("Guild Wars Wiki:Game integration/Skills/1-10", 2),
+                }
+            ],
+            profession_list_snapshots=[
+                {
+                    "title": "List of warrior skills",
+                    "content": profession_html,
+                    "sourceReference": source("List of warrior skills", 3),
+                    "professionId": 1,
+                }
+            ],
+        )
+
+        self.assertEqual([seed["skillId"] for seed in result.plan["acceptedSeeds"]], [1])
+        self.assertEqual(result.plan["summary"]["rangeSeedCount"], 5)
+        self.assertEqual(result.plan["summary"]["rangeOnlySeedCount"], 4)
+        self.assertEqual(result.plan["acceptedSeeds"][0]["idSourceKind"], "game-integration-range")
+
+    def test_profession_skill_rows_parse_rendered_skill_table_links(self) -> None:
+        rows, diagnostics = profession_skill_rows_from_rendered_html(
+            """
+            <table class="sortable"><tbody>
+            <tr data-name=""><th>icon</th><th><a href="/wiki/%22Coward!%22_(PvP)" title="&quot;Coward!&quot; (PvP)">"Coward!" (PvP)</a></th></tr>
+            </tbody></table>
+            """,
+            list_title="List of warrior skills",
+            profession_id=1,
+            source_reference=source("List of warrior skills", 3),
+        )
+
+        self.assertEqual(diagnostics, [])
+        self.assertEqual(rows[0]["requestedTitle"], '"Coward!" (PvP)')
+        self.assertEqual(rows[0]["name"], '"Coward!" (PvP)')
+
+    def test_profession_list_only_rows_become_supplemental_seeds(self) -> None:
+        profile = profile_by_id(EPIC_04_PROFILE_ID)
+        index_text = (FIXTURE_ROOT / "skills/index.wiki").read_text(encoding="utf-8")
+        range_text = (FIXTURE_ROOT / "skills/skills-1-10.wiki").read_text(encoding="utf-8")
+        profession_html = """
+            <table class="sortable"><tbody>
+            <tr data-name=""><th>icon</th><th><a href="/wiki/%22Coward!%22_(PvP)" title="&quot;Coward!&quot; (PvP)">"Coward!" (PvP)</a></th></tr>
+            </tbody></table>
+            """
+        result = build_source_plan(
+            profile=profile,
+            generated_at="2026-09-01T00:00:00Z",
+            index_snapshot={
+                "title": "Guild Wars Wiki:Game integration/Skills",
+                "content": index_text,
+                "sourceReference": source("Guild Wars Wiki:Game integration/Skills", 1),
+            },
+            range_snapshots=[
+                {
+                    "title": "Guild Wars Wiki:Game integration/Skills/1-10",
+                    "content": range_text,
+                    "sourceReference": source("Guild Wars Wiki:Game integration/Skills/1-10", 2),
+                }
+            ],
+            profession_list_snapshots=[
+                {
+                    "title": "List of warrior skills",
+                    "content": profession_html,
+                    "sourceReference": source("List of warrior skills", 3),
+                    "professionId": 1,
+                }
+            ],
+            supplemental_seed_snapshots=[
+                {
+                    "title": '"Coward!" (PvP)',
+                    "requestedTitle": '"Coward!" (PvP)',
+                    "canonicalTitle": '"Coward!" (PvP)',
+                    "content": "{{Skill infobox| id = 6 | name = \"Coward!\" (PvP) | profession = Warrior | type = Shout}}",
+                    "sourceReference": source('"Coward!" (PvP)', 4),
+                }
+            ],
+        )
+
+        self.assertEqual(result.plan["summary"]["acceptedSeedCount"], 1)
+        self.assertEqual(result.plan["summary"]["professionSkillRowCount"], 1)
+        self.assertEqual(result.plan["summary"]["rangeSeedCount"], 5)
+        self.assertEqual(result.plan["summary"]["rangeOnlySeedCount"], 5)
+        self.assertEqual(result.plan["summary"]["supplementalSeedCount"], 1)
+        self.assertEqual(result.plan["summary"]["unresolvedProfessionListTitleCount"], 0)
+        self.assertEqual(result.plan["acceptedSeeds"][0]["skillId"], 6)
+        self.assertEqual(result.plan["acceptedSeeds"][0]["requestedTitle"], '"Coward!" (PvP)')
+        self.assertEqual(result.plan["acceptedSeeds"][0]["idSourceKind"], "supplemental-infobox")
         validate_source_plan(
             result.plan,
             profile=profile,
@@ -89,6 +222,7 @@ class SkillSourceSetTests(unittest.TestCase):
                     "sourceReference": source("Guild Wars Wiki:Game integration/Skills/1-10", 2),
                 }
             ],
+            profession_list_snapshots=fixture_profession_list_snapshots(),
         )
 
         with self.assertRaisesRegex(SkillSourceSetError, "confirmation"):

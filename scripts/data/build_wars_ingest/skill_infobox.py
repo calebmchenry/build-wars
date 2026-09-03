@@ -56,6 +56,14 @@ CAMPAIGN_ALIASES = {
 NO_ATTRIBUTE_NAMES = {"", "none", "no attribute", "n/a", "na"}
 
 
+def extract_skill_infobox_ids(wikitext: str) -> list[int]:
+    templates = _skill_infobox_templates(wikitext)
+    if not templates:
+        return []
+    params = _template_params(templates[0])
+    return _infobox_ids(params.get("id"))
+
+
 def extract_skill_infobox(
     *,
     skill_id: int,

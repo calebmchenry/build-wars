@@ -230,7 +230,7 @@ describe("build validation context", () => {
     });
 
     expect(context.catalogVersions.professionAttributeCatalogVersion).toBe("pa-e5d0d35ad8f30b4c");
-    expect(context.catalogVersions.skillCatalogVersion).toBe("skills-f3bb1c6da9b0b761");
+    expect(context.catalogVersions.skillCatalogVersion).toBe("skills-f79c3de0622a83db");
     expect(context.primaryProfession.lookup.kind).toBe("resolved");
     expect(context.attributeRows[0]?.lookup.kind).toBe("resolved");
     expect(context.skillSlots[0]?.lookup.kind).toBe("resolved");

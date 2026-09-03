@@ -1,5 +1,5 @@
 {
-  "catalogVersion": "skills-e055a437de3f69ec",
+  "catalogVersion": "skills-cb7491857576c8d7",
   "dependencyDigests": [
     {
       "artifactDigest": "1cb3f79b7139cf26adbcf40b600094c2860796c60dcd9f1ba75bad694d07c8b4",
@@ -47,7 +47,7 @@
       "requestLimit": 260,
       "responseByteCap": 5000000,
       "retryLimit": 3,
-      "seedPageLimit": 8
+      "seedPageLimit": 18
     },
     "sourceEpic": "EPIC-04",
     "sourceTarget": "BACKLOG"
@@ -473,7 +473,7 @@
       "section": "dependencyDigests"
     },
     {
-      "digest": "452d2b10f67adf9a7796b892dbb1978fe954f0d28ae7629f8e94c8c9e3225934",
+      "digest": "3ef33a778d2a328c9f8bae10f41e24e884b536714813431029bc5f032832a3ee",
       "section": "sourceSet"
     },
     {
@@ -1263,12 +1263,29 @@
     "maximumAcceptedId": 5,
     "minimumAcceptedId": 1,
     "numericGapCount": 0,
-    "planningAmendment": "SPRINT-005 replaced the missing Guild Wars Wiki:Game integration/Skills/0 source with the live index and linked ranged skill pages.",
+    "planningAmendment": "SPRINT-005 replaced the missing Guild Wars Wiki:Game integration/Skills/0 source with the live index and linked ranged skill pages for ID lookup. The Guild Wars Wiki profession skill list pages now define the runtime profession-skill catalog.",
+    "professionListRowCount": 5,
+    "professionListTitles": [
+      "List of warrior skills",
+      "List of ranger skills",
+      "List of monk skills",
+      "List of necromancer skills",
+      "List of mesmer skills",
+      "List of elementalist skills",
+      "List of assassin skills",
+      "List of ritualist skills",
+      "List of paragon skills",
+      "List of dervish skills"
+    ],
+    "professionListUnsupportedCount": 0,
+    "rangeOnlySeedCount": 0,
+    "rangeSeedCount": 5,
     "rangedPageTitles": [
       "Guild Wars Wiki:Game integration/Skills/1-10"
     ],
-    "sourcePlanDigest": "48ef9c4c75e2d9cc1c24ec63ec0fb564af16509b83b4bede8898e4ab0c820ae7",
-    "sourceSetDigest": "14a20a7316bded9328f5d71d90a63178d4a51659a7238ac7614e7e5cacc6112e"
+    "sourcePlanDigest": "86d1fb50fbd9d994800487de80da550ee9764b9f82def2cd9830a1e3a2dacf1f",
+    "sourceSetDigest": "be95c1fa9e0290911eee2a09119b5f9a2ccc05a6ee9f838583f467d6b4ebb749",
+    "supplementalSeedCount": 0
   },
   "splitGroups": [
     {

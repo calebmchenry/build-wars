@@ -27,7 +27,8 @@ describe("skill bar workflow", () => {
   });
 
   it("replaces occupied slots and clears the other resolved elite atomically", () => {
-    const [eliteOne, eliteTwo] = catalogs.skills.filter((skill) => skill.classification.elite);
+    const eliteOne = catalogs.skills.find((skill) => skill.name === "Hundred Blades");
+    const eliteTwo = catalogs.skills.find((skill) => skill.name === "Barrage");
     if (eliteOne === undefined || eliteTwo === undefined) {
       throw new Error("elite fixture skills missing");
     }

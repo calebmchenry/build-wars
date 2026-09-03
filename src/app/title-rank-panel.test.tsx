@@ -2,13 +2,15 @@ import { fireEvent, render, screen, within } from "@testing-library/react";
 import { useReducer } from "react";
 import { describe, expect, it } from "vitest";
 
-import { catalogId } from "../domain";
-import { requireReadyCatalogs } from "./catalogs";
+import {
+  requireTitleRankTestCatalogs,
+  titleRankTestSkillIds
+} from "../../test/fixtures/app/title-rank-catalogs";
 import { TitleRankPanel } from "./components/TitleRankPanel";
 import { selectTitleRankPanelView, selectValidationView } from "./editor-selectors";
 import { createBlankEditorState, editorReducer, type EditorState } from "./editor-state";
 
-const catalogs = requireReadyCatalogs();
+const catalogs = requireTitleRankTestCatalogs();
 
 describe("TitleRankPanel", () => {
   it("renders relevant controls first with an all-title disclosure", () => {
@@ -74,7 +76,7 @@ function titleEditorState(): EditorState {
     ...state,
     build: {
       ...state.build,
-      skillBar: [catalogId<"Skill">(1815), null, null, null, null, null, null, null]
+      skillBar: [titleRankTestSkillIds.lightbringer, null, null, null, null, null, null, null]
     }
   };
 }

@@ -22,7 +22,7 @@ const provenance = {
 } satisfies CatalogFieldProvenance;
 
 describe("title rank catalog", () => {
-  it("discovers promoted title definitions and the exact Sunspear alias conflict", () => {
+  it("discovers promoted profession-skill title definitions and the Sunspear alias conflict", () => {
     const catalog = createTitleRankCatalog(
       (
         generatedSkills as unknown as {
@@ -34,11 +34,6 @@ describe("title rank catalog", () => {
 
     expect(catalog.definitions.map((definition) => definition.key)).toEqual([
       "title:allegiance-rank",
-      "title:asura-rank",
-      "title:deldrimor-rank",
-      "title:ebon-vanguard-rank",
-      "title:lightbringer-rank",
-      "title:norn-rank",
       "title:sunspear-rank"
     ]);
     expect(catalog.canonicalKeyByRawKey.get("title:title-sunspear-rank")).toBe(

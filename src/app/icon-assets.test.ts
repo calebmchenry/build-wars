@@ -9,9 +9,9 @@ describe("generated skill icon assets", () => {
     const encoded = JSON.stringify(generatedSkillIconManifest);
 
     expect(encoded).not.toMatch(/https?:\/\//);
-    expect(generatedSkillIconManifest.summary.runtimeSkillIconCount).toBeGreaterThan(2000);
 
     const catalogs = requireReadyCatalogs();
+    expect(generatedSkillIconManifest.summary.runtimeSkillIconCount).toBe(catalogs.skills.length);
     const powerBlock = catalogs.skills.find((skill) => skill.name === "Power Block");
     const asset = localSkillIconAsset(powerBlock ?? null);
 

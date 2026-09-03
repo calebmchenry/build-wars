@@ -8,7 +8,13 @@ describe("app catalog boundary", () => {
 
     expect(promotedAppCatalogs.status).toBe("ready");
     expect(catalogs.professions).toHaveLength(10);
-    expect(catalogs.skills.length).toBeGreaterThan(2900);
+    expect(catalogs.skills).toHaveLength(1452);
+    expect(catalogs.skillCatalog.sourceSet).toMatchObject({
+      acceptedSeedCount: 1452,
+      catalogRecordCount: 1452,
+      professionListRowCount: 1452,
+      professionListUnsupportedCount: 0
+    });
     expect(catalogs.versions.professionAttributes).toMatch(/^pa-/);
     expect(catalogs.versions.skills).toMatch(/^skills-/);
     expect(catalogs.versions.runes).toMatch(/^runes-/);

@@ -40,6 +40,7 @@ from .profiles import (
     EPIC_02_PROFILE_ID,
     EPIC_03_ICON_IMAGEINFO_TITLE,
     EPIC_03_PROFILE_ID,
+    EPIC_04_PROFESSION_SKILL_LISTS,
     EPIC_04_PROFILE_ID,
     EPIC_04_SKILL_ICON_IMAGEINFO_TITLE,
     EPIC_04_SOURCE_INDEX_TITLE,
@@ -763,11 +764,44 @@ def _run_epic04_fixture(options: PipelineOptions) -> PipelineResult:
         child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
         range_plan_snapshots.append({"title": title, "content": content, "sourceReference": source_ref})
 
+    profession_list_plan_snapshots: list[dict[str, Any]] = []
+    for offset, (profession_id, slug, title) in enumerate(EPIC_04_PROFESSION_SKILL_LISTS, start=1):
+        revision_timestamp = f"2026-08-31T15:{20 + offset:02d}:00Z"
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-04-fixture:profession-list:{slug}:52{offset:02d}",
+            page_title=title,
+            page_id=9700 + offset,
+            revision_id=5200 + offset,
+            source_revision_timestamp=revision_timestamp,
+            retrieved_at=options.generated_at,
+        )
+        content = fixtures["professionLists"][title]
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=9700 + offset,
+            revision_id=5200 + offset,
+            timestamp=revision_timestamp,
+            retrieved_at=options.generated_at,
+            content=content,
+        )
+        child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        profession_list_plan_snapshots.append(
+            {
+                "title": title,
+                "content": content,
+                "sourceReference": source_ref,
+                "professionId": profession_id,
+            }
+        )
+
     plan_result = build_source_plan(
         profile=profile,
         generated_at=options.generated_at,
         index_snapshot=index_plan_snapshot,
         range_snapshots=range_plan_snapshots,
+        profession_list_snapshots=profession_list_plan_snapshots,
     )
     plan_path = write_source_plan(roots.root, plan_result.plan)
     diagnostics = [*ranged_diagnostics, *plan_result.diagnostics]
@@ -2651,14 +2685,50 @@ def _discover_epic04_source_set(
         )
         child_manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
         range_snapshots.append({"title": title, "content": content, "sourceReference": source_ref})
+
+    profession_list_snapshots, profession_list_manifest_paths, profession_list_diagnostics = (
+        _fetch_epic04_profession_skill_lists(
+            client=client,
+            snapshot_store=snapshot_store,
+            generated_at=generated_at,
+            roots=roots,
+        )
+    )
+    child_manifest_paths.extend(profession_list_manifest_paths)
+    draft_plan_result = build_source_plan(
+        profile=profile,
+        generated_at=generated_at,
+        index_snapshot={"title": EPIC_04_SOURCE_INDEX_TITLE, "content": index_content, "sourceReference": index_source},
+        range_snapshots=range_snapshots,
+        profession_list_snapshots=profession_list_snapshots,
+    )
+    supplemental_seed_snapshots, supplemental_seed_manifest_paths, supplemental_seed_diagnostics = (
+        _fetch_epic04_supplemental_seed_pages(
+            client=client,
+            snapshot_store=snapshot_store,
+            generated_at=generated_at,
+            roots=roots,
+            unresolved_rows=draft_plan_result.plan["unresolvedProfessionListTitles"],
+        )
+    )
+    child_manifest_paths.extend(supplemental_seed_manifest_paths)
     plan_result = build_source_plan(
         profile=profile,
         generated_at=generated_at,
         index_snapshot={"title": EPIC_04_SOURCE_INDEX_TITLE, "content": index_content, "sourceReference": index_source},
         range_snapshots=range_snapshots,
+        profession_list_snapshots=profession_list_snapshots,
+        supplemental_seed_snapshots=supplemental_seed_snapshots,
     )
     plan_path = write_source_plan(roots.root, plan_result.plan)
-    diagnostics = [*index_diagnostics, *ranged_diagnostics, *range_page_diagnostics, *plan_result.diagnostics]
+    diagnostics = [
+        *index_diagnostics,
+        *ranged_diagnostics,
+        *range_page_diagnostics,
+        *profession_list_diagnostics,
+        *supplemental_seed_diagnostics,
+        *plan_result.diagnostics,
+    ]
     report = build_report(
         artifact_path=_relative_to_root(roots.root, plan_path),
         artifact_manifest_path=None,
@@ -2680,6 +2750,113 @@ def _discover_epic04_source_set(
         generated={**plan_result.plan, "snapshotManifestPaths": child_manifest_paths},
         qa_report=report,
     )
+
+
+def _fetch_epic04_profession_skill_lists(
+    *,
+    client: MediaWikiClient,
+    snapshot_store: SnapshotStore,
+    generated_at: str,
+    roots: RuntimeRoots,
+) -> tuple[list[dict[str, Any]], list[str], list[Diagnostic]]:
+    titles = [title for _profession_id, _slug, title in EPIC_04_PROFESSION_SKILL_LISTS]
+    profession_id_by_title = {
+        title: profession_id for profession_id, _slug, title in EPIC_04_PROFESSION_SKILL_LISTS
+    }
+    pages, diagnostics = client.query_title_revisions(titles)
+    snapshots: list[dict[str, Any]] = []
+    manifest_paths: list[str] = []
+    for page in pages:
+        revision = _first_revision(page)
+        requested_title = str(page.get("_buildWarsRequestedTitle") or page.get("title"))
+        title = str(page.get("title"))
+        revision_id = revision.get("revid")
+        timestamp = revision.get("timestamp")
+        parsed = client.request({"action": "parse", "oldid": revision_id, "prop": "text|revid"})
+        parse_payload = parsed.get("parse")
+        if not isinstance(parse_payload, dict) or not isinstance(parse_payload.get("text"), str):
+            raise PipelineError(f"EPIC-04 profession skill list did not render: {requested_title}")
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-04-live:profession-list:{page.get('pageid')}:{revision_id}",
+            page_title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision_id,
+            source_revision_timestamp=timestamp,
+            retrieved_at=generated_at,
+        )
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision_id,
+            timestamp=timestamp,
+            retrieved_at=generated_at,
+            content=str(parse_payload["text"]),
+        )
+        manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        snapshots.append(
+            {
+                "title": title,
+                "content": str(parse_payload["text"]),
+                "sourceReference": source_ref,
+                "professionId": profession_id_by_title[requested_title],
+            }
+        )
+    return snapshots, manifest_paths, diagnostics
+
+
+def _fetch_epic04_supplemental_seed_pages(
+    *,
+    client: MediaWikiClient,
+    snapshot_store: SnapshotStore,
+    generated_at: str,
+    roots: RuntimeRoots,
+    unresolved_rows: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[str], list[Diagnostic]]:
+    if not unresolved_rows:
+        return [], [], []
+    titles = sorted({str(row["requestedTitle"]) for row in unresolved_rows})
+    pages, diagnostics = client.query_title_revisions(titles)
+    snapshots: list[dict[str, Any]] = []
+    manifest_paths: list[str] = []
+    for page in pages:
+        revision = _first_revision(page)
+        requested_title = str(page.get("_buildWarsRequestedTitle") or page.get("title"))
+        title = str(page.get("title"))
+        revision_id = revision.get("revid")
+        timestamp = revision.get("timestamp")
+        content = _revision_content(revision)
+        source_ref = _page_source_reference(
+            source_id=f"source:gww:epic-04-live:supplemental-skill:{page.get('pageid')}:{revision_id}",
+            page_title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision_id,
+            source_revision_timestamp=timestamp,
+            retrieved_at=generated_at,
+        )
+        snapshot = _write_page_snapshot(
+            snapshot_store=snapshot_store,
+            source_reference=source_ref,
+            title=title,
+            page_id=page.get("pageid"),
+            revision_id=revision_id,
+            timestamp=timestamp,
+            retrieved_at=generated_at,
+            content=content,
+        )
+        manifest_paths.append(_relative_to_root(roots.root, snapshot.manifest_path))
+        snapshots.append(
+            {
+                "title": title,
+                "requestedTitle": requested_title,
+                "normalizedTitle": str(page.get("_buildWarsNormalizedTitle") or requested_title),
+                "canonicalTitle": title,
+                "content": content,
+                "sourceReference": source_ref,
+            }
+        )
+    return snapshots, manifest_paths, diagnostics
 
 
 def _write_epic04_catalog_result(
@@ -2902,8 +3079,18 @@ def _load_epic04_fixture_pages(fixture_root: Path) -> dict[str, Any]:
             "Training Beacon (PvE)": (base / "training-beacon-pve.wiki").read_text(encoding="utf-8"),
             "Training Beacon (PvP)": (base / "training-beacon-pvp.wiki").read_text(encoding="utf-8"),
         }
+        profession_lists = {
+            title: (base / f"list-{slug}.html").read_text(encoding="utf-8")
+            for _profession_id, slug, title in EPIC_04_PROFESSION_SKILL_LISTS
+        }
         imageinfo = json.loads((base / "imageinfo.json").read_text(encoding="utf-8"))
-        return {"index": index, "ranges": ranges, "details": details, "imageinfo": imageinfo}
+        return {
+            "index": index,
+            "ranges": ranges,
+            "details": details,
+            "professionLists": profession_lists,
+            "imageinfo": imageinfo,
+        }
     except OSError as exc:
         raise PipelineError(f"EPIC-04 fixture input could not be read: {exc}") from exc
     except json.JSONDecodeError as exc:
@@ -3319,20 +3506,39 @@ def _epic04_manual_reviews(
             "id": "review:epic-04-source-set:2026-09-01",
             "reviewer": "Build Wars sprint executor",
             "reviewedAt": generated_at,
-            "scope": "EPIC-04 source-set digest and ranged-page amendment",
+            "scope": "EPIC-04 source-set digest, ranged-page amendment, and profession skill list authority",
             "decision": "approved",
-            "rationale": "The missing /Skills/0 page is retained only as blocker history; the approved live index and ranged pages define the source-set seed authority.",
+            "rationale": "The missing /Skills/0 page is retained only as blocker history; the approved live index and ranged pages provide the ID lookup, and profession list pages define the promoted source-set seed authority.",
             "evidence": [
                 {
                     "kind": "source",
                     "reference": str(source_plan["summary"]["sourceSetDigest"]),
-                    "notes": "Digest of source-set index, ranged pages, and accepted seeds.",
+                    "notes": "Digest of source-set index, ranged pages, profession list rows, supplemental seeds, and accepted seeds.",
                 }
             ],
             "relatedFindingIds": [],
             "followUpTicketIds": [],
             "expiresAt": None,
-            "reReviewTrigger": "Any source-set index, ranged page revision, accepted seed, or source-plan digest change.",
+            "reReviewTrigger": "Any source-set index, ranged page revision, profession list revision, accepted seed policy, or source-plan digest change.",
+        },
+        {
+            "id": "review:epic-04-profession-list-authority:2026-09-03",
+            "reviewer": "Build Wars sprint executor",
+            "reviewedAt": generated_at,
+            "scope": "EPIC-04 playable profession skill membership",
+            "decision": "approved",
+            "rationale": "Guild Wars Wiki profession skill list pages define which skill records are promoted into the runtime profession-skill catalog; off-list game-integration skills are not promoted in this schema version.",
+            "evidence": [
+                {
+                    "kind": "source",
+                    "reference": str(source_plan["summary"]["sourceSetDigest"]),
+                    "notes": "Profession skill list rows, supplemental source seeds, and range ID lookup records are part of this digest.",
+                }
+            ],
+            "relatedFindingIds": [],
+            "followUpTicketIds": [],
+            "expiresAt": None,
+            "reReviewTrigger": "Any profession list page revision, row parser change, or promotion policy change.",
         },
         {
             "id": "review:epic-04-description-structured-only:2026-09-01",

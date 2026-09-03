@@ -385,6 +385,7 @@ export interface SkillSourceSetDisposition {
 export interface SkillSourceSetSummary {
   readonly indexTitle: "Guild Wars Wiki:Game integration/Skills";
   readonly rangedPageTitles: readonly string[];
+  readonly professionListTitles: readonly string[];
   readonly sourceSetDigest: string;
   readonly sourcePlanDigest: string;
   readonly acceptedSeedCount: number;
@@ -393,6 +394,11 @@ export interface SkillSourceSetSummary {
   readonly minimumAcceptedId: TemplateSkillId | null;
   readonly maximumAcceptedId: TemplateSkillId | null;
   readonly numericGapCount: number;
+  readonly professionListRowCount: number;
+  readonly rangeSeedCount: number;
+  readonly rangeOnlySeedCount: number;
+  readonly supplementalSeedCount: number;
+  readonly professionListUnsupportedCount: number;
   readonly planningAmendment: string;
 }
 

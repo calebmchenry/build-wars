@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import { catalogId, type SkillBar } from "../domain";
+import {
+  requireTitleRankTestCatalogs,
+  titleRankTestSkillIds
+} from "../../test/fixtures/app/title-rank-catalogs";
 import { requireReadyCatalogs } from "./catalogs";
 import { playableEditorFixture } from "./editor-fixtures";
 import {
@@ -21,6 +25,7 @@ import {
 } from "./editor-state";
 
 const catalogs = requireReadyCatalogs();
+const titleRankCatalogs = requireTitleRankTestCatalogs();
 
 describe("editor selectors", () => {
   it("uses the same PvE budget policy for display and validation input", () => {
@@ -124,9 +129,14 @@ describe("editor selectors", () => {
 
   it("uses default and authored title ranks for title-scaled skill display", () => {
     const state = playableEditorFixture();
-    const view = selectSkillDisplay(catalogs, state, catalogId<"Skill">(1815), "tooltip");
+    const view = selectSkillDisplay(
+      titleRankCatalogs,
+      state,
+      titleRankTestSkillIds.lightbringer,
+      "tooltip"
+    );
     const lowered = selectSkillDisplay(
-      catalogs,
+      titleRankCatalogs,
       {
         ...state,
         build: {
@@ -134,7 +144,7 @@ describe("editor selectors", () => {
           titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }]
         }
       },
-      catalogId<"Skill">(1815),
+      titleRankTestSkillIds.lightbringer,
       "tooltip"
     );
 
@@ -160,8 +170,8 @@ describe("editor selectors", () => {
       build: {
         ...playableEditorFixture().build,
         skillBar: [
-          catalogId<"Skill">(1815),
-          catalogId<"Skill">(2224),
+          titleRankTestSkillIds.lightbringer,
+          titleRankTestSkillIds.asura,
           null,
           null,
           null,
@@ -175,8 +185,8 @@ describe("editor selectors", () => {
         ]
       }
     };
-    const validation = selectValidationView(state, catalogs);
-    const panel = selectTitleRankPanelView(state, catalogs, validation.result);
+    const validation = selectValidationView(state, titleRankCatalogs);
+    const panel = selectTitleRankPanelView(state, titleRankCatalogs, validation.result);
 
     expect(panel.relevantRows.map((row) => row.label)).toEqual(["Lightbringer", "Asura"]);
     expect(panel.relevantRows[0]).toMatchObject({

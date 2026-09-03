@@ -48,6 +48,18 @@ EPIC_03_SOURCE_TITLES = (
 EPIC_03_ICON_IMAGEINFO_TITLE = "EPIC-03 profession icon imageinfo"
 EPIC_04_SOURCE_INDEX_TITLE = "Guild Wars Wiki:Game integration/Skills"
 EPIC_04_SKILL_ICON_IMAGEINFO_TITLE = "EPIC-04 skill icon imageinfo"
+EPIC_04_PROFESSION_SKILL_LISTS = (
+    (1, "warrior", "List of warrior skills"),
+    (2, "ranger", "List of ranger skills"),
+    (3, "monk", "List of monk skills"),
+    (4, "necromancer", "List of necromancer skills"),
+    (5, "mesmer", "List of mesmer skills"),
+    (6, "elementalist", "List of elementalist skills"),
+    (7, "assassin", "List of assassin skills"),
+    (8, "ritualist", "List of ritualist skills"),
+    (9, "paragon", "List of paragon skills"),
+    (10, "dervish", "List of dervish skills"),
+)
 EPIC_10_SOURCE_TITLES = (
     "Equipment template format",
     "Rune",

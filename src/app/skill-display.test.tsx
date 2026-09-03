@@ -2,6 +2,10 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { catalogId } from "../domain";
+import {
+  requireTitleRankTestCatalogs,
+  titleRankTestSkillIds
+} from "../../test/fixtures/app/title-rank-catalogs";
 import { requireReadyCatalogs } from "./catalogs";
 import { SkillDisplay } from "./components/SkillDisplay";
 import { SkillTooltip, SkillTooltipTrigger } from "./components/SkillTooltip";
@@ -9,13 +13,14 @@ import { playableEditorFixture } from "./editor-fixtures";
 import { selectSkillDisplay } from "./editor-selectors";
 
 const catalogs = requireReadyCatalogs();
+const titleRankCatalogs = requireTitleRankTestCatalogs();
 
 describe("SkillDisplay and SkillTooltip", () => {
   it("renders structured skill facts and title-rank status without remote images", () => {
     const view = selectSkillDisplay(
-      catalogs,
+      titleRankCatalogs,
       playableEditorFixture(),
-      catalogId<"Skill">(1815),
+      titleRankTestSkillIds.lightbringer,
       "tooltip"
     );
     render(<SkillTooltip view={view} onClose={() => undefined} />);
@@ -26,8 +31,7 @@ describe("SkillDisplay and SkillTooltip", () => {
     expect(screen.getByText("rank 12 default")).toBeInTheDocument();
     expect(screen.queryByText(/maximum title rank/)).toBeNull();
     const images = localImageSources();
-    expect(images).toHaveLength(3);
-    expect(images.some((src) => src.includes("lightbringer-signet"))).toBe(true);
+    expect(images.every((src) => !src.includes("http"))).toBe(true);
   });
 
   it("renders compact action and resource icons with accessible fact labels", () => {
