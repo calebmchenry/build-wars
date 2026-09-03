@@ -89,6 +89,15 @@ describe("TemplateControls", () => {
     ).not.toBeInTheDocument();
   });
 
+  it("labels template actions as selected-loadout-only when used inside a build set", () => {
+    render(<Harness selectedLoadoutOnly />);
+
+    expect(screen.getByText("Selected loadout only")).toBeInTheDocument();
+    expect(
+      screen.getByText("Sibling loadouts use build-set transfer or backup JSON.")
+    ).toBeInTheDocument();
+  });
+
   it("confirms before skill-template import discards meaningful equipment", () => {
     const confirm = vi.spyOn(window, "confirm").mockReturnValue(false);
     render(<Harness initialState={stateWithEquipment()} />);
@@ -125,9 +134,11 @@ describe("TemplateControls", () => {
 });
 
 function Harness({
-  initialState = createBlankEditorState()
+  initialState = createBlankEditorState(),
+  selectedLoadoutOnly = false
 }: {
   readonly initialState?: EditorState;
+  readonly selectedLoadoutOnly?: boolean;
 }) {
   const [state, dispatch] = useReducer(editorReducer, initialState);
   const validation = selectValidationView(state, catalogs);
@@ -138,6 +149,7 @@ function Harness({
         catalogs={catalogs}
         validation={validation}
         dispatch={dispatch}
+        selectedLoadoutOnly={selectedLoadoutOnly}
       />
       <div role="status">{state.transient?.text ?? ""}</div>
     </>

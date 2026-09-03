@@ -14,10 +14,11 @@ import { createBlankEditorState } from "./editor-state";
 import {
   corruptRecordEnvelopeFixture,
   duplicateIdEnvelopeFixture,
-  fixtureCatalogFacts,
   oversizedEnvelopeFixture,
   unsupportedEnvelopeFixture,
   validLocalLibraryEnvelopeFixture,
+  validSavedRecordFixture,
+  validWorkingDraftFixture,
   validSnapshotFixture
 } from "./library-fixtures";
 import {
@@ -28,7 +29,10 @@ import {
   hydrateEditorFromSnapshot,
   parseLocalLibraryEnvelope,
   parseLocalLibraryJson,
-  serializeLocalLibraryEnvelope
+  selectedPersistedBuildSnapshot,
+  serializeLocalLibraryEnvelope,
+  type PersistedSavedDocumentRecord,
+  type PersistedWorkingDraft
 } from "./persistence-schema";
 
 describe("local persistence schema", () => {
@@ -37,7 +41,7 @@ describe("local persistence schema", () => {
 
     expect(LOCAL_LIBRARY_STORAGE_KEY).toBe("build-wars:v1");
     expect(parsed.ok ? parsed.envelope.kind : null).toBe(LOCAL_LIBRARY_KIND);
-    expect(parsed.ok ? parsed.envelope.schemaVersion : null).toBe(1);
+    expect(parsed.ok ? parsed.envelope.schemaVersion : null).toBe(2);
   });
 
   it("round-trips durable build, PvE budget, raw template source, and unresolved overlays", () => {
@@ -49,13 +53,14 @@ describe("local persistence schema", () => {
     if (!parsed.ok) {
       return;
     }
-    const unresolved = parsed.envelope.savedBuilds.find(
+    const unresolved = parsed.envelope.savedDocuments.find(
       (record) => record.name === "Unresolved import"
     );
-    expect(unresolved?.snapshot.pveBudget).toEqual({ level: 20, questBonus: "maximum-applicable" });
-    expect(unresolved?.snapshot.rawTemplate.source?.originalBareCode).toBe("OAAQIAAAAAAAAAAAAAAA");
-    expect(unresolved?.snapshot.rawTemplate.skillBar[1]?.templateId).toBe(999999);
-    expect(Number(unresolved?.snapshot.build.skillBar[1])).toBe(-200001);
+    const snapshot = recordSnapshot(unresolved);
+    expect(snapshot?.pveBudget).toEqual({ level: 20, questBonus: "maximum-applicable" });
+    expect(snapshot?.rawTemplate.source?.originalBareCode).toBe("OAAQIAAAAAAAAAAAAAAA");
+    expect(snapshot?.rawTemplate.skillBar[1]?.templateId).toBe(999999);
+    expect(Number(snapshot?.build.skillBar[1])).toBe(-200001);
     expect(unresolved?.savedWith.ruleEngineVersion).toBe("rule-engine:v3");
   });
 
@@ -64,14 +69,14 @@ describe("local persistence schema", () => {
 
     expect(parsed.ok).toBe(true);
     expect(parsed.writeBlocked).toBe(false);
-    expect(parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.schemaVersion : null).toBe(
-      BUILD_SCHEMA_VERSION
-    );
     expect(
-      parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.titleRankOverrides : null
+      parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.schemaVersion : null
+    ).toBe(BUILD_SCHEMA_VERSION);
+    expect(
+      parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.titleRankOverrides : null
     ).toEqual([]);
     expect(
-      parsed.ok ? parsed.envelope.savedBuilds[0]?.snapshot.build.titleRankOverrides : null
+      parsed.ok ? recordSnapshot(parsed.envelope.savedDocuments[0])?.build.titleRankOverrides : null
     ).toEqual([]);
   });
 
@@ -108,7 +113,7 @@ describe("local persistence schema", () => {
     const envelope = validLocalLibraryEnvelopeFixture();
     const reordered = {
       metadata: envelope.metadata,
-      savedBuilds: envelope.savedBuilds,
+      savedDocuments: envelope.savedDocuments,
       workingDraft: envelope.workingDraft,
       updatedAt: envelope.updatedAt,
       revision: envelope.revision,
@@ -123,8 +128,8 @@ describe("local persistence schema", () => {
     const unsupported = parseLocalLibraryEnvelope(unsupportedEnvelopeFixture());
     const dangerous = parseLocalLibraryJson(
       JSON.stringify(validLocalLibraryEnvelopeFixture()).replace(
-        '"savedBuilds":[',
-        '"savedBuilds":[{"__proto__":"bad"},'
+        '"savedDocuments":[',
+        '"savedDocuments":[{"__proto__":"bad"},'
       )
     );
     const oversized = parseLocalLibraryEnvelope(oversizedEnvelopeFixture());
@@ -143,10 +148,10 @@ describe("local persistence schema", () => {
     const duplicate = parseLocalLibraryEnvelope(duplicateIdEnvelopeFixture());
 
     expect(corruptRecord.ok).toBe(true);
-    expect(corruptRecord.ok ? corruptRecord.envelope.savedBuilds : []).toHaveLength(1);
+    expect(corruptRecord.ok ? corruptRecord.envelope.savedDocuments : []).toHaveLength(1);
     expect(corruptRecord.writeBlocked).toBe(true);
     expect(duplicate.ok).toBe(true);
-    expect(duplicate.ok ? duplicate.envelope.savedBuilds : []).toHaveLength(1);
+    expect(duplicate.ok ? duplicate.envelope.savedDocuments : []).toHaveLength(1);
     expect(duplicate.writeBlocked).toBe(true);
   });
 
@@ -167,28 +172,22 @@ describe("local persistence schema", () => {
     const parsed = parseLocalLibraryEnvelope(
       validLocalLibraryEnvelopeFixture({
         workingDraft: {
-          snapshot,
-          associatedRecordId: null,
-          savedWith: fixtureCatalogFacts
+          ...validWorkingDraftFixture({ snapshot }),
+          associatedRecordId: null
         },
-        savedBuilds: [
-          {
-            ...validLocalLibraryEnvelopeFixture().savedBuilds[0]!,
-            snapshot
-          }
-        ]
+        savedDocuments: [validSavedRecordFixture({ snapshot })]
       })
     );
 
     expect(snapshot.build.equipment).not.toBe(equipment);
     expect(snapshot.build.equipment?.armor[0]?.rune).toEqual(knownEquipmentSelection(101));
     expect(parsed.ok).toBe(true);
-    expect(parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.equipment : null).toEqual(
+    expect(parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.equipment : null).toEqual(
       snapshot.build.equipment
     );
-    expect(parsed.ok ? parsed.envelope.savedBuilds[0]?.snapshot.build.equipment : null).toEqual(
-      snapshot.build.equipment
-    );
+    expect(
+      parsed.ok ? recordSnapshot(parsed.envelope.savedDocuments[0])?.build.equipment : null
+    ).toEqual(snapshot.build.equipment);
     expect(fingerprintPersistedSnapshot(snapshot)).not.toBe(
       fingerprintPersistedSnapshot(validSnapshotFixture())
     );
@@ -206,16 +205,10 @@ describe("local persistence schema", () => {
     const parsed = parseLocalLibraryEnvelope(
       validLocalLibraryEnvelopeFixture({
         workingDraft: {
-          snapshot,
-          associatedRecordId: null,
-          savedWith: fixtureCatalogFacts
+          ...validWorkingDraftFixture({ snapshot }),
+          associatedRecordId: null
         },
-        savedBuilds: [
-          {
-            ...validLocalLibraryEnvelopeFixture().savedBuilds[0]!,
-            snapshot
-          }
-        ]
+        savedDocuments: [validSavedRecordFixture({ snapshot })]
       })
     );
 
@@ -224,10 +217,10 @@ describe("local persistence schema", () => {
     ]);
     expect(parsed.ok).toBe(true);
     expect(
-      parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.titleRankOverrides : null
+      parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.titleRankOverrides : null
     ).toEqual(snapshot.build.titleRankOverrides);
     expect(
-      parsed.ok ? parsed.envelope.savedBuilds[0]?.snapshot.build.titleRankOverrides : null
+      parsed.ok ? recordSnapshot(parsed.envelope.savedDocuments[0])?.build.titleRankOverrides : null
     ).toEqual(snapshot.build.titleRankOverrides);
   });
 
@@ -344,14 +337,44 @@ function canonicalEquipmentFixture(): EquipmentLoadout {
 }
 
 function legacySchemaOneEnvelopeFixture(): unknown {
-  const envelope = JSON.parse(JSON.stringify(validLocalLibraryEnvelopeFixture())) as {
-    workingDraft: { snapshot: { build: Record<string, unknown> } } | null;
-    savedBuilds: { snapshot: { build: Record<string, unknown> } }[];
-  };
+  const current = validLocalLibraryEnvelopeFixture();
+  const envelope = {
+    schemaVersion: 1,
+    kind: current.kind,
+    revision: current.revision,
+    updatedAt: current.updatedAt,
+    workingDraft:
+      current.workingDraft === null
+        ? null
+        : {
+            snapshot: draftSnapshot(current.workingDraft),
+            associatedRecordId: current.workingDraft.associatedRecordId,
+            savedWith: current.workingDraft.savedWith
+          },
+    savedBuilds: current.savedDocuments.map((record) => ({
+      id: record.id,
+      name: record.name,
+      createdAt: record.createdAt,
+      updatedAt: record.updatedAt,
+      favorite: record.favorite,
+      tags: record.tags,
+      notes: record.notes,
+      snapshot: recordSnapshot(record),
+      savedWith: record.savedWith
+    })),
+    metadata: current.metadata
+  } as {
+    workingDraft: { snapshot: { build: Record<string, unknown> } | null } | null;
+    savedBuilds: { snapshot: { build: Record<string, unknown> } | null }[];
+  } & Record<string, unknown>;
   const builds = [
-    ...(envelope.workingDraft === null ? [] : [envelope.workingDraft.snapshot.build]),
-    ...envelope.savedBuilds.map((record) => record.snapshot.build)
-  ];
+    ...(envelope.workingDraft?.snapshot?.build === undefined
+      ? []
+      : [envelope.workingDraft.snapshot.build]),
+    ...envelope.savedBuilds.flatMap((record) =>
+      record.snapshot?.build === undefined ? [] : [record.snapshot.build]
+    )
+  ] as Record<string, unknown>[];
   for (const build of builds) {
     build.schemaVersion = 1;
     delete build.titleRankOverrides;
@@ -359,13 +382,22 @@ function legacySchemaOneEnvelopeFixture(): unknown {
   return envelope;
 }
 
+function draftSnapshot(draft: PersistedWorkingDraft | null | undefined) {
+  return draft === null || draft === undefined
+    ? null
+    : selectedPersistedBuildSnapshot(draft.document);
+}
+
+function recordSnapshot(record: PersistedSavedDocumentRecord | undefined) {
+  return record === undefined ? null : selectedPersistedBuildSnapshot(record.document);
+}
+
 function parseSingleTitleOverrides(overrides: unknown): { readonly codes: readonly string[] } {
   const snapshot = validSnapshotFixture();
   const parsed = parseLocalLibraryEnvelope(
     validLocalLibraryEnvelopeFixture({
-      savedBuilds: [
-        {
-          ...validLocalLibraryEnvelopeFixture().savedBuilds[0]!,
+      savedDocuments: [
+        validSavedRecordFixture({
           snapshot: {
             ...snapshot,
             build: {
@@ -373,7 +405,7 @@ function parseSingleTitleOverrides(overrides: unknown): { readonly codes: readon
               titleRankOverrides: overrides as never
             }
           }
-        }
+        })
       ]
     })
   );
@@ -387,9 +419,8 @@ function parseSingleEquipment(equipment: unknown): { readonly codes: readonly st
   const snapshot = validSnapshotFixture();
   const parsed = parseLocalLibraryEnvelope(
     validLocalLibraryEnvelopeFixture({
-      savedBuilds: [
-        {
-          ...validLocalLibraryEnvelopeFixture().savedBuilds[0]!,
+      savedDocuments: [
+        validSavedRecordFixture({
           snapshot: {
             ...snapshot,
             build: {
@@ -397,7 +428,7 @@ function parseSingleEquipment(equipment: unknown): { readonly codes: readonly st
               equipment: equipment as EquipmentLoadout
             }
           }
-        }
+        })
       ]
     })
   );

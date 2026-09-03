@@ -2,8 +2,10 @@
 id: BW-1601
 title: Build Set Contracts
 epic: EPIC-16
-status: ready
+status: done
 priority: critical
+planned_sprint: SPRINT-017
+completed_sprint: SPRINT-017
 depends_on:
   - EPIC-08
   - EPIC-14
@@ -45,3 +47,9 @@ Define the framework-neutral model for a group of complete build loadouts.
 
 - `npm run typecheck`
 - Focused Vitest coverage for build set fixtures and empty/partial states
+
+## Closeout Evidence
+
+- Implemented in `SPRINT-017`.
+- Passed `npm run test:run -- test/domain/build-set.test.ts test/domain/contracts.test.ts`.
+- Passed `npm run verify`.

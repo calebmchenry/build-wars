@@ -59,7 +59,9 @@ attribute budget policy rather than inheriting PvE points.
 
 ## Interaction Model
 
-The main column renders `Skills` and `Equipment` tabs. `Skills` is the default tab and keeps the
+The main column renders `Skills` and `Equipment` tabs for the active loadout. In build-set mode,
+that active loadout is the selected entry from a neutral multi-build workspace; inactive entries are
+durable snapshots and are not separate live editors. `Skills` is the default tab and keeps the
 existing eight-slot skill bar, compact title-rank panel, and skill browser. Users can place skills
 from the browser, replace a slot, move to an empty slot, swap filled slots, clear slots, and use
 keyboard pick/place/cancel controls. Drag payloads are opaque app JSON under an internal MIME type
@@ -115,7 +117,9 @@ later evidence-backed ticket changes the architecture.
 
 Local library persistence, storage migrations, tags, favorites, backup/restore, share URLs, and
 saved template workflows are documented in [Local library and sharing](local-library-and-sharing.md).
-Title-rank behavior is documented in [Title ranks](title-ranks.md). Equipment editor behavior is
-documented in [Equipment editor](equipment-editor.md). Later epics own account-wide title profiles,
-title ownership, allegiance side selection, party/hero builds, guide authoring, recommendations,
-remote icon loading, analytics, auth, deployment, and PWA behavior.
+Build-set selection, inactive snapshots, variants, comparison, and transfer are documented in
+[Multi-build workspace](multi-build-workspace.md). Title-rank behavior is documented in
+[Title ranks](title-ranks.md). Equipment editor behavior is documented in
+[Equipment editor](equipment-editor.md). Later epics own account-wide title profiles, title
+ownership, allegiance side selection, party/hero semantics, guide authoring, recommendations, remote
+icon loading, analytics, auth, deployment, and PWA behavior.

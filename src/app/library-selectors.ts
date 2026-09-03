@@ -1,11 +1,12 @@
-import type { GameMode, ProfessionId } from "../domain";
+import { authoredDocumentId, type GameMode, type ProfessionId } from "../domain";
 import type { AppCatalogViews } from "./catalogs";
 import { selectHasMeaningfulEquipment } from "./equipment-selectors";
 import { selectCatalogFreshnessView, selectValidationView } from "./editor-selectors";
 import {
   hydrateEditorFromSnapshot,
   type PersistedCatalogFacts,
-  type PersistedSavedBuildRecord
+  type PersistedBuildSnapshot,
+  type PersistedSavedDocumentRecord
 } from "./persistence-schema";
 import type { LibrarySortMode, WorkspaceLibraryState } from "./workspace-state";
 
@@ -32,7 +33,10 @@ export interface LibraryDiagnostics {
 
 export interface LibraryRecordRow {
   readonly id: string;
-  readonly record: PersistedSavedBuildRecord;
+  readonly record: PersistedSavedDocumentRecord;
+  readonly recordKind: "build" | "build-set";
+  readonly kindLabel: string;
+  readonly entryCount: number;
   readonly name: string;
   readonly professionPair: string;
   readonly mode: GameMode;
@@ -72,7 +76,7 @@ export function filtersFromLibraryState(library: WorkspaceLibraryState): Library
 }
 
 export function selectLibraryView(
-  records: readonly PersistedSavedBuildRecord[],
+  records: readonly PersistedSavedDocumentRecord[],
   catalogs: AppCatalogViews,
   filters: LibraryFilters,
   currentFacts: PersistedCatalogFacts
@@ -81,7 +85,7 @@ export function selectLibraryView(
   const filtered = rows
     .filter((row) => matchesQuery(row, filters.query))
     .filter((row) => matchesProfession(row, filters.professionFilter))
-    .filter((row) => filters.modeFilter === "all" || row.mode === filters.modeFilter)
+    .filter((row) => matchesMode(row, filters.modeFilter))
     .filter((row) => !filters.favoriteOnly || row.favorite)
     .filter((row) => filters.tagFilter === null || hasTag(row, filters.tagFilter));
   const ordered = sortRows(filtered, filters.sortMode);
@@ -96,42 +100,58 @@ export function selectLibraryView(
 }
 
 export function summarizeLibraryRecord(
-  record: PersistedSavedBuildRecord,
+  record: PersistedSavedDocumentRecord,
   catalogs: AppCatalogViews,
   currentFacts: PersistedCatalogFacts
 ): LibraryRecordRow {
-  const validation = selectValidationView(
-    hydrateEditorFromSnapshot(record.snapshot),
-    catalogs
-  ).result;
-  const skillNames = record.snapshot.build.skillBar.flatMap((skillId) => {
-    if (skillId === null) {
-      return [];
-    }
-    const skill = catalogs.skills.find((candidate) => Number(candidate.id) === Number(skillId));
-    return skill === undefined ? [] : [skill.name];
-  });
-  const rawSkillLabels = record.snapshot.rawTemplate.skillBar.flatMap((entry) =>
-    entry === null ? [] : [entry.label]
+  const snapshots = snapshotsForRecord(record);
+  const preview = previewSnapshotForRecord(record);
+  const aggregate = snapshots.map(
+    (snapshot) => selectValidationView(hydrateEditorFromSnapshot(snapshot), catalogs).result
+  );
+  const skillNames = uniqueSorted(
+    snapshots.flatMap((snapshot) =>
+      snapshot.build.skillBar.flatMap((skillId) => {
+        if (skillId === null) {
+          return [];
+        }
+        const skill = catalogs.skills.find((candidate) => Number(candidate.id) === Number(skillId));
+        return skill === undefined ? [] : [skill.name];
+      })
+    )
+  );
+  const rawSkillLabels = uniqueSorted(
+    snapshots.flatMap((snapshot) =>
+      snapshot.rawTemplate.skillBar.flatMap((entry) => (entry === null ? [] : [entry.label]))
+    )
   );
   const freshness = selectCatalogFreshnessView(record.savedWith, currentFacts, {
-    includeEquipment: selectHasMeaningfulEquipment(record.snapshot.build.equipment)
+    includeEquipment: snapshots.some((snapshot) =>
+      selectHasMeaningfulEquipment(snapshot.build.equipment)
+    )
   });
   const diagnostics: LibraryDiagnostics = {
     freshness: freshness.status,
-    validation: validation.valid ? "valid" : "invalid",
-    resolution: validation.resolved ? "resolved" : "unresolved",
-    validationIssueCount: validation.counts.total,
-    summary: diagnosticSummary(validation.valid, validation.resolved, freshness.status)
+    validation: aggregate.every((result) => result.valid) ? "valid" : "invalid",
+    resolution: aggregate.every((result) => result.resolved) ? "resolved" : "unresolved",
+    validationIssueCount: aggregate.reduce((total, result) => total + result.counts.total, 0),
+    summary: diagnosticSummary(
+      aggregate.every((result) => result.valid),
+      aggregate.every((result) => result.resolved),
+      freshness.status
+    )
   };
 
   return {
     id: record.id,
     record,
+    recordKind: record.document.kind,
+    kindLabel: record.document.kind === "build-set" ? "Build set" : "Build",
+    entryCount: record.document.kind === "build-set" ? record.document.snapshot.entries.length : 1,
     name: record.name,
-    professionPair: professionPair(record, catalogs),
-    mode: record.snapshot.build.mode,
-    modeLabel: record.snapshot.build.mode.toUpperCase(),
+    professionPair: professionPair(preview, catalogs),
+    mode: preview.build.mode,
+    modeLabel: preview.build.mode.toUpperCase(),
     updatedLabel: formatTimestamp(record.updatedAt),
     favorite: record.favorite,
     tags: record.tags,
@@ -148,13 +168,15 @@ export function selectLibraryFacets(
 ): LibraryFacets {
   const usedProfessions = new Set<number>();
   rows.forEach((row) => {
-    const build = row.record.snapshot.build;
-    if (build.primaryProfessionId !== null) {
-      usedProfessions.add(Number(build.primaryProfessionId));
-    }
-    if (build.secondaryProfessionId !== null) {
-      usedProfessions.add(Number(build.secondaryProfessionId));
-    }
+    snapshotsForRecord(row.record).forEach((snapshot) => {
+      const build = snapshot.build;
+      if (build.primaryProfessionId !== null) {
+        usedProfessions.add(Number(build.primaryProfessionId));
+      }
+      if (build.secondaryProfessionId !== null) {
+        usedProfessions.add(Number(build.secondaryProfessionId));
+      }
+    });
   });
 
   return {
@@ -185,7 +207,9 @@ function matchesQuery(row: LibraryRecordRow, query: string): boolean {
     row.notesPreview ?? "",
     ...row.tags,
     ...row.skillNames,
-    ...row.rawSkillLabels
+    ...row.rawSkillLabels,
+    row.kindLabel,
+    ...entryLabels(row.record)
   ]
     .map(normalize)
     .some((value) => value.includes(normalized));
@@ -195,10 +219,17 @@ function matchesProfession(row: LibraryRecordRow, professionFilter: ProfessionId
   if (professionFilter === null) {
     return true;
   }
-  const build = row.record.snapshot.build;
+  return snapshotsForRecord(row.record).some(
+    (snapshot) =>
+      Number(snapshot.build.primaryProfessionId) === Number(professionFilter) ||
+      Number(snapshot.build.secondaryProfessionId) === Number(professionFilter)
+  );
+}
+
+function matchesMode(row: LibraryRecordRow, modeFilter: GameMode | "all"): boolean {
   return (
-    Number(build.primaryProfessionId) === Number(professionFilter) ||
-    Number(build.secondaryProfessionId) === Number(professionFilter)
+    modeFilter === "all" ||
+    snapshotsForRecord(row.record).some((snapshot) => snapshot.build.mode === modeFilter)
   );
 }
 
@@ -236,20 +267,73 @@ function sortRows(
   });
 }
 
-function professionPair(record: PersistedSavedBuildRecord, catalogs: AppCatalogViews): string {
-  const build = record.snapshot.build;
+function professionPair(snapshot: PersistedBuildSnapshot, catalogs: AppCatalogViews): string {
+  const build = snapshot.build;
   return [
     professionName(
       build.primaryProfessionId,
-      record.snapshot.rawTemplate.primaryProfession?.label,
+      snapshot.rawTemplate.primaryProfession?.label,
       catalogs
     ),
     professionName(
       build.secondaryProfessionId,
-      record.snapshot.rawTemplate.secondaryProfession?.label,
+      snapshot.rawTemplate.secondaryProfession?.label,
       catalogs
     )
   ].join(" / ");
+}
+
+function snapshotsForRecord(
+  record: PersistedSavedDocumentRecord
+): readonly PersistedBuildSnapshot[] {
+  return record.document.kind === "build"
+    ? [record.document.snapshot]
+    : record.document.snapshot.entries.map((entry) => entry.snapshot);
+}
+
+function previewSnapshotForRecord(record: PersistedSavedDocumentRecord): PersistedBuildSnapshot {
+  if (record.document.kind === "build") {
+    return record.document.snapshot;
+  }
+  const selected = record.document.snapshot.lastSelectedEntryId;
+  return (
+    record.document.snapshot.entries.find((entry) => entry.id === selected)?.snapshot ??
+    record.document.snapshot.entries[0]?.snapshot ??
+    createEmptyPreviewSnapshot(record.name)
+  );
+}
+
+function createEmptyPreviewSnapshot(name: string): PersistedBuildSnapshot {
+  return {
+    build: {
+      schemaVersion: 2,
+      catalogVersion: null,
+      id: authoredDocumentId("build:empty-build-set-preview"),
+      name,
+      mode: "unknown",
+      primaryProfessionId: null,
+      secondaryProfessionId: null,
+      attributes: [],
+      skillBar: [null, null, null, null, null, null, null, null],
+      titleRankOverrides: [],
+      equipment: null
+    },
+    pveBudget: { level: 20, questBonus: "maximum-applicable" },
+    rawTemplate: {
+      source: null,
+      templateName: null,
+      primaryProfession: null,
+      secondaryProfession: null,
+      attributes: [],
+      skillBar: [null, null, null, null, null, null, null, null]
+    }
+  };
+}
+
+function entryLabels(record: PersistedSavedDocumentRecord): readonly string[] {
+  return record.document.kind === "build-set"
+    ? record.document.snapshot.entries.flatMap((entry) => [entry.label, entry.kind])
+    : [];
 }
 
 function professionName(

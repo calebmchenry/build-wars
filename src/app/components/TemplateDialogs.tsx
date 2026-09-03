@@ -12,13 +12,15 @@ export function TemplateControls({
   catalogs,
   validation,
   dispatch,
-  requestDraftReplacement
+  requestDraftReplacement,
+  selectedLoadoutOnly = false
 }: {
   readonly state: EditorState;
   readonly catalogs: AppCatalogViews;
   readonly validation: ValidationView;
   readonly dispatch: Dispatch<EditorAction>;
   readonly requestDraftReplacement?: () => "cancel" | "discard";
+  readonly selectedLoadoutOnly?: boolean;
 }) {
   return (
     <section className="editor-panel template-panel" aria-labelledby="template-title">
@@ -43,6 +45,12 @@ export function TemplateControls({
             ? "Canonical export available."
             : "Canonical export blocked until validation and projection gates pass."}
       </p>
+      {selectedLoadoutOnly ? (
+        <div className="share-warning">
+          <strong>Selected loadout only</strong>
+          <p>Sibling loadouts use build-set transfer or backup JSON.</p>
+        </div>
+      ) : null}
       <ImportDialog
         state={state}
         catalogs={catalogs}

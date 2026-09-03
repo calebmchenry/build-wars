@@ -2,8 +2,10 @@
 id: BW-1602
 title: Workspace State and Persistence
 epic: EPIC-16
-status: ready
+status: done
 priority: high
+planned_sprint: SPRINT-017
+completed_sprint: SPRINT-017
 depends_on:
   - BW-1601
   - EPIC-09
@@ -43,3 +45,9 @@ Let users create, save, load, and edit build sets locally.
 
 - `npm run test:run -- src/app`
 - Focused persistence and reducer tests for build set operations
+
+## Closeout Evidence
+
+- Implemented in `SPRINT-017`.
+- Passed `npm run test:run -- src/app/build-set-state.test.ts src/app/workspace-state.test.ts src/app/persistence-schema.test.ts src/app/local-storage.test.ts`.
+- Passed `npm run verify`.

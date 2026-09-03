@@ -72,7 +72,7 @@ export function BackupDialog({
     ? serializeBackupEnvelope(
         createBackupEnvelope({
           exportedAt: new Date().toISOString(),
-          savedBuilds: workspace.library.records,
+          savedDocuments: workspace.library.records,
           workingDraft: createWorkspaceEnvelope(workspace, currentFacts, new Date().toISOString())
             .workingDraft,
           savedWith: currentFacts
@@ -241,7 +241,7 @@ export function RestoreDialog({
                 dispatch({
                   type: "apply-restore",
                   records: applied.records,
-                  draftEditor: applied.draftEditor,
+                  draftDocument: applied.draftDocument,
                   draftAssociation: applied.draftAssociation,
                   decision: "discard"
                 });

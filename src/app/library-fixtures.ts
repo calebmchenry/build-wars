@@ -1,4 +1,9 @@
-import { catalogId } from "../domain";
+import {
+  BUILD_SET_SCHEMA_VERSION,
+  authoredDocumentId,
+  buildSetEntryId,
+  catalogId
+} from "../domain";
 import { importedUnresolvedEditorFixture, playableEditorFixture } from "./editor-fixtures";
 import {
   LOCAL_LIBRARY_KIND,
@@ -6,7 +11,10 @@ import {
   createPersistedBuildSnapshot,
   emptyLocalLibraryEnvelope,
   localBuildRecordId,
+  persistedBuildDocument,
   type LocalLibraryEnvelopeV1,
+  type PersistedDocument,
+  type PersistedBuildSetSnapshot,
   type PersistedBuildSnapshot,
   type PersistedCatalogFacts,
   type PersistedSavedBuildRecord,
@@ -38,6 +46,35 @@ export function unresolvedSnapshotFixture(): PersistedBuildSnapshot {
   return createPersistedBuildSnapshot(importedUnresolvedEditorFixture());
 }
 
+export function validBuildSetSnapshotFixture(
+  overrides: Partial<PersistedBuildSetSnapshot> = {}
+): PersistedBuildSetSnapshot {
+  const first = validSnapshotFixture();
+  const second = unresolvedSnapshotFixture();
+  return {
+    schemaVersion: BUILD_SET_SCHEMA_VERSION,
+    id: overrides.id ?? authoredDocumentId("build-set-fixture"),
+    name: overrides.name ?? "Fixture Build Set",
+    lastSelectedEntryId: overrides.lastSelectedEntryId ?? buildSetEntryId("entry-fixture-1"),
+    entries: overrides.entries ?? [
+      {
+        id: buildSetEntryId("entry-fixture-1"),
+        label: "Frontline",
+        kind: "build",
+        notes: "Main loadout",
+        snapshot: first
+      },
+      {
+        id: buildSetEntryId("entry-fixture-2"),
+        label: "Unresolved Variant",
+        kind: "variant",
+        notes: null,
+        snapshot: second
+      }
+    ]
+  };
+}
+
 export function staleCatalogFactsFixture(): PersistedCatalogFacts {
   return {
     ...fixtureCatalogFacts,
@@ -47,18 +84,22 @@ export function staleCatalogFactsFixture(): PersistedCatalogFacts {
 }
 
 export function validSavedRecordFixture(
-  overrides: Partial<PersistedSavedBuildRecord> = {}
+  overrides: Partial<PersistedSavedBuildRecord> & {
+    readonly snapshot?: PersistedBuildSnapshot;
+    readonly document?: PersistedDocument;
+  } = {}
 ): PersistedSavedBuildRecord {
-  const snapshot = overrides.snapshot ?? validSnapshotFixture();
+  const document =
+    overrides.document ?? persistedBuildDocument(overrides.snapshot ?? validSnapshotFixture());
   return {
     id: overrides.id ?? localBuildRecordId("local-fixture-1"),
-    name: overrides.name ?? snapshot.build.name,
+    name: overrides.name ?? documentName(document),
     createdAt: overrides.createdAt ?? FIXED_LIBRARY_NOW,
     updatedAt: overrides.updatedAt ?? FIXED_LIBRARY_NOW,
     favorite: overrides.favorite ?? false,
     tags: overrides.tags ?? ["farm", "warrior"],
     notes: hasOwn(overrides, "notes") ? (overrides.notes ?? null) : "Fixture record",
-    snapshot,
+    document,
     savedWith: overrides.savedWith ?? fixtureCatalogFacts
   };
 }
@@ -81,18 +122,43 @@ export function unresolvedSavedRecordFixture(): PersistedSavedBuildRecord {
   });
 }
 
+export function validBuildSetSavedRecordFixture(
+  overrides: Partial<PersistedSavedBuildRecord> & {
+    readonly snapshot?: PersistedBuildSetSnapshot;
+  } = {}
+): PersistedSavedBuildRecord {
+  const { snapshot: buildSetSnapshot, ...recordOverrides } = overrides;
+  const document: PersistedDocument = {
+    kind: "build-set",
+    snapshot: buildSetSnapshot ?? validBuildSetSnapshotFixture()
+  };
+  return validSavedRecordFixture({
+    ...recordOverrides,
+    document,
+    name: recordOverrides.name ?? document.snapshot.name,
+    tags: recordOverrides.tags ?? ["variants"],
+    notes: hasOwn(recordOverrides, "notes") ? (recordOverrides.notes ?? null) : "Fixture set"
+  });
+}
+
 export function validWorkingDraftFixture(
-  overrides: Partial<PersistedWorkingDraft> = {}
+  overrides: Partial<PersistedWorkingDraft> & {
+    readonly snapshot?: PersistedBuildSnapshot;
+    readonly document?: PersistedDocument;
+  } = {}
 ): PersistedWorkingDraft {
   return {
-    snapshot: overrides.snapshot ?? validSnapshotFixture(),
+    document:
+      overrides.document ?? persistedBuildDocument(overrides.snapshot ?? validSnapshotFixture()),
     associatedRecordId: overrides.associatedRecordId ?? null,
     savedWith: overrides.savedWith ?? fixtureCatalogFacts
   };
 }
 
 export function validLocalLibraryEnvelopeFixture(
-  overrides: Partial<LocalLibraryEnvelopeV1> = {}
+  overrides: Partial<LocalLibraryEnvelopeV1> & {
+    readonly savedBuilds?: readonly PersistedSavedBuildRecord[];
+  } = {}
 ): LocalLibraryEnvelopeV1 {
   const workingDraft = hasOwn(overrides, "workingDraft")
     ? (overrides.workingDraft ?? null)
@@ -101,11 +167,12 @@ export function validLocalLibraryEnvelopeFixture(
     ...emptyLocalLibraryEnvelope(overrides.updatedAt ?? FIXED_LIBRARY_NOW),
     revision: overrides.revision ?? 3,
     workingDraft,
-    savedBuilds: overrides.savedBuilds ?? [
-      validSavedRecordFixture(),
-      unresolvedSavedRecordFixture(),
-      staleSavedRecordFixture()
-    ],
+    savedDocuments: overrides.savedDocuments ??
+      overrides.savedBuilds ?? [
+        validSavedRecordFixture(),
+        unresolvedSavedRecordFixture(),
+        staleSavedRecordFixture()
+      ],
     metadata: overrides.metadata ?? {
       lastWriteReason: "fixture",
       lastCompactedAt: null
@@ -125,7 +192,7 @@ export function duplicateIdEnvelopeFixture(): unknown {
   });
   return {
     ...validLocalLibraryEnvelopeFixture(),
-    savedBuilds: [first, second]
+    savedDocuments: [first, second]
   };
 }
 
@@ -136,7 +203,7 @@ export function unsupportedEnvelopeFixture(): unknown {
     revision: 1,
     updatedAt: FIXED_LIBRARY_NOW,
     workingDraft: null,
-    savedBuilds: [],
+    savedDocuments: [],
     metadata: {}
   };
 }
@@ -144,7 +211,7 @@ export function unsupportedEnvelopeFixture(): unknown {
 export function corruptRecordEnvelopeFixture(): unknown {
   return {
     ...validLocalLibraryEnvelopeFixture(),
-    savedBuilds: [
+    savedDocuments: [
       validSavedRecordFixture(),
       {
         id: "bad",
@@ -154,7 +221,7 @@ export function corruptRecordEnvelopeFixture(): unknown {
         favorite: false,
         tags: [],
         notes: null,
-        snapshot: null,
+        document: null,
         savedWith: fixtureCatalogFacts
       }
     ]
@@ -168,7 +235,7 @@ export function oversizedEnvelopeFixture(): unknown {
     revision: 1,
     updatedAt: FIXED_LIBRARY_NOW,
     workingDraft: null,
-    savedBuilds: Array.from({ length: 251 }, (_, index) =>
+    savedDocuments: Array.from({ length: 251 }, (_, index) =>
       validSavedRecordFixture({ id: localBuildRecordId(`local-${index}`) })
     ),
     metadata: {}
@@ -177,7 +244,7 @@ export function oversizedEnvelopeFixture(): unknown {
 
 export function largeLibraryEnvelopeFixture(count = 25): LocalLibraryEnvelopeV1 {
   return validLocalLibraryEnvelopeFixture({
-    savedBuilds: Array.from({ length: count }, (_, index) =>
+    savedDocuments: Array.from({ length: count }, (_, index) =>
       validSavedRecordFixture({
         id: localBuildRecordId(`local-large-${index}`),
         name: `Fixture Build ${index.toString().padStart(2, "0")}`,
@@ -199,4 +266,45 @@ export function largeLibraryEnvelopeFixture(count = 25): LocalLibraryEnvelopeV1 
 
 export function corruptLocalLibraryJsonFixture(): string {
   return "{not-json";
+}
+
+export function legacyLocalLibraryEnvelopeV1Fixture(): unknown {
+  const envelope = validLocalLibraryEnvelopeFixture();
+  const legacyWorkingDraft =
+    envelope.workingDraft === null
+      ? null
+      : {
+          snapshot:
+            envelope.workingDraft.document.kind === "build"
+              ? envelope.workingDraft.document.snapshot
+              : envelope.workingDraft.document.snapshot.entries[0]?.snapshot,
+          associatedRecordId: envelope.workingDraft.associatedRecordId,
+          savedWith: envelope.workingDraft.savedWith
+        };
+  return {
+    schemaVersion: 1,
+    kind: LOCAL_LIBRARY_KIND,
+    revision: envelope.revision,
+    updatedAt: envelope.updatedAt,
+    workingDraft: legacyWorkingDraft,
+    savedBuilds: envelope.savedDocuments.map((record) => ({
+      id: record.id,
+      name: record.name,
+      createdAt: record.createdAt,
+      updatedAt: record.updatedAt,
+      favorite: record.favorite,
+      tags: record.tags,
+      notes: record.notes,
+      snapshot:
+        record.document.kind === "build"
+          ? record.document.snapshot
+          : record.document.snapshot.entries[0]?.snapshot,
+      savedWith: record.savedWith
+    })),
+    metadata: envelope.metadata
+  };
+}
+
+function documentName(document: PersistedDocument): string {
+  return document.kind === "build" ? document.snapshot.build.name : document.snapshot.name;
 }

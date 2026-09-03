@@ -452,6 +452,40 @@ export {
 export { BUILD_SCHEMA_VERSION, SKILL_BAR_SLOT_COUNT } from "./build";
 export type { AttributeAllocation, Build, GameMode, SkillBar } from "./build";
 export {
+  BUILD_SET_SCHEMA_VERSION,
+  MAX_BUILD_SET_ENTRIES,
+  MAX_BUILD_SET_ENTRY_LABEL_LENGTH,
+  MAX_BUILD_SET_ENTRY_NOTES_LENGTH,
+  MAX_BUILD_SET_NAME_LENGTH,
+  buildSetEntryId,
+  cloneBuildForBuildSetEntry,
+  containsBuildSetDangerousKey,
+  createBlankBuildSet,
+  createBuildSetEntry,
+  duplicateBuildSetEntry,
+  insertBuildSetEntry,
+  isBuildSetEntryKind,
+  moveBuildSetEntry,
+  normalizeBuildSetEntryLabel,
+  normalizeBuildSetEntryNotes,
+  normalizeBuildSetName,
+  promoteBuildSetEntry,
+  removeBuildSetEntry,
+  renameBuildSetEntry,
+  repairSelectedBuildSetEntryId,
+  setBuildSetEntryKind,
+  setBuildSetEntryNotes,
+  uniqueBuildSetEntryLabel,
+  validateBuildSetShape
+} from "./build-set";
+export type {
+  BuildSet,
+  BuildSetEntry,
+  BuildSetEntryId,
+  BuildSetEntryKind,
+  BuildSetValidationIssue
+} from "./build-set";
+export {
   TITLE_RANK_OVERRIDE_LIMIT,
   createTitleRankCatalog,
   hasAuthoredTitleRankOverrides,

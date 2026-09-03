@@ -9,7 +9,10 @@ import {
 } from "../library-selectors";
 import type { PersistedCatalogFacts } from "../persistence-schema";
 import {
+  generateAuthoredBuildSetId,
+  generateBuildSetEntryId,
   generateLocalBuildRecordId,
+  generateNestedBuildId,
   needsDirtyGuard,
   professionFilterFromValue,
   type LibrarySortMode,
@@ -49,8 +52,16 @@ export function LibraryPanel({
       ? null
       : workspace.library.records.find((record) => record.id === pendingDeleteId);
 
-  const saveName = saveNameDraft ?? workspace.editor.build.name;
+  const activeSaveName =
+    saveNameDraft ??
+    (workspace.document.kind === "build-set"
+      ? workspace.document.name
+      : workspace.editor.build.name);
   const nextId = () => generateLocalBuildRecordId(new Date().toISOString(), sequenceRef.current++);
+  const nextEntryId = () =>
+    generateBuildSetEntryId(new Date().toISOString(), sequenceRef.current++);
+  const nextSetId = () =>
+    generateAuthoredBuildSetId(new Date().toISOString(), sequenceRef.current++);
 
   return (
     <section
@@ -83,7 +94,7 @@ export function LibraryPanel({
             <label>
               <span>Save name</span>
               <input
-                value={saveName}
+                value={activeSaveName}
                 onChange={(event) => setSaveNameDraft(event.currentTarget.value)}
               />
             </label>
@@ -94,7 +105,7 @@ export function LibraryPanel({
                   dispatch({
                     type: "save-new",
                     id: nextId(),
-                    name: saveName,
+                    name: activeSaveName,
                     now: new Date().toISOString(),
                     savedWith: currentFacts
                   });
@@ -122,7 +133,7 @@ export function LibraryPanel({
                   dispatch({
                     type: "save-as-new",
                     id: nextId(),
-                    name: saveName,
+                    name: activeSaveName,
                     now: new Date().toISOString(),
                     savedWith: currentFacts
                   });
@@ -142,6 +153,35 @@ export function LibraryPanel({
                 }
               >
                 New Draft
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const entryId = nextEntryId();
+                  dispatch({
+                    type: "create-build-set-from-current",
+                    setId: nextSetId(),
+                    entryId,
+                    decision: "discard"
+                  });
+                  setSaveNameDraft(null);
+                }}
+              >
+                Create Set
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  dispatch({
+                    type: "new-build-set",
+                    setId: nextSetId(),
+                    name: "Untitled Build Set",
+                    decision: replacementDecision(workspace)
+                  });
+                  setSaveNameDraft(null);
+                }}
+              >
+                New Set
               </button>
             </div>
           </div>
@@ -291,6 +331,18 @@ export function LibraryPanel({
                   }
                   onDelete={() => setPendingDeleteId(row.id)}
                   onShare={() => onShareRecord?.(row.id)}
+                  onCopyIntoSet={() => {
+                    const entryId = nextEntryId();
+                    dispatch({
+                      type: "copy-record-into-set",
+                      recordId: row.record.id,
+                      entryId,
+                      buildId: generateNestedBuildId(entryId)
+                    });
+                  }}
+                  canCopyIntoSet={
+                    workspace.document.kind === "build-set" && row.record.document.kind === "build"
+                  }
                 />
               ))}
             </div>
@@ -324,7 +376,9 @@ function LibraryRecord({
   onLoad,
   onDuplicate,
   onDelete,
-  onShare
+  onShare,
+  onCopyIntoSet,
+  canCopyIntoSet
 }: {
   readonly row: LibraryRecordRow;
   readonly selected: boolean;
@@ -334,6 +388,8 @@ function LibraryRecord({
   readonly onDuplicate: () => void;
   readonly onDelete: () => void;
   readonly onShare: () => void;
+  readonly onCopyIntoSet: () => void;
+  readonly canCopyIntoSet: boolean;
 }) {
   return (
     <article className={`library-record ${selected ? "selected-record" : ""}`}>
@@ -341,6 +397,7 @@ function LibraryRecord({
         <div>
           <h3>{row.name}</h3>
           <span>
+            {row.kindLabel} - {row.entryCount} loadout{row.entryCount === 1 ? "" : "s"} -{" "}
             {row.professionPair} - {row.modeLabel} - {row.updatedLabel}
           </span>
         </div>
@@ -378,6 +435,11 @@ function LibraryRecord({
         <button type="button" onClick={onShare}>
           Share
         </button>
+        {canCopyIntoSet ? (
+          <button type="button" onClick={onCopyIntoSet}>
+            Copy Into Set
+          </button>
+        ) : null}
         <button type="button" onClick={onDelete}>
           Delete
         </button>

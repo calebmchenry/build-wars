@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  authoredDocumentId,
+  buildSetEntryId,
   catalogId,
   createEmptyEquipmentLoadout,
   knownEquipmentSelection,
@@ -17,6 +19,11 @@ import {
   projectEditorToSkillTemplate,
   selectShareTemplateExport
 } from "./template-workflow";
+import {
+  createInitialWorkspaceState,
+  materializeActiveBuildSetSnapshot,
+  workspaceReducer
+} from "./workspace-state";
 
 const catalogs = requireReadyCatalogs();
 
@@ -144,5 +151,52 @@ describe("template workflow", () => {
     );
     expect(validation.exportPolicy.canonical.available).toBe(true);
     expect(selectShareTemplateExport(validation.exportPolicy).ok).toBe(true);
+  });
+
+  it("replaces only the selected build-set entry snapshot on template import", () => {
+    const entryId = buildSetEntryId("entry-template");
+    const blankSet = workspaceReducer(createInitialWorkspaceState(), {
+      type: "new-build-set",
+      setId: authoredDocumentId("set-template"),
+      decision: "discard"
+    });
+    const selected = workspaceReducer(blankSet, {
+      type: "add-blank-build-set-entry",
+      entryId,
+      buildId: authoredDocumentId("build-selected"),
+      label: "Original Label"
+    });
+    const withMetadata = workspaceReducer(
+      workspaceReducer(selected, {
+        type: "set-build-set-entry-kind",
+        entryId,
+        kind: "variant"
+      }),
+      {
+        type: "set-build-set-entry-notes",
+        entryId,
+        notes: "Entry note"
+      }
+    );
+    const imported = importSkillTemplateToEditor(
+      SKILL_TEMPLATE_PACKAGE_EXAMPLE,
+      withMetadata.editor,
+      catalogs
+    );
+    if (!imported.ok) {
+      throw new Error(imported.error.message);
+    }
+    const replaced = workspaceReducer(withMetadata, {
+      type: "editor",
+      action: { type: "replace-state", state: imported.state }
+    });
+    const entry = materializeActiveBuildSetSnapshot(replaced)?.entries[0];
+
+    expect(entry?.id).toBe(entryId);
+    expect(entry?.label).toBe("Original Label");
+    expect(entry?.kind).toBe("variant");
+    expect(entry?.notes).toBe("Entry note");
+    expect(entry?.snapshot.build.id).toBe(authoredDocumentId("build-selected"));
+    expect(replaced.draftSession.associatedRecordId).toBeNull();
   });
 });

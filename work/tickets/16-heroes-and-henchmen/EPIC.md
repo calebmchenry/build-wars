@@ -2,8 +2,10 @@
 id: EPIC-16
 title: Multi-Build Workspace
 track: functional
-status: ready
+status: done
 priority: medium
+planned_sprint: SPRINT-017
+completed_sprint: SPRINT-017
 depends_on:
   - EPIC-08
   - EPIC-09
@@ -75,3 +77,18 @@ hero team, variant group, farming setup, or comparison set, but EPIC-16 should s
 * `BW-1604`: Variant duplication, comparison, labeling, and promotion workflows.
 * `BW-1605`: Per-loadout validation, group overview, backup/restore, and share/export boundaries.
 * `BW-1606`: Docs, deferred hero/party/template scope, verification, and closeout.
+
+## Closeout Evidence
+
+Completed in `SPRINT-017`.
+
+- `src/domain/build-set.ts` defines neutral build-set contracts and helpers.
+- `src/app` supports schema-2 mixed documents, one active editor plus inactive snapshots, build-set
+  navigation, variants, comparison, aggregate per-entry validation, backup/restore, and Build Wars
+  JSON transfer.
+- Documentation records that hero catalogs, henchmen, portraits, AI behavior, party slots, party
+  validation, paw-ned2/team templates, guide authoring, backend sync, collaboration, and remote
+  media are deferred.
+- Passed `npm run test:run -- src/app test/domain`.
+- Passed `npm run verify`.
+- Passed `git diff --check`.

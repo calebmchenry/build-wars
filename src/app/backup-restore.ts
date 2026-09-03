@@ -1,19 +1,20 @@
-import type { EditorState } from "./editor-state";
+import { containsBuildSetDangerousKey } from "../domain";
 import {
   LOCAL_LIBRARY_KIND,
   LOCAL_LIBRARY_SCHEMA_VERSION,
-  hydrateEditorFromSnapshot,
   localBuildRecordId,
   parseLocalLibraryEnvelope,
   type LocalBuildRecordId,
   type PersistenceDiagnostic,
   type PersistedCatalogFacts,
-  type PersistedSavedBuildRecord,
+  type PersistedDocument,
+  type PersistedSavedDocumentRecord,
   type PersistedWorkingDraft
 } from "./persistence-schema";
 
 export const BACKUP_KIND = "build-wars-library-backup";
-export const BACKUP_SCHEMA_VERSION = 1;
+export const BACKUP_SCHEMA_VERSION = 2;
+export const LEGACY_BACKUP_SCHEMA_VERSION = 1;
 
 export type RestoreMode = "merge" | "replace";
 
@@ -21,7 +22,7 @@ export interface LocalLibraryBackupEnvelopeV1 {
   readonly schemaVersion: typeof BACKUP_SCHEMA_VERSION;
   readonly kind: typeof BACKUP_KIND;
   readonly exportedAt: string;
-  readonly savedBuilds: readonly PersistedSavedBuildRecord[];
+  readonly savedDocuments: readonly PersistedSavedDocumentRecord[];
   readonly workingDraft: PersistedWorkingDraft | null;
   readonly savedWith: PersistedCatalogFacts;
   readonly metadata: {
@@ -51,7 +52,7 @@ export interface RestoreIdRemap {
 export interface RestorePreviewPlan {
   readonly id: string;
   readonly backup: LocalLibraryBackupEnvelopeV1;
-  readonly acceptedRecords: readonly PersistedSavedBuildRecord[];
+  readonly acceptedRecords: readonly PersistedSavedDocumentRecord[];
   readonly skippedRecords: readonly PersistenceDiagnostic[];
   readonly duplicateBackupIds: readonly LocalBuildRecordId[];
   readonly currentIdConflicts: readonly LocalBuildRecordId[];
@@ -67,8 +68,8 @@ export type RestoreApplyResult =
   | {
       readonly ok: true;
       readonly plan: RestorePreviewPlan;
-      readonly records: readonly PersistedSavedBuildRecord[];
-      readonly draftEditor: EditorState | null;
+      readonly records: readonly PersistedSavedDocumentRecord[];
+      readonly draftDocument: PersistedDocument | null;
       readonly draftAssociation: LocalBuildRecordId | null;
       readonly importedCount: number;
       readonly remappedCount: number;
@@ -82,20 +83,22 @@ export type RestoreApplyResult =
 
 export function createBackupEnvelope(input: {
   readonly exportedAt: string;
-  readonly savedBuilds: readonly PersistedSavedBuildRecord[];
+  readonly savedDocuments?: readonly PersistedSavedDocumentRecord[];
+  readonly savedBuilds?: readonly PersistedSavedDocumentRecord[];
   readonly workingDraft: PersistedWorkingDraft | null;
   readonly savedWith: PersistedCatalogFacts;
 }): LocalLibraryBackupEnvelopeV1 {
+  const savedDocuments = input.savedDocuments ?? input.savedBuilds ?? [];
   return {
     schemaVersion: BACKUP_SCHEMA_VERSION,
     kind: BACKUP_KIND,
     exportedAt: input.exportedAt,
-    savedBuilds: input.savedBuilds,
+    savedDocuments,
     workingDraft: input.workingDraft,
     savedWith: input.savedWith,
     metadata: {
       sourceStorageKey: "build-wars:v1",
-      declaredRecordCount: input.savedBuilds.length
+      declaredRecordCount: savedDocuments.length
     }
   };
 }
@@ -122,13 +125,23 @@ export function parseBackupJson(text: string): BackupParseResult {
 }
 
 export function parseBackupEnvelope(input: unknown): BackupParseResult {
+  if (containsBuildSetDangerousKey(input)) {
+    return fail(
+      "dangerous-key",
+      "$",
+      "Backup contains a key that is not accepted in Build Wars local data."
+    );
+  }
   if (!isRecord(input)) {
     return fail("invalid-object", "$", "Backup root must be an object.");
   }
   if (input.kind !== BACKUP_KIND) {
     return fail("invalid-kind", "$.kind", "Backup is not a Build Wars library backup.");
   }
-  if (input.schemaVersion !== BACKUP_SCHEMA_VERSION) {
+  if (
+    input.schemaVersion !== BACKUP_SCHEMA_VERSION &&
+    input.schemaVersion !== LEGACY_BACKUP_SCHEMA_VERSION
+  ) {
     return fail(
       "unsupported-schema-version",
       "$.schemaVersion",
@@ -143,14 +156,22 @@ export function parseBackupEnvelope(input: unknown): BackupParseResult {
       "Backup exportedAt must be a valid timestamp."
     );
   }
-  const declaredRecordCount = Array.isArray(input.savedBuilds) ? input.savedBuilds.length : 0;
+  const savedDocuments =
+    input.schemaVersion === LEGACY_BACKUP_SCHEMA_VERSION
+      ? migrateLegacyBackupRecords(input.savedBuilds)
+      : input.savedDocuments;
+  const workingDraft =
+    input.schemaVersion === LEGACY_BACKUP_SCHEMA_VERSION
+      ? migrateLegacyBackupDraft(input.workingDraft)
+      : input.workingDraft;
+  const declaredRecordCount = Array.isArray(savedDocuments) ? savedDocuments.length : 0;
   const parsed = parseLocalLibraryEnvelope({
     schemaVersion: LOCAL_LIBRARY_SCHEMA_VERSION,
     kind: LOCAL_LIBRARY_KIND,
     revision: 0,
     updatedAt: exportedAt,
-    workingDraft: input.workingDraft ?? null,
-    savedBuilds: input.savedBuilds,
+    workingDraft: workingDraft ?? null,
+    savedDocuments,
     metadata: {}
   });
   if (!parsed.ok) {
@@ -163,7 +184,7 @@ export function parseBackupEnvelope(input: unknown): BackupParseResult {
       schemaVersion: BACKUP_SCHEMA_VERSION,
       kind: BACKUP_KIND,
       exportedAt,
-      savedBuilds: parsed.envelope.savedBuilds,
+      savedDocuments: parsed.envelope.savedDocuments,
       workingDraft: parsed.envelope.workingDraft,
       savedWith,
       metadata: {
@@ -178,7 +199,7 @@ export function parseBackupEnvelope(input: unknown): BackupParseResult {
 
 export function createRestorePreviewPlan(input: {
   readonly backup: LocalLibraryBackupEnvelopeV1;
-  readonly currentRecords: readonly PersistedSavedBuildRecord[];
+  readonly currentRecords: readonly PersistedSavedDocumentRecord[];
   readonly nextId: (sourceId: LocalBuildRecordId) => LocalBuildRecordId;
   readonly diagnostics?: readonly PersistenceDiagnostic[];
   readonly id?: string;
@@ -188,7 +209,7 @@ export function createRestorePreviewPlan(input: {
   const duplicateBackupIds: LocalBuildRecordId[] = [];
   const currentIdConflicts: LocalBuildRecordId[] = [];
   const idRemaps: RestoreIdRemap[] = [];
-  const acceptedRecords = input.backup.savedBuilds.map((record) => {
+  const acceptedRecords = input.backup.savedDocuments.map((record) => {
     if (seenIncoming.has(record.id)) {
       duplicateBackupIds.push(record.id);
       const to = input.nextId(record.id);
@@ -224,7 +245,7 @@ export function createRestorePreviewPlan(input: {
 export function applyRestorePlan(
   plan: RestorePreviewPlan,
   input: {
-    readonly currentRecords: readonly PersistedSavedBuildRecord[];
+    readonly currentRecords: readonly PersistedSavedDocumentRecord[];
     readonly mode: RestoreMode;
     readonly restoreWorkingDraft: boolean;
   }
@@ -255,11 +276,55 @@ export function applyRestorePlan(
     ok: true,
     plan: { ...plan, applied: true },
     records,
-    draftEditor: restoredDraft === null ? null : hydrateEditorFromSnapshot(restoredDraft.snapshot),
+    draftDocument: restoredDraft === null ? null : restoredDraft.document,
     draftAssociation: restoredDraft?.associatedRecordId ?? null,
     importedCount: plan.acceptedRecords.length,
     remappedCount: plan.idRemaps.length,
     skippedCount: plan.skippedRecords.length
+  };
+}
+
+function migrateLegacyBackupRecords(input: unknown): unknown {
+  if (!Array.isArray(input)) {
+    return input;
+  }
+  return input.map((item) => {
+    const record = isRecord(item) ? item : null;
+    if (record === null) {
+      return item;
+    }
+    return {
+      id: record.id,
+      name: record.name,
+      createdAt: record.createdAt,
+      updatedAt: record.updatedAt,
+      favorite: record.favorite,
+      tags: record.tags,
+      notes: record.notes,
+      document: {
+        kind: "build",
+        snapshot: record.snapshot
+      },
+      savedWith: record.savedWith
+    };
+  });
+}
+
+function migrateLegacyBackupDraft(input: unknown): unknown {
+  if (input === null || input === undefined) {
+    return null;
+  }
+  const record = isRecord(input) ? input : null;
+  if (record === null) {
+    return input;
+  }
+  return {
+    document: {
+      kind: "build",
+      snapshot: record.snapshot
+    },
+    associatedRecordId: record.associatedRecordId,
+    savedWith: record.savedWith
   };
 }
 

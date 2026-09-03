@@ -12,7 +12,13 @@ import {
   validLocalLibraryEnvelopeFixture,
   validSavedRecordFixture
 } from "./library-fixtures";
-import { LOCAL_LIBRARY_STORAGE_KEY, localBuildRecordId } from "./persistence-schema";
+import {
+  LOCAL_LIBRARY_STORAGE_KEY,
+  localBuildRecordId,
+  selectedPersistedBuildSnapshot,
+  type PersistedSavedDocumentRecord,
+  type PersistedWorkingDraft
+} from "./persistence-schema";
 import {
   createInitialWorkspaceState,
   createWorkspaceEnvelope,
@@ -34,7 +40,7 @@ describe("workspace state", () => {
       diagnostics: []
     });
 
-    expect(workspace.editor.build.name).toBe(envelope.workingDraft?.snapshot.build.name);
+    expect(workspace.editor.build.name).toBe(draftSnapshot(envelope.workingDraft)?.build.name);
     expect(workspace.editor.browser.filters.query).toBe("");
     expect(workspace.library.records).toHaveLength(3);
     expect(workspace.draftSession.hydrationSource).toBe("storage");
@@ -53,10 +59,10 @@ describe("workspace state", () => {
     const envelope = createWorkspaceEnvelope(workspace, fixtureCatalogFacts, LATER);
 
     expect(workspace.draftSession.dirtyState).toBe("dirty");
-    expect(envelope.workingDraft?.snapshot.build.primaryProfessionId).toBe(
+    expect(draftSnapshot(envelope.workingDraft)?.build.primaryProfessionId).toBe(
       catalogId<"Profession">(1)
     );
-    expect(envelope.savedBuilds).toHaveLength(0);
+    expect(envelope.savedDocuments).toHaveLength(0);
     expect(LOCAL_LIBRARY_STORAGE_KEY).toBe("build-wars:v1");
   });
 
@@ -91,7 +97,7 @@ describe("workspace state", () => {
 
     expect(saved.library.records).toHaveLength(1);
     expect(saved.draftSession.associatedRecordId).toBe("local-a");
-    expect(updated.library.records[0]?.snapshot.build.mode).toBe("pvp");
+    expect(recordSnapshot(updated.library.records[0])?.build.mode).toBe("pvp");
     expect(updated.draftSession.dirtyState).toBe("clean");
     expect(copy.library.records).toHaveLength(2);
     expect(copy.library.records.map((record) => record.name)).toEqual(["First Save", "First Save"]);
@@ -130,7 +136,7 @@ describe("workspace state", () => {
     expect(ignoredDelete.library.records).toHaveLength(2);
     expect(deleted.library.records.map((item) => item.id)).toEqual(["local-copy"]);
     expect(deleted.draftSession.associatedRecordId).toBeNull();
-    expect(deleted.editor.build.name).toBe(record.snapshot.build.name);
+    expect(deleted.editor.build.name).toBe(recordSnapshot(record)?.build.name);
   });
 
   it("preserves semantic equipment through save, duplicate, and load", () => {
@@ -175,11 +181,11 @@ describe("workspace state", () => {
     });
 
     expect(duplicated.library.records).toHaveLength(2);
-    expect(duplicated.library.records[1]?.snapshot.build.equipment).toEqual(
-      saved.library.records[0]?.snapshot.build.equipment
+    expect(recordSnapshot(duplicated.library.records[1])?.build.equipment).toEqual(
+      recordSnapshot(saved.library.records[0])?.build.equipment
     );
     expect(loaded.editor.build.equipment).toEqual(
-      saved.library.records[0]?.snapshot.build.equipment
+      recordSnapshot(saved.library.records[0])?.build.equipment
     );
   });
 
@@ -216,7 +222,7 @@ describe("workspace state", () => {
       decision: "discard"
     });
 
-    expect(duplicated.library.records[1]?.snapshot.build.titleRankOverrides).toEqual([
+    expect(recordSnapshot(duplicated.library.records[1])?.build.titleRankOverrides).toEqual([
       { key: "title:lightbringer-rank", rank: 4 }
     ]);
     expect(loaded.editor.build.titleRankOverrides).toEqual([
@@ -349,3 +355,13 @@ describe("workspace state", () => {
     expect(blank.draftSession.dirtyState).toBe("clean");
   });
 });
+
+function draftSnapshot(draft: PersistedWorkingDraft | null | undefined) {
+  return draft === null || draft === undefined
+    ? null
+    : selectedPersistedBuildSnapshot(draft.document);
+}
+
+function recordSnapshot(record: PersistedSavedDocumentRecord | undefined) {
+  return record === undefined ? null : selectedPersistedBuildSnapshot(record.document);
+}

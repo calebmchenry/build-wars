@@ -1,10 +1,10 @@
 # Build Wars
 
 Build Wars is a local-first TypeScript web app for Guild Wars Reforged build tooling. The current
-app includes a durable browser-local single-character build editor with skill and equipment
-workspaces, local saved-build library, template-code sharing, backup/restore, framework-neutral
-domain contracts, template import/export compatibility, source policy, and offline-first promoted
-catalog data.
+app includes a durable browser-local build editor, neutral multi-build workspaces for complete
+loadout sets, skill and equipment workspaces, local saved-document library, selected-loadout
+template sharing, backup/restore, framework-neutral domain contracts, template import/export
+compatibility, source policy, and offline-first promoted catalog data.
 
 ## Prerequisites
 
@@ -94,19 +94,25 @@ Included now:
   `EquipmentLoadout`, canonical armor and weapon-set topology, known/unresolved semantic equipment
   selections, headgear and rune rank-adjustment helpers, weapon-set analysis, and optional
   equipment validation catalog views.
-- A browser-based core build editor under `src/app` for one durable single-character workspace:
+- A browser-based core build editor under `src/app` for one active authored loadout at a time:
   profession and mode controls, PvE attribute budgets, deterministic skill search/filter views,
   an eight-slot skill bar with pointer and keyboard operations, compact title-rank controls,
   equipment workspace tabs, tooltips, validation presentation, and skill-template import/export.
+- Neutral build sets under `src/domain/build-set.ts` and `src/app/build-set-state.ts`: up to 16
+  complete loadouts with stable entry IDs, labels, `build | variant | freeform` kinds, notes, one
+  active editor, inactive durable snapshots, duplicate variants, comparison rows, aggregate
+  per-entry validation status, and Build Wars JSON transfer.
 - A browser-based equipment editor under `src/app`: five canonical armor slots for runes,
   insignias, and headgear bonuses; four canonical weapon sets for main hand, off hand, two-handed,
   stale, unresolved, and modifier states; per-family equipment catalog readiness; inline validation;
   and conservative health, energy, armor, requirement, and attribution summaries.
-- Local library and sharing workflows under `src/app`: one `localStorage` key (`build-wars:v1`),
-  working-draft autosave, explicit saved records, search/filter/sort, tags, favorites, notes,
-  semantic equipment and title-rank persistence, template-code-first share URLs capped at 1,800
-  characters, and inert JSON whole-library backup/restore. Share URLs remain skill-template-only and
-  warn when meaningful authored equipment or authored title-rank overrides are omitted.
+- Local library and sharing workflows under `src/app`: one `localStorage` key (`build-wars:v1`) with
+  schema-2 mixed build/build-set documents, schema-1 migration on read, working-draft autosave,
+  explicit saved records, search/filter/sort, tags, favorites, notes, semantic equipment and
+  title-rank persistence, template-code-first share URLs capped at 1,800 characters, inert JSON
+  whole-library backup/restore, and inert Build Wars JSON build-set transfer. Share URLs and skill
+  templates remain selected-loadout-only and warn when sibling entries, notes, meaningful authored
+  equipment, or authored title-rank overrides are omitted.
 
 Deferred to later epics:
 
@@ -117,9 +123,11 @@ Deferred to later epics:
   defers ownership to EPIC-17
 - Compact runtime catalog derivation, dynamic catalog loading, search workers, virtualization, and
   remote icon fetching
-- Title ownership, account-wide title profiles, allegiance selection, equipment/title share
-  payloads, raw equipment-template replay into the app editor, full stat aggregation, party builder,
-  guide authoring, PWA behavior, auth, analytics, and deployment
+- Hero catalogs, henchmen, portraits, AI behavior, party slots, party validation, paw-ned2/team
+  templates, title ownership, account-wide title profiles, allegiance selection, equipment/title
+  share payloads, raw equipment-template replay into the app editor, full stat aggregation, guide
+  authoring, backend sync, collaboration, remote media, PWA behavior, auth, analytics, and
+  deployment
 
 ## Project Layout
 
@@ -242,20 +250,26 @@ performance observation, and deferred scope.
 ## Local Library And Sharing
 
 The local workspace persists to browser `localStorage` under exactly one app-owned key:
-`build-wars:v1`. The versioned envelope stores the working draft separately from explicit saved
-records, preserving `Build`, PvE budget controls, raw template overlay/source facts, unresolved
-import IDs, semantic equipment, title-rank overrides, template source/name facts, and saved-with
-catalog/rule-engine versions. UI-only state is not persisted.
+`build-wars:v1`. The payload is schema version 2. It stores a discriminated working document and
+mixed saved documents separately from UI-only state, preserving single builds and build sets with
+`Build`, PvE budget controls, raw template overlay/source facts, unresolved import IDs, semantic
+equipment, title-rank overrides, entry metadata, template source/name facts, and saved-with
+catalog/rule-engine versions. Valid schema-1 libraries migrate in memory without dirtying or
+rewriting the stored value.
 
-Saved records use opaque local IDs, so duplicate names and duplicate build contents are allowed.
+Saved records use opaque local IDs, so duplicate names and duplicate document contents are allowed.
 The library panel supports save new, update, save as new, duplicate, delete confirmation, favorite,
-rename, tags, notes, load, search, filters, sorting, share, backup, and restore without accounts,
-backend sync, IndexedDB, service workers, analytics, or remote media fetches.
+rename, tags, notes, load, Copy Into Set, search, filters, sorting, selected-loadout share, backup,
+and restore without accounts, backend sync, IndexedDB, service workers, analytics, or remote media
+fetches.
 
 Single-build sharing uses the existing skill-template codec through hash fragments:
 `#bw=1&code=<bare-skill-template-code>&mode=<optional-mode>`. The full URL is capped at 1,800
 characters and excludes library metadata, catalog snapshots, equipment, party, and guide data.
-Title-rank overrides are also excluded from share URLs and skill-template bytes; non-default local
-overrides show omission warnings.
+Build-set sharing uses the selected loadout only; sibling entries and entry notes require
+whole-library backup or build-set transfer JSON. Title-rank overrides are also excluded from share
+URLs and skill-template bytes; non-default local overrides show omission warnings.
 Whole-library backup/restore uses inert JSON with previewed merge/replace behavior and skipped
-record reports. See [Local library and sharing](compendium/local-library-and-sharing.md).
+record reports. Build-set transfer uses a separate versioned Build Wars JSON envelope for one set.
+See [Local library and sharing](compendium/local-library-and-sharing.md) and
+[Multi-build workspace](compendium/multi-build-workspace.md).

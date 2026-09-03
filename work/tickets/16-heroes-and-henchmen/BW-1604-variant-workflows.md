@@ -2,8 +2,10 @@
 id: BW-1604
 title: Variant Workflows
 epic: EPIC-16
-status: ready
+status: done
 priority: high
+planned_sprint: SPRINT-017
+completed_sprint: SPRINT-017
 depends_on:
   - BW-1601
   - BW-1602
@@ -45,3 +47,9 @@ Support common "try another version" workflows without forcing party semantics.
 
 - `npm run test:run -- src/app`
 - Focused tests for duplicate, compare, rename, remove, reorder, and promote flows
+
+## Closeout Evidence
+
+- Implemented in `SPRINT-017`.
+- Passed `npm run test:run -- src/app/build-set-state.test.ts src/app/build-set-comparison.test.ts src/app/build-set-comparison.test.tsx src/app/build-set-navigator.test.tsx`.
+- Passed `npm run verify`.

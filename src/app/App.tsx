@@ -2,6 +2,7 @@ import { useEffect, useMemo, useReducer, useRef, useState, type Dispatch } from 
 
 import { promotedAppCatalogs, type AppCatalogLoadState } from "./catalogs";
 import { AttributeEditor } from "./components/AttributeEditor";
+import { BuildSetNavigator } from "./components/BuildSetNavigator";
 import { CatalogAttribution } from "./components/CatalogAttribution";
 import { EditorWorkspaceTabs, type EditorWorkspaceTab } from "./components/EditorWorkspaceTabs";
 import { EquipmentPanel } from "./components/EquipmentPanel";
@@ -9,6 +10,7 @@ import { BackupDialog, RestoreDialog } from "./components/LibraryDialogs";
 import { LibraryPanel } from "./components/LibraryPanel";
 import { ProfessionModeEditor } from "./components/ProfessionModeEditor";
 import { ShareControls } from "./components/ShareControls";
+import { BuildSetTransferDialog } from "./components/BuildSetTransferDialog";
 import { SkillBar } from "./components/SkillBar";
 import { SkillBrowser } from "./components/SkillBrowser";
 import { SkillTooltip } from "./components/SkillTooltip";
@@ -48,6 +50,7 @@ export function App() {
   const [shareRecordId, setShareRecordId] = useState<string | null>(null);
   const [backupOpen, setBackupOpen] = useState(false);
   const [restoreOpen, setRestoreOpen] = useState(false);
+  const [transferOpen, setTransferOpen] = useState(false);
   const [workspaceTab, setWorkspaceTab] = useState<EditorWorkspaceTab>("skills");
   const latestWorkspaceRef = useRef<{
     readonly workspace: WorkspaceState;
@@ -98,6 +101,8 @@ export function App() {
       : selectSkillDisplay(catalogs, state, state.tooltip.skillId, "tooltip");
   const equipmentView = selectEquipmentPanelView(state, catalogs, validationView.result);
   const titleRankPanelView = selectTitleRankPanelView(state, catalogs, validationView.result);
+  const hasSelectedLoadout =
+    workspace.document.kind === "build" || workspace.document.selectedEntryId !== null;
 
   return (
     <main className="app-shell editor-shell" aria-labelledby="app-title" data-catalog-state="ready">
@@ -118,50 +123,74 @@ export function App() {
             onOpenBackup={() => setBackupOpen(true)}
             onOpenRestore={() => setRestoreOpen(true)}
           />
-          <ProfessionModeEditor
-            state={state}
-            catalogs={catalogs}
-            validation={validationView.result}
-            dispatch={dispatch}
-          />
-          <AttributeEditor
-            state={state}
-            catalogs={catalogs}
-            validation={validationView}
-            dispatch={dispatch}
-          />
-          <TemplateControls
-            state={state}
-            catalogs={catalogs}
-            validation={validationView}
-            dispatch={dispatch}
-            requestDraftReplacement={() =>
-              needsDirtyGuard(workspace) && !window.confirm("Discard unsaved draft changes?")
-                ? "cancel"
-                : "discard"
-            }
-          />
+          {hasSelectedLoadout ? (
+            <>
+              <ProfessionModeEditor
+                state={state}
+                catalogs={catalogs}
+                validation={validationView.result}
+                dispatch={dispatch}
+              />
+              <AttributeEditor
+                state={state}
+                catalogs={catalogs}
+                validation={validationView}
+                dispatch={dispatch}
+              />
+              <TemplateControls
+                state={state}
+                catalogs={catalogs}
+                validation={validationView}
+                dispatch={dispatch}
+                requestDraftReplacement={() =>
+                  needsDirtyGuard(workspace) && !window.confirm("Discard unsaved draft changes?")
+                    ? "cancel"
+                    : "discard"
+                }
+                selectedLoadoutOnly={workspace.document.kind === "build-set"}
+              />
+            </>
+          ) : (
+            <section className="editor-panel empty-loadout-panel">
+              <h2>No Selected Loadout</h2>
+              <p>
+                Add a loadout to edit professions, attributes, templates, equipment, and skills.
+              </p>
+            </section>
+          )}
           <ShareControls
             workspace={workspace}
             catalogs={catalogs}
             shareRecordId={shareRecordId}
             dispatch={workspaceDispatch}
           />
-          <ValidationPanel validation={validationView} />
+          {hasSelectedLoadout ? <ValidationPanel validation={validationView} /> : null}
         </div>
         <div className="main-column">
-          <EditorWorkspaceTabs
-            activeTab={workspaceTab}
-            onChange={setWorkspaceTab}
-            skills={
-              <>
-                <SkillBar state={state} catalogs={catalogs} dispatch={dispatch} />
-                <TitleRankPanel view={titleRankPanelView} dispatch={dispatch} />
-                <SkillBrowser state={state} catalogs={catalogs} dispatch={dispatch} />
-              </>
-            }
-            equipment={<EquipmentPanel view={equipmentView} dispatch={dispatch} />}
+          <BuildSetNavigator
+            workspace={workspace}
+            catalogs={catalogs}
+            dispatch={workspaceDispatch}
+            onOpenTransfer={() => setTransferOpen(true)}
           />
+          {hasSelectedLoadout ? (
+            <EditorWorkspaceTabs
+              activeTab={workspaceTab}
+              onChange={setWorkspaceTab}
+              skills={
+                <>
+                  <SkillBar state={state} catalogs={catalogs} dispatch={dispatch} />
+                  <TitleRankPanel view={titleRankPanelView} dispatch={dispatch} />
+                  <SkillBrowser state={state} catalogs={catalogs} dispatch={dispatch} />
+                </>
+              }
+              equipment={<EquipmentPanel view={equipmentView} dispatch={dispatch} />}
+            />
+          ) : (
+            <section className="editor-panel empty-state">
+              <strong>No loadout selected</strong>
+            </section>
+          )}
         </div>
         <SkillTooltip
           view={tooltipView}
@@ -183,6 +212,12 @@ export function App() {
         workspace={workspace}
         dispatch={workspaceDispatch}
         onClose={() => setRestoreOpen(false)}
+      />
+      <BuildSetTransferDialog
+        open={transferOpen}
+        workspace={workspace}
+        dispatch={workspaceDispatch}
+        onClose={() => setTransferOpen(false)}
       />
     </main>
   );

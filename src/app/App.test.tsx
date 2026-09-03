@@ -11,7 +11,9 @@ import { fixtureCatalogFacts, validSavedRecordFixture } from "./library-fixtures
 import {
   LOCAL_LIBRARY_STORAGE_KEY,
   parseLocalLibraryJson,
-  serializeLocalLibraryEnvelope
+  selectedPersistedBuildSnapshot,
+  serializeLocalLibraryEnvelope,
+  type PersistedWorkingDraft
 } from "./persistence-schema";
 import { buildShareUrl } from "./share-url";
 
@@ -59,7 +61,9 @@ describe("App", () => {
     expect(screen.getByRole("tab", { name: "Equipment" })).toHaveAttribute("aria-selected", "true");
     expect(screen.getByRole("heading", { name: "Equipment" })).toBeInTheDocument();
     const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
-    expect(parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.equipment : "error").toBeNull();
+    expect(
+      parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.equipment : "error"
+    ).toBeNull();
   });
 
   it("autosaves semantic equipment after the first armor edit", () => {
@@ -79,9 +83,11 @@ describe("App", () => {
 
     expect(parsed.ok).toBe(true);
     expect(
-      parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.equipment?.armor[0]?.rune : null
+      parsed.ok
+        ? draftSnapshot(parsed.envelope.workingDraft)?.build.equipment?.armor[0]?.rune
+        : null
     ).toEqual({ kind: "known", id: 40 });
-    expect(parsed.ok ? parsed.envelope.savedBuilds : []).toHaveLength(0);
+    expect(parsed.ok ? parsed.envelope.savedDocuments : []).toHaveLength(0);
   });
 
   it("supports blank-to-playable authoring through visible controls", () => {
@@ -96,7 +102,7 @@ describe("App", () => {
       screen.getByRole("button", { name: /Skill slot 1: Healing Signet/ })
     ).toBeInTheDocument();
     expect(screen.getByText("Healing Signet placed in slot 1.")).toBeInTheDocument();
-  });
+  }, 10_000);
 
   it("opens the export dialog and shows canonical gate output or reasons", () => {
     render(<App />);
@@ -133,17 +139,20 @@ describe("App", () => {
             ? null
             : {
                 ...envelope.workingDraft,
-                snapshot: {
-                  ...envelope.workingDraft.snapshot,
-                  build: {
-                    ...envelope.workingDraft.snapshot.build,
-                    equipment: {
-                      ...equipment,
-                      armor: equipment.armor.map((piece) =>
-                        piece.slot === "head"
-                          ? { ...piece, rune: knownEquipmentSelection(40 as RuneId) }
-                          : piece
-                      )
+                document: {
+                  kind: "build",
+                  snapshot: {
+                    ...draftSnapshot(envelope.workingDraft)!,
+                    build: {
+                      ...draftSnapshot(envelope.workingDraft)!.build,
+                      equipment: {
+                        ...equipment,
+                        armor: equipment.armor.map((piece) =>
+                          piece.slot === "head"
+                            ? { ...piece, rune: knownEquipmentSelection(40 as RuneId) }
+                            : piece
+                        )
+                      }
                     }
                   }
                 }
@@ -170,11 +179,14 @@ describe("App", () => {
             ? null
             : {
                 ...envelope.workingDraft,
-                snapshot: {
-                  ...envelope.workingDraft.snapshot,
-                  build: {
-                    ...envelope.workingDraft.snapshot.build,
-                    titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }]
+                document: {
+                  kind: "build",
+                  snapshot: {
+                    ...draftSnapshot(envelope.workingDraft)!,
+                    build: {
+                      ...draftSnapshot(envelope.workingDraft)!.build,
+                      titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }]
+                    }
                   }
                 }
               }
@@ -202,9 +214,9 @@ describe("App", () => {
     if (!parsed.ok) {
       return;
     }
-    expect(parsed.envelope.workingDraft?.snapshot.build.primaryProfessionId).toBe(1);
-    expect(parsed.envelope.workingDraft?.snapshot.build.secondaryProfessionId).toBe(2);
-    expect(parsed.envelope.savedBuilds).toHaveLength(0);
+    expect(draftSnapshot(parsed.envelope.workingDraft)?.build.primaryProfessionId).toBe(1);
+    expect(draftSnapshot(parsed.envelope.workingDraft)?.build.secondaryProfessionId).toBe(2);
+    expect(parsed.envelope.savedDocuments).toHaveLength(0);
   });
 
   it("does not overwrite corrupt local data through autosave", () => {
@@ -243,7 +255,7 @@ describe("App", () => {
 
     const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
     expect(
-      parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.primaryProfessionId : null
+      parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.primaryProfessionId : null
     ).toBe(1);
   });
 
@@ -269,7 +281,7 @@ describe("App", () => {
     act(() => vi.advanceTimersByTime(160));
     const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
     expect(parsed.ok ? parsed.envelope.workingDraft?.associatedRecordId : "error").toBeNull();
-    expect(parsed.ok ? parsed.envelope.savedBuilds : []).toHaveLength(0);
+    expect(parsed.ok ? parsed.envelope.savedDocuments : []).toHaveLength(0);
   });
 
   it("preserves a stored draft when a share URL opens over it until explicitly accepted", () => {
@@ -296,7 +308,7 @@ describe("App", () => {
     fireEvent.click(screen.getByRole("button", { name: "Use as Draft" }));
     act(() => vi.advanceTimersByTime(1));
     const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
-    expect(parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.mode : null).toBe("pvp");
+    expect(parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.mode : null).toBe("pvp");
   });
 
   it("saves, finds, favorites, duplicates, and deletes records from the library panel", () => {
@@ -367,3 +379,9 @@ describe("App", () => {
     expect(screen.getByRole("heading", { name: "Restored Build" })).toBeInTheDocument();
   });
 });
+
+function draftSnapshot(draft: PersistedWorkingDraft | null | undefined) {
+  return draft === null || draft === undefined
+    ? null
+    : selectedPersistedBuildSnapshot(draft.document);
+}

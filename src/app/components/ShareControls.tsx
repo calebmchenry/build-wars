@@ -4,7 +4,11 @@ import { hasAuthoredTitleRankOverrides } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
 import { selectValidationView } from "../editor-selectors";
 import { selectHasMeaningfulEquipment } from "../equipment-selectors";
-import { hydrateEditorFromSnapshot } from "../persistence-schema";
+import {
+  hydrateEditorFromSnapshot,
+  selectedPersistedBuildSnapshot,
+  type PersistedSavedDocumentRecord
+} from "../persistence-schema";
 import { buildShareUrl } from "../share-url";
 import { selectShareTemplateExport } from "../template-workflow";
 import type { WorkspaceAction, WorkspaceState } from "../workspace-state";
@@ -24,10 +28,16 @@ export function ShareControls({
     shareRecordId === null
       ? null
       : (workspace.library.records.find((record) => record.id === shareRecordId) ?? null);
-  const targetEditor =
-    targetRecord === null ? workspace.editor : hydrateEditorFromSnapshot(targetRecord.snapshot);
+  const shareSnapshot =
+    targetRecord === null
+      ? selectedWorkspaceSnapshot(workspace)
+      : selectedRecordSnapshot(targetRecord);
+  const targetEditor = shareSnapshot === null ? null : hydrateEditorFromSnapshot(shareSnapshot);
   const targetLabel = targetRecord === null ? "Current draft" : targetRecord.name;
   const share = useMemo(() => {
+    if (targetEditor === null) {
+      return { ok: false as const, blockedReasons: ["No selected loadout is available to share."] };
+    }
     const validation = selectValidationView(targetEditor, catalogs);
     const selected = selectShareTemplateExport(validation.exportPolicy);
     if (!selected.ok) {
@@ -60,7 +70,13 @@ export function ShareControls({
           </button>
         </div>
       ) : null}
-      {share.ok ? (
+      {workspace.document.kind === "build-set" ? (
+        <div className="share-warning">
+          <strong>Selected loadout only</strong>
+          <p>Sibling entries and entry notes use build-set transfer or backup JSON.</p>
+        </div>
+      ) : null}
+      {share.ok && targetEditor !== null ? (
         <>
           {selectHasMeaningfulEquipment(targetEditor.build.equipment) ? (
             <div className="share-warning">
@@ -113,7 +129,7 @@ export function ShareControls({
         <div className="blocked-option">
           <strong>Sharing blocked</strong>
           <ul>
-            {share.blockedReasons.map((reason) => (
+            {shareBlockedReasons(share).map((reason) => (
               <li key={reason}>{reason}</li>
             ))}
           </ul>
@@ -121,6 +137,35 @@ export function ShareControls({
       )}
     </section>
   );
+}
+
+function shareBlockedReasons(share: {
+  readonly ok: boolean;
+  readonly blockedReasons?: readonly string[];
+}): readonly string[] {
+  return share.ok ? ["No selected loadout is available to share."] : (share.blockedReasons ?? []);
+}
+
+function selectedWorkspaceSnapshot(workspace: WorkspaceState) {
+  if (workspace.document.kind === "build") {
+    return {
+      build: workspace.editor.build,
+      pveBudget: workspace.editor.pveBudget,
+      rawTemplate: workspace.editor.rawTemplate
+    };
+  }
+  if (workspace.document.selectedEntryId === null) {
+    return null;
+  }
+  return {
+    build: workspace.editor.build,
+    pveBudget: workspace.editor.pveBudget,
+    rawTemplate: workspace.editor.rawTemplate
+  };
+}
+
+function selectedRecordSnapshot(record: PersistedSavedDocumentRecord) {
+  return selectedPersistedBuildSnapshot(record.document);
 }
 
 function browserBaseUrl(): string {

@@ -1,4 +1,30 @@
-import { catalogId, type GameMode, type ProfessionId } from "../domain";
+import {
+  authoredDocumentId,
+  buildSetEntryId,
+  catalogId,
+  type AuthoredDocumentId,
+  type BuildSetEntryId,
+  type BuildSetEntryKind,
+  type GameMode,
+  type ProfessionId
+} from "../domain";
+import {
+  addBlankBuildSetEntry,
+  copySnapshotIntoBuildSet,
+  createBuildSetFromEditor,
+  createEmptyBuildSet,
+  duplicateSelectedBuildSetEntry,
+  hydrateRuntimeBuildSet,
+  materializeBuildSetSnapshot,
+  moveBuildSetRuntimeEntry,
+  removeBuildSetRuntimeEntry,
+  renameBuildSetRuntimeEntry,
+  selectBuildSetEntry,
+  setBuildSetComparisonEntry,
+  setBuildSetRuntimeEntryKind,
+  setBuildSetRuntimeEntryNotes,
+  type RuntimeBuildSetDocument
+} from "./build-set-state";
 import {
   createBlankEditorState,
   editorReducer,
@@ -8,21 +34,33 @@ import {
 import type { LocalLibraryWriteResult } from "./local-storage";
 import {
   createPersistedBuildSnapshot,
+  clonePersistedBuildSetSnapshot,
+  clonePersistedBuildSnapshot,
   emptyLocalLibraryEnvelope,
-  fingerprintPersistedSnapshot,
+  fingerprintPersistedDocument,
   hydrateEditorFromSnapshot,
   localBuildRecordId,
+  persistedBuildDocument,
+  persistedBuildSetDocument,
   serializeLocalLibraryEnvelope,
   type LocalBuildRecordId,
   type LocalLibraryEnvelopeV1,
   type PersistenceDiagnostic,
   type PersistedCatalogFacts,
-  type PersistedSavedBuildRecord,
+  type PersistedBuildSetSnapshot,
+  type PersistedDocument,
+  type PersistedSavedDocumentRecord,
   type PersistedWorkingDraft
 } from "./persistence-schema";
 
 export type HydrationSource =
-  "blank" | "storage" | "saved-record" | "template-import" | "share-url" | "restore";
+  | "blank"
+  | "storage"
+  | "saved-record"
+  | "template-import"
+  | "share-url"
+  | "restore"
+  | "build-set-transfer";
 export type DraftDirtyState = "clean" | "dirty" | "unknown";
 export type WorkspaceDurability =
   "durable" | "pending" | "memory-only" | "write-blocked" | "conflict";
@@ -39,7 +77,7 @@ export interface DraftSessionState {
 }
 
 export interface WorkspaceLibraryState {
-  readonly records: readonly PersistedSavedBuildRecord[];
+  readonly records: readonly PersistedSavedDocumentRecord[];
   readonly selectedRecordId: LocalBuildRecordId | null;
   readonly query: string;
   readonly professionFilter: ProfessionId | null;
@@ -64,8 +102,15 @@ export interface WorkspaceRestoreState {
   readonly previewId: string | null;
 }
 
+export type WorkspaceDocument =
+  | {
+      readonly kind: "build";
+    }
+  | RuntimeBuildSetDocument;
+
 export interface WorkspaceState {
   readonly editor: EditorState;
+  readonly document: WorkspaceDocument;
   readonly draftSession: DraftSessionState;
   readonly library: WorkspaceLibraryState;
   readonly storage: WorkspaceStorageState;
@@ -88,6 +133,82 @@ export type WorkspaceAction =
       readonly type: "new-draft";
       readonly name?: string;
       readonly decision: DirtyGuardDecision;
+    }
+  | {
+      readonly type: "create-build-set-from-current";
+      readonly setId: AuthoredDocumentId;
+      readonly entryId: BuildSetEntryId;
+      readonly decision: DirtyGuardDecision;
+      readonly name?: string;
+    }
+  | {
+      readonly type: "new-build-set";
+      readonly setId: AuthoredDocumentId;
+      readonly name?: string;
+      readonly decision: DirtyGuardDecision;
+    }
+  | {
+      readonly type: "replace-build-set-draft";
+      readonly snapshot: PersistedBuildSetSnapshot;
+      readonly decision: DirtyGuardDecision;
+      readonly source: HydrationSource;
+    }
+  | {
+      readonly type: "rename-build-set";
+      readonly name: string;
+    }
+  | {
+      readonly type: "add-blank-build-set-entry";
+      readonly entryId: BuildSetEntryId;
+      readonly buildId: AuthoredDocumentId;
+      readonly label?: string;
+    }
+  | {
+      readonly type: "copy-record-into-set";
+      readonly recordId: LocalBuildRecordId;
+      readonly entryId: BuildSetEntryId;
+      readonly buildId: AuthoredDocumentId;
+    }
+  | {
+      readonly type: "select-build-set-entry";
+      readonly entryId: BuildSetEntryId;
+    }
+  | {
+      readonly type: "remove-build-set-entry";
+      readonly entryId: BuildSetEntryId;
+    }
+  | {
+      readonly type: "move-build-set-entry";
+      readonly entryId: BuildSetEntryId;
+      readonly direction: "earlier" | "later";
+    }
+  | {
+      readonly type: "rename-build-set-entry";
+      readonly entryId: BuildSetEntryId;
+      readonly label: string;
+    }
+  | {
+      readonly type: "set-build-set-entry-notes";
+      readonly entryId: BuildSetEntryId;
+      readonly notes: string | null;
+    }
+  | {
+      readonly type: "set-build-set-entry-kind";
+      readonly entryId: BuildSetEntryId;
+      readonly kind: BuildSetEntryKind;
+    }
+  | {
+      readonly type: "promote-build-set-entry";
+      readonly entryId: BuildSetEntryId;
+    }
+  | {
+      readonly type: "duplicate-selected-build-set-entry";
+      readonly entryId: BuildSetEntryId;
+      readonly buildId: AuthoredDocumentId;
+    }
+  | {
+      readonly type: "set-build-set-comparison-entry";
+      readonly entryId: BuildSetEntryId | null;
     }
   | {
       readonly type: "save-new";
@@ -151,8 +272,8 @@ export type WorkspaceAction =
     }
   | {
       readonly type: "apply-restore";
-      readonly records: readonly PersistedSavedBuildRecord[];
-      readonly draftEditor: EditorState | null;
+      readonly records: readonly PersistedSavedDocumentRecord[];
+      readonly draftDocument: PersistedDocument | null;
       readonly draftAssociation: LocalBuildRecordId | null;
       readonly decision: DirtyGuardDecision;
     }
@@ -193,13 +314,16 @@ export function createInitialWorkspaceState(
 ): WorkspaceState {
   const now = input.now ?? new Date().toISOString();
   const envelope = input.envelope ?? emptyLocalLibraryEnvelope(now);
-  const editor =
+  const hydrated =
     envelope.workingDraft === null
-      ? createBlankEditorState()
-      : hydrateEditorFromSnapshot(envelope.workingDraft.snapshot);
-  const baselineFingerprint = fingerprintPersistedSnapshot(createPersistedBuildSnapshot(editor));
+      ? { editor: createBlankEditorState(), document: { kind: "build" } as WorkspaceDocument }
+      : hydrateWorkspaceDocument(envelope.workingDraft.document);
+  const baselineFingerprint = fingerprintPersistedDocument(
+    materializeDocument(hydrated.document, hydrated.editor)
+  );
   const initial: WorkspaceState = {
-    editor,
+    editor: hydrated.editor,
+    document: hydrated.document,
     draftSession: {
       associatedRecordId: envelope.workingDraft?.associatedRecordId ?? null,
       hydrationSource: envelope.workingDraft === null ? "blank" : "storage",
@@ -209,7 +333,7 @@ export function createInitialWorkspaceState(
       baselineFingerprint
     },
     library: {
-      records: envelope.savedBuilds,
+      records: envelope.savedDocuments,
       selectedRecordId: envelope.workingDraft?.associatedRecordId ?? null,
       query: "",
       professionFilter: null,
@@ -261,6 +385,68 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
         action.decision,
         true
       );
+    case "create-build-set-from-current":
+      return createBuildSetDraftFromCurrent(state, action);
+    case "new-build-set":
+      return replaceWithBuildSetDraft(state, action);
+    case "replace-build-set-draft":
+      return replaceWithBuildSetSnapshot(state, action.snapshot, action.source, action.decision);
+    case "rename-build-set":
+      return reduceBuildSetDocument(state, (document) => ({
+        ...document,
+        name: action.name
+      }));
+    case "add-blank-build-set-entry":
+      return reduceBuildSetTransition(state, (document) =>
+        addBlankBuildSetEntry(
+          document,
+          state.editor,
+          action.label === undefined
+            ? { entryId: action.entryId, buildId: action.buildId }
+            : { entryId: action.entryId, buildId: action.buildId, label: action.label }
+        )
+      );
+    case "copy-record-into-set":
+      return copyRecordIntoSet(state, action.recordId, action.entryId, action.buildId);
+    case "select-build-set-entry":
+      return reduceBuildSetTransition(state, (document) =>
+        selectBuildSetEntry(document, state.editor, action.entryId)
+      );
+    case "remove-build-set-entry":
+      return reduceBuildSetTransition(state, (document) =>
+        removeBuildSetRuntimeEntry(document, state.editor, action.entryId)
+      );
+    case "move-build-set-entry":
+      return reduceBuildSetDocument(state, (document) =>
+        moveBuildSetRuntimeEntry(document, state.editor, action.entryId, action.direction)
+      );
+    case "rename-build-set-entry":
+      return reduceBuildSetDocument(state, (document) =>
+        renameBuildSetRuntimeEntry(document, action.entryId, action.label)
+      );
+    case "set-build-set-entry-notes":
+      return reduceBuildSetDocument(state, (document) =>
+        setBuildSetRuntimeEntryNotes(document, action.entryId, action.notes)
+      );
+    case "set-build-set-entry-kind":
+      return reduceBuildSetDocument(state, (document) =>
+        setBuildSetRuntimeEntryKind(document, action.entryId, action.kind)
+      );
+    case "promote-build-set-entry":
+      return reduceBuildSetDocument(state, (document) =>
+        setBuildSetRuntimeEntryKind(document, action.entryId, "build")
+      );
+    case "duplicate-selected-build-set-entry":
+      return reduceBuildSetTransition(state, (document) =>
+        duplicateSelectedBuildSetEntry(document, state.editor, {
+          entryId: action.entryId,
+          buildId: action.buildId
+        })
+      );
+    case "set-build-set-comparison-entry":
+      return reduceBuildSetDocument(state, (document) =>
+        setBuildSetComparisonEntry(document, action.entryId)
+      );
     case "save-new":
       return saveNewRecord(state, action.name, action.id, action.now, action.savedWith);
     case "update-associated":
@@ -294,7 +480,7 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
       return applyRestore(
         state,
         action.records,
-        action.draftEditor,
+        action.draftDocument,
         action.draftAssociation,
         action.decision
       );
@@ -355,8 +541,8 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
 
 function applyRestore(
   state: WorkspaceState,
-  records: readonly PersistedSavedBuildRecord[],
-  draftEditor: EditorState | null,
+  records: readonly PersistedSavedDocumentRecord[],
+  draftDocument: PersistedDocument | null,
   draftAssociation: LocalBuildRecordId | null,
   decision: DirtyGuardDecision
 ): WorkspaceState {
@@ -364,27 +550,31 @@ function applyRestore(
     return state;
   }
   const retainedAssociation =
-    draftEditor !== null
+    draftDocument !== null
       ? draftAssociation
       : records.some((record) => record.id === state.draftSession.associatedRecordId)
         ? state.draftSession.associatedRecordId
         : null;
-  const editor = draftEditor ?? state.editor;
-  const snapshot = createPersistedBuildSnapshot(editor);
+  const hydrated =
+    draftDocument === null
+      ? { editor: state.editor, document: state.document }
+      : hydrateWorkspaceDocument(draftDocument);
+  const document = materializeDocument(hydrated.document, hydrated.editor);
   return markDurableMutation(
     {
       ...state,
-      editor,
+      editor: hydrated.editor,
+      document: hydrated.document,
       draftSession: {
         associatedRecordId: retainedAssociation,
-        hydrationSource: draftEditor === null ? state.draftSession.hydrationSource : "restore",
+        hydrationSource: draftDocument === null ? state.draftSession.hydrationSource : "restore",
         dirtyState:
           retainedAssociation === state.draftSession.associatedRecordId
             ? state.draftSession.dirtyState
             : "dirty",
         durability: pendingFrom(state.draftSession.durability),
         allowWorkingDraftAutosave: true,
-        baselineFingerprint: fingerprintPersistedSnapshot(snapshot)
+        baselineFingerprint: fingerprintPersistedDocument(document)
       },
       library: {
         ...state.library,
@@ -409,18 +599,18 @@ export function createWorkspaceEnvelope(
       ruleEngineVersion: null
     };
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     kind: "build-wars-local-library",
     revision: state.storage.revision,
     updatedAt: now,
     workingDraft: state.draftSession.allowWorkingDraftAutosave
       ? {
-          snapshot: createPersistedBuildSnapshot(state.editor),
+          document: materializeActiveDocument(state),
           associatedRecordId: state.draftSession.associatedRecordId,
           savedWith: facts
         }
       : state.storage.preservedWorkingDraft,
-    savedBuilds: state.library.records,
+    savedDocuments: state.library.records,
     metadata: {
       lastWriteReason: null,
       lastCompactedAt: null
@@ -444,6 +634,18 @@ export function workspacePersistenceFingerprint(
   });
 }
 
+export function materializeActiveDocument(state: WorkspaceState): PersistedDocument {
+  return materializeDocument(state.document, state.editor);
+}
+
+export function materializeActiveBuildSetSnapshot(
+  state: WorkspaceState
+): PersistedBuildSetSnapshot | null {
+  return state.document.kind === "build-set"
+    ? materializeBuildSetSnapshot(state.document, state.editor).snapshot
+    : null;
+}
+
 export function needsDirtyGuard(state: WorkspaceState): boolean {
   return state.draftSession.dirtyState !== "clean";
 }
@@ -457,21 +659,278 @@ export function professionFilterFromValue(value: string): ProfessionId | null {
   return value.length === 0 ? null : catalogId<"Profession">(Number(value));
 }
 
+export function generateBuildSetEntryId(now: string, sequence: number): BuildSetEntryId {
+  const normalized = now.replace(/[^0-9A-Za-z]/g, "");
+  return buildSetEntryId(`entry-${normalized}-${sequence}`);
+}
+
+export function generateAuthoredBuildSetId(now: string, sequence: number): AuthoredDocumentId {
+  const normalized = now.replace(/[^0-9A-Za-z]/g, "");
+  return authoredDocumentId(`build-set-${normalized}-${sequence}`);
+}
+
+export function generateNestedBuildId(entryId: BuildSetEntryId): AuthoredDocumentId {
+  return authoredDocumentId(`build:${entryId}`);
+}
+
+function hydrateWorkspaceDocument(document: PersistedDocument): {
+  readonly editor: EditorState;
+  readonly document: WorkspaceDocument;
+} {
+  switch (document.kind) {
+    case "build":
+      return {
+        editor: hydrateEditorFromSnapshot(document.snapshot),
+        document: { kind: "build" }
+      };
+    case "build-set":
+      return hydrateRuntimeBuildSet(document.snapshot);
+  }
+}
+
+function materializeDocument(document: WorkspaceDocument, editor: EditorState): PersistedDocument {
+  switch (document.kind) {
+    case "build":
+      return persistedBuildDocument(createPersistedBuildSnapshot(editor));
+    case "build-set":
+      return persistedBuildSetDocument(materializeBuildSetSnapshot(document, editor).snapshot);
+  }
+}
+
+function createBuildSetDraftFromCurrent(
+  state: WorkspaceState,
+  action: Extract<WorkspaceAction, { readonly type: "create-build-set-from-current" }>
+): WorkspaceState {
+  if (needsDirtyGuard(state) && action.decision === "cancel") {
+    return state;
+  }
+  const document = createBuildSetFromEditor(
+    action.name === undefined
+      ? { editor: state.editor, setId: action.setId, entryId: action.entryId }
+      : { editor: state.editor, setId: action.setId, entryId: action.entryId, name: action.name }
+  );
+  return markDurableMutation({
+    ...state,
+    document,
+    draftSession: {
+      associatedRecordId: null,
+      hydrationSource: "blank",
+      dirtyState: "dirty",
+      durability: pendingFrom(state.draftSession.durability),
+      allowWorkingDraftAutosave: true,
+      baselineFingerprint: fingerprintPersistedDocument(materializeDocument(document, state.editor))
+    },
+    library: {
+      ...state.library,
+      selectedRecordId: null
+    }
+  });
+}
+
+function replaceWithBuildSetDraft(
+  state: WorkspaceState,
+  action: Extract<WorkspaceAction, { readonly type: "new-build-set" }>
+): WorkspaceState {
+  if (needsDirtyGuard(state) && action.decision === "cancel") {
+    return state;
+  }
+  const document = createEmptyBuildSet(
+    action.name === undefined ? { setId: action.setId } : { setId: action.setId, name: action.name }
+  );
+  const editor = createBlankEditorState("Untitled Build");
+  return markDurableMutation({
+    ...state,
+    editor,
+    document,
+    draftSession: {
+      associatedRecordId: null,
+      hydrationSource: "blank",
+      dirtyState: "dirty",
+      durability: pendingFrom(state.draftSession.durability),
+      allowWorkingDraftAutosave: true,
+      baselineFingerprint: fingerprintPersistedDocument(materializeDocument(document, editor))
+    },
+    library: {
+      ...state.library,
+      selectedRecordId: null
+    }
+  });
+}
+
+function replaceWithBuildSetSnapshot(
+  state: WorkspaceState,
+  snapshot: PersistedBuildSetSnapshot,
+  source: HydrationSource,
+  decision: DirtyGuardDecision
+): WorkspaceState {
+  if (needsDirtyGuard(state) && decision === "cancel") {
+    return state;
+  }
+  const hydrated = hydrateRuntimeBuildSet(snapshot);
+  return markDurableMutation({
+    ...state,
+    editor: hydrated.editor,
+    document: hydrated.document,
+    draftSession: {
+      associatedRecordId: null,
+      hydrationSource: source,
+      dirtyState: "dirty",
+      durability: pendingFrom(state.draftSession.durability),
+      allowWorkingDraftAutosave: true,
+      baselineFingerprint: fingerprintPersistedDocument(
+        materializeDocument(hydrated.document, hydrated.editor)
+      )
+    },
+    library: {
+      ...state.library,
+      selectedRecordId: null
+    }
+  });
+}
+
+function reduceBuildSetTransition(
+  state: WorkspaceState,
+  reduce: (document: RuntimeBuildSetDocument) => {
+    readonly document: RuntimeBuildSetDocument;
+    readonly editor: EditorState;
+  }
+): WorkspaceState {
+  if (state.document.kind !== "build-set") {
+    return state;
+  }
+  const before = fingerprintPersistedDocument(materializeActiveDocument(state));
+  const next = reduce(state.document);
+  const after = fingerprintPersistedDocument(materializeDocument(next.document, next.editor));
+  if (before === after) {
+    return { ...state, editor: next.editor, document: next.document };
+  }
+  return markDurableMutation({
+    ...state,
+    editor: next.editor,
+    document: next.document,
+    draftSession: {
+      ...state.draftSession,
+      dirtyState: "dirty",
+      durability: pendingFrom(state.draftSession.durability),
+      allowWorkingDraftAutosave: true
+    }
+  });
+}
+
+function reduceBuildSetDocument(
+  state: WorkspaceState,
+  reduce: (document: RuntimeBuildSetDocument) => RuntimeBuildSetDocument
+): WorkspaceState {
+  return reduceBuildSetTransition(state, (document) => ({
+    editor: state.editor,
+    document: reduce(document)
+  }));
+}
+
+function copyRecordIntoSet(
+  state: WorkspaceState,
+  recordId: LocalBuildRecordId,
+  entryId: BuildSetEntryId,
+  buildId: AuthoredDocumentId
+): WorkspaceState {
+  if (state.document.kind !== "build-set") {
+    return state;
+  }
+  const record = state.library.records.find((candidate) => candidate.id === recordId);
+  if (record === undefined || record.document.kind !== "build") {
+    return state;
+  }
+  const documentToCopy = record.document;
+  return reduceBuildSetTransition(state, (document) =>
+    copySnapshotIntoBuildSet(document, state.editor, {
+      entryId,
+      buildId,
+      snapshot: documentToCopy.snapshot,
+      label: record.name
+    })
+  );
+}
+
+function activeDocumentName(state: WorkspaceState): string {
+  return state.document.kind === "build-set" ? state.document.name : state.editor.build.name;
+}
+
+function stateWithRecordName(state: WorkspaceState, name: string): WorkspaceState {
+  if (state.document.kind === "build-set") {
+    return {
+      ...state,
+      document: {
+        ...state.document,
+        name: normalizeRecordName(name, state.document.name)
+      }
+    };
+  }
+  return {
+    ...state,
+    editor: editorWithName(state.editor, name)
+  };
+}
+
+function cloneRecordDocumentForDuplicate(
+  document: PersistedDocument,
+  newId: LocalBuildRecordId
+): PersistedDocument {
+  if (document.kind === "build") {
+    const snapshot = clonePersistedBuildSnapshot(document.snapshot);
+    return persistedBuildDocument({
+      ...snapshot,
+      build: {
+        ...snapshot.build,
+        id: authoredDocumentId(`build:${newId}`)
+      }
+    });
+  }
+  const snapshot = clonePersistedBuildSetSnapshot(document.snapshot);
+  return persistedBuildSetDocument({
+    ...snapshot,
+    id: authoredDocumentId(`build-set:${newId}`),
+    entries: snapshot.entries.map((entry, index) => ({
+      ...entry,
+      id: buildSetEntryId(`${newId}:entry-${index + 1}`),
+      snapshot: {
+        ...entry.snapshot,
+        build: {
+          ...entry.snapshot.build,
+          id: authoredDocumentId(`build:${newId}:entry-${index + 1}`)
+        }
+      }
+    })),
+    lastSelectedEntryId:
+      snapshot.entries[0] === undefined ? null : buildSetEntryId(`${newId}:entry-1`)
+  });
+}
+
 function reduceEditorAction(state: WorkspaceState, action: EditorAction): WorkspaceState {
-  const before = fingerprintPersistedSnapshot(createPersistedBuildSnapshot(state.editor));
-  const nextEditor = editorReducer(state.editor, action);
-  const after = fingerprintPersistedSnapshot(createPersistedBuildSnapshot(nextEditor));
+  const before = fingerprintPersistedDocument(materializeActiveDocument(state));
+  const reducedEditor = editorReducer(state.editor, action);
+  const externalReplacement = action.type === "replace-state";
+  const nextEditor =
+    externalReplacement && state.document.kind === "build-set"
+      ? {
+          ...reducedEditor,
+          build: {
+            ...reducedEditor.build,
+            id: state.editor.build.id
+          }
+        }
+      : reducedEditor;
+  const after = fingerprintPersistedDocument(materializeDocument(state.document, nextEditor));
   if (before === after) {
     return { ...state, editor: nextEditor };
   }
 
-  const externalReplacement = action.type === "replace-state";
+  const clearsAssociation = externalReplacement && state.document.kind === "build";
   return {
     ...state,
     editor: nextEditor,
     draftSession: {
       ...state.draftSession,
-      associatedRecordId: externalReplacement ? null : state.draftSession.associatedRecordId,
+      associatedRecordId: clearsAssociation ? null : state.draftSession.associatedRecordId,
       hydrationSource: externalReplacement ? "template-import" : state.draftSession.hydrationSource,
       dirtyState: "dirty",
       durability: pendingFrom(state.draftSession.durability),
@@ -490,10 +949,12 @@ function replaceDraft(
   if (needsDirtyGuard(state) && decision === "cancel") {
     return state;
   }
-  const baselineFingerprint = fingerprintPersistedSnapshot(createPersistedBuildSnapshot(editor));
+  const document: WorkspaceDocument = { kind: "build" };
+  const baselineFingerprint = fingerprintPersistedDocument(materializeDocument(document, editor));
   const nextState: WorkspaceState = {
     ...state,
     editor,
+    document,
     draftSession: {
       associatedRecordId: null,
       hydrationSource: source,
@@ -519,34 +980,33 @@ function saveNewRecord(
   now: string,
   savedWith: PersistedCatalogFacts
 ): WorkspaceState {
-  const editor = editorWithName(state.editor, name);
-  const snapshot = createPersistedBuildSnapshot(editor);
-  const record: PersistedSavedBuildRecord = {
+  const renamed = stateWithRecordName(state, name);
+  const document = materializeActiveDocument(renamed);
+  const record: PersistedSavedDocumentRecord = {
     id,
-    name: normalizeRecordName(name, state.editor.build.name),
+    name: normalizeRecordName(name, activeDocumentName(state)),
     createdAt: now,
     updatedAt: now,
     favorite: false,
     tags: [],
     notes: null,
-    snapshot,
+    document,
     savedWith
   };
   return markDurableMutation(
     {
-      ...state,
-      editor,
+      ...renamed,
       draftSession: {
         associatedRecordId: id,
         hydrationSource: "saved-record",
         dirtyState: "clean",
-        durability: pendingFrom(state.draftSession.durability),
+        durability: pendingFrom(renamed.draftSession.durability),
         allowWorkingDraftAutosave: true,
-        baselineFingerprint: fingerprintPersistedSnapshot(snapshot)
+        baselineFingerprint: fingerprintPersistedDocument(document)
       },
       library: {
-        ...state.library,
-        records: [...state.library.records, record],
+        ...renamed.library,
+        records: [...renamed.library.records, record],
         selectedRecordId: id
       }
     },
@@ -563,22 +1023,41 @@ function updateAssociatedRecord(
   if (associatedRecordId === null) {
     return state;
   }
-  const snapshot = createPersistedBuildSnapshot(state.editor);
+  const record = state.library.records.find((candidate) => candidate.id === associatedRecordId);
+  if (record === undefined) {
+    return state;
+  }
+  const document = materializeActiveDocument(state);
+  if (record.document.kind !== document.kind) {
+    return markDurableMutation({
+      ...state,
+      draftSession: {
+        ...state.draftSession,
+        associatedRecordId: null,
+        dirtyState: "dirty",
+        durability: pendingFrom(state.draftSession.durability)
+      },
+      library: {
+        ...state.library,
+        selectedRecordId: null
+      }
+    });
+  }
   return mutateRecord(
     {
       ...state,
       draftSession: {
         ...state.draftSession,
         dirtyState: "clean",
-        baselineFingerprint: fingerprintPersistedSnapshot(snapshot)
+        baselineFingerprint: fingerprintPersistedDocument(document)
       }
     },
     associatedRecordId,
     now,
     (record) => ({
       ...record,
-      name: state.editor.build.name,
-      snapshot,
+      name: activeDocumentName(state),
+      document,
       savedWith
     }),
     true
@@ -597,17 +1076,18 @@ function loadRecord(
   if (record === undefined) {
     return state;
   }
-  const editor = hydrateEditorFromSnapshot(record.snapshot);
+  const hydrated = hydrateWorkspaceDocument(record.document);
   return markDurableMutation({
     ...state,
-    editor,
+    editor: hydrated.editor,
+    document: hydrated.document,
     draftSession: {
       associatedRecordId: id,
       hydrationSource: "saved-record",
       dirtyState: "clean",
       durability: pendingFrom(state.draftSession.durability),
       allowWorkingDraftAutosave: true,
-      baselineFingerprint: fingerprintPersistedSnapshot(record.snapshot)
+      baselineFingerprint: fingerprintPersistedDocument(record.document)
     },
     library: {
       ...state.library,
@@ -626,12 +1106,13 @@ function duplicateRecord(
   if (record === undefined) {
     return state;
   }
-  const copy: PersistedSavedBuildRecord = {
+  const copy: PersistedSavedDocumentRecord = {
     ...record,
     id: newId,
     name: `${record.name} Copy`,
     createdAt: now,
-    updatedAt: now
+    updatedAt: now,
+    document: cloneRecordDocumentForDuplicate(record.document, newId)
   };
   return markDurableMutation(
     {
@@ -691,27 +1172,26 @@ function renameRecord(
   const nextName = normalizeRecordName(name, "Untitled Build");
   const associatedAndClean =
     state.draftSession.associatedRecordId === id && state.draftSession.dirtyState === "clean";
-  const editor = associatedAndClean ? editorWithName(state.editor, nextName) : state.editor;
-  const snapshot = associatedAndClean ? createPersistedBuildSnapshot(editor) : null;
+  const nextState = associatedAndClean ? stateWithRecordName(state, nextName) : state;
+  const document = associatedAndClean ? materializeActiveDocument(nextState) : null;
   return mutateRecord(
     {
-      ...state,
-      editor,
+      ...nextState,
       draftSession:
-        associatedAndClean && snapshot !== null
+        associatedAndClean && document !== null
           ? {
-              ...state.draftSession,
-              baselineFingerprint: fingerprintPersistedSnapshot(snapshot)
+              ...nextState.draftSession,
+              baselineFingerprint: fingerprintPersistedDocument(document)
             }
-          : state.draftSession
+          : nextState.draftSession
     },
     id,
     now,
     (record) => ({
       ...record,
       name: nextName,
-      snapshot: snapshot ?? record.snapshot,
-      savedWith: snapshot === null ? record.savedWith : savedWith
+      document: document ?? record.document,
+      savedWith: document === null ? record.savedWith : savedWith
     }),
     true
   );
@@ -721,7 +1201,7 @@ function mutateRecord(
   state: WorkspaceState,
   id: LocalBuildRecordId,
   now: string,
-  mutate: (record: PersistedSavedBuildRecord) => PersistedSavedBuildRecord,
+  mutate: (record: PersistedSavedDocumentRecord) => PersistedSavedDocumentRecord,
   flush = false
 ): WorkspaceState {
   let changed = false;

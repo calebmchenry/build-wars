@@ -2,8 +2,10 @@
 id: BW-1606
 title: Multi-Build Docs and Closeout
 epic: EPIC-16
-status: ready
+status: done
 priority: high
+planned_sprint: SPRINT-017
+completed_sprint: SPRINT-017
 depends_on:
   - BW-1602
   - BW-1603
@@ -45,3 +47,13 @@ Document the multi-build workspace behavior, deferred hero/party scope, and veri
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- Implemented in `SPRINT-017`.
+- Documented build sets in `README.md`, `compendium/multi-build-workspace.md`,
+  `compendium/core-build-editor.md`, `compendium/local-library-and-sharing.md`,
+  `compendium/equipment-editor.md`, and `compendium/title-ranks.md`.
+- Passed `npm run test:run -- src/app test/domain`.
+- Passed `npm run verify`.
+- Passed `git diff --check`.

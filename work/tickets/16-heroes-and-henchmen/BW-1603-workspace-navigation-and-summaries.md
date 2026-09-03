@@ -2,8 +2,10 @@
 id: BW-1603
 title: Workspace Navigation and Summaries
 epic: EPIC-16
-status: ready
+status: done
 priority: high
+planned_sprint: SPRINT-017
+completed_sprint: SPRINT-017
 depends_on:
   - BW-1601
   - BW-1602
@@ -43,3 +45,9 @@ Make several loadouts visible while keeping one selected loadout easy to edit.
 
 - `npm run test:run -- src/app`
 - Focused component/selector tests for navigation, summaries, selection, and responsive states
+
+## Closeout Evidence
+
+- Implemented in `SPRINT-017`.
+- Passed `npm run test:run -- src/app/build-set-selectors.test.ts src/app/build-set-navigator.test.tsx src/app/App.test.tsx src/app/catalog-boundary.test.ts`.
+- Passed `npm run verify`.

@@ -2,8 +2,10 @@
 id: BW-1605
 title: Group Validation and Export Boundaries
 epic: EPIC-16
-status: ready
+status: done
 priority: high
+planned_sprint: SPRINT-017
+completed_sprint: SPRINT-017
 depends_on:
   - BW-1601
   - BW-1602
@@ -44,3 +46,9 @@ Show validation across a build set while keeping party rules and external sharin
 
 - `npm run test:run -- src/app src/domain`
 - Focused tests for aggregate validation and build set backup/restore boundaries
+
+## Closeout Evidence
+
+- Implemented in `SPRINT-017`.
+- Passed `npm run test:run -- src/app/build-set-selectors.test.ts src/app/build-set-transfer.test.ts src/app/build-set-transfer-dialog.test.tsx src/app/backup-restore.test.ts src/app/template-workflow.test.ts src/app/template-dialogs.test.tsx src/app/share-url.test.ts`.
+- Passed `npm run verify`.

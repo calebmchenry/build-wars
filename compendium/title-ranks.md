@@ -73,19 +73,20 @@ restrictions and browser availability filters remain owned by the existing skill
 
 ## Persistence And Sharing
 
-The outer local-library envelope and `build-wars:v1` storage key remain unchanged. Schema-1 builds
-migrate in memory to nested Build schema 2 with empty overrides and do not dirty old records merely
-by loading. Working draft autosave, named saves, update, save-as-new, duplicate, load, backup,
-restore, hydration, and fingerprints preserve title overrides.
+The `build-wars:v1` storage key remains unchanged while the local-library payload is now schema 2.
+Schema-1 builds migrate in memory to nested Build schema 2 with empty overrides and do not dirty old
+records merely by loading. Working draft autosave, named saves, update, save-as-new, duplicate,
+load, backup, restore, hydration, build-set transfer, and fingerprints preserve title overrides for
+single builds and for active or inactive build-set entries.
 
 Skill-template bytes, exact-source replay, raw overlays, share URL grammar, and the 1,800-character
-share cap remain title-free. Non-default title overrides are local-only and show omission warnings
-for template export/share. Template import warns before replacing a draft that contains authored
-title overrides.
+share cap remain title-free and selected-loadout-only. Non-default title overrides are local-only
+and show omission warnings for template export/share. Template import warns before replacing the
+selected loadout when it contains authored title overrides.
 
 ## Deferred Scope
 
 EPIC-15 does not model account title ownership, title acquisition, reputation farming, campaign
 unlocks, title guide prose, party-wide title state, hosted title sharing, or broad allegiance side
-configuration. Later work may add those domains, but should consume the existing title-rank helper
-instead of normalizing title keys independently.
+configuration. EPIC-16 build sets do not add those semantics. Later work may add them, but should
+consume the existing title-rank helper instead of normalizing title keys independently.

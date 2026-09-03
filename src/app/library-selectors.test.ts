@@ -8,6 +8,7 @@ import {
   fixtureCatalogFacts,
   staleSavedRecordFixture,
   unresolvedSavedRecordFixture,
+  validBuildSetSavedRecordFixture,
   validSavedRecordFixture
 } from "./library-fixtures";
 import { selectLibraryView } from "./library-selectors";
@@ -180,6 +181,34 @@ describe("library selectors", () => {
 
     expect(empty.emptyState).toBe("empty-library");
     expect(noResults.emptyState).toBe("no-results");
+  });
+
+  it("summarizes and filters build-set records by any contained entry", () => {
+    const buildSet = validBuildSetSavedRecordFixture({
+      id: localBuildRecordId("local-set"),
+      name: "Variant Set"
+    });
+    const byEntry = selectLibraryView(
+      [validSavedRecordFixture({ id: localBuildRecordId("local-build") }), buildSet],
+      catalogs,
+      filters({ query: "unresolved variant" }),
+      fixtureCatalogFacts
+    );
+    const byProfession = selectLibraryView(
+      [buildSet],
+      catalogs,
+      filters({ professionFilter: catalogId<"Profession">(1) }),
+      fixtureCatalogFacts
+    );
+
+    expect(byEntry.rows.map((row) => row.id)).toEqual(["local-set"]);
+    expect(byEntry.rows[0]).toMatchObject({
+      recordKind: "build-set",
+      kindLabel: "Build set",
+      entryCount: 2
+    });
+    expect(byProfession.rows.map((row) => row.id)).toEqual(["local-set"]);
+    expect(byEntry.rows[0]?.diagnostics.resolution).toBe("unresolved");
   });
 });
 

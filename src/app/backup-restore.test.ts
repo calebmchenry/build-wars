@@ -1,10 +1,11 @@
 import { describe, expect, it } from "vitest";
 
 import { createEmptyEquipmentLoadout, knownEquipmentSelection, type RuneId } from "../domain";
-import { localBuildRecordId } from "./persistence-schema";
+import { localBuildRecordId, selectedPersistedBuildSnapshot } from "./persistence-schema";
 import {
   corruptRecordEnvelopeFixture,
   fixtureCatalogFacts,
+  validBuildSetSavedRecordFixture,
   validSavedRecordFixture,
   validWorkingDraftFixture
 } from "./library-fixtures";
@@ -33,8 +34,8 @@ describe("backup and restore", () => {
     expect(text).toContain('"kind": "build-wars-library-backup"');
     expect(text).not.toContain("<script");
     expect(text).not.toContain(["data", "source-snapshots"].join("/"));
-    expect(parsed.ok ? parsed.backup.savedBuilds.length : 0).toBe(1);
-    expect(parsed.ok ? parsed.backup.workingDraft?.snapshot.build.name : null).toBe(
+    expect(parsed.ok ? parsed.backup.savedDocuments.length : 0).toBe(1);
+    expect(parsed.ok ? draftSnapshot(parsed.backup.workingDraft)?.build.name : null).toBe(
       "Hammer and Bow"
     );
   });
@@ -43,9 +44,9 @@ describe("backup and restore", () => {
     const equipment = createEmptyEquipmentLoadout();
     const record = validSavedRecordFixture({
       snapshot: {
-        ...validSavedRecordFixture().snapshot,
+        ...recordSnapshot(validSavedRecordFixture())!,
         build: {
-          ...validSavedRecordFixture().snapshot.build,
+          ...recordSnapshot(validSavedRecordFixture())!.build,
           equipment: {
             ...equipment,
             armor: equipment.armor.map((piece) =>
@@ -57,29 +58,31 @@ describe("backup and restore", () => {
         }
       }
     });
-    const corrupt = corruptRecordEnvelopeFixture() as { readonly savedBuilds: readonly unknown[] };
+    const corrupt = corruptRecordEnvelopeFixture() as {
+      readonly savedDocuments: readonly unknown[];
+    };
     const parsed = parseBackupEnvelope({
       kind: "build-wars-library-backup",
-      schemaVersion: 1,
+      schemaVersion: 2,
       exportedAt: NOW,
-      savedBuilds: [record, corrupt.savedBuilds[1]],
+      savedDocuments: [record, corrupt.savedDocuments[1]],
       savedWith: fixtureCatalogFacts
     });
 
     expect(parsed.ok).toBe(true);
-    expect(parsed.ok ? parsed.backup.savedBuilds : []).toHaveLength(1);
-    expect(parsed.ok ? parsed.backup.savedBuilds[0]?.snapshot.build.equipment : null).toEqual(
-      record.snapshot.build.equipment
-    );
+    expect(parsed.ok ? parsed.backup.savedDocuments : []).toHaveLength(1);
+    expect(
+      parsed.ok ? recordSnapshot(parsed.backup.savedDocuments[0])?.build.equipment : null
+    ).toEqual(recordSnapshot(record)?.build.equipment);
     expect(parsed.diagnostics.some((issue) => issue.code === "invalid-record")).toBe(true);
   });
 
   it("round-trips title overrides through backup parse and draft restore", () => {
     const record = validSavedRecordFixture({
       snapshot: {
-        ...validSavedRecordFixture().snapshot,
+        ...recordSnapshot(validSavedRecordFixture())!,
         build: {
-          ...validSavedRecordFixture().snapshot.build,
+          ...recordSnapshot(validSavedRecordFixture())!.build,
           titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }]
         }
       }
@@ -88,7 +91,7 @@ describe("backup and restore", () => {
       exportedAt: NOW,
       savedBuilds: [record],
       workingDraft: validWorkingDraftFixture({
-        snapshot: record.snapshot,
+        snapshot: recordSnapshot(record)!,
         associatedRecordId: record.id
       }),
       savedWith: fixtureCatalogFacts
@@ -96,7 +99,7 @@ describe("backup and restore", () => {
     const parsed = parseBackupEnvelope(backup);
 
     expect(
-      parsed.ok ? parsed.backup.savedBuilds[0]?.snapshot.build.titleRankOverrides : null
+      parsed.ok ? recordSnapshot(parsed.backup.savedDocuments[0])?.build.titleRankOverrides : null
     ).toEqual([{ key: "title:lightbringer-rank", rank: 4 }]);
     if (!parsed.ok) {
       return;
@@ -113,9 +116,52 @@ describe("backup and restore", () => {
       restoreWorkingDraft: true
     });
 
-    expect(restored.ok ? restored.draftEditor?.build.titleRankOverrides : null).toEqual([
-      { key: "title:lightbringer-rank", rank: 4 }
+    expect(
+      restored.ok
+        ? selectedPersistedBuildSnapshot(restored.draftDocument!)?.build.titleRankOverrides
+        : null
+    ).toEqual([{ key: "title:lightbringer-rank", rank: 4 }]);
+  });
+
+  it("round-trips mixed schema-2 build and build-set backups", () => {
+    const build = validSavedRecordFixture({ id: localBuildRecordId("local-build") });
+    const buildSet = validBuildSetSavedRecordFixture({
+      id: localBuildRecordId("local-set"),
+      name: "Saved build set"
+    });
+    const backup = createBackupEnvelope({
+      exportedAt: NOW,
+      savedDocuments: [build, buildSet],
+      workingDraft: validWorkingDraftFixture({
+        document: buildSet.document,
+        associatedRecordId: buildSet.id
+      }),
+      savedWith: fixtureCatalogFacts
+    });
+    const parsed = parseBackupEnvelope(backup);
+
+    expect(parsed.ok).toBe(true);
+    if (!parsed.ok) {
+      return;
+    }
+    expect(parsed.backup.savedDocuments.map((record) => record.document.kind)).toEqual([
+      "build",
+      "build-set"
     ]);
+    const plan = createRestorePreviewPlan({
+      backup: parsed.backup,
+      currentRecords: [],
+      nextId: (sourceId) => sourceId,
+      id: "restore-mixed"
+    });
+    const restored = applyRestorePlan(plan, {
+      currentRecords: [],
+      mode: "replace",
+      restoreWorkingDraft: true
+    });
+
+    expect(restored.ok ? restored.draftDocument?.kind : null).toBe("build-set");
+    expect(restored.ok ? restored.records.length : 0).toBe(2);
   });
 
   it("rejects malformed, unsupported, and dangerous backup inputs with bounded diagnostics", () => {
@@ -126,7 +172,7 @@ describe("backup and restore", () => {
     expect(
       parseBackupEnvelope({
         kind: "build-wars-library-backup",
-        schemaVersion: 2,
+        schemaVersion: 999,
         exportedAt: NOW,
         savedBuilds: []
       }).ok
@@ -143,13 +189,15 @@ describe("backup and restore", () => {
       id: localBuildRecordId("local-a"),
       name: "Incoming collision"
     });
-    const corrupt = corruptRecordEnvelopeFixture() as { readonly savedBuilds: readonly unknown[] };
+    const corrupt = corruptRecordEnvelopeFixture() as {
+      readonly savedDocuments: readonly unknown[];
+    };
     const parsed = parseBackupEnvelope({
       ...corrupt,
       kind: "build-wars-library-backup",
-      schemaVersion: 1,
+      schemaVersion: 2,
       exportedAt: NOW,
-      savedBuilds: [incoming, ...corrupt.savedBuilds]
+      savedDocuments: [incoming, ...corrupt.savedDocuments]
     });
 
     expect(parsed.ok).toBe(true);
@@ -207,12 +255,14 @@ describe("backup and restore", () => {
       "local-current",
       "local-incoming"
     ]);
-    expect(merged.ok ? merged.draftEditor : "error").toBeNull();
+    expect(merged.ok ? merged.draftDocument : "error").toBeNull();
     expect(replaced.ok ? replaced.records.map((record) => record.id) : []).toEqual([
       "local-incoming"
     ]);
     expect(replaced.ok ? replaced.draftAssociation : null).toBe("local-incoming");
-    expect(replaced.ok ? replaced.draftEditor?.build.name : null).toBe("Hammer and Bow");
+    expect(
+      replaced.ok ? selectedPersistedBuildSnapshot(replaced.draftDocument!)?.build.name : null
+    ).toBe("Hammer and Bow");
   });
 
   it("blocks all-invalid destructive replace and marks applied plans as one-time", () => {
@@ -264,3 +314,13 @@ describe("backup and restore", () => {
     expect(second.ok ? null : second.reason).toContain("already");
   });
 });
+
+function draftSnapshot(draft: ReturnType<typeof validWorkingDraftFixture> | null | undefined) {
+  return draft === null || draft === undefined
+    ? null
+    : selectedPersistedBuildSnapshot(draft.document);
+}
+
+function recordSnapshot(record: ReturnType<typeof validSavedRecordFixture> | undefined) {
+  return record === undefined ? null : selectedPersistedBuildSnapshot(record.document);
+}

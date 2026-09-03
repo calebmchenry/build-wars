@@ -5,9 +5,11 @@ workspace.
 
 ## Workspace Contract
 
-The main editor column has peer `Skills` and `Equipment` tabs. `Skills` remains the default tab and
-contains the existing skill bar, skill browser, and skill-specific tooltip behavior. Opening or
-rendering `Equipment` does not materialize equipment or dirty the draft.
+The main editor column has peer `Skills` and `Equipment` tabs for the active loadout. In build-set
+mode this is the selected entry; switching entries materializes the outgoing equipment snapshot
+before hydrating the incoming one. `Skills` remains the default tab and contains the existing skill
+bar, skill browser, and skill-specific tooltip behavior. Opening or rendering `Equipment` does not
+materialize equipment or dirty the draft.
 
 `Build.equipment` remains nullable:
 
@@ -86,12 +88,14 @@ Saved catalog facts include equipment catalog versions and weapon catalog-set fa
 had those slices. Old `equipment: null` records do not become stale merely because equipment catalog
 facts are absent.
 
-Skill-template import/export and share URLs remain equipment-free. Meaningful equipment triggers
-warnings before skill-template export/share omission and before skill-template import discards
-authored equipment. Equipment-only validation issues do not block canonical skill-template export.
+Skill-template import/export and share URLs remain equipment-free and selected-loadout-only.
+Meaningful equipment triggers warnings before skill-template export/share omission and before
+skill-template import discards authored equipment from the selected loadout. Equipment-only
+validation issues do not block canonical skill-template export. Whole-library backup and build-set
+transfer preserve semantic equipment for both active and inactive build-set entries.
 
 ## Deferred Scope
 
 Raw equipment-template replay into semantic editor state, equipment share payloads, equipment icons,
 skins, dyes, color IDs, acquisition facts, recommendations, active-set selection, full stat
-aggregation, party equipment, and combat simulation remain deferred.
+aggregation, party equipment semantics, and combat simulation remain deferred.

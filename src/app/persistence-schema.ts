@@ -1,17 +1,30 @@
 import {
+  BUILD_SET_SCHEMA_VERSION,
   authoredDocumentId,
   BUILD_SCHEMA_VERSION,
   catalogId,
   EQUIPMENT_LOADOUT_SCHEMA_VERSION,
   ARMOR_SLOTS,
+  MAX_BUILD_SET_ENTRIES,
+  MAX_BUILD_SET_ENTRY_LABEL_LENGTH,
+  MAX_BUILD_SET_ENTRY_NOTES_LENGTH,
+  MAX_BUILD_SET_NAME_LENGTH,
   TITLE_RANK_OVERRIDE_LIMIT,
   WEAPON_SET_SLOTS,
   MAX_MODIFIERS_PER_HAND_TO_VALIDATE,
+  buildSetEntryId,
+  isBuildSetEntryKind,
+  normalizeBuildSetEntryLabel,
+  normalizeBuildSetEntryNotes,
+  normalizeBuildSetName,
   isCanonicalTitleRankKey,
   normalizeTitleRankKey,
   type AttributeId,
   type ArmorPiece,
   type AuthoredWeaponRequirement,
+  type AuthoredDocumentId,
+  type BuildSetEntryId,
+  type BuildSetEntryKind,
   type Build,
   type EquipmentLoadout,
   type EquipmentSelectionState,
@@ -44,7 +57,8 @@ import {
 
 export const LOCAL_LIBRARY_STORAGE_KEY = "build-wars:v1";
 export const LOCAL_LIBRARY_KIND = "build-wars-local-library";
-export const LOCAL_LIBRARY_SCHEMA_VERSION = 1;
+export const LOCAL_LIBRARY_SCHEMA_VERSION = 2;
+export const LEGACY_LOCAL_LIBRARY_SCHEMA_VERSION = 1;
 
 export type LocalBuildRecordId = string & { readonly __brand: "LocalBuildRecordId" };
 
@@ -69,13 +83,39 @@ export interface PersistedBuildSnapshot {
   readonly rawTemplate: RawTemplateOverlay;
 }
 
-export interface PersistedWorkingDraft {
+export interface PersistedBuildSetEntrySnapshot {
+  readonly id: BuildSetEntryId;
+  readonly label: string;
+  readonly kind: BuildSetEntryKind;
+  readonly notes: string | null;
   readonly snapshot: PersistedBuildSnapshot;
+}
+
+export interface PersistedBuildSetSnapshot {
+  readonly schemaVersion: typeof BUILD_SET_SCHEMA_VERSION;
+  readonly id: AuthoredDocumentId;
+  readonly name: string;
+  readonly entries: readonly PersistedBuildSetEntrySnapshot[];
+  readonly lastSelectedEntryId: BuildSetEntryId | null;
+}
+
+export type PersistedDocument =
+  | {
+      readonly kind: "build";
+      readonly snapshot: PersistedBuildSnapshot;
+    }
+  | {
+      readonly kind: "build-set";
+      readonly snapshot: PersistedBuildSetSnapshot;
+    };
+
+export interface PersistedWorkingDraft {
+  readonly document: PersistedDocument;
   readonly associatedRecordId: LocalBuildRecordId | null;
   readonly savedWith: PersistedCatalogFacts;
 }
 
-export interface PersistedSavedBuildRecord {
+export interface PersistedSavedDocumentRecord {
   readonly id: LocalBuildRecordId;
   readonly name: string;
   readonly createdAt: string;
@@ -83,24 +123,28 @@ export interface PersistedSavedBuildRecord {
   readonly favorite: boolean;
   readonly tags: readonly string[];
   readonly notes: string | null;
-  readonly snapshot: PersistedBuildSnapshot;
+  readonly document: PersistedDocument;
   readonly savedWith: PersistedCatalogFacts;
 }
+
+export type PersistedSavedBuildRecord = PersistedSavedDocumentRecord;
 
 export interface LocalLibraryMetadata {
   readonly lastWriteReason: string | null;
   readonly lastCompactedAt: string | null;
 }
 
-export interface LocalLibraryEnvelopeV1 {
+export interface LocalLibraryEnvelopeV2 {
   readonly schemaVersion: typeof LOCAL_LIBRARY_SCHEMA_VERSION;
   readonly kind: typeof LOCAL_LIBRARY_KIND;
   readonly revision: number;
   readonly updatedAt: string;
   readonly workingDraft: PersistedWorkingDraft | null;
-  readonly savedBuilds: readonly PersistedSavedBuildRecord[];
+  readonly savedDocuments: readonly PersistedSavedDocumentRecord[];
   readonly metadata: LocalLibraryMetadata;
 }
+
+export type LocalLibraryEnvelopeV1 = LocalLibraryEnvelopeV2;
 
 export interface PersistenceDiagnostic {
   readonly code: string;
@@ -111,7 +155,7 @@ export interface PersistenceDiagnostic {
 export type LocalLibraryParseResult =
   | {
       readonly ok: true;
-      readonly envelope: LocalLibraryEnvelopeV1;
+      readonly envelope: LocalLibraryEnvelopeV2;
       readonly diagnostics: readonly PersistenceDiagnostic[];
       readonly writeBlocked: boolean;
     }
@@ -155,14 +199,14 @@ export function localBuildRecordId(value: string): LocalBuildRecordId {
   return value as LocalBuildRecordId;
 }
 
-export function emptyLocalLibraryEnvelope(now: string, revision = 0): LocalLibraryEnvelopeV1 {
+export function emptyLocalLibraryEnvelope(now: string, revision = 0): LocalLibraryEnvelopeV2 {
   return {
     schemaVersion: LOCAL_LIBRARY_SCHEMA_VERSION,
     kind: LOCAL_LIBRARY_KIND,
     revision,
     updatedAt: now,
     workingDraft: null,
-    savedBuilds: [],
+    savedDocuments: [],
     metadata: {
       lastWriteReason: null,
       lastCompactedAt: null
@@ -214,23 +258,31 @@ export function hydrateEditorFromSnapshot(snapshot: PersistedBuildSnapshot): Edi
   };
 }
 
+export function persistedBuildDocument(snapshot: PersistedBuildSnapshot): PersistedDocument {
+  return { kind: "build", snapshot };
+}
+
+export function persistedBuildSetDocument(snapshot: PersistedBuildSetSnapshot): PersistedDocument {
+  return { kind: "build-set", snapshot };
+}
+
 export function createWorkingDraft(
-  state: EditorState,
+  document: PersistedDocument,
   associatedRecordId: LocalBuildRecordId | null,
   savedWith: PersistedCatalogFacts
 ): PersistedWorkingDraft {
   return {
-    snapshot: createPersistedBuildSnapshot(state),
+    document: clonePersistedDocument(document),
     associatedRecordId,
     savedWith
   };
 }
 
 export function prepareEnvelopeForWrite(
-  envelope: LocalLibraryEnvelopeV1,
+  envelope: LocalLibraryEnvelopeV2,
   now: string,
   reason: string
-): LocalLibraryEnvelopeV1 {
+): LocalLibraryEnvelopeV2 {
   return {
     ...envelope,
     revision: envelope.revision + 1,
@@ -296,29 +348,34 @@ export function parseLocalLibraryEnvelope(input: unknown): LocalLibraryParseResu
   const revision = safeInteger(root.revision, "$.revision", diagnostics, { min: 0 });
   const updatedAt = timestamp(root.updatedAt, "$.updatedAt", diagnostics);
   const metadata = validateMetadata(root.metadata, "$.metadata", diagnostics);
-  const savedBuilds = validateSavedBuilds(root.savedBuilds, diagnostics);
+  const savedDocuments = validateSavedDocuments(root.savedDocuments, diagnostics);
   const workingDraft = validateWorkingDraft(root.workingDraft, "$.workingDraft", diagnostics);
 
-  if (revision === null || updatedAt === null || metadata === null || savedBuilds === null) {
+  if (revision === null || updatedAt === null || metadata === null || savedDocuments === null) {
     return { ok: false, diagnostics, writeBlocked: true };
   }
 
-  const envelope: LocalLibraryEnvelopeV1 = {
+  const envelope: LocalLibraryEnvelopeV2 = {
     schemaVersion: LOCAL_LIBRARY_SCHEMA_VERSION,
     kind: LOCAL_LIBRARY_KIND,
     revision,
     updatedAt,
     workingDraft,
-    savedBuilds,
+    savedDocuments,
     metadata
   };
   const writeBlocked = diagnostics.some((item) =>
-    ["invalid-record", "duplicate-record-id", "invalid-working-draft"].includes(item.code)
+    [
+      "invalid-record",
+      "duplicate-record-id",
+      "invalid-working-draft",
+      "stale-selected-entry-id"
+    ].includes(item.code)
   );
   return { ok: true, envelope, diagnostics, writeBlocked };
 }
 
-export function serializeLocalLibraryEnvelope(envelope: LocalLibraryEnvelopeV1): string {
+export function serializeLocalLibraryEnvelope(envelope: LocalLibraryEnvelopeV2): string {
   return JSON.stringify(stableJson(envelope));
 }
 
@@ -326,8 +383,26 @@ export function fingerprintPersistedSnapshot(snapshot: PersistedBuildSnapshot): 
   return JSON.stringify(stableJson(snapshot));
 }
 
-export function fingerprintSavedRecord(record: PersistedSavedBuildRecord): string {
+export function fingerprintPersistedDocument(document: PersistedDocument): string {
+  return JSON.stringify(stableJson(document));
+}
+
+export function fingerprintSavedRecord(record: PersistedSavedDocumentRecord): string {
   return JSON.stringify(stableJson(record));
+}
+
+export function selectedPersistedBuildSnapshot(
+  document: PersistedDocument
+): PersistedBuildSnapshot | null {
+  if (document.kind === "build") {
+    return document.snapshot;
+  }
+  const selected = document.snapshot.lastSelectedEntryId;
+  return (
+    document.snapshot.entries.find((entry) => entry.id === selected)?.snapshot ??
+    document.snapshot.entries[0]?.snapshot ??
+    null
+  );
 }
 
 function migrateLocalLibraryEnvelope(
@@ -341,6 +416,9 @@ function migrateLocalLibraryEnvelope(
   if (root.schemaVersion === LOCAL_LIBRARY_SCHEMA_VERSION) {
     return { ok: true, value: input };
   }
+  if (root.schemaVersion === LEGACY_LOCAL_LIBRARY_SCHEMA_VERSION) {
+    return { ok: true, value: migrateLegacyLocalLibraryEnvelope(root) };
+  }
   addDiagnostic(
     diagnostics,
     "unsupported-schema-version",
@@ -348,6 +426,59 @@ function migrateLocalLibraryEnvelope(
     "No migration exists for this local library schema version."
   );
   return { ok: false };
+}
+
+function migrateLegacyLocalLibraryEnvelope(root: Readonly<Record<string, unknown>>): unknown {
+  return {
+    schemaVersion: LOCAL_LIBRARY_SCHEMA_VERSION,
+    kind: root.kind,
+    revision: root.revision,
+    updatedAt: root.updatedAt,
+    workingDraft: migrateLegacyWorkingDraft(root.workingDraft),
+    savedDocuments: Array.isArray(root.savedBuilds)
+      ? root.savedBuilds.map((record) => migrateLegacySavedRecord(record))
+      : root.savedBuilds,
+    metadata: root.metadata
+  };
+}
+
+function migrateLegacyWorkingDraft(input: unknown): unknown {
+  if (input === null) {
+    return null;
+  }
+  const record = asUncheckedRecord(input);
+  if (record === null) {
+    return input;
+  }
+  return {
+    document: {
+      kind: "build",
+      snapshot: record.snapshot
+    },
+    associatedRecordId: record.associatedRecordId,
+    savedWith: record.savedWith
+  };
+}
+
+function migrateLegacySavedRecord(input: unknown): unknown {
+  const record = asUncheckedRecord(input);
+  if (record === null) {
+    return input;
+  }
+  return {
+    id: record.id,
+    name: record.name,
+    createdAt: record.createdAt,
+    updatedAt: record.updatedAt,
+    favorite: record.favorite,
+    tags: record.tags,
+    notes: record.notes,
+    document: {
+      kind: "build",
+      snapshot: record.snapshot
+    },
+    savedWith: record.savedWith
+  };
 }
 
 function validateWorkingDraft(
@@ -364,33 +495,33 @@ function validateWorkingDraft(
     addDiagnostic(diagnostics, "invalid-working-draft", path, "Working draft is invalid.");
     return null;
   }
-  const snapshot = validateSnapshot(record.snapshot, `${path}.snapshot`, diagnostics);
+  const document = validatePersistedDocument(record.document, `${path}.document`, diagnostics);
   const associatedRecordId = nullableRecordId(
     record.associatedRecordId,
     `${path}.associatedRecordId`,
     diagnostics
   );
   const savedWith = validateCatalogFacts(record.savedWith, `${path}.savedWith`, diagnostics);
-  if (snapshot === null || associatedRecordId === undefined || savedWith === null) {
+  if (document === null || associatedRecordId === undefined || savedWith === null) {
     addDiagnostic(diagnostics, "invalid-working-draft", path, "Working draft was skipped.");
     return null;
   }
   if (diagnostics.length > startCount) {
     return null;
   }
-  return { snapshot, associatedRecordId, savedWith };
+  return { document, associatedRecordId, savedWith };
 }
 
-function validateSavedBuilds(
+function validateSavedDocuments(
   input: unknown,
   diagnostics: PersistenceDiagnostic[]
-): readonly PersistedSavedBuildRecord[] | null {
+): readonly PersistedSavedDocumentRecord[] | null {
   if (!Array.isArray(input)) {
     addDiagnostic(
       diagnostics,
-      "invalid-saved-builds",
-      "$.savedBuilds",
-      "Saved builds must be an array."
+      "invalid-saved-documents",
+      "$.savedDocuments",
+      "Saved documents must be an array."
     );
     return null;
   }
@@ -398,16 +529,16 @@ function validateSavedBuilds(
     addDiagnostic(
       diagnostics,
       "oversized-collection",
-      "$.savedBuilds",
-      `Saved build count exceeds the ${MAX_RECORDS} record limit.`
+      "$.savedDocuments",
+      `Saved document count exceeds the ${MAX_RECORDS} record limit.`
     );
     return null;
   }
 
-  const records: PersistedSavedBuildRecord[] = [];
+  const records: PersistedSavedDocumentRecord[] = [];
   const seen = new Set<string>();
   input.forEach((item, index) => {
-    const path = `$.savedBuilds[${index}]`;
+    const path = `$.savedDocuments[${index}]`;
     const record = validateSavedRecord(item, path, diagnostics);
     if (record === null) {
       addDiagnostic(diagnostics, "invalid-record", path, "Saved build record was skipped.");
@@ -432,7 +563,7 @@ function validateSavedRecord(
   input: unknown,
   path: string,
   diagnostics: PersistenceDiagnostic[]
-): PersistedSavedBuildRecord | null {
+): PersistedSavedDocumentRecord | null {
   const startCount = diagnostics.length;
   const record = asRecord(input, path, diagnostics);
   if (record === null) {
@@ -447,7 +578,7 @@ function validateSavedRecord(
   const favorite = booleanField(record.favorite, `${path}.favorite`, diagnostics);
   const tags = tagsField(record.tags, `${path}.tags`, diagnostics);
   const notes = nullableString(record.notes, `${path}.notes`, diagnostics, MAX_NOTES);
-  const snapshot = validateSnapshot(record.snapshot, `${path}.snapshot`, diagnostics);
+  const document = validatePersistedDocument(record.document, `${path}.document`, diagnostics);
   const savedWith = validateCatalogFacts(record.savedWith, `${path}.savedWith`, diagnostics);
 
   if (
@@ -459,7 +590,7 @@ function validateSavedRecord(
     favorite === null ||
     tags === null ||
     notes === undefined ||
-    snapshot === null ||
+    document === null ||
     savedWith === null
   ) {
     return null;
@@ -473,8 +604,179 @@ function validateSavedRecord(
     favorite,
     tags,
     notes,
-    snapshot,
+    document,
     savedWith
+  };
+}
+
+function validatePersistedDocument(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): PersistedDocument | null {
+  const record = asRecord(input, path, diagnostics);
+  if (record === null) {
+    return null;
+  }
+  if (record.kind === "build") {
+    const snapshot = validateSnapshot(record.snapshot, `${path}.snapshot`, diagnostics);
+    return snapshot === null ? null : { kind: "build", snapshot };
+  }
+  if (record.kind === "build-set") {
+    const snapshot = validateBuildSetSnapshot(record.snapshot, `${path}.snapshot`, diagnostics);
+    return snapshot === null ? null : { kind: "build-set", snapshot };
+  }
+  addDiagnostic(
+    diagnostics,
+    "unknown-document-kind",
+    `${path}.kind`,
+    "Persisted document kind is not supported."
+  );
+  return null;
+}
+
+function validateBuildSetSnapshot(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): PersistedBuildSetSnapshot | null {
+  const record = asRecord(input, path, diagnostics);
+  if (record === null) {
+    return null;
+  }
+  const schemaVersion = safeInteger(record.schemaVersion, `${path}.schemaVersion`, diagnostics, {
+    min: BUILD_SET_SCHEMA_VERSION,
+    max: BUILD_SET_SCHEMA_VERSION
+  });
+  const id = stringField(record.id, `${path}.id`, diagnostics, MAX_STRING, {
+    allowEmpty: false
+  });
+  const name = stringField(record.name, `${path}.name`, diagnostics, MAX_BUILD_SET_NAME_LENGTH, {
+    allowEmpty: false
+  });
+  const entries = validateBuildSetEntries(record.entries, `${path}.entries`, diagnostics);
+  const selected =
+    record.lastSelectedEntryId === null
+      ? null
+      : buildSetEntryIdField(
+          record.lastSelectedEntryId,
+          `${path}.lastSelectedEntryId`,
+          diagnostics
+        );
+
+  if (
+    schemaVersion === null ||
+    id === null ||
+    name === null ||
+    entries === null ||
+    (selected === null && record.lastSelectedEntryId !== null)
+  ) {
+    return null;
+  }
+  const selectedExists = selected === null || entries.some((entry) => entry.id === selected);
+  const lastSelectedEntryId = selectedExists ? selected : (entries[0]?.id ?? null);
+  if (!selectedExists) {
+    addDiagnostic(
+      diagnostics,
+      "stale-selected-entry-id",
+      `${path}.lastSelectedEntryId`,
+      "Build set selected entry ID was not present and was repaired."
+    );
+  }
+  return {
+    schemaVersion: BUILD_SET_SCHEMA_VERSION,
+    id: authoredDocumentId(id),
+    name: normalizeBuildSetName(name),
+    entries,
+    lastSelectedEntryId
+  };
+}
+
+function validateBuildSetEntries(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): readonly PersistedBuildSetEntrySnapshot[] | null {
+  if (!denseArray(input, path, diagnostics)) {
+    return null;
+  }
+  if (input.length > MAX_BUILD_SET_ENTRIES) {
+    addDiagnostic(
+      diagnostics,
+      "too-many-build-set-entries",
+      path,
+      `Build sets support at most ${MAX_BUILD_SET_ENTRIES} entries.`
+    );
+    return null;
+  }
+  const entries: PersistedBuildSetEntrySnapshot[] = [];
+  const seen = new Set<string>();
+  for (const [index, item] of input.entries()) {
+    const itemPath = `${path}[${index}]`;
+    const entry = validateBuildSetEntrySnapshot(item, itemPath, diagnostics);
+    if (entry === null) {
+      return null;
+    }
+    if (seen.has(entry.id)) {
+      addDiagnostic(
+        diagnostics,
+        "duplicate-build-set-entry-id",
+        `${itemPath}.id`,
+        "Duplicate build-set entry IDs are not accepted."
+      );
+      return null;
+    }
+    seen.add(entry.id);
+    entries.push(entry);
+  }
+  return entries;
+}
+
+function validateBuildSetEntrySnapshot(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): PersistedBuildSetEntrySnapshot | null {
+  const record = asRecord(input, path, diagnostics);
+  if (record === null) {
+    return null;
+  }
+  const id = buildSetEntryIdField(record.id, `${path}.id`, diagnostics);
+  const label = stringField(
+    record.label,
+    `${path}.label`,
+    diagnostics,
+    MAX_BUILD_SET_ENTRY_LABEL_LENGTH,
+    {
+      allowEmpty: false
+    }
+  );
+  const kind =
+    typeof record.kind === "string" && isBuildSetEntryKind(record.kind) ? record.kind : null;
+  if (kind === null) {
+    addDiagnostic(
+      diagnostics,
+      "invalid-build-set-entry-kind",
+      `${path}.kind`,
+      "Build set entry kind is not accepted."
+    );
+  }
+  const notes = nullableString(
+    record.notes,
+    `${path}.notes`,
+    diagnostics,
+    MAX_BUILD_SET_ENTRY_NOTES_LENGTH
+  );
+  const snapshot = validateSnapshot(record.snapshot, `${path}.snapshot`, diagnostics);
+  if (id === null || label === null || kind === null || notes === undefined || snapshot === null) {
+    return null;
+  }
+  return {
+    id,
+    label: normalizeBuildSetEntryLabel(label),
+    kind,
+    notes: normalizeBuildSetEntryNotes(notes),
+    snapshot
   };
 }
 
@@ -1496,6 +1798,27 @@ function nullableRecordId(
   return recordId(input, path, diagnostics) ?? undefined;
 }
 
+function buildSetEntryIdField(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): BuildSetEntryId | null {
+  const value = stringField(input, path, diagnostics, 96, { allowEmpty: false });
+  if (value === null) {
+    return null;
+  }
+  if (!/^[A-Za-z0-9:_-]+$/.test(value)) {
+    addDiagnostic(
+      diagnostics,
+      "invalid-id",
+      path,
+      "Build set entry ID contains unsupported characters."
+    );
+    return null;
+  }
+  return buildSetEntryId(value);
+}
+
 function tagsField(
   input: unknown,
   path: string,
@@ -1540,6 +1863,12 @@ function asRecord(
     return null;
   }
   return input as Record<string, unknown>;
+}
+
+function asUncheckedRecord(input: unknown): Readonly<Record<string, unknown>> | null {
+  return typeof input === "object" && input !== null && !Array.isArray(input)
+    ? (input as Readonly<Record<string, unknown>>)
+    : null;
 }
 
 function denseArray(
@@ -1710,6 +2039,46 @@ function cloneBuild(build: Build): Build {
     skillBar: tupleSkillBar(build.skillBar),
     titleRankOverrides: build.titleRankOverrides.map((override) => ({ ...override })),
     equipment: cloneEquipmentLoadout(build.equipment)
+  };
+}
+
+export function clonePersistedDocument(document: PersistedDocument): PersistedDocument {
+  switch (document.kind) {
+    case "build":
+      return { kind: "build", snapshot: clonePersistedBuildSnapshot(document.snapshot) };
+    case "build-set":
+      return {
+        kind: "build-set",
+        snapshot: clonePersistedBuildSetSnapshot(document.snapshot)
+      };
+  }
+}
+
+export function clonePersistedBuildSnapshot(
+  snapshot: PersistedBuildSnapshot
+): PersistedBuildSnapshot {
+  return {
+    build: cloneBuild(snapshot.build),
+    pveBudget: { ...snapshot.pveBudget },
+    rawTemplate: cloneRawTemplateOverlay(snapshot.rawTemplate)
+  };
+}
+
+export function clonePersistedBuildSetSnapshot(
+  snapshot: PersistedBuildSetSnapshot
+): PersistedBuildSetSnapshot {
+  return {
+    schemaVersion: BUILD_SET_SCHEMA_VERSION,
+    id: snapshot.id,
+    name: snapshot.name,
+    lastSelectedEntryId: snapshot.lastSelectedEntryId,
+    entries: snapshot.entries.map((entry) => ({
+      id: entry.id,
+      label: entry.label,
+      kind: entry.kind,
+      notes: entry.notes,
+      snapshot: clonePersistedBuildSnapshot(entry.snapshot)
+    }))
   };
 }
 

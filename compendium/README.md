@@ -27,3 +27,4 @@ The Compendium is an in-repo documentation system for agents.
 - [Title ranks](title-ranks.md)
 - [Equipment editor](equipment-editor.md)
 - [Local library and sharing](local-library-and-sharing.md)
+- [Multi-build workspace](multi-build-workspace.md)

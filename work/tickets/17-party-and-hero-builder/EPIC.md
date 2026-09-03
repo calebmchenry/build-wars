@@ -45,6 +45,12 @@ EPIC-17 should build on multi-build workspaces. Hero names, henchmen, portraits,
 external team-template compatibility are optional later enhancements, not requirements for the first
 party workflow.
 
+SPRINT-017/EPIC-16 provides the neutral base: ordered build-set entries, one active loadout editor,
+inactive durable snapshots, variant comparison, per-entry aggregate validation, schema-2 mixed local
+documents, whole-library backup, and native build-set transfer JSON. EPIC-17 should add
+party-specific labels, party validation, party sharing, hero/henchman identity, and any external
+team format adapters on top of that base instead of changing build-set entry semantics.
+
 ## Grooming Decisions
 
 * Do not build a hero/henchman catalog as a prerequisite for party workflows.
