@@ -136,7 +136,7 @@ describe("editor selectors", () => {
       buildCatalogVersion: null,
       professionAttributeCatalogVersion: "pa-current",
       skillCatalogVersion: "skills-current",
-      ruleEngineVersion: "rule-engine:v1"
+      ruleEngineVersion: "rule-engine:v2"
     };
 
     expect(selectCatalogFreshnessView(current, current).status).toBe("fresh");

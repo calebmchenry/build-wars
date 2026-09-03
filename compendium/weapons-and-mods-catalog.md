@@ -106,9 +106,10 @@ requires the retained selected snapshot set or a fresh bounded live discover/fet
 
 ## Downstream Boundaries
 
-- EPIC-13 owns armor/headgear records and must not move armor-owned modifier IDs into EPIC-12.
-- EPIC-14 owns equipment editing, weapon-set controls, slot occupancy across full equipment sets,
-  and attaching selected weapon/modifier IDs to loadouts.
+- EPIC-13 owns semantic weapon-set topology, hand occupancy, duplicate occupied modifier-slot
+  validation, advisory requirement handoff, and selected weapon/modifier ID attachment points.
+- EPIC-14 owns equipment editing, app catalog wiring, active-set UI policy, and validation
+  presentation for selected weapon/modifier IDs.
 - EPIC-17 owns broader semantic equipment-template import workflows while preserving unknown raw
   equipment template IDs.
 - EPIC-20 may index names, lookup keys, families, slots, requirements, effects, and structured

@@ -2,12 +2,14 @@
 id: BW-1303
 title: Weapon Set Shell
 epic: EPIC-13
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1301
   - EPIC-03
   - EPIC-12
+planned_sprint: SPRINT-014
+completed_sprint: SPRINT-014
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -41,6 +43,16 @@ Define the semantic weapon-set container needed to attach EPIC-12 weapons and mo
 - A two-handed weapon cannot silently coexist with an off-hand item in the same set.
 - Weapon/mod attachments preserve catalog IDs and unresolved semantic placeholders where needed.
 - The contract is sufficient for EPIC-14 controls and validation messages.
+
+## Closeout
+
+- Implemented in SPRINT-014.
+- Added pure weapon-set analysis for empty, partial, paired, two-handed, conflicting, and unresolved
+  authored state.
+- Delegated pairwise modifier compatibility to EPIC-12 helpers and enforced per-instance duplicate
+  occupied modifier slots.
+- Added catalog-first requirement evaluation with authored fallback only for catalog-unresolved
+  requirement facts.
 
 ## Verification
 

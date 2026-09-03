@@ -103,7 +103,11 @@ draft is separately opt-in in both modes.
 
 ## Boundaries
 
+EPIC-13 added a domain `EquipmentLoadout`, but local-library schema v1 still rejects non-null
+persisted equipment. EPIC-14 must add the migration, backup/restore behavior, validation
+presentation, and share-boundary messaging before semantic equipment becomes durable app state.
+
 No backend, account, auth, analytics, service worker, IndexedDB, hosted sharing, short link, remote
-icon/media fetch, new runtime dependency, generated-data pipeline change, equipment state, party
-record, guide record, or historical skill revision analysis was introduced. Deeper freshness and
-revision-history analysis remains deferred to EPIC-21.
+icon/media fetch, new runtime dependency, generated-data pipeline change, party record, guide
+record, or historical skill revision analysis was introduced. Deeper freshness and revision-history
+analysis remains deferred to EPIC-21.

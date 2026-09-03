@@ -2,12 +2,14 @@
 id: BW-1305
 title: Equipment Shell Docs and Closeout
 epic: EPIC-13
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1302
   - BW-1303
   - BW-1304
+planned_sprint: SPRINT-014
+completed_sprint: SPRINT-014
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -40,6 +42,15 @@ Document the EPIC-13 semantic equipment shell, deferred compatibility scope, and
 - Downstream docs make the semantic equipment boundary explicit.
 - EPIC-14 has a clear implementation handoff and no hidden dye/skin/template-code requirements.
 - EPIC-13 is ready to mark done only after verification and docs closeout pass.
+
+## Closeout
+
+- Implemented in SPRINT-014.
+- Added `compendium/equipment-shell.md` and updated README, rule-engine, template compatibility,
+  rune, insignia, weapon, editor, local-library, compendium index, and fixture notes.
+- Confirmed `src/app/catalogs.ts`, leaf UI, share-url payloads, generated data, and template codecs
+  were not changed.
+- Verified non-null equipment persistence remains deliberately unsupported until EPIC-14.
 
 ## Verification
 

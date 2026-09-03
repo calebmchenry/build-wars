@@ -3,6 +3,8 @@ import { describe, expect, it } from "vitest";
 import {
   calculateEffectiveAttributeRank,
   catalogId,
+  collectEquipmentAttributeRankAdjustments,
+  equipmentAdjustmentsForAttribute,
   summarizeAttributeRuneEffects,
   templateEquipmentModifierId,
   type AttributeId,
@@ -12,6 +14,8 @@ import {
 } from "../../src/domain";
 import { attributeIds, professionAttributeCatalog } from "../fixtures/rule-engine/catalogs";
 import { attributes, buildFixture } from "../fixtures/rule-engine/builds";
+import { equipmentRuneCatalog, runeIds } from "../fixtures/rule-engine/equipment-catalogs";
+import { knownRune, loadoutWithArmor } from "../fixtures/rule-engine/equipment";
 
 describe("effective attribute rank calculator", () => {
   it("resolves allocated zero and nonzero authored base ranks", () => {
@@ -136,6 +140,30 @@ describe("effective attribute rank calculator", () => {
       { kind: "rune", amount: 3, sourceId: "chest", label: "Rune 95" }
     ]);
     expect(summary.totalAttributeRuneHealthDelta).toBe(-110);
+    expect(result).toMatchObject({ kind: "resolved", finalRank: 11 });
+  });
+
+  it("accepts equipment-generated rune adjustments through the same adjustment API", () => {
+    const build = buildFixture({
+      attributes: attributes([attributeIds.axeMastery, 8]),
+      equipment: loadoutWithArmor({
+        head: { rune: knownRune(runeIds.minorAxe) },
+        chest: { rune: knownRune(runeIds.superiorAxe) }
+      })
+    });
+    const summary = collectEquipmentAttributeRankAdjustments({
+      build,
+      professionAttributes: professionAttributeCatalog,
+      runes: equipmentRuneCatalog
+    });
+
+    const result = calculateEffectiveAttributeRank({
+      build,
+      professionAttributes: professionAttributeCatalog,
+      attributeId: attributeIds.axeMastery,
+      adjustments: equipmentAdjustmentsForAttribute(summary, attributeIds.axeMastery)
+    });
+
     expect(result).toMatchObject({ kind: "resolved", finalRank: 11 });
   });
 

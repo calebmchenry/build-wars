@@ -1,5 +1,5 @@
 import type { AttributeId, AuthoredDocumentId, ProfessionId, SkillId } from "./ids";
-import type { EquipmentTemplate } from "./equipment";
+import type { EquipmentLoadout } from "./equipment";
 import type { AuthoredDocumentRoot } from "./source";
 
 export const SKILL_BAR_SLOT_COUNT = 8;
@@ -30,5 +30,5 @@ export interface Build extends AuthoredDocumentRoot {
   readonly secondaryProfessionId: ProfessionId | null;
   readonly attributes: readonly AttributeAllocation[];
   readonly skillBar: SkillBar;
-  readonly equipment: EquipmentTemplate | null;
+  readonly equipment: EquipmentLoadout | null;
 }

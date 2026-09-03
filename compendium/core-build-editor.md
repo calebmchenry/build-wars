@@ -9,6 +9,10 @@ Runtime app code imports promoted data only through `src/app/catalogs.ts`. That 
 - `data/generated/epic-03/professions-attributes.catalog.json`
 - `data/generated/epic-04/skills.catalog.json`
 
+EPIC-13 added semantic equipment domain contracts and optional validation catalog views, but the app
+catalog boundary was not expanded. EPIC-14 must add app-owned rune, insignia, weapon, and weapon
+modifier catalog views before editor controls consume equipment validation.
+
 Leaf components consume app-ready catalog views, attribution, validation slices, placeholder icon
 descriptors, and explicit template crosswalk helpers. Components do not import generated artifacts,
 QA reports, source snapshots, ingestion scripts, wiki APIs, or remote media bytes.
@@ -98,6 +102,7 @@ later evidence-backed ticket changes the architecture.
 
 Local library persistence, storage migrations, tags, favorites, backup/restore, share URLs, and
 saved template workflows are documented in [Local library and sharing](local-library-and-sharing.md).
-EPIC-15 owns title rank state, title ownership, and allegiance configuration. Later epics own
-equipment, party/hero builds, guide authoring, recommendations, remote icon loading, analytics,
-auth, deployment, and PWA behavior.
+EPIC-14 owns equipment editor state, controls, app catalog wiring, non-null persistence migration,
+validation presentation, and share-boundary messaging. EPIC-15 owns title rank state, title
+ownership, and allegiance configuration. Later epics own party/hero builds, guide authoring,
+recommendations, remote icon loading, analytics, auth, deployment, and PWA behavior.

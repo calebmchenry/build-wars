@@ -2,13 +2,15 @@
 id: BW-1302
 title: Armor Slot and Headgear Mechanics
 epic: EPIC-13
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1301
   - EPIC-03
   - EPIC-10
   - EPIC-11
+planned_sprint: SPRINT-014
+completed_sprint: SPRINT-014
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -44,6 +46,15 @@ bonuses.
   or a documented later handoff.
 - Base armor facts are minimal and mechanically justified.
 - Invalid or incomplete armor state produces structured validation fixtures, not crashes.
+
+## Closeout
+
+- Implemented in SPRINT-014.
+- Added target-aware equipment rank-adjustment helpers for validated headgear and attribute-rune
+  selections.
+- Reused `summarizeAttributeRuneEffects` for highest-per-attribute rune stacking.
+- Documented source-policy evidence for the fixed headgear fact in sprint execution notes; numeric
+  base armor remains deferred because EPIC-13 has no totals consumer.
 
 ## Verification
 

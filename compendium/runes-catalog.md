@@ -85,10 +85,10 @@ bounded metadata-only finding class.
 
 ## Downstream Boundaries
 
-- EPIC-13 owns armor shell and headgear records. Use the rune catalog's `headgearInteraction` as a
-  handoff fact, not as an armor-owned `+1`.
-- EPIC-14 owns equipment editing and rune legality. Use `ArmorPiece.runeId` as the attachment point
-  and join armor profession legality against primary armor profession facts.
+- EPIC-13 owns semantic armor shell validation, `ArmorPiece.rune` attachment points, and the fixed
+  headgear `+1` rank handoff backed by the approved `Attribute bonus` source authority.
+- EPIC-14 owns equipment editing and app catalog wiring. Join rune legality against primary armor
+  profession facts through the EPIC-13 catalog-view boundary.
 - EPIC-15 owns title ranks, allegiance, and title effects separately from runes.
 - EPIC-17 owns semantic equipment-template resolution from decoded modifier IDs to rune lookup
   outcomes while preserving unknown authored modifiers.

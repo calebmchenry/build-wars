@@ -89,6 +89,10 @@ Included now:
   `src/template-compatibility`, backed by a pinned `@buildwars/gw-templates@1.1.1` adapter.
 - Pure domain rule-engine APIs for authored builds: `validateBuild` and
   `calculateEffectiveAttributeRank`.
+- A framework-neutral semantic equipment shell for one authored build: nullable
+  `EquipmentLoadout`, canonical armor and weapon-set topology, known/unresolved semantic equipment
+  selections, headgear and rune rank-adjustment helpers, weapon-set analysis, and optional
+  equipment validation catalog views.
 - A browser-based core build editor under `src/app` for one durable single-character workspace:
   profession and mode controls, PvE attribute budgets, deterministic skill search/filter views,
   an eight-slot skill bar with pointer and keyboard operations, tooltips, validation presentation,
@@ -107,9 +111,9 @@ Deferred to later epics:
   defers ownership to EPIC-17
 - Compact runtime catalog derivation, dynamic catalog loading, search workers, virtualization, and
   remote icon fetching
-- Title ownership, title-rank controls, allegiance selection, armor/headgear/equipment legality,
-  full stat aggregation, equipment editor, party builder, guide authoring, PWA behavior, auth,
-  analytics, and deployment
+- Title ownership, title-rank controls, allegiance selection, equipment editor UI, non-null
+  equipment persistence/share payloads, full stat aggregation, party builder, guide authoring, PWA
+  behavior, auth, analytics, and deployment
 
 ## Project Layout
 
@@ -192,9 +196,14 @@ limits, fidelity guarantees, and the paw-ned2 deferral record.
 Build validation is available through `src/domain`.
 
 - `validateBuild` returns deterministic structured issues and separates `valid`, `complete`,
-  `resolved`, and `exhaustive` from export/publish policy.
+  `resolved`, and `exhaustive` from export/publish policy. It accepts optional equipment catalog
+  views and skips `equipment: null`.
 - `calculateEffectiveAttributeRank` resolves authored base ranks, optional overrides, and
   caller-supplied additive adjustments without deriving deferred equipment or title semantics.
+- `collectEquipmentAttributeRankAdjustments` derives target-scoped headgear and attribute-rune rank
+  adjustments from semantic equipment.
+- `analyzeWeaponSet` projects authored weapon-set occupancy, modifier compatibility, duplicate
+  occupied slots, and advisory requirements from caller-supplied EPIC-12 facts.
 - `summarizeAttributeRuneEffects` derives caller-supplied rune rank adjustments and independent
   attribute-rune health penalties from a runtime rune catalog without owning armor slots, legality,
   headgear bonuses, or full stat totals.

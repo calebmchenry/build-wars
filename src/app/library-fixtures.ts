@@ -19,7 +19,7 @@ export const fixtureCatalogFacts: PersistedCatalogFacts = {
   buildCatalogVersion: "fixture-builds",
   professionAttributeCatalogVersion: "fixture-professions-attributes",
   skillCatalogVersion: "fixture-skills",
-  ruleEngineVersion: "rule-engine:v1"
+  ruleEngineVersion: "rule-engine:v2"
 };
 
 export function validSnapshotFixture(): PersistedBuildSnapshot {

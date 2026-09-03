@@ -304,6 +304,7 @@ export type {
 } from "./insignia-effects";
 export { summarizeAttributeRuneEffects } from "./rune-effects";
 export type {
+  AttributeRuneCatalogView,
   AttributeRuneEffectSummary,
   AttributeRuneEffectUnresolvedCode,
   AttributeRuneEffectUnresolvedReason,
@@ -311,6 +312,32 @@ export type {
   EquippedRuneEntry,
   SelectedAttributeRuneContribution
 } from "./rune-effects";
+export {
+  collectEquipmentAttributeRankAdjustments,
+  equipmentAdjustmentsForAttribute
+} from "./equipment-attribute-rank";
+export type {
+  EquipmentAttributeRankAdjustmentInput,
+  EquipmentAttributeRankAdjustmentSource,
+  EquipmentAttributeRankAdjustmentSummary,
+  EquipmentAttributeRankUnresolvedCode,
+  EquipmentAttributeRankUnresolvedReason,
+  EquipmentRuneCatalogView,
+  TargetedEquipmentAttributeRankAdjustment
+} from "./equipment-attribute-rank";
+export { analyzeWeaponSet } from "./weapon-set";
+export type {
+  EquipmentWeaponCatalogView,
+  EquipmentWeaponModifierCatalogView,
+  WeaponHandAnalysis,
+  WeaponModifierAnalysis,
+  WeaponSetAnalysis,
+  WeaponSetAnalysisInput,
+  WeaponSetAnalysisIssue,
+  WeaponSetAnalysisIssueCode,
+  WeaponSetHand,
+  WeaponSetOccupancyKind
+} from "./weapon-set";
 export { TEMPLATE_COMPATIBILITY_SCHEMA_VERSION } from "./template";
 export type {
   EquipmentTemplateDocument,
@@ -371,6 +398,10 @@ export type {
   BuildValidationInput,
   BuildValidationOptions,
   BuildValidationProfile,
+  EquipmentCatalogIndex,
+  EquipmentCatalogIndexes,
+  EquipmentInsigniaCatalogView,
+  EquipmentValidationCatalogs,
   ProfessionAttributeValidationCatalog,
   SkillValidationCatalog
 } from "./validation-context";
@@ -389,11 +420,34 @@ export type {
 export type {
   ArmorPiece,
   ArmorSlot,
+  AuthoredWeaponRequirement,
+  EquipmentLoadout,
+  EquipmentSelection,
+  EquipmentSelectionState,
   EquipmentTemplate,
+  UnresolvedEquipmentSelection,
   Weapon,
+  WeaponHandSelection,
   WeaponModifier,
   WeaponSet,
   WeaponSetSlot
+} from "./equipment";
+export {
+  ARMOR_SLOTS,
+  EQUIPMENT_LOADOUT_SCHEMA_VERSION,
+  HEADGEAR_ATTRIBUTE_BONUS,
+  MAX_ARMOR_ROWS_TO_VALIDATE,
+  MAX_MODIFIERS_PER_HAND_TO_VALIDATE,
+  MAX_WEAPON_SET_ROWS_TO_VALIDATE,
+  WEAPON_SET_SLOTS,
+  createEmptyArmorPiece,
+  createEmptyEquipmentLoadout,
+  createEmptyWeaponHandSelection,
+  createEmptyWeaponSet,
+  isArmorSlot,
+  isWeaponSetSlot,
+  knownEquipmentSelection,
+  unresolvedEquipmentSelection
 } from "./equipment";
 export { SKILL_BAR_SLOT_COUNT } from "./build";
 export type { AttributeAllocation, Build, GameMode, SkillBar } from "./build";

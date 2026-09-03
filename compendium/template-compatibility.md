@@ -44,6 +44,11 @@ pairs, and exactly eight raw template skill IDs. Skill slot `0` remains an empty
 Equipment documents preserve deterministic raw slot, item, color, and ordered modifier facts without
 joining to semantic armor, rune, insignia, weapon, modifier, color, or dye catalogs.
 
+EPIC-13 semantic `EquipmentLoadout` state is intentionally separate from these raw
+`EquipmentTemplateDocument` facts. The raw codec keeps exact-source replay and color/item/modifier
+field preservation; later EPIC-17 work may map raw template facts into semantic selections without
+moving raw IDs into authored `Build.equipment`.
+
 Catalog resolution is a pure caller-supplied view over EPIC-03 and EPIC-04 catalogs. It reports
 known, none, reserved, unsupported, dispositioned, empty, and unknown outcomes without mutating the
 decoded template document or caching catalog truth.

@@ -94,8 +94,10 @@ requires the retained selected snapshot set or a fresh bounded live discover/fet
 
 ## Downstream Boundaries
 
-- EPIC-13 owns armor shell/headgear records and primary armor profession facts.
-- EPIC-14 owns equipment editing, armor legality, and attaching `ArmorPiece.insigniaId` by slot.
+- EPIC-13 owns semantic armor shell validation, headgear records, primary armor profession facts,
+  and `ArmorPiece.insignia` attachment points.
+- EPIC-14 owns equipment editing, app catalog wiring, and validation presentation for insignia
+  placement by slot.
 - EPIC-17 owns semantic equipment-template resolution from decoded modifier IDs to insignia lookup
   outcomes while preserving unknown authored modifiers.
 - EPIC-20 may index names, lookup keys, families, availability, restrictions, slots, effects, and

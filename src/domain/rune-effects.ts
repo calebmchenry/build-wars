@@ -2,7 +2,6 @@ import type {
   AttributeRankRuneEffect,
   CatalogRuneRecord,
   MaximumHealthDeltaRuneEffect,
-  RuneCatalog,
   RuneEffect
 } from "./catalog";
 import type {
@@ -58,6 +57,10 @@ export interface AttributeRuneEffectSummary {
   readonly unresolved: readonly AttributeRuneEffectUnresolvedReason[];
 }
 
+export interface AttributeRuneCatalogView {
+  readonly runes: readonly CatalogRuneRecord[];
+}
+
 type AttributeCandidate = {
   readonly sourceKey: string;
   readonly rune: CatalogRuneRecord;
@@ -65,7 +68,7 @@ type AttributeCandidate = {
 };
 
 export function summarizeAttributeRuneEffects(
-  catalog: RuneCatalog,
+  catalog: AttributeRuneCatalogView,
   equippedEntries: readonly EquippedRuneEntry[]
 ): AttributeRuneEffectSummary {
   const unresolved: AttributeRuneEffectUnresolvedReason[] = [];

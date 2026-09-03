@@ -2,13 +2,15 @@
 id: BW-1304
 title: Equipment Validation Fixtures
 epic: EPIC-13
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1301
   - BW-1302
   - BW-1303
   - EPIC-06
+planned_sprint: SPRINT-014
+completed_sprint: SPRINT-014
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -42,6 +44,15 @@ Prepare the rule-engine handoffs and fixtures EPIC-14 needs for clear equipment 
 - Invalid build-affecting equipment state is surfaced without blocking unrelated skill editing.
 - Unknown semantic equipment remains recoverable and visibly unresolved.
 - Raw equipment template compatibility is explicitly deferred from these fixtures.
+
+## Closeout
+
+- Implemented in SPRINT-014.
+- Added optional equipment validation catalog views, duplicate-safe indexes, equipment issue codes,
+  equipment locations, bounded traversal, and rule-engine composition after skill rules.
+- Added focused validation fixtures for null/empty equipment, topology issues, unresolved
+  selections, catalog gaps, restrictions, weapon occupancy, modifiers, requirements, mismatched
+  catalog sets, truncation, ordering, and no-mutation behavior.
 
 ## Verification
 

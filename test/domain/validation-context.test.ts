@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   authoredDocumentId,
   calculateEffectiveAttributeRank,
+  createEmptyEquipmentLoadout,
   validateBuild,
   type Build,
   type ProfessionAttributeValidationCatalog,
@@ -21,6 +22,12 @@ import {
   withSkillCatalog
 } from "../fixtures/rule-engine/catalogs";
 import { buildFixture, malformedBuild, skillBar } from "../fixtures/rule-engine/builds";
+import {
+  equipmentInsigniaCatalog,
+  equipmentRuneCatalog,
+  equipmentWeaponCatalog,
+  equipmentWeaponModifierCatalog
+} from "../fixtures/rule-engine/equipment-catalogs";
 
 describe("build validation context", () => {
   it("preserves authored IDs and catalog-version evidence", () => {
@@ -52,7 +59,36 @@ describe("build validation context", () => {
       buildCatalogVersion: "fixture-build-v1",
       professionAttributeCatalogVersion: "fixture-pa-v1",
       skillCatalogVersion: "fixture-skills-v1",
-      ruleEngineVersion: "rule-engine:v1"
+      ruleEngineVersion: "rule-engine:v2"
+    });
+  });
+
+  it("preserves optional equipment catalog indexes and version evidence", () => {
+    const context = createBuildValidationContext({
+      build: buildFixture({ equipment: createEmptyEquipmentLoadout() }),
+      professionAttributes: professionAttributeCatalog,
+      skills: skillsCatalog,
+      equipmentCatalogs: {
+        runes: equipmentRuneCatalog,
+        insignias: equipmentInsigniaCatalog,
+        weapons: equipmentWeaponCatalog,
+        weaponModifiers: equipmentWeaponModifierCatalog
+      }
+    });
+
+    expect(context.equipmentIndexes.runes?.recordsById.size).toBe(
+      equipmentRuneCatalog.records.length
+    );
+    expect(context.equipmentIndexes.weaponModifiers?.recordsById.size).toBe(
+      equipmentWeaponModifierCatalog.records.length
+    );
+    expect(context.catalogVersions).toMatchObject({
+      runeCatalogVersion: "fixture-runes-v1",
+      insigniaCatalogVersion: "fixture-insignias-v1",
+      weaponCatalogVersion: "fixture-weapons-v1",
+      weaponModifierCatalogVersion: "fixture-weapon-mods-v1",
+      weaponCatalogSetVersion: "fixture-weapon-set-v1",
+      weaponModifierCatalogSetDigest: "fixture-weapon-set-digest"
     });
   });
 

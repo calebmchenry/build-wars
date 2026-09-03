@@ -2,13 +2,15 @@
 id: BW-1301
 title: Equipment Shell Contracts
 epic: EPIC-13
-status: ready
+status: done
 priority: critical
 depends_on:
   - EPIC-03
   - EPIC-10
   - EPIC-11
   - EPIC-12
+planned_sprint: SPRINT-014
+completed_sprint: SPRINT-014
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -43,6 +45,14 @@ template fields or cosmetic item choices.
 - Color IDs and skin IDs are absent from semantic equipment contracts.
 - Empty and partial equipment loadouts are representable without validation crashes.
 - Existing build, local library, and skill-template behavior remains compatible.
+
+## Closeout
+
+- Implemented in SPRINT-014.
+- Added `EquipmentLoadout` as the preferred semantic authored equipment type while retaining
+  `EquipmentTemplate` as a deprecated alias.
+- Verified default topology, nullable equipment compatibility, JSON-compatible known and unresolved
+  selections, and current null-equipment app/template regressions.
 
 ## Verification
 

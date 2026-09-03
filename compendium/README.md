@@ -19,6 +19,7 @@ The Compendium is an in-repo documentation system for agents.
 - [Runes catalog](runes-catalog.md)
 - [Insignias catalog](insignias-catalog.md)
 - [Weapons and mods catalog](weapons-and-mods-catalog.md)
+- [Equipment shell](equipment-shell.md)
 - [Template compatibility](template-compatibility.md)
 - [Game rule engine](game-rule-engine.md)
 - [Visual prior art](visual-prior-art.md)

@@ -2,7 +2,7 @@
 id: EPIC-13
 title: Equipment Shell Model
 track: functional
-status: ready
+status: done
 priority: high
 depends_on:
   - EPIC-01
@@ -12,6 +12,8 @@ depends_on:
   - EPIC-10
   - EPIC-11
   - EPIC-12
+planned_sprint: SPRINT-014
+completed_sprint: SPRINT-014
 tickets:
   - BW-1301
   - BW-1302
@@ -47,6 +49,12 @@ fidelity.
 * Armor slots can attach known rune and insignia IDs from EPIC-10/11 catalogs.
 * Weapon sets can attach known weapon and modifier IDs from EPIC-12 catalogs.
 * EPIC-14 has clear domain contracts and validation fixtures for the user-facing equipment editor.
+
+## Closeout
+
+Completed in SPRINT-014. The semantic equipment shell, armor/headgear helpers, weapon-set analyzer,
+equipment validation fixtures, optional catalog views, documentation, and downstream handoffs are
+implemented and verified.
 
 ## Notes
 

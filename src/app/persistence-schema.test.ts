@@ -44,7 +44,7 @@ describe("local persistence schema", () => {
     expect(unresolved?.snapshot.rawTemplate.source?.originalBareCode).toBe("OAAQIAAAAAAAAAAAAAAA");
     expect(unresolved?.snapshot.rawTemplate.skillBar[1]?.templateId).toBe(999999);
     expect(Number(unresolved?.snapshot.build.skillBar[1])).toBe(-200001);
-    expect(unresolved?.savedWith.ruleEngineVersion).toBe("rule-engine:v1");
+    expect(unresolved?.savedWith.ruleEngineVersion).toBe("rule-engine:v2");
   });
 
   it("hydrates durable snapshots into fresh editor UI defaults instead of persisted UI state", () => {

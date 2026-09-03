@@ -1,3 +1,4 @@
+import { validateEquipmentRules } from "./rules/equipment";
 import { validateProfessionAndAttributeRules } from "./rules/profession-attribute";
 import { validateSkillBarRules } from "./rules/skill-bar";
 import { validateSkillEligibilityRules } from "./rules/skill-eligibility";
@@ -16,7 +17,8 @@ export function validateBuild(input: BuildValidationInput): ValidationResult {
     ...context.issues,
     ...validateProfessionAndAttributeRules(context),
     ...validateSkillBarRules(context),
-    ...validateSkillEligibilityRules(context)
+    ...validateSkillEligibilityRules(context),
+    ...validateEquipmentRules(context)
   ];
   const capped = capIssues(issues, context.options.maxIssues, context.truncation);
   return createValidationResult(capped.issues, context.catalogVersions, capped.truncation);

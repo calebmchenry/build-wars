@@ -10,6 +10,10 @@
   health penalties.
 - `resolveInsigniaEffectsForArmorSlot(record, slot)` projects one insignia record onto one armor
   slot with tagged value/not-applicable/unresolved outcomes.
+- `collectEquipmentAttributeRankAdjustments(input)` derives target-scoped semantic equipment rank
+  adjustments for valid headgear and attribute-rune selections.
+- `analyzeWeaponSet(input)` projects authored weapon occupancy, modifier compatibility, duplicate
+  occupied slots, and weapon requirement state.
 
 Production rule-engine modules do not import React, DOM/browser APIs, browser storage, network
 clients, app modules, generated catalog JSON, manifests, QA reports, source snapshots, Python data
@@ -43,9 +47,9 @@ locale, wall clock, filesystem order, or caller overrides.
 ## Context And Defaults
 
 Every `validateBuild` call creates a fresh internal context. It indexes professions, attributes,
-skills, split groups, and progression series by real catalog IDs only. Duplicate catalog IDs and
-split-group IDs are reported and excluded from resolved lookups so validation cannot depend on
-first-record-wins behavior.
+skills, split groups, progression series, and optional equipment catalog views by real catalog IDs
+only. Duplicate catalog IDs and split-group IDs are reported and excluded from resolved lookups so
+validation cannot depend on first-record-wins behavior.
 
 Unknown imported or stale authored IDs are preserved and reported as unresolved references. The
 engine does not coerce, delete, guess, compact, replace split variants, or mutate caller objects.
@@ -93,9 +97,9 @@ and final rank when resolved. Duplicate allocations, malformed base ranks, unkno
 invalid overrides, invalid adjustments, unsafe integer overflow, and negative final ranks return a
 typed unresolved result instead of throwing or clamping.
 
-Headgear, rune, weapon, title, temporary-effect, and manual adjustment semantics are not derived
-from equipment or title catalogs in this sprint. Later epics own stacking policy and ownership
-validation.
+Semantic equipment now derives valid headgear and attribute-rune rank adjustments through
+`collectEquipmentAttributeRankAdjustments`. Title, temporary-effect, manual adjustment, broad weapon
+effects, and complete stacking/aggregation policy remain caller-owned or deferred.
 
 `summarizeAttributeRuneEffects` is the narrow EPIC-10 bridge for attribute runes only. It accepts
 runtime rune catalog data plus caller-provided equipped instance keys, reports unknown IDs,
@@ -111,9 +115,27 @@ validate armor/profession/mode legality, evaluate conditions, aggregate multiple
 compose rune/title/weapon effects, apply hit-location probabilities, calculate totals, read
 generated files, or mutate caller data.
 
+## Equipment Rules
+
+`validateBuild` skips `equipment: null` and accepts a canonical empty `EquipmentLoadout` without
+catalog views. Non-null equipment validation is additive and appears after skill rules. It covers
+loadout schema version, armor slot topology, rune/insignia/headgear selections, optional catalog
+availability, duplicate equipment catalog IDs, catalog-set mismatch, weapon-set topology, hand
+placement, two-handed occupancy, modifier compatibility, duplicate occupied modifier slots, and
+weapon requirements.
+
+Missing catalogs produce unresolved warnings only when selected equipment needs the missing facts.
+Known unmet weapon requirements are advisory warnings, so `valid` remains true. Unresolved
+equipment selections, unknown IDs, duplicate catalog IDs, catalog-set mismatch, unresolved
+requirements, and traversal caps make `resolved` or `exhaustive` false according to the shared
+result contract.
+
+`RULE_ENGINE_VERSION` is `rule-engine:v2` because non-null semantic equipment now changes validation
+behavior.
+
 ## Deferred Scope
 
-Title ownership, title rank, allegiance side, equipment, armor legality, condition evaluation,
-rune/insignia composition, weapon, modifier, hero, party, recommendation, guide, UI, storage, and
-export/publish policy validation remain deferred. Later domains should add built-in rule modules
-that emit the same issue/result contract.
+Title ownership, title rank, allegiance side, equipment editor UI, condition evaluation, full
+rune/insignia composition, weapon effect math, modifier effect aggregation, hero, party,
+recommendation, guide, storage migration, share payload policy, and export/publish policy
+validation remain deferred. Later domains should emit the same issue/result contract.

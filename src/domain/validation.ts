@@ -1,4 +1,4 @@
-export const RULE_ENGINE_VERSION = "rule-engine:v1";
+export const RULE_ENGINE_VERSION = "rule-engine:v2";
 
 export type ValidationSeverity = "error" | "warning" | "info";
 export type ValidationPathSegment = string | number;
@@ -21,6 +21,36 @@ export type ValidationIssueCode =
   | "catalog.skill-split-group-duplicate-id"
   | "catalog.skill-split-group-duplicate-member"
   | "catalog.skill-split-group-overbroad"
+  | "equipment.armor-selection-unresolved"
+  | "equipment.armor-slot-duplicate"
+  | "equipment.armor-slot-malformed"
+  | "equipment.armor-slot-missing"
+  | "equipment.catalog-duplicate-id"
+  | "equipment.catalog-set-mismatch"
+  | "equipment.catalog-unavailable"
+  | "equipment.headgear-attribute-invalid"
+  | "equipment.headgear-slot-invalid"
+  | "equipment.headgear-unresolved"
+  | "equipment.insignia-restricted"
+  | "equipment.insignia-slot-inapplicable"
+  | "equipment.insignia-unresolved"
+  | "equipment.rune-restricted"
+  | "equipment.rune-unresolved"
+  | "equipment.schema-unsupported"
+  | "equipment.weapon-mode-restricted"
+  | "equipment.weapon-modifier-compatibility-unresolved"
+  | "equipment.weapon-modifier-duplicate-slot"
+  | "equipment.weapon-modifier-incompatible"
+  | "equipment.weapon-modifier-unresolved"
+  | "equipment.weapon-modifier-without-weapon"
+  | "equipment.weapon-occupancy-conflict"
+  | "equipment.weapon-requirement-unmet"
+  | "equipment.weapon-requirement-unresolved"
+  | "equipment.weapon-set-duplicate"
+  | "equipment.weapon-set-malformed"
+  | "equipment.weapon-set-missing"
+  | "equipment.weapon-unresolved"
+  | "equipment.weapon-wrong-hand"
   | "option.unsupported"
   | "profession.duplicate"
   | "profession.primary-missing"
@@ -78,19 +108,29 @@ export type ValidationRuleId =
   | "skill.mode"
   | "skill.split"
   | "skill.deferred-title"
+  | "equipment.structure"
+  | "equipment.catalog"
+  | "equipment.armor"
+  | "equipment.weapon"
+  | "equipment.weapon-requirement"
   | (string & {});
 
 export type ValidationEntityKind =
+  | "armor-slot"
   | "attribute"
   | "attribute-row"
   | "budget"
   | "catalog-key"
+  | "equipment-selection"
   | "option"
   | "profession"
   | "rule"
   | "skill"
   | "skill-slot"
-  | "split-group";
+  | "split-group"
+  | "weapon"
+  | "weapon-modifier"
+  | "weapon-set";
 
 export interface ValidationEntityReference {
   readonly kind: ValidationEntityKind;
@@ -113,7 +153,29 @@ export type ValidationLocation =
     }
   | {
       readonly kind: "catalog";
-      readonly catalog: "profession-attributes" | "skills";
+      readonly catalog:
+        "insignias" | "profession-attributes" | "runes" | "skills" | "weapon-modifiers" | "weapons";
+    }
+  | {
+      readonly kind: "armor-piece";
+      readonly index: number;
+      readonly slot: string | null;
+    }
+  | {
+      readonly kind: "weapon-set";
+      readonly index: number;
+      readonly slot: string | null;
+    }
+  | {
+      readonly kind: "weapon-hand";
+      readonly setIndex: number;
+      readonly hand: "mainHand" | "offHand";
+    }
+  | {
+      readonly kind: "weapon-modifier";
+      readonly setIndex: number;
+      readonly hand: "mainHand" | "offHand";
+      readonly index: number;
     }
   | {
       readonly kind: "options";
@@ -147,7 +209,13 @@ export interface ValidationIssueCounts {
 }
 
 export type ValidationTruncationKind =
-  "attribute-row-cap" | "issue-cap" | "related-entity-cap" | "skill-slot-cap";
+  | "armor-row-cap"
+  | "attribute-row-cap"
+  | "issue-cap"
+  | "related-entity-cap"
+  | "skill-slot-cap"
+  | "weapon-modifier-cap"
+  | "weapon-set-row-cap";
 
 export interface ValidationTruncation {
   readonly kind: ValidationTruncationKind;
@@ -160,6 +228,14 @@ export interface ValidationCatalogVersions {
   readonly buildCatalogVersion: string | null;
   readonly professionAttributeCatalogVersion: string | null;
   readonly skillCatalogVersion: string | null;
+  readonly runeCatalogVersion?: string | null;
+  readonly insigniaCatalogVersion?: string | null;
+  readonly weaponCatalogVersion?: string | null;
+  readonly weaponModifierCatalogVersion?: string | null;
+  readonly weaponCatalogSetVersion?: string | null;
+  readonly weaponCatalogSetDigest?: string | null;
+  readonly weaponModifierCatalogSetVersion?: string | null;
+  readonly weaponModifierCatalogSetDigest?: string | null;
   readonly ruleEngineVersion: typeof RULE_ENGINE_VERSION;
 }
 
@@ -177,6 +253,11 @@ export interface ValidationResult {
 const INCOMPLETE_CODES = new Set<ValidationIssueCode>([
   "profession.primary-missing",
   "profession.secondary-missing",
+  "equipment.armor-slot-malformed",
+  "equipment.armor-slot-missing",
+  "equipment.schema-unsupported",
+  "equipment.weapon-set-malformed",
+  "equipment.weapon-set-missing",
   "skill.profession-missing-secondary",
   "skill-bar.incomplete",
   "skill-bar.malformed"
@@ -194,6 +275,19 @@ const UNRESOLVED_CODES = new Set<ValidationIssueCode>([
   "catalog.skill-split-group-duplicate-id",
   "catalog.skill-split-group-duplicate-member",
   "catalog.skill-split-group-overbroad",
+  "equipment.armor-selection-unresolved",
+  "equipment.catalog-duplicate-id",
+  "equipment.catalog-set-mismatch",
+  "equipment.catalog-unavailable",
+  "equipment.headgear-unresolved",
+  "equipment.insignia-unresolved",
+  "equipment.rune-unresolved",
+  "equipment.schema-unsupported",
+  "equipment.weapon-modifier-compatibility-unresolved",
+  "equipment.weapon-modifier-unresolved",
+  "equipment.weapon-modifier-without-weapon",
+  "equipment.weapon-requirement-unresolved",
+  "equipment.weapon-unresolved",
   "option.unsupported",
   "profession.primary-unresolved",
   "profession.secondary-unresolved",
@@ -239,7 +333,12 @@ const RULE_ORDER: readonly ValidationRuleId[] = [
   "skill.attribute",
   "skill.mode",
   "skill.split",
-  "skill.deferred-title"
+  "skill.deferred-title",
+  "equipment.structure",
+  "equipment.catalog",
+  "equipment.armor",
+  "equipment.weapon",
+  "equipment.weapon-requirement"
 ];
 
 export function createValidationIssue(init: ValidationIssueInit): ValidationIssue {
@@ -388,8 +487,19 @@ function locationKey(location: ValidationLocation | null): string {
   if (location === null) {
     return "";
   }
-  if (location.kind === "attribute-row" || location.kind === "skill-slot") {
+  if (
+    location.kind === "attribute-row" ||
+    location.kind === "skill-slot" ||
+    location.kind === "armor-piece" ||
+    location.kind === "weapon-set"
+  ) {
     return `${location.kind}:${location.index}`;
+  }
+  if (location.kind === "weapon-hand") {
+    return `weapon-hand:${location.setIndex}:${location.hand}`;
+  }
+  if (location.kind === "weapon-modifier") {
+    return `weapon-modifier:${location.setIndex}:${location.hand}:${location.index}`;
   }
   if (location.kind === "profession") {
     return `profession:${location.field}`;

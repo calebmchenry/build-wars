@@ -3,12 +3,23 @@ import type {
   AttributePointRules,
   AttributeRankCost,
   CatalogAttributeRecord,
+  CatalogInsigniaRecord,
   CatalogProfessionRecord,
+  CatalogRuneRecord,
   CatalogSkillRecord,
+  CatalogWeaponBaseRecord,
+  CatalogWeaponModRecord,
   SkillModeVariantGroup,
   SkillProgressionSeries,
   SkillSourceSetDisposition
 } from "./catalog";
+import {
+  MAX_ARMOR_ROWS_TO_VALIDATE,
+  MAX_MODIFIERS_PER_HAND_TO_VALIDATE,
+  MAX_WEAPON_SET_ROWS_TO_VALIDATE
+} from "./equipment";
+import type { EquipmentRuneCatalogView } from "./equipment-attribute-rank";
+import type { EquipmentWeaponCatalogView, EquipmentWeaponModifierCatalogView } from "./weapon-set";
 import type { AttributeId, ProfessionId, SkillId } from "./ids";
 import {
   RULE_ENGINE_VERSION,
@@ -17,6 +28,7 @@ import {
   type ValidationCatalogVersions,
   type ValidationIssue,
   type ValidationIssueCode,
+  type ValidationLocation,
   type ValidationTruncation
 } from "./validation";
 
@@ -35,6 +47,18 @@ export interface SkillValidationCatalog {
   readonly dispositions: readonly SkillSourceSetDisposition[];
   readonly progressionSeries: readonly SkillProgressionSeries[];
   readonly splitGroups: readonly SkillModeVariantGroup[];
+}
+
+export interface EquipmentInsigniaCatalogView {
+  readonly catalogVersion: string | null;
+  readonly records: readonly CatalogInsigniaRecord[];
+}
+
+export interface EquipmentValidationCatalogs {
+  readonly runes?: EquipmentRuneCatalogView;
+  readonly insignias?: EquipmentInsigniaCatalogView;
+  readonly weapons?: EquipmentWeaponCatalogView;
+  readonly weaponModifiers?: EquipmentWeaponModifierCatalogView;
 }
 
 export type BuildValidationProfile = "editing" | "complete";
@@ -71,6 +95,7 @@ export interface BuildValidationInput {
   readonly build: Build;
   readonly professionAttributes: ProfessionAttributeValidationCatalog;
   readonly skills: SkillValidationCatalog;
+  readonly equipmentCatalogs?: EquipmentValidationCatalogs;
   readonly options?: BuildValidationOptions;
 }
 
@@ -100,6 +125,18 @@ export type SkillSlotLookup =
       readonly id: number;
       readonly disposition: SkillSourceSetDisposition;
     };
+
+export interface EquipmentCatalogIndex<Record> {
+  readonly recordsById: ReadonlyMap<number, Record>;
+  readonly ambiguousIds: ReadonlySet<number>;
+}
+
+export interface EquipmentCatalogIndexes {
+  readonly runes: EquipmentCatalogIndex<CatalogRuneRecord> | null;
+  readonly insignias: EquipmentCatalogIndex<CatalogInsigniaRecord> | null;
+  readonly weapons: EquipmentCatalogIndex<CatalogWeaponBaseRecord> | null;
+  readonly weaponModifiers: EquipmentCatalogIndex<CatalogWeaponModRecord> | null;
+}
 
 export interface ProfessionSelectionContext {
   readonly field: "primary" | "secondary";
@@ -150,6 +187,8 @@ export interface BuildValidationContext {
   };
   readonly professionAttributes: ProfessionAttributeValidationCatalog;
   readonly skills: SkillValidationCatalog;
+  readonly equipmentCatalogs: EquipmentValidationCatalogs;
+  readonly equipmentIndexes: EquipmentCatalogIndexes;
   readonly professionsById: ReadonlyMap<number, CatalogProfessionRecord>;
   readonly attributesById: ReadonlyMap<number, CatalogAttributeRecord>;
   readonly skillsById: ReadonlyMap<number, CatalogSkillRecord>;
@@ -202,6 +241,7 @@ export function createBuildValidationContext(input: BuildValidationInput): Build
     "Duplicate skill catalog ID."
   );
   const splitGroupIndex = indexSplitGroups(input.skills.splitGroups);
+  const equipmentIndexes = indexEquipmentCatalogs(input.equipmentCatalogs, issues);
   const progressionSeriesById = indexByStringId(
     input.skills.progressionSeries,
     (record) => record.id
@@ -250,6 +290,8 @@ export function createBuildValidationContext(input: BuildValidationInput): Build
     },
     professionAttributes: input.professionAttributes,
     skills: input.skills,
+    equipmentCatalogs: input.equipmentCatalogs ?? {},
+    equipmentIndexes,
     professionsById: professionIndex.recordsById,
     attributesById: attributeIndex.recordsById,
     skillsById: skillIndex.recordsById,
@@ -271,11 +313,14 @@ export function createBuildValidationContext(input: BuildValidationInput): Build
         input.professionAttributes.catalogVersion
       ),
       skillCatalogVersion: stringifyVersion(input.skills.catalogVersion),
+      ...equipmentCatalogVersions(input.equipmentCatalogs),
       ruleEngineVersion: RULE_ENGINE_VERSION
     },
     issues,
     truncation:
-      skillBar.truncation ?? attributeRowsTruncation(input.build, options.maxAttributeRows)
+      skillBar.truncation ??
+      attributeRowsTruncation(input.build, options.maxAttributeRows) ??
+      equipmentRowsTruncation(input.build)
   };
 }
 
@@ -458,7 +503,7 @@ function indexNumericRecords<Record>(
   idForRecord: (record: Record) => unknown,
   duplicateCode: ValidationIssueCode,
   path: readonly (string | number)[],
-  catalog: "profession-attributes" | "skills",
+  catalog: Extract<ValidationLocation, { readonly kind: "catalog" }>["catalog"],
   message: string
 ): NumericIndex<Record> {
   const buckets = new Map<number, Record[]>();
@@ -501,6 +546,67 @@ function indexNumericRecords<Record>(
   }
 
   return { recordsById, ambiguousIds, issues };
+}
+
+function indexEquipmentCatalogs(
+  catalogs: EquipmentValidationCatalogs | undefined,
+  issues: ValidationIssue[]
+): EquipmentCatalogIndexes {
+  return {
+    runes: indexEquipmentCatalog(
+      catalogs?.runes,
+      (record) => record.id,
+      "runes",
+      "Duplicate rune catalog ID.",
+      issues
+    ),
+    insignias: indexEquipmentCatalog(
+      catalogs?.insignias,
+      (record) => record.id,
+      "insignias",
+      "Duplicate insignia catalog ID.",
+      issues
+    ),
+    weapons: indexEquipmentCatalog(
+      catalogs?.weapons,
+      (record) => record.id,
+      "weapons",
+      "Duplicate weapon catalog ID.",
+      issues
+    ),
+    weaponModifiers: indexEquipmentCatalog(
+      catalogs?.weaponModifiers,
+      (record) => record.id,
+      "weapon-modifiers",
+      "Duplicate weapon modifier catalog ID.",
+      issues
+    )
+  };
+}
+
+function indexEquipmentCatalog<Record>(
+  view: { readonly records: readonly Record[] } | undefined,
+  idForRecord: (record: Record) => unknown,
+  catalog: Extract<ValidationLocation, { readonly kind: "catalog" }>["catalog"],
+  message: string,
+  issues: ValidationIssue[]
+): EquipmentCatalogIndex<Record> | null {
+  if (view === undefined) {
+    return null;
+  }
+  const index = indexNumericRecords(
+    view.records,
+    idForRecord,
+    "equipment.catalog-duplicate-id",
+    ["equipmentCatalogs", catalog, "records"],
+    catalog,
+    message
+  );
+  issues.push(...index.issues);
+  return {
+    recordsById: index.recordsById,
+    ambiguousIds: index.ambiguousIds
+  };
 }
 
 function indexSplitGroups(groups: readonly SkillModeVariantGroup[]): SplitGroupIndex {
@@ -648,6 +754,60 @@ function attributeRowsTruncation(build: Build, maxRows: number): ValidationTrunc
       observed: rawAttributes.length,
       path: ["attributes"]
     };
+  }
+  return null;
+}
+
+function equipmentRowsTruncation(build: Build): ValidationTruncation | null {
+  const equipment = (build as unknown as Readonly<Record<string, unknown>>).equipment;
+  if (equipment === null || equipment === undefined || !isRecord(equipment)) {
+    return null;
+  }
+  if (Array.isArray(equipment.armor) && equipment.armor.length > MAX_ARMOR_ROWS_TO_VALIDATE) {
+    return {
+      kind: "armor-row-cap",
+      limit: MAX_ARMOR_ROWS_TO_VALIDATE,
+      observed: equipment.armor.length,
+      path: ["equipment", "armor"]
+    };
+  }
+  if (
+    Array.isArray(equipment.weaponSets) &&
+    equipment.weaponSets.length > MAX_WEAPON_SET_ROWS_TO_VALIDATE
+  ) {
+    return {
+      kind: "weapon-set-row-cap",
+      limit: MAX_WEAPON_SET_ROWS_TO_VALIDATE,
+      observed: equipment.weaponSets.length,
+      path: ["equipment", "weaponSets"]
+    };
+  }
+  if (!Array.isArray(equipment.weaponSets)) {
+    return null;
+  }
+  for (
+    let setIndex = 0;
+    setIndex < Math.min(equipment.weaponSets.length, MAX_WEAPON_SET_ROWS_TO_VALIDATE);
+    setIndex += 1
+  ) {
+    const set = equipment.weaponSets[setIndex];
+    if (!isRecord(set)) {
+      continue;
+    }
+    for (const hand of ["mainHand", "offHand"] as const) {
+      const handSelection = set[hand];
+      if (!isRecord(handSelection) || !Array.isArray(handSelection.modifiers)) {
+        continue;
+      }
+      if (handSelection.modifiers.length > MAX_MODIFIERS_PER_HAND_TO_VALIDATE) {
+        return {
+          kind: "weapon-modifier-cap",
+          limit: MAX_MODIFIERS_PER_HAND_TO_VALIDATE,
+          observed: handSelection.modifiers.length,
+          path: ["equipment", "weaponSets", setIndex, hand, "modifiers"]
+        };
+      }
+    }
   }
   return null;
 }
@@ -817,6 +977,40 @@ function stringifyVersion(value: unknown): string | null {
     return String(value);
   }
   return null;
+}
+
+function equipmentCatalogVersions(
+  catalogs: EquipmentValidationCatalogs | undefined
+): Partial<ValidationCatalogVersions> {
+  if (catalogs === undefined) {
+    return {};
+  }
+  return {
+    ...(catalogs.runes === undefined
+      ? {}
+      : { runeCatalogVersion: stringifyVersion(catalogs.runes.catalogVersion) }),
+    ...(catalogs.insignias === undefined
+      ? {}
+      : { insigniaCatalogVersion: stringifyVersion(catalogs.insignias.catalogVersion) }),
+    ...(catalogs.weapons === undefined
+      ? {}
+      : {
+          weaponCatalogVersion: stringifyVersion(catalogs.weapons.catalogVersion),
+          weaponCatalogSetVersion: stringifyVersion(catalogs.weapons.catalogSetVersion),
+          weaponCatalogSetDigest: stringifyVersion(catalogs.weapons.catalogSetDigest)
+        }),
+    ...(catalogs.weaponModifiers === undefined
+      ? {}
+      : {
+          weaponModifierCatalogVersion: stringifyVersion(catalogs.weaponModifiers.catalogVersion),
+          weaponModifierCatalogSetVersion: stringifyVersion(
+            catalogs.weaponModifiers.catalogSetVersion
+          ),
+          weaponModifierCatalogSetDigest: stringifyVersion(
+            catalogs.weaponModifiers.catalogSetDigest
+          )
+        })
+  };
 }
 
 function stringValue(value: unknown, fallback: string): string {
