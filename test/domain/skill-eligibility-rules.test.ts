@@ -251,7 +251,7 @@ describe("skill eligibility and mode rules", () => {
     ]);
   });
 
-  it("emits title and allegiance deferrals only from explicit catalog facts", () => {
+  it("resolves title ranks and keeps allegiance uncertainty narrow", () => {
     const title = validateBuild({
       build: buildFixture({ skillBar: ordinarySkillBarWith(skillIds.titleSkill) }),
       professionAttributes: professionAttributeCatalog,
@@ -263,8 +263,8 @@ describe("skill eligibility and mode rules", () => {
       skills: skillsCatalog
     });
 
-    expect(codes(title)).toEqual(["skill.title-deferred"]);
-    expect(codes(allegiance)).toEqual(["skill.allegiance-deferred", "skill.title-deferred"]);
+    expect(codes(title)).toEqual([]);
+    expect(codes(allegiance)).toEqual(["skill.allegiance-unmodeled"]);
   });
 });
 

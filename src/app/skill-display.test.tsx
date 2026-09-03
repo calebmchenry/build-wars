@@ -10,7 +10,7 @@ import { selectSkillDisplay } from "./editor-selectors";
 const catalogs = requireReadyCatalogs();
 
 describe("SkillDisplay and SkillTooltip", () => {
-  it("renders structured skill facts and title-rank assumptions without remote images", () => {
+  it("renders structured skill facts and title-rank status without remote images", () => {
     const view = selectSkillDisplay(
       catalogs,
       playableEditorFixture(),
@@ -20,7 +20,9 @@ describe("SkillDisplay and SkillTooltip", () => {
     render(<SkillTooltip view={view} onClose={() => undefined} />);
 
     expect(screen.getByText("Lightbringer Signet")).toBeInTheDocument();
-    expect(screen.getByText(/maximum title rank 12/)).toBeInTheDocument();
+    expect(screen.getByText("Title: Lightbringer")).toBeInTheDocument();
+    expect(screen.getByText("rank 12 default")).toBeInTheDocument();
+    expect(screen.queryByText(/maximum title rank/)).toBeNull();
     expect(document.querySelector("img")).toBeNull();
   });
 });

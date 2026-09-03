@@ -19,17 +19,22 @@ build records, and bounded metadata. The durable snapshot intentionally persists
 - raw template overlay/source facts
 - saved-with catalog and rule-engine facts
 - semantic equipment selections and topology
+- sparse title-rank overrides
 - saved-record metadata: local ID, name, timestamps, favorite, tags, and notes
 
 Full editor UI state is not durable. Browser filters, dialog text, tooltip state, drag/keyboard
 state, selected slot, transient messages, batch size, and counters are reconstructed from current
 defaults on hydration.
 
+The outer envelope remains schema version 1. Nested `Build` objects are normalized to schema version 2. Schema-1 builds migrate in memory with empty `titleRankOverrides`, so opening old libraries does
+not dirty or eagerly overwrite them. Schema-2 builds require bounded canonical title override arrays
+and retain structurally valid unknown/stale overrides so the user can see and reset them.
+
 Schema v1 accepts strict semantic equipment only: five canonical armor rows, four canonical weapon
 sets, dense modifier arrays, bounded labels/reasons, and known or unresolved semantic selections.
 It rejects dangerous keys, raw equipment-template structures, unsupported fields, malformed
-topology, sparse arrays, empty hand objects, duplicate known modifier IDs, invalid indexes, and
-unbounded strings.
+topology, sparse arrays, empty hand objects, duplicate known modifier IDs, invalid indexes,
+malformed title overrides, unsafe title ranks, duplicate title keys, and unbounded strings.
 
 Corrupt roots, unsupported schema versions, duplicate IDs, invalid subsets, malformed equipment,
 oversized payloads, quota errors, unavailable storage, and stale revisions are typed failure states.
@@ -81,15 +86,15 @@ The URL fragment grammar is:
 ```
 
 `mode` may be omitted when unknown. Share URLs exclude tags, notes, favorite state, local IDs,
-backup metadata, catalog snapshots, equipment, runes, insignias, weapon mods, party data, guide
-data, validation prose, and whole-library JSON.
+backup metadata, catalog snapshots, equipment, runes, insignias, weapon mods, title-rank overrides,
+party data, guide data, validation prose, and whole-library JSON.
 
 Share export prefers exact-source bare code when the imported source fingerprint still matches. It
 falls back to proven canonical bare code only after validation, representation, encode, and
 decode-back checks pass. Equipment-only validation issues do not block skill-template export. The
 complete encoded URL is capped at 1,800 characters; oversized or unrepresentable shares leave
-selectable template text and a blocked reason. Meaningful authored equipment shows an omission
-warning because equipment remains local-only.
+selectable template text and a blocked reason. Meaningful authored equipment and non-default
+authored title-rank overrides show omission warnings because both remain local-only.
 
 Valid share fragments hydrate an unassociated working draft and are consumed with
 `history.replaceState` when available. If a share opens over an existing stored draft, the shared
@@ -115,6 +120,6 @@ draft is separately opt-in in both modes.
 
 No backend, account, auth, analytics, service worker, IndexedDB, hosted sharing, short link, remote
 icon/media fetch, new runtime dependency, generated-data pipeline change, party record, guide
-record, equipment share payload, raw equipment-template replay, or historical skill revision
-analysis was introduced. Deeper freshness and revision-history analysis remains deferred to
-EPIC-21.
+record, equipment/title share payload, raw equipment-template replay, account title profile, or
+historical skill revision analysis was introduced. Deeper freshness and revision-history analysis
+remains deferred to EPIC-21.

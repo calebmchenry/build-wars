@@ -1,5 +1,6 @@
 import { useMemo, type Dispatch } from "react";
 
+import { hasAuthoredTitleRankOverrides } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
 import { selectValidationView } from "../editor-selectors";
 import { selectHasMeaningfulEquipment } from "../equipment-selectors";
@@ -65,6 +66,12 @@ export function ShareControls({
             <div className="share-warning">
               <strong>Equipment omitted from skill template sharing</strong>
               <p>Authored equipment remains in local saves and backups.</p>
+            </div>
+          ) : null}
+          {hasAuthoredTitleRankOverrides(targetEditor.build) ? (
+            <div className="share-warning">
+              <strong>Title ranks omitted from skill template sharing</strong>
+              <p>Authored title ranks remain in local saves and backups.</p>
             </div>
           ) : null}
           {share.url.ok ? (

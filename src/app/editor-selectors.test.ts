@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { catalogId } from "../domain";
+import { catalogId, type SkillBar } from "../domain";
 import { requireReadyCatalogs } from "./catalogs";
 import { playableEditorFixture } from "./editor-fixtures";
 import {
@@ -10,6 +10,7 @@ import {
   selectAttributeRows,
   selectSkillBrowser,
   selectSkillDisplay,
+  selectTitleRankPanelView,
   selectValidationView
 } from "./editor-selectors";
 import {
@@ -121,13 +122,69 @@ describe("editor selectors", () => {
     ).toBe(true);
   });
 
-  it("uses max-title-rank assumptions for title-scaled skill display", () => {
+  it("uses default and authored title ranks for title-scaled skill display", () => {
     const state = playableEditorFixture();
     const view = selectSkillDisplay(catalogs, state, catalogId<"Skill">(1815), "tooltip");
+    const lowered = selectSkillDisplay(
+      catalogs,
+      {
+        ...state,
+        build: {
+          ...state.build,
+          titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }]
+        }
+      },
+      catalogId<"Skill">(1815),
+      "tooltip"
+    );
 
     expect(view.kind).toBe("known");
-    expect(view.kind === "known" ? view.assumptions.join(" ") : "").toContain(
-      "maximum title rank 12"
+    expect(view.kind === "known" ? view.assumptions.join(" ") : "").not.toContain("maximum");
+    expect(view.kind === "known" ? view.facts : []).toContainEqual({
+      label: "Title: Lightbringer",
+      value: "rank 12 default",
+      state: "title:lightbringer-rank"
+    });
+    expect(lowered.kind === "known" ? lowered.facts : []).toContainEqual({
+      label: "Title: Lightbringer",
+      value: "rank 4 configured",
+      state: "title:lightbringer-rank"
+    });
+  });
+
+  it("shows relevant title controls before all-title controls and retained stale overrides", () => {
+    const state = {
+      ...playableEditorFixture(),
+      build: {
+        ...playableEditorFixture().build,
+        skillBar: [
+          catalogId<"Skill">(1815),
+          catalogId<"Skill">(2224),
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ] satisfies SkillBar,
+        titleRankOverrides: [
+          { key: "title:lightbringer-rank", rank: 4 },
+          { key: "title:stale-rank", rank: 2 }
+        ]
+      }
+    };
+    const validation = selectValidationView(state, catalogs);
+    const panel = selectTitleRankPanelView(state, catalogs, validation.result);
+
+    expect(panel.relevantRows.map((row) => row.label)).toEqual(["Lightbringer", "Asura"]);
+    expect(panel.relevantRows[0]).toMatchObject({
+      key: "title:lightbringer-rank",
+      value: 4,
+      currentText: "Rank 4 configured",
+      resettable: true
+    });
+    expect(panel.allRows.some((row) => row.key === "title:stale-rank" && row.resettable)).toBe(
+      true
     );
   });
 
@@ -136,7 +193,7 @@ describe("editor selectors", () => {
       buildCatalogVersion: null,
       professionAttributeCatalogVersion: "pa-current",
       skillCatalogVersion: "skills-current",
-      ruleEngineVersion: "rule-engine:v2"
+      ruleEngineVersion: "rule-engine:v3"
     };
 
     expect(selectCatalogFreshnessView(current, current).status).toBe("fresh");

@@ -2,11 +2,13 @@
 id: BW-1503
 title: Title Tooltip and Display Integration
 epic: EPIC-15
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1501
   - BW-1502
+planned_sprint: SPRINT-016
+completed_sprint: SPRINT-016
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -44,3 +46,11 @@ assumptions.
 
 - `npm run test:run -- src/app src/domain`
 - Focused selector and tooltip tests for title-rank rendering
+
+## Closeout Evidence
+
+- SPRINT-016 routes title ranks through the shared resolver for skill display facts, browser/bar
+  tooltip rank context, progression labels, default max display, lowered-rank display, reset
+  behavior, alias conflicts, and unresolved title metadata.
+- Validation passed: focused selector/tooltip Vitest coverage, `npm run test:run -- src/app
+test/domain`, final `npm run verify`, and `git diff --check`.

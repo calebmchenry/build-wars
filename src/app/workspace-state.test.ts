@@ -183,6 +183,47 @@ describe("workspace state", () => {
     );
   });
 
+  it("preserves title overrides through save, duplicate, and load", () => {
+    const editor = {
+      ...playableEditorFixture(),
+      build: {
+        ...playableEditorFixture().build,
+        titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }]
+      }
+    };
+    const saved = workspaceReducer(
+      {
+        ...createInitialWorkspaceState({ now: NOW }),
+        editor
+      },
+      {
+        type: "save-new",
+        id: localBuildRecordId("local-title"),
+        name: "Title Save",
+        now: NOW,
+        savedWith: fixtureCatalogFacts
+      }
+    );
+    const duplicated = workspaceReducer(saved, {
+      type: "duplicate-record",
+      id: localBuildRecordId("local-title"),
+      newId: localBuildRecordId("local-title-copy"),
+      now: LATER
+    });
+    const loaded = workspaceReducer(duplicated, {
+      type: "load-record",
+      id: localBuildRecordId("local-title-copy"),
+      decision: "discard"
+    });
+
+    expect(duplicated.library.records[1]?.snapshot.build.titleRankOverrides).toEqual([
+      { key: "title:lightbringer-rank", rank: 4 }
+    ]);
+    expect(loaded.editor.build.titleRankOverrides).toEqual([
+      { key: "title:lightbringer-rank", rank: 4 }
+    ]);
+  });
+
   it("normalizes tags and notes without deduplicating records by name or content", () => {
     const record = validSavedRecordFixture({ id: localBuildRecordId("local-a"), tags: [] });
     const workspace = createInitialWorkspaceState({

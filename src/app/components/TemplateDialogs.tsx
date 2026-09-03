@@ -1,5 +1,6 @@
 import { useEffect, useRef, type Dispatch, type KeyboardEvent, type ReactNode } from "react";
 
+import { hasAuthoredTitleRankOverrides } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
 import type { ValidationView } from "../editor-selectors";
 import { selectHasMeaningfulEquipment } from "../equipment-selectors";
@@ -90,11 +91,15 @@ function ImportDialog({
               catalogs
             );
             if (imported.ok) {
+              const replacementWarnings = [
+                ...(selectHasMeaningfulEquipment(state.build.equipment)
+                  ? ["authored equipment"]
+                  : []),
+                ...(hasAuthoredTitleRankOverrides(state.build) ? ["authored title ranks"] : [])
+              ];
               if (
-                selectHasMeaningfulEquipment(state.build.equipment) &&
-                !window.confirm(
-                  "Importing a skill template will discard authored equipment from this draft."
-                )
+                replacementWarnings.length > 0 &&
+                !window.confirm(importWarning(replacementWarnings))
               ) {
                 return;
               }
@@ -148,6 +153,11 @@ function ExportDialog({
           Authored equipment is local-only and is not included in skill template output.
         </p>
       ) : null}
+      {hasAuthoredTitleRankOverrides(state.build) ? (
+        <p className="warning-text">
+          Authored title ranks are local-only and are not included in skill template output.
+        </p>
+      ) : null}
       <label className="dialog-field">
         <span>Wrapper name</span>
         <input
@@ -181,6 +191,10 @@ function ExportDialog({
       </div>
     </Modal>
   );
+}
+
+function importWarning(warnings: readonly string[]): string {
+  return `Importing a skill template will discard ${warnings.join(" and ")} from this draft.`;
 }
 
 function ExportOption({

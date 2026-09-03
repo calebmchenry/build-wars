@@ -14,6 +14,8 @@
   adjustments for valid headgear and attribute-rune selections.
 - `analyzeWeaponSet(input)` projects authored weapon occupancy, modifier compatibility, duplicate
   occupied slots, and weapon requirement state.
+- `createTitleRankCatalog(input)` and `resolveTitleRanksForSkill(input)` derive supported
+  title-rank defaults and authored override projections from skill progression metadata.
 
 Production rule-engine modules do not import React, DOM/browser APIs, browser storage, network
 clients, app modules, generated catalog JSON, manifests, QA reports, source snapshots, Python data
@@ -29,7 +31,8 @@ Severity semantics:
 
 - `error`: a catalog-proven contradiction.
 - `warning`: incomplete editor state, unresolved or stale IDs, unsupported or catalog-gap facts,
-  deferred title/allegiance rules, unsupported options, or non-exhaustive budget state.
+  title-rank metadata gaps, narrow allegiance uncertainty, unsupported options, or non-exhaustive
+  budget state.
 - `info`: advisory facts only.
 
 `ValidationResult.valid` means no emitted error issues. Export and publish policy must also inspect
@@ -47,9 +50,10 @@ locale, wall clock, filesystem order, or caller overrides.
 ## Context And Defaults
 
 Every `validateBuild` call creates a fresh internal context. It indexes professions, attributes,
-skills, split groups, progression series, and optional equipment catalog views by real catalog IDs
-only. Duplicate catalog IDs and split-group IDs are reported and excluded from resolved lookups so
-validation cannot depend on first-record-wins behavior.
+skills, split groups, progression series, title-rank definitions, and optional equipment catalog
+views by real catalog IDs or canonical title keys only. Duplicate catalog IDs and split-group IDs
+are reported and excluded from resolved lookups so validation cannot depend on first-record-wins
+behavior.
 
 Unknown imported or stale authored IDs are preserved and reported as unresolved references. The
 engine does not coerce, delete, guess, compact, replace split variants, or mutate caller objects.
@@ -77,14 +81,26 @@ unsupported records, and non-player records.
 
 Skill eligibility validates selected profession ownership, explicit professionless
 classifications, skill attribute joins against the profession/attribute slice, mode availability,
-split-group integrity, and mode-specific split counterpart availability. `modeAvailability` is
-canonical for restrictions; `pveOnly`, `pvpOnly`, and split metadata are consistency evidence.
+split-group integrity, mode-specific split counterpart availability, title-rank dependencies, and
+selected allegiance-ranked skills. `modeAvailability` is canonical for restrictions; `pveOnly`,
+`pvpOnly`, and split metadata are consistency evidence.
 
 Split validation never substitutes a counterpart skill. It validates the authored selected ID and
 attaches split-group or counterpart evidence as related entities.
 
-Title-rank and allegiance enforcement is deferred to EPIC-15. The current engine emits deferred
-warnings only from explicit `classification.title` facts or title-rank progression dependencies.
+Resolved title-rank dependencies emit no generic deferral warning. Empty title state uses the
+progression series' declared maximum rank. Authored overrides are canonical sparse `{ key, rank }`
+entries and are validated for bounded count, safe integers, exact editable rows, duplicates, stale
+keys, and current catalog compatibility.
+
+Malformed, missing, unsupported, row-incomplete, and domain-conflicting title metadata emits located
+title warnings. The promoted Sunspear aliases intentionally remain one canonical control with
+visible domain-conflict diagnostics: reset uses per-series implicit maximums, while explicit edits
+are limited to common exact rows.
+
+Allegiance-ranked skills resolve rank scaling through the same title-rank path and emit one narrow
+warning for side/exclusivity uncertainty. The rule engine does not infer Kurzick/Luxon ownership or
+provide an account-side selector.
 
 ## Effective Attribute Rank
 
@@ -98,8 +114,9 @@ invalid overrides, invalid adjustments, unsafe integer overflow, and negative fi
 typed unresolved result instead of throwing or clamping.
 
 Semantic equipment now derives valid headgear and attribute-rune rank adjustments through
-`collectEquipmentAttributeRankAdjustments`. Title, temporary-effect, manual adjustment, broad weapon
-effects, and complete stacking/aggregation policy remain caller-owned or deferred.
+`collectEquipmentAttributeRankAdjustments`. Title-rank skill scaling is handled separately by
+`resolveTitleRanksForSkill`. Temporary-effect, manual adjustment, broad weapon effects, and complete
+stacking/aggregation policy remain caller-owned or deferred.
 
 `summarizeAttributeRuneEffects` is the narrow EPIC-10 bridge for attribute runes only. It accepts
 runtime rune catalog data plus caller-provided equipped instance keys, reports unknown IDs,
@@ -130,12 +147,12 @@ equipment selections, unknown IDs, duplicate catalog IDs, catalog-set mismatch, 
 requirements, and traversal caps make `resolved` or `exhaustive` false according to the shared
 result contract.
 
-`RULE_ENGINE_VERSION` is `rule-engine:v2` because non-null semantic equipment now changes validation
-behavior.
+`RULE_ENGINE_VERSION` is `rule-engine:v3` because title-rank validation and the replacement title
+issue-code set now change validation behavior.
 
 ## Deferred Scope
 
-Title ownership, title rank, allegiance side, equipment editor UI, condition evaluation, full
+Title ownership, account-wide title profiles, allegiance side selectors, condition evaluation, full
 rune/insignia composition, weapon effect math, modifier effect aggregation, hero, party,
-recommendation, guide, storage migration, share payload policy, and export/publish policy
-validation remain deferred. Later domains should emit the same issue/result contract.
+recommendation, guide, equipment/title share payloads, and export/publish policy validation remain
+deferred. Later domains should emit the same issue/result contract.

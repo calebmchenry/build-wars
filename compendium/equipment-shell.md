@@ -95,8 +95,8 @@ appends equipment after profession, attribute, skill-bar, and skill eligibility 
 global issue cap is applied once after all issues are combined. Oversized armor rows, weapon sets,
 and per-hand modifier arrays set the result non-exhaustive through the existing truncation field.
 
-`RULE_ENGINE_VERSION` is `rule-engine:v2` because non-null semantic equipment now affects
-validation results.
+`RULE_ENGINE_VERSION` is currently `rule-engine:v3`; semantic equipment remains additive in the
+shared validation contract, and title-rank validation now also contributes domain issues.
 
 ## Runtime Boundaries
 

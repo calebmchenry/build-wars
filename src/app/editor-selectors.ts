@@ -6,6 +6,7 @@ import {
   lookupSkillById,
   purchasedRankCost,
   renderSkillTooltipText,
+  resolveTitleRanksForSkill,
   validateBuild,
   type AttributeBudgetPolicy,
   type AttributeId,
@@ -20,6 +21,13 @@ import {
   type ValidationResult
 } from "../domain";
 import type { AppCatalogViews, PlaceholderIconDescriptor } from "./catalogs";
+export { selectTitleRankPanelView } from "./title-rank-selectors";
+export type {
+  TitleRankControlStatus,
+  TitleRankControlView,
+  TitleRankIssueView,
+  TitleRankPanelView
+} from "./title-rank-selectors";
 import type {
   BrowserFilters,
   BrowserSortMode,
@@ -409,7 +417,7 @@ export function selectSkillDisplay(
     title: skill.name,
     subtitle: subtitleForSkill(skill, catalogs),
     placeholder: catalogs.placeholders.skill(skill, surface),
-    facts: [...costFacts(skill), ...timingFacts(skill)],
+    facts: [...costFacts(skill), ...timingFacts(skill), ...titleRankFacts(skill, catalogs, state)],
     tooltipText: tooltip.kind === "rendered" ? tooltip.text : tooltip.detail,
     tooltipState: tooltip.kind,
     tooltipDetail: tooltip.kind === "rendered" ? null : tooltip.detail,
@@ -449,6 +457,12 @@ function selectTooltipRankContext(
 } {
   const ranks: Record<string, number> = {};
   const assumptions: string[] = [];
+  const titleRanks = resolveTitleRanksForSkill({
+    catalog: catalogs.titleRanks,
+    skill,
+    overrides: state.build.titleRankOverrides
+  });
+  Object.assign(ranks, titleRanks.ranks);
   const equipmentAdjustmentSummary = collectEquipmentAttributeRankAdjustments({
     build: state.build,
     professionAttributes: catalogs.validation.professionAttributes,
@@ -482,14 +496,6 @@ function selectTooltipRankContext(
       ranks[`attribute:${Number(series.dependency.attributeId)}`] =
         result.kind === "resolved" ? result.finalRank : 0;
     }
-    if (series.dependency.kind === "title-rank" && series.dependency.titleKey !== null) {
-      const rank = series.dependency.rankDomain?.max ?? 0;
-      ranks[series.dependency.titleKey] = rank;
-      const assumption = `${series.dependency.titleKey} shown at maximum title rank ${rank}.`;
-      if (!assumptions.includes(assumption)) {
-        assumptions.push(assumption);
-      }
-    }
   }
   return { ranks, assumptions };
 }
@@ -507,7 +513,7 @@ function progressionViews(
       : [
           {
             id: series.id,
-            dependencyLabel: dependencyLabel(series),
+            dependencyLabel: dependencyLabel(series, catalogs),
             rows: series.values.map((row) => ({
               rank: row.rank,
               values: row.values.map((value, index) => {
@@ -522,14 +528,61 @@ function progressionViews(
   });
 }
 
-function dependencyLabel(series: SkillProgressionSeries): string {
+function dependencyLabel(series: SkillProgressionSeries, catalogs: AppCatalogViews): string {
   if (series.dependency.kind === "attribute" && series.dependency.attributeId !== null) {
     return `Attribute ${Number(series.dependency.attributeId)}`;
   }
   if (series.dependency.kind === "title-rank" && series.dependency.titleKey !== null) {
-    return `${series.dependency.titleKey} maximum-title-rank assumption`;
+    const key = catalogs.titleRanks.canonicalKeyByRawKey.get(series.dependency.titleKey);
+    const definition = key === undefined ? undefined : catalogs.titleRanks.byCanonicalKey.get(key);
+    return definition === undefined ? series.dependency.titleKey : `${definition.label} title rank`;
   }
   return series.dependency.kind;
+}
+
+function titleRankFacts(
+  skill: CatalogSkillRecord,
+  catalogs: AppCatalogViews,
+  state: EditorState
+): readonly SkillFactView[] {
+  const resolution = resolveTitleRanksForSkill({
+    catalog: catalogs.titleRanks,
+    skill,
+    overrides: state.build.titleRankOverrides
+  });
+  const byKey = new Map<
+    string,
+    {
+      readonly label: string;
+      readonly ranks: readonly number[];
+      readonly source: "implicit" | "override";
+    }
+  >();
+  for (const dependency of resolution.dependencies) {
+    const existing = byKey.get(dependency.key);
+    const ranks =
+      dependency.rank === null
+        ? (existing?.ranks ?? [])
+        : [...(existing?.ranks ?? []), dependency.rank];
+    byKey.set(dependency.key, {
+      label: dependency.label,
+      ranks,
+      source: existing?.source === "override" ? "override" : dependency.source
+    });
+  }
+  return [...byKey.entries()].map(([key, item]) => {
+    const ranks = [...new Set(item.ranks)].sort((left, right) => left - right);
+    return {
+      label: `Title: ${item.label}`,
+      value:
+        ranks.length === 0
+          ? "unresolved"
+          : ranks.length === 1
+            ? `rank ${ranks[0]} ${item.source === "override" ? "configured" : "default"}`
+            : "per-series maximum",
+      state: key
+    };
+  });
 }
 
 function costFacts(skill: CatalogSkillRecord): readonly SkillFactView[] {
@@ -860,6 +913,9 @@ function sameLocation(left: ValidationLocation | null, right: ValidationLocation
   }
   if (left.kind === "catalog" && right.kind === "catalog") {
     return left.catalog === right.catalog;
+  }
+  if (left.kind === "title-rank" && right.kind === "title-rank") {
+    return left.key === right.key;
   }
   return left.kind === right.kind;
 }

@@ -1,7 +1,7 @@
 import {
   authoredDocumentId,
+  BUILD_SCHEMA_VERSION,
   catalogId,
-  FOUNDATION_SCHEMA_VERSION,
   type Attribute,
   type AttributeId,
   type Build,
@@ -46,7 +46,7 @@ export const syntheticSkill: Skill = {
 
 export const syntheticFoundationBuild: Build = {
   id: authoredDocumentId("foundation-build"),
-  schemaVersion: FOUNDATION_SCHEMA_VERSION,
+  schemaVersion: BUILD_SCHEMA_VERSION,
   catalogVersion: "synthetic-foundation",
   name: "Synthetic Foundation Build",
   mode: "unknown",
@@ -54,5 +54,6 @@ export const syntheticFoundationBuild: Build = {
   secondaryProfessionId: null,
   attributes: [{ attributeId: syntheticAttributeId, rank: 0 }],
   skillBar: [syntheticUnknownSkillId, null, null, null, null, null, null, null],
+  titleRankOverrides: [],
   equipment: null
 };

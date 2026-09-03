@@ -1,6 +1,6 @@
 import {
   authoredDocumentId,
-  FOUNDATION_SCHEMA_VERSION,
+  BUILD_SCHEMA_VERSION,
   type AttributeAllocation,
   type AttributeId,
   type Build,
@@ -32,7 +32,7 @@ export const partialBuild = buildFixture({
 export function buildFixture(overrides: Partial<Build> = {}): Build {
   return {
     id: authoredDocumentId("rule-engine-build"),
-    schemaVersion: FOUNDATION_SCHEMA_VERSION,
+    schemaVersion: BUILD_SCHEMA_VERSION,
     catalogVersion: "fixture-build-v1",
     name: "Rule Engine Fixture Build",
     mode: "pve",
@@ -54,6 +54,7 @@ export function buildFixture(overrides: Partial<Build> = {}): Build {
       skillIds.commonTwo,
       skillIds.commonThree
     ],
+    titleRankOverrides: [],
     equipment: null,
     ...overrides
   };

@@ -586,7 +586,7 @@ function titleProgression(id: string, skillId: SkillId, titleKey: string): Skill
       rankDomain: { min: 0, max: 12 }
     },
     valueSlots: [{ index: 0, label: "Fixture value", unit: null }],
-    values: [{ rank: 0, values: [0] }],
+    values: Array.from({ length: 13 }, (_, rank) => ({ rank, values: [rank] })),
     sourceForm: "skill progression",
     provenance
   };

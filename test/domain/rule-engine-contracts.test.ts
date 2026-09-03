@@ -13,7 +13,7 @@ const versions = {
   buildCatalogVersion: "build-v1",
   professionAttributeCatalogVersion: "pa-v1",
   skillCatalogVersion: "skills-v1",
-  ruleEngineVersion: "rule-engine:v2"
+  ruleEngineVersion: "rule-engine:v3"
 } satisfies ValidationCatalogVersions;
 
 describe("rule-engine validation contracts", () => {

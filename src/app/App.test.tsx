@@ -159,6 +159,36 @@ describe("App", () => {
     expect(shareUrl.value).not.toContain("rune");
   });
 
+  it("warns that share URLs omit authored title ranks from a valid stored draft", () => {
+    const envelope = validLocalLibraryEnvelopeFixture();
+    localStorage.setItem(
+      LOCAL_LIBRARY_STORAGE_KEY,
+      serializeLocalLibraryEnvelope({
+        ...envelope,
+        workingDraft:
+          envelope.workingDraft === null
+            ? null
+            : {
+                ...envelope.workingDraft,
+                snapshot: {
+                  ...envelope.workingDraft.snapshot,
+                  build: {
+                    ...envelope.workingDraft.snapshot.build,
+                    titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }]
+                  }
+                }
+              }
+      })
+    );
+
+    render(<App />);
+
+    expect(screen.getByText("Title ranks omitted from skill template sharing")).toBeInTheDocument();
+    const shareUrl = screen.getByLabelText("Share URL") as HTMLTextAreaElement;
+    expect(shareUrl.value).not.toContain("title");
+    expect(shareUrl.value).not.toContain("lightbringer");
+  });
+
   it("coalesces draft autosave without creating a saved library record", () => {
     vi.useFakeTimers();
     render(<App />);

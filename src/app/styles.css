@@ -280,6 +280,104 @@ textarea {
   font-size: 0.82rem;
 }
 
+.title-rank-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title-rank-list {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title-rank-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(260px, auto);
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #e0e7dd;
+  border-radius: 6px;
+  background: #fbfcf8;
+}
+
+.title-rank-row.configured {
+  border-color: #bfd2c2;
+  background: #f4fbf6;
+}
+
+.title-rank-row.retained,
+.title-rank-row.unsupported {
+  border-color: #dfb3a9;
+  background: #fff6f3;
+}
+
+.title-rank-copy,
+.title-rank-copy label {
+  min-width: 0;
+}
+
+.title-rank-copy label {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #1f2328;
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
+.title-rank-copy span {
+  display: block;
+  color: #66746a;
+  font-size: 0.78rem;
+}
+
+.title-rank-controls {
+  display: grid;
+  grid-template-columns: 32px minmax(70px, 92px) 32px auto;
+  gap: 6px;
+  align-items: center;
+}
+
+.title-rank-controls button {
+  min-height: 32px;
+}
+
+.title-rank-controls button:first-child,
+.title-rank-controls button:nth-child(3) {
+  width: 32px;
+  min-width: 32px;
+  padding: 0;
+}
+
+.title-rank-controls input {
+  min-height: 32px;
+  padding: 5px 7px;
+}
+
+.title-rank-disclosure {
+  padding-top: 4px;
+}
+
+.title-rank-disclosure summary {
+  cursor: pointer;
+  color: #204e3a;
+  font-weight: 700;
+}
+
+.title-rank-disclosure .title-rank-list {
+  margin-top: 8px;
+}
+
+.title-rank-issues {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .skillbar {
   display: grid;
   grid-template-columns: repeat(8, minmax(74px, 1fr));
@@ -983,6 +1081,14 @@ textarea {
 
   .attribute-row {
     grid-template-columns: minmax(0, 1fr) 88px 34px;
+  }
+
+  .title-rank-row {
+    grid-template-columns: 1fr;
+  }
+
+  .title-rank-controls {
+    grid-template-columns: 32px minmax(72px, 1fr) 32px auto;
   }
 
   .skillbar {

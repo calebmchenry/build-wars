@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   authoredDocumentId,
+  BUILD_SCHEMA_VERSION,
   calculateEffectiveAttributeRank,
   createEmptyEquipmentLoadout,
   validateBuild,
@@ -59,7 +60,7 @@ describe("build validation context", () => {
       buildCatalogVersion: "fixture-build-v1",
       professionAttributeCatalogVersion: "fixture-pa-v1",
       skillCatalogVersion: "fixture-skills-v1",
-      ruleEngineVersion: "rule-engine:v2"
+      ruleEngineVersion: "rule-engine:v3"
     });
   });
 
@@ -211,7 +212,7 @@ describe("build validation context", () => {
   it("proves checked-in generated runtime catalogs satisfy narrow validation inputs", () => {
     const build: Build = {
       id: authoredDocumentId("generated-smoke"),
-      schemaVersion: 1,
+      schemaVersion: BUILD_SCHEMA_VERSION,
       catalogVersion: "generated-smoke",
       name: "Generated Smoke",
       mode: "pve",
@@ -219,6 +220,7 @@ describe("build validation context", () => {
       secondaryProfessionId: professionIds.mesmer,
       attributes: [{ attributeId: attributeIds.tactics, rank: 0 }],
       skillBar: skillBar(skillIds.healingSignet),
+      titleRankOverrides: [],
       equipment: null
     };
     const context = createBuildValidationContext({

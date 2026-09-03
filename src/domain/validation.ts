@@ -1,4 +1,4 @@
-export const RULE_ENGINE_VERSION = "rule-engine:v2";
+export const RULE_ENGINE_VERSION = "rule-engine:v3";
 
 export type ValidationSeverity = "error" | "warning" | "info";
 export type ValidationPathSegment = string | number;
@@ -73,14 +73,22 @@ export type ValidationIssueCode =
   | "skill.professionless-unsupported"
   | "skill.pve-only-limit"
   | "skill.split-ambiguous"
-  | "skill.allegiance-deferred"
+  | "skill.allegiance-unmodeled"
   | "skill.split-counterpart-unresolved"
-  | "skill.title-deferred"
+  | "skill.title-alias-conflict"
+  | "skill.title-domain-missing"
+  | "skill.title-key-missing"
+  | "skill.title-row-missing"
+  | "skill.title-unsupported"
   | "skill.unresolved"
   | "skill.unsupported"
   | "skill.wrong-profession"
   | "skill-bar.incomplete"
-  | "skill-bar.malformed";
+  | "skill-bar.malformed"
+  | "title.override-duplicate"
+  | "title.override-invalid"
+  | "title.override-out-of-domain"
+  | "title.override-unknown";
 
 export type ValidationRuleId =
   | "context.options"
@@ -107,7 +115,9 @@ export type ValidationRuleId =
   | "skill.attribute"
   | "skill.mode"
   | "skill.split"
-  | "skill.deferred-title"
+  | "skill.allegiance"
+  | "skill.title-rank"
+  | "title.override"
   | "equipment.structure"
   | "equipment.catalog"
   | "equipment.armor"
@@ -128,6 +138,7 @@ export type ValidationEntityKind =
   | "skill"
   | "skill-slot"
   | "split-group"
+  | "title-rank"
   | "weapon"
   | "weapon-modifier"
   | "weapon-set";
@@ -179,6 +190,10 @@ export type ValidationLocation =
     }
   | {
       readonly kind: "options";
+    }
+  | {
+      readonly kind: "title-rank";
+      readonly key: string | null;
     };
 
 export interface ValidationIssue {
@@ -214,6 +229,7 @@ export type ValidationTruncationKind =
   | "issue-cap"
   | "related-entity-cap"
   | "skill-slot-cap"
+  | "title-override-cap"
   | "weapon-modifier-cap"
   | "weapon-set-row-cap";
 
@@ -296,16 +312,24 @@ const UNRESOLVED_CODES = new Set<ValidationIssueCode>([
   "skill.attribute-unresolved",
   "skill.dispositioned",
   "skill.duplicate-uncertain",
-  "skill.allegiance-deferred",
+  "skill.allegiance-unmodeled",
   "skill.mode-metadata-conflict",
   "skill.mode-unknown",
   "skill.profession-missing-secondary",
   "skill.professionless-unsupported",
   "skill.split-ambiguous",
   "skill.split-counterpart-unresolved",
-  "skill.title-deferred",
+  "skill.title-alias-conflict",
+  "skill.title-domain-missing",
+  "skill.title-key-missing",
+  "skill.title-row-missing",
+  "skill.title-unsupported",
   "skill.unresolved",
-  "skill.unsupported"
+  "skill.unsupported",
+  "title.override-duplicate",
+  "title.override-invalid",
+  "title.override-out-of-domain",
+  "title.override-unknown"
 ]);
 
 const RULE_ORDER: readonly ValidationRuleId[] = [
@@ -333,7 +357,9 @@ const RULE_ORDER: readonly ValidationRuleId[] = [
   "skill.attribute",
   "skill.mode",
   "skill.split",
-  "skill.deferred-title",
+  "title.override",
+  "skill.title-rank",
+  "skill.allegiance",
   "equipment.structure",
   "equipment.catalog",
   "equipment.armor",
@@ -503,6 +529,9 @@ function locationKey(location: ValidationLocation | null): string {
   }
   if (location.kind === "profession") {
     return `profession:${location.field}`;
+  }
+  if (location.kind === "title-rank") {
+    return `title-rank:${location.key ?? ""}`;
   }
   if (location.kind === "catalog") {
     return `catalog:${location.catalog}`;

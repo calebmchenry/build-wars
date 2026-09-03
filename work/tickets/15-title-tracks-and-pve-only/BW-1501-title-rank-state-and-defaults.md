@@ -2,12 +2,14 @@
 id: BW-1501
 title: Title Rank State and Defaults
 epic: EPIC-15
-status: ready
+status: done
 priority: critical
 depends_on:
   - EPIC-04
   - EPIC-08
   - EPIC-09
+planned_sprint: SPRINT-016
+completed_sprint: SPRINT-016
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -44,3 +46,12 @@ Add authored title-rank state that defaults every discovered title dependency to
 - `npm run typecheck`
 - Focused Vitest coverage for title key discovery, aliasing, default max ranks, clamping, and local
   persistence migration
+
+## Closeout Evidence
+
+- SPRINT-016 added `src/domain/title-rank.ts`, Build schema 2 `titleRankOverrides`, exact title
+  alias normalization, sparse set/reset helpers, schema-1 migration, bounded persisted override
+  parsing, unknown/stale override retention, and clone/fingerprint durability.
+- Validation passed: `npm run typecheck`, focused title/persistence/workspace/backup Vitest
+  coverage, `npm run test:run -- src/app test/domain`, final `npm run verify`, and
+  `git diff --check`.

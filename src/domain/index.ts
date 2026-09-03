@@ -449,7 +449,33 @@ export {
   knownEquipmentSelection,
   unresolvedEquipmentSelection
 } from "./equipment";
-export { SKILL_BAR_SLOT_COUNT } from "./build";
+export { BUILD_SCHEMA_VERSION, SKILL_BAR_SLOT_COUNT } from "./build";
 export type { AttributeAllocation, Build, GameMode, SkillBar } from "./build";
+export {
+  TITLE_RANK_OVERRIDE_LIMIT,
+  createTitleRankCatalog,
+  hasAuthoredTitleRankOverrides,
+  isCanonicalTitleRankKey,
+  labelForTitleRankKey,
+  normalizeTitleRankKey,
+  resetTitleRankOverride,
+  resolveTitleRanksForSkill,
+  setTitleRankOverride,
+  titleRankOverrideFor,
+  validateTitleRankOverridesAgainstCatalog
+} from "./title-rank";
+export type {
+  TitleRankCatalog,
+  TitleRankDeclaredDomain,
+  TitleRankDefaultKind,
+  TitleRankDefinition,
+  TitleRankDiagnostic,
+  TitleRankDiagnosticCode,
+  TitleRankDomain,
+  TitleRankOverride,
+  TitleRankOverrideMutationFacts,
+  TitleRankSkillDependencyResolution,
+  TitleRankSkillResolution
+} from "./title-rank";
 export type { PartyBuild, PartySlot } from "./party";
 export type { Guide, GuideSection, GuideSectionKind } from "./guide";

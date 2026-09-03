@@ -27,7 +27,7 @@ export const fixtureCatalogFacts: PersistedCatalogFacts = {
   weaponCatalogSetDigest: "fixture-weapon-set-digest",
   weaponModifierCatalogSetVersion: "fixture-weapon-set",
   weaponModifierCatalogSetDigest: "fixture-weapon-set-digest",
-  ruleEngineVersion: "rule-engine:v2"
+  ruleEngineVersion: "rule-engine:v3"
 };
 
 export function validSnapshotFixture(): PersistedBuildSnapshot {

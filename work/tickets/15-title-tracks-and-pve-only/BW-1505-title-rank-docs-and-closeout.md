@@ -2,12 +2,14 @@
 id: BW-1505
 title: Title Rank Docs and Closeout
 epic: EPIC-15
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1502
   - BW-1503
   - BW-1504
+planned_sprint: SPRINT-016
+completed_sprint: SPRINT-016
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -44,3 +46,12 @@ Document the simplified EPIC-15 behavior, deferred scope, and verification recor
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- SPRINT-016 updated README and compendium docs for title defaults, overrides, exact aliases,
+  Sunspear conflict handling, reset-to-max, Build schema 2, validation v3, PvE-only preservation,
+  local-only sharing omissions, and deferred account/title-ingestion scope.
+- SPRINT-016 synchronized BW-1501 through BW-1505, EPIC-15, the sprint checklist, ledger, and
+  ticket-burn result manifest after validation.
+- Validation passed: final `npm run verify` and `git diff --check`.

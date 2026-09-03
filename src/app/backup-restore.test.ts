@@ -74,6 +74,50 @@ describe("backup and restore", () => {
     expect(parsed.diagnostics.some((issue) => issue.code === "invalid-record")).toBe(true);
   });
 
+  it("round-trips title overrides through backup parse and draft restore", () => {
+    const record = validSavedRecordFixture({
+      snapshot: {
+        ...validSavedRecordFixture().snapshot,
+        build: {
+          ...validSavedRecordFixture().snapshot.build,
+          titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }]
+        }
+      }
+    });
+    const backup = createBackupEnvelope({
+      exportedAt: NOW,
+      savedBuilds: [record],
+      workingDraft: validWorkingDraftFixture({
+        snapshot: record.snapshot,
+        associatedRecordId: record.id
+      }),
+      savedWith: fixtureCatalogFacts
+    });
+    const parsed = parseBackupEnvelope(backup);
+
+    expect(
+      parsed.ok ? parsed.backup.savedBuilds[0]?.snapshot.build.titleRankOverrides : null
+    ).toEqual([{ key: "title:lightbringer-rank", rank: 4 }]);
+    if (!parsed.ok) {
+      return;
+    }
+    const plan = createRestorePreviewPlan({
+      backup: parsed.backup,
+      currentRecords: [],
+      nextId: (sourceId) => sourceId,
+      id: "restore-title"
+    });
+    const restored = applyRestorePlan(plan, {
+      currentRecords: [],
+      mode: "replace",
+      restoreWorkingDraft: true
+    });
+
+    expect(restored.ok ? restored.draftEditor?.build.titleRankOverrides : null).toEqual([
+      { key: "title:lightbringer-rank", rank: 4 }
+    ]);
+  });
+
   it("rejects malformed, unsupported, and dangerous backup inputs with bounded diagnostics", () => {
     expect(parseBackupJson("{").ok).toBe(false);
     expect(parseBackupEnvelope({ kind: "other", schemaVersion: 1, exportedAt: NOW }).ok).toBe(

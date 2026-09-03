@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   FOUNDATION_SCHEMA_VERSION,
+  BUILD_SCHEMA_VERSION,
   SKILL_BAR_SLOT_COUNT,
   type ArmorPiece,
   type Attribute,
@@ -104,7 +105,8 @@ describe("domain contracts", () => {
   });
 
   it("requires authored roots to carry a schema version", () => {
-    expect(syntheticFoundationBuild.schemaVersion).toBe(FOUNDATION_SCHEMA_VERSION);
+    expect(FOUNDATION_SCHEMA_VERSION).toBe(1);
+    expect(syntheticFoundationBuild.schemaVersion).toBe(BUILD_SCHEMA_VERSION);
     expect(syntheticFoundationBuild.catalogVersion).toBe("synthetic-foundation");
   });
 

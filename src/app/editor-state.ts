@@ -2,12 +2,15 @@ import {
   SKILL_BAR_SLOT_COUNT,
   authoredDocumentId,
   catalogId,
+  resetTitleRankOverride,
+  setTitleRankOverride,
   type AttributeId,
   type Build,
   type GameMode,
   type ProfessionId,
   type SkillBar,
   type SkillId,
+  type TitleRankOverrideMutationFacts,
   type TemplateSourceEnvelope
 } from "../domain";
 import { reduceEquipmentEditorAction, type EquipmentEditorAction } from "./equipment-editor-state";
@@ -188,6 +191,15 @@ export type EditorAction =
       readonly rank: number;
     }
   | {
+      readonly type: "set-title-rank-override";
+      readonly facts: TitleRankOverrideMutationFacts;
+      readonly rank: number;
+    }
+  | {
+      readonly type: "reset-title-rank-override";
+      readonly key: string;
+    }
+  | {
       readonly type: "remove-attribute-row";
       readonly index: number;
     }
@@ -312,7 +324,7 @@ export function createBlankEditorState(name = "Untitled Build"): EditorState {
 
 export function createBlankBuild(name = "Untitled Build"): Build {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     catalogVersion: null,
     id: authoredDocumentId("build:single-character-editor"),
     name,
@@ -321,6 +333,7 @@ export function createBlankBuild(name = "Untitled Build"): Build {
     secondaryProfessionId: null,
     attributes: [],
     skillBar: emptySkillBar(),
+    titleRankOverrides: [],
     equipment: null
   };
 }
@@ -406,6 +419,16 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
       return setAttributeRank(state, action.attributeId, action.rank);
     case "set-attribute-row":
       return setAttributeRow(state, action.index, action.attributeId, action.rank);
+    case "set-title-rank-override":
+      return {
+        ...state,
+        build: setTitleRankOverride(state.build, action.facts, action.rank)
+      };
+    case "reset-title-rank-override":
+      return {
+        ...state,
+        build: resetTitleRankOverride(state.build, action.key)
+      };
     case "remove-attribute-row":
       return removeAttributeRow(state, action.index);
     case "place-skill":

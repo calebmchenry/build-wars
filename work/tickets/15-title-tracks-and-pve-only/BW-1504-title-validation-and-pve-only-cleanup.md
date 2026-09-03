@@ -2,12 +2,14 @@
 id: BW-1504
 title: Title Validation and PvE-only Cleanup
 epic: EPIC-15
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1501
   - BW-1503
   - EPIC-06
+planned_sprint: SPRINT-016
+completed_sprint: SPRINT-016
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -47,3 +49,12 @@ existing PvE-only rules.
 
 - `npm run test:run -- test/domain src/app`
 - Focused rule-engine tests for title dependencies, PvE-only limits, and allegiance warnings
+
+## Closeout Evidence
+
+- SPRINT-016 advanced `RULE_ENGINE_VERSION` to `rule-engine:v3`, replaced generic title/allegiance
+  deferrals with narrow title-rank and override issue codes, added validation context override
+  recovery, kept allegiance rank-first with one side/exclusivity warning, and preserved PvE-only,
+  PvP, unknown-mode, browser availability, result-flag, truncation, and ordering behavior.
+- Validation passed: focused rule-engine and validation-context Vitest coverage,
+  `npm run test:run -- src/app test/domain`, final `npm run verify`, and `git diff --check`.

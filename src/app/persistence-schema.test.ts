@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  BUILD_SCHEMA_VERSION,
   createEmptyEquipmentLoadout,
   knownEquipmentSelection,
   unresolvedEquipmentSelection,
@@ -55,7 +56,23 @@ describe("local persistence schema", () => {
     expect(unresolved?.snapshot.rawTemplate.source?.originalBareCode).toBe("OAAQIAAAAAAAAAAAAAAA");
     expect(unresolved?.snapshot.rawTemplate.skillBar[1]?.templateId).toBe(999999);
     expect(Number(unresolved?.snapshot.build.skillBar[1])).toBe(-200001);
-    expect(unresolved?.savedWith.ruleEngineVersion).toBe("rule-engine:v2");
+    expect(unresolved?.savedWith.ruleEngineVersion).toBe("rule-engine:v3");
+  });
+
+  it("migrates schema-1 builds to runtime schema 2 without marking the library write-blocked", () => {
+    const parsed = parseLocalLibraryEnvelope(legacySchemaOneEnvelopeFixture());
+
+    expect(parsed.ok).toBe(true);
+    expect(parsed.writeBlocked).toBe(false);
+    expect(parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.schemaVersion : null).toBe(
+      BUILD_SCHEMA_VERSION
+    );
+    expect(
+      parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.titleRankOverrides : null
+    ).toEqual([]);
+    expect(
+      parsed.ok ? parsed.envelope.savedBuilds[0]?.snapshot.build.titleRankOverrides : null
+    ).toEqual([]);
   });
 
   it("hydrates durable snapshots into fresh editor UI defaults instead of persisted UI state", () => {
@@ -177,6 +194,63 @@ describe("local persistence schema", () => {
     );
   });
 
+  it("round-trips canonical title overrides through snapshots and parsing", () => {
+    const state = createBlankEditorState();
+    const snapshot = createPersistedBuildSnapshot({
+      ...state,
+      build: {
+        ...state.build,
+        titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }]
+      }
+    });
+    const parsed = parseLocalLibraryEnvelope(
+      validLocalLibraryEnvelopeFixture({
+        workingDraft: {
+          snapshot,
+          associatedRecordId: null,
+          savedWith: fixtureCatalogFacts
+        },
+        savedBuilds: [
+          {
+            ...validLocalLibraryEnvelopeFixture().savedBuilds[0]!,
+            snapshot
+          }
+        ]
+      })
+    );
+
+    expect(snapshot.build.titleRankOverrides).toEqual([
+      { key: "title:lightbringer-rank", rank: 4 }
+    ]);
+    expect(parsed.ok).toBe(true);
+    expect(
+      parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.titleRankOverrides : null
+    ).toEqual(snapshot.build.titleRankOverrides);
+    expect(
+      parsed.ok ? parsed.envelope.savedBuilds[0]?.snapshot.build.titleRankOverrides : null
+    ).toEqual(snapshot.build.titleRankOverrides);
+  });
+
+  it("rejects malformed persisted title overrides with bounded diagnostics", () => {
+    expect(
+      parseSingleTitleOverrides([
+        { key: "title:lightbringer-rank", rank: 1 },
+        { key: "title:lightbringer-rank", rank: 2 }
+      ]).codes
+    ).toContain("duplicate-title-rank-override");
+    expect(parseSingleTitleOverrides([{ key: "__proto__", rank: 1 }]).codes).toContain(
+      "invalid-title-rank-key"
+    );
+    expect(
+      parseSingleTitleOverrides([{ key: "title:lightbringer-rank", rank: 1.5 }]).codes
+    ).toContain("invalid-number");
+    expect(
+      parseSingleTitleOverrides(
+        Array.from({ length: 33 }, (_, index) => ({ key: `title:stale-${index}`, rank: 1 }))
+      ).codes
+    ).toContain("oversized-collection");
+  });
+
   it("rejects malformed persisted equipment with bounded diagnostics", () => {
     expect(parseSingleEquipment({ anything: true }).codes).toContain("invalid-equipment-topology");
     expect(
@@ -267,6 +341,46 @@ function canonicalEquipmentFixture(): EquipmentLoadout {
         : set
     )
   };
+}
+
+function legacySchemaOneEnvelopeFixture(): unknown {
+  const envelope = JSON.parse(JSON.stringify(validLocalLibraryEnvelopeFixture())) as {
+    workingDraft: { snapshot: { build: Record<string, unknown> } } | null;
+    savedBuilds: { snapshot: { build: Record<string, unknown> } }[];
+  };
+  const builds = [
+    ...(envelope.workingDraft === null ? [] : [envelope.workingDraft.snapshot.build]),
+    ...envelope.savedBuilds.map((record) => record.snapshot.build)
+  ];
+  for (const build of builds) {
+    build.schemaVersion = 1;
+    delete build.titleRankOverrides;
+  }
+  return envelope;
+}
+
+function parseSingleTitleOverrides(overrides: unknown): { readonly codes: readonly string[] } {
+  const snapshot = validSnapshotFixture();
+  const parsed = parseLocalLibraryEnvelope(
+    validLocalLibraryEnvelopeFixture({
+      savedBuilds: [
+        {
+          ...validLocalLibraryEnvelopeFixture().savedBuilds[0]!,
+          snapshot: {
+            ...snapshot,
+            build: {
+              ...snapshot.build,
+              titleRankOverrides: overrides as never
+            }
+          }
+        }
+      ]
+    })
+  );
+
+  expect(parsed.ok).toBe(true);
+  expect(parsed.writeBlocked).toBe(true);
+  return { codes: parsed.diagnostics.map((issue) => issue.code) };
 }
 
 function parseSingleEquipment(equipment: unknown): { readonly codes: readonly string[] } {

@@ -14,9 +14,14 @@ import { SkillBrowser } from "./components/SkillBrowser";
 import { SkillTooltip } from "./components/SkillTooltip";
 import { StorageBanner } from "./components/StorageBanner";
 import { TemplateControls } from "./components/TemplateDialogs";
+import { TitleRankPanel } from "./components/TitleRankPanel";
 import { ValidationPanel } from "./components/ValidationPanel";
 import { selectEquipmentPanelView } from "./equipment-selectors";
-import { selectSkillDisplay, selectValidationView } from "./editor-selectors";
+import {
+  selectSkillDisplay,
+  selectTitleRankPanelView,
+  selectValidationView
+} from "./editor-selectors";
 import type { EditorAction } from "./editor-state";
 import { browserLocalStorage, readLocalLibrary, writeLocalLibrary } from "./local-storage";
 import { persistedCatalogFactsFromValidation } from "./persistence-schema";
@@ -92,6 +97,7 @@ export function App() {
       ? null
       : selectSkillDisplay(catalogs, state, state.tooltip.skillId, "tooltip");
   const equipmentView = selectEquipmentPanelView(state, catalogs, validationView.result);
+  const titleRankPanelView = selectTitleRankPanelView(state, catalogs, validationView.result);
 
   return (
     <main className="app-shell editor-shell" aria-labelledby="app-title" data-catalog-state="ready">
@@ -150,6 +156,7 @@ export function App() {
             skills={
               <>
                 <SkillBar state={state} catalogs={catalogs} dispatch={dispatch} />
+                <TitleRankPanel view={titleRankPanelView} dispatch={dispatch} />
                 <SkillBrowser state={state} catalogs={catalogs} dispatch={dispatch} />
               </>
             }

@@ -61,8 +61,9 @@ digests for future review invalidation. Copied source-authored descriptions requ
 digest-bound review before runtime text can include them.
 
 Progression series store dependency kind, rank domain, value slots, finite rows, source form, and
-provenance. Title-rank dependencies use stable keys and defer title ownership, allegiance,
-eligibility, and effective-rank rules to EPIC-15.
+provenance. Title-rank dependencies use stable raw keys that `src/domain/title-rank.ts` normalizes
+into runtime title controls. Account title ownership, acquisition, and broad allegiance modeling
+remain outside the skill catalog.
 
 PvE/PvP split groups are explicit. Unknown mode returns an ambiguous outcome when variants differ;
 EPIC-06 and UI work own runtime mode selection policy.
@@ -73,7 +74,8 @@ EPIC-06 and UI work own runtime mode selection policy.
 - EPIC-06 may consume profession, attribute, elite, common, no-attribute, title, PvE-only, PvP-only,
   split, special, and unsupported classifications.
 - EPIC-08 may use the catalog for skill-picker data after attribution and privacy UI exist.
-- EPIC-15 owns title identity, title rank eligibility, allegiance semantics, and effective ranks.
+- EPIC-15 owns runtime title-rank defaults, sparse per-build overrides, title validation, and narrow
+  allegiance uncertainty warnings.
 - EPIC-19 owns acquisition, guide prose, and authoring workflows.
 - EPIC-20 may index names, lookup keys, types, campaigns, costs, classifications, and structured
   search text from the runtime catalog only.

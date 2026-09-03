@@ -14,6 +14,13 @@ import type {
   SkillSourceSetDisposition
 } from "./catalog";
 import {
+  TITLE_RANK_OVERRIDE_LIMIT,
+  createTitleRankCatalog,
+  normalizeTitleRankKey,
+  type TitleRankCatalog,
+  type TitleRankOverride
+} from "./title-rank";
+import {
   MAX_ARMOR_ROWS_TO_VALIDATE,
   MAX_MODIFIERS_PER_HAND_TO_VALIDATE,
   MAX_WEAPON_SET_ROWS_TO_VALIDATE
@@ -194,6 +201,10 @@ export interface BuildValidationContext {
   readonly skillsById: ReadonlyMap<number, CatalogSkillRecord>;
   readonly splitGroupsById: ReadonlyMap<string, SkillModeVariantGroup>;
   readonly progressionSeriesById: ReadonlyMap<string, SkillProgressionSeries>;
+  readonly titleRanks: {
+    readonly catalog: TitleRankCatalog;
+    readonly overrides: readonly TitleRankOverride[];
+  };
   readonly ambiguousProfessionIds: ReadonlySet<number>;
   readonly ambiguousAttributeIds: ReadonlySet<number>;
   readonly ambiguousSkillIds: ReadonlySet<number>;
@@ -246,6 +257,7 @@ export function createBuildValidationContext(input: BuildValidationInput): Build
     input.skills.progressionSeries,
     (record) => record.id
   );
+  const titleRankCatalog = createTitleRankCatalog(input.skills.progressionSeries);
   const rankCostsByRank = indexRankCosts(input.professionAttributes.attributePointRules, issues);
   issues.push(
     ...professionIndex.issues,
@@ -278,6 +290,7 @@ export function createBuildValidationContext(input: BuildValidationInput): Build
     input.professionAttributes.attributePointRules,
     options.attributeBudget
   );
+  const titleRankOverrides = createTitleRankOverrides(input.build, titleRankCatalog, issues);
 
   return {
     build: input.build,
@@ -297,6 +310,10 @@ export function createBuildValidationContext(input: BuildValidationInput): Build
     skillsById: skillIndex.recordsById,
     splitGroupsById: splitGroupIndex.recordsById,
     progressionSeriesById,
+    titleRanks: {
+      catalog: titleRankCatalog,
+      overrides: titleRankOverrides
+    },
     ambiguousProfessionIds: professionIndex.ambiguousIds,
     ambiguousAttributeIds: attributeIndex.ambiguousIds,
     ambiguousSkillIds: skillIndex.ambiguousIds,
@@ -320,6 +337,7 @@ export function createBuildValidationContext(input: BuildValidationInput): Build
     truncation:
       skillBar.truncation ??
       attributeRowsTruncation(input.build, options.maxAttributeRows) ??
+      titleRankOverridesTruncation(input.build) ??
       equipmentRowsTruncation(input.build)
   };
 }
@@ -756,6 +774,109 @@ function attributeRowsTruncation(build: Build, maxRows: number): ValidationTrunc
     };
   }
   return null;
+}
+
+function createTitleRankOverrides(
+  build: Build,
+  catalog: TitleRankCatalog,
+  issues: ValidationIssue[]
+): readonly TitleRankOverride[] {
+  const rawOverrides = (build as unknown as Readonly<Record<string, unknown>>).titleRankOverrides;
+  if (rawOverrides === undefined) {
+    return [];
+  }
+  if (!Array.isArray(rawOverrides)) {
+    issues.push(titleOverrideIssue("title.override-invalid", ["titleRankOverrides"], null));
+    return [];
+  }
+
+  const overrides: TitleRankOverride[] = [];
+  const seen = new Set<string>();
+  for (
+    let index = 0;
+    index < Math.min(rawOverrides.length, TITLE_RANK_OVERRIDE_LIMIT);
+    index += 1
+  ) {
+    const raw = rawOverrides[index];
+    const path = ["titleRankOverrides", index] as const;
+    if (!isRecord(raw)) {
+      issues.push(titleOverrideIssue("title.override-invalid", path, null));
+      continue;
+    }
+    const key = typeof raw.key === "string" ? normalizeTitleRankKey(raw.key) : null;
+    const rank = isFiniteSafeInteger(raw.rank) ? raw.rank : null;
+    if (key === null || rank === null) {
+      issues.push(titleOverrideIssue("title.override-invalid", path, key));
+      continue;
+    }
+    if (seen.has(key)) {
+      issues.push(titleOverrideIssue("title.override-duplicate", path, key));
+      continue;
+    }
+    seen.add(key);
+    const definition = catalog.byCanonicalKey.get(key);
+    if (definition === undefined) {
+      issues.push(titleOverrideIssue("title.override-unknown", path, key));
+    } else if (!definition.editableRanks.includes(rank)) {
+      issues.push(titleOverrideIssue("title.override-out-of-domain", path, key));
+    }
+    overrides.push({ key, rank });
+  }
+  return overrides.sort(
+    (left, right) => left.key.localeCompare(right.key, "en-US") || left.rank - right.rank
+  );
+}
+
+function titleRankOverridesTruncation(build: Build): ValidationTruncation | null {
+  const rawOverrides = (build as unknown as Readonly<Record<string, unknown>>).titleRankOverrides;
+  if (Array.isArray(rawOverrides) && rawOverrides.length > TITLE_RANK_OVERRIDE_LIMIT) {
+    return {
+      kind: "title-override-cap",
+      limit: TITLE_RANK_OVERRIDE_LIMIT,
+      observed: rawOverrides.length,
+      path: ["titleRankOverrides"]
+    };
+  }
+  return null;
+}
+
+function titleOverrideIssue(
+  code:
+    | "title.override-duplicate"
+    | "title.override-invalid"
+    | "title.override-out-of-domain"
+    | "title.override-unknown",
+  path: readonly (string | number)[],
+  key: string | null
+): ValidationIssue {
+  return createValidationIssue({
+    severity: "warning",
+    code,
+    message: titleOverrideMessage(code),
+    path,
+    location: { kind: "title-rank", key },
+    relatedEntities: key === null ? [] : [relatedEntity("title-rank", key)],
+    sourceRule: "title.override"
+  });
+}
+
+function titleOverrideMessage(
+  code:
+    | "title.override-duplicate"
+    | "title.override-invalid"
+    | "title.override-out-of-domain"
+    | "title.override-unknown"
+): string {
+  if (code === "title.override-duplicate") {
+    return "Duplicate title rank override keys are ignored after the first entry.";
+  }
+  if (code === "title.override-out-of-domain") {
+    return "Title rank override is outside the current catalog's editable exact rows.";
+  }
+  if (code === "title.override-unknown") {
+    return "Title rank override is not present in the current catalog and is retained for reset.";
+  }
+  return "Title rank override is malformed and cannot be applied.";
 }
 
 function equipmentRowsTruncation(build: Build): ValidationTruncation | null {

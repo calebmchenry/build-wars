@@ -1,6 +1,12 @@
 import type { CatalogSkillRecord, SkillModeVariantGroup } from "../catalog";
 import type { BuildValidationContext, SkillSlotContext } from "../validation-context";
-import { createValidationIssue, relatedEntity, type ValidationIssue } from "../validation";
+import { resolveTitleRanksForSkill, type TitleRankDiagnostic } from "../title-rank";
+import {
+  createValidationIssue,
+  relatedEntity,
+  type ValidationIssue,
+  type ValidationIssueCode
+} from "../validation";
 
 export function validateSkillEligibilityRules(
   context: BuildValidationContext
@@ -17,7 +23,7 @@ export function validateSkillEligibilityRules(
     issues.push(...validateSkillAttribute(context, slot));
     issues.push(...validateSkillMode(context, slot));
     issues.push(...validateSkillSplitGroup(context, slot));
-    issues.push(...validateDeferredSkillRules(context, slot));
+    issues.push(...validateTitleRankRules(context, slot));
   }
   return issues;
 }
@@ -354,48 +360,95 @@ function validateSkillSplitGroup(
   return issues;
 }
 
-function validateDeferredSkillRules(
+function validateTitleRankRules(
   context: BuildValidationContext,
   slot: ResolvedSkillSlot
 ): readonly ValidationIssue[] {
-  const titleKeys = titleDependencyKeys(context, slot.skill);
   const issues: ValidationIssue[] = [];
-  if (slot.skill.classification.title || titleKeys.length > 0) {
+  const resolution = resolveTitleRanksForSkill({
+    catalog: context.titleRanks.catalog,
+    skill: slot.skill,
+    overrides: context.titleRanks.overrides
+  });
+
+  if (slot.skill.classification.title && resolution.dependencies.length === 0) {
     issues.push(
       createValidationIssue({
         severity: "warning",
-        code: "skill.title-deferred",
-        message: "Title-rank legality is deferred to EPIC-15.",
+        code: "skill.title-unsupported",
+        message: "Title-classified skill has no usable title-rank progression metadata.",
         path: ["skillBar", slot.slot.index],
         location: { kind: "skill-slot", index: slot.slot.index },
-        relatedEntities: [
-          ...skillSlotEntities(slot.slot),
-          ...titleKeys.map((key) => relatedEntity("catalog-key", key, "title-key"))
-        ],
-        sourceRule: "skill.deferred-title"
+        relatedEntities: skillSlotEntities(slot.slot),
+        sourceRule: "skill.title-rank"
       })
     );
   }
 
-  const allegianceKeys = titleKeys.filter((key) => key.startsWith("allegiance:"));
-  if (allegianceKeys.length > 0) {
+  issues.push(
+    ...resolution.diagnostics.map((diagnostic) => titleDiagnosticIssue(slot, diagnostic))
+  );
+
+  if (resolution.dependencies.some((dependency) => dependency.key === "title:allegiance-rank")) {
     issues.push(
       createValidationIssue({
         severity: "warning",
-        code: "skill.allegiance-deferred",
-        message: "Allegiance legality is deferred to EPIC-15.",
+        code: "skill.allegiance-unmodeled",
+        message: "Allegiance rank is applied, but side and exclusivity legality remain unmodeled.",
         path: ["skillBar", slot.slot.index],
         location: { kind: "skill-slot", index: slot.slot.index },
         relatedEntities: [
           ...skillSlotEntities(slot.slot),
-          ...allegianceKeys.map((key) => relatedEntity("catalog-key", key, "allegiance-key"))
+          relatedEntity("title-rank", "title:allegiance-rank", "allegiance")
         ],
-        sourceRule: "skill.deferred-title"
+        sourceRule: "skill.allegiance"
       })
     );
   }
 
   return issues;
+}
+
+function titleDiagnosticIssue(
+  slot: ResolvedSkillSlot,
+  diagnostic: TitleRankDiagnostic
+): ValidationIssue {
+  const code = validationCodeForTitleDiagnostic(diagnostic);
+  const related = [
+    ...skillSlotEntities(slot.slot),
+    ...(diagnostic.key === null ? [] : [relatedEntity("title-rank", diagnostic.key)]),
+    ...(diagnostic.rawKey === null ? [] : [relatedEntity("catalog-key", diagnostic.rawKey, "raw")]),
+    ...(diagnostic.seriesId === null
+      ? []
+      : [relatedEntity("catalog-key", diagnostic.seriesId, "progression-series")])
+  ];
+  return createValidationIssue({
+    severity: "warning",
+    code,
+    message: diagnostic.message,
+    path: ["skillBar", slot.slot.index],
+    location: { kind: "skill-slot", index: slot.slot.index },
+    relatedEntities: related,
+    sourceRule: "skill.title-rank"
+  });
+}
+
+function validationCodeForTitleDiagnostic(diagnostic: TitleRankDiagnostic): ValidationIssueCode {
+  if (diagnostic.code === "title.alias-domain-conflict") {
+    return "skill.title-alias-conflict";
+  }
+  if (diagnostic.code === "title.missing-domain" || diagnostic.code === "title.invalid-domain") {
+    return "skill.title-domain-missing";
+  }
+  if (
+    diagnostic.code === "title.missing-exact-row" ||
+    diagnostic.code === "title.row-gap" ||
+    diagnostic.code === "title.duplicate-row" ||
+    diagnostic.code === "title.invalid-row"
+  ) {
+    return "skill.title-row-missing";
+  }
+  return "skill.title-key-missing";
 }
 
 function permitsProfessionlessSkill(skill: CatalogSkillRecord): boolean {
@@ -500,20 +553,6 @@ function validateSplitGroupBreadth(
     relatedEntities: [...skillSlotEntities(slot.slot), relatedEntity("split-group", group.id)],
     sourceRule: "skill.split"
   });
-}
-
-function titleDependencyKeys(
-  context: BuildValidationContext,
-  skill: CatalogSkillRecord
-): readonly string[] {
-  const keys: string[] = [];
-  for (const seriesId of skill.progressionSeriesIds) {
-    const series = context.progressionSeriesById.get(seriesId);
-    if (series?.dependency.kind === "title-rank" && series.dependency.titleKey !== null) {
-      keys.push(series.dependency.titleKey);
-    }
-  }
-  return [...new Set(keys)].sort();
 }
 
 function resolvedSkillSlots(slots: readonly SkillSlotContext[]): readonly ResolvedSkillSlot[] {

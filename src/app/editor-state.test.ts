@@ -104,6 +104,35 @@ describe("editor state reducer", () => {
     expect(next.build.mode).toBe("unknown");
   });
 
+  it("sets and resets structural title rank overrides without touching skill or equipment state", () => {
+    const state = createBlankEditorState();
+    const facts = {
+      key: "title:lightbringer-rank",
+      defaultKind: "coherent" as const,
+      editableRanks: Array.from({ length: 13 }, (_, rank) => rank)
+    };
+    const lowered = editorReducer(state, {
+      type: "set-title-rank-override",
+      facts,
+      rank: 4
+    });
+    const removedAtMax = editorReducer(lowered, {
+      type: "set-title-rank-override",
+      facts,
+      rank: 12
+    });
+    const ignored = editorReducer(removedAtMax, {
+      type: "set-title-rank-override",
+      facts,
+      rank: 13
+    });
+
+    expect(lowered.build.titleRankOverrides).toEqual([{ key: "title:lightbringer-rank", rank: 4 }]);
+    expect(lowered.build.skillBar).toBe(state.build.skillBar);
+    expect(removedAtMax.build.titleRankOverrides).toEqual([]);
+    expect(ignored.build).toBe(removedAtMax.build);
+  });
+
   it("keeps null equipment untouched for no-op clears and materializes on first meaningful edit", () => {
     const state = createBlankEditorState();
     const noOp = editorReducer(state, {

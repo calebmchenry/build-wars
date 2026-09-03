@@ -88,25 +88,25 @@ Included now:
   and wiki APIs remain non-runtime.
 - Framework-neutral Guild Wars skill and raw equipment template import/export APIs under
   `src/template-compatibility`, backed by a pinned `@buildwars/gw-templates@1.1.1` adapter.
-- Pure domain rule-engine APIs for authored builds: `validateBuild` and
-  `calculateEffectiveAttributeRank`.
+- Pure domain rule-engine APIs for authored builds: `validateBuild`,
+  `calculateEffectiveAttributeRank`, and title-rank discovery/resolution helpers.
 - A framework-neutral semantic equipment shell for one authored build: nullable
   `EquipmentLoadout`, canonical armor and weapon-set topology, known/unresolved semantic equipment
   selections, headgear and rune rank-adjustment helpers, weapon-set analysis, and optional
   equipment validation catalog views.
 - A browser-based core build editor under `src/app` for one durable single-character workspace:
   profession and mode controls, PvE attribute budgets, deterministic skill search/filter views,
-  an eight-slot skill bar with pointer and keyboard operations, equipment workspace tabs, tooltips,
-  validation presentation, and skill-template import/export.
+  an eight-slot skill bar with pointer and keyboard operations, compact title-rank controls,
+  equipment workspace tabs, tooltips, validation presentation, and skill-template import/export.
 - A browser-based equipment editor under `src/app`: five canonical armor slots for runes,
   insignias, and headgear bonuses; four canonical weapon sets for main hand, off hand, two-handed,
   stale, unresolved, and modifier states; per-family equipment catalog readiness; inline validation;
   and conservative health, energy, armor, requirement, and attribution summaries.
 - Local library and sharing workflows under `src/app`: one `localStorage` key (`build-wars:v1`),
   working-draft autosave, explicit saved records, search/filter/sort, tags, favorites, notes,
-  semantic equipment persistence, template-code-first share URLs capped at 1,800 characters, and
-  inert JSON whole-library backup/restore. Share URLs remain skill-template-only and warn when
-  meaningful authored equipment is omitted.
+  semantic equipment and title-rank persistence, template-code-first share URLs capped at 1,800
+  characters, and inert JSON whole-library backup/restore. Share URLs remain skill-template-only and
+  warn when meaningful authored equipment or authored title-rank overrides are omitted.
 
 Deferred to later epics:
 
@@ -117,9 +117,9 @@ Deferred to later epics:
   defers ownership to EPIC-17
 - Compact runtime catalog derivation, dynamic catalog loading, search workers, virtualization, and
   remote icon fetching
-- Title ownership, title-rank controls, allegiance selection, equipment share payloads, raw
-  equipment-template replay into the app editor, full stat aggregation, party builder, guide
-  authoring, PWA behavior, auth, analytics, and deployment
+- Title ownership, account-wide title profiles, allegiance selection, equipment/title share
+  payloads, raw equipment-template replay into the app editor, full stat aggregation, party builder,
+  guide authoring, PWA behavior, auth, analytics, and deployment
 
 ## Project Layout
 
@@ -205,7 +205,11 @@ Build validation is available through `src/domain`.
   `resolved`, and `exhaustive` from export/publish policy. It accepts optional equipment catalog
   views and skips `equipment: null`.
 - `calculateEffectiveAttributeRank` resolves authored base ranks, optional overrides, and
-  caller-supplied additive adjustments without deriving deferred equipment or title semantics.
+  caller-supplied additive adjustments without deriving title, temporary-effect, or full equipment
+  semantics.
+- `createTitleRankCatalog` and `resolveTitleRanksForSkill` derive title-rank defaults and authored
+  overrides from EPIC-04 skill progression metadata. Empty title state uses implicit per-series max
+  ranks; authored overrides are sparse per-build state.
 - `collectEquipmentAttributeRankAdjustments` derives target-scoped headgear and attribute-rune rank
   adjustments from semantic equipment.
 - `analyzeWeaponSet` projects authored weapon-set occupancy, modifier compatibility, duplicate
@@ -228,9 +232,10 @@ split/mode behavior, duplicate policies, and deferred scope.
 The core editor is available in `src/app`. It composes promoted catalog facts through one app-owned
 boundary, shows attribution before source-derived facts, preserves unresolved imported template IDs
 in an app raw overlay, and gates canonical skill-template export on representation, validation, and
-codec fidelity proof. The main column has `Skills` and `Equipment` workspace tabs; the equipment
+codec fidelity proof. The main column has `Skills` and `Equipment` workspace tabs; the Skills
+workspace includes compact title-rank controls derived from selected skills, and the equipment
 workspace edits semantic equipment without importing raw generated data into leaf components. See
-[Core build editor](compendium/core-build-editor.md) and
+[Core build editor](compendium/core-build-editor.md), [Title ranks](compendium/title-ranks.md), and
 [Equipment editor](compendium/equipment-editor.md) for the interaction model, export policy, current
 performance observation, and deferred scope.
 
@@ -239,8 +244,8 @@ performance observation, and deferred scope.
 The local workspace persists to browser `localStorage` under exactly one app-owned key:
 `build-wars:v1`. The versioned envelope stores the working draft separately from explicit saved
 records, preserving `Build`, PvE budget controls, raw template overlay/source facts, unresolved
-import IDs, semantic equipment, template source/name facts, and saved-with catalog/rule-engine
-versions. UI-only state is not persisted.
+import IDs, semantic equipment, title-rank overrides, template source/name facts, and saved-with
+catalog/rule-engine versions. UI-only state is not persisted.
 
 Saved records use opaque local IDs, so duplicate names and duplicate build contents are allowed.
 The library panel supports save new, update, save as new, duplicate, delete confirmation, favorite,
@@ -250,5 +255,7 @@ backend sync, IndexedDB, service workers, analytics, or remote media fetches.
 Single-build sharing uses the existing skill-template codec through hash fragments:
 `#bw=1&code=<bare-skill-template-code>&mode=<optional-mode>`. The full URL is capped at 1,800
 characters and excludes library metadata, catalog snapshots, equipment, party, and guide data.
+Title-rank overrides are also excluded from share URLs and skill-template bytes; non-default local
+overrides show omission warnings.
 Whole-library backup/restore uses inert JSON with previewed merge/replace behavior and skipped
 record reports. See [Local library and sharing](compendium/local-library-and-sharing.md).

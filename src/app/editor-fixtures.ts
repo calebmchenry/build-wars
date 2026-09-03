@@ -27,7 +27,8 @@ export function playableEditorFixture(): EditorState {
         catalogId<"Skill">(391),
         catalogId<"Skill">(392),
         catalogId<"Skill">(2)
-      ]
+      ],
+      titleRankOverrides: []
     },
     rawTemplate: {
       ...state.rawTemplate,

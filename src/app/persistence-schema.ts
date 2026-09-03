@@ -1,10 +1,14 @@
 import {
   authoredDocumentId,
+  BUILD_SCHEMA_VERSION,
   catalogId,
   EQUIPMENT_LOADOUT_SCHEMA_VERSION,
   ARMOR_SLOTS,
+  TITLE_RANK_OVERRIDE_LIMIT,
   WEAPON_SET_SLOTS,
   MAX_MODIFIERS_PER_HAND_TO_VALIDATE,
+  isCanonicalTitleRankKey,
+  normalizeTitleRankKey,
   type AttributeId,
   type ArmorPiece,
   type AuthoredWeaponRequirement,
@@ -20,6 +24,7 @@ import {
   type TemplateInputKind,
   type TemplateKind,
   type TemplateSourceEnvelope,
+  type TitleRankOverride,
   type ValidationResult,
   type WeaponHandSelection,
   type WeaponId,
@@ -502,7 +507,7 @@ function validateBuild(
   }
   const schemaVersion = safeInteger(record.schemaVersion, `${path}.schemaVersion`, diagnostics, {
     min: 1,
-    max: 1
+    max: BUILD_SCHEMA_VERSION
   });
   const catalogVersion = nullableString(
     record.catalogVersion,
@@ -527,6 +532,14 @@ function validateBuild(
   );
   const attributes = validateAttributes(record.attributes, `${path}.attributes`, diagnostics);
   const skillBar = validateSkillBar(record.skillBar, `${path}.skillBar`, diagnostics);
+  const titleRankOverrides =
+    schemaVersion === 1
+      ? []
+      : validateTitleRankOverrides(
+          record.titleRankOverrides,
+          `${path}.titleRankOverrides`,
+          diagnostics
+        );
   const equipment = validateEquipmentLoadout(record.equipment, `${path}.equipment`, diagnostics);
 
   if (
@@ -539,12 +552,13 @@ function validateBuild(
     secondaryProfessionId === undefined ||
     attributes === null ||
     skillBar === null ||
+    titleRankOverrides === null ||
     equipment === undefined
   ) {
     return null;
   }
   return {
-    schemaVersion,
+    schemaVersion: BUILD_SCHEMA_VERSION,
     catalogVersion,
     id: authoredDocumentId(id),
     name,
@@ -553,6 +567,7 @@ function validateBuild(
     secondaryProfessionId,
     attributes,
     skillBar,
+    titleRankOverrides,
     equipment
   };
 }
@@ -994,6 +1009,69 @@ function validateSkillBar(
     return null;
   }
   return tupleSkillBar(slots as readonly (SkillId | null)[]);
+}
+
+function validateTitleRankOverrides(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): readonly TitleRankOverride[] | null {
+  if (!denseArray(input, path, diagnostics)) {
+    return null;
+  }
+  if (input.length > TITLE_RANK_OVERRIDE_LIMIT) {
+    addDiagnostic(
+      diagnostics,
+      "oversized-collection",
+      path,
+      `Title rank overrides exceed the ${TITLE_RANK_OVERRIDE_LIMIT} override limit.`
+    );
+    return null;
+  }
+  const overrides: TitleRankOverride[] = [];
+  const seen = new Set<string>();
+  for (const [index, item] of input.entries()) {
+    const itemPath = `${path}[${index}]`;
+    const record = asRecord(item, itemPath, diagnostics);
+    if (record === null || !hasOnlyKeys(record, ["key", "rank"])) {
+      addDiagnostic(
+        diagnostics,
+        "invalid-title-rank-override",
+        itemPath,
+        "Title rank override entries must contain only key and rank."
+      );
+      return null;
+    }
+    const rawKey = stringField(record.key, `${itemPath}.key`, diagnostics, 80, {
+      allowEmpty: false
+    });
+    const rank = safeInteger(record.rank, `${itemPath}.rank`, diagnostics);
+    if (rawKey === null || rank === null) {
+      return null;
+    }
+    const key = normalizeTitleRankKey(rawKey);
+    if (key === null || !isCanonicalTitleRankKey(key)) {
+      addDiagnostic(
+        diagnostics,
+        "invalid-title-rank-key",
+        `${itemPath}.key`,
+        "Title rank override key is not a supported canonical title key."
+      );
+      return null;
+    }
+    if (seen.has(key)) {
+      addDiagnostic(
+        diagnostics,
+        "duplicate-title-rank-override",
+        `${itemPath}.key`,
+        "Duplicate title rank override keys are not accepted."
+      );
+      return null;
+    }
+    seen.add(key);
+    overrides.push({ key, rank });
+  }
+  return overrides.sort((left, right) => left.key.localeCompare(right.key, "en-US"));
 }
 
 function validatePveBudget(
@@ -1630,6 +1708,7 @@ function cloneBuild(build: Build): Build {
     secondaryProfessionId: build.secondaryProfessionId,
     attributes: build.attributes.map((attribute) => ({ ...attribute })),
     skillBar: tupleSkillBar(build.skillBar),
+    titleRankOverrides: build.titleRankOverrides.map((override) => ({ ...override })),
     equipment: cloneEquipmentLoadout(build.equipment)
   };
 }

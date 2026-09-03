@@ -1,3 +1,4 @@
+import { createTitleRankCatalog } from "../domain";
 import type {
   AttributeId,
   CatalogAttributeRecord,
@@ -17,7 +18,8 @@ import type {
   SourceReference,
   TemplateAttributeId,
   TemplateProfessionId,
-  TemplateSkillId
+  TemplateSkillId,
+  TitleRankCatalog
 } from "../domain";
 import insigniaCatalogJson from "../../data/generated/epic-11/insignias.catalog.json";
 import professionAttributeCatalogJson from "../../data/generated/epic-03/professions-attributes.catalog.json";
@@ -104,6 +106,7 @@ export interface AppCatalogViews {
   readonly professions: readonly CatalogProfessionRecord[];
   readonly attributes: readonly CatalogAttributeRecord[];
   readonly skills: readonly CatalogSkillRecord[];
+  readonly titleRanks: TitleRankCatalog;
   readonly validation: {
     readonly professionAttributes: ProfessionAttributeValidationCatalog;
     readonly skills: SkillValidationCatalog;
@@ -217,6 +220,7 @@ function createCatalogViews(
   }
 ): AppCatalogViews {
   const equipment = createEquipmentCatalogViews(equipmentInput);
+  const titleRanks = createTitleRankCatalog(skillCatalog.progressionSeries);
   const versions = {
     professionAttributes: String(professionAttributeCatalog.catalogVersion),
     skills: String(skillCatalog.catalogVersion),
@@ -234,6 +238,7 @@ function createCatalogViews(
     professions: professionAttributeCatalog.professions,
     attributes: professionAttributeCatalog.attributes,
     skills: skillCatalog.skills,
+    titleRanks,
     validation: {
       professionAttributes: {
         catalogVersion: versions.professionAttributes,

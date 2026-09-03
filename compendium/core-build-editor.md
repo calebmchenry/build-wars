@@ -60,10 +60,14 @@ attribute budget policy rather than inheriting PvE points.
 ## Interaction Model
 
 The main column renders `Skills` and `Equipment` tabs. `Skills` is the default tab and keeps the
-existing eight-slot skill bar and skill browser. Users can place skills from the browser, replace a
-slot, move to an empty slot, swap filled slots, clear slots, and use keyboard pick/place/cancel
-controls. Drag payloads are opaque app JSON under an internal MIME type and are validated before the
-reducer receives an action.
+existing eight-slot skill bar, compact title-rank panel, and skill browser. Users can place skills
+from the browser, replace a slot, move to an empty slot, swap filled slots, clear slots, and use
+keyboard pick/place/cancel controls. Drag payloads are opaque app JSON under an internal MIME type
+and are validated before the reducer receives an action.
+
+The title-rank panel derives relevant rows from selected skill slots, shows remaining discovered
+titles in a disclosure, and stores only non-default per-build overrides. Opening the all-title
+disclosure or rendering title controls does not create authored override state.
 
 The `Equipment` tab renders the EPIC-14 semantic equipment editor. Opening the tab does not
 materialize `Build.equipment`; only the first meaningful equipment edit creates canonical equipment
@@ -77,8 +81,9 @@ template text selectable.
 
 Skill rows, grid tiles, bar slots, and tooltip panels share one display projection. Tooltip text uses
 the domain `renderSkillTooltipText` helper. Attribute-scaled text receives effective authored ranks
-from `calculateEffectiveAttributeRank`. Title-scaled series use the catalog `rankDomain.max` as a
-visible maximum-title-rank assumption until EPIC-15 owns title state.
+from `calculateEffectiveAttributeRank`. Title-scaled series receive exact raw-key title ranks from
+the shared title-rank resolver, using implicit maximums by default and authored overrides when
+present. Resolved title scaling no longer renders maximum-title-rank assumption copy.
 
 The current promoted EPIC-04 catalog mostly exposes structured-only descriptions rather than copied
 source prose. The editor renders supported structured facts and progression tables separately and
@@ -110,7 +115,7 @@ later evidence-backed ticket changes the architecture.
 
 Local library persistence, storage migrations, tags, favorites, backup/restore, share URLs, and
 saved template workflows are documented in [Local library and sharing](local-library-and-sharing.md).
-Equipment editor behavior is documented in [Equipment editor](equipment-editor.md). EPIC-15 owns
-title rank state, title ownership, and allegiance configuration. Later epics own party/hero builds,
-guide authoring, recommendations, remote icon loading, analytics, auth, deployment, and PWA
-behavior.
+Title-rank behavior is documented in [Title ranks](title-ranks.md). Equipment editor behavior is
+documented in [Equipment editor](equipment-editor.md). Later epics own account-wide title profiles,
+title ownership, allegiance side selection, party/hero builds, guide authoring, recommendations,
+remote icon loading, analytics, auth, deployment, and PWA behavior.

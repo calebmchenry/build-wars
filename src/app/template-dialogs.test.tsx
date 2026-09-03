@@ -57,6 +57,18 @@ describe("TemplateControls", () => {
     ).toBeInTheDocument();
   });
 
+  it("warns on export when title overrides will be omitted", () => {
+    render(<Harness initialState={stateWithTitleOverrides()} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Export" }));
+
+    expect(
+      within(screen.getByRole("dialog", { name: "Export skill template" })).getByText(
+        "Authored title ranks are local-only and are not included in skill template output."
+      )
+    ).toBeInTheDocument();
+  });
+
   it("does not warn for canonical empty equipment on export", () => {
     const state = createBlankEditorState();
     render(
@@ -90,6 +102,23 @@ describe("TemplateControls", () => {
 
     expect(confirm).toHaveBeenCalledWith(
       "Importing a skill template will discard authored equipment from this draft."
+    );
+    expect(screen.getByText("Fresh build")).toBeInTheDocument();
+  });
+
+  it("confirms before skill-template import discards authored title ranks", () => {
+    const confirm = vi.spyOn(window, "confirm").mockReturnValue(false);
+    render(<Harness initialState={stateWithTitleOverrides()} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Import" }));
+    const importDialog = screen.getByRole("dialog", { name: "Import skill template" });
+    fireEvent.change(within(importDialog).getByLabelText("Skill template code"), {
+      target: { value: SKILL_TEMPLATE_PACKAGE_EXAMPLE }
+    });
+    fireEvent.click(within(importDialog).getByRole("button", { name: "Import" }));
+
+    expect(confirm).toHaveBeenCalledWith(
+      "Importing a skill template will discard authored title ranks from this draft."
     );
     expect(screen.getByText("Fresh build")).toBeInTheDocument();
   });
@@ -142,6 +171,17 @@ function stateWithEquipment(): EditorState {
           { slot: "set-4", mainHand: null, offHand: null }
         ]
       }
+    }
+  };
+}
+
+function stateWithTitleOverrides(): EditorState {
+  const state = createBlankEditorState();
+  return {
+    ...state,
+    build: {
+      ...state.build,
+      titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }]
     }
   };
 }

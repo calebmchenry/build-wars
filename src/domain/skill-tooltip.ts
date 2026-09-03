@@ -31,7 +31,7 @@ export type SkillTooltipOutcome =
 
 export interface SkillTooltipContext {
   readonly mode: SkillMode | "unknown";
-  readonly ranks: Readonly<Record<string, number>>;
+  readonly ranks: Readonly<Record<string, number>> | ReadonlyMap<string, number>;
 }
 
 export function renderSkillTooltipText(
@@ -140,7 +140,7 @@ function renderProgressionValue(
 ): TokenRenderOutcome {
   if (series.dependency.kind === "title-rank") {
     const key = series.dependency.titleKey;
-    if (key === null || context.ranks[key] === undefined) {
+    if (key === null || rankValue(context.ranks, key) === undefined) {
       return {
         kind: "unresolved",
         skill: null,
@@ -154,7 +154,7 @@ function renderProgressionValue(
     series.dependency.kind === "attribute" && series.dependency.attributeId !== null
       ? `attribute:${Number(series.dependency.attributeId)}`
       : series.dependency.titleKey;
-  const rank = rankKey === null ? 0 : context.ranks[rankKey];
+  const rank = rankKey === null ? 0 : rankValue(context.ranks, rankKey);
   if (rank === undefined) {
     return {
       kind: "unresolved",
@@ -176,4 +176,17 @@ function renderProgressionValue(
   }
 
   return { kind: "rendered", value: String(value) };
+}
+
+function rankValue(
+  ranks: Readonly<Record<string, number>> | ReadonlyMap<string, number>,
+  key: string
+): number | undefined {
+  return isRankMap(ranks) ? ranks.get(key) : ranks[key];
+}
+
+function isRankMap(
+  ranks: Readonly<Record<string, number>> | ReadonlyMap<string, number>
+): ranks is ReadonlyMap<string, number> {
+  return typeof (ranks as ReadonlyMap<string, number>).get === "function";
 }

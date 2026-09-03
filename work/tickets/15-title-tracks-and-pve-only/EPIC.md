@@ -2,13 +2,15 @@
 id: EPIC-15
 title: Title Rank Controls and PvE-only
 track: functional
-status: ready
+status: done
 priority: high
 depends_on:
   - EPIC-04
   - EPIC-06
   - EPIC-08
   - EPIC-09
+planned_sprint: SPRINT-016
+completed_sprint: SPRINT-016
 tickets:
   - BW-1501
   - BW-1502
@@ -77,3 +79,19 @@ skill catalog cannot identify the needed rank keys and ranges.
 * `BW-1503`: Tooltip and skill-display integration using selected title ranks.
 * `BW-1504`: Title/PvE-only validation cleanup, allegiance warnings, and browser filter handoffs.
 * `BW-1505`: Docs, tests, deferred scope, and closeout.
+
+## Completion Evidence
+
+- SPRINT-016 completed BW-1501 through BW-1505.
+- Title-scaled skill descriptions now default to implicit max rank, update from per-build title
+  overrides, and feed browser rows, skill-bar slots, pinned tooltips, progression labels, validation,
+  local persistence, backup/restore, and workspace fingerprints.
+- The editor exposes compact relevant title controls plus an all-title disclosure. Resolved title
+  dependencies no longer show maximum-title assumption copy.
+- `RULE_ENGINE_VERSION` is `rule-engine:v3`; generic title/allegiance deferrals were replaced with
+  narrow located warnings, while PvE-only skill-count validation remains unchanged.
+- Share URLs and skill-template bytes remain title-free and warn when authored title overrides are
+  omitted.
+- Validation passed: `npm run typecheck`, focused title/persistence/share/rule-engine Vitest
+  coverage, `npm run test:run -- src/app test/domain`, final `npm run verify`, and
+  `git diff --check`.
