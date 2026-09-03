@@ -2,8 +2,10 @@
 id: BW-1804
 title: Attribute Allocation Editor
 epic: EPIC-18
-status: backlog
+status: done
 priority: high
+planned_sprint: SPRINT-019
+completed_sprint: SPRINT-019
 depends_on:
   - BW-1802
   - BW-1803
@@ -46,3 +48,16 @@ clear point investment and refund controls.
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- Completed in `SPRINT-019`.
+- Added selector-derived focused attribute rows and `FocusedAttributeEditor` with allocated/effective
+  ranks, refund/investment costs, budget gates, retained unresolved rows, and subordinate PvE budget
+  controls.
+- Validation evidence: `npm run test:run -- src/app test/domain test/template-compatibility`,
+  `npm run verify`, and `git diff --check`.
+
+## Planning
+
+Planned in `SPRINT-019`.

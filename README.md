@@ -1,11 +1,11 @@
 # Build Wars
 
 Build Wars is a local-first TypeScript web app for Guild Wars Reforged build tooling. The current
-app includes a durable browser-local build editor, neutral multi-build workspaces for complete
-loadout sets, optional party annotations and sharing, skill and equipment workspaces, local
-saved-document library, selected-loadout template sharing, backup/restore, framework-neutral domain
-contracts, template import/export compatibility, source policy, and offline-first promoted catalog
-data.
+app opens to a focused two-panel build composer with the active loadout on the left and a compact
+skills catalog on the right. Durable secondary tools preserve neutral multi-build workspaces,
+optional party annotations and sharing, equipment and title workspaces, the local saved-document
+library, selected-loadout template sharing, backup/restore, framework-neutral domain contracts,
+template import/export compatibility, source policy, and offline-first promoted catalog data.
 
 ## Prerequisites
 
@@ -95,10 +95,13 @@ Included now:
   `EquipmentLoadout`, canonical armor and weapon-set topology, known/unresolved semantic equipment
   selections, headgear and rune rank-adjustment helpers, weapon-set analysis, and optional
   equipment validation catalog views.
-- A browser-based core build editor under `src/app` for one active authored loadout at a time:
-  profession and mode controls, PvE attribute budgets, deterministic skill search/filter views,
-  an eight-slot skill bar with pointer and keyboard operations, compact title-rank controls,
-  equipment workspace tabs, tooltips, validation presentation, and skill-template import/export.
+- A browser-based focused build composer under `src/app` for one active authored loadout at a time:
+  inline build naming, Any-aware profession pickers, PvE attribute budgets, effective-rank display,
+  a deterministic skills catalog, an eight-slot skill bar with shared pointer/click/keyboard
+  placement policy, inline skill-template import/export, tooltips, and policy-safe placeholder
+  icons/glyphs. Library, build-set, party, equipment, title-rank, sharing, validation,
+  backup/restore, and transfer workflows remain available as secondary tools without changing the
+  storage key or persistence schema.
 - Neutral build sets under `src/domain/build-set.ts` and `src/app/build-set-state.ts`: up to 16
   complete loadouts with stable entry IDs, labels, `build | variant | freeform` kinds, notes, one
   active editor, inactive durable snapshots, duplicate variants, comparison rows, aggregate
@@ -118,7 +121,9 @@ Included now:
   share URLs capped at 1,800 characters, inert JSON whole-library backup/restore, inert Build Wars
   JSON build-set transfer, and native party JSON transfer. Share URLs and skill templates remain
   selected-loadout-only and warn when sibling entries, party metadata, notes, meaningful authored
-  equipment, or authored title-rank overrides are omitted.
+  equipment, or authored title-rank overrides are omitted. Primary Any blocks canonical
+  skill-template export; secondary Any uses the existing secondary-none template semantics when
+  validation and codec proof pass.
 
 Deferred to later epics:
 

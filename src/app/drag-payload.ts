@@ -29,10 +29,18 @@ export function parseDragPayload(value: string): SkillDragPayload | null {
     if (!isRecord(parsed) || typeof parsed.kind !== "string") {
       return null;
     }
-    if (parsed.kind === "browser-skill" && Number.isSafeInteger(parsed.skillId)) {
+    if (
+      parsed.kind === "browser-skill" &&
+      hasOnlyKeys(parsed, ["kind", "skillId"]) &&
+      Number.isSafeInteger(parsed.skillId)
+    ) {
       return { kind: "browser-skill", skillId: Number(parsed.skillId) };
     }
-    if (parsed.kind === "skill-slot" && Number.isSafeInteger(parsed.slotIndex)) {
+    if (
+      parsed.kind === "skill-slot" &&
+      hasOnlyKeys(parsed, ["kind", "slotIndex"]) &&
+      Number.isSafeInteger(parsed.slotIndex)
+    ) {
       return { kind: "skill-slot", slotIndex: Number(parsed.slotIndex) };
     }
     return null;
@@ -43,4 +51,12 @@ export function parseDragPayload(value: string): SkillDragPayload | null {
 
 function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function hasOnlyKeys(
+  value: Readonly<Record<string, unknown>>,
+  allowed: readonly string[]
+): boolean {
+  const allowedKeys = new Set(allowed);
+  return Object.keys(value).every((key) => allowedKeys.has(key));
 }

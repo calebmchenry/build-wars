@@ -90,6 +90,36 @@ describe("template workflow", () => {
     expect(projection.diagnostics[0]?.code).toBe("missing-skill-template-id");
   });
 
+  it("blocks primary Any from canonical export while preserving secondary Any semantics", () => {
+    const primaryAny = createBlankEditorState();
+    const primaryProjection = projectEditorToSkillTemplate(primaryAny, catalogs, {
+      allowRawOverlay: false
+    });
+
+    expect(primaryProjection.document).toBeNull();
+    expect(primaryProjection.diagnostics).toContainEqual({
+      code: "invalid-field-value",
+      location: "primaryProfession",
+      message: "Primary profession must be selected before canonical skill-template export."
+    });
+
+    const primarySelected = editorReducer(createBlankEditorState(), {
+      type: "set-profession",
+      field: "primary",
+      professionId: catalogId<"Profession">(1)
+    });
+    const secondaryAny = {
+      ...primarySelected,
+      build: {
+        ...primarySelected.build,
+        secondaryProfessionId: null
+      }
+    };
+    const secondaryValidation = selectValidationView(secondaryAny, catalogs);
+
+    expect(secondaryValidation.exportPolicy.canonical.available).toBe(true);
+  });
+
   it("selects share output from exact source first, then proven canonical output", () => {
     const imported = importSkillTemplateToEditor(
       SKILL_TEMPLATE_PACKAGE_EXAMPLE,

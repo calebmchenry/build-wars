@@ -165,11 +165,11 @@ export function selectShareTemplateExport(policy: ExportWorkflowView): ShareTemp
   }
   return {
     ok: false,
-    blockedReasons: [
+    blockedReasons: uniqueMessages([
       ...policy.exactSource.blockedReasons,
       ...policy.canonical.blockedReasons,
       ...policy.projectionDiagnostics.map((diagnostic) => diagnostic.message)
-    ]
+    ])
   };
 }
 
@@ -536,6 +536,14 @@ function templateProfessionField(
     if (allowRawOverlay && raw !== null) {
       return raw.templateId;
     }
+    if (location === "primaryProfession") {
+      diagnostics.push({
+        code: "invalid-field-value",
+        location,
+        message: "Primary profession must be selected before canonical skill-template export."
+      });
+      return null;
+    }
     return 0;
   }
   const templateId = catalogs.crosswalk.professionTemplateIdFromCatalogId(professionId);
@@ -626,6 +634,10 @@ function tupleTemplateSkillBar(values: readonly (number | null)[]): TemplateSkil
     templateSkillId(values[6] ?? 0),
     templateSkillId(values[7] ?? 0)
   ];
+}
+
+function uniqueMessages(messages: readonly string[]): readonly string[] {
+  return [...new Set(messages)];
 }
 
 function tupleRawSkillBar(values: readonly (RawTemplateOverlayEntry | null)[]): RawSkillBarOverlay {

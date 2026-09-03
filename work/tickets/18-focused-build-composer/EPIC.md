@@ -2,8 +2,10 @@
 id: EPIC-18
 title: Focused Build Composer
 track: functional
-status: backlog
+status: done
 priority: critical
+planned_sprint: SPRINT-019
+completed_sprint: SPRINT-019
 depends_on:
   - EPIC-03
   - EPIC-04
@@ -91,6 +93,24 @@ and importing or exporting the skill template code inline.
 - `BW-1807`: Skill catalog tab with profession filtering and attribute grouping.
 - `BW-1808`: Runtime icon assets and in-game visual polish.
 - `BW-1809`: Verification, documentation updates, and closeout.
+
+## Planning
+
+Planned in `SPRINT-019`. Execution should preserve completed editor, template, library, equipment,
+build-set, party, validation, backup, restore, and transfer behavior while making the focused
+single-build composer the primary first-screen workflow.
+
+## Closeout Evidence
+
+- Completed in `SPRINT-019`.
+- Implemented a composer-first app shell with active-loadout header, focused attributes, shared
+  skill-bar placement policy, inline template controls, and right-panel Skills catalog.
+- Preserved library, build-set, party, equipment, title-rank, sharing, validation, backup, restore,
+  transfer, and modal template workflows behind keyboard-reachable secondary tools.
+- Documented naming, Any semantics, selected-loadout boundaries, asset-policy outcome, and deferred
+  scope in README and compendium records.
+- Validation evidence: `npm run test:run -- src/app test/domain test/template-compatibility`,
+  `npm run verify`, and `git diff --check`.
 
 ## Notes
 

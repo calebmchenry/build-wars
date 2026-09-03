@@ -82,9 +82,10 @@ atomic compare-and-swap.
 
 ## Library Panel
 
-The editor now includes a compact local library panel on the same screen. It supports explicit save,
-update, save-as-new, duplicate, delete confirmation, favorite, rename, tags, notes, load, Copy Into
-Set, selected-loadout share, backup, and restore entry points.
+The focused composer keeps local-library workflows in the keyboard-reachable `Secondary tools`
+surface. The local library panel supports explicit save, update, save-as-new, duplicate, delete
+confirmation, favorite, rename, tags, notes, load, Copy Into Set, selected-loadout share, backup,
+and restore entry points without competing with first-screen build authoring.
 
 Library selectors search deterministically by saved document name, entry labels, party member
 labels, roles, member-kind labels, slot notes, resolved skill names, unresolved raw skill labels,
@@ -120,10 +121,12 @@ empty-slot, or no-selection build sets cannot invoke selected-loadout share/temp
 
 Share export prefers exact-source bare code when the imported source fingerprint still matches. It
 falls back to proven canonical bare code only after validation, representation, encode, and
-decode-back checks pass. Equipment-only validation issues do not block skill-template export. The
-complete encoded URL is capped at 1,800 characters; oversized or unrepresentable shares leave
-selectable template text and a blocked reason. Meaningful authored equipment and non-default
-authored title-rank overrides show omission warnings because both remain local-only.
+decode-back checks pass. Primary Any blocks canonical export; secondary Any is representable as the
+existing secondary-none template value when the proof passes. Equipment-only validation issues do
+not block skill-template export. The complete encoded URL is capped at 1,800 characters; oversized
+or unrepresentable shares leave selectable template text and a blocked reason. Meaningful authored
+equipment and non-default authored title-rank overrides show omission warnings because both remain
+local-only.
 
 Valid share fragments hydrate an unassociated working draft and are consumed with
 `history.replaceState` when available. If a share opens over an existing stored draft, the shared

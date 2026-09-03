@@ -1,30 +1,17 @@
 import { useEffect, useMemo, useReducer, useRef, useState, type Dispatch } from "react";
 
 import { promotedAppCatalogs, type AppCatalogLoadState } from "./catalogs";
-import { AttributeEditor } from "./components/AttributeEditor";
-import { BuildSetNavigator } from "./components/BuildSetNavigator";
+import { BuildComposer } from "./components/BuildComposer";
 import { CatalogAttribution } from "./components/CatalogAttribution";
-import { EditorWorkspaceTabs, type EditorWorkspaceTab } from "./components/EditorWorkspaceTabs";
-import { EquipmentPanel } from "./components/EquipmentPanel";
+import type { EditorWorkspaceTab } from "./components/EditorWorkspaceTabs";
+import { ComposerSecondaryTools } from "./components/ComposerSecondaryTools";
 import { BackupDialog, RestoreDialog } from "./components/LibraryDialogs";
-import { LibraryPanel } from "./components/LibraryPanel";
-import { ProfessionModeEditor } from "./components/ProfessionModeEditor";
-import { ShareControls } from "./components/ShareControls";
 import { BuildSetTransferDialog } from "./components/BuildSetTransferDialog";
 import { PartyTransferDialog } from "./components/PartyTransferDialog";
-import { SkillBar } from "./components/SkillBar";
-import { SkillBrowser } from "./components/SkillBrowser";
 import { SkillTooltip } from "./components/SkillTooltip";
 import { StorageBanner } from "./components/StorageBanner";
-import { TemplateControls } from "./components/TemplateDialogs";
-import { TitleRankPanel } from "./components/TitleRankPanel";
-import { ValidationPanel } from "./components/ValidationPanel";
-import { selectEquipmentPanelView } from "./equipment-selectors";
-import {
-  selectSkillDisplay,
-  selectTitleRankPanelView,
-  selectValidationView
-} from "./editor-selectors";
+import { selectComposerLoadoutContext } from "./composer-selectors";
+import { selectSkillDisplay, selectValidationView } from "./editor-selectors";
 import type { EditorAction } from "./editor-state";
 import { browserLocalStorage, readLocalLibrary, writeLocalLibrary } from "./local-storage";
 import { persistedCatalogFactsFromValidation } from "./persistence-schema";
@@ -97,14 +84,11 @@ export function App() {
   if (validationView === null || savedWith === null) {
     throw new Error("Catalog validation view missing after catalog readiness check.");
   }
+  const loadoutContext = selectComposerLoadoutContext(workspace);
   const tooltipView =
-    workspaceTab !== "skills" || state.tooltip.skillId === null
+    !loadoutContext.selected || state.tooltip.skillId === null
       ? null
       : selectSkillDisplay(catalogs, state, state.tooltip.skillId, "tooltip");
-  const equipmentView = selectEquipmentPanelView(state, catalogs, validationView.result);
-  const titleRankPanelView = selectTitleRankPanelView(state, catalogs, validationView.result);
-  const hasSelectedLoadout =
-    workspace.document.kind === "build" || workspace.document.selectedEntryId !== null;
 
   return (
     <main className="app-shell editor-shell" aria-labelledby="app-title" data-catalog-state="ready">
@@ -114,92 +98,38 @@ export function App() {
         diagnostics={workspace.storage.diagnostics}
         rejectedPayloadSummary={workspace.storage.rejectedPayloadSummary}
       />
-      <div className="workspace-layout">
-        <div className="left-column">
-          <LibraryPanel
-            workspace={workspace}
-            catalogs={catalogs}
-            currentFacts={savedWith}
-            dispatch={workspaceDispatch}
-            onShareRecord={setShareRecordId}
-            onOpenBackup={() => setBackupOpen(true)}
-            onOpenRestore={() => setRestoreOpen(true)}
-          />
-          {hasSelectedLoadout ? (
-            <>
-              <ProfessionModeEditor
-                state={state}
-                catalogs={catalogs}
-                validation={validationView.result}
-                dispatch={dispatch}
-              />
-              <AttributeEditor
-                state={state}
-                catalogs={catalogs}
-                validation={validationView}
-                dispatch={dispatch}
-              />
-              <TemplateControls
-                state={state}
-                catalogs={catalogs}
-                validation={validationView}
-                dispatch={dispatch}
-                requestDraftReplacement={() =>
-                  needsDirtyGuard(workspace) && !window.confirm("Discard unsaved draft changes?")
-                    ? "cancel"
-                    : "discard"
-                }
-                selectedLoadoutOnly={workspace.document.kind === "build-set"}
-              />
-            </>
-          ) : (
-            <section className="editor-panel empty-loadout-panel">
-              <h2>No Selected Loadout</h2>
-              <p>
-                Add a loadout to edit professions, attributes, templates, equipment, and skills.
-              </p>
-            </section>
-          )}
-          <ShareControls
-            workspace={workspace}
-            catalogs={catalogs}
-            shareRecordId={shareRecordId}
-            dispatch={workspaceDispatch}
-          />
-          {hasSelectedLoadout ? <ValidationPanel validation={validationView} /> : null}
-        </div>
-        <div className="main-column">
-          <BuildSetNavigator
-            workspace={workspace}
-            catalogs={catalogs}
-            dispatch={workspaceDispatch}
-            onOpenTransfer={() => setTransferOpen(true)}
-            onOpenPartyTransfer={() => setPartyTransferOpen(true)}
-          />
-          {hasSelectedLoadout ? (
-            <EditorWorkspaceTabs
-              activeTab={workspaceTab}
-              onChange={setWorkspaceTab}
-              skills={
-                <>
-                  <SkillBar state={state} catalogs={catalogs} dispatch={dispatch} />
-                  <TitleRankPanel view={titleRankPanelView} dispatch={dispatch} />
-                  <SkillBrowser state={state} catalogs={catalogs} dispatch={dispatch} />
-                </>
-              }
-              equipment={<EquipmentPanel view={equipmentView} dispatch={dispatch} />}
-            />
-          ) : (
-            <section className="editor-panel empty-state">
-              <strong>No loadout selected</strong>
-            </section>
-          )}
-        </div>
-        <SkillTooltip
-          view={tooltipView}
-          onClose={() => dispatch({ type: "set-tooltip", skillId: null, pinned: false })}
-        />
-      </div>
+      <BuildComposer
+        workspace={workspace}
+        catalogs={catalogs}
+        validation={validationView}
+        editorDispatch={dispatch}
+        workspaceDispatch={workspaceDispatch}
+        requestDraftReplacement={() =>
+          needsDirtyGuard(workspace) && !window.confirm("Discard unsaved draft changes?")
+            ? "cancel"
+            : "discard"
+        }
+      />
+      <ComposerSecondaryTools
+        workspace={workspace}
+        catalogs={catalogs}
+        validation={validationView}
+        currentFacts={savedWith}
+        editorDispatch={dispatch}
+        workspaceDispatch={workspaceDispatch}
+        workspaceTab={workspaceTab}
+        onWorkspaceTabChange={setWorkspaceTab}
+        shareRecordId={shareRecordId}
+        onShareRecord={setShareRecordId}
+        onOpenBackup={() => setBackupOpen(true)}
+        onOpenRestore={() => setRestoreOpen(true)}
+        onOpenTransfer={() => setTransferOpen(true)}
+        onOpenPartyTransfer={() => setPartyTransferOpen(true)}
+      />
+      <SkillTooltip
+        view={tooltipView}
+        onClose={() => dispatch({ type: "set-tooltip", skillId: null, pinned: false })}
+      />
       <div className="live-region" role="status" aria-live="polite">
         {state.transient?.text ?? ""}
       </div>

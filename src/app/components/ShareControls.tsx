@@ -132,8 +132,8 @@ export function ShareControls({
         <div className="blocked-option">
           <strong>Sharing blocked</strong>
           <ul>
-            {shareBlockedReasons(share).map((reason) => (
-              <li key={reason}>{reason}</li>
+            {shareBlockedReasons(share).map((reason, index) => (
+              <li key={`${index}:${reason}`}>{reason}</li>
             ))}
           </ul>
         </div>

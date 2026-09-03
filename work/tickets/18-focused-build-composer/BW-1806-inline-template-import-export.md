@@ -2,8 +2,10 @@
 id: BW-1806
 title: Inline Template Import Export
 epic: EPIC-18
-status: backlog
+status: done
 priority: high
+planned_sprint: SPRINT-019
+completed_sprint: SPRINT-019
 depends_on:
   - BW-1802
   - BW-1803
@@ -48,3 +50,16 @@ input with copy and paste behavior.
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- Completed in `SPRINT-019`.
+- Added `InlineTemplateCode` with preferred proven output, blocked reasons, selectable fallback,
+  explicit Apply import, copy feedback, dirty/omission guards, and selected-loadout-only warnings.
+- Kept modal template controls as a tested secondary fallback.
+- Validation evidence: `npm run test:run -- src/app test/domain test/template-compatibility`,
+  `npm run verify`, and `git diff --check`.
+
+## Planning
+
+Planned in `SPRINT-019`.

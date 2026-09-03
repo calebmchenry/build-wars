@@ -48,8 +48,10 @@ Save, autosave, pagehide flush, dirty fingerprinting, summaries, validation, com
 restore preview, library rows, and transfer export all use the same materialized build-set snapshot.
 The active loadout therefore cannot drift from what persistence, validation, or export sees.
 
-Removing the last entry leaves a real empty set with no selected loadout. Unsupported selected-loadout
-actions are disabled or blocked until an entry exists.
+Removing the last entry leaves a real empty set with no selected loadout. Unsupported
+selected-loadout actions are disabled or blocked until an entry exists. In the focused composer
+shell, empty build sets and empty selected party slots render a no-selected-loadout state with
+create or assign actions instead of hydrating a placeholder build.
 
 ## Party Workspace
 
@@ -152,6 +154,8 @@ UTF-8 bytes, and is not an import format.
 Share URLs and skill-template import/export remain selected-loadout-only. They use the existing
 skill-template URL grammar and do not include sibling entries, party metadata, entry notes, slot
 notes, semantic equipment, title-rank overrides, library metadata, backup data, or transfer JSON.
+The composer inline template controls warn about this selected-loadout boundary in build-set and
+party contexts.
 
 ## Deferred Scope
 

@@ -2,8 +2,10 @@
 id: BW-1805
 title: Skill Bar Drag Drop Refinement
 epic: EPIC-18
-status: backlog
+status: done
 priority: critical
+planned_sprint: SPRINT-019
+completed_sprint: SPRINT-019
 depends_on:
   - BW-1802
   - BW-1807
@@ -46,3 +48,17 @@ editing and handles the focused composer rules explicitly.
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- Completed in `SPRINT-019`.
+- Added `skill-bar-workflow.ts` plus a catalog-informed `skill-bar-actions.ts` apply path used by
+  pointer drop, click placement, and keyboard placement.
+- Covered duplicate movement, occupied replacement, bar move/swap, explicit removal, invalid/stale
+  payload rejection, raw-overlay preservation, and one resolved elite enforcement.
+- Validation evidence: `npm run test:run -- src/app test/domain test/template-compatibility`,
+  `npm run verify`, and `git diff --check`.
+
+## Planning
+
+Planned in `SPRINT-019`.

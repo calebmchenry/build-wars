@@ -1,4 +1,4 @@
-import type { Dispatch } from "react";
+import type { Dispatch, DragEvent } from "react";
 
 import { catalogId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
@@ -15,6 +15,7 @@ import type {
   ResourceFilterValue
 } from "../editor-state";
 import { BUILD_WARS_DRAG_MIME, browserSkillDragPayload } from "../drag-payload";
+import { applySkillBarIntent } from "../skill-bar-actions";
 import { SkillDisplay } from "./SkillDisplay";
 
 const RESOURCE_FILTERS: readonly ResourceFilterKind[] = [
@@ -241,6 +242,7 @@ export function SkillBrowser({
                           BUILD_WARS_DRAG_MIME,
                           browserSkillDragPayload(skill.id)
                         );
+                        setLocalDragImage(event, skill.name);
                         dispatch({
                           type: "start-drag",
                           drag: { kind: "browser-skill", skillId: skill.id }
@@ -257,19 +259,14 @@ export function SkillBrowser({
                               type="button"
                               aria-label={`Place ${skill.name} in slot ${targetSlot + 1}`}
                               onClick={() => {
-                                dispatch({
-                                  type: "place-skill",
-                                  slotIndex: targetSlot,
-                                  skillId: skill.id
-                                });
-                                dispatch({
-                                  type: "set-message",
-                                  tone: "success",
-                                  text: `${skill.name} placed in slot ${targetSlot + 1}.`
+                                applySkillBarIntent(state, catalogs, dispatch, {
+                                  kind: "catalog-skill",
+                                  skillId: skill.id,
+                                  toIndex: targetSlot
                                 });
                               }}
                             >
-                              +
+                              Place
                             </button>
                             <button
                               type="button"
@@ -281,7 +278,7 @@ export function SkillBrowser({
                                 })
                               }
                             >
-                              k
+                              Pick
                             </button>
                             <button
                               type="button"
@@ -290,7 +287,7 @@ export function SkillBrowser({
                                 dispatch({ type: "set-tooltip", skillId: skill.id, pinned: true })
                               }
                             >
-                              i
+                              Details
                             </button>
                           </div>
                         }
@@ -339,10 +336,22 @@ function professionScopeFromValue(value: string): BrowserProfessionScope {
 
 function viewLabel(view: BrowserViewMode): string {
   if (view === "small-grid") {
-    return "S";
+    return "Compact";
   }
   if (view === "large-grid") {
-    return "L";
+    return "Expanded";
   }
   return "List";
+}
+
+function setLocalDragImage(event: DragEvent<HTMLElement>, label: string): void {
+  if (event.dataTransfer.setDragImage === undefined || typeof document === "undefined") {
+    return;
+  }
+  const preview = document.createElement("div");
+  preview.className = "drag-preview";
+  preview.textContent = label;
+  document.body.append(preview);
+  event.dataTransfer.setDragImage(preview, 18, 18);
+  window.setTimeout(() => preview.remove(), 0);
 }

@@ -26,8 +26,13 @@ describe("PartySharePanel", () => {
     render(<Harness initial={partyDraft()} />);
 
     expect(screen.getByText("Multi-Code Copy")).toBeInTheDocument();
-    expect(screen.getByText(/1 available \/ 1 empty/)).toBeInTheDocument();
+    expect(screen.getByText(/0 available \/ 1 empty \/ 1 unavailable/)).toBeInTheDocument();
     expect(screen.getByDisplayValue(/Build Wars Party Codes/)).toBeInTheDocument();
+    expect(
+      screen.getByDisplayValue(
+        /Primary profession must be selected before canonical skill-template export\./
+      )
+    ).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Copy Partial Multi-Code" }));
 

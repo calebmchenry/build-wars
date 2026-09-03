@@ -22,8 +22,8 @@ describe("SkillBrowser", () => {
   it("can switch list and grid views", () => {
     render(<Harness />);
 
-    fireEvent.click(screen.getByRole("button", { name: "S" }));
-    expect(screen.getByRole("button", { name: "S" })).toHaveAttribute("aria-pressed", "true");
+    fireEvent.click(screen.getByRole("button", { name: "Compact" }));
+    expect(screen.getByRole("button", { name: "Compact" })).toHaveAttribute("aria-pressed", "true");
   });
 });
 

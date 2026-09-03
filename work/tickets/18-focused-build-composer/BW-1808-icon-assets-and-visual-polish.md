@@ -2,8 +2,10 @@
 id: BW-1808
 title: Icon Assets And Visual Polish
 epic: EPIC-18
-status: backlog
+status: done
 priority: high
+planned_sprint: SPRINT-019
+completed_sprint: SPRINT-019
 depends_on:
   - BW-1803
   - BW-1804
@@ -48,3 +50,18 @@ Guild Wars-inspired assets and cost icons where policy allows.
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- Completed in `SPRINT-019`.
+- Added a shared `CatalogIcon` placeholder primitive and product-owned resource/timing glyphs; no
+  binary assets, remote media rendering, runtime fetch, preload, CSS URL, canvas, or service-worker
+  path was added.
+- Tightened composer layout, fixed slot dimensions, responsive stacking, focus/hover/drop/invalid
+  states, reduced-motion behavior, and long-text wrapping.
+- Validation evidence: `npm run test:run -- src/app test/domain test/template-compatibility`,
+  `npm run verify`, and `git diff --check`.
+
+## Planning
+
+Planned in `SPRINT-019`.

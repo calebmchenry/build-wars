@@ -175,6 +175,10 @@ export type EditorAction =
       readonly mode: GameMode;
     }
   | {
+      readonly type: "set-build-name";
+      readonly name: string;
+    }
+  | {
       readonly type: "set-pve-budget";
       readonly level?: number;
       readonly questBonus?: AttributeQuestBonusPolicy;
@@ -221,6 +225,12 @@ export type EditorAction =
   | {
       readonly type: "clear-skill-slot";
       readonly slotIndex: number;
+    }
+  | {
+      readonly type: "apply-skill-bar-plan";
+      readonly skillBar: SkillBar;
+      readonly rawSkillBar: RawSkillBarOverlay;
+      readonly selectedSlotIndex: number | null;
     }
   | {
       readonly type: "select-slot";
@@ -407,6 +417,11 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
         ...state,
         build: { ...state.build, mode: action.mode }
       };
+    case "set-build-name":
+      return {
+        ...state,
+        build: { ...state.build, name: normalizeBuildName(action.name) }
+      };
     case "set-pve-budget":
       return {
         ...state,
@@ -439,6 +454,8 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
       return swapSkillSlots(state, action.leftIndex, action.rightIndex);
     case "clear-skill-slot":
       return clearSkillSlot(state, action.slotIndex);
+    case "apply-skill-bar-plan":
+      return applySkillBarPlan(state, action);
     case "set-armor-rune":
     case "set-armor-insignia":
     case "set-headgear-attribute":
@@ -739,6 +756,30 @@ function clearSkillSlot(state: EditorState, slotIndex: number): EditorState {
   };
 }
 
+function applySkillBarPlan(
+  state: EditorState,
+  action: Extract<EditorAction, { readonly type: "apply-skill-bar-plan" }>
+): EditorState {
+  if (!validSkillBar(action.skillBar) || !validRawSkillBar(action.rawSkillBar)) {
+    return state;
+  }
+  if (action.selectedSlotIndex !== null && !validSlotIndex(action.selectedSlotIndex)) {
+    return state;
+  }
+  return {
+    ...state,
+    build: {
+      ...state.build,
+      skillBar: action.skillBar
+    },
+    rawTemplate: {
+      ...state.rawTemplate,
+      skillBar: action.rawSkillBar
+    },
+    selectedSlotIndex: action.selectedSlotIndex
+  };
+}
+
 function placeKeyboardSelection(state: EditorState, slotIndex: number): EditorState {
   if (!validSlotIndex(slotIndex) || state.keyboardPlacement === null) {
     return state;
@@ -792,4 +833,25 @@ function validSlotIndex(index: number): boolean {
 
 function validArrayIndex(index: number, length: number): boolean {
   return Number.isSafeInteger(index) && index >= 0 && index < length;
+}
+
+function validSkillBar(value: SkillBar): boolean {
+  return (
+    Array.isArray(value) &&
+    value.length === SKILL_BAR_SLOT_COUNT &&
+    value.every((slot) => slot === null || Number.isSafeInteger(Number(slot)))
+  );
+}
+
+function validRawSkillBar(value: RawSkillBarOverlay): boolean {
+  return (
+    Array.isArray(value) &&
+    value.length === SKILL_BAR_SLOT_COUNT &&
+    value.every((entry) => entry === null || entry.namespace === "skill")
+  );
+}
+
+function normalizeBuildName(name: string): string {
+  const normalized = name.trim().replace(/\s+/g, " ");
+  return normalized.length === 0 ? "Untitled Build" : normalized.slice(0, 120);
 }

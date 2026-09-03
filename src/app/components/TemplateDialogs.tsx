@@ -230,8 +230,8 @@ function ExportOption({
         </>
       ) : (
         <ul>
-          {blockedReasons.map((reason) => (
-            <li key={reason}>{reason}</li>
+          {blockedReasons.map((reason, index) => (
+            <li key={`${index}:${reason}`}>{reason}</li>
           ))}
         </ul>
       )}

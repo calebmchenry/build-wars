@@ -2,8 +2,10 @@
 id: BW-1807
 title: Skill Catalog Tab
 epic: EPIC-18
-status: backlog
+status: done
 priority: critical
+planned_sprint: SPRINT-019
+completed_sprint: SPRINT-019
 depends_on:
   - BW-1802
   - BW-1803
@@ -48,3 +50,16 @@ active professions and grouped by attribute.
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- Completed in `SPRINT-019`.
+- Added `FocusedSkillCatalog` with Skills tab, selected-profession/all-playable defaults,
+  deterministic grouped rows, UI-only group collapse, bounded rendering, search/scope controls, and
+  compact fact display.
+- Validation evidence: `npm run test:run -- src/app test/domain test/template-compatibility`,
+  `npm run verify`, and `git diff --check`.
+
+## Planning
+
+Planned in `SPRINT-019`.

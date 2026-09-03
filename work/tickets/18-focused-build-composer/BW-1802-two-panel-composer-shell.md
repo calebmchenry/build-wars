@@ -2,8 +2,10 @@
 id: BW-1802
 title: Two Panel Composer Shell
 epic: EPIC-18
-status: backlog
+status: done
 priority: critical
+planned_sprint: SPRINT-019
+completed_sprint: SPRINT-019
 depends_on:
   - BW-1801
 created: 2026-09-03
@@ -45,3 +47,17 @@ that makes single-build creation the default experience.
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- Completed in `SPRINT-019`.
+- Added `BuildComposer` and `ComposerSecondaryTools`; `App.tsx` keeps boot, storage, autosave,
+  share-fragment, and global dialog ownership while mounting the two-panel composer.
+- Covered single-build, empty build-set, and empty party-slot states plus App regressions for moved
+  secondary workflows.
+- Validation evidence: `npm run test:run -- src/app test/domain test/template-compatibility`,
+  `npm run verify`, and `git diff --check`.
+
+## Planning
+
+Planned in `SPRINT-019`.

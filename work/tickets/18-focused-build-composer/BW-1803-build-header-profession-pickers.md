@@ -2,8 +2,10 @@
 id: BW-1803
 title: Build Header Profession Pickers
 epic: EPIC-18
-status: backlog
+status: done
 priority: high
+planned_sprint: SPRINT-019
+completed_sprint: SPRINT-019
 depends_on:
   - BW-1802
 created: 2026-09-03
@@ -44,3 +46,17 @@ profession icon, and editable build name.
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- Completed in `SPRINT-019`.
+- Added `ComposerHeader` and `ProfessionIconPicker` with Any plus ten professions, keyboard/Escape
+  behavior, unresolved raw-profession evidence, active-build name editing, and compact mode control.
+- Added primary-Any canonical export blocking while preserving secondary-Any template-none
+  semantics where proof passes.
+- Validation evidence: `npm run test:run -- src/app test/domain test/template-compatibility`,
+  `npm run verify`, and `git diff --check`.
+
+## Planning
+
+Planned in `SPRINT-019`.

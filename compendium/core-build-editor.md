@@ -59,16 +59,26 @@ attribute budget policy rather than inheriting PvE points.
 
 ## Interaction Model
 
-The main column renders `Skills` and `Equipment` tabs for the active loadout. In build-set mode,
+The first screen renders the focused build composer. The left side owns the active loadout header,
+Any-aware profession pickers, mode, focused attribute editor, eight-slot skill bar, and inline
+skill-template import/export. The right side owns the compact skills catalog. In build-set mode,
 that active loadout is the selected entry from a neutral multi-build workspace; inactive entries are
 durable snapshots and are not separate live editors. In enabled party mode, the editor is bound only
 to an occupied selected slot. Selecting an empty party slot snapshots the outgoing member, leaves no
-active editor, disables selected-loadout controls, and shows create or assign actions instead of
-materializing a placeholder build. `Skills` is the default tab and keeps the existing eight-slot
-skill bar, compact title-rank panel, and skill browser. Users can place skills from the browser,
-replace a slot, move to an empty slot, swap filled slots, clear slots, and use keyboard
-pick/place/cancel controls. Drag payloads are opaque app JSON under an internal MIME type and are
-validated before the reducer receives an action.
+selected loadout, disables selected-loadout controls, and shows create or assign actions instead of
+materializing a placeholder build.
+
+Secondary tools preserve library, build-set, party, equipment, title-rank, sharing, backup,
+restore, transfer, modal template fallback, and full validation workflows behind a keyboard-reachable
+disclosure. `Skills` remains the default secondary workspace tab for title ranks; `Equipment`
+continues to lazy-author semantic equipment only after the first meaningful equipment edit.
+
+Users can place skills from either catalog surface, replace a slot, move to an empty slot, swap
+filled slots, clear slots, use a visible removal target, and use keyboard pick/place/cancel
+controls. Catalog placement, pointer drop, click placement, and keyboard placement all route
+through one app-layer planner before the catalog-free reducer applies an eight-slot plan. Drag
+payloads are opaque app JSON under an internal MIME type and are validated before they can mutate
+state.
 
 The title-rank panel derives relevant rows from selected skill slots, shows remaining discovered
 titles in a disclosure, and stores only non-default per-build overrides. Opening the all-title
@@ -108,6 +118,8 @@ Exact-source export is allowed when the current reconstructed template field fin
 imported source fingerprint, including after UI-only changes or semantic edit/revert sequences.
 Canonical export is shown only when app projection has explicit template mappings, validation has no
 errors, EPIC-05 encode succeeds, and decode-back field equality proves fidelity.
+Primary Any blocks canonical skill-template export with a field-specific reason. Secondary Any
+continues to use the existing template-none semantics when the projection and codec proof pass.
 
 ## Performance Observation
 

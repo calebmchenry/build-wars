@@ -5,6 +5,8 @@ import type { AppCatalogViews } from "../catalogs";
 import { BUILD_WARS_DRAG_MIME, parseDragPayload, slotDragPayload } from "../drag-payload";
 import { selectSkillSlotDisplays } from "../editor-selectors";
 import type { EditorAction, EditorState } from "../editor-state";
+import { applySkillBarIntent } from "../skill-bar-actions";
+import type { SkillBarWorkflowIntent } from "../skill-bar-workflow";
 import { SkillDisplay } from "./SkillDisplay";
 
 export function SkillBar({
@@ -17,9 +19,11 @@ export function SkillBar({
   readonly dispatch: Dispatch<EditorAction>;
 }) {
   const slots = selectSkillSlotDisplays(state, catalogs);
+  const applyIntent = (intent: SkillBarWorkflowIntent) =>
+    applySkillBarIntent(state, catalogs, dispatch, intent);
 
   return (
-    <section className="editor-panel skillbar-panel" aria-labelledby="skillbar-title">
+    <section className="skillbar-panel" aria-labelledby="skillbar-title">
       <div className="panel-heading">
         <div>
           <h2 id="skillbar-title">Skill Bar</h2>
@@ -46,7 +50,7 @@ export function SkillBar({
               role="listitem"
               className={selected ? "skill-slot-card selected-slot" : "skill-slot-card"}
               onDragOver={(event) => event.preventDefault()}
-              onDrop={(event) => handleDrop(event, index, dispatch)}
+              onDrop={(event) => handleDrop(event, index, state, catalogs, dispatch)}
             >
               <button
                 type="button"
@@ -56,10 +60,10 @@ export function SkillBar({
                 onClick={() => dispatch({ type: "select-slot", slotIndex: index })}
                 onKeyDown={(event) => {
                   if (event.key === "Delete" || event.key === "Backspace") {
-                    dispatch({ type: "clear-skill-slot", slotIndex: index });
+                    applyIntent({ kind: "remove-slot", fromIndex: index });
                   }
                   if (event.key === "Enter" && state.keyboardPlacement !== null) {
-                    dispatch({ type: "place-keyboard", slotIndex: index });
+                    applyKeyboardPlacement(state, catalogs, dispatch, index);
                   }
                   if (event.key === "Escape") {
                     dispatch({ type: "cancel-keyboard" });
@@ -71,6 +75,7 @@ export function SkillBar({
                     return;
                   }
                   event.dataTransfer.setData(BUILD_WARS_DRAG_MIME, slotDragPayload(index));
+                  setLocalDragImage(event, slot.title);
                   dispatch({ type: "start-drag", drag: { kind: "skill-slot", slotIndex: index } });
                 }}
                 onDragEnd={() => dispatch({ type: "cancel-drag" })}
@@ -89,27 +94,36 @@ export function SkillBar({
                     })
                   }
                 >
-                  k
+                  Move
                 </button>
                 <button
                   type="button"
                   aria-label={`Place keyboard selection in slot ${index + 1}`}
                   disabled={state.keyboardPlacement === null}
-                  onClick={() => dispatch({ type: "place-keyboard", slotIndex: index })}
+                  onClick={() => applyKeyboardPlacement(state, catalogs, dispatch, index)}
                 >
-                  v
+                  Place
                 </button>
                 <button
                   type="button"
                   aria-label={`Clear slot ${index + 1}`}
-                  onClick={() => dispatch({ type: "clear-skill-slot", slotIndex: index })}
+                  onClick={() => applyIntent({ kind: "remove-slot", fromIndex: index })}
                 >
-                  x
+                  Clear
                 </button>
               </div>
             </div>
           );
         })}
+      </div>
+      <div
+        className="skill-removal-target"
+        data-active={state.drag?.kind === "skill-slot" ? "true" : "false"}
+        onDragOver={(event) => event.preventDefault()}
+        onDrop={(event) => handleRemovalDrop(event, state, catalogs, dispatch)}
+      >
+        <strong>Remove skill</strong>
+        <span>Drop a filled slot here or use a slot Clear button.</span>
       </div>
     </section>
   );
@@ -118,22 +132,83 @@ export function SkillBar({
 function handleDrop(
   event: DragEvent<HTMLDivElement>,
   slotIndex: number,
+  state: EditorState,
+  catalogs: AppCatalogViews,
   dispatch: Dispatch<EditorAction>
 ): void {
   event.preventDefault();
   const payload = parseDragPayload(event.dataTransfer.getData(BUILD_WARS_DRAG_MIME));
   if (payload === null) {
+    dispatch({ type: "set-message", tone: "warning", text: "Invalid skill drag payload." });
     dispatch({ type: "cancel-drag" });
     return;
   }
   if (payload.kind === "browser-skill") {
-    dispatch({
-      type: "place-skill",
-      slotIndex,
-      skillId: payload.skillId as SkillId
+    applySkillBarIntent(state, catalogs, dispatch, {
+      kind: "catalog-skill",
+      skillId: payload.skillId as SkillId,
+      toIndex: slotIndex
     });
   } else {
-    dispatch({ type: "move-skill-slot", fromIndex: payload.slotIndex, toIndex: slotIndex });
+    applySkillBarIntent(state, catalogs, dispatch, {
+      kind: "bar-slot",
+      fromIndex: payload.slotIndex,
+      toIndex: slotIndex
+    });
   }
   dispatch({ type: "cancel-drag" });
+}
+
+function handleRemovalDrop(
+  event: DragEvent<HTMLDivElement>,
+  state: EditorState,
+  catalogs: AppCatalogViews,
+  dispatch: Dispatch<EditorAction>
+): void {
+  event.preventDefault();
+  const payload = parseDragPayload(event.dataTransfer.getData(BUILD_WARS_DRAG_MIME));
+  if (payload?.kind !== "skill-slot") {
+    dispatch({
+      type: "set-message",
+      tone: "warning",
+      text: "Only skill-bar slots can be removed."
+    });
+    dispatch({ type: "cancel-drag" });
+    return;
+  }
+  applySkillBarIntent(state, catalogs, dispatch, {
+    kind: "remove-slot",
+    fromIndex: payload.slotIndex
+  });
+  dispatch({ type: "cancel-drag" });
+}
+
+function applyKeyboardPlacement(
+  state: EditorState,
+  catalogs: AppCatalogViews,
+  dispatch: Dispatch<EditorAction>,
+  slotIndex: number
+): void {
+  if (state.keyboardPlacement === null) {
+    return;
+  }
+  const placement = state.keyboardPlacement;
+  const intent =
+    placement.kind === "browser-skill"
+      ? ({ kind: "catalog-skill", skillId: placement.skillId, toIndex: slotIndex } as const)
+      : ({ kind: "bar-slot", fromIndex: placement.slotIndex, toIndex: slotIndex } as const);
+  applySkillBarIntent(state, catalogs, dispatch, intent);
+  dispatch({ type: "cancel-keyboard" });
+}
+
+function setLocalDragImage(event: DragEvent<HTMLElement>, label: string): void {
+  if (event.dataTransfer.setDragImage === undefined || typeof document === "undefined") {
+    return;
+  }
+  const preview = document.createElement("div");
+  preview.className = "drag-preview";
+  preview.textContent = label;
+  document.body.append(preview);
+  event.dataTransfer.setDragImage(preview, 18, 18);
+  window.setTimeout(() => preview.remove(), 0);
 }

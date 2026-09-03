@@ -190,6 +190,11 @@ epics.
   members, and equipment slots rely heavily on icons adjacent to short labels or
   values. Supported by VP-OBS-005, VP-OBS-008, VP-OBS-011, VP-OBS-015,
   VP-OBS-019, and VP-OBS-022. Limitation: prior-art icons are not runtime assets.
+- Focused composer baseline: SPRINT-019 applies the skill/attribute panel and
+  PvX display evidence as a two-panel authoring surface with local placeholder
+  icons and product-owned resource glyphs only. Remote media IDs remain
+  metadata-only until a future exact approved asset ticket identifies local
+  files and provenance.
 - Stable alignment: skill rows consistently reserve aligned areas for icons,
   names, and cost/value facts. Supported by VP-OBS-006, VP-OBS-007, and
   VP-OBS-017. Limitation: EPIC-08 still owns responsive and overflow behavior.
