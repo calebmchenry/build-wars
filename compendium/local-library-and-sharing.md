@@ -18,16 +18,23 @@ build records, and bounded metadata. The durable snapshot intentionally persists
 - `PveBudgetState`
 - raw template overlay/source facts
 - saved-with catalog and rule-engine facts
+- semantic equipment selections and topology
 - saved-record metadata: local ID, name, timestamps, favorite, tags, and notes
 
 Full editor UI state is not durable. Browser filters, dialog text, tooltip state, drag/keyboard
 state, selected slot, transient messages, batch size, and counters are reconstructed from current
 defaults on hydration.
 
-Corrupt roots, unsupported schema versions, duplicate IDs, invalid subsets, oversized payloads,
-quota errors, unavailable storage, and stale revisions are typed failure states. Corrupt or
-partially recovered storage enters `write-blocked`; autosave does not delete or overwrite it without
-an explicit user action.
+Schema v1 accepts strict semantic equipment only: five canonical armor rows, four canonical weapon
+sets, dense modifier arrays, bounded labels/reasons, and known or unresolved semantic selections.
+It rejects dangerous keys, raw equipment-template structures, unsupported fields, malformed
+topology, sparse arrays, empty hand objects, duplicate known modifier IDs, invalid indexes, and
+unbounded strings.
+
+Corrupt roots, unsupported schema versions, duplicate IDs, invalid subsets, malformed equipment,
+oversized payloads, quota errors, unavailable storage, and stale revisions are typed failure states.
+Corrupt or partially recovered storage enters `write-blocked`; autosave does not delete or
+overwrite it without an explicit user action.
 
 ## Workspace Behavior
 
@@ -59,7 +66,8 @@ name, updated timestamp, and local ID.
 
 Saved rows show freshness, validation, and resolution as separate diagnostics. Freshness compares
 saved-with catalog/rule-engine facts to current app facts. It does not imply validity, and validity
-does not imply freshness.
+does not imply freshness. Equipment catalog freshness is compared only for records with meaningful
+authored equipment, so old `equipment: null` saves stay quiet.
 
 ## Share URLs
 
@@ -78,8 +86,10 @@ data, validation prose, and whole-library JSON.
 
 Share export prefers exact-source bare code when the imported source fingerprint still matches. It
 falls back to proven canonical bare code only after validation, representation, encode, and
-decode-back checks pass. The complete encoded URL is capped at 1,800 characters; oversized or
-unrepresentable shares leave selectable template text and a blocked reason.
+decode-back checks pass. Equipment-only validation issues do not block skill-template export. The
+complete encoded URL is capped at 1,800 characters; oversized or unrepresentable shares leave
+selectable template text and a blocked reason. Meaningful authored equipment shows an omission
+warning because equipment remains local-only.
 
 Valid share fragments hydrate an unassociated working draft and are consumed with
 `history.replaceState` when available. If a share opens over an existing stored draft, the shared
@@ -103,11 +113,8 @@ draft is separately opt-in in both modes.
 
 ## Boundaries
 
-EPIC-13 added a domain `EquipmentLoadout`, but local-library schema v1 still rejects non-null
-persisted equipment. EPIC-14 must add the migration, backup/restore behavior, validation
-presentation, and share-boundary messaging before semantic equipment becomes durable app state.
-
 No backend, account, auth, analytics, service worker, IndexedDB, hosted sharing, short link, remote
 icon/media fetch, new runtime dependency, generated-data pipeline change, party record, guide
-record, or historical skill revision analysis was introduced. Deeper freshness and revision-history
-analysis remains deferred to EPIC-21.
+record, equipment share payload, raw equipment-template replay, or historical skill revision
+analysis was introduced. Deeper freshness and revision-history analysis remains deferred to
+EPIC-21.

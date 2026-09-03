@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { createEmptyEquipmentLoadout, knownEquipmentSelection, type RuneId } from "../domain";
 import { localBuildRecordId } from "./persistence-schema";
 import {
   corruptRecordEnvelopeFixture,
@@ -36,6 +37,41 @@ describe("backup and restore", () => {
     expect(parsed.ok ? parsed.backup.workingDraft?.snapshot.build.name : null).toBe(
       "Hammer and Bow"
     );
+  });
+
+  it("round-trips semantic equipment and partially skips malformed backup records", () => {
+    const equipment = createEmptyEquipmentLoadout();
+    const record = validSavedRecordFixture({
+      snapshot: {
+        ...validSavedRecordFixture().snapshot,
+        build: {
+          ...validSavedRecordFixture().snapshot.build,
+          equipment: {
+            ...equipment,
+            armor: equipment.armor.map((piece) =>
+              piece.slot === "head"
+                ? { ...piece, rune: knownEquipmentSelection(40 as RuneId) }
+                : piece
+            )
+          }
+        }
+      }
+    });
+    const corrupt = corruptRecordEnvelopeFixture() as { readonly savedBuilds: readonly unknown[] };
+    const parsed = parseBackupEnvelope({
+      kind: "build-wars-library-backup",
+      schemaVersion: 1,
+      exportedAt: NOW,
+      savedBuilds: [record, corrupt.savedBuilds[1]],
+      savedWith: fixtureCatalogFacts
+    });
+
+    expect(parsed.ok).toBe(true);
+    expect(parsed.ok ? parsed.backup.savedBuilds : []).toHaveLength(1);
+    expect(parsed.ok ? parsed.backup.savedBuilds[0]?.snapshot.build.equipment : null).toEqual(
+      record.snapshot.build.equipment
+    );
+    expect(parsed.diagnostics.some((issue) => issue.code === "invalid-record")).toBe(true);
   });
 
   it("rejects malformed, unsupported, and dangerous backup inputs with bounded diagnostics", () => {

@@ -158,5 +158,21 @@ describe("editor selectors", () => {
         current
       ).status
     ).toBe("unknown");
+
+    const equipmentCurrent = {
+      ...current,
+      runeCatalogVersion: "runes-current",
+      insigniaCatalogVersion: "insignias-current",
+      weaponCatalogVersion: "weapons-current",
+      weaponModifierCatalogVersion: "weapon-mods-current"
+    };
+    const equipmentOld = {
+      ...equipmentCurrent,
+      runeCatalogVersion: "runes-old"
+    };
+    expect(selectCatalogFreshnessView(equipmentOld, equipmentCurrent).status).toBe("fresh");
+    expect(
+      selectCatalogFreshnessView(equipmentOld, equipmentCurrent, { includeEquipment: true }).status
+    ).toBe("stale");
   });
 });

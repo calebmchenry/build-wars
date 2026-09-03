@@ -19,6 +19,14 @@ export const fixtureCatalogFacts: PersistedCatalogFacts = {
   buildCatalogVersion: "fixture-builds",
   professionAttributeCatalogVersion: "fixture-professions-attributes",
   skillCatalogVersion: "fixture-skills",
+  runeCatalogVersion: "fixture-runes",
+  insigniaCatalogVersion: "fixture-insignias",
+  weaponCatalogVersion: "fixture-weapons",
+  weaponModifierCatalogVersion: "fixture-weapon-mods",
+  weaponCatalogSetVersion: "fixture-weapon-set",
+  weaponCatalogSetDigest: "fixture-weapon-set-digest",
+  weaponModifierCatalogSetVersion: "fixture-weapon-set",
+  weaponModifierCatalogSetDigest: "fixture-weapon-set-digest",
   ruleEngineVersion: "rule-engine:v2"
 };
 

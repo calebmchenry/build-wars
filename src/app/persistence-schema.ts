@@ -1,16 +1,30 @@
 import {
   authoredDocumentId,
   catalogId,
+  EQUIPMENT_LOADOUT_SCHEMA_VERSION,
+  ARMOR_SLOTS,
+  WEAPON_SET_SLOTS,
+  MAX_MODIFIERS_PER_HAND_TO_VALIDATE,
   type AttributeId,
+  type ArmorPiece,
+  type AuthoredWeaponRequirement,
   type Build,
+  type EquipmentLoadout,
+  type EquipmentSelectionState,
   type GameMode,
+  type InsigniaId,
+  type RuneId,
   type SkillBar,
   type SkillId,
   type TemplateFidelity,
   type TemplateInputKind,
   type TemplateKind,
   type TemplateSourceEnvelope,
-  type ValidationResult
+  type ValidationResult,
+  type WeaponHandSelection,
+  type WeaponId,
+  type WeaponModifierId,
+  type WeaponSet
 } from "../domain";
 import {
   createBlankEditorState,
@@ -33,6 +47,14 @@ export interface PersistedCatalogFacts {
   readonly buildCatalogVersion: string | null;
   readonly professionAttributeCatalogVersion: string | null;
   readonly skillCatalogVersion: string | null;
+  readonly runeCatalogVersion?: string | null;
+  readonly insigniaCatalogVersion?: string | null;
+  readonly weaponCatalogVersion?: string | null;
+  readonly weaponModifierCatalogVersion?: string | null;
+  readonly weaponCatalogSetVersion?: string | null;
+  readonly weaponCatalogSetDigest?: string | null;
+  readonly weaponModifierCatalogSetVersion?: string | null;
+  readonly weaponModifierCatalogSetDigest?: string | null;
   readonly ruleEngineVersion: string | null;
 }
 
@@ -99,6 +121,7 @@ const MAX_ATTRIBUTES = 16;
 const MAX_TAGS = 24;
 const MAX_STRING = 2_048;
 const MAX_NAME = 120;
+const MAX_SELECTION_REASON = 240;
 const MAX_TAG = 40;
 const MAX_NOTES = 1_000;
 const MAX_DIAGNOSTICS = 24;
@@ -150,6 +173,16 @@ export function persistedCatalogFactsFromValidation(
     professionAttributeCatalogVersion:
       validation.validatedAgainst.professionAttributeCatalogVersion,
     skillCatalogVersion: validation.validatedAgainst.skillCatalogVersion,
+    runeCatalogVersion: validation.validatedAgainst.runeCatalogVersion ?? null,
+    insigniaCatalogVersion: validation.validatedAgainst.insigniaCatalogVersion ?? null,
+    weaponCatalogVersion: validation.validatedAgainst.weaponCatalogVersion ?? null,
+    weaponModifierCatalogVersion: validation.validatedAgainst.weaponModifierCatalogVersion ?? null,
+    weaponCatalogSetVersion: validation.validatedAgainst.weaponCatalogSetVersion ?? null,
+    weaponCatalogSetDigest: validation.validatedAgainst.weaponCatalogSetDigest ?? null,
+    weaponModifierCatalogSetVersion:
+      validation.validatedAgainst.weaponModifierCatalogSetVersion ?? null,
+    weaponModifierCatalogSetDigest:
+      validation.validatedAgainst.weaponModifierCatalogSetDigest ?? null,
     ruleEngineVersion: validation.validatedAgainst.ruleEngineVersion
   };
 }
@@ -494,14 +527,7 @@ function validateBuild(
   );
   const attributes = validateAttributes(record.attributes, `${path}.attributes`, diagnostics);
   const skillBar = validateSkillBar(record.skillBar, `${path}.skillBar`, diagnostics);
-  if (record.equipment !== null) {
-    addDiagnostic(
-      diagnostics,
-      "unsupported-equipment",
-      `${path}.equipment`,
-      "Persisted single-character builds cannot include equipment state yet."
-    );
-  }
+  const equipment = validateEquipmentLoadout(record.equipment, `${path}.equipment`, diagnostics);
 
   if (
     schemaVersion === null ||
@@ -513,7 +539,7 @@ function validateBuild(
     secondaryProfessionId === undefined ||
     attributes === null ||
     skillBar === null ||
-    record.equipment !== null
+    equipment === undefined
   ) {
     return null;
   }
@@ -527,8 +553,384 @@ function validateBuild(
     secondaryProfessionId,
     attributes,
     skillBar,
-    equipment: null
+    equipment
   };
+}
+
+function validateEquipmentLoadout(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): EquipmentLoadout | null | undefined {
+  if (input === null) {
+    return null;
+  }
+  const record = asRecord(input, path, diagnostics);
+  if (record === null) {
+    return undefined;
+  }
+  if (!hasOnlyKeys(record, ["armor", "schemaVersion", "weaponSets"])) {
+    addDiagnostic(
+      diagnostics,
+      "invalid-equipment-topology",
+      path,
+      "Equipment loadout contains unsupported fields."
+    );
+    return undefined;
+  }
+  const schemaVersion = safeInteger(record.schemaVersion, `${path}.schemaVersion`, diagnostics, {
+    min: EQUIPMENT_LOADOUT_SCHEMA_VERSION,
+    max: EQUIPMENT_LOADOUT_SCHEMA_VERSION
+  });
+  const armor = validateEquipmentArmor(record.armor, `${path}.armor`, diagnostics);
+  const weaponSets = validateEquipmentWeaponSets(
+    record.weaponSets,
+    `${path}.weaponSets`,
+    diagnostics
+  );
+  if (schemaVersion === null || armor === null || weaponSets === null) {
+    return undefined;
+  }
+  return {
+    schemaVersion: EQUIPMENT_LOADOUT_SCHEMA_VERSION,
+    armor,
+    weaponSets
+  };
+}
+
+function validateEquipmentArmor(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): readonly ArmorPiece[] | null {
+  if (!denseArray(input, path, diagnostics) || input.length !== ARMOR_SLOTS.length) {
+    addDiagnostic(
+      diagnostics,
+      "noncanonical-equipment-topology",
+      path,
+      "Equipment armor must contain the five canonical armor slots."
+    );
+    return null;
+  }
+  const armor: ArmorPiece[] = [];
+  for (const [index, expectedSlot] of ARMOR_SLOTS.entries()) {
+    const item = input[index];
+    const itemPath = `${path}[${index}]`;
+    const record = asRecord(item, itemPath, diagnostics);
+    if (
+      record === null ||
+      !hasOnlyKeys(record, ["headgearAttribute", "insignia", "rune", "slot"])
+    ) {
+      addDiagnostic(
+        diagnostics,
+        "invalid-equipment-topology",
+        itemPath,
+        "Equipment armor row has an unsupported shape."
+      );
+      return null;
+    }
+    if (record.slot !== expectedSlot) {
+      addDiagnostic(
+        diagnostics,
+        "noncanonical-equipment-topology",
+        `${itemPath}.slot`,
+        "Equipment armor rows must be in canonical slot order."
+      );
+      return null;
+    }
+    const rune = validateEquipmentSelection<RuneId>(record.rune, `${itemPath}.rune`, diagnostics);
+    const insignia = validateEquipmentSelection<InsigniaId>(
+      record.insignia,
+      `${itemPath}.insignia`,
+      diagnostics
+    );
+    const headgearAttribute = validateEquipmentSelection<AttributeId>(
+      record.headgearAttribute,
+      `${itemPath}.headgearAttribute`,
+      diagnostics
+    );
+    if (
+      rune === undefined ||
+      insignia === undefined ||
+      headgearAttribute === undefined ||
+      (expectedSlot !== "head" && headgearAttribute !== null)
+    ) {
+      if (expectedSlot !== "head" && headgearAttribute !== null) {
+        addDiagnostic(
+          diagnostics,
+          "invalid-equipment-topology",
+          `${itemPath}.headgearAttribute`,
+          "Only the head armor slot can persist a headgear attribute bonus."
+        );
+      }
+      return null;
+    }
+    armor.push({
+      slot: expectedSlot,
+      rune,
+      insignia,
+      headgearAttribute
+    });
+  }
+  return armor;
+}
+
+function validateEquipmentWeaponSets(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): readonly WeaponSet[] | null {
+  if (!denseArray(input, path, diagnostics) || input.length !== WEAPON_SET_SLOTS.length) {
+    addDiagnostic(
+      diagnostics,
+      "noncanonical-equipment-topology",
+      path,
+      "Equipment weaponSets must contain the four canonical weapon sets."
+    );
+    return null;
+  }
+  const sets: WeaponSet[] = [];
+  for (const [index, expectedSlot] of WEAPON_SET_SLOTS.entries()) {
+    const item = input[index];
+    const itemPath = `${path}[${index}]`;
+    const record = asRecord(item, itemPath, diagnostics);
+    if (record === null || !hasOnlyKeys(record, ["mainHand", "offHand", "slot"])) {
+      addDiagnostic(
+        diagnostics,
+        "invalid-equipment-topology",
+        itemPath,
+        "Equipment weapon-set row has an unsupported shape."
+      );
+      return null;
+    }
+    if (record.slot !== expectedSlot) {
+      addDiagnostic(
+        diagnostics,
+        "noncanonical-equipment-topology",
+        `${itemPath}.slot`,
+        "Equipment weapon sets must be in canonical slot order."
+      );
+      return null;
+    }
+    const mainHand = validateWeaponHand(record.mainHand, `${itemPath}.mainHand`, diagnostics);
+    const offHand = validateWeaponHand(record.offHand, `${itemPath}.offHand`, diagnostics);
+    if (mainHand === undefined || offHand === undefined) {
+      return null;
+    }
+    sets.push({
+      slot: expectedSlot,
+      mainHand,
+      offHand
+    });
+  }
+  return sets;
+}
+
+function validateWeaponHand(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): WeaponHandSelection | null | undefined {
+  if (input === null) {
+    return null;
+  }
+  const record = asRecord(input, path, diagnostics);
+  if (record === null || !hasOnlyKeys(record, ["modifiers", "requirement", "weapon"])) {
+    addDiagnostic(
+      diagnostics,
+      "invalid-equipment-topology",
+      path,
+      "Equipment weapon hand has an unsupported shape."
+    );
+    return undefined;
+  }
+  const weapon = validateEquipmentSelection<WeaponId>(record.weapon, `${path}.weapon`, diagnostics);
+  const modifiers = validateWeaponModifiers(record.modifiers, `${path}.modifiers`, diagnostics);
+  const requirement = validateWeaponRequirement(
+    record.requirement,
+    `${path}.requirement`,
+    diagnostics
+  );
+  if (weapon === undefined || modifiers === null || requirement === undefined) {
+    return undefined;
+  }
+  if (weapon === null && modifiers.length === 0 && requirement === null) {
+    addDiagnostic(
+      diagnostics,
+      "noncanonical-equipment-topology",
+      path,
+      "Empty weapon hands must persist as null."
+    );
+    return undefined;
+  }
+  return {
+    weapon,
+    modifiers,
+    requirement
+  };
+}
+
+function validateWeaponModifiers(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): readonly EquipmentSelectionState<WeaponModifierId>[] | null {
+  if (!denseArray(input, path, diagnostics)) {
+    return null;
+  }
+  if (input.length > MAX_MODIFIERS_PER_HAND_TO_VALIDATE) {
+    addDiagnostic(
+      diagnostics,
+      "oversized-collection",
+      path,
+      `Weapon modifiers exceed the ${MAX_MODIFIERS_PER_HAND_TO_VALIDATE} modifier limit.`
+    );
+    return null;
+  }
+  const modifiers: EquipmentSelectionState<WeaponModifierId>[] = [];
+  const knownIds = new Set<number>();
+  for (const [index, item] of input.entries()) {
+    const selection = validateEquipmentSelection<WeaponModifierId>(
+      item,
+      `${path}[${index}]`,
+      diagnostics
+    );
+    if (selection === null || selection === undefined) {
+      addDiagnostic(
+        diagnostics,
+        "invalid-equipment-selection",
+        `${path}[${index}]`,
+        "Weapon modifier entries must be non-null equipment selections."
+      );
+      return null;
+    }
+    if (selection.kind === "known") {
+      if (knownIds.has(Number(selection.id))) {
+        addDiagnostic(
+          diagnostics,
+          "duplicate-equipment-selection",
+          `${path}[${index}].id`,
+          "Duplicate known weapon modifier IDs are not accepted in persisted hands."
+        );
+        return null;
+      }
+      knownIds.add(Number(selection.id));
+    }
+    modifiers.push(selection);
+  }
+  return modifiers;
+}
+
+function validateWeaponRequirement(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): AuthoredWeaponRequirement | null | undefined {
+  if (input === null) {
+    return null;
+  }
+  const record = asRecord(input, path, diagnostics);
+  if (record === null || !hasOnlyKeys(record, ["attribute", "rank", "reason"])) {
+    addDiagnostic(
+      diagnostics,
+      "invalid-equipment-topology",
+      path,
+      "Authored weapon requirement has an unsupported shape."
+    );
+    return undefined;
+  }
+  const attribute = validateEquipmentSelection<AttributeId>(
+    record.attribute,
+    `${path}.attribute`,
+    diagnostics
+  );
+  const rank =
+    record.rank === null
+      ? null
+      : (safeInteger(record.rank, `${path}.rank`, diagnostics, { min: 0, max: 20 }) ?? undefined);
+  const reason = enumField(
+    record.reason,
+    `${path}.reason`,
+    diagnostics,
+    new Set<AuthoredWeaponRequirement["reason"]>(["catalog-unresolved", "user-visible-placeholder"])
+  );
+  if (attribute === undefined || rank === undefined || reason === null) {
+    return undefined;
+  }
+  return {
+    attribute,
+    rank,
+    reason
+  };
+}
+
+function validateEquipmentSelection<Id>(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): EquipmentSelectionState<Id> | null | undefined {
+  if (input === null) {
+    return null;
+  }
+  const record = asRecord(input, path, diagnostics);
+  if (record === null || typeof record.kind !== "string") {
+    addDiagnostic(
+      diagnostics,
+      "invalid-equipment-selection",
+      path,
+      "Equipment selection must be null, known, or unresolved."
+    );
+    return undefined;
+  }
+  if (record.kind === "known") {
+    if (!hasOnlyKeys(record, ["id", "kind"])) {
+      addDiagnostic(
+        diagnostics,
+        "invalid-equipment-selection",
+        path,
+        "Known equipment selection contains unsupported fields."
+      );
+      return undefined;
+    }
+    const id = safeInteger(record.id, `${path}.id`, diagnostics, { min: 0 });
+    return id === null ? undefined : { kind: "known", id: catalogId<"Equipment">(id) as Id };
+  }
+  if (record.kind === "unresolved") {
+    if (!hasOnlyKeys(record, ["candidateCatalogId", "kind", "label", "reason"])) {
+      addDiagnostic(
+        diagnostics,
+        "invalid-equipment-selection",
+        path,
+        "Unresolved equipment selection contains unsupported fields."
+      );
+      return undefined;
+    }
+    const label = nullableString(record.label, `${path}.label`, diagnostics, MAX_NAME);
+    const reason = stringField(record.reason, `${path}.reason`, diagnostics, MAX_SELECTION_REASON, {
+      allowEmpty: false
+    });
+    const candidateCatalogId = nullableSafeInteger(
+      record.candidateCatalogId,
+      `${path}.candidateCatalogId`,
+      diagnostics
+    );
+    if (label === undefined || reason === null || candidateCatalogId === undefined) {
+      return undefined;
+    }
+    return {
+      kind: "unresolved",
+      label,
+      reason,
+      candidateCatalogId
+    };
+  }
+  addDiagnostic(
+    diagnostics,
+    "invalid-equipment-selection",
+    `${path}.kind`,
+    "Equipment selection kind is not accepted."
+  );
+  return undefined;
 }
 
 function validateAttributes(
@@ -864,6 +1266,58 @@ function validateCatalogFacts(
     diagnostics,
     MAX_STRING
   );
+  const runeCatalogVersion = nullableString(
+    record.runeCatalogVersion === undefined ? null : record.runeCatalogVersion,
+    `${path}.runeCatalogVersion`,
+    diagnostics,
+    MAX_STRING
+  );
+  const insigniaCatalogVersion = nullableString(
+    record.insigniaCatalogVersion === undefined ? null : record.insigniaCatalogVersion,
+    `${path}.insigniaCatalogVersion`,
+    diagnostics,
+    MAX_STRING
+  );
+  const weaponCatalogVersion = nullableString(
+    record.weaponCatalogVersion === undefined ? null : record.weaponCatalogVersion,
+    `${path}.weaponCatalogVersion`,
+    diagnostics,
+    MAX_STRING
+  );
+  const weaponModifierCatalogVersion = nullableString(
+    record.weaponModifierCatalogVersion === undefined ? null : record.weaponModifierCatalogVersion,
+    `${path}.weaponModifierCatalogVersion`,
+    diagnostics,
+    MAX_STRING
+  );
+  const weaponCatalogSetVersion = nullableString(
+    record.weaponCatalogSetVersion === undefined ? null : record.weaponCatalogSetVersion,
+    `${path}.weaponCatalogSetVersion`,
+    diagnostics,
+    MAX_STRING
+  );
+  const weaponCatalogSetDigest = nullableString(
+    record.weaponCatalogSetDigest === undefined ? null : record.weaponCatalogSetDigest,
+    `${path}.weaponCatalogSetDigest`,
+    diagnostics,
+    MAX_STRING
+  );
+  const weaponModifierCatalogSetVersion = nullableString(
+    record.weaponModifierCatalogSetVersion === undefined
+      ? null
+      : record.weaponModifierCatalogSetVersion,
+    `${path}.weaponModifierCatalogSetVersion`,
+    diagnostics,
+    MAX_STRING
+  );
+  const weaponModifierCatalogSetDigest = nullableString(
+    record.weaponModifierCatalogSetDigest === undefined
+      ? null
+      : record.weaponModifierCatalogSetDigest,
+    `${path}.weaponModifierCatalogSetDigest`,
+    diagnostics,
+    MAX_STRING
+  );
   const ruleEngineVersion = nullableString(
     record.ruleEngineVersion,
     `${path}.ruleEngineVersion`,
@@ -874,6 +1328,14 @@ function validateCatalogFacts(
     buildCatalogVersion === undefined ||
     professionAttributeCatalogVersion === undefined ||
     skillCatalogVersion === undefined ||
+    runeCatalogVersion === undefined ||
+    insigniaCatalogVersion === undefined ||
+    weaponCatalogVersion === undefined ||
+    weaponModifierCatalogVersion === undefined ||
+    weaponCatalogSetVersion === undefined ||
+    weaponCatalogSetDigest === undefined ||
+    weaponModifierCatalogSetVersion === undefined ||
+    weaponModifierCatalogSetDigest === undefined ||
     ruleEngineVersion === undefined
   ) {
     return null;
@@ -882,6 +1344,14 @@ function validateCatalogFacts(
     buildCatalogVersion,
     professionAttributeCatalogVersion,
     skillCatalogVersion,
+    runeCatalogVersion,
+    insigniaCatalogVersion,
+    weaponCatalogVersion,
+    weaponModifierCatalogVersion,
+    weaponCatalogSetVersion,
+    weaponCatalogSetDigest,
+    weaponModifierCatalogSetVersion,
+    weaponModifierCatalogSetDigest,
     ruleEngineVersion
   };
 }
@@ -992,6 +1462,34 @@ function asRecord(
     return null;
   }
   return input as Record<string, unknown>;
+}
+
+function denseArray(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): input is readonly unknown[] {
+  if (!Array.isArray(input)) {
+    addDiagnostic(diagnostics, "invalid-array", path, "Expected an array.");
+    return false;
+  }
+  for (let index = 0; index < input.length; index += 1) {
+    if (!(index in input)) {
+      addDiagnostic(
+        diagnostics,
+        "invalid-array",
+        `${path}[${index}]`,
+        "Sparse arrays are not accepted."
+      );
+      return false;
+    }
+  }
+  return true;
+}
+
+function hasOnlyKeys(record: Readonly<Record<string, unknown>>, keys: readonly string[]): boolean {
+  const allowed = new Set(keys);
+  return Object.keys(record).every((key) => allowed.has(key));
 }
 
 function stringField(
@@ -1132,8 +1630,58 @@ function cloneBuild(build: Build): Build {
     secondaryProfessionId: build.secondaryProfessionId,
     attributes: build.attributes.map((attribute) => ({ ...attribute })),
     skillBar: tupleSkillBar(build.skillBar),
-    equipment: null
+    equipment: cloneEquipmentLoadout(build.equipment)
   };
+}
+
+function cloneEquipmentLoadout(equipment: EquipmentLoadout | null): EquipmentLoadout | null {
+  if (equipment === null) {
+    return null;
+  }
+  return {
+    schemaVersion: EQUIPMENT_LOADOUT_SCHEMA_VERSION,
+    armor: equipment.armor.map((piece) => ({
+      slot: piece.slot,
+      rune: cloneSelection(piece.rune),
+      insignia: cloneSelection(piece.insignia),
+      headgearAttribute: cloneSelection(piece.headgearAttribute)
+    })),
+    weaponSets: equipment.weaponSets.map((set) => ({
+      slot: set.slot,
+      mainHand: cloneWeaponHand(set.mainHand),
+      offHand: cloneWeaponHand(set.offHand)
+    }))
+  };
+}
+
+function cloneWeaponHand(hand: WeaponHandSelection | null): WeaponHandSelection | null {
+  if (hand === null) {
+    return null;
+  }
+  return {
+    weapon: cloneSelection(hand.weapon),
+    modifiers: hand.modifiers.map((modifier) => cloneRequiredSelection(modifier)),
+    requirement:
+      hand.requirement === null
+        ? null
+        : {
+            attribute: cloneSelection(hand.requirement.attribute),
+            rank: hand.requirement.rank,
+            reason: hand.requirement.reason
+          }
+  };
+}
+
+function cloneSelection<Id>(
+  selection: EquipmentSelectionState<Id> | null
+): EquipmentSelectionState<Id> | null {
+  return selection === null ? null : { ...selection };
+}
+
+function cloneRequiredSelection<Id>(
+  selection: EquipmentSelectionState<Id>
+): EquipmentSelectionState<Id> {
+  return { ...selection };
 }
 
 function cloneRawTemplateOverlay(rawTemplate: RawTemplateOverlay): RawTemplateOverlay {

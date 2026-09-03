@@ -2,6 +2,7 @@ import { useEffect, useRef, type Dispatch, type KeyboardEvent, type ReactNode } 
 
 import type { AppCatalogViews } from "../catalogs";
 import type { ValidationView } from "../editor-selectors";
+import { selectHasMeaningfulEquipment } from "../equipment-selectors";
 import type { EditorAction, EditorState } from "../editor-state";
 import { importSkillTemplateToEditor } from "../template-workflow";
 
@@ -89,6 +90,14 @@ function ImportDialog({
               catalogs
             );
             if (imported.ok) {
+              if (
+                selectHasMeaningfulEquipment(state.build.equipment) &&
+                !window.confirm(
+                  "Importing a skill template will discard authored equipment from this draft."
+                )
+              ) {
+                return;
+              }
               if ((requestDraftReplacement?.() ?? "discard") === "cancel") {
                 return;
               }
@@ -134,6 +143,11 @@ function ExportDialog({
 
   return (
     <Modal title="Export skill template" onClose={() => dispatch({ type: "close-dialog" })}>
+      {selectHasMeaningfulEquipment(state.build.equipment) ? (
+        <p className="warning-text">
+          Authored equipment is local-only and is not included in skill template output.
+        </p>
+      ) : null}
       <label className="dialog-field">
         <span>Wrapper name</span>
         <input

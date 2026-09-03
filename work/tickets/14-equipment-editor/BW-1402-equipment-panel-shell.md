@@ -2,12 +2,14 @@
 id: BW-1402
 title: Equipment Panel Shell
 epic: EPIC-14
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1401
   - EPIC-07
   - EPIC-08
+planned_sprint: SPRINT-015
+completed_sprint: SPRINT-015
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -41,8 +43,14 @@ Add a usable equipment editing surface inside the existing editor.
 - The panel remains usable on desktop and narrow viewports.
 - Equipment UI does not crowd or regress existing skill/attribute workflows.
 
+## Closeout Evidence
+
+- Implemented in SPRINT-015.
+- Added `Skills` and `Equipment` workspace tabs with `Skills` as the default.
+- Added an equipment panel shell with selected-build context, readiness chips, validation issue
+  count, summary placement, and reset behavior.
+- Verified opening the equipment tab leaves `equipment: null` intact.
+
 ## Verification
 
-- `npm run test:run -- src/app`
-- Focused component tests for panel visibility, empty state, catalog-error state, and responsive
-  behavior
+- `npm run verify`

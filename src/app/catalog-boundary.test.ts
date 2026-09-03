@@ -14,6 +14,15 @@ const forbiddenRuntimePatterns = [
   "api\\.php",
   ["wiki", "guildwars"].join("\\.")
 ].map((pattern) => new RegExp(pattern));
+const forbiddenEquipmentRuntimePatterns = [
+  "TemplateEquipment",
+  "templateEquipment",
+  "\\bcolorId\\b",
+  "\\bdye\\b",
+  "\\bskin\\b",
+  "equipment-template",
+  "Equipment template format"
+].map((pattern) => new RegExp(pattern));
 
 describe("app runtime source boundary", () => {
   it("keeps promoted generated imports isolated to catalogs.ts", () => {
@@ -46,6 +55,19 @@ describe("app runtime source boundary", () => {
       .flatMap((file) =>
         imageLike.test(readFileSync(file, "utf8")) ? [relative(appRoot, file)] : []
       );
+
+    expect(offenders).toEqual([]);
+  });
+
+  it("does not leak raw equipment-template replay or cosmetic fields into app runtime", () => {
+    const offenders = sourceFiles(appRoot)
+      .filter((file) => !file.endsWith(".test.ts") && !file.endsWith(".test.tsx"))
+      .flatMap((file) => {
+        const text = readFileSync(file, "utf8");
+        return forbiddenEquipmentRuntimePatterns.some((pattern) => pattern.test(text))
+          ? [relative(appRoot, file)]
+          : [];
+      });
 
     expect(offenders).toEqual([]);
   });

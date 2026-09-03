@@ -156,31 +156,7 @@ export function parseBackupEnvelope(input: unknown): BackupParseResult {
   if (!parsed.ok) {
     return { ok: false, diagnostics: parsed.diagnostics };
   }
-  const savedWith = isRecord(input.savedWith)
-    ? {
-        buildCatalogVersion:
-          typeof input.savedWith.buildCatalogVersion === "string"
-            ? input.savedWith.buildCatalogVersion
-            : null,
-        professionAttributeCatalogVersion:
-          typeof input.savedWith.professionAttributeCatalogVersion === "string"
-            ? input.savedWith.professionAttributeCatalogVersion
-            : null,
-        skillCatalogVersion:
-          typeof input.savedWith.skillCatalogVersion === "string"
-            ? input.savedWith.skillCatalogVersion
-            : null,
-        ruleEngineVersion:
-          typeof input.savedWith.ruleEngineVersion === "string"
-            ? input.savedWith.ruleEngineVersion
-            : null
-      }
-    : {
-        buildCatalogVersion: null,
-        professionAttributeCatalogVersion: null,
-        skillCatalogVersion: null,
-        ruleEngineVersion: null
-      };
+  const savedWith = catalogFactsFromBackup(input.savedWith);
   return {
     ok: true,
     backup: {
@@ -300,6 +276,35 @@ function rewriteDraft(
 
 function isRecord(input: unknown): input is Record<string, unknown> {
   return typeof input === "object" && input !== null && !Array.isArray(input);
+}
+
+function catalogFactsFromBackup(input: unknown): PersistedCatalogFacts {
+  if (!isRecord(input)) {
+    return {
+      buildCatalogVersion: null,
+      professionAttributeCatalogVersion: null,
+      skillCatalogVersion: null,
+      ruleEngineVersion: null
+    };
+  }
+  return {
+    buildCatalogVersion: optionalString(input.buildCatalogVersion),
+    professionAttributeCatalogVersion: optionalString(input.professionAttributeCatalogVersion),
+    skillCatalogVersion: optionalString(input.skillCatalogVersion),
+    runeCatalogVersion: optionalString(input.runeCatalogVersion),
+    insigniaCatalogVersion: optionalString(input.insigniaCatalogVersion),
+    weaponCatalogVersion: optionalString(input.weaponCatalogVersion),
+    weaponModifierCatalogVersion: optionalString(input.weaponModifierCatalogVersion),
+    weaponCatalogSetVersion: optionalString(input.weaponCatalogSetVersion),
+    weaponCatalogSetDigest: optionalString(input.weaponCatalogSetDigest),
+    weaponModifierCatalogSetVersion: optionalString(input.weaponModifierCatalogSetVersion),
+    weaponModifierCatalogSetDigest: optionalString(input.weaponModifierCatalogSetDigest),
+    ruleEngineVersion: optionalString(input.ruleEngineVersion)
+  };
+}
+
+function optionalString(input: unknown): string | null {
+  return typeof input === "string" ? input : null;
 }
 
 function fail(code: string, path: string, message: string): BackupParseResult {

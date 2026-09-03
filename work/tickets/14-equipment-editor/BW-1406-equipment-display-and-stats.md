@@ -2,11 +2,13 @@
 id: BW-1406
 title: Equipment Display and Stats
 epic: EPIC-14
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1404
   - BW-1405
+planned_sprint: SPRINT-015
+completed_sprint: SPRINT-015
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -40,8 +42,13 @@ combat.
 - Conditional or unknown effects are not silently folded into totals.
 - Equipment display remains consistent across editor rows, summaries, and tooltips.
 
+## Closeout Evidence
+
+- Implemented in SPRINT-015.
+- Added conservative summary counts, health and energy deltas, global notes, weapon-set-local notes,
+  requirement notes, validation-unavailable messages, and attribution.
+- Kept weapon-set effects out of global character totals.
+
 ## Verification
 
-- `npm run test:run -- src/app src/domain`
-- Focused selector/display tests for summaries, tooltip facts, simple stat deltas, and note-only
-  effects
+- `npm run verify`

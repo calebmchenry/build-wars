@@ -1,0 +1,13 @@
+Read `work/sprints/drafts/SPRINT-015-GPT56SOL-DRAFT.md` and
+`work/sprints/drafts/SPRINT-015-GPT54-DRAFT.md`.
+
+Do not read or critique `work/sprints/drafts/SPRINT-015-GPT55-DRAFT.md`.
+Do not edit files. Do not write files. Do not use skills. Do not run a planning workflow.
+
+Return only one complete markdown combined critique in your final response.
+Focus on architecture assumptions, scope creep risk, hidden complexity, and missing alternative
+designs.
+
+For each reviewed draft, identify strengths, weaknesses, gaps in risk analysis, missing edge cases,
+and Definition of Done completeness. Then compare the two drafts and call out merge
+recommendations.

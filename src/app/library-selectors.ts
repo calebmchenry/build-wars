@@ -1,5 +1,6 @@
 import type { GameMode, ProfessionId } from "../domain";
 import type { AppCatalogViews } from "./catalogs";
+import { selectHasMeaningfulEquipment } from "./equipment-selectors";
 import { selectCatalogFreshnessView, selectValidationView } from "./editor-selectors";
 import {
   hydrateEditorFromSnapshot,
@@ -113,16 +114,15 @@ export function summarizeLibraryRecord(
   const rawSkillLabels = record.snapshot.rawTemplate.skillBar.flatMap((entry) =>
     entry === null ? [] : [entry.label]
   );
+  const freshness = selectCatalogFreshnessView(record.savedWith, currentFacts, {
+    includeEquipment: selectHasMeaningfulEquipment(record.snapshot.build.equipment)
+  });
   const diagnostics: LibraryDiagnostics = {
-    freshness: selectCatalogFreshnessView(record.savedWith, currentFacts).status,
+    freshness: freshness.status,
     validation: validation.valid ? "valid" : "invalid",
     resolution: validation.resolved ? "resolved" : "unresolved",
     validationIssueCount: validation.counts.total,
-    summary: diagnosticSummary(
-      validation.valid,
-      validation.resolved,
-      selectCatalogFreshnessView(record.savedWith, currentFacts).status
-    )
+    summary: diagnosticSummary(validation.valid, validation.resolved, freshness.status)
   };
 
   return {

@@ -2,7 +2,7 @@
 id: EPIC-14
 title: Equipment Editor
 track: functional
-status: ready
+status: done
 priority: medium
 depends_on:
   - EPIC-06
@@ -13,6 +13,8 @@ depends_on:
   - EPIC-11
   - EPIC-12
   - EPIC-13
+planned_sprint: SPRINT-015
+completed_sprint: SPRINT-015
 tickets:
   - BW-1401
   - BW-1402
@@ -47,6 +49,14 @@ sets, weapons, and weapon mods.
 * A user can model a practical PvE/PvP equipment setup.
 * The editor does not ask users to choose armor skins, weapon skins, dyes, or color IDs.
 * Equipment validation reports incompatible mods, missing requirements, and invalid armor upgrades.
+
+## Closeout
+
+Completed in SPRINT-015. The app now exposes a semantic equipment editor with catalog-backed armor
+and weapon controls, searchable equipment pickers, conservative summaries, inline validation,
+strict local persistence, backup/restore support, and skill-template share/import omission
+warnings. Raw equipment-template replay, equipment share payloads, cosmetics, runtime icons, full
+stat aggregation, and party equipment remain deferred.
 
 ## Notes
 

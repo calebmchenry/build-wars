@@ -2,7 +2,7 @@
 id: BW-1401
 title: Equipment Catalog Boundary and State
 epic: EPIC-14
-status: ready
+status: done
 priority: critical
 depends_on:
   - EPIC-08
@@ -11,6 +11,8 @@ depends_on:
   - EPIC-11
   - EPIC-12
   - EPIC-13
+planned_sprint: SPRINT-015
+completed_sprint: SPRINT-015
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -45,7 +47,15 @@ generated artifacts into leaf components.
 - Empty and partial equipment state remains valid editor state.
 - Existing saved-build and working-draft behavior remains compatible.
 
+## Closeout Evidence
+
+- Implemented in SPRINT-015.
+- Added app-owned rune, insignia, weapon, and modifier catalog views with per-family readiness and
+  validation slices behind `src/app/catalogs.ts`.
+- Added catalog-independent equipment reducer actions and selectors for meaningful equipment,
+  retained values, option filtering, inline issues, summaries, and validation inputs.
+- Verified generated imports remain isolated to `src/app/catalogs.ts`.
+
 ## Verification
 
-- `npm run typecheck`
-- Focused Vitest coverage for catalog boundary projections and equipment reducer actions
+- `npm run verify`

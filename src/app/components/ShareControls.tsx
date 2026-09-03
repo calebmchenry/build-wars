@@ -2,6 +2,7 @@ import { useMemo, type Dispatch } from "react";
 
 import type { AppCatalogViews } from "../catalogs";
 import { selectValidationView } from "../editor-selectors";
+import { selectHasMeaningfulEquipment } from "../equipment-selectors";
 import { hydrateEditorFromSnapshot } from "../persistence-schema";
 import { buildShareUrl } from "../share-url";
 import { selectShareTemplateExport } from "../template-workflow";
@@ -60,6 +61,12 @@ export function ShareControls({
       ) : null}
       {share.ok ? (
         <>
+          {selectHasMeaningfulEquipment(targetEditor.build.equipment) ? (
+            <div className="share-warning">
+              <strong>Equipment omitted from skill template sharing</strong>
+              <p>Authored equipment remains in local saves and backups.</p>
+            </div>
+          ) : null}
           {share.url.ok ? (
             <label className="dialog-field">
               <span>Share URL</span>

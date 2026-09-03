@@ -2,7 +2,7 @@
 id: BW-1404
 title: Armor Controls
 epic: EPIC-14
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1401
@@ -11,6 +11,8 @@ depends_on:
   - EPIC-10
   - EPIC-11
   - EPIC-13
+planned_sprint: SPRINT-015
+completed_sprint: SPRINT-015
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -42,8 +44,13 @@ Let users configure build-affecting armor upgrades across the five armor slots.
 - Headgear bonus changes feed effective attribute display or produce a documented handoff.
 - Invalid or incomplete armor state is visible and recoverable.
 
+## Closeout Evidence
+
+- Implemented in SPRINT-015.
+- Added five canonical armor rows for rune, insignia, and headgear bonus controls.
+- Preserved stale and unresolved selections as selected, clearable authored state.
+- Fed headgear and rune rank adjustments into the existing effective-rank display path.
+
 ## Verification
 
-- `npm run test:run -- src/app src/domain`
-- Focused tests for armor slot editing, rune/insignia selection, headgear bonus, and state
-  preservation
+- `npm run verify`

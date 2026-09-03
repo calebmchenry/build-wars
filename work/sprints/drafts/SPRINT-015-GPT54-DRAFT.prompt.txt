@@ -1,0 +1,10 @@
+Read `work/sprints/drafts/SPRINT-015-INTENT.md` and the project conventions. Write an independent
+sprint draft to `work/sprints/drafts/SPRINT-015-GPT54-DRAFT.md`.
+
+Optimize for implementation phasing, dependency sequencing, and verification.
+Do not use skills.
+Do not run a planning workflow.
+Output only the markdown sprint document.
+
+Follow the sprint template structure: Overview, Use Cases, Architecture, Implementation, Files
+Summary, Definition of Done, Risks, Security, Dependencies, Open Questions.

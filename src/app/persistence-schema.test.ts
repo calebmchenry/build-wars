@@ -1,9 +1,19 @@
 import { describe, expect, it } from "vitest";
 
+import {
+  createEmptyEquipmentLoadout,
+  knownEquipmentSelection,
+  unresolvedEquipmentSelection,
+  type EquipmentLoadout,
+  type RuneId,
+  type WeaponId,
+  type WeaponModifierId
+} from "../domain";
 import { createBlankEditorState } from "./editor-state";
 import {
   corruptRecordEnvelopeFixture,
   duplicateIdEnvelopeFixture,
+  fixtureCatalogFacts,
   oversizedEnvelopeFixture,
   unsupportedEnvelopeFixture,
   validLocalLibraryEnvelopeFixture,
@@ -13,6 +23,7 @@ import {
   LOCAL_LIBRARY_KIND,
   LOCAL_LIBRARY_STORAGE_KEY,
   createPersistedBuildSnapshot,
+  fingerprintPersistedSnapshot,
   hydrateEditorFromSnapshot,
   parseLocalLibraryEnvelope,
   parseLocalLibraryJson,
@@ -129,27 +140,155 @@ describe("local persistence schema", () => {
     expect(parsed.diagnostics[0]?.code).toBe("malformed-json");
   });
 
-  it("rejects unsupported equipment in persisted single-character builds", () => {
-    const snapshot = validSnapshotFixture();
+  it("round-trips canonical semantic equipment through snapshots and parsing", () => {
+    const state = createBlankEditorState();
+    const equipment = canonicalEquipmentFixture();
+    const snapshot = createPersistedBuildSnapshot({
+      ...state,
+      build: { ...state.build, equipment }
+    });
     const parsed = parseLocalLibraryEnvelope(
       validLocalLibraryEnvelopeFixture({
+        workingDraft: {
+          snapshot,
+          associatedRecordId: null,
+          savedWith: fixtureCatalogFacts
+        },
         savedBuilds: [
           {
             ...validLocalLibraryEnvelopeFixture().savedBuilds[0]!,
-            snapshot: {
-              ...snapshot,
-              build: {
-                ...snapshot.build,
-                equipment: { anything: true } as unknown as null
-              }
-            }
+            snapshot
           }
         ]
       })
     );
 
+    expect(snapshot.build.equipment).not.toBe(equipment);
+    expect(snapshot.build.equipment?.armor[0]?.rune).toEqual(knownEquipmentSelection(101));
     expect(parsed.ok).toBe(true);
-    expect(parsed.writeBlocked).toBe(true);
-    expect(parsed.diagnostics.some((issue) => issue.code === "unsupported-equipment")).toBe(true);
+    expect(parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.equipment : null).toEqual(
+      snapshot.build.equipment
+    );
+    expect(parsed.ok ? parsed.envelope.savedBuilds[0]?.snapshot.build.equipment : null).toEqual(
+      snapshot.build.equipment
+    );
+    expect(fingerprintPersistedSnapshot(snapshot)).not.toBe(
+      fingerprintPersistedSnapshot(validSnapshotFixture())
+    );
+  });
+
+  it("rejects malformed persisted equipment with bounded diagnostics", () => {
+    expect(parseSingleEquipment({ anything: true }).codes).toContain("invalid-equipment-topology");
+    expect(
+      parseSingleEquipment({
+        ...canonicalEquipmentFixture(),
+        armor: canonicalEquipmentFixture().armor.toReversed()
+      }).codes
+    ).toContain("noncanonical-equipment-topology");
+    expect(
+      parseSingleEquipment({
+        ...canonicalEquipmentFixture(),
+        weaponSets: [
+          {
+            ...canonicalEquipmentFixture().weaponSets[0]!,
+            mainHand: { weapon: null, modifiers: [], requirement: null }
+          },
+          ...canonicalEquipmentFixture().weaponSets.slice(1)
+        ]
+      }).codes
+    ).toContain("noncanonical-equipment-topology");
+    expect(
+      parseSingleEquipment({
+        ...canonicalEquipmentFixture(),
+        weaponSets: [
+          {
+            ...canonicalEquipmentFixture().weaponSets[0]!,
+            mainHand: {
+              weapon: knownEquipmentSelection(301 as WeaponId),
+              modifiers: [
+                knownEquipmentSelection(401 as WeaponModifierId),
+                knownEquipmentSelection(401 as WeaponModifierId)
+              ],
+              requirement: null
+            }
+          },
+          ...canonicalEquipmentFixture().weaponSets.slice(1)
+        ]
+      }).codes
+    ).toContain("duplicate-equipment-selection");
+    expect(
+      parseSingleEquipment({
+        ...canonicalEquipmentFixture(),
+        weaponSets: [
+          {
+            ...canonicalEquipmentFixture().weaponSets[0]!,
+            mainHand: {
+              weapon: knownEquipmentSelection(301 as WeaponId),
+              modifiers: Array.from({ length: 17 }, (_, index) =>
+                knownEquipmentSelection((401 + index) as WeaponModifierId)
+              ),
+              requirement: null
+            }
+          },
+          ...canonicalEquipmentFixture().weaponSets.slice(1)
+        ]
+      }).codes
+    ).toContain("oversized-collection");
   });
 });
+
+function canonicalEquipmentFixture(): EquipmentLoadout {
+  const base = createEmptyEquipmentLoadout();
+  return {
+    ...base,
+    armor: base.armor.map((piece) =>
+      piece.slot === "head"
+        ? {
+            ...piece,
+            rune: knownEquipmentSelection(101 as RuneId),
+            headgearAttribute: unresolvedEquipmentSelection({
+              label: "Retained attribute",
+              reason: "catalog unresolved",
+              candidateCatalogId: 17
+            })
+          }
+        : piece
+    ),
+    weaponSets: base.weaponSets.map((set) =>
+      set.slot === "set-1"
+        ? {
+            ...set,
+            mainHand: {
+              weapon: knownEquipmentSelection(301 as WeaponId),
+              modifiers: [knownEquipmentSelection(401 as WeaponModifierId)],
+              requirement: null
+            }
+          }
+        : set
+    )
+  };
+}
+
+function parseSingleEquipment(equipment: unknown): { readonly codes: readonly string[] } {
+  const snapshot = validSnapshotFixture();
+  const parsed = parseLocalLibraryEnvelope(
+    validLocalLibraryEnvelopeFixture({
+      savedBuilds: [
+        {
+          ...validLocalLibraryEnvelopeFixture().savedBuilds[0]!,
+          snapshot: {
+            ...snapshot,
+            build: {
+              ...snapshot.build,
+              equipment: equipment as EquipmentLoadout
+            }
+          }
+        }
+      ]
+    })
+  );
+
+  expect(parsed.ok).toBe(true);
+  expect(parsed.writeBlocked).toBe(true);
+  return { codes: parsed.diagnostics.map((issue) => issue.code) };
+}

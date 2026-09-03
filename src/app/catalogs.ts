@@ -1,8 +1,13 @@
 import type {
   AttributeId,
   CatalogAttributeRecord,
+  CatalogInsigniaRecord,
   CatalogProfessionRecord,
+  CatalogRuneRecord,
   CatalogSkillRecord,
+  CatalogWeaponBaseRecord,
+  CatalogWeaponModRecord,
+  EquipmentValidationCatalogs,
   ProfessionAttributeCatalog,
   ProfessionAttributeValidationCatalog,
   ProfessionId,
@@ -14,15 +19,24 @@ import type {
   TemplateProfessionId,
   TemplateSkillId
 } from "../domain";
+import insigniaCatalogJson from "../../data/generated/epic-11/insignias.catalog.json";
 import professionAttributeCatalogJson from "../../data/generated/epic-03/professions-attributes.catalog.json";
+import runeCatalogJson from "../../data/generated/epic-10/runes.catalog.json";
 import skillCatalogJson from "../../data/generated/epic-04/skills.catalog.json";
+import weaponModCatalogJson from "../../data/generated/epic-12/weapon-mods.catalog.json";
+import weaponCatalogJson from "../../data/generated/epic-12/weapons.catalog.json";
 
 export const APPROVED_RUNTIME_CATALOG_IMPORTS = [
   "../../data/generated/epic-03/professions-attributes.catalog.json",
-  "../../data/generated/epic-04/skills.catalog.json"
+  "../../data/generated/epic-04/skills.catalog.json",
+  "../../data/generated/epic-10/runes.catalog.json",
+  "../../data/generated/epic-11/insignias.catalog.json",
+  "../../data/generated/epic-12/weapons.catalog.json",
+  "../../data/generated/epic-12/weapon-mods.catalog.json"
 ] as const;
 
-export type CatalogSurface = "profession-selector" | "skill-browser" | "skill-bar" | "tooltip";
+export type CatalogSurface =
+  "equipment" | "profession-selector" | "skill-browser" | "skill-bar" | "tooltip";
 
 export interface PlaceholderIconDescriptor {
   readonly surface: CatalogSurface;
@@ -47,6 +61,41 @@ export interface CatalogAttributionView {
 export interface CatalogVersionView {
   readonly professionAttributes: string;
   readonly skills: string;
+  readonly runes: string | null;
+  readonly insignias: string | null;
+  readonly weapons: string | null;
+  readonly weaponModifiers: string | null;
+  readonly weaponCatalogSetVersion: string | null;
+  readonly weaponCatalogSetDigest: string | null;
+}
+
+export type EquipmentCatalogFamily = "runes" | "insignias" | "weapons" | "weaponModifiers";
+export type EquipmentCatalogReadinessStatus = "ready" | "error";
+
+export interface EquipmentCatalogReadiness {
+  readonly family: EquipmentCatalogFamily;
+  readonly label: string;
+  readonly status: EquipmentCatalogReadinessStatus;
+  readonly catalogVersion: string | null;
+  readonly catalogSetVersion: string | null;
+  readonly catalogSetDigest: string | null;
+  readonly generatedAt: string | null;
+  readonly recordCount: number;
+  readonly attribution: string;
+  readonly issues: readonly string[];
+}
+
+export type EquipmentCatalogReadinessMap = Readonly<
+  Record<EquipmentCatalogFamily, EquipmentCatalogReadiness>
+>;
+
+export interface EquipmentCatalogViews {
+  readonly runes: readonly CatalogRuneRecord[];
+  readonly insignias: readonly CatalogInsigniaRecord[];
+  readonly weapons: readonly CatalogWeaponBaseRecord[];
+  readonly weaponModifiers: readonly CatalogWeaponModRecord[];
+  readonly validation: EquipmentValidationCatalogs;
+  readonly readiness: EquipmentCatalogReadinessMap;
 }
 
 export interface AppCatalogViews {
@@ -61,6 +110,7 @@ export interface AppCatalogViews {
   };
   readonly versions: CatalogVersionView;
   readonly attribution: CatalogAttributionView;
+  readonly equipment: EquipmentCatalogViews;
   readonly placeholders: {
     readonly profession: (profession: CatalogProfessionRecord | null) => PlaceholderIconDescriptor;
     readonly skill: (
@@ -111,10 +161,18 @@ export const promotedAppCatalogs = loadAppCatalogs();
 export function loadAppCatalogs(input?: {
   readonly professionAttributes?: unknown;
   readonly skills?: unknown;
+  readonly runes?: unknown;
+  readonly insignias?: unknown;
+  readonly weapons?: unknown;
+  readonly weaponModifiers?: unknown;
 }): AppCatalogLoadState {
   const professionAttributes =
     input?.professionAttributes ?? (professionAttributeCatalogJson as unknown);
   const skills = input?.skills ?? (skillCatalogJson as unknown);
+  const runes = input?.runes ?? (runeCatalogJson as unknown);
+  const insignias = input?.insignias ?? (insigniaCatalogJson as unknown);
+  const weapons = input?.weapons ?? (weaponCatalogJson as unknown);
+  const weaponModifiers = input?.weaponModifiers ?? (weaponModCatalogJson as unknown);
   const issues = [
     ...validateProfessionAttributeCatalog(professionAttributes),
     ...validateSkillCatalog(skills)
@@ -128,7 +186,13 @@ export function loadAppCatalogs(input?: {
     status: "ready",
     catalogs: createCatalogViews(
       professionAttributes as ProfessionAttributeCatalog,
-      skills as SkillCatalog
+      skills as SkillCatalog,
+      {
+        runes,
+        insignias,
+        weapons,
+        weaponModifiers
+      }
     )
   };
 }
@@ -144,11 +208,24 @@ export function requireReadyCatalogs(
 
 function createCatalogViews(
   professionAttributeCatalog: ProfessionAttributeCatalog,
-  skillCatalog: SkillCatalog
+  skillCatalog: SkillCatalog,
+  equipmentInput: {
+    readonly runes: unknown;
+    readonly insignias: unknown;
+    readonly weapons: unknown;
+    readonly weaponModifiers: unknown;
+  }
 ): AppCatalogViews {
+  const equipment = createEquipmentCatalogViews(equipmentInput);
   const versions = {
     professionAttributes: String(professionAttributeCatalog.catalogVersion),
-    skills: String(skillCatalog.catalogVersion)
+    skills: String(skillCatalog.catalogVersion),
+    runes: equipment.readiness.runes.catalogVersion,
+    insignias: equipment.readiness.insignias.catalogVersion,
+    weapons: equipment.readiness.weapons.catalogVersion,
+    weaponModifiers: equipment.readiness.weaponModifiers.catalogVersion,
+    weaponCatalogSetVersion: equipment.readiness.weapons.catalogSetVersion,
+    weaponCatalogSetDigest: equipment.readiness.weapons.catalogSetDigest
   } satisfies CatalogVersionView;
 
   return {
@@ -175,7 +252,8 @@ function createCatalogViews(
       }
     },
     versions,
-    attribution: createAttributionView(professionAttributeCatalog, skillCatalog),
+    attribution: createAttributionView(professionAttributeCatalog, skillCatalog, equipment),
+    equipment,
     placeholders: {
       profession: (profession) => ({
         surface: "profession-selector",
@@ -221,6 +299,194 @@ function createCatalogViews(
       skillTemplateIdFromCatalogId: (catalogId) =>
         skillCatalog.skills.find((skill) => Number(skill.id) === Number(catalogId))?.templateId ??
         null
+    }
+  };
+}
+
+interface EquipmentCatalogSlice<Item> {
+  readonly readiness: EquipmentCatalogReadiness;
+  readonly records: readonly Item[];
+}
+
+function createEquipmentCatalogViews(input: {
+  readonly runes: unknown;
+  readonly insignias: unknown;
+  readonly weapons: unknown;
+  readonly weaponModifiers: unknown;
+}): EquipmentCatalogViews {
+  const runes = adaptRuneCatalog(input.runes);
+  const insignias = adaptInsigniaCatalog(input.insignias);
+  const weapons = adaptWeaponCatalog(input.weapons);
+  const weaponModifiers = adaptWeaponModCatalog(input.weaponModifiers);
+
+  return {
+    runes: runes.records,
+    insignias: insignias.records,
+    weapons: weapons.records,
+    weaponModifiers: weaponModifiers.records,
+    validation: {
+      ...(runes.readiness.status === "ready"
+        ? {
+            runes: {
+              catalogVersion: runes.readiness.catalogVersion,
+              records: runes.records
+            }
+          }
+        : {}),
+      ...(insignias.readiness.status === "ready"
+        ? {
+            insignias: {
+              catalogVersion: insignias.readiness.catalogVersion,
+              records: insignias.records
+            }
+          }
+        : {}),
+      ...(weapons.readiness.status === "ready"
+        ? {
+            weapons: {
+              catalogVersion: weapons.readiness.catalogVersion,
+              catalogSetVersion: weapons.readiness.catalogSetVersion,
+              catalogSetDigest: weapons.readiness.catalogSetDigest,
+              records: weapons.records
+            }
+          }
+        : {}),
+      ...(weaponModifiers.readiness.status === "ready"
+        ? {
+            weaponModifiers: {
+              catalogVersion: weaponModifiers.readiness.catalogVersion,
+              catalogSetVersion: weaponModifiers.readiness.catalogSetVersion,
+              catalogSetDigest: weaponModifiers.readiness.catalogSetDigest,
+              records: weaponModifiers.records
+            }
+          }
+        : {})
+    },
+    readiness: {
+      runes: runes.readiness,
+      insignias: insignias.readiness,
+      weapons: weapons.readiness,
+      weaponModifiers: weaponModifiers.readiness
+    }
+  };
+}
+
+function adaptRuneCatalog(value: unknown): EquipmentCatalogSlice<CatalogRuneRecord> {
+  const issues = validateEquipmentCatalogBase(value, "epic-10-runes", "rune");
+  const record = isRecord(value) ? value : null;
+  const records = Array.isArray(record?.runes)
+    ? (record.runes as readonly CatalogRuneRecord[])
+    : [];
+  if (!Array.isArray(record?.runes) || records.length === 0) {
+    issues.push("rune records are empty or missing");
+  }
+  return equipmentSlice("runes", "Runes", record, records, issues);
+}
+
+function adaptInsigniaCatalog(value: unknown): EquipmentCatalogSlice<CatalogInsigniaRecord> {
+  const issues = validateEquipmentCatalogBase(value, "epic-11-insignias", "insignia");
+  const record = isRecord(value) ? value : null;
+  const records = Array.isArray(record?.insignias)
+    ? (record.insignias as readonly CatalogInsigniaRecord[])
+    : [];
+  if (!Array.isArray(record?.insignias) || records.length === 0) {
+    issues.push("insignia records are empty or missing");
+  }
+  return equipmentSlice("insignias", "Insignias", record, records, issues);
+}
+
+function adaptWeaponCatalog(value: unknown): EquipmentCatalogSlice<CatalogWeaponBaseRecord> {
+  const issues = validateEquipmentCatalogBase(value, "epic-12-weapons-and-mods", "weapon");
+  const record = isRecord(value) ? value : null;
+  const records = Array.isArray(record?.weaponBases)
+    ? (record.weaponBases as readonly CatalogWeaponBaseRecord[])
+    : [];
+  if (!Array.isArray(record?.weaponBases)) {
+    issues.push("weapon base records are missing");
+  }
+  if (typeof record?.catalogSetVersion !== "string" || record.catalogSetVersion.length === 0) {
+    issues.push("weapon catalog-set version is missing");
+  }
+  if (typeof record?.catalogSetDigest !== "string" || record.catalogSetDigest.length === 0) {
+    issues.push("weapon catalog-set digest is missing");
+  }
+  return equipmentSlice("weapons", "Weapons", record, records, issues);
+}
+
+function adaptWeaponModCatalog(value: unknown): EquipmentCatalogSlice<CatalogWeaponModRecord> {
+  const issues = validateEquipmentCatalogBase(value, "epic-12-weapons-and-mods", "weapon mod");
+  const record = isRecord(value) ? value : null;
+  const records = Array.isArray(record?.weaponMods)
+    ? (record.weaponMods as readonly CatalogWeaponModRecord[])
+    : [];
+  if (!Array.isArray(record?.weaponMods)) {
+    issues.push("weapon modifier records are missing");
+  }
+  if (typeof record?.catalogSetVersion !== "string" || record.catalogSetVersion.length === 0) {
+    issues.push("weapon modifier catalog-set version is missing");
+  }
+  if (typeof record?.catalogSetDigest !== "string" || record.catalogSetDigest.length === 0) {
+    issues.push("weapon modifier catalog-set digest is missing");
+  }
+  return equipmentSlice("weaponModifiers", "Weapon modifiers", record, records, issues);
+}
+
+function validateEquipmentCatalogBase(
+  value: unknown,
+  expectedProfile: string,
+  label: string
+): string[] {
+  const issues: string[] = [];
+  if (!isRecord(value)) {
+    return [`${label} catalog is not an object`];
+  }
+  const profile = isRecord(value.profile) ? value.profile : null;
+  if (profile?.id !== expectedProfile) {
+    issues.push(`${label} catalog profile id is not ${expectedProfile}`);
+  }
+  if (!Number.isSafeInteger(value.schemaVersion)) {
+    issues.push(`${label} catalog schemaVersion is missing`);
+  }
+  if (typeof value.catalogVersion !== "string" || value.catalogVersion.length === 0) {
+    issues.push(`${label} catalog catalogVersion is missing`);
+  }
+  if (typeof value.generatedAt !== "string" || value.generatedAt.length === 0) {
+    issues.push(`${label} catalog generatedAt is missing`);
+  }
+  if (!isRecord(value.sourceSet) || typeof value.sourceSet.sourceSetDigest !== "string") {
+    issues.push(`${label} source-set attribution is missing`);
+  }
+  return issues;
+}
+
+function equipmentSlice<Item>(
+  family: EquipmentCatalogFamily,
+  label: string,
+  record: Readonly<Record<string, unknown>> | null,
+  records: readonly Item[],
+  issues: readonly string[]
+): EquipmentCatalogSlice<Item> {
+  return {
+    records: issues.length === 0 ? records : [],
+    readiness: {
+      family,
+      label,
+      status: issues.length === 0 ? "ready" : "error",
+      catalogVersion:
+        typeof record?.catalogVersion === "string" ? String(record.catalogVersion) : null,
+      catalogSetVersion:
+        typeof record?.catalogSetVersion === "string" ? String(record.catalogSetVersion) : null,
+      catalogSetDigest:
+        typeof record?.catalogSetDigest === "string" ? String(record.catalogSetDigest) : null,
+      generatedAt: typeof record?.generatedAt === "string" ? String(record.generatedAt) : null,
+      recordCount: issues.length === 0 ? records.length : 0,
+      attribution:
+        typeof record?.sourceSet === "object" && record.sourceSet !== null
+          ? `${label} source set ${String(
+              (record.sourceSet as Readonly<Record<string, unknown>>).sourceSetDigest ?? "unknown"
+            )}`
+          : `${label} source set unavailable`,
+      issues
     }
   };
 }
@@ -290,16 +556,26 @@ function validateSkillCatalog(value: unknown): readonly string[] {
 
 function createAttributionView(
   professionAttributeCatalog: ProfessionAttributeCatalog,
-  skillCatalog: SkillCatalog
+  skillCatalog: SkillCatalog,
+  equipment: EquipmentCatalogViews
 ): CatalogAttributionView {
   return {
     heading: "Catalog attribution",
     notice:
-      "Profession, attribute, and skill facts are source-derived factual metadata from Guild Wars Wiki records reviewed for Build Wars. Icon records are metadata-only; this editor uses local placeholders.",
-    generatedAt: latestString(professionAttributeCatalog.generatedAt, skillCatalog.generatedAt),
+      "Profession, attribute, skill, rune, insignia, weapon, and modifier facts are source-derived factual metadata from Guild Wars Wiki records reviewed for Build Wars. Icon records are metadata-only; this editor uses local placeholders.",
+    generatedAt: latestString(
+      professionAttributeCatalog.generatedAt,
+      skillCatalog.generatedAt,
+      ...Object.values(equipment.readiness).flatMap((readiness) =>
+        readiness.generatedAt === null ? [] : [readiness.generatedAt]
+      )
+    ),
     sourceLinks: dedupeSourceLinks([
       ...professionAttributeCatalog.sources.slice(0, 8),
-      sourceLinkFromSkillCatalog(skillCatalog)
+      sourceLinkFromSkillCatalog(skillCatalog),
+      ...Object.values(equipment.readiness).map((readiness) =>
+        sourceLinkFromEquipmentReadiness(readiness)
+      )
     ])
   };
 }
@@ -325,6 +601,27 @@ function sourceLinkFromSkillCatalog(skillCatalog: SkillCatalog): SourceReference
   };
 }
 
+function sourceLinkFromEquipmentReadiness(readiness: EquipmentCatalogReadiness): SourceReference {
+  return {
+    id: `source:equipment:${readiness.family}`,
+    name: "Guild Wars Wiki",
+    family: "guild-wars-wiki",
+    canonicalUrl: null,
+    pageId: null,
+    pageTitle: readiness.label,
+    fileId: null,
+    fileTitle: null,
+    revisionId: null,
+    sourceRevisionTimestamp: null,
+    retrievedAt: readiness.generatedAt,
+    materialClass: "factual-metadata",
+    rightsBasis: "contributor-license-declared",
+    useDecision: "allowed",
+    license: null,
+    notes: readiness.attribution
+  };
+}
+
 function dedupeSourceLinks(sources: readonly SourceReference[]): readonly CatalogSourceLink[] {
   const byId = new Map<string, CatalogSourceLink>();
   for (const source of sources) {
@@ -339,8 +636,8 @@ function dedupeSourceLinks(sources: readonly SourceReference[]): readonly Catalo
   return [...byId.values()];
 }
 
-function latestString(left: string, right: string): string {
-  return left > right ? left : right;
+function latestString(first: string, ...rest: readonly string[]): string {
+  return rest.reduce((latest, value) => (value > latest ? value : latest), first);
 }
 
 function initialsFor(name: string, abbreviation: string | null): string {

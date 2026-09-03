@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { catalogId } from "../domain";
+import {
+  catalogId,
+  createEmptyEquipmentLoadout,
+  knownEquipmentSelection,
+  type RuneId
+} from "../domain";
 import { playableEditorFixture } from "./editor-fixtures";
 import {
   fixtureCatalogFacts,
@@ -126,6 +131,56 @@ describe("workspace state", () => {
     expect(deleted.library.records.map((item) => item.id)).toEqual(["local-copy"]);
     expect(deleted.draftSession.associatedRecordId).toBeNull();
     expect(deleted.editor.build.name).toBe(record.snapshot.build.name);
+  });
+
+  it("preserves semantic equipment through save, duplicate, and load", () => {
+    const equipment = createEmptyEquipmentLoadout();
+    const editor = {
+      ...playableEditorFixture(),
+      build: {
+        ...playableEditorFixture().build,
+        equipment: {
+          ...equipment,
+          armor: equipment.armor.map((piece) =>
+            piece.slot === "head"
+              ? { ...piece, rune: knownEquipmentSelection(40 as RuneId) }
+              : piece
+          )
+        }
+      }
+    };
+    const saved = workspaceReducer(
+      {
+        ...createInitialWorkspaceState({ now: NOW }),
+        editor
+      },
+      {
+        type: "save-new",
+        id: localBuildRecordId("local-equipment"),
+        name: "Equipment Save",
+        now: NOW,
+        savedWith: fixtureCatalogFacts
+      }
+    );
+    const duplicated = workspaceReducer(saved, {
+      type: "duplicate-record",
+      id: localBuildRecordId("local-equipment"),
+      newId: localBuildRecordId("local-equipment-copy"),
+      now: LATER
+    });
+    const loaded = workspaceReducer(duplicated, {
+      type: "load-record",
+      id: localBuildRecordId("local-equipment-copy"),
+      decision: "discard"
+    });
+
+    expect(duplicated.library.records).toHaveLength(2);
+    expect(duplicated.library.records[1]?.snapshot.build.equipment).toEqual(
+      saved.library.records[0]?.snapshot.build.equipment
+    );
+    expect(loaded.editor.build.equipment).toEqual(
+      saved.library.records[0]?.snapshot.build.equipment
+    );
   });
 
   it("normalizes tags and notes without deduplicating records by name or content", () => {

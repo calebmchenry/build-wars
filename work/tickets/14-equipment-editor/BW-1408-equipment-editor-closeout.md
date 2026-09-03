@@ -2,7 +2,7 @@
 id: BW-1408
 title: Equipment Editor Closeout
 epic: EPIC-14
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1402
@@ -11,6 +11,8 @@ depends_on:
   - BW-1405
   - BW-1406
   - BW-1407
+planned_sprint: SPRINT-015
+completed_sprint: SPRINT-015
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -43,6 +45,15 @@ Close out EPIC-14 with accessibility, responsive polish, documentation, and veri
 - Equipment editor workflows are documented and test-covered.
 - Deferred compatibility/cosmetic scope is explicit.
 - EPIC-14 is ready to mark done only after full verification passes.
+
+## Closeout Evidence
+
+- Implemented in SPRINT-015.
+- Updated README and compendium documentation for the equipment editor, local persistence,
+  share-boundary warnings, runtime catalog boundaries, and deferred scope.
+- Added focused reducer, selector, component, persistence, backup/restore, App, workspace, template,
+  and boundary tests.
+- `npm run verify` passed after implementation.
 
 ## Verification
 

@@ -2,11 +2,13 @@
 id: BW-1403
 title: Searchable Equipment Pickers
 epic: EPIC-14
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1401
   - BW-1402
+planned_sprint: SPRINT-015
+completed_sprint: SPRINT-015
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -40,7 +42,14 @@ Provide precise pickers for selecting runes, insignias, weapons, and weapon modi
 - Pickers are keyboard accessible and deterministic.
 - Catalog option rendering does not fetch remote media.
 
+## Closeout Evidence
+
+- Implemented in SPRINT-015.
+- Added a narrow equipment combobox with bounded search, keyboard navigation, pointer selection,
+  outside-click close, focus restoration, no-result state, IME guard, disabled-option reasons, and
+  retained authored values.
+- Added deterministic option view models for runes, insignias, attributes, weapons, and modifiers.
+
 ## Verification
 
-- `npm run test:run -- src/app`
-- Focused tests for search, filtering, clearing, unresolved options, and keyboard interaction
+- `npm run verify`

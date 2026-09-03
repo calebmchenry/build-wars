@@ -100,24 +100,21 @@ validation results.
 
 ## Runtime Boundaries
 
-EPIC-13 did not change generated data, app catalog imports, editor UI, local-library persistence,
-backup/restore migrations, share URL payloads, raw equipment-template codecs, search, tooltips, or
-stat aggregation.
+EPIC-14 added app-owned runtime views for promoted rune, insignia, weapon, and weapon-modifier
+catalogs behind `src/app/catalogs.ts`. Leaf components receive selector view models and do not
+import generated JSON, manifests, QA reports, source snapshots, ingestion scripts, wiki APIs, raw
+equipment-template records, cosmetic fields, or remote media bytes.
 
-`src/app/catalogs.ts` remains the generated-catalog import boundary and was not expanded for
-equipment catalogs. Local-library parsing still rejects non-null persisted equipment until EPIC-14
-owns UI state and migration together. Share URLs remain skill-template-code-only.
+Local-library schema v1 now accepts strict semantic equipment and rejects malformed topology at the
+persistence boundary. Share URLs remain skill-template-code-only and warn when meaningful semantic
+equipment is omitted.
 
 ## Handoffs
-
-EPIC-14 must add app-owned equipment catalog views, editor reducer actions, controls, validation
-presentation, non-null local persistence migration, backup/restore migration, and share-boundary
-messaging.
 
 EPIC-17 must keep raw equipment-template state separate from semantic loadout selections while it
 maps decoded raw item/modifier facts into recoverable semantic choices.
 
-EPIC-20 may consume approved runtime display facts for equipment search and tooltips.
+EPIC-20 may consume approved runtime display facts for richer equipment search and tooltips.
 
 EPIC-21 owns complete effect/stat aggregation, condition evaluation, health/energy/armor totals,
 weapon effect math, combat simulation, DPS, and cross-system composition.

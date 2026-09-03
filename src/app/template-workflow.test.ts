@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { catalogId } from "../domain";
+import {
+  catalogId,
+  createEmptyEquipmentLoadout,
+  knownEquipmentSelection,
+  type RuneId
+} from "../domain";
 import { SKILL_TEMPLATE_PACKAGE_EXAMPLE } from "../template-compatibility";
 import { requireReadyCatalogs } from "./catalogs";
 import { playableEditorFixture } from "./editor-fixtures";
@@ -113,5 +118,31 @@ describe("template workflow", () => {
     expect(canonical.ok ? canonical.source : null).toBe("canonical");
     expect(blocked.ok).toBe(false);
     expect(blocked.ok ? [] : blocked.blockedReasons.length).toBeGreaterThan(0);
+  });
+
+  it("does not block canonical skill-template export on equipment-only validation errors", () => {
+    const base = playableEditorFixture();
+    const equipment = createEmptyEquipmentLoadout();
+    const state = {
+      ...base,
+      build: {
+        ...base.build,
+        equipment: {
+          ...equipment,
+          armor: equipment.armor.map((piece) =>
+            piece.slot === "head"
+              ? { ...piece, rune: knownEquipmentSelection(catalogId<"Rune">(9999) as RuneId) }
+              : piece
+          )
+        }
+      }
+    };
+    const validation = selectValidationView(state, catalogs);
+
+    expect(validation.result.issues.some((issue) => issue.code.startsWith("equipment."))).toBe(
+      true
+    );
+    expect(validation.exportPolicy.canonical.available).toBe(true);
+    expect(selectShareTemplateExport(validation.exportPolicy).ok).toBe(true);
   });
 });

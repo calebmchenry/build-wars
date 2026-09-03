@@ -2,7 +2,7 @@
 id: BW-1405
 title: Weapon Set Controls
 epic: EPIC-14
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1401
@@ -10,6 +10,8 @@ depends_on:
   - BW-1403
   - EPIC-12
   - EPIC-13
+planned_sprint: SPRINT-015
+completed_sprint: SPRINT-015
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -41,8 +43,15 @@ Let users configure practical weapon sets using EPIC-12 weapon and modifier data
 - Missing or unmet requirements are visible.
 - Empty and partial weapon sets remain recoverable editor state.
 
+## Closeout Evidence
+
+- Implemented in SPRINT-015.
+- Added four canonical weapon-set sections with main-hand and off-hand controls.
+- Added weapon and modifier option models for empty, stale, unresolved, wrong-hand, two-handed,
+  off-hand-only, and compatibility states.
+- Enforced dense bounded modifier writes and preserved modifiers unless the user explicitly clears
+  the modifier, hand, or set.
+
 ## Verification
 
-- `npm run test:run -- src/app src/domain`
-- Focused tests for weapon set editing, hand occupancy, modifier compatibility, and requirement
-  presentation
+- `npm run verify`

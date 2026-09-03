@@ -8,10 +8,13 @@ Runtime app code imports promoted data only through `src/app/catalogs.ts`. That 
 
 - `data/generated/epic-03/professions-attributes.catalog.json`
 - `data/generated/epic-04/skills.catalog.json`
+- `data/generated/epic-10/runes.catalog.json`
+- `data/generated/epic-11/insignias.catalog.json`
+- `data/generated/epic-12/weapons.catalog.json`
+- `data/generated/epic-12/weapon-mods.catalog.json`
 
-EPIC-13 added semantic equipment domain contracts and optional validation catalog views, but the app
-catalog boundary was not expanded. EPIC-14 must add app-owned rune, insignia, weapon, and weapon
-modifier catalog views before editor controls consume equipment validation.
+Equipment catalog slices expose per-family readiness and validation views. Core profession,
+attribute, skill, library, and share workflows remain usable if an equipment slice fails to adapt.
 
 Leaf components consume app-ready catalog views, attribution, validation slices, placeholder icon
 descriptors, and explicit template crosswalk helpers. Components do not import generated artifacts,
@@ -56,10 +59,15 @@ attribute budget policy rather than inheriting PvE points.
 
 ## Interaction Model
 
-The skill bar renders exactly eight stable slots. Users can place skills from the browser, replace a
+The main column renders `Skills` and `Equipment` tabs. `Skills` is the default tab and keeps the
+existing eight-slot skill bar and skill browser. Users can place skills from the browser, replace a
 slot, move to an empty slot, swap filled slots, clear slots, and use keyboard pick/place/cancel
 controls. Drag payloads are opaque app JSON under an internal MIME type and are validated before the
 reducer receives an action.
+
+The `Equipment` tab renders the EPIC-14 semantic equipment editor. Opening the tab does not
+materialize `Build.equipment`; only the first meaningful equipment edit creates canonical equipment
+state.
 
 Dialogs use an app modal primitive with initial focus, Escape close, Tab containment, trigger focus
 restoration, and bounded viewport height. Clipboard writes are best-effort only; failures leave the
@@ -102,7 +110,7 @@ later evidence-backed ticket changes the architecture.
 
 Local library persistence, storage migrations, tags, favorites, backup/restore, share URLs, and
 saved template workflows are documented in [Local library and sharing](local-library-and-sharing.md).
-EPIC-14 owns equipment editor state, controls, app catalog wiring, non-null persistence migration,
-validation presentation, and share-boundary messaging. EPIC-15 owns title rank state, title
-ownership, and allegiance configuration. Later epics own party/hero builds, guide authoring,
-recommendations, remote icon loading, analytics, auth, deployment, and PWA behavior.
+Equipment editor behavior is documented in [Equipment editor](equipment-editor.md). EPIC-15 owns
+title rank state, title ownership, and allegiance configuration. Later epics own party/hero builds,
+guide authoring, recommendations, remote icon loading, analytics, auth, deployment, and PWA
+behavior.

@@ -2,7 +2,7 @@
 id: BW-1407
 title: Validation, Persistence, and Sharing
 epic: EPIC-14
-status: ready
+status: done
 priority: high
 depends_on:
   - BW-1404
@@ -10,6 +10,8 @@ depends_on:
   - BW-1406
   - EPIC-06
   - EPIC-09
+planned_sprint: SPRINT-015
+completed_sprint: SPRINT-015
 created: 2026-09-03
 updated: 2026-09-03
 ---
@@ -41,8 +43,17 @@ Integrate equipment with validation, local saves, backup/restore, and existing s
 - Validation messages are located on the relevant armor slot or weapon set when possible.
 - Existing skill-template share behavior remains compatible and honest about equipment omission.
 
+## Closeout Evidence
+
+- Implemented in SPRINT-015.
+- Local schema v1 now accepts strict canonical semantic equipment and rejects malformed topology,
+  dangerous keys, sparse arrays, duplicate known modifiers, empty hand objects, invalid indexes, and
+  oversized strings.
+- Autosave, saved records, duplicate, hydration, reload, backup, and restore preserve semantic
+  equipment.
+- Skill-template sharing remains equipment-free and warns when meaningful equipment is omitted;
+  equipment-only validation issues do not block canonical skill-template export.
+
 ## Verification
 
-- `npm run test:run -- src/app src/domain`
-- Focused tests for equipment validation presentation, local persistence, backup/restore, and share
-  boundary warnings
+- `npm run verify`

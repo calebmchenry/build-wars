@@ -1,9 +1,10 @@
 # Build Wars
 
 Build Wars is a local-first TypeScript web app for Guild Wars Reforged build tooling. The current
-app includes a durable browser-local single-character build editor, local saved-build library,
-template-code sharing, backup/restore, framework-neutral domain contracts, template import/export
-compatibility, source policy, and offline-first promoted catalog data.
+app includes a durable browser-local single-character build editor with skill and equipment
+workspaces, local saved-build library, template-code sharing, backup/restore, framework-neutral
+domain contracts, template import/export compatibility, source policy, and offline-first promoted
+catalog data.
 
 ## Prerequisites
 
@@ -95,12 +96,17 @@ Included now:
   equipment validation catalog views.
 - A browser-based core build editor under `src/app` for one durable single-character workspace:
   profession and mode controls, PvE attribute budgets, deterministic skill search/filter views,
-  an eight-slot skill bar with pointer and keyboard operations, tooltips, validation presentation,
-  and skill-template import/export.
+  an eight-slot skill bar with pointer and keyboard operations, equipment workspace tabs, tooltips,
+  validation presentation, and skill-template import/export.
+- A browser-based equipment editor under `src/app`: five canonical armor slots for runes,
+  insignias, and headgear bonuses; four canonical weapon sets for main hand, off hand, two-handed,
+  stale, unresolved, and modifier states; per-family equipment catalog readiness; inline validation;
+  and conservative health, energy, armor, requirement, and attribution summaries.
 - Local library and sharing workflows under `src/app`: one `localStorage` key (`build-wars:v1`),
   working-draft autosave, explicit saved records, search/filter/sort, tags, favorites, notes,
-  template-code-first share URLs capped at 1,800 characters, and inert JSON whole-library
-  backup/restore.
+  semantic equipment persistence, template-code-first share URLs capped at 1,800 characters, and
+  inert JSON whole-library backup/restore. Share URLs remain skill-template-only and warn when
+  meaningful authored equipment is omitted.
 
 Deferred to later epics:
 
@@ -111,9 +117,9 @@ Deferred to later epics:
   defers ownership to EPIC-17
 - Compact runtime catalog derivation, dynamic catalog loading, search workers, virtualization, and
   remote icon fetching
-- Title ownership, title-rank controls, allegiance selection, equipment editor UI, non-null
-  equipment persistence/share payloads, full stat aggregation, party builder, guide authoring, PWA
-  behavior, auth, analytics, and deployment
+- Title ownership, title-rank controls, allegiance selection, equipment share payloads, raw
+  equipment-template replay into the app editor, full stat aggregation, party builder, guide
+  authoring, PWA behavior, auth, analytics, and deployment
 
 ## Project Layout
 
@@ -222,16 +228,19 @@ split/mode behavior, duplicate policies, and deferred scope.
 The core editor is available in `src/app`. It composes promoted catalog facts through one app-owned
 boundary, shows attribution before source-derived facts, preserves unresolved imported template IDs
 in an app raw overlay, and gates canonical skill-template export on representation, validation, and
-codec fidelity proof. See [Core build editor](compendium/core-build-editor.md) for the interaction
-model, export policy, current performance observation, and deferred scope.
+codec fidelity proof. The main column has `Skills` and `Equipment` workspace tabs; the equipment
+workspace edits semantic equipment without importing raw generated data into leaf components. See
+[Core build editor](compendium/core-build-editor.md) and
+[Equipment editor](compendium/equipment-editor.md) for the interaction model, export policy, current
+performance observation, and deferred scope.
 
 ## Local Library And Sharing
 
 The local workspace persists to browser `localStorage` under exactly one app-owned key:
 `build-wars:v1`. The versioned envelope stores the working draft separately from explicit saved
 records, preserving `Build`, PvE budget controls, raw template overlay/source facts, unresolved
-import IDs, template source/name facts, and saved-with catalog/rule-engine versions. UI-only state is
-not persisted.
+import IDs, semantic equipment, template source/name facts, and saved-with catalog/rule-engine
+versions. UI-only state is not persisted.
 
 Saved records use opaque local IDs, so duplicate names and duplicate build contents are allowed.
 The library panel supports save new, update, save as new, duplicate, delete confirmation, favorite,

@@ -2,6 +2,7 @@ import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { StrictMode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { createEmptyEquipmentLoadout, knownEquipmentSelection, type RuneId } from "../domain";
 import { SKILL_TEMPLATE_PACKAGE_EXAMPLE } from "../template-compatibility";
 import { App } from "./App";
 import { validLocalLibraryEnvelopeFixture } from "./library-fixtures";
@@ -45,6 +46,44 @@ describe("App", () => {
     ).toBeTruthy();
   });
 
+  it("keeps skills as the default workspace tab and does not dirty equipment on tab open", () => {
+    vi.useFakeTimers();
+    render(<App />);
+
+    expect(screen.getByRole("tab", { name: "Skills" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.queryByRole("heading", { name: "Equipment" })).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("tab", { name: "Equipment" }));
+    act(() => vi.advanceTimersByTime(300));
+
+    expect(screen.getByRole("tab", { name: "Equipment" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("heading", { name: "Equipment" })).toBeInTheDocument();
+    const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
+    expect(parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.equipment : "error").toBeNull();
+  });
+
+  it("autosaves semantic equipment after the first armor edit", () => {
+    vi.useFakeTimers();
+    render(<App />);
+
+    fireEvent.change(screen.getByLabelText("Primary"), { target: { value: "1" } });
+    fireEvent.click(screen.getByRole("tab", { name: "Equipment" }));
+    fireEvent.focus(screen.getByRole("combobox", { name: "Head rune" }));
+    fireEvent.change(screen.getByRole("combobox", { name: "Head rune" }), {
+      target: { value: "Rune of Minor Strength" }
+    });
+    fireEvent.click(screen.getByRole("option", { name: /Rune of Minor Strength/ }));
+
+    act(() => vi.advanceTimersByTime(160));
+    const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
+
+    expect(parsed.ok).toBe(true);
+    expect(
+      parsed.ok ? parsed.envelope.workingDraft?.snapshot.build.equipment?.armor[0]?.rune : null
+    ).toEqual({ kind: "known", id: 40 });
+    expect(parsed.ok ? parsed.envelope.savedBuilds : []).toHaveLength(0);
+  });
+
   it("supports blank-to-playable authoring through visible controls", () => {
     render(<App />);
 
@@ -80,6 +119,44 @@ describe("App", () => {
     expect(
       screen.getByRole("button", { name: /Skill slot 1: Healing Signet/ })
     ).toBeInTheDocument();
+  });
+
+  it("warns that share URLs omit meaningful equipment from a valid stored draft", () => {
+    const envelope = validLocalLibraryEnvelopeFixture();
+    const equipment = createEmptyEquipmentLoadout();
+    localStorage.setItem(
+      LOCAL_LIBRARY_STORAGE_KEY,
+      serializeLocalLibraryEnvelope({
+        ...envelope,
+        workingDraft:
+          envelope.workingDraft === null
+            ? null
+            : {
+                ...envelope.workingDraft,
+                snapshot: {
+                  ...envelope.workingDraft.snapshot,
+                  build: {
+                    ...envelope.workingDraft.snapshot.build,
+                    equipment: {
+                      ...equipment,
+                      armor: equipment.armor.map((piece) =>
+                        piece.slot === "head"
+                          ? { ...piece, rune: knownEquipmentSelection(40 as RuneId) }
+                          : piece
+                      )
+                    }
+                  }
+                }
+              }
+      })
+    );
+
+    render(<App />);
+
+    expect(screen.getByText("Equipment omitted from skill template sharing")).toBeInTheDocument();
+    const shareUrl = screen.getByLabelText("Share URL") as HTMLTextAreaElement;
+    expect(shareUrl.value).not.toContain("equipment");
+    expect(shareUrl.value).not.toContain("rune");
   });
 
   it("coalesces draft autosave without creating a saved library record", () => {

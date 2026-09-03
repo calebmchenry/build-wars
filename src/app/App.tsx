@@ -3,6 +3,8 @@ import { useEffect, useMemo, useReducer, useRef, useState, type Dispatch } from 
 import { promotedAppCatalogs, type AppCatalogLoadState } from "./catalogs";
 import { AttributeEditor } from "./components/AttributeEditor";
 import { CatalogAttribution } from "./components/CatalogAttribution";
+import { EditorWorkspaceTabs, type EditorWorkspaceTab } from "./components/EditorWorkspaceTabs";
+import { EquipmentPanel } from "./components/EquipmentPanel";
 import { BackupDialog, RestoreDialog } from "./components/LibraryDialogs";
 import { LibraryPanel } from "./components/LibraryPanel";
 import { ProfessionModeEditor } from "./components/ProfessionModeEditor";
@@ -13,6 +15,7 @@ import { SkillTooltip } from "./components/SkillTooltip";
 import { StorageBanner } from "./components/StorageBanner";
 import { TemplateControls } from "./components/TemplateDialogs";
 import { ValidationPanel } from "./components/ValidationPanel";
+import { selectEquipmentPanelView } from "./equipment-selectors";
 import { selectSkillDisplay, selectValidationView } from "./editor-selectors";
 import type { EditorAction } from "./editor-state";
 import { browserLocalStorage, readLocalLibrary, writeLocalLibrary } from "./local-storage";
@@ -40,6 +43,7 @@ export function App() {
   const [shareRecordId, setShareRecordId] = useState<string | null>(null);
   const [backupOpen, setBackupOpen] = useState(false);
   const [restoreOpen, setRestoreOpen] = useState(false);
+  const [workspaceTab, setWorkspaceTab] = useState<EditorWorkspaceTab>("skills");
   const latestWorkspaceRef = useRef<{
     readonly workspace: WorkspaceState;
     readonly savedWith: ReturnType<typeof persistedCatalogFactsFromValidation> | null;
@@ -84,9 +88,10 @@ export function App() {
     throw new Error("Catalog validation view missing after catalog readiness check.");
   }
   const tooltipView =
-    state.tooltip.skillId === null
+    workspaceTab !== "skills" || state.tooltip.skillId === null
       ? null
       : selectSkillDisplay(catalogs, state, state.tooltip.skillId, "tooltip");
+  const equipmentView = selectEquipmentPanelView(state, catalogs, validationView.result);
 
   return (
     <main className="app-shell editor-shell" aria-labelledby="app-title" data-catalog-state="ready">
@@ -139,8 +144,17 @@ export function App() {
           <ValidationPanel validation={validationView} />
         </div>
         <div className="main-column">
-          <SkillBar state={state} catalogs={catalogs} dispatch={dispatch} />
-          <SkillBrowser state={state} catalogs={catalogs} dispatch={dispatch} />
+          <EditorWorkspaceTabs
+            activeTab={workspaceTab}
+            onChange={setWorkspaceTab}
+            skills={
+              <>
+                <SkillBar state={state} catalogs={catalogs} dispatch={dispatch} />
+                <SkillBrowser state={state} catalogs={catalogs} dispatch={dispatch} />
+              </>
+            }
+            equipment={<EquipmentPanel view={equipmentView} dispatch={dispatch} />}
+          />
         </div>
         <SkillTooltip
           view={tooltipView}

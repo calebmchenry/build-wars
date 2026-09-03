@@ -1,6 +1,8 @@
 import {
   attributeBudgetForLevel,
   calculateEffectiveAttributeRank,
+  collectEquipmentAttributeRankAdjustments,
+  equipmentAdjustmentsForAttribute,
   lookupSkillById,
   purchasedRankCost,
   renderSkillTooltipText,
@@ -27,6 +29,7 @@ import type {
   ResourceFilterValue
 } from "./editor-state";
 import type { PersistedCatalogFacts } from "./persistence-schema";
+import { selectHasMeaningfulEquipment } from "./equipment-selectors";
 import { evaluateTemplateExport, type ExportWorkflowView } from "./template-workflow";
 
 export interface AttributeBudgetView {
@@ -140,6 +143,7 @@ export function selectValidationInput(
     build: state.build,
     professionAttributes: catalogs.validation.professionAttributes,
     skills: catalogs.validation.skills,
+    equipmentCatalogs: catalogs.equipment.validation,
     options: {
       profile: "editing",
       attributeBudget: selectAttributeBudgetPolicy(state)
@@ -175,7 +179,8 @@ export function selectAttributeBudgetPolicy(state: EditorState): AttributeBudget
 
 export function selectCatalogFreshnessView(
   savedWith: PersistedCatalogFacts,
-  currentFacts: PersistedCatalogFacts
+  currentFacts: PersistedCatalogFacts,
+  options: { readonly includeEquipment?: boolean } = {}
 ): CatalogFreshnessView {
   const messages: string[] = [];
   compareCatalogFact(
@@ -196,6 +201,32 @@ export function selectCatalogFreshnessView(
     savedWith.ruleEngineVersion,
     currentFacts.ruleEngineVersion
   );
+  if (options.includeEquipment === true) {
+    compareCatalogFact(
+      messages,
+      "rune catalog",
+      savedWith.runeCatalogVersion ?? null,
+      currentFacts.runeCatalogVersion ?? null
+    );
+    compareCatalogFact(
+      messages,
+      "insignia catalog",
+      savedWith.insigniaCatalogVersion ?? null,
+      currentFacts.insigniaCatalogVersion ?? null
+    );
+    compareCatalogFact(
+      messages,
+      "weapon catalog",
+      savedWith.weaponCatalogVersion ?? null,
+      currentFacts.weaponCatalogVersion ?? null
+    );
+    compareCatalogFact(
+      messages,
+      "weapon modifier catalog",
+      savedWith.weaponModifierCatalogVersion ?? null,
+      currentFacts.weaponModifierCatalogVersion ?? null
+    );
+  }
   if (messages.some((message) => message.includes("unknown"))) {
     return { status: "unknown", messages };
   }
@@ -418,6 +449,19 @@ function selectTooltipRankContext(
 } {
   const ranks: Record<string, number> = {};
   const assumptions: string[] = [];
+  const equipmentAdjustmentSummary = collectEquipmentAttributeRankAdjustments({
+    build: state.build,
+    professionAttributes: catalogs.validation.professionAttributes,
+    ...(catalogs.equipment.validation.runes === undefined
+      ? {}
+      : { runes: catalogs.equipment.validation.runes })
+  });
+  if (
+    selectHasMeaningfulEquipment(state.build.equipment) &&
+    equipmentAdjustmentSummary.unresolved.length > 0
+  ) {
+    assumptions.push("Equipment rank adjustments include unresolved authored selections.");
+  }
   for (const seriesId of skill.progressionSeriesIds) {
     const series = catalogs.skillCatalog.progressionSeries.find(
       (candidate) => candidate.id === seriesId
@@ -429,7 +473,11 @@ function selectTooltipRankContext(
       const result = calculateEffectiveAttributeRank({
         build: state.build,
         professionAttributes: catalogs.validation.professionAttributes,
-        attributeId: series.dependency.attributeId
+        attributeId: series.dependency.attributeId,
+        adjustments: equipmentAdjustmentsForAttribute(
+          equipmentAdjustmentSummary,
+          series.dependency.attributeId
+        )
       });
       ranks[`attribute:${Number(series.dependency.attributeId)}`] =
         result.kind === "resolved" ? result.finalRank : 0;

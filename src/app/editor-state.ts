@@ -10,6 +10,7 @@ import {
   type SkillId,
   type TemplateSourceEnvelope
 } from "../domain";
+import { reduceEquipmentEditorAction, type EquipmentEditorAction } from "./equipment-editor-state";
 
 export type RawOverlayNamespace = "profession" | "attribute" | "skill";
 export type RawOverlayOutcomeKind =
@@ -156,6 +157,7 @@ const EMPTY_RESOURCE_FILTERS: Readonly<Record<ResourceFilterKind, ResourceFilter
 };
 
 export type EditorAction =
+  | EquipmentEditorAction
   | {
       readonly type: "replace-state";
       readonly state: EditorState;
@@ -414,6 +416,24 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
       return swapSkillSlots(state, action.leftIndex, action.rightIndex);
     case "clear-skill-slot":
       return clearSkillSlot(state, action.slotIndex);
+    case "set-armor-rune":
+    case "set-armor-insignia":
+    case "set-headgear-attribute":
+    case "clear-armor-field":
+    case "set-weapon":
+    case "set-authored-unresolved-weapon":
+    case "clear-weapon":
+    case "set-weapon-modifier":
+    case "set-authored-unresolved-modifier":
+    case "clear-weapon-modifier":
+    case "set-weapon-requirement":
+    case "clear-weapon-hand":
+    case "clear-weapon-set":
+    case "reset-equipment":
+      return {
+        ...state,
+        build: reduceEquipmentEditorAction(state.build, action)
+      };
     case "select-slot":
       return {
         ...state,
