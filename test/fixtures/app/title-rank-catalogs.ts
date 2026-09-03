@@ -3,6 +3,7 @@ import {
   templateSkillId,
   type CatalogFieldProvenance,
   type CatalogSkillRecord,
+  type ProfessionId,
   type SkillCatalog,
   type SkillId,
   type SkillProgressionSeries
@@ -16,7 +17,9 @@ import {
 
 export const titleRankTestSkillIds = {
   lightbringer: catalogId<"Skill">(1815),
-  asura: catalogId<"Skill">(2224)
+  asura: catalogId<"Skill">(2224),
+  luxon: catalogId<"Skill">(19001),
+  kurzick: catalogId<"Skill">(19002)
 } as const;
 
 const provenance = {
@@ -48,17 +51,41 @@ function titleRankSkillCatalog(): SkillCatalog {
     titleKey: "title:asura-rank",
     rankMax: 10
   });
+  const luxon = titleSkill({
+    base: base.skills[0],
+    id: titleRankTestSkillIds.luxon,
+    name: "Luxon Allegiance Fixture",
+    seriesId: "progression:test:luxon-rank",
+    titleKey: "allegiance:luxon",
+    rankMax: 12,
+    professionId: catalogId<"Profession">(1) as ProfessionId
+  });
+  const kurzick = titleSkill({
+    base: base.skills[0],
+    id: titleRankTestSkillIds.kurzick,
+    name: "Kurzick Allegiance Fixture",
+    seriesId: "progression:test:kurzick-rank",
+    titleKey: "allegiance:kurzick",
+    rankMax: 12,
+    professionId: catalogId<"Profession">(9) as ProfessionId
+  });
 
   return {
     ...base,
     catalogVersion: `${base.catalogVersion}+title-rank-tests`,
     sourceSet: {
       ...base.sourceSet,
-      acceptedSeedCount: base.sourceSet.acceptedSeedCount + 2,
-      catalogRecordCount: base.sourceSet.catalogRecordCount + 2
+      acceptedSeedCount: base.sourceSet.acceptedSeedCount + 4,
+      catalogRecordCount: base.sourceSet.catalogRecordCount + 4
     },
-    skills: [...base.skills, lightbringer.record, asura.record],
-    progressionSeries: [...base.progressionSeries, lightbringer.series, asura.series]
+    skills: [...base.skills, lightbringer.record, asura.record, luxon.record, kurzick.record],
+    progressionSeries: [
+      ...base.progressionSeries,
+      lightbringer.series,
+      asura.series,
+      luxon.series,
+      kurzick.series
+    ]
   };
 }
 
@@ -69,6 +96,7 @@ function titleSkill(input: {
   readonly seriesId: string;
   readonly titleKey: string;
   readonly rankMax: number;
+  readonly professionId?: ProfessionId | null;
 }): {
   readonly record: CatalogSkillRecord;
   readonly series: SkillProgressionSeries;
@@ -92,7 +120,7 @@ function titleSkill(input: {
       revisionId: Number(input.id)
     },
     campaign: "eye-of-the-north",
-    professionId: null,
+    professionId: input.professionId ?? null,
     attributeId: null,
     type: "Signet",
     classification: {

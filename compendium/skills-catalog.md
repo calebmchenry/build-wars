@@ -22,8 +22,9 @@ runtime presentation before showing source-derived facts or icons.
 ## Source Authority
 
 The approved source set is `Guild Wars Wiki:Game integration/Skills` plus linked ranged pages under
-`Guild Wars Wiki:Game integration/Skills/*`. `Guild Wars Wiki:Game integration/Skills/0` was checked
-and is missing from the live MediaWiki API, so it is retained only as blocker history.
+`Guild Wars Wiki:Game integration/Skills/*`, the ten `List of <profession> skills` pages, and
+`List of PvE-only skills`. `Guild Wars Wiki:Game integration/Skills/0` was checked and is missing
+from the live MediaWiki API, so it is retained only as blocker history.
 
 Live refresh is two-step:
 
@@ -49,6 +50,10 @@ and attribute joins from EPIC-03, skill type, classification flags, independent 
 states, description state, progression references, split group ID, nullable icon ID, and compact
 provenance references.
 
+PvE-only title-track skills remain ordinary skill records. Browser sections are derived from
+title-rank progression keys such as Kurzick, Luxon, Sunspear, Lightbringer, Asura, Deldrimor, Ebon
+Vanguard, and Norn; profession-gated PvE title skills still keep their `professionId` requirement.
+
 Schema v1 excludes acquisition metadata, guide prose, strategy or usage notes, vendor/drop/quest
 instructions, community content, raw page bodies, MediaWiki HTML, icon bytes, thumbnails, and
 screenshots.
@@ -62,8 +67,8 @@ digest-bound review before runtime text can include them.
 
 Progression series store dependency kind, rank domain, value slots, finite rows, source form, and
 provenance. Title-rank dependencies use stable raw keys that `src/domain/title-rank.ts` normalizes
-into runtime title controls. Account title ownership, acquisition, and broad allegiance modeling
-remain outside the skill catalog.
+into runtime title controls. Account title ownership, acquisition, and broad allegiance exclusivity
+modeling remain outside the skill catalog.
 
 PvE/PvP split groups are explicit. Unknown mode returns an ambiguous outcome when variants differ;
 EPIC-06 and UI work own runtime mode selection policy.

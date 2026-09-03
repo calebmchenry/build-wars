@@ -47,6 +47,7 @@ EPIC_03_SOURCE_TITLES = (
 
 EPIC_03_ICON_IMAGEINFO_TITLE = "EPIC-03 profession icon imageinfo"
 EPIC_04_SOURCE_INDEX_TITLE = "Guild Wars Wiki:Game integration/Skills"
+EPIC_04_PVE_ONLY_SKILL_LIST_TITLE = "List of PvE-only skills"
 EPIC_04_SKILL_ICON_IMAGEINFO_TITLE = "EPIC-04 skill icon imageinfo"
 EPIC_04_PROFESSION_SKILL_LISTS = (
     (1, "warrior", "List of warrior skills"),

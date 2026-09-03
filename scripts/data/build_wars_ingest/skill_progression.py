@@ -129,7 +129,12 @@ def _dependency(
     explicit_title = _clean(params.get("title track") or params.get("title"))
     explicit_attribute = _clean(params.get("attribute"))
     if title_key or (explicit_title and explicit_title.casefold().endswith("rank")):
-        key = _title_key(explicit_title or title_key or "title rank")
+        if title_key is not None and title_key.startswith("allegiance:"):
+            key = title_key
+        elif explicit_title is not None:
+            key = _title_key(explicit_title)
+        else:
+            key = title_key or "title:title-rank"
         return {
             "kind": "title-rank",
             "attributeId": None,

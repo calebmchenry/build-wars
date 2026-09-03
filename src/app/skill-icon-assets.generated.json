@@ -976,7 +976,7 @@
     "1247": {
       "height": 64,
       "label": "Pain icon",
-      "src": "/gww-icons/skills/pain-pvp.jpg",
+      "src": "/gww-icons/skills/pain.jpg",
       "width": 64
     },
     "1249": {
@@ -1018,7 +1018,7 @@
     "1255": {
       "height": 64,
       "label": "Wanderlust icon",
-      "src": "/gww-icons/skills/wanderlust-pvp.jpg",
+      "src": "/gww-icons/skills/wanderlust.jpg",
       "width": 64
     },
     "1257": {
@@ -1139,6 +1139,12 @@
       "height": 64,
       "label": "Barbed Signet icon",
       "src": "/gww-icons/skills/barbed-signet.jpg",
+      "width": 64
+    },
+    "1319": {
+      "height": 64,
+      "label": "Final Thrust icon",
+      "src": "/gww-icons/skills/final-thrust.jpg",
       "width": 64
     },
     "132": {
@@ -3421,6 +3427,24 @@
       "src": "/gww-icons/skills/ether-renewal-pvp.jpg",
       "width": 64
     },
+    "1814": {
+      "height": 64,
+      "label": "Lightbringer's Gaze icon",
+      "src": "/gww-icons/skills/lightbringer-s-gaze.jpg",
+      "width": 64
+    },
+    "1815": {
+      "height": 64,
+      "label": "Lightbringer Signet icon",
+      "src": "/gww-icons/skills/lightbringer-signet.jpg",
+      "width": 64
+    },
+    "1816": {
+      "height": 64,
+      "label": "Sunspear Rebirth Signet icon",
+      "src": "/gww-icons/skills/sunspear-rebirth-signet.jpg",
+      "width": 64
+    },
     "182": {
       "height": 64,
       "label": "Conjure Flame icon",
@@ -3991,6 +4015,60 @@
       "src": "/gww-icons/skills/mind-freeze-pvp.jpg",
       "width": 64
     },
+    "2091": {
+      "height": 128,
+      "label": "Shadow Sanctuary icon",
+      "src": "/gww-icons/skills/shadow-sanctuary.jpg",
+      "width": 64
+    },
+    "2092": {
+      "height": 128,
+      "label": "Ether Nightmare icon",
+      "src": "/gww-icons/skills/ether-nightmare.jpg",
+      "width": 64
+    },
+    "2093": {
+      "height": 128,
+      "label": "Signet of Corruption icon",
+      "src": "/gww-icons/skills/signet-of-corruption.jpg",
+      "width": 64
+    },
+    "2094": {
+      "height": 128,
+      "label": "Elemental Lord icon",
+      "src": "/gww-icons/skills/elemental-lord.jpg",
+      "width": 64
+    },
+    "2095": {
+      "height": 128,
+      "label": "Selfless Spirit icon",
+      "src": "/gww-icons/skills/selfless-spirit.jpg",
+      "width": 64
+    },
+    "2096": {
+      "height": 128,
+      "label": "Triple Shot icon",
+      "src": "/gww-icons/skills/triple-shot.jpg",
+      "width": 64
+    },
+    "2097": {
+      "height": 128,
+      "label": "\"Save Yourselves!\" icon",
+      "src": "/gww-icons/skills/save-yourselves.jpg",
+      "width": 64
+    },
+    "2098": {
+      "height": 128,
+      "label": "Aura of Holy Might icon",
+      "src": "/gww-icons/skills/aura-of-holy-might.jpg",
+      "width": 64
+    },
+    "2099": {
+      "height": 128,
+      "label": "Spear of Fury icon",
+      "src": "/gww-icons/skills/spear-of-fury.jpg",
+      "width": 64
+    },
     "21": {
       "height": 64,
       "label": "Inspired Enchantment icon",
@@ -4001,6 +4079,12 @@
       "height": 64,
       "label": "Ice Prison icon",
       "src": "/gww-icons/skills/ice-prison.jpg",
+      "width": 64
+    },
+    "2100": {
+      "height": 128,
+      "label": "Summon Spirits icon",
+      "src": "/gww-icons/skills/summon-spirits.jpg",
       "width": 64
     },
     "2101": {
@@ -4067,6 +4151,12 @@
       "height": 64,
       "label": "\"There's Nothing to Fear!\" icon",
       "src": "/gww-icons/skills/there-s-nothing-to-fear.jpg",
+      "width": 64
+    },
+    "2116": {
+      "height": 64,
+      "label": "Sneak Attack icon",
+      "src": "/gww-icons/skills/sneak-attack.jpg",
       "width": 64
     },
     "212": {
@@ -4381,16 +4471,166 @@
       "src": "/gww-icons/skills/spear-swipe.jpg",
       "width": 64
     },
+    "2211": {
+      "height": 64,
+      "label": "Alkar's Alchemical Acid icon",
+      "src": "/gww-icons/skills/alkar-s-alchemical-acid.jpg",
+      "width": 64
+    },
+    "2212": {
+      "height": 64,
+      "label": "Light of Deldrimor icon",
+      "src": "/gww-icons/skills/light-of-deldrimor.jpg",
+      "width": 64
+    },
+    "2213": {
+      "height": 64,
+      "label": "Ear Bite icon",
+      "src": "/gww-icons/skills/ear-bite.jpg",
+      "width": 64
+    },
+    "2214": {
+      "height": 64,
+      "label": "Low Blow icon",
+      "src": "/gww-icons/skills/low-blow.jpg",
+      "width": 64
+    },
+    "2215": {
+      "height": 64,
+      "label": "Brawling Headbutt icon",
+      "src": "/gww-icons/skills/brawling-headbutt.jpg",
+      "width": 64
+    },
+    "2216": {
+      "height": 64,
+      "label": "\"Don't Trip!\" icon",
+      "src": "/gww-icons/skills/don-t-trip.jpg",
+      "width": 64
+    },
+    "2217": {
+      "height": 64,
+      "label": "\"By Ural's Hammer!\" icon",
+      "src": "/gww-icons/skills/by-ural-s-hammer.jpg",
+      "width": 64
+    },
+    "2218": {
+      "height": 64,
+      "label": "Drunken Master icon",
+      "src": "/gww-icons/skills/drunken-master.jpg",
+      "width": 64
+    },
+    "2219": {
+      "height": 64,
+      "label": "Great Dwarf Weapon icon",
+      "src": "/gww-icons/skills/great-dwarf-weapon.jpg",
+      "width": 64
+    },
     "222": {
       "height": 64,
       "label": "Lightning Strike icon",
       "src": "/gww-icons/skills/lightning-strike.jpg",
       "width": 64
     },
+    "2220": {
+      "height": 64,
+      "label": "Great Dwarf Armor icon",
+      "src": "/gww-icons/skills/great-dwarf-armor.jpg",
+      "width": 64
+    },
+    "2221": {
+      "height": 64,
+      "label": "Breath of the Great Dwarf icon",
+      "src": "/gww-icons/skills/breath-of-the-great-dwarf.jpg",
+      "width": 64
+    },
+    "2222": {
+      "height": 64,
+      "label": "Snow Storm icon",
+      "src": "/gww-icons/skills/snow-storm.jpg",
+      "width": 64
+    },
+    "2223": {
+      "height": 64,
+      "label": "Black Powder Mine icon",
+      "src": "/gww-icons/skills/black-powder-mine.jpg",
+      "width": 64
+    },
+    "2224": {
+      "height": 64,
+      "label": "Summon Mursaat icon",
+      "src": "/gww-icons/skills/summon-mursaat.jpg",
+      "width": 64
+    },
+    "2225": {
+      "height": 64,
+      "label": "Summon Ruby Djinn icon",
+      "src": "/gww-icons/skills/summon-ruby-djinn.jpg",
+      "width": 64
+    },
+    "2226": {
+      "height": 64,
+      "label": "Summon Ice Imp icon",
+      "src": "/gww-icons/skills/summon-ice-imp.jpg",
+      "width": 64
+    },
+    "2227": {
+      "height": 64,
+      "label": "Summon Naga Shaman icon",
+      "src": "/gww-icons/skills/summon-naga-shaman.jpg",
+      "width": 64
+    },
+    "2228": {
+      "height": 64,
+      "label": "Deft Strike icon",
+      "src": "/gww-icons/skills/deft-strike.jpg",
+      "width": 64
+    },
+    "2229": {
+      "height": 64,
+      "label": "Signet of Infection icon",
+      "src": "/gww-icons/skills/signet-of-infection.jpg",
+      "width": 64
+    },
     "223": {
       "height": 64,
       "label": "Chain Lightning icon",
       "src": "/gww-icons/skills/chain-lightning.jpg",
+      "width": 64
+    },
+    "2230": {
+      "height": 64,
+      "label": "Tryptophan Signet icon",
+      "src": "/gww-icons/skills/tryptophan-signet.jpg",
+      "width": 64
+    },
+    "2231": {
+      "height": 64,
+      "label": "Ebon Battle Standard of Courage icon",
+      "src": "/gww-icons/skills/ebon-battle-standard-of-courage.jpg",
+      "width": 64
+    },
+    "2232": {
+      "height": 64,
+      "label": "Ebon Battle Standard of Wisdom icon",
+      "src": "/gww-icons/skills/ebon-battle-standard-of-wisdom.jpg",
+      "width": 64
+    },
+    "2233": {
+      "height": 64,
+      "label": "Ebon Battle Standard of Honor icon",
+      "src": "/gww-icons/skills/ebon-battle-standard-of-honor.jpg",
+      "width": 64
+    },
+    "2234": {
+      "height": 64,
+      "label": "Ebon Vanguard Sniper Support icon",
+      "src": "/gww-icons/skills/ebon-vanguard-sniper-support.jpg",
+      "width": 64
+    },
+    "2235": {
+      "height": 64,
+      "label": "Ebon Vanguard Assassin Support icon",
+      "src": "/gww-icons/skills/ebon-vanguard-assassin-support.jpg",
       "width": 64
     },
     "2236": {
@@ -4489,10 +4729,64 @@
       "src": "/gww-icons/skills/blurred-vision.jpg",
       "width": 64
     },
+    "2353": {
+      "height": 64,
+      "label": "\"Finish Him!\" icon",
+      "src": "/gww-icons/skills/finish-him.jpg",
+      "width": 64
+    },
+    "2354": {
+      "height": 64,
+      "label": "\"Dodge This!\" icon",
+      "src": "/gww-icons/skills/dodge-this.jpg",
+      "width": 64
+    },
+    "2355": {
+      "height": 64,
+      "label": "\"I Am the Strongest!\" icon",
+      "src": "/gww-icons/skills/i-am-the-strongest.jpg",
+      "width": 64
+    },
+    "2356": {
+      "height": 64,
+      "label": "\"I Am Unstoppable!\" icon",
+      "src": "/gww-icons/skills/i-am-unstoppable.jpg",
+      "width": 64
+    },
+    "2357": {
+      "height": 64,
+      "label": "A Touch of Guile icon",
+      "src": "/gww-icons/skills/a-touch-of-guile.jpg",
+      "width": 64
+    },
+    "2358": {
+      "height": 64,
+      "label": "\"You Move Like a Dwarf!\" icon",
+      "src": "/gww-icons/skills/you-move-like-a-dwarf.jpg",
+      "width": 64
+    },
+    "2359": {
+      "height": 64,
+      "label": "\"You Are All Weaklings!\" icon",
+      "src": "/gww-icons/skills/you-are-all-weaklings.jpg",
+      "width": 64
+    },
     "236": {
       "height": 64,
       "label": "Mist Form icon",
       "src": "/gww-icons/skills/mist-form-pvp.jpg",
+      "width": 64
+    },
+    "2360": {
+      "height": 64,
+      "label": "Feel No Pain icon",
+      "src": "/gww-icons/skills/feel-no-pain.jpg",
+      "width": 64
+    },
+    "2361": {
+      "height": 64,
+      "label": "Club of a Thousand Bears icon",
+      "src": "/gww-icons/skills/club-of-a-thousand-bears.jpg",
       "width": 64
     },
     "237": {
@@ -4501,10 +4795,28 @@
       "src": "/gww-icons/skills/water-trident.jpg",
       "width": 64
     },
+    "2374": {
+      "height": 64,
+      "label": "Ursan Blessing icon",
+      "src": "/gww-icons/skills/ursan-blessing.jpg",
+      "width": 64
+    },
+    "2379": {
+      "height": 64,
+      "label": "Volfen Blessing icon",
+      "src": "/gww-icons/skills/volfen-blessing.jpg",
+      "width": 64
+    },
     "238": {
       "height": 64,
       "label": "Armor of Mist icon",
       "src": "/gww-icons/skills/armor-of-mist.jpg",
+      "width": 64
+    },
+    "2384": {
+      "height": 64,
+      "label": "Raven Blessing icon",
+      "src": "/gww-icons/skills/raven-blessing.jpg",
       "width": 64
     },
     "239": {
@@ -4531,10 +4843,82 @@
       "src": "/gww-icons/skills/life-bond.jpg",
       "width": 64
     },
+    "2411": {
+      "height": 64,
+      "label": "Mindbender icon",
+      "src": "/gww-icons/skills/mindbender.jpg",
+      "width": 64
+    },
+    "2412": {
+      "height": 64,
+      "label": "Smooth Criminal icon",
+      "src": "/gww-icons/skills/smooth-criminal.jpg",
+      "width": 64
+    },
+    "2413": {
+      "height": 64,
+      "label": "Technobabble icon",
+      "src": "/gww-icons/skills/technobabble.jpg",
+      "width": 64
+    },
+    "2414": {
+      "height": 64,
+      "label": "Radiation Field icon",
+      "src": "/gww-icons/skills/radiation-field.jpg",
+      "width": 64
+    },
+    "2415": {
+      "height": 64,
+      "label": "Asuran Scan icon",
+      "src": "/gww-icons/skills/asuran-scan.jpg",
+      "width": 64
+    },
+    "2416": {
+      "height": 64,
+      "label": "Air of Superiority icon",
+      "src": "/gww-icons/skills/air-of-superiority.jpg",
+      "width": 64
+    },
+    "2417": {
+      "height": 64,
+      "label": "Mental Block icon",
+      "src": "/gww-icons/skills/mental-block.jpg",
+      "width": 64
+    },
+    "2418": {
+      "height": 64,
+      "label": "Pain Inverter icon",
+      "src": "/gww-icons/skills/pain-inverter.jpg",
+      "width": 64
+    },
     "242": {
       "height": 64,
       "label": "Balthazar's Spirit icon",
       "src": "/gww-icons/skills/balthazar-s-spirit.jpg",
+      "width": 64
+    },
+    "2420": {
+      "height": 64,
+      "label": "Ebon Escape icon",
+      "src": "/gww-icons/skills/ebon-escape.jpg",
+      "width": 64
+    },
+    "2421": {
+      "height": 64,
+      "label": "Weakness Trap icon",
+      "src": "/gww-icons/skills/weakness-trap.jpg",
+      "width": 64
+    },
+    "2422": {
+      "height": 64,
+      "label": "Winds icon",
+      "src": "/gww-icons/skills/winds.jpg",
+      "width": 64
+    },
+    "2423": {
+      "height": 64,
+      "label": "Dwarven Stability icon",
+      "src": "/gww-icons/skills/dwarven-stability.jpg",
       "width": 64
     },
     "243": {
@@ -4669,16 +5053,130 @@
       "src": "/gww-icons/skills/shield-of-judgment.jpg",
       "width": 64
     },
+    "2626": {
+      "height": 64,
+      "label": "Complicate icon",
+      "src": "/gww-icons/skills/complicate.jpg",
+      "width": 64
+    },
+    "2627": {
+      "height": 64,
+      "label": "Reaper's Mark icon",
+      "src": "/gww-icons/skills/reaper-s-mark.jpg",
+      "width": 64
+    },
+    "2628": {
+      "height": 64,
+      "label": "Enfeeble icon",
+      "src": "/gww-icons/skills/enfeeble-pvp.jpg",
+      "width": 64
+    },
     "263": {
       "height": 64,
       "label": "Protective Bond icon",
       "src": "/gww-icons/skills/protective-bond.jpg",
       "width": 64
     },
+    "2630": {
+      "height": 64,
+      "label": "Signet of Lost Souls icon",
+      "src": "/gww-icons/skills/signet-of-lost-souls.jpg",
+      "width": 64
+    },
+    "2632": {
+      "height": 64,
+      "label": "Searing Flames icon",
+      "src": "/gww-icons/skills/searing-flames.jpg",
+      "width": 64
+    },
+    "2633": {
+      "height": 64,
+      "label": "Glowing Gaze icon",
+      "src": "/gww-icons/skills/glowing-gaze.jpg",
+      "width": 64
+    },
+    "2634": {
+      "height": 64,
+      "label": "Steam icon",
+      "src": "/gww-icons/skills/steam.jpg",
+      "width": 64
+    },
+    "2635": {
+      "height": 64,
+      "label": "Flame Djinn's Haste icon",
+      "src": "/gww-icons/skills/flame-djinn-s-haste.jpg",
+      "width": 64
+    },
+    "2636": {
+      "height": 64,
+      "label": "Liquid Flame icon",
+      "src": "/gww-icons/skills/liquid-flame.jpg",
+      "width": 64
+    },
+    "2639": {
+      "height": 64,
+      "label": "Smite Condition icon",
+      "src": "/gww-icons/skills/smite-condition.jpg",
+      "width": 64
+    },
     "264": {
       "height": 64,
       "label": "Pacifism icon",
       "src": "/gww-icons/skills/pacifism.jpg",
+      "width": 64
+    },
+    "2640": {
+      "height": 64,
+      "label": "Crippling Slash icon",
+      "src": "/gww-icons/skills/crippling-slash.jpg",
+      "width": 64
+    },
+    "2641": {
+      "height": 64,
+      "label": "Sun and Moon Slash icon",
+      "src": "/gww-icons/skills/sun-and-moon-slash.jpg",
+      "width": 64
+    },
+    "2642": {
+      "height": 64,
+      "label": "Enraging Charge icon",
+      "src": "/gww-icons/skills/enraging-charge.jpg",
+      "width": 64
+    },
+    "2643": {
+      "height": 64,
+      "label": "Tiger Stance icon",
+      "src": "/gww-icons/skills/tiger-stance.jpg",
+      "width": 64
+    },
+    "2644": {
+      "height": 64,
+      "label": "Burning Arrow icon",
+      "src": "/gww-icons/skills/burning-arrow.jpg",
+      "width": 64
+    },
+    "2645": {
+      "height": 64,
+      "label": "Natural Stride icon",
+      "src": "/gww-icons/skills/natural-stride.jpg",
+      "width": 64
+    },
+    "2646": {
+      "height": 64,
+      "label": "Falling Lotus Strike icon",
+      "src": "/gww-icons/skills/falling-lotus-strike.jpg",
+      "width": 64
+    },
+    "2647": {
+      "height": 64,
+      "label": "Anthem of Weariness icon",
+      "src": "/gww-icons/skills/anthem-of-weariness.jpg",
+      "width": 64
+    },
+    "2648": {
+      "height": 64,
+      "label": "Pious Fury icon",
+      "src": "/gww-icons/skills/pious-fury-pvp.jpg",
       "width": 64
     },
     "265": {
@@ -5173,6 +5671,12 @@
       "src": "/gww-icons/skills/strength-of-honor-pvp.jpg",
       "width": 64
     },
+    "3": {
+      "height": 64,
+      "label": "Signet of Capture icon",
+      "src": "/gww-icons/skills/signet-of-capture.jpg",
+      "width": 64
+    },
     "30": {
       "height": 64,
       "label": "Diversion icon",
@@ -5212,7 +5716,7 @@
     "3007": {
       "height": 64,
       "label": "Pain (PvP) icon",
-      "src": "/gww-icons/skills/pain-pvp.jpg",
+      "src": "/gww-icons/skills/pain.jpg",
       "width": 64
     },
     "3008": {
@@ -5302,7 +5806,7 @@
     "3020": {
       "height": 64,
       "label": "Wanderlust (PvP) icon",
-      "src": "/gww-icons/skills/wanderlust-pvp.jpg",
+      "src": "/gww-icons/skills/wanderlust.jpg",
       "width": 64
     },
     "3021": {
@@ -5437,6 +5941,18 @@
       "src": "/gww-icons/skills/anthem-of-disruption-pvp.jpg",
       "width": 64
     },
+    "3042": {
+      "height": 64,
+      "label": "Pain icon",
+      "src": "/gww-icons/skills/pain.jpg",
+      "width": 64
+    },
+    "3043": {
+      "height": 64,
+      "label": "Wanderlust icon",
+      "src": "/gww-icons/skills/wanderlust.jpg",
+      "width": 64
+    },
     "3045": {
       "height": 64,
       "label": "Comfort Animal (PvP) icon",
@@ -5531,6 +6047,18 @@
       "height": 64,
       "label": "Mantra of Resolve (PvP) icon",
       "src": "/gww-icons/skills/mantra-of-resolve-pvp.jpg",
+      "width": 64
+    },
+    "3065": {
+      "height": 64,
+      "label": "Charm Animal icon",
+      "src": "/gww-icons/skills/charm-animal-codex.jpg",
+      "width": 64
+    },
+    "3066": {
+      "height": 64,
+      "label": "Charm Animal icon",
+      "src": "/gww-icons/skills/charm-animal-codex.jpg",
       "width": 64
     },
     "3068": {
@@ -7261,6 +7789,12 @@
       "src": "/gww-icons/skills/soothing-images.jpg",
       "width": 64
     },
+    "562": {
+      "height": 64,
+      "label": "Lightning Orb icon",
+      "src": "/gww-icons/skills/lightning-orb.jpg",
+      "width": 64
+    },
     "57": {
       "height": 64,
       "label": "Cry of Frustration icon",
@@ -8714,13 +9248,13 @@
       "width": 64
     }
   },
-  "generatedAt": "2026-09-03T00:00:00Z",
+  "generatedAt": "2026-09-03T23:06:58Z",
   "schemaVersion": 1,
-  "sourceCatalogVersion": "skills-f79c3de0622a83db",
+  "sourceCatalogVersion": "skills-5478103b193f82fd",
   "summary": {
-    "runtimeSkillIconCount": 1452,
-    "skillCount": 1452,
-    "uniqueAssetCount": 1266,
+    "runtimeSkillIconCount": 1541,
+    "skillCount": 1541,
+    "uniqueAssetCount": 1320,
     "unresolvedSkillCount": 0
   }
 }

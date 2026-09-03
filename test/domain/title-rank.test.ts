@@ -22,7 +22,7 @@ const provenance = {
 } satisfies CatalogFieldProvenance;
 
 describe("title rank catalog", () => {
-  it("discovers promoted profession-skill title definitions and the Sunspear alias conflict", () => {
+  it("discovers promoted PvE title definitions and the Sunspear domain conflict", () => {
     const catalog = createTitleRankCatalog(
       (
         generatedSkills as unknown as {
@@ -34,11 +34,13 @@ describe("title rank catalog", () => {
 
     expect(catalog.definitions.map((definition) => definition.key)).toEqual([
       "title:allegiance-rank",
+      "title:asura-rank",
+      "title:deldrimor-rank",
+      "title:ebon-vanguard-rank",
+      "title:lightbringer-rank",
+      "title:norn-rank",
       "title:sunspear-rank"
     ]);
-    expect(catalog.canonicalKeyByRawKey.get("title:title-sunspear-rank")).toBe(
-      "title:sunspear-rank"
-    );
     expect(sunspear).toMatchObject({
       label: "Sunspear",
       defaultKind: "alias-conflict",
@@ -46,11 +48,7 @@ describe("title rank catalog", () => {
     });
     expect(
       sunspear?.declaredDomains.map((domain) => `${domain.rawKey}:${domain.min}-${domain.max}`)
-    ).toEqual([
-      "title:sunspear-rank:0-10",
-      "title:sunspear-rank:0-12",
-      "title:title-sunspear-rank:0-15"
-    ]);
+    ).toEqual(["title:sunspear-rank:0-10", "title:sunspear-rank:0-12", "title:sunspear-rank:0-15"]);
     expect(catalog.diagnostics.map((diagnostic) => diagnostic.code)).toContain(
       "title.alias-domain-conflict"
     );

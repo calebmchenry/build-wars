@@ -141,6 +141,7 @@ def extract_skill_infobox(
     diagnostics.extend(attribute_diagnostics)
 
     infobox_ids = _infobox_ids(params.get("id"))
+    infobox_id_label = _infobox_id_label(params.get("id"), skill_id)
     if infobox_ids and skill_id not in infobox_ids:
         diagnostics.append(
             _diag(
@@ -206,7 +207,7 @@ def extract_skill_infobox(
         record=record,
         icon_file_title=_file_title(params.get("image")),
         attribute_name=attribute_name,
-        title_key=_title_key(attribute_name) if attribute_name and attribute_name.casefold().endswith("rank") else None,
+        title_key=_rank_title_key(attribute_name, infobox_id_label),
         source_text_digest=description["sourceTextDigest"],
         diagnostics=sorted(diagnostics, key=lambda item: item.stable_key()),
     )
@@ -536,6 +537,28 @@ def _infobox_ids(value: str | None) -> list[int]:
     if value is None:
         return []
     return [int(match) for match in re.findall(r"\d+", value)]
+
+
+def _infobox_id_label(value: str | None, skill_id: int) -> str | None:
+    if value is None:
+        return None
+    for part in value.split(","):
+        if skill_id not in [int(match) for match in re.findall(r"\d+", part)]:
+            continue
+        labels = [label.strip().casefold() for label in re.findall(r"<!--\s*([^>]+?)\s*-->", part)]
+        if any("kurzick" in label for label in labels):
+            return "kurzick"
+        if any("luxon" in label for label in labels):
+            return "luxon"
+    return None
+
+
+def _rank_title_key(attribute_name: str | None, infobox_id_label: str | None) -> str | None:
+    if attribute_name is None or not attribute_name.casefold().endswith("rank"):
+        return None
+    if attribute_name.casefold() == "allegiance rank" and infobox_id_label in {"kurzick", "luxon"}:
+        return f"allegiance:{infobox_id_label}"
+    return _title_key(attribute_name)
 
 
 def _search_text(values: list[str | None]) -> str:

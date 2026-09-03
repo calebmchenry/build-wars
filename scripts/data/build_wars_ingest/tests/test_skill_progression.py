@@ -42,6 +42,20 @@ class SkillProgressionTests(unittest.TestCase):
         self.assertEqual(extraction.series[0]["dependency"]["titleKey"], "title:allegiance-rank")
         self.assertEqual(extraction.series[0]["values"][-1]["rank"], 12)
 
+    def test_allegiance_progression_preserves_side_specific_key(self) -> None:
+        text = (FIXTURE_ROOT / "skills/save-yourselves.wiki").read_text(encoding="utf-8")
+
+        extraction = extract_skill_progressions(
+            skill_id=3,
+            wikitext=text,
+            source_id="source:gww:skill:3",
+            attribute_id=None,
+            attribute_name="Allegiance rank",
+            title_key="allegiance:luxon",
+        )
+
+        self.assertEqual(extraction.series[0]["dependency"]["titleKey"], "allegiance:luxon")
+
     def test_split_suffix_evidence_is_explicit(self) -> None:
         self.assertEqual(split_evidence_from_title("Training Beacon (PvE)"), ("training beacon", "pve"))
         self.assertEqual(split_evidence_from_title("Training Beacon"), ("training beacon", None))

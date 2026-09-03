@@ -835,13 +835,7 @@ function primarySortKey(
   if (sortMode === "type") {
     return skill.type;
   }
-  if (skill.attributeId === null) {
-    return "zz:no-attribute";
-  }
-  return (
-    catalogs.attributes.find((attribute) => Number(attribute.id) === Number(skill.attributeId))
-      ?.name ?? "zz:unknown-attribute"
-  );
+  return skillCatalogSection(skill, catalogs).sortKey;
 }
 
 function groupSkills(
@@ -854,26 +848,130 @@ function groupSkills(
   }
   const groups = new Map<string, CatalogSkillRecord[]>();
   for (const skill of skills) {
-    const label =
-      sortMode === "type" ? skill.type || "Unknown type" : attributeGroupLabel(skill, catalogs);
-    const existing = groups.get(label) ?? [];
-    groups.set(label, [...existing, skill]);
+    const section =
+      sortMode === "type"
+        ? {
+            id: `type:${normalizeQuery(skill.type) || "unknown"}`,
+            label: skill.type || "Unknown type"
+          }
+        : skillCatalogSection(skill, catalogs);
+    const existing = groups.get(section.id) ?? [];
+    groups.set(section.id, [...existing, skill]);
   }
-  return [...groups.entries()].map(([label, groupSkills]) => ({
-    id: normalizeQuery(label) || "unknown",
-    label,
+  return [...groups.entries()].map(([id, groupSkills]) => ({
+    id,
+    label:
+      sortMode === "type"
+        ? groupSkills[0]?.type || "Unknown type"
+        : skillCatalogSection(groupSkills[0]!, catalogs).label,
     skills: groupSkills
   }));
 }
 
-function attributeGroupLabel(skill: CatalogSkillRecord, catalogs: AppCatalogViews): string {
-  if (skill.attributeId === null) {
-    return "No attribute";
+interface SkillCatalogSectionView {
+  readonly id: string;
+  readonly label: string;
+  readonly sortKey: string;
+}
+
+const TITLE_SECTION_ORDER = new Map<string, number>([
+  ["kurzick", 10],
+  ["luxon", 20],
+  ["lightbringer", 30],
+  ["sunspear", 40],
+  ["asura", 50],
+  ["deldrimor", 60],
+  ["ebon-vanguard", 70],
+  ["norn", 80],
+  ["allegiance", 90]
+]);
+
+function skillCatalogSection(
+  skill: CatalogSkillRecord,
+  catalogs: AppCatalogViews
+): SkillCatalogSectionView {
+  const titleSection = titleRankSection(skill, catalogs);
+  if (titleSection !== null) {
+    return titleSection;
   }
-  return (
-    catalogs.attributes.find((attribute) => Number(attribute.id) === Number(skill.attributeId))
-      ?.name ?? "Unknown attribute"
-  );
+  if (skill.attributeId !== null) {
+    const attribute =
+      catalogs.attributes.find((entry) => Number(entry.id) === Number(skill.attributeId)) ?? null;
+    const label = attribute?.name ?? "Unknown attribute";
+    return {
+      id: `attribute:${Number(skill.attributeId)}`,
+      label,
+      sortKey: `attribute:${label}`
+    };
+  }
+  return { id: "no-attribute", label: "No attribute", sortKey: "zz:no-attribute" };
+}
+
+function titleRankSection(
+  skill: CatalogSkillRecord,
+  catalogs: AppCatalogViews
+): SkillCatalogSectionView | null {
+  if (!skill.classification.title) {
+    return null;
+  }
+  for (const seriesId of skill.progressionSeriesIds) {
+    const series = catalogs.skillCatalog.progressionSeries.find(
+      (candidate) => candidate.id === seriesId
+    );
+    const rawKey = series?.dependency.kind === "title-rank" ? series.dependency.titleKey : null;
+    if (rawKey === null) {
+      continue;
+    }
+    const section = titleRankSectionFromKey(rawKey, catalogs);
+    if (section !== null) {
+      return section;
+    }
+  }
+  return null;
+}
+
+function titleRankSectionFromKey(
+  rawKey: string,
+  catalogs: AppCatalogViews
+): SkillCatalogSectionView | null {
+  if (rawKey === "allegiance:kurzick") {
+    return titleSection("kurzick", "Kurzick");
+  }
+  if (rawKey === "allegiance:luxon") {
+    return titleSection("luxon", "Luxon");
+  }
+  const canonicalKey = catalogs.titleRanks.canonicalKeyByRawKey.get(rawKey) ?? rawKey;
+  const definition = catalogs.titleRanks.byCanonicalKey.get(canonicalKey);
+  const label = definition?.label ?? titleLabelFromKey(canonicalKey);
+  return titleSection(normalizeSectionId(label), label);
+}
+
+function titleSection(key: string, label: string): SkillCatalogSectionView {
+  const order = TITLE_SECTION_ORDER.get(key) ?? 999;
+  return {
+    id: `title:${key}`,
+    label,
+    sortKey: `title:${String(order).padStart(3, "0")}:${label}`
+  };
+}
+
+function titleLabelFromKey(key: string): string {
+  const label = key
+    .replace(/^title:/, "")
+    .replace(/-rank$/, "")
+    .split("-")
+    .filter(Boolean)
+    .map((part) => `${part[0]?.toLocaleUpperCase("en-US") ?? ""}${part.slice(1)}`)
+    .join(" ");
+  return label || "Title rank";
+}
+
+function normalizeSectionId(value: string): string {
+  return value
+    .trim()
+    .toLocaleLowerCase("en-US")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 function subtitleForSkill(skill: CatalogSkillRecord, catalogs: AppCatalogViews): string {

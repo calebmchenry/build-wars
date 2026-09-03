@@ -16,6 +16,7 @@ from .profiles import (
     DataIngestionProfile,
     EPIC_04_PROFESSION_SKILL_LISTS,
     EPIC_04_PROFILE_ID,
+    EPIC_04_PVE_ONLY_SKILL_LIST_TITLE,
     EPIC_04_SOURCE_INDEX_TITLE,
 )
 from .skill_infobox import extract_skill_infobox_ids
@@ -34,6 +35,10 @@ PROFESSION_LIST_ROW_RE = re.compile(
 HTML_TH_RE = re.compile(r"<th\b[^>]*>(?P<content>.*?)</th>", flags=re.IGNORECASE | re.DOTALL)
 HTML_LINK_RE = re.compile(
     r"<a\b(?P<attrs>[^>]*)\s*>(?P<label>.*?)</a\s*>",
+    flags=re.IGNORECASE | re.DOTALL,
+)
+HTML_HEADING_OR_ROW_RE = re.compile(
+    r"(?P<heading><h[23]\b[^>]*>.*?</h[23]>)|(?P<row><tr\b(?=[^>]*\bdata-name=)[^>]*>.*?</tr>)",
     flags=re.IGNORECASE | re.DOTALL,
 )
 PROFESSION_LIST_TITLE_BY_ID = {
@@ -140,6 +145,7 @@ def build_source_plan(
     index_snapshot: dict[str, Any],
     range_snapshots: list[dict[str, Any]],
     profession_list_snapshots: list[dict[str, Any]] | None = None,
+    pve_only_list_snapshot: dict[str, Any] | None = None,
     supplemental_seed_snapshots: list[dict[str, Any]] | None = None,
 ) -> SourceSetBuildResult:
     if profile.id != EPIC_04_PROFILE_ID:
@@ -196,9 +202,18 @@ def build_source_plan(
         profession_list_snapshots
     )
     diagnostics.extend(profession_list_diagnostics)
-    accepted_seeds, unresolved_profession_titles, supplemental_diagnostics = _profession_list_seeds(
+    pve_only_rows: list[dict[str, Any]] = []
+    pve_only_list_diagnostics: list[Diagnostic] = []
+    if pve_only_list_snapshot is not None:
+        pve_only_rows, pve_only_list_diagnostics = pve_only_skill_rows_from_rendered_html(
+            str(pve_only_list_snapshot["content"]),
+            list_title=str(pve_only_list_snapshot["title"]),
+            source_reference=pve_only_list_snapshot["sourceReference"],
+        )
+        diagnostics.extend(pve_only_list_diagnostics)
+    accepted_seeds, unresolved_skill_titles, supplemental_diagnostics = _skill_list_seeds(
         range_seeds=range_seeds,
-        profession_rows=profession_rows,
+        skill_rows=[*profession_rows, *pve_only_rows],
         supplemental_seed_snapshots=supplemental_seed_snapshots,
     )
     diagnostics.extend(supplemental_diagnostics)
@@ -232,6 +247,9 @@ def build_source_plan(
         {**_snapshot_identity(snapshot), "professionId": int(snapshot["professionId"])}
         for snapshot in profession_list_snapshots
     ]
+    pve_only_list_identity = (
+        _snapshot_identity(pve_only_list_snapshot) if pve_only_list_snapshot is not None else None
+    )
     supplemental_seed_page_identities = [
         _snapshot_identity(snapshot) for snapshot in supplemental_seed_snapshots
     ]
@@ -240,6 +258,8 @@ def build_source_plan(
         "ranges": [_snapshot_identity(snapshots_by_title[title]) for title in ranged_titles if title in snapshots_by_title],
         "professionLists": profession_list_page_identities,
         "professionSkillRows": profession_rows,
+        "pveOnlyList": pve_only_list_identity,
+        "pveOnlySkillRows": pve_only_rows,
         "rangeSeeds": range_seeds,
         "supplementalSeedPages": supplemental_seed_page_identities,
         "acceptedSeeds": accepted_seeds,
@@ -258,10 +278,13 @@ def build_source_plan(
         ],
         "professionListPages": profession_list_page_identities,
         "professionSkillRows": profession_rows,
+        "pveOnlyListPage": pve_only_list_identity,
+        "pveOnlySkillRows": pve_only_rows,
         "rangeSeeds": range_seeds,
         "supplementalSeedPages": supplemental_seed_page_identities,
         "acceptedSeeds": accepted_seeds,
-        "unresolvedProfessionListTitles": unresolved_profession_titles,
+        "unresolvedSkillListTitles": unresolved_skill_titles,
+        "unresolvedProfessionListTitles": unresolved_skill_titles,
         "summary": {
             "acceptedSeedCount": len(accepted_seeds),
             "minimumAcceptedId": min((int(seed["skillId"]) for seed in accepted_seeds), default=None),
@@ -270,10 +293,12 @@ def build_source_plan(
             "duplicateRequestedTitleCount": duplicate_title_count,
             "professionListPageCount": len(profession_list_snapshots),
             "professionSkillRowCount": len(profession_rows),
+            "pveOnlySkillRowCount": len(pve_only_rows),
             "rangeSeedCount": len(range_seeds),
             "rangeOnlySeedCount": len([seed for seed in range_seeds if int(seed["skillId"]) not in accepted_seed_ids]),
             "supplementalSeedCount": supplemental_seed_count,
-            "unresolvedProfessionListTitleCount": len(unresolved_profession_titles),
+            "unresolvedSkillListTitleCount": len(unresolved_skill_titles),
+            "unresolvedProfessionListTitleCount": len(unresolved_skill_titles),
             "sourceSetDigest": source_set_digest,
             "sourcePlanDigest": "pending",
         },
@@ -342,8 +367,8 @@ def validate_source_plan(
     if len(seeds) > profile.page_limit:
         raise SkillSourceSetError("Source plan exceeds the profile detail page cap")
     summary = plan.get("summary")
-    if isinstance(summary, dict) and int(summary.get("unresolvedProfessionListTitleCount", 0)) > 0:
-        raise SkillSourceSetError("Source plan contains unresolved profession-list skill rows")
+    if isinstance(summary, dict) and int(summary.get("unresolvedSkillListTitleCount", 0)) > 0:
+        raise SkillSourceSetError("Source plan contains unresolved skill-list rows")
 
 
 def page_snapshot_from_loaded(loaded: LoadedSnapshot) -> dict[str, Any]:
@@ -618,6 +643,85 @@ def profession_skill_rows_from_rendered_html(
     return rows, sorted(diagnostics, key=lambda item: item.stable_key())
 
 
+def pve_only_skill_rows_from_rendered_html(
+    rendered_html: str,
+    *,
+    list_title: str,
+    source_reference: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[Diagnostic]]:
+    rows: list[dict[str, Any]] = []
+    diagnostics: list[Diagnostic] = []
+    source_id = str(source_reference["id"])
+    section_label = "PvE-only"
+    seen: dict[str, int] = {}
+    for match in HTML_HEADING_OR_ROW_RE.finditer(rendered_html):
+        heading = match.group("heading")
+        if heading is not None:
+            section_label = _html_heading_text(heading) or section_label
+            continue
+        row = match.group("row")
+        if row is None:
+            continue
+        table_headers = [item.group("content") for item in HTML_TH_RE.finditer(row)]
+        if len(table_headers) < 2:
+            diagnostics.append(
+                Diagnostic(
+                    code="SKILL_PVE_ONLY_LIST_ROW_SHAPE",
+                    severity="warning",
+                    message="PvE-only skill list row did not include an icon and name header cell",
+                    category="schema-shape-error",
+                    scope_kind="source",
+                    source_ids=(source_id,),
+                    disposition="accepted-risk",
+                )
+            )
+            continue
+        link = _first_wiki_link(table_headers[1])
+        if link is None:
+            diagnostics.append(
+                Diagnostic(
+                    code="SKILL_PVE_ONLY_LIST_ROW_MISSING_LINK",
+                    severity="warning",
+                    message="PvE-only skill list row did not include a wiki skill link",
+                    category="schema-shape-error",
+                    scope_kind="source",
+                    source_ids=(source_id,),
+                    disposition="accepted-risk",
+                )
+            )
+            continue
+        requested_title = link["title"]
+        key = _title_key(requested_title)
+        if key in seen:
+            diagnostics.append(
+                Diagnostic(
+                    code="SKILL_PVE_ONLY_LIST_DUPLICATE_ROW",
+                    severity="warning",
+                    message=f"PvE-only skill list duplicated row title: {requested_title}",
+                    category="schema-shape-error",
+                    scope_kind="source",
+                    record_id=requested_title,
+                    source_ids=(source_id,),
+                    disposition="accepted-risk",
+                )
+            )
+            continue
+        seen[key] = len(rows) + 1
+        rows.append(
+            {
+                "name": link["label"] or requested_title,
+                "requestedTitle": requested_title,
+                "sourcePage": list_title,
+                "sourceId": source_id,
+                "rowNumber": len(rows) + 1,
+                "sourceKind": "pve-only-skill-list",
+                "pveOnlySection": _pve_only_section_key(section_label),
+                "pveOnlySectionLabel": section_label,
+            }
+        )
+    return rows, sorted(diagnostics, key=lambda item: item.stable_key())
+
+
 def _seed_record(record: dict[str, Any], *, source_kind: str) -> dict[str, Any]:
     return {
         "skillId": int(record["skillId"]),
@@ -656,10 +760,10 @@ def _profession_skill_rows_from_snapshots(
     return rows, sorted(diagnostics, key=lambda item: item.stable_key())
 
 
-def _profession_list_seeds(
+def _skill_list_seeds(
     *,
     range_seeds: list[dict[str, Any]],
-    profession_rows: list[dict[str, Any]],
+    skill_rows: list[dict[str, Any]],
     supplemental_seed_snapshots: list[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[Diagnostic]]:
     range_seeds_by_title = _range_seeds_by_title(range_seeds)
@@ -668,25 +772,24 @@ def _profession_list_seeds(
     accepted_ids: set[int] = set()
     unresolved: list[dict[str, Any]] = []
     diagnostics: list[Diagnostic] = []
-    for row in profession_rows:
+    for row in skill_rows:
         title_key = _title_key(str(row["requestedTitle"]))
-        range_seed = range_seeds_by_title.get(title_key)
-        if range_seed is not None:
-            seed = _profession_seed_from_range(row, range_seed)
+        range_matches = range_seeds_by_title.get(title_key)
+        if range_matches:
+            seeds = [_skill_seed_from_range(row, range_seed) for range_seed in range_matches]
         else:
             page = supplemental_pages.get(title_key)
             if page is None:
-                unresolved.append(_unresolved_profession_row(row, "No supplemental detail page was fetched."))
+                unresolved.append(_unresolved_skill_row(row, "No supplemental detail page was fetched."))
                 continue
             ids = extract_skill_infobox_ids(str(page["content"]))
-            if len(ids) != 1:
+            if not ids:
                 diagnostics.append(
                     Diagnostic(
-                        code="SKILL_PROFESSION_LIST_ID_UNRESOLVED",
+                        code="SKILL_LIST_ID_UNRESOLVED",
                         severity="error",
                         message=(
-                            f"Profession-list skill {row['requestedTitle']} did not expose exactly "
-                            f"one infobox id: {ids}"
+                            f"Skill-list row {row['requestedTitle']} did not expose any infobox ids."
                         ),
                         category="schema-shape-error",
                         scope_kind="record",
@@ -694,78 +797,76 @@ def _profession_list_seeds(
                         source_ids=(str(row["sourceId"]), str(page["sourceReference"]["id"])),
                     )
                 )
-                unresolved.append(
-                    _unresolved_profession_row(row, "Supplemental detail page did not expose exactly one skill id.")
-                )
+                unresolved.append(_unresolved_skill_row(row, "Supplemental detail page did not expose any skill id."))
                 continue
-            seed = _profession_seed_from_supplemental(row, page, skill_id=int(ids[0]))
+            seeds = [_skill_seed_from_supplemental(row, page, skill_id=int(skill_id)) for skill_id in ids]
 
-        skill_id = int(seed["skillId"])
-        if skill_id in accepted_ids:
-            diagnostics.append(
-                Diagnostic(
-                    code="SKILL_PROFESSION_LIST_DUPLICATE_ID",
-                    severity="warning",
-                    message=f"Profession skill list row resolved to duplicate skill ID {skill_id}: {row['requestedTitle']}",
-                    category="schema-shape-error",
-                    scope_kind="record",
-                    record_id=skill_id,
-                    source_ids=(str(row["sourceId"]),),
-                    disposition="accepted-risk",
-                )
-            )
-            continue
-        accepted.append(seed)
-        accepted_ids.add(skill_id)
+        for seed in seeds:
+            skill_id = int(seed["skillId"])
+            if skill_id in accepted_ids:
+                continue
+            accepted.append(seed)
+            accepted_ids.add(skill_id)
     accepted.sort(key=_seed_sort_key)
-    unresolved.sort(key=lambda item: (int(item["professionId"]), str(item["requestedTitle"])))
+    unresolved.sort(key=lambda item: (str(item.get("professionId", "")), str(item["requestedTitle"])))
     return accepted, unresolved, sorted(diagnostics, key=lambda item: item.stable_key())
 
 
-def _range_seeds_by_title(range_seeds: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
-    selected: dict[str, dict[str, Any]] = {}
+def _range_seeds_by_title(range_seeds: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    selected: dict[str, list[dict[str, Any]]] = {}
     for seed in sorted(range_seeds, key=_seed_sort_key):
-        selected.setdefault(_title_key(str(seed["requestedTitle"])), seed)
+        key = _title_key(str(seed["requestedTitle"]))
+        selected[key] = [*selected.get(key, []), seed]
     return selected
 
 
-def _profession_seed_from_range(row: dict[str, Any], range_seed: dict[str, Any]) -> dict[str, Any]:
-    return {
+def _skill_seed_from_range(row: dict[str, Any], range_seed: dict[str, Any]) -> dict[str, Any]:
+    seed = {
         "skillId": int(range_seed["skillId"]),
         "templateId": int(range_seed["templateId"]),
         "requestedTitle": str(row["requestedTitle"]),
         "sourcePage": str(row["sourcePage"]),
         "sourceId": str(row["sourceId"]),
         "lineNumber": int(row["rowNumber"]),
-        "sourceKind": "profession-skill-list",
-        "professionId": int(row["professionId"]),
+        "sourceKind": str(row.get("sourceKind", "profession-skill-list")),
         "idSourceKind": "game-integration-range",
         "idSourceId": str(range_seed["sourceId"]),
         "idSourcePage": str(range_seed["sourcePage"]),
         "idSourceLineNumber": int(range_seed["lineNumber"]),
         "idSourceRequestedTitle": str(range_seed["requestedTitle"]),
     }
+    return _copy_optional_row_facts(seed, row)
 
 
-def _profession_seed_from_supplemental(
+def _skill_seed_from_supplemental(
     row: dict[str, Any],
     page: dict[str, Any],
     *,
     skill_id: int,
 ) -> dict[str, Any]:
-    return {
+    seed = {
         "skillId": skill_id,
         "templateId": skill_id,
         "requestedTitle": str(row["requestedTitle"]),
         "sourcePage": str(row["sourcePage"]),
         "sourceId": str(row["sourceId"]),
         "lineNumber": int(row["rowNumber"]),
-        "sourceKind": "profession-skill-list",
-        "professionId": int(row["professionId"]),
+        "sourceKind": str(row.get("sourceKind", "profession-skill-list")),
         "idSourceKind": "supplemental-infobox",
         "detailSourceId": str(page["sourceReference"]["id"]),
         "detailSourcePage": str(page["title"]),
     }
+    return _copy_optional_row_facts(seed, row)
+
+
+def _copy_optional_row_facts(seed: dict[str, Any], row: dict[str, Any]) -> dict[str, Any]:
+    if "professionId" in row:
+        seed["professionId"] = int(row["professionId"])
+    if "pveOnlySection" in row:
+        seed["pveOnlySection"] = str(row["pveOnlySection"])
+    if "pveOnlySectionLabel" in row:
+        seed["pveOnlySectionLabel"] = str(row["pveOnlySectionLabel"])
+    return seed
 
 
 def _supplemental_pages_by_title(snapshots: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -783,15 +884,19 @@ def _supplemental_pages_by_title(snapshots: list[dict[str, Any]]) -> dict[str, d
     return by_title
 
 
-def _unresolved_profession_row(row: dict[str, Any], reason: str) -> dict[str, Any]:
-    return {
-        "professionId": int(row["professionId"]),
+def _unresolved_skill_row(row: dict[str, Any], reason: str) -> dict[str, Any]:
+    result = {
         "requestedTitle": str(row["requestedTitle"]),
         "sourcePage": str(row["sourcePage"]),
         "sourceId": str(row["sourceId"]),
         "rowNumber": int(row["rowNumber"]),
         "reason": reason,
     }
+    if "professionId" in row:
+        result["professionId"] = int(row["professionId"])
+    if "pveOnlySection" in row:
+        result["pveOnlySection"] = str(row["pveOnlySection"])
+    return result
 
 
 def _first_wiki_link(html_fragment: str) -> dict[str, str] | None:
@@ -829,6 +934,16 @@ def _wiki_href_to_title(href: str) -> str | None:
 def _html_text(value: str) -> str:
     text = re.sub(r"<[^>]+>", "", value)
     return re.sub(r"\s+", " ", html.unescape(text)).strip()
+
+
+def _html_heading_text(value: str) -> str:
+    text = _html_text(value)
+    text = re.sub(r"\[\s*edit\s*]", "", text, flags=re.IGNORECASE)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _pve_only_section_key(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", value.casefold()).strip("-") or "pve-only"
 
 
 def _title_key(value: str) -> str:

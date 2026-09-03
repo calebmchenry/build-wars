@@ -173,10 +173,12 @@ only the catalog JSON, manifest JSON, and machine-readable QA JSON are exact-pat
 For EPIC-04, live refresh is two-step: first run
 `PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-04-skills --root . --allow-live-network --stage discover`,
 review the source-plan digest, then run `--stage fetch --source-plan <path>
---confirm-source-set-digest <digest>`. Discovery uses the game-integration index/range pages plus
-the ten profession skill list pages; list-only rows are resolved through supplemental detail pages
-and the profession lists define the promoted runtime profession-skill catalog. Off-list
-game-integration skills, title skills, and other special groups are deferred. Offline replay
+--confirm-source-set-digest <digest>`. Discovery uses the game-integration index/range pages, the
+ten profession skill list pages, and `List of PvE-only skills`; list-only rows are resolved through
+supplemental detail pages. Profession lists define the promoted runtime profession-skill catalog,
+while the PvE-only list adds capture signets and title-track sections with profession gates from
+skill infobox metadata. Off-list game-integration skills and other special groups are deferred.
+Offline replay
 requires the selected `--snapshot-set` manifest and remains network-free. EPIC-04 schema v1
 preserves unknown authored skill IDs and structured costs/progressions, but excludes acquisition and
 copied description prose.

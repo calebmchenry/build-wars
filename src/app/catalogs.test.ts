@@ -8,11 +8,13 @@ describe("app catalog boundary", () => {
 
     expect(promotedAppCatalogs.status).toBe("ready");
     expect(catalogs.professions).toHaveLength(10);
-    expect(catalogs.skills).toHaveLength(1452);
+    expect(catalogs.skills).toHaveLength(1541);
     expect(catalogs.skillCatalog.sourceSet).toMatchObject({
-      acceptedSeedCount: 1452,
-      catalogRecordCount: 1452,
+      acceptedSeedCount: 1541,
+      catalogRecordCount: 1541,
       professionListRowCount: 1452,
+      pveOnlyListTitle: "List of PvE-only skills",
+      pveOnlySkillRowCount: 85,
       professionListUnsupportedCount: 0
     });
     expect(catalogs.versions.professionAttributes).toMatch(/^pa-/);

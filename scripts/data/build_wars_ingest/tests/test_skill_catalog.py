@@ -30,8 +30,8 @@ class SkillCatalogTests(unittest.TestCase):
 
             self.assertEqual(result.exit_code, 0)
             self.assertEqual(catalog["profile"]["id"], "epic-04-skills")
-            self.assertEqual(catalog["sourceSet"]["acceptedSeedCount"], 5)
-            self.assertEqual([skill["id"] for skill in catalog["skills"]], [1, 2, 3, 4, 5])
+            self.assertEqual(catalog["sourceSet"]["acceptedSeedCount"], 6)
+            self.assertEqual([skill["id"] for skill in catalog["skills"]], [1, 2, 3, 4, 5, 6])
             self.assertEqual(catalog["skills"][0]["description"]["state"], "structured-only")
             self.assertEqual(catalog["skills"][0]["costs"]["energy"]["state"], "absent")
             self.assertTrue(catalog["skills"][2]["classification"]["title"])

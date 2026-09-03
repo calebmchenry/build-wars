@@ -94,9 +94,10 @@ adapter flags.
   source pages, detail pages, page/request/byte caps, exact promoted paths, selected snapshot replay,
   and metadata-only icon handling.
 - `epic-04-skills`: EPIC-04 skills catalog. The profile locks the source-set index
-  `Guild Wars Wiki:Game integration/Skills`, linked ranged pages, large finite caps, digest-bound
-  source plans, selected complete snapshot-set replay, exact promoted paths, structured-only
-  description policy, and metadata-only icon handling.
+  `Guild Wars Wiki:Game integration/Skills`, linked ranged pages, profession skill lists,
+  `List of PvE-only skills`, large finite caps, digest-bound source plans, selected complete
+  snapshot-set replay, exact promoted paths, structured-only description policy, and metadata-only
+  icon handling.
 - `epic-10-runes`: EPIC-10 runes catalog. The profile locks three seed authority pages, the EPIC-03
   dependency, finite detail-page and icon metadata caps, digest-bound source plans, selected
   complete snapshot-set replay, exact promoted paths, effect-level stacking, and metadata-only icon

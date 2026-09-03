@@ -101,16 +101,18 @@ for this profile uses those names instead of ad hoc `--title` values, then fetch
 icon `imageinfo` metadata without following file redirects.
 
 The EPIC-04 profile is locked to `Guild Wars Wiki:Game integration/Skills`, linked ranged pages
-under `Guild Wars Wiki:Game integration/Skills/*`, and the ten `List of <profession> skills` pages;
-the missing `/Skills/0` page is blocker history only. Discovery fetches the index/ranges, renders
-the exact profession-list revisions, resolves list-only rows through supplemental detail pages,
-writes a digest-bound source plan, and stops. Fetch mode requires the exact plan path and
+under `Guild Wars Wiki:Game integration/Skills/*`, the ten `List of <profession> skills` pages, and
+`List of PvE-only skills`; the missing `/Skills/0` page is blocker history only. Discovery fetches
+the index/ranges, renders the exact profession-list and PvE-only-list revisions, resolves list-only
+rows through supplemental detail pages, writes a digest-bound source plan, and stops. Fetch mode
+requires the exact plan path and
 `--confirm-source-set-digest`, rechecks source-set drift, fetches planned detail pages in
 deterministic batches, writes one complete `SourceSnapshotSetManifest`, and promotes only the exact
 catalog/manifest/QA paths. Profession skill list rows define the runtime profession-skill catalog;
-off-list game-integration skills, title skills, and other special groups are not promoted in schema
-v1. CLI options may lower smoke-test limits such as `--detail-limit`, but code-owned caps remain the
-ceiling.
+the PvE-only list adds capture signets and title-track PvE sections while preserving profession gates
+from skill infobox metadata. Off-list game-integration skills and other special groups are not
+promoted in schema v1. CLI options may lower smoke-test limits such as `--detail-limit`, but
+code-owned caps remain the ceiling.
 
 The EPIC-10 profile is locked to `Equipment template format`, `Rune`, and `Attribute bonus` as seed
 authority pages, the promoted EPIC-03 catalog as the profession/attribute dependency, verified rune
@@ -187,9 +189,10 @@ progression series, split groups, nullable metadata-only icons, source-set summa
 section digests, and a semantic `catalogVersion`.
 
 The game-integration index/range pages provide the baseline ID map. The ten profession skill list
-pages define the promoted runtime catalog and supply supplemental seeds for list-only rows when the
-numeric range pages lag behind current wiki profession lists. Title skills, PvE-only title tracks,
-and other special skill groups are deferred to later profiles.
+pages define the promoted profession-skill catalog and supply supplemental seeds for list-only rows
+when the numeric range pages lag behind current wiki profession lists. `List of PvE-only skills`
+adds PvE-only entries outside profession lists, including capture signets and title-rank sections
+such as Kurzick, Luxon, Sunspear, Lightbringer, Asura, Deldrimor, Ebon Vanguard, and Norn.
 
 The adjacent manifest owns source-plan path/digest, selected snapshot-set path/digest, child snapshot
 paths, dependency digests, artifact digest, and review records. The QA JSON owns bounded findings and

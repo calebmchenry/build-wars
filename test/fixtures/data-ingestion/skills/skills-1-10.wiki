@@ -6,4 +6,5 @@
 * [{{fullurl:Game link:Skill 3|redirect=no}} Skill 3] &rarr; [["Save Yourselves!"]]
 * [{{fullurl:Game link:Skill 4|redirect=no}} Skill 4] &rarr; [[Training Beacon (PvE)]]
 * [{{fullurl:Game link:Skill 5|redirect=no}} Skill 5] &rarr; [[Training Beacon (PvP)]]
+* [{{fullurl:Game link:Skill 6|redirect=no}} Skill 6] &rarr; [["Save Yourselves!"]]
 |}

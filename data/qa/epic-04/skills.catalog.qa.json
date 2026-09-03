@@ -2502,35 +2502,6 @@
       "evidence": [
         {
           "kind": "source",
-          "notes": "File:Rigor Mortis.jpg, File:Rigor Mortis.png",
-          "reference": "Rigor Mortis"
-        }
-      ],
-      "expiresAt": null,
-      "followUpTicketIds": [],
-      "id": "qa:icon_default_ambiguous:cc21ae5acc2c",
-      "rationale": "Default icon candidates were ambiguous",
-      "reReviewTrigger": null,
-      "reviewedAt": null,
-      "reviewer": null,
-      "scope": {
-        "artifactPath": null,
-        "fieldPath": null,
-        "kind": "record",
-        "recordId": "Rigor Mortis",
-        "sourceIds": [
-          "source:gww:epic-04-live:skill:15405:2736390"
-        ]
-      },
-      "severity": "warning"
-    },
-    {
-      "category": "missing-icon-metadata",
-      "code": "ICON_DEFAULT_AMBIGUOUS",
-      "disposition": "accepted-risk",
-      "evidence": [
-        {
-          "kind": "source",
           "notes": "File:Rotting Flesh.jpg, File:Rotting Flesh.png",
           "reference": "Rotting Flesh"
         }
@@ -3489,6 +3460,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "\"By Ural's Hammer!\""
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:a8ed95fd11e8",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "\"By Ural's Hammer!\"",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:64072:2632748"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "\"Can't Touch This!\""
         }
       ],
@@ -3634,6 +3634,64 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "\"Dodge This!\""
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:62c6fdfc5ef6",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "\"Dodge This!\"",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58314:2732700"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "\"Don't Trip!\""
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:1bef69188851",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "\"Don't Trip!\"",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:63466:2666149"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "\"Fall Back!\""
         }
       ],
@@ -3767,6 +3825,35 @@
         "recordId": "\"Find Their Weakness!\" (PvP)",
         "sourceIds": [
           "source:gww:epic-04-live:skill:207593:2645359"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "\"Finish Him!\""
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:59d8666e56ef",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "\"Finish Him!\"",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58315:2633672"
         ]
       },
       "severity": "warning"
@@ -3941,6 +4028,64 @@
         "recordId": "\"Help!\" (PvP)",
         "sourceIds": [
           "source:gww:epic-04-live:skill:207521:2726866"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "\"I Am Unstoppable!\""
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:3e68aff9bf51",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "\"I Am Unstoppable!\"",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58318:2716553"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "\"I Am the Strongest!\""
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:1637279a9d1b",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "\"I Am the Strongest!\"",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58317:2732701"
         ]
       },
       "severity": "warning"
@@ -4446,6 +4591,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "\"Save Yourselves!\""
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:d0ea5eab7145",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "\"Save Yourselves!\"",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:41143:2706908"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "\"Shields Up!\""
         }
       ],
@@ -4823,6 +4997,64 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "\"You Are All Weaklings!\""
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:ec6f2df1320e",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "\"You Are All Weaklings!\"",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58327:2719028"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "\"You Move Like a Dwarf!\""
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:a40c583f0a3e",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "\"You Move Like a Dwarf!\"",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58320:2667948"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "\"You Will Die!\""
         }
       ],
@@ -4869,6 +5101,35 @@
         "recordId": "\"You're All Alone!\"",
         "sourceIds": [
           "source:gww:epic-04-live:skill:4265:2721604"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "A Touch of Guile"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:81f9066aae2a",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "A Touch of Guile",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58321:2674048"
         ]
       },
       "severity": "warning"
@@ -5217,6 +5478,64 @@
         "recordId": "Air of Enchantment",
         "sourceIds": [
           "source:gww:epic-04-live:skill:4290:2726359"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Air of Superiority"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:a8df8a276501",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Air of Superiority",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58328:2680287"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Alkar's Alchemical Acid"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:deee978b2698",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Alkar's Alchemical Acid",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:63802:2679312"
         ]
       },
       "severity": "warning"
@@ -5867,6 +6186,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Anthem of Weariness"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:87c751e76868",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Anthem of Weariness",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:51852:2684164"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Antidote Signet"
         }
       ],
@@ -6476,6 +6824,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Asuran Scan"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:6132e364e34f",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Asuran Scan",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58290:2727152"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Atrophy"
         }
       ],
@@ -6696,6 +7073,35 @@
         "recordId": "Aura of Faith",
         "sourceIds": [
           "source:gww:epic-04-live:skill:2625:2732819"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Aura of Holy Might"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:3cc5e702a505",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Aura of Holy Might",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:41148:2739291"
         ]
       },
       "severity": "warning"
@@ -8129,6 +8535,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Black Powder Mine"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:a1eac5c8077a",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Black Powder Mine",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:64161:2684371"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Black Spider Strike"
         }
       ],
@@ -8912,6 +9347,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Brawling Headbutt"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:121ea7a8a3d2",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Brawling Headbutt",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:63119:2730918"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Breath of Fire"
         }
       ],
@@ -8929,6 +9393,35 @@
         "recordId": "Breath of Fire",
         "sourceIds": [
           "source:gww:epic-04-live:skill:2434:2683926"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Breath of the Great Dwarf"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:bab2edb56c5a",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Breath of the Great Dwarf",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58700:2679970"
         ]
       },
       "severity": "warning"
@@ -9074,6 +9567,35 @@
         "recordId": "Bull's Strike",
         "sourceIds": [
           "source:gww:epic-04-live:skill:6728:2733097"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Burning Arrow"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:0d36e6f35fbd",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Burning Arrow",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:1238:2739057"
         ]
       },
       "severity": "warning"
@@ -9695,6 +10217,64 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Charm Animal"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:5d9e276b914a",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Charm Animal",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:1490:2730833"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Charm Animal"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:5d9e276b914a",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Charm Animal",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:1490:2730833"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Charm Animal (Codex)"
         }
       ],
@@ -9985,6 +10565,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Club of a Thousand Bears"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:9615f0f1b567",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Club of a Thousand Bears",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58322:2732703"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Comfort Animal"
         }
       ],
@@ -10060,6 +10669,35 @@
         "recordId": "Companionship",
         "sourceIds": [
           "source:gww:epic-04-live:skill:51919:2699693"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Complicate"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:4fb4182e296e",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Complicate",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:1472:2733173"
         ]
       },
       "severity": "warning"
@@ -10669,6 +11307,35 @@
         "recordId": "Crippling Shot (PvP)",
         "sourceIds": [
           "source:gww:epic-04-live:supplemental-skill:321762:2738643"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Crippling Slash"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:ee92494660a6",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Crippling Slash",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:4264:2738481"
         ]
       },
       "severity": "warning"
@@ -12003,6 +12670,35 @@
         "recordId": "Deflect Arrows",
         "sourceIds": [
           "source:gww:epic-04-live:skill:15206:2695928"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Deft Strike"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:98c0bd236041",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Deft Strike",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:63082:2645610"
         ]
       },
       "severity": "warning"
@@ -13465,6 +14161,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Drunken Master"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:e00202382b1a",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Drunken Master",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:65948:2721144"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Dryder's Defenses"
         }
       ],
@@ -13668,6 +14393,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Dwarven Stability"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:604e794c8b8d",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Dwarven Stability",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:63422:2645603"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Dwayna's Kiss"
         }
       ],
@@ -13743,6 +14497,35 @@
         "recordId": "Dwayna's Touch",
         "sourceIds": [
           "source:gww:epic-04-live:skill:14077:2721027"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Ear Bite"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:1ef35db567f4",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Ear Bite",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:63159:2711214"
         ]
       },
       "severity": "warning"
@@ -13929,6 +14712,93 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Ebon Battle Standard of Courage"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:42e369e16b5f",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Ebon Battle Standard of Courage",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58695:2647106"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Ebon Battle Standard of Honor"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:46b0d554a33a",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Ebon Battle Standard of Honor",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:59022:2732698"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Ebon Battle Standard of Wisdom"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:db23f1b67979",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Ebon Battle Standard of Wisdom",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:59023:2711462"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Ebon Dust Aura"
         }
       ],
@@ -13958,6 +14828,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Ebon Escape"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:a9c2739f8118",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Ebon Escape",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:63135:2645614"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Ebon Hawk"
         }
       ],
@@ -13975,6 +14874,64 @@
         "recordId": "Ebon Hawk",
         "sourceIds": [
           "source:gww:epic-04-live:skill:14067:2683942"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Ebon Vanguard Assassin Support"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:a262dc1c661d",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Ebon Vanguard Assassin Support",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:63124:2669008"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Ebon Vanguard Sniper Support"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:d247d8f31d93",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Ebon Vanguard Sniper Support",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:65953:2732699"
         ]
       },
       "severity": "warning"
@@ -14091,6 +15048,35 @@
         "recordId": "Elemental Flame (PvP)",
         "sourceIds": [
           "source:gww:epic-04-live:skill:302377:2609918"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Elemental Lord"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:ad4f0c9df3f7",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Elemental Lord",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:41150:2691933"
         ]
       },
       "severity": "warning"
@@ -14857,6 +15843,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Enraging Charge"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:556bf947eefa",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Enraging Charge",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:16020:2733218"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Entangling Asp"
         }
       ],
@@ -15164,6 +16179,35 @@
         "recordId": "Eternal Aura",
         "sourceIds": [
           "source:gww:epic-04-live:skill:41124:2664529"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Ether Nightmare"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:0e0cc02c149c",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Ether Nightmare",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:41149:2647107"
         ]
       },
       "severity": "warning"
@@ -15843,6 +16887,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Falling Lotus Strike"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:510c30cf94ee",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Falling Lotus Strike",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:51828:2733277"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Falling Spider"
         }
       ],
@@ -16133,6 +17206,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Feel No Pain"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:6c818466d056",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Feel No Pain",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58323:2732702"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Feigned Neutrality"
         }
       ],
@@ -16394,6 +17496,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Final Thrust"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:400b74bd764b",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Final Thrust",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:2026:2739078"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Finale of Restoration"
         }
       ],
@@ -16614,6 +17745,35 @@
         "recordId": "Flame Burst",
         "sourceIds": [
           "source:gww:epic-04-live:skill:2784:2695860"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Flame Djinn's Haste"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:88345f1a41df",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Flame Djinn's Haste",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:2789:2683943"
         ]
       },
       "severity": "warning"
@@ -17989,6 +19149,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Glowing Gaze"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:53be1bbd331c",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Glowing Gaze",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:2791:2683944"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Glowing Ice"
         }
       ],
@@ -18615,6 +19804,64 @@
         "recordId": "Grasping Was Kuurong",
         "sourceIds": [
           "source:gww:epic-04-live:skill:3140:2726597"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Great Dwarf Armor"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:b99babb58a6b",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Great Dwarf Armor",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:59250:2645605"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Great Dwarf Weapon"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:b6f627b02478",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Great Dwarf Weapon",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:59251:2732696"
         ]
       },
       "severity": "warning"
@@ -22310,6 +23557,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Light of Deldrimor"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:634d467fe38f",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Light of Deldrimor",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:18427:2684506"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Light of Deliverance"
         }
       ],
@@ -22385,6 +23661,64 @@
         "recordId": "Light of Dwayna",
         "sourceIds": [
           "source:gww:epic-04-live:skill:2779:2705639"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Lightbringer Signet"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:52b16b8c86fd",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Lightbringer Signet",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:13771:2706570"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Lightbringer's Gaze"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:17124ce7f1be",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Lightbringer's Gaze",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:10654:2675377"
         ]
       },
       "severity": "warning"
@@ -22501,6 +23835,35 @@
         "recordId": "Lightning Javelin",
         "sourceIds": [
           "source:gww:epic-04-live:skill:1942:2738951"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Lightning Orb"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:e873a5c28daa",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Lightning Orb",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:1946:2738710"
         ]
       },
       "severity": "warning"
@@ -22774,6 +24137,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Liquid Flame"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:721be138a3a7",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Liquid Flame",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:2603:2730076"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Live Vicariously"
         }
       ],
@@ -22878,6 +24270,35 @@
         "recordId": "Lotus Strike",
         "sourceIds": [
           "source:gww:epic-04-live:skill:51825:2733276"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Low Blow"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:382bf0e58c78",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Low Blow",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:63161:2657193"
         ]
       },
       "severity": "warning"
@@ -24282,6 +25703,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Mental Block"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:d9abbd677104",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Mental Block",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58301:2647105"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Merciless Spear"
         }
       ],
@@ -24705,6 +26155,35 @@
         "recordId": "Mind Wrack (PvP)",
         "sourceIds": [
           "source:gww:epic-04-live:skill:285394:2629710"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Mindbender"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:37232d6ad117",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Mindbender",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58303:2680288"
         ]
       },
       "severity": "warning"
@@ -25401,6 +26880,35 @@
         "recordId": "Natural Healing",
         "sourceIds": [
           "source:gww:epic-04-live:skill:14387:2720984"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Natural Stride"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:4dfcc854c14d",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Natural Stride",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:6585:2719212"
         ]
       },
       "severity": "warning"
@@ -26254,6 +27762,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Pain"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:c19acca9f3f8",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Pain",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:6338:2719804"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Pain (PvP)"
         }
       ],
@@ -26271,6 +27808,35 @@
         "recordId": "Pain (PvP)",
         "sourceIds": [
           "source:gww:epic-04-live:skill:207533:2731222"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Pain Inverter"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:938cd5e9b48b",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Pain Inverter",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58305:2728795"
         ]
       },
       "severity": "warning"
@@ -26822,6 +28388,35 @@
         "recordId": "Pious Concentration",
         "sourceIds": [
           "source:gww:epic-04-live:skill:1390:2684196"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Pious Fury"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:52e4cd645240",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Pious Fury",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:51901:2645528"
         ]
       },
       "severity": "warning"
@@ -28516,6 +30111,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Radiation Field"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:5e61c9a24550",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Radiation Field",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58306:2734338"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Rage of the Ntouka"
         }
       ],
@@ -28591,6 +30215,35 @@
         "recordId": "Rapid Fire",
         "sourceIds": [
           "source:gww:epic-04-live:skill:51914:2667637"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Raven Blessing"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:dfa1a35b9d9e",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Raven Blessing",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58324:2707357"
         ]
       },
       "severity": "warning"
@@ -28736,6 +30389,35 @@
         "recordId": "Reap Impurities",
         "sourceIds": [
           "source:gww:epic-04-live:skill:14070:2733227"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Reaper's Mark"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:400665d72491",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Reaper's Mark",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:4325:2738609"
         ]
       },
       "severity": "warning"
@@ -30053,6 +31735,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Rigor Mortis"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:5f72d4eea78d",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Rigor Mortis",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:15405:2736390"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Rip Enchantment"
         }
       ],
@@ -30836,6 +32547,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Searing Flames"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:683e71f0da2b",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Searing Flames",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:3058:2629958"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Searing Heat"
         }
       ],
@@ -30998,6 +32738,35 @@
         "recordId": "Seeping Wound",
         "sourceIds": [
           "source:gww:epic-04-live:skill:4404:2739091"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Selfless Spirit"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:dadb69369d2d",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Selfless Spirit",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:41146:2645390"
         ]
       },
       "severity": "warning"
@@ -31288,6 +33057,35 @@
         "recordId": "Shadow Refuge",
         "sourceIds": [
           "source:gww:epic-04-live:skill:13045:2733156"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Shadow Sanctuary"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:225f4a6d261b",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Shadow Sanctuary",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:41154:2732691"
         ]
       },
       "severity": "warning"
@@ -32692,6 +34490,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Signet of Corruption"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:9db41ad25863",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Signet of Corruption",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:41152:2645392"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Signet of Creation"
         }
       ],
@@ -32982,6 +34809,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Signet of Infection"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:87ca8ffb91b5",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Signet of Infection",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:65950:2645617"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Signet of Judgment"
         }
       ],
@@ -33028,6 +34884,35 @@
         "recordId": "Signet of Judgment (PvP)",
         "sourceIds": [
           "source:gww:epic-04-live:skill:148636:2630016"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Signet of Lost Souls"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:55c9fd48e72e",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Signet of Lost Souls",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:7056:2690910"
         ]
       },
       "severity": "warning"
@@ -34084,6 +35969,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Smite Condition"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:38c49db0dd0f",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Smite Condition",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:51884:2686607"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Smite Hex"
         }
       ],
@@ -34258,6 +36172,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Smooth Criminal"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:4377d4355c81",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Smooth Criminal",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58307:2723310"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Snare"
         }
       ],
@@ -34275,6 +36218,64 @@
         "recordId": "Snare",
         "sourceIds": [
           "source:gww:epic-04-live:skill:2518:2726592"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Sneak Attack"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:8af556367aad",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Sneak Attack",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:66008:2667609"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Snow Storm"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:f0357c971de5",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Snow Storm",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:65949:2733887"
         ]
       },
       "severity": "warning"
@@ -34855,6 +36856,35 @@
         "recordId": "Spear Swipe",
         "sourceIds": [
           "source:gww:epic-04-live:skill:51826:2733292"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Spear of Fury"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:a205b21b020e",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Spear of Fury",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:41157:2732692"
         ]
       },
       "severity": "warning"
@@ -35969,6 +37999,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Steam"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:297c68ccac14",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Steam",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:16267:2738742"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Steelfang Slash"
         }
       ],
@@ -36520,6 +38579,122 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Summon Ice Imp"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:2b635fd80015",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Summon Ice Imp",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58308:2680291"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Summon Mursaat"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:276cbd3cd731",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Summon Mursaat",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58310:2681413"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Summon Naga Shaman"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:b11990826b6e",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Summon Naga Shaman",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58309:2680293"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Summon Ruby Djinn"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:1f55447fbb01",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Summon Ruby Djinn",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58311:2706550"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Summon Spirits"
         }
       ],
@@ -36537,6 +38712,64 @@
         "recordId": "Summon Spirits",
         "sourceIds": [
           "source:gww:epic-04-live:skill:41156:2658492"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Summon Spirits"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:a082c4c5d935",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Summon Spirits",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:41156:2658492"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Sun and Moon Slash"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:923b57d30e60",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Sun and Moon Slash",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:14750:2683933"
         ]
       },
       "severity": "warning"
@@ -36653,6 +38886,35 @@
         "recordId": "Sundering Weapon",
         "sourceIds": [
           "source:gww:epic-04-live:skill:51879:2684103"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Sunspear Rebirth Signet"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:f3b228936cea",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Sunspear Rebirth Signet",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:17633:2687564"
         ]
       },
       "severity": "warning"
@@ -37129,6 +39391,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Technobabble"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:6a3c35fc72b8",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Technobabble",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58312:2680290"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Teinai's Crystals"
         }
       ],
@@ -37378,6 +39669,35 @@
         "recordId": "Thunderclap",
         "sourceIds": [
           "source:gww:epic-04-live:skill:2403:2731208"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Tiger Stance"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:bc6abf4f330d",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Tiger Stance",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:16226:2733059"
         ]
       },
       "severity": "warning"
@@ -37796,6 +40116,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Triple Shot"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:12504413aea3",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Triple Shot",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:41144:2710816"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Tripwire"
         }
       ],
@@ -37842,6 +40191,35 @@
         "recordId": "Troll Unguent",
         "sourceIds": [
           "source:gww:epic-04-live:skill:644:2733140"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Tryptophan Signet"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:21caf603d703",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Tryptophan Signet",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:65952:2645619"
         ]
       },
       "severity": "warning"
@@ -38306,6 +40684,35 @@
         "recordId": "Unyielding Aura (PvP)",
         "sourceIds": [
           "source:gww:epic-04-live:skill:154794:2630185"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Ursan Blessing"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:8ccee2d25c55",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Ursan Blessing",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58325:2707359"
         ]
       },
       "severity": "warning"
@@ -39072,6 +41479,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Volfen Blessing"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:7678f91c2b6f",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Volfen Blessing",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:58326:2707358"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Volley"
         }
       ],
@@ -39350,6 +41786,35 @@
         "recordId": "Wandering Eye (PvP)",
         "sourceIds": [
           "source:gww:epic-04-live:skill:253954:2646603"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Wanderlust"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:718f1a654ebd",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Wanderlust",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:3959:2630210"
         ]
       },
       "severity": "warning"
@@ -40249,6 +42714,35 @@
         "recordId": "Weaken Knees",
         "sourceIds": [
           "source:gww:epic-04-live:skill:4312:2726486"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "Weakness Trap"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:0e114eaa2429",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Weakness Trap",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:65951:2645620"
         ]
       },
       "severity": "warning"
@@ -41189,6 +43683,35 @@
         {
           "kind": "source",
           "notes": null,
+          "reference": "Winds"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:icon_default_missing:9081d9194739",
+      "rationale": "No default icon candidate resolved",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": null,
+        "kind": "record",
+        "recordId": "Winds",
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:63118:2720905"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "missing-icon-metadata",
+      "code": "ICON_DEFAULT_MISSING",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
           "reference": "Winds of Disenchantment"
         }
       ],
@@ -41792,6 +44315,673 @@
     },
     {
       "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:1472:2733173"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:2214beec089c",
+      "rationale": "Source-set skill ID 2626 was not listed in infobox IDs [932]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2626,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:1472:2733173"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:4325:2738609"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:9d751444ad79",
+      "rationale": "Source-set skill ID 2627 was not listed in infobox IDs [808]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2627,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:4325:2738609"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:15397:2628777"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:147ea6a7c7ba",
+      "rationale": "Source-set skill ID 2628 was not listed in infobox IDs [117]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2628,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:15397:2628777"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:7056:2690910"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:524bf292191e",
+      "rationale": "Source-set skill ID 2630 was not listed in infobox IDs [1365]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2630,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:7056:2690910"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:3058:2629958"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:bff9673f0228",
+      "rationale": "Source-set skill ID 2632 was not listed in infobox IDs [884]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2632,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:3058:2629958"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:2791:2683944"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:c823db1f4ae7",
+      "rationale": "Source-set skill ID 2633 was not listed in infobox IDs [1379]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2633,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:2791:2683944"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:16267:2738742"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:d13e9334b058",
+      "rationale": "Source-set skill ID 2634 was not listed in infobox IDs [846]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2634,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:16267:2738742"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:2789:2683943"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:b6d48a22dedb",
+      "rationale": "Source-set skill ID 2635 was not listed in infobox IDs [1381]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2635,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:2789:2683943"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:2603:2730076"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:b92f262ccbec",
+      "rationale": "Source-set skill ID 2636 was not listed in infobox IDs [845]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2636,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:2603:2730076"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:51884:2686607"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:67a508185394",
+      "rationale": "Source-set skill ID 2639 was not listed in infobox IDs [2004]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2639,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:51884:2686607"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:4264:2738481"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:d61c3b03d00a",
+      "rationale": "Source-set skill ID 2640 was not listed in infobox IDs [1415]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2640,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:4264:2738481"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:14750:2683933"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:6e74dc66ab55",
+      "rationale": "Source-set skill ID 2641 was not listed in infobox IDs [851]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2641,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:14750:2683933"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:16020:2733218"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:797b08e8b7ec",
+      "rationale": "Source-set skill ID 2642 was not listed in infobox IDs [1414]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2642,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:16020:2733218"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:16226:2733059"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:6bb206996f31",
+      "rationale": "Source-set skill ID 2643 was not listed in infobox IDs [995]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2643,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:16226:2733059"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:1238:2739057"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:9c836272abc1",
+      "rationale": "Source-set skill ID 2644 was not listed in infobox IDs [1466]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2644,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:1238:2739057"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:6585:2719212"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:11f552fc367a",
+      "rationale": "Source-set skill ID 2645 was not listed in infobox IDs [1727]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2645,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:6585:2719212"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:51828:2733277"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:8edd8c339c7a",
+      "rationale": "Source-set skill ID 2646 was not listed in infobox IDs [1990]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2646,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:51828:2733277"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:51852:2684164"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:4e989c1e8f48",
+      "rationale": "Source-set skill ID 2647 was not listed in infobox IDs [2017]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2647,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:51852:2684164"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:51901:2645528"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:437bca1c242d",
+      "rationale": "Source-set skill ID 2648 was not listed in infobox IDs [2146]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 2648,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:51901:2645528"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:6338:2719804"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:be6e17ad42d2",
+      "rationale": "Source-set skill ID 3042 was not listed in infobox IDs [1247]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 3042,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:6338:2719804"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:3959:2630210"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:211f08a4cb6d",
+      "rationale": "Source-set skill ID 3043 was not listed in infobox IDs [1255]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 3043,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:3959:2630210"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:1490:2730833"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:b0851a2a5f20",
+      "rationale": "Source-set skill ID 3065 was not listed in infobox IDs [411]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 3065,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:1490:2730833"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
+      "code": "SKILL_INFOBOX_ID_MISMATCH",
+      "disposition": "accepted-risk",
+      "evidence": [
+        {
+          "kind": "source",
+          "notes": null,
+          "reference": "source:gww:epic-04-live:skill:1490:2730833"
+        }
+      ],
+      "expiresAt": null,
+      "followUpTicketIds": [],
+      "id": "qa:skill_infobox_id_mismatch:1fd027bf82e0",
+      "rationale": "Source-set skill ID 3066 was not listed in infobox IDs [411]",
+      "reReviewTrigger": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "scope": {
+        "artifactPath": null,
+        "fieldPath": "/id",
+        "kind": "record",
+        "recordId": 3066,
+        "sourceIds": [
+          "source:gww:epic-04-live:skill:1490:2730833"
+        ]
+      },
+      "severity": "warning"
+    },
+    {
+      "category": "schema-shape-error",
       "code": "SKILL_PROGRESSION_UNSUPPORTED",
       "disposition": "accepted-risk",
       "evidence": [
@@ -42052,7 +45242,7 @@
       "severity": "warning"
     }
   ],
-  "generatedAt": "2026-09-03T00:00:00Z",
+  "generatedAt": "2026-09-03T23:09:13Z",
   "generator": "build-wars-ingest/0.1.0",
   "notes": "EPIC-04 skills catalog QA report covering source-set accounting, joins, costs, descriptions, progressions, splits, icons, provenance, determinism, and release gates.",
   "publicReleaseGate": "pass",
@@ -42069,6 +45259,7 @@
     "source:gww:epic-04-live:profession-list:964:2623113",
     "source:gww:epic-04-live:profession-list:966:2623120",
     "source:gww:epic-04-live:profession-list:973:2623117",
+    "source:gww:epic-04-live:pve-only-list:42386:2739108",
     "source:gww:epic-04-live:range:139049:2538606",
     "source:gww:epic-04-live:range:139051:2677015",
     "source:gww:epic-04-live:range:139053:2549769",
@@ -42076,11 +45267,13 @@
     "source:gww:epic-04-live:range:139055:2538610",
     "source:gww:epic-04-live:range:139056:2678532",
     "source:gww:epic-04-live:range:205586:2737264",
+    "source:gww:epic-04-live:skill:1005:2710463",
     "source:gww:epic-04-live:skill:10303:2733106",
     "source:gww:epic-04-live:skill:1035:2686504",
     "source:gww:epic-04-live:skill:10394:2695680",
     "source:gww:epic-04-live:skill:1040:2724764",
     "source:gww:epic-04-live:skill:10596:2683930",
+    "source:gww:epic-04-live:skill:10654:2675377",
     "source:gww:epic-04-live:skill:10784:2683867",
     "source:gww:epic-04-live:skill:1078:2629266",
     "source:gww:epic-04-live:skill:10796:2709858",
@@ -42225,6 +45418,7 @@
     "source:gww:epic-04-live:skill:13732:2695802",
     "source:gww:epic-04-live:skill:1374:2691925",
     "source:gww:epic-04-live:skill:13756:2733088",
+    "source:gww:epic-04-live:skill:13771:2706570",
     "source:gww:epic-04-live:skill:1378:2722095",
     "source:gww:epic-04-live:skill:13793:2732654",
     "source:gww:epic-04-live:skill:1380:2733271",
@@ -42703,6 +45897,7 @@
     "source:gww:epic-04-live:skill:176113:2729057",
     "source:gww:epic-04-live:skill:176114:2733305",
     "source:gww:epic-04-live:skill:1761:2686491",
+    "source:gww:epic-04-live:skill:17633:2687564",
     "source:gww:epic-04-live:skill:1764:2733075",
     "source:gww:epic-04-live:skill:1766:2695755",
     "source:gww:epic-04-live:skill:1768:2732025",
@@ -42729,6 +45924,7 @@
     "source:gww:epic-04-live:skill:1804:2727775",
     "source:gww:epic-04-live:skill:1805:2695854",
     "source:gww:epic-04-live:skill:1813:2687119",
+    "source:gww:epic-04-live:skill:18427:2684506",
     "source:gww:epic-04-live:skill:1921:2732015",
     "source:gww:epic-04-live:skill:192502:2629908",
     "source:gww:epic-04-live:skill:1936:2629431",
@@ -43375,7 +46571,33 @@
     "source:gww:epic-04-live:skill:5275:2738484",
     "source:gww:epic-04-live:skill:5276:2718839",
     "source:gww:epic-04-live:skill:5281:2738494",
+    "source:gww:epic-04-live:skill:58290:2727152",
+    "source:gww:epic-04-live:skill:58301:2647105",
+    "source:gww:epic-04-live:skill:58303:2680288",
+    "source:gww:epic-04-live:skill:58305:2728795",
+    "source:gww:epic-04-live:skill:58306:2734338",
+    "source:gww:epic-04-live:skill:58307:2723310",
+    "source:gww:epic-04-live:skill:58308:2680291",
+    "source:gww:epic-04-live:skill:58309:2680293",
+    "source:gww:epic-04-live:skill:58310:2681413",
+    "source:gww:epic-04-live:skill:58311:2706550",
+    "source:gww:epic-04-live:skill:58312:2680290",
+    "source:gww:epic-04-live:skill:58314:2732700",
+    "source:gww:epic-04-live:skill:58315:2633672",
+    "source:gww:epic-04-live:skill:58317:2732701",
+    "source:gww:epic-04-live:skill:58318:2716553",
+    "source:gww:epic-04-live:skill:58320:2667948",
+    "source:gww:epic-04-live:skill:58321:2674048",
+    "source:gww:epic-04-live:skill:58322:2732703",
+    "source:gww:epic-04-live:skill:58323:2732702",
+    "source:gww:epic-04-live:skill:58324:2707357",
+    "source:gww:epic-04-live:skill:58325:2707359",
+    "source:gww:epic-04-live:skill:58326:2707358",
+    "source:gww:epic-04-live:skill:58327:2719028",
+    "source:gww:epic-04-live:skill:58328:2680287",
     "source:gww:epic-04-live:skill:5864:2733114",
+    "source:gww:epic-04-live:skill:58695:2647106",
+    "source:gww:epic-04-live:skill:58700:2679970",
     "source:gww:epic-04-live:skill:5877:2733153",
     "source:gww:epic-04-live:skill:5878:2684068",
     "source:gww:epic-04-live:skill:5884:2733176",
@@ -43387,6 +46609,17 @@
     "source:gww:epic-04-live:skill:5891:2731704",
     "source:gww:epic-04-live:skill:5892:2732834",
     "source:gww:epic-04-live:skill:5893:2684038",
+    "source:gww:epic-04-live:skill:59022:2732698",
+    "source:gww:epic-04-live:skill:59023:2711462",
+    "source:gww:epic-04-live:skill:59250:2645605",
+    "source:gww:epic-04-live:skill:59251:2732696",
+    "source:gww:epic-04-live:skill:63082:2645610",
+    "source:gww:epic-04-live:skill:63118:2720905",
+    "source:gww:epic-04-live:skill:63119:2730918",
+    "source:gww:epic-04-live:skill:63124:2669008",
+    "source:gww:epic-04-live:skill:63135:2645614",
+    "source:gww:epic-04-live:skill:63159:2711214",
+    "source:gww:epic-04-live:skill:63161:2657193",
     "source:gww:epic-04-live:skill:6328:2733206",
     "source:gww:epic-04-live:skill:6329:2720903",
     "source:gww:epic-04-live:skill:6331:2720900",
@@ -43395,7 +46628,9 @@
     "source:gww:epic-04-live:skill:6337:2732842",
     "source:gww:epic-04-live:skill:6338:2719804",
     "source:gww:epic-04-live:skill:6341:2738368",
+    "source:gww:epic-04-live:skill:63422:2645603",
     "source:gww:epic-04-live:skill:6343:2720880",
+    "source:gww:epic-04-live:skill:63466:2666149",
     "source:gww:epic-04-live:skill:6346:2720698",
     "source:gww:epic-04-live:skill:6354:2684046",
     "source:gww:epic-04-live:skill:6357:2721015",
@@ -43404,9 +46639,12 @@
     "source:gww:epic-04-live:skill:6361:2731157",
     "source:gww:epic-04-live:skill:6362:2738136",
     "source:gww:epic-04-live:skill:6365:2734459",
+    "source:gww:epic-04-live:skill:63802:2679312",
+    "source:gww:epic-04-live:skill:64072:2632748",
     "source:gww:epic-04-live:skill:6409:2686599",
     "source:gww:epic-04-live:skill:6410:2724401",
     "source:gww:epic-04-live:skill:6414:2731456",
+    "source:gww:epic-04-live:skill:64161:2684371",
     "source:gww:epic-04-live:skill:644:2733140",
     "source:gww:epic-04-live:skill:6452:2739059",
     "source:gww:epic-04-live:skill:6454:2698669",
@@ -43449,10 +46687,17 @@
     "source:gww:epic-04-live:skill:6589:2731273",
     "source:gww:epic-04-live:skill:6590:2711872",
     "source:gww:epic-04-live:skill:6591:2683457",
+    "source:gww:epic-04-live:skill:65948:2721144",
+    "source:gww:epic-04-live:skill:65949:2733887",
     "source:gww:epic-04-live:skill:6594:2738362",
+    "source:gww:epic-04-live:skill:65950:2645617",
+    "source:gww:epic-04-live:skill:65951:2645620",
+    "source:gww:epic-04-live:skill:65952:2645619",
+    "source:gww:epic-04-live:skill:65953:2732699",
     "source:gww:epic-04-live:skill:6595:2683505",
     "source:gww:epic-04-live:skill:6597:2732151",
     "source:gww:epic-04-live:skill:6599:2731278",
+    "source:gww:epic-04-live:skill:66008:2667609",
     "source:gww:epic-04-live:skill:6667:2713590",
     "source:gww:epic-04-live:skill:6671:2733113",
     "source:gww:epic-04-live:skill:6688:2738624",
@@ -43528,14 +46773,14 @@
     "source:gww:epic-04-live:supplemental-skill:321799:2738648",
     "source:gww:epic-04-live:supplemental-skill:321800:2738649",
     "source:gww:epic-04-live:supplemental-skill:321801:2738650",
-    "source:gww:epic-04-skill-icons:61fdebe200c3"
+    "source:gww:epic-04-skill-icons:2b34fd09f441"
   ],
   "summary": {
     "criticalCount": 0,
     "errorCount": 1,
-    "findingCount": 1450,
+    "findingCount": 1560,
     "infoCount": 1,
     "openBlockingCount": 0,
-    "warningCount": 1448
+    "warningCount": 1558
   }
 }

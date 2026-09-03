@@ -84,7 +84,7 @@ class SkillInfoboxTests(unittest.TestCase):
 
         self.assertIsNone(extraction.record["attributeId"])
         self.assertTrue(extraction.record["classification"]["title"])
-        self.assertEqual(extraction.title_key, "title:allegiance-rank")
+        self.assertEqual(extraction.title_key, "allegiance:luxon")
         self.assertEqual(extraction.record["costs"]["adrenaline"]["value"], 8)
 
     def test_missing_infobox_is_explicitly_unsupported(self) -> None:

@@ -386,6 +386,7 @@ export interface SkillSourceSetSummary {
   readonly indexTitle: "Guild Wars Wiki:Game integration/Skills";
   readonly rangedPageTitles: readonly string[];
   readonly professionListTitles: readonly string[];
+  readonly pveOnlyListTitle: string | null;
   readonly sourceSetDigest: string;
   readonly sourcePlanDigest: string;
   readonly acceptedSeedCount: number;
@@ -395,6 +396,7 @@ export interface SkillSourceSetSummary {
   readonly maximumAcceptedId: TemplateSkillId | null;
   readonly numericGapCount: number;
   readonly professionListRowCount: number;
+  readonly pveOnlySkillRowCount: number;
   readonly rangeSeedCount: number;
   readonly rangeOnlySeedCount: number;
   readonly supplementalSeedCount: number;

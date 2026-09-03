@@ -9,6 +9,7 @@ from build_wars_ingest.profiles import EPIC_04_PROFESSION_SKILL_LISTS, EPIC_04_P
 from build_wars_ingest.skill_source_set import (
     SkillSourceSetError,
     build_source_plan,
+    pve_only_skill_rows_from_rendered_html,
     profession_skill_rows_from_rendered_html,
     ranged_titles_from_index,
     source_plan_digest,
@@ -75,12 +76,18 @@ class SkillSourceSetTests(unittest.TestCase):
                 }
             ],
             profession_list_snapshots=fixture_profession_list_snapshots(),
+            pve_only_list_snapshot={
+                "title": "List of PvE-only skills",
+                "content": (FIXTURE_ROOT / "skills/list-pve-only.html").read_text(encoding="utf-8"),
+                "sourceReference": source("List of PvE-only skills", 6),
+            },
         )
 
-        self.assertEqual(result.plan["summary"]["acceptedSeedCount"], 5)
-        self.assertEqual([seed["skillId"] for seed in result.plan["acceptedSeeds"]], [1, 2, 3, 4, 5])
+        self.assertEqual(result.plan["summary"]["acceptedSeedCount"], 6)
+        self.assertEqual([seed["skillId"] for seed in result.plan["acceptedSeeds"]], [1, 2, 3, 4, 5, 6])
         self.assertEqual(result.plan["summary"]["professionSkillRowCount"], 5)
-        self.assertEqual(result.plan["summary"]["rangeSeedCount"], 5)
+        self.assertEqual(result.plan["summary"]["pveOnlySkillRowCount"], 2)
+        self.assertEqual(result.plan["summary"]["rangeSeedCount"], 6)
         self.assertEqual(result.plan["summary"]["rangeOnlySeedCount"], 0)
         self.assertEqual(result.plan["summary"]["sourcePlanDigest"], source_plan_digest(result.plan))
         validate_source_plan(
@@ -125,8 +132,8 @@ class SkillSourceSetTests(unittest.TestCase):
         )
 
         self.assertEqual([seed["skillId"] for seed in result.plan["acceptedSeeds"]], [1])
-        self.assertEqual(result.plan["summary"]["rangeSeedCount"], 5)
-        self.assertEqual(result.plan["summary"]["rangeOnlySeedCount"], 4)
+        self.assertEqual(result.plan["summary"]["rangeSeedCount"], 6)
+        self.assertEqual(result.plan["summary"]["rangeOnlySeedCount"], 5)
         self.assertEqual(result.plan["acceptedSeeds"][0]["idSourceKind"], "game-integration-range")
 
     def test_profession_skill_rows_parse_rendered_skill_table_links(self) -> None:
@@ -144,6 +151,22 @@ class SkillSourceSetTests(unittest.TestCase):
         self.assertEqual(diagnostics, [])
         self.assertEqual(rows[0]["requestedTitle"], '"Coward!" (PvP)')
         self.assertEqual(rows[0]["name"], '"Coward!" (PvP)')
+
+    def test_pve_only_skill_rows_parse_rendered_skill_table_sections(self) -> None:
+        rows, diagnostics = pve_only_skill_rows_from_rendered_html(
+            """
+            <h3><span class="mw-headline">Asura skills</span><span>[edit]</span></h3>
+            <table class="sortable"><tbody>
+            <tr data-name="Technobabble"><th>icon</th><th><a href="/wiki/Technobabble" title="Technobabble">Technobabble</a></th></tr>
+            </tbody></table>
+            """,
+            list_title="List of PvE-only skills",
+            source_reference=source("List of PvE-only skills", 6),
+        )
+
+        self.assertEqual(diagnostics, [])
+        self.assertEqual(rows[0]["requestedTitle"], "Technobabble")
+        self.assertEqual(rows[0]["pveOnlySection"], "asura-skills")
 
     def test_profession_list_only_rows_become_supplemental_seeds(self) -> None:
         profile = profile_by_id(EPIC_04_PROFILE_ID)
@@ -182,7 +205,7 @@ class SkillSourceSetTests(unittest.TestCase):
                     "title": '"Coward!" (PvP)',
                     "requestedTitle": '"Coward!" (PvP)',
                     "canonicalTitle": '"Coward!" (PvP)',
-                    "content": "{{Skill infobox| id = 6 | name = \"Coward!\" (PvP) | profession = Warrior | type = Shout}}",
+                    "content": "{{Skill infobox| id = 7 | name = \"Coward!\" (PvP) | profession = Warrior | type = Shout}}",
                     "sourceReference": source('"Coward!" (PvP)', 4),
                 }
             ],
@@ -190,11 +213,11 @@ class SkillSourceSetTests(unittest.TestCase):
 
         self.assertEqual(result.plan["summary"]["acceptedSeedCount"], 1)
         self.assertEqual(result.plan["summary"]["professionSkillRowCount"], 1)
-        self.assertEqual(result.plan["summary"]["rangeSeedCount"], 5)
-        self.assertEqual(result.plan["summary"]["rangeOnlySeedCount"], 5)
+        self.assertEqual(result.plan["summary"]["rangeSeedCount"], 6)
+        self.assertEqual(result.plan["summary"]["rangeOnlySeedCount"], 6)
         self.assertEqual(result.plan["summary"]["supplementalSeedCount"], 1)
         self.assertEqual(result.plan["summary"]["unresolvedProfessionListTitleCount"], 0)
-        self.assertEqual(result.plan["acceptedSeeds"][0]["skillId"], 6)
+        self.assertEqual(result.plan["acceptedSeeds"][0]["skillId"], 7)
         self.assertEqual(result.plan["acceptedSeeds"][0]["requestedTitle"], '"Coward!" (PvP)')
         self.assertEqual(result.plan["acceptedSeeds"][0]["idSourceKind"], "supplemental-infobox")
         validate_source_plan(

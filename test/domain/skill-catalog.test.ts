@@ -29,8 +29,8 @@ describe("skill catalog contracts", () => {
     expect(catalog.schemaVersion).toBe(SOURCE_POLICY_SCHEMA_VERSION);
     expect(catalog.profile.id).toBe("epic-04-skills");
     expect(catalog.sourceSet.indexTitle).toBe("Guild Wars Wiki:Game integration/Skills");
-    expect(catalog.sourceSet.acceptedSeedCount).toBe(5);
-    expect(catalog.skills.map((skill) => Number(skill.id))).toEqual([1, 2, 3, 4, 5]);
+    expect(catalog.sourceSet.acceptedSeedCount).toBe(6);
+    expect(catalog.skills.map((skill) => Number(skill.id))).toEqual([1, 2, 3, 4, 5, 6]);
 
     const healingSignet = catalog.skills[0];
     expect(healingSignet?.templateId).toBe(1);

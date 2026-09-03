@@ -164,6 +164,66 @@ describe("editor selectors", () => {
     });
   });
 
+  it("groups PvE title skills by title track while keeping profession-gated visibility", () => {
+    const base = {
+      ...createBlankEditorState(),
+      build: {
+        ...createBlankEditorState().build,
+        mode: "pve",
+        primaryProfessionId: catalogId<"Profession">(9),
+        secondaryProfessionId: catalogId<"Profession">(1)
+      }
+    } satisfies EditorState;
+    const titleTrackBrowser = selectSkillBrowser(
+      editorReducer(base, {
+        type: "set-browser-filters",
+        filters: { query: "Lightbringer Signet", sortMode: "attribute" }
+      }),
+      titleRankCatalogs
+    );
+    const allegianceBrowser = selectSkillBrowser(
+      editorReducer(base, {
+        type: "set-browser-filters",
+        filters: { query: "Allegiance Fixture", sortMode: "attribute" }
+      }),
+      titleRankCatalogs
+    );
+
+    expect(titleTrackBrowser.groups.map((group) => group.label)).toEqual(["Lightbringer"]);
+    expect(allegianceBrowser.groups.map((group) => group.label)).toEqual(["Kurzick", "Luxon"]);
+    expect(
+      allegianceBrowser.groups.flatMap((group) => group.skills).map((skill) => skill.name)
+    ).toEqual(["Kurzick Allegiance Fixture", "Luxon Allegiance Fixture"]);
+  });
+
+  it("shows profession-gated PvE-only sections for a Paragon/Warrior build", () => {
+    const base = createBlankEditorState();
+    const state = {
+      ...base,
+      browser: {
+        ...base.browser,
+        batchSize: 2000
+      },
+      build: {
+        ...base.build,
+        mode: "pve",
+        primaryProfessionId: catalogId<"Profession">(9),
+        secondaryProfessionId: catalogId<"Profession">(1)
+      }
+    } satisfies EditorState;
+    const browser = selectSkillBrowser(state, catalogs);
+    const visibleSkills = browser.groups.flatMap((group) => group.skills);
+    const visibleNames = visibleSkills.map((skill) => skill.name);
+
+    expect(visibleNames).toContain("Spear of Fury");
+    expect(visibleNames).toContain('"Save Yourselves!"');
+    expect(visibleNames).toContain("Whirlwind Attack");
+    expect(visibleNames).toContain('"There\'s Nothing to Fear!"');
+    expect(browser.groups.map((group) => group.label)).toEqual(
+      expect.arrayContaining(["Kurzick", "Luxon", "Sunspear"])
+    );
+  });
+
   it("shows relevant title controls before all-title controls and retained stale overrides", () => {
     const state = {
       ...playableEditorFixture(),

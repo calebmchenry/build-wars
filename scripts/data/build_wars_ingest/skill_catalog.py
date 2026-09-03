@@ -10,7 +10,12 @@ from .artifacts import canonical_json_bytes
 from .config import GENERATOR_NAME, INGESTION_SCHEMA_VERSION
 from .icons import resolve_icon_metadata
 from .models import Diagnostic, Evidence, digest_bytes
-from .profiles import DataIngestionProfile, EPIC_04_PROFESSION_SKILL_LISTS, EPIC_04_PROFILE_ID
+from .profiles import (
+    DataIngestionProfile,
+    EPIC_04_PROFESSION_SKILL_LISTS,
+    EPIC_04_PROFILE_ID,
+    EPIC_04_PVE_ONLY_SKILL_LIST_TITLE,
+)
 from .skill_infobox import extract_skill_infobox
 from .skill_progression import extract_skill_progressions, split_evidence_from_title
 
@@ -315,10 +320,17 @@ def _source_set_summary(
     summary = source_plan["summary"]
     profession_list_pages = source_plan.get("professionListPages", [])
     profession_list_rows = source_plan.get("professionSkillRows", [])
+    pve_only_list_page = source_plan.get("pveOnlyListPage")
+    pve_only_rows = source_plan.get("pveOnlySkillRows", [])
     return {
         "indexTitle": "Guild Wars Wiki:Game integration/Skills",
         "rangedPageTitles": [page["title"] for page in source_plan["rangedPages"]],
         "professionListTitles": [page["title"] for page in profession_list_pages],
+        "pveOnlyListTitle": (
+            str(pve_only_list_page["title"])
+            if isinstance(pve_only_list_page, dict)
+            else EPIC_04_PVE_ONLY_SKILL_LIST_TITLE
+        ),
         "sourceSetDigest": summary["sourceSetDigest"],
         "sourcePlanDigest": summary["sourcePlanDigest"],
         "acceptedSeedCount": int(summary["acceptedSeedCount"]),
@@ -328,6 +340,7 @@ def _source_set_summary(
         "maximumAcceptedId": summary["maximumAcceptedId"],
         "numericGapCount": int(summary["numericGapCount"]),
         "professionListRowCount": len(profession_list_rows),
+        "pveOnlySkillRowCount": len(pve_only_rows),
         "rangeSeedCount": int(summary.get("rangeSeedCount", 0)),
         "rangeOnlySeedCount": int(summary.get("rangeOnlySeedCount", 0)),
         "supplementalSeedCount": int(summary.get("supplementalSeedCount", 0)),
@@ -335,7 +348,8 @@ def _source_set_summary(
         "planningAmendment": (
             "SPRINT-005 replaced the missing Guild Wars Wiki:Game integration/Skills/0 "
             "source with the live index and linked ranged skill pages for ID lookup. The "
-            "Guild Wars Wiki profession skill list pages now define the runtime profession-skill catalog."
+            "Guild Wars Wiki profession skill list pages define the runtime profession-skill catalog, "
+            "and List of PvE-only skills adds professionless PvE skills plus title-track PvE sections."
         ),
     }
 
@@ -346,7 +360,7 @@ def _profile_wire(profile: DataIngestionProfile) -> dict[str, Any]:
         "sourceTarget": profile.source_target,
         "sourceEpic": profile.source_epic,
         "sourceCaps": {
-            "seedPageLimit": 8 + len(EPIC_04_PROFESSION_SKILL_LISTS),
+            "seedPageLimit": 9 + len(EPIC_04_PROFESSION_SKILL_LISTS),
             "detailPageLimit": profile.page_limit,
             "mediaTitleLimit": profile.media_title_limit,
             "requestLimit": profile.request_limit,

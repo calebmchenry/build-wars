@@ -42,6 +42,7 @@ from .profiles import (
     EPIC_03_PROFILE_ID,
     EPIC_04_PROFESSION_SKILL_LISTS,
     EPIC_04_PROFILE_ID,
+    EPIC_04_PVE_ONLY_SKILL_LIST_TITLE,
     EPIC_04_SKILL_ICON_IMAGEINFO_TITLE,
     EPIC_04_SOURCE_INDEX_TITLE,
     EPIC_10_PROFILE_ID,
@@ -796,12 +797,38 @@ def _run_epic04_fixture(options: PipelineOptions) -> PipelineResult:
             }
         )
 
+    pve_only_source = _page_source_reference(
+        source_id="source:gww:epic-04-fixture:pve-only-list:5301",
+        page_title=EPIC_04_PVE_ONLY_SKILL_LIST_TITLE,
+        page_id=9531,
+        revision_id=5301,
+        source_revision_timestamp="2026-08-31T15:40:00Z",
+        retrieved_at=options.generated_at,
+    )
+    pve_only_snapshot = _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=pve_only_source,
+        title=EPIC_04_PVE_ONLY_SKILL_LIST_TITLE,
+        page_id=9531,
+        revision_id=5301,
+        timestamp="2026-08-31T15:40:00Z",
+        retrieved_at=options.generated_at,
+        content=fixtures["pveOnlyList"],
+    )
+    child_manifest_paths.append(_relative_to_root(roots.root, pve_only_snapshot.manifest_path))
+    pve_only_plan_snapshot = {
+        "title": EPIC_04_PVE_ONLY_SKILL_LIST_TITLE,
+        "content": fixtures["pveOnlyList"],
+        "sourceReference": pve_only_source,
+    }
+
     plan_result = build_source_plan(
         profile=profile,
         generated_at=options.generated_at,
         index_snapshot=index_plan_snapshot,
         range_snapshots=range_plan_snapshots,
         profession_list_snapshots=profession_list_plan_snapshots,
+        pve_only_list_snapshot=pve_only_plan_snapshot,
     )
     plan_path = write_source_plan(roots.root, plan_result.plan)
     diagnostics = [*ranged_diagnostics, *plan_result.diagnostics]
@@ -2695,12 +2722,22 @@ def _discover_epic04_source_set(
         )
     )
     child_manifest_paths.extend(profession_list_manifest_paths)
+    pve_only_list_snapshot, pve_only_list_manifest_paths, pve_only_list_diagnostics = (
+        _fetch_epic04_pve_only_skill_list(
+            client=client,
+            snapshot_store=snapshot_store,
+            generated_at=generated_at,
+            roots=roots,
+        )
+    )
+    child_manifest_paths.extend(pve_only_list_manifest_paths)
     draft_plan_result = build_source_plan(
         profile=profile,
         generated_at=generated_at,
         index_snapshot={"title": EPIC_04_SOURCE_INDEX_TITLE, "content": index_content, "sourceReference": index_source},
         range_snapshots=range_snapshots,
         profession_list_snapshots=profession_list_snapshots,
+        pve_only_list_snapshot=pve_only_list_snapshot,
     )
     supplemental_seed_snapshots, supplemental_seed_manifest_paths, supplemental_seed_diagnostics = (
         _fetch_epic04_supplemental_seed_pages(
@@ -2708,7 +2745,7 @@ def _discover_epic04_source_set(
             snapshot_store=snapshot_store,
             generated_at=generated_at,
             roots=roots,
-            unresolved_rows=draft_plan_result.plan["unresolvedProfessionListTitles"],
+            unresolved_rows=draft_plan_result.plan["unresolvedSkillListTitles"],
         )
     )
     child_manifest_paths.extend(supplemental_seed_manifest_paths)
@@ -2718,6 +2755,7 @@ def _discover_epic04_source_set(
         index_snapshot={"title": EPIC_04_SOURCE_INDEX_TITLE, "content": index_content, "sourceReference": index_source},
         range_snapshots=range_snapshots,
         profession_list_snapshots=profession_list_snapshots,
+        pve_only_list_snapshot=pve_only_list_snapshot,
         supplemental_seed_snapshots=supplemental_seed_snapshots,
     )
     plan_path = write_source_plan(roots.root, plan_result.plan)
@@ -2726,6 +2764,7 @@ def _discover_epic04_source_set(
         *ranged_diagnostics,
         *range_page_diagnostics,
         *profession_list_diagnostics,
+        *pve_only_list_diagnostics,
         *supplemental_seed_diagnostics,
         *plan_result.diagnostics,
     ]
@@ -2733,7 +2772,12 @@ def _discover_epic04_source_set(
         artifact_path=_relative_to_root(roots.root, plan_path),
         artifact_manifest_path=None,
         generated_at=generated_at,
-        source_ids=[index_source["id"], *[snapshot["sourceReference"]["id"] for snapshot in range_snapshots]],
+        source_ids=[
+            index_source["id"],
+            *[snapshot["sourceReference"]["id"] for snapshot in range_snapshots],
+            *[snapshot["sourceReference"]["id"] for snapshot in profession_list_snapshots],
+            pve_only_list_snapshot["sourceReference"]["id"],
+        ],
         diagnostics=diagnostics,
         notes="EPIC-04 discover-only source-plan QA report.",
     )
@@ -2804,6 +2848,50 @@ def _fetch_epic04_profession_skill_lists(
             }
         )
     return snapshots, manifest_paths, diagnostics
+
+
+def _fetch_epic04_pve_only_skill_list(
+    *,
+    client: MediaWikiClient,
+    snapshot_store: SnapshotStore,
+    generated_at: str,
+    roots: RuntimeRoots,
+) -> tuple[dict[str, Any], list[str], list[Diagnostic]]:
+    pages, diagnostics = client.query_title_revisions([EPIC_04_PVE_ONLY_SKILL_LIST_TITLE])
+    if not pages:
+        raise PipelineError("EPIC-04 PvE-only skill list could not be fetched")
+    page = pages[0]
+    revision = _first_revision(page)
+    title = str(page.get("title"))
+    revision_id = revision.get("revid")
+    timestamp = revision.get("timestamp")
+    parsed = client.request({"action": "parse", "oldid": revision_id, "prop": "text|revid"})
+    parse_payload = parsed.get("parse")
+    if not isinstance(parse_payload, dict) or not isinstance(parse_payload.get("text"), str):
+        raise PipelineError(f"EPIC-04 PvE-only skill list did not render: {title}")
+    source_ref = _page_source_reference(
+        source_id=f"source:gww:epic-04-live:pve-only-list:{page.get('pageid')}:{revision_id}",
+        page_title=title,
+        page_id=page.get("pageid"),
+        revision_id=revision_id,
+        source_revision_timestamp=timestamp,
+        retrieved_at=generated_at,
+    )
+    snapshot = _write_page_snapshot(
+        snapshot_store=snapshot_store,
+        source_reference=source_ref,
+        title=title,
+        page_id=page.get("pageid"),
+        revision_id=revision_id,
+        timestamp=timestamp,
+        retrieved_at=generated_at,
+        content=str(parse_payload["text"]),
+    )
+    return (
+        {"title": title, "content": str(parse_payload["text"]), "sourceReference": source_ref},
+        [_relative_to_root(roots.root, snapshot.manifest_path)],
+        diagnostics,
+    )
 
 
 def _fetch_epic04_supplemental_seed_pages(
@@ -3083,12 +3171,14 @@ def _load_epic04_fixture_pages(fixture_root: Path) -> dict[str, Any]:
             title: (base / f"list-{slug}.html").read_text(encoding="utf-8")
             for _profession_id, slug, title in EPIC_04_PROFESSION_SKILL_LISTS
         }
+        pve_only_list = (base / "list-pve-only.html").read_text(encoding="utf-8")
         imageinfo = json.loads((base / "imageinfo.json").read_text(encoding="utf-8"))
         return {
             "index": index,
             "ranges": ranges,
             "details": details,
             "professionLists": profession_lists,
+            "pveOnlyList": pve_only_list,
             "imageinfo": imageinfo,
         }
     except OSError as exc:
@@ -3506,20 +3596,20 @@ def _epic04_manual_reviews(
             "id": "review:epic-04-source-set:2026-09-01",
             "reviewer": "Build Wars sprint executor",
             "reviewedAt": generated_at,
-            "scope": "EPIC-04 source-set digest, ranged-page amendment, and profession skill list authority",
+            "scope": "EPIC-04 source-set digest, ranged-page amendment, profession skill list authority, and PvE-only skill list authority",
             "decision": "approved",
-            "rationale": "The missing /Skills/0 page is retained only as blocker history; the approved live index and ranged pages provide the ID lookup, and profession list pages define the promoted source-set seed authority.",
+            "rationale": "The missing /Skills/0 page is retained only as blocker history; the approved live index and ranged pages provide the ID lookup, while profession list pages and the PvE-only list define promoted source-set seed authority.",
             "evidence": [
                 {
                     "kind": "source",
                     "reference": str(source_plan["summary"]["sourceSetDigest"]),
-                    "notes": "Digest of source-set index, ranged pages, profession list rows, supplemental seeds, and accepted seeds.",
+                    "notes": "Digest of source-set index, ranged pages, profession list rows, PvE-only list rows, supplemental seeds, and accepted seeds.",
                 }
             ],
             "relatedFindingIds": [],
             "followUpTicketIds": [],
             "expiresAt": None,
-            "reReviewTrigger": "Any source-set index, ranged page revision, profession list revision, accepted seed policy, or source-plan digest change.",
+            "reReviewTrigger": "Any source-set index, ranged page revision, profession list revision, PvE-only list revision, accepted seed policy, or source-plan digest change.",
         },
         {
             "id": "review:epic-04-profession-list-authority:2026-09-03",
@@ -3539,6 +3629,25 @@ def _epic04_manual_reviews(
             "followUpTicketIds": [],
             "expiresAt": None,
             "reReviewTrigger": "Any profession list page revision, row parser change, or promotion policy change.",
+        },
+        {
+            "id": "review:epic-04-pve-only-list-authority:2026-09-03",
+            "reviewer": "Build Wars sprint executor",
+            "reviewedAt": generated_at,
+            "scope": "EPIC-04 PvE-only skill membership",
+            "decision": "approved",
+            "rationale": "Guild Wars Wiki List of PvE-only skills supplies the promoted PvE-only seed rows not covered by profession skill lists and preserves title-track PvE grouping evidence.",
+            "evidence": [
+                {
+                    "kind": "source",
+                    "reference": str(source_plan["summary"]["sourceSetDigest"]),
+                    "notes": "PvE-only list rows are included in the source-set digest and resolve IDs through the same game-integration range or supplemental infobox policy.",
+                }
+            ],
+            "relatedFindingIds": [],
+            "followUpTicketIds": [],
+            "expiresAt": None,
+            "reReviewTrigger": "Any PvE-only list page revision, row parser change, or promotion policy change.",
         },
         {
             "id": "review:epic-04-description-structured-only:2026-09-01",

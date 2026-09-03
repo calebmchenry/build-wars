@@ -1,5 +1,5 @@
 {
-  "catalogVersion": "skills-cb7491857576c8d7",
+  "catalogVersion": "skills-7e8d6fb1495be8d3",
   "dependencyDigests": [
     {
       "artifactDigest": "1cb3f79b7139cf26adbcf40b600094c2860796c60dcd9f1ba75bad694d07c8b4",
@@ -31,7 +31,29 @@
       ]
     }
   ],
-  "dispositions": [],
+  "dispositions": [
+    {
+      "id": "disposition:skill:6:same-page-variant",
+      "kind": "same-page-variant",
+      "provenance": {
+        "claimIds": [
+          "claim:skill:6:same-page-variant"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-04-first-baseline:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:6:5106"
+        ]
+      },
+      "reason": "Multiple accepted seed IDs resolve to the same canonical page; each ID remains a separate catalog record.",
+      "requestedTitle": "\"Save Yourselves!\"",
+      "reviewId": "review:epic-04-first-baseline:2026-09-01",
+      "skillId": 6,
+      "templateId": 6
+    }
+  ],
   "generatedAt": "2026-09-01T00:00:00Z",
   "generator": "build-wars-ingest/0.1.0",
   "profile": {
@@ -47,7 +69,7 @@
       "requestLimit": 260,
       "responseByteCap": 5000000,
       "retryLimit": 3,
-      "seedPageLimit": 18
+      "seedPageLimit": 19
     },
     "sourceEpic": "EPIC-04",
     "sourceTarget": "BACKLOG"
@@ -326,7 +348,7 @@
           "max": 12,
           "min": 0
         },
-        "titleKey": "title:allegiance-rank"
+        "titleKey": "allegiance:luxon"
       },
       "id": "progression:skill:3:1",
       "provenance": {
@@ -342,6 +364,120 @@
         ]
       },
       "skillId": 3,
+      "sourceForm": "skill progression max12",
+      "valueSlots": [
+        {
+          "index": 0,
+          "label": "Duration",
+          "unit": null
+        }
+      ],
+      "values": [
+        {
+          "rank": 0,
+          "values": [
+            4
+          ]
+        },
+        {
+          "rank": 1,
+          "values": [
+            4.167
+          ]
+        },
+        {
+          "rank": 2,
+          "values": [
+            4.333
+          ]
+        },
+        {
+          "rank": 3,
+          "values": [
+            4.5
+          ]
+        },
+        {
+          "rank": 4,
+          "values": [
+            4.667
+          ]
+        },
+        {
+          "rank": 5,
+          "values": [
+            4.833
+          ]
+        },
+        {
+          "rank": 6,
+          "values": [
+            5
+          ]
+        },
+        {
+          "rank": 7,
+          "values": [
+            5.167
+          ]
+        },
+        {
+          "rank": 8,
+          "values": [
+            5.333
+          ]
+        },
+        {
+          "rank": 9,
+          "values": [
+            5.5
+          ]
+        },
+        {
+          "rank": 10,
+          "values": [
+            5.667
+          ]
+        },
+        {
+          "rank": 11,
+          "values": [
+            5.833
+          ]
+        },
+        {
+          "rank": 12,
+          "values": [
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "dependency": {
+        "attributeId": null,
+        "kind": "title-rank",
+        "mode": null,
+        "rankDomain": {
+          "max": 12,
+          "min": 0
+        },
+        "titleKey": "allegiance:kurzick"
+      },
+      "id": "progression:skill:6:1",
+      "provenance": {
+        "claimIds": [
+          "claim:skill:6:progression"
+        ],
+        "notes": "Progression values are normalized from bounded structured templates.",
+        "reviewIds": [
+          "review:epic-04-structured-progressions:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:6:5106"
+        ]
+      },
+      "skillId": 6,
       "sourceForm": "skill progression max12",
       "valueSlots": [
         {
@@ -473,19 +609,19 @@
       "section": "dependencyDigests"
     },
     {
-      "digest": "3ef33a778d2a328c9f8bae10f41e24e884b536714813431029bc5f032832a3ee",
+      "digest": "d3a79911392c46d9ead0628e7999e483927a53be3f61c881bd860c5424ae2cdb",
       "section": "sourceSet"
     },
     {
-      "digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "digest": "7b8799c4b9982b27a93f1f9f43640bb59906f0038a3eac5a4c69042d630bf106",
       "section": "dispositions"
     },
     {
-      "digest": "24d5f1dd867cfe85369f4334dcb4c74a38245530ac21955d17f096b018e6a1e7",
+      "digest": "48d5ed1890e23d91c7aa4d4d0335e8b6c527c27b45fb090f9d02d783c743bf21",
       "section": "skills"
     },
     {
-      "digest": "b86e5fb7d52d84008ddb2415793184e9e2ce26917cae1b2f8152abef0d99203f",
+      "digest": "f1feb222f84b83e84de6b2f09c44d44aeff8958a6d0f640c3067feda4e292142",
       "section": "progressionSeries"
     },
     {
@@ -1253,17 +1389,169 @@
       },
       "type": "Spell",
       "wikiUrl": "https://wiki.guildwars.com/wiki/Training_Beacon_(PvP)"
+    },
+    {
+      "attributeId": null,
+      "campaign": "factions",
+      "classification": {
+        "common": false,
+        "elite": false,
+        "modeAvailability": "pve-only",
+        "noAttribute": false,
+        "nonPlayer": false,
+        "pveOnly": true,
+        "pvpOnly": false,
+        "sharedPage": false,
+        "special": true,
+        "split": false,
+        "title": true,
+        "unsupported": false
+      },
+      "costs": {
+        "adrenaline": {
+          "source": "8",
+          "state": "number",
+          "text": "8",
+          "unit": null,
+          "value": 8
+        },
+        "energy": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "overcast": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "sacrifice": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "upkeep": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        }
+      },
+      "description": {
+        "limitations": [
+          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
+        ],
+        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
+        "searchText": "\"Save Yourselves!\" Shout Warrior Allegiance rank",
+        "sourceTextDigest": "b9b297e01afe131ec732f5167b54fe40ec01546bbf4443a1461b88d04917e188",
+        "state": "structured-only",
+        "tokens": [
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Skill type: "
+          },
+          {
+            "kind": "literal",
+            "value": "Shout"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Profession: "
+          },
+          {
+            "kind": "literal",
+            "value": "Warrior"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "reviewed-factual-marker",
+            "value": "Attribute: "
+          },
+          {
+            "kind": "literal",
+            "value": "Allegiance rank"
+          }
+        ]
+      },
+      "iconId": null,
+      "id": 6,
+      "name": "\"Save Yourselves!\"",
+      "normalizedName": "\"save yourselves!\"",
+      "pageIdentity": {
+        "canonicalTitle": "\"Save Yourselves!\"",
+        "normalizedTitle": "\"Save Yourselves!\"",
+        "pageId": 9606,
+        "redirectedFrom": null,
+        "requestedTitle": "\"Save Yourselves!\"",
+        "revisionId": 5106,
+        "sourceRevisionTimestamp": "2026-08-31T16:00:00Z"
+      },
+      "professionId": 1,
+      "progressionSeriesIds": [
+        "progression:skill:6:1"
+      ],
+      "provenance": {
+        "claimIds": [
+          "claim:skill:6:infobox"
+        ],
+        "notes": null,
+        "reviewIds": [
+          "review:epic-04-description-structured-only:2026-09-01"
+        ],
+        "sourceIds": [
+          "source:gww:epic-04-fixture:skill:6:5106"
+        ]
+      },
+      "splitGroupId": null,
+      "templateId": 6,
+      "timings": {
+        "activation": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "moraleBoostRecharge": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        },
+        "recharge": {
+          "source": null,
+          "state": "absent",
+          "text": null,
+          "unit": null,
+          "value": null
+        }
+      },
+      "type": "Shout",
+      "wikiUrl": "https://wiki.guildwars.com/wiki/\"Save_Yourselves!\""
     }
   ],
   "sourceSet": {
-    "acceptedSeedCount": 5,
-    "catalogRecordCount": 5,
-    "dispositionCount": 0,
+    "acceptedSeedCount": 6,
+    "catalogRecordCount": 6,
+    "dispositionCount": 1,
     "indexTitle": "Guild Wars Wiki:Game integration/Skills",
-    "maximumAcceptedId": 5,
+    "maximumAcceptedId": 6,
     "minimumAcceptedId": 1,
     "numericGapCount": 0,
-    "planningAmendment": "SPRINT-005 replaced the missing Guild Wars Wiki:Game integration/Skills/0 source with the live index and linked ranged skill pages for ID lookup. The Guild Wars Wiki profession skill list pages now define the runtime profession-skill catalog.",
+    "planningAmendment": "SPRINT-005 replaced the missing Guild Wars Wiki:Game integration/Skills/0 source with the live index and linked ranged skill pages for ID lookup. The Guild Wars Wiki profession skill list pages define the runtime profession-skill catalog, and List of PvE-only skills adds professionless PvE skills plus title-track PvE sections.",
     "professionListRowCount": 5,
     "professionListTitles": [
       "List of warrior skills",
@@ -1278,13 +1566,15 @@
       "List of dervish skills"
     ],
     "professionListUnsupportedCount": 0,
+    "pveOnlyListTitle": "List of PvE-only skills",
+    "pveOnlySkillRowCount": 2,
     "rangeOnlySeedCount": 0,
-    "rangeSeedCount": 5,
+    "rangeSeedCount": 6,
     "rangedPageTitles": [
       "Guild Wars Wiki:Game integration/Skills/1-10"
     ],
-    "sourcePlanDigest": "86d1fb50fbd9d994800487de80da550ee9764b9f82def2cd9830a1e3a2dacf1f",
-    "sourceSetDigest": "be95c1fa9e0290911eee2a09119b5f9a2ccc05a6ee9f838583f467d6b4ebb749",
+    "sourcePlanDigest": "be6dfc7f5c510322b38bd4f5dacbeccc042b76b04fd343ed4c8a6d6b3dd62a13",
+    "sourceSetDigest": "1cb32650a251f5f037c47b8d9e709f7d0e4d8c6fb36341b5911a28d9d70ade69",
     "supplementalSeedCount": 0
   },
   "splitGroups": [

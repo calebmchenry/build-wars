@@ -71,7 +71,7 @@ class CliTests(unittest.TestCase):
 
             self.assertEqual(exit_code, 0)
             output = stdout.getvalue()
-            self.assertIn("records: 5", output)
+            self.assertIn("records: 6", output)
             self.assertIn("skills.catalog.qa.json", output)
         finally:
             shutil.rmtree(tmp)
