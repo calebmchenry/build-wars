@@ -1,5 +1,4 @@
 import {
-  BUILD_SET_SCHEMA_VERSION,
   authoredDocumentId,
   BUILD_SCHEMA_VERSION,
   catalogId,
@@ -9,14 +8,27 @@ import {
   MAX_BUILD_SET_ENTRY_LABEL_LENGTH,
   MAX_BUILD_SET_ENTRY_NOTES_LENGTH,
   MAX_BUILD_SET_NAME_LENGTH,
+  MAX_PARTY_MEMBER_KIND_LABEL_LENGTH,
+  MAX_PARTY_MEMBER_LABEL_LENGTH,
+  MAX_PARTY_ROLE_LENGTH,
+  MAX_PARTY_SLOT_NOTES_LENGTH,
+  MAX_PARTY_SLOTS,
   TITLE_RANK_OVERRIDE_LIMIT,
   WEAPON_SET_SLOTS,
   MAX_MODIFIERS_PER_HAND_TO_VALIDATE,
   buildSetEntryId,
+  clonePartyAnnotations,
   isBuildSetEntryKind,
+  isPartyMemberKind,
+  isPartySizePreset,
   normalizeBuildSetEntryLabel,
   normalizeBuildSetEntryNotes,
   normalizeBuildSetName,
+  normalizePartyMemberKindLabel,
+  normalizePartyMemberLabel,
+  normalizePartyRole,
+  normalizePartySlotNotes,
+  partySlotId,
   isCanonicalTitleRankKey,
   normalizeTitleRankKey,
   type AttributeId,
@@ -30,6 +42,10 @@ import {
   type EquipmentSelectionState,
   type GameMode,
   type InsigniaId,
+  type PartyAnnotations,
+  type PartySize,
+  type PartySlotAnnotation,
+  type PartySlotId,
   type RuneId,
   type SkillBar,
   type SkillId,
@@ -59,6 +75,8 @@ export const LOCAL_LIBRARY_STORAGE_KEY = "build-wars:v1";
 export const LOCAL_LIBRARY_KIND = "build-wars-local-library";
 export const LOCAL_LIBRARY_SCHEMA_VERSION = 2;
 export const LEGACY_LOCAL_LIBRARY_SCHEMA_VERSION = 1;
+export const PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION = 2;
+export const LEGACY_PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION = 1;
 
 export type LocalBuildRecordId = string & { readonly __brand: "LocalBuildRecordId" };
 
@@ -92,11 +110,13 @@ export interface PersistedBuildSetEntrySnapshot {
 }
 
 export interface PersistedBuildSetSnapshot {
-  readonly schemaVersion: typeof BUILD_SET_SCHEMA_VERSION;
+  readonly schemaVersion: typeof PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION;
   readonly id: AuthoredDocumentId;
   readonly name: string;
   readonly entries: readonly PersistedBuildSetEntrySnapshot[];
   readonly lastSelectedEntryId: BuildSetEntryId | null;
+  readonly party: PartyAnnotations | null;
+  readonly lastSelectedPartySlotId: PartySlotId | null;
 }
 
 export type PersistedDocument =
@@ -369,7 +389,8 @@ export function parseLocalLibraryEnvelope(input: unknown): LocalLibraryParseResu
       "invalid-record",
       "duplicate-record-id",
       "invalid-working-draft",
-      "stale-selected-entry-id"
+      "stale-selected-entry-id",
+      "stale-selected-party-slot-id"
     ].includes(item.code)
   );
   return { ok: true, envelope, diagnostics, writeBlocked };
@@ -396,6 +417,17 @@ export function selectedPersistedBuildSnapshot(
 ): PersistedBuildSnapshot | null {
   if (document.kind === "build") {
     return document.snapshot;
+  }
+  if (document.snapshot.party?.enabled === true) {
+    const selectedSlot = document.snapshot.party.slots.find(
+      (slot) => slot.id === document.snapshot.lastSelectedPartySlotId
+    );
+    if (selectedSlot !== undefined) {
+      return selectedSlot.entryId === null
+        ? null
+        : (document.snapshot.entries.find((entry) => entry.id === selectedSlot.entryId)?.snapshot ??
+            null);
+    }
   }
   const selected = document.snapshot.lastSelectedEntryId;
   return (
@@ -645,8 +677,8 @@ function validateBuildSetSnapshot(
     return null;
   }
   const schemaVersion = safeInteger(record.schemaVersion, `${path}.schemaVersion`, diagnostics, {
-    min: BUILD_SET_SCHEMA_VERSION,
-    max: BUILD_SET_SCHEMA_VERSION
+    min: LEGACY_PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION,
+    max: PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION
   });
   const id = stringField(record.id, `${path}.id`, diagnostics, MAX_STRING, {
     allowEmpty: false
@@ -663,13 +695,27 @@ function validateBuildSetSnapshot(
           `${path}.lastSelectedEntryId`,
           diagnostics
         );
+  const party =
+    schemaVersion === PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION
+      ? validatePersistedPartyAnnotations(record.party, `${path}.party`, diagnostics, entries)
+      : null;
+  const rawSelectedPartySlotId =
+    schemaVersion === PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION
+      ? record.lastSelectedPartySlotId
+      : null;
+  const selectedPartySlotId =
+    rawSelectedPartySlotId === null
+      ? null
+      : partySlotIdField(rawSelectedPartySlotId, `${path}.lastSelectedPartySlotId`, diagnostics);
 
   if (
     schemaVersion === null ||
     id === null ||
     name === null ||
     entries === null ||
-    (selected === null && record.lastSelectedEntryId !== null)
+    (selected === null && record.lastSelectedEntryId !== null) ||
+    party === undefined ||
+    (selectedPartySlotId === null && rawSelectedPartySlotId !== null)
   ) {
     return null;
   }
@@ -683,12 +729,28 @@ function validateBuildSetSnapshot(
       "Build set selected entry ID was not present and was repaired."
     );
   }
+  const partySlotExists =
+    party === null ||
+    selectedPartySlotId === null ||
+    party.slots.some((slot) => slot.id === selectedPartySlotId);
+  const lastSelectedPartySlotId =
+    party === null ? null : partySlotExists ? selectedPartySlotId : (party.slots[0]?.id ?? null);
+  if (!partySlotExists) {
+    addDiagnostic(
+      diagnostics,
+      "stale-selected-party-slot-id",
+      `${path}.lastSelectedPartySlotId`,
+      "Party selected slot ID was not present and was repaired."
+    );
+  }
   return {
-    schemaVersion: BUILD_SET_SCHEMA_VERSION,
+    schemaVersion: PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION,
     id: authoredDocumentId(id),
     name: normalizeBuildSetName(name),
     entries,
-    lastSelectedEntryId
+    lastSelectedEntryId,
+    party,
+    lastSelectedPartySlotId
   };
 }
 
@@ -777,6 +839,221 @@ function validateBuildSetEntrySnapshot(
     kind,
     notes: normalizeBuildSetEntryNotes(notes),
     snapshot
+  };
+}
+
+function validatePersistedPartyAnnotations(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[],
+  entries: readonly PersistedBuildSetEntrySnapshot[] | null
+): PartyAnnotations | null | undefined {
+  if (input === null) {
+    return null;
+  }
+  const record = asRecord(input, path, diagnostics);
+  if (record === null) {
+    return undefined;
+  }
+  const schemaVersion = safeInteger(record.schemaVersion, `${path}.schemaVersion`, diagnostics, {
+    min: 1,
+    max: 1
+  });
+  const enabled = booleanField(record.enabled, `${path}.enabled`, diagnostics);
+  const size = validatePartySize(record.size, `${path}.size`, diagnostics);
+  const slots = validatePartySlots(record.slots, `${path}.slots`, diagnostics, entries);
+  if (schemaVersion === null || enabled === null || size === null || slots === null) {
+    return undefined;
+  }
+  const declaredSize = size.size;
+  if (declaredSize !== slots.length) {
+    addDiagnostic(
+      diagnostics,
+      "party-size-mismatch",
+      `${path}.slots`,
+      "Party slot count must match the declared party size."
+    );
+    return undefined;
+  }
+  return {
+    schemaVersion: 1,
+    enabled,
+    size,
+    slots
+  };
+}
+
+function validatePartySize(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): PartySize | null {
+  const record = asRecord(input, path, diagnostics);
+  if (record === null) {
+    return null;
+  }
+  if (record.kind === "preset") {
+    const size = safeInteger(record.size, `${path}.size`, diagnostics, {
+      min: 1,
+      max: MAX_PARTY_SLOTS
+    });
+    if (size === null || !isPartySizePreset(size)) {
+      addDiagnostic(
+        diagnostics,
+        "invalid-party-size",
+        `${path}.size`,
+        "Party preset size is not supported."
+      );
+      return null;
+    }
+    return { kind: "preset", size };
+  }
+  if (record.kind === "custom") {
+    const size = safeInteger(record.size, `${path}.size`, diagnostics, {
+      min: 1,
+      max: MAX_PARTY_SLOTS
+    });
+    return size === null ? null : { kind: "custom", size };
+  }
+  addDiagnostic(
+    diagnostics,
+    "invalid-party-size",
+    `${path}.kind`,
+    "Party size kind must be preset or custom."
+  );
+  return null;
+}
+
+function validatePartySlots(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[],
+  entries: readonly PersistedBuildSetEntrySnapshot[] | null
+): readonly PartySlotAnnotation[] | null {
+  if (!denseArray(input, path, diagnostics)) {
+    return null;
+  }
+  if (input.length > MAX_PARTY_SLOTS) {
+    addDiagnostic(
+      diagnostics,
+      "too-many-party-slots",
+      path,
+      `Parties support at most ${MAX_PARTY_SLOTS} slots.`
+    );
+    return null;
+  }
+  const entryIds = entries === null ? null : new Set(entries.map((entry) => entry.id));
+  const seenSlots = new Set<string>();
+  const seenAssignments = new Set<string>();
+  const slots: PartySlotAnnotation[] = [];
+  for (const [index, item] of input.entries()) {
+    const itemPath = `${path}[${index}]`;
+    const slot = validatePartySlot(item, itemPath, index, diagnostics);
+    if (slot === null) {
+      return null;
+    }
+    if (seenSlots.has(slot.id)) {
+      addDiagnostic(
+        diagnostics,
+        "duplicate-party-slot-id",
+        `${itemPath}.id`,
+        "Duplicate party slot IDs are not accepted."
+      );
+      return null;
+    }
+    seenSlots.add(slot.id);
+    if (slot.entryId !== null) {
+      if (seenAssignments.has(slot.entryId)) {
+        addDiagnostic(
+          diagnostics,
+          "duplicate-party-entry-assignment",
+          `${itemPath}.entryId`,
+          "A build-set entry can be assigned to at most one party slot."
+        );
+        return null;
+      }
+      seenAssignments.add(slot.entryId);
+      if (entryIds !== null && !entryIds.has(slot.entryId)) {
+        addDiagnostic(
+          diagnostics,
+          "missing-party-entry-reference",
+          `${itemPath}.entryId`,
+          "Party slot references a missing build-set entry."
+        );
+        return null;
+      }
+    }
+    slots.push(slot);
+  }
+  return slots;
+}
+
+function validatePartySlot(
+  input: unknown,
+  path: string,
+  index: number,
+  diagnostics: PersistenceDiagnostic[]
+): PartySlotAnnotation | null {
+  const record = asRecord(input, path, diagnostics);
+  if (record === null) {
+    return null;
+  }
+  const id = partySlotIdField(record.id, `${path}.id`, diagnostics);
+  const entryId =
+    record.entryId === null
+      ? null
+      : buildSetEntryIdField(record.entryId, `${path}.entryId`, diagnostics);
+  const memberLabel = stringField(
+    record.memberLabel,
+    `${path}.memberLabel`,
+    diagnostics,
+    MAX_PARTY_MEMBER_LABEL_LENGTH,
+    { allowEmpty: false }
+  );
+  const role = nullableString(record.role, `${path}.role`, diagnostics, MAX_PARTY_ROLE_LENGTH);
+  const memberKind =
+    typeof record.memberKind === "string" && isPartyMemberKind(record.memberKind)
+      ? record.memberKind
+      : null;
+  if (memberKind === null) {
+    addDiagnostic(
+      diagnostics,
+      "invalid-party-member-kind",
+      `${path}.memberKind`,
+      "Party member kind is not accepted."
+    );
+  }
+  const memberKindLabel = nullableString(
+    record.memberKindLabel,
+    `${path}.memberKindLabel`,
+    diagnostics,
+    MAX_PARTY_MEMBER_KIND_LABEL_LENGTH
+  );
+  const notes = nullableString(
+    record.notes,
+    `${path}.notes`,
+    diagnostics,
+    MAX_PARTY_SLOT_NOTES_LENGTH
+  );
+  if (
+    id === null ||
+    (entryId === null && record.entryId !== null) ||
+    memberLabel === null ||
+    role === undefined ||
+    memberKind === null ||
+    memberKindLabel === undefined ||
+    notes === undefined
+  ) {
+    return null;
+  }
+  return {
+    id,
+    entryId,
+    memberLabel: normalizePartyMemberLabel(memberLabel, `Member ${index + 1}`),
+    role: normalizePartyRole(role),
+    memberKind,
+    memberKindLabel: normalizePartyMemberKindLabel(memberKind, memberKindLabel),
+    notes: normalizePartySlotNotes(notes)
   };
 }
 
@@ -1819,6 +2096,27 @@ function buildSetEntryIdField(
   return buildSetEntryId(value);
 }
 
+function partySlotIdField(
+  input: unknown,
+  path: string,
+  diagnostics: PersistenceDiagnostic[]
+): PartySlotId | null {
+  const value = stringField(input, path, diagnostics, 96, { allowEmpty: false });
+  if (value === null) {
+    return null;
+  }
+  if (!/^[A-Za-z0-9:_-]+$/.test(value)) {
+    addDiagnostic(
+      diagnostics,
+      "invalid-id",
+      path,
+      "Party slot ID contains unsupported characters."
+    );
+    return null;
+  }
+  return partySlotId(value);
+}
+
 function tagsField(
   input: unknown,
   path: string,
@@ -2068,10 +2366,12 @@ export function clonePersistedBuildSetSnapshot(
   snapshot: PersistedBuildSetSnapshot
 ): PersistedBuildSetSnapshot {
   return {
-    schemaVersion: BUILD_SET_SCHEMA_VERSION,
+    schemaVersion: PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION,
     id: snapshot.id,
     name: snapshot.name,
     lastSelectedEntryId: snapshot.lastSelectedEntryId,
+    party: snapshot.party === null ? null : clonePartyAnnotations(snapshot.party),
+    lastSelectedPartySlotId: snapshot.lastSelectedPartySlotId,
     entries: snapshot.entries.map((entry) => ({
       id: entry.id,
       label: entry.label,

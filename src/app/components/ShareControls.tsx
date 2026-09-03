@@ -73,7 +73,10 @@ export function ShareControls({
       {workspace.document.kind === "build-set" ? (
         <div className="share-warning">
           <strong>Selected loadout only</strong>
-          <p>Sibling entries and entry notes use build-set transfer or backup JSON.</p>
+          <p>
+            Sibling entries, party metadata, equipment, title overrides, and notes use native JSON
+            transfer or backup.
+          </p>
         </div>
       ) : null}
       {share.ok && targetEditor !== null ? (

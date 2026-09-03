@@ -61,11 +61,14 @@ attribute budget policy rather than inheriting PvE points.
 
 The main column renders `Skills` and `Equipment` tabs for the active loadout. In build-set mode,
 that active loadout is the selected entry from a neutral multi-build workspace; inactive entries are
-durable snapshots and are not separate live editors. `Skills` is the default tab and keeps the
-existing eight-slot skill bar, compact title-rank panel, and skill browser. Users can place skills
-from the browser, replace a slot, move to an empty slot, swap filled slots, clear slots, and use
-keyboard pick/place/cancel controls. Drag payloads are opaque app JSON under an internal MIME type
-and are validated before the reducer receives an action.
+durable snapshots and are not separate live editors. In enabled party mode, the editor is bound only
+to an occupied selected slot. Selecting an empty party slot snapshots the outgoing member, leaves no
+active editor, disables selected-loadout controls, and shows create or assign actions instead of
+materializing a placeholder build. `Skills` is the default tab and keeps the existing eight-slot
+skill bar, compact title-rank panel, and skill browser. Users can place skills from the browser,
+replace a slot, move to an empty slot, swap filled slots, clear slots, and use keyboard
+pick/place/cancel controls. Drag payloads are opaque app JSON under an internal MIME type and are
+validated before the reducer receives an action.
 
 The title-rank panel derives relevant rows from selected skill slots, shows remaining discovered
 titles in a disclosure, and stores only non-default per-build overrides. Opening the all-title
@@ -97,6 +100,10 @@ Template import uses EPIC-05 `decodeSkillTemplate` and `resolveSkillTemplateDocu
 import is transactional and sets build mode to `unknown`. Failed parse, decode, or resolve leaves
 the prior editor state unchanged.
 
+In party mode, template import and export remain selected-member operations. They require an
+occupied selected slot and preserve build-set entry identity plus any party slot label, role, kind,
+freeform label, notes, and order.
+
 Exact-source export is allowed when the current reconstructed template field fingerprint matches the
 imported source fingerprint, including after UI-only changes or semantic edit/revert sequences.
 Canonical export is shown only when app projection has explicit template mappings, validation has no
@@ -121,5 +128,6 @@ Build-set selection, inactive snapshots, variants, comparison, and transfer are 
 [Multi-build workspace](multi-build-workspace.md). Title-rank behavior is documented in
 [Title ranks](title-ranks.md). Equipment editor behavior is documented in
 [Equipment editor](equipment-editor.md). Later epics own account-wide title profiles, title
-ownership, allegiance side selection, party/hero semantics, guide authoring, recommendations, remote
-icon loading, analytics, auth, deployment, and PWA behavior.
+ownership, allegiance side selection, hero catalogs, henchmen, portraits, hero AI behavior,
+paw-ned2/team-template compatibility, guide authoring, recommendations, remote icon loading,
+analytics, auth, deployment, and PWA behavior.

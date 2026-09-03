@@ -2,8 +2,10 @@
 id: BW-1702
 title: Party Annotations and Presets
 epic: EPIC-17
-status: ready
+status: done
 priority: high
+planned_sprint: SPRINT-018
+completed_sprint: SPRINT-018
 depends_on:
   - EPIC-16
 created: 2026-09-03
@@ -41,3 +43,19 @@ Add party/team metadata on top of build sets without requiring a hero catalog.
 
 - `npm run typecheck`
 - Focused tests for party annotation contracts and presets
+
+## Closeout Evidence
+
+- Implemented in `SPRINT-018`.
+- Replaced placeholder party shape with bounded annotation contracts, slot IDs, presets, member
+  labels, roles, kinds, freeform labels, notes, lifecycle helpers, unassigned projections, and
+  structural diagnostics.
+- Added persisted build-set snapshot v2 with in-memory v1 neutral migration while keeping the
+  domain `BuildSet` schema and outer `build-wars:v1` library envelope stable.
+- Passed `npm run test:run -- test/domain/party.test.ts test/domain/contracts.test.ts
+src/app/persistence-schema.test.ts`.
+- Passed `npm run typecheck`.
+
+## Planning
+
+Planned in `SPRINT-018`.

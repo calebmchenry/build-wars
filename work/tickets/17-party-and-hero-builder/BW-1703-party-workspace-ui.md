@@ -2,8 +2,10 @@
 id: BW-1703
 title: Party Workspace UI
 epic: EPIC-17
-status: ready
+status: done
 priority: high
+planned_sprint: SPRINT-018
+completed_sprint: SPRINT-018
 depends_on:
   - BW-1702
 created: 2026-09-03
@@ -41,3 +43,20 @@ Provide a party-oriented view over a multi-build workspace.
 
 - `npm run test:run -- src/app`
 - Focused component tests for member selection, add/remove, reorder, and responsive states
+
+## Closeout Evidence
+
+- Implemented in `SPRINT-018`.
+- Added party workspace selectors and UI for enabled, dormant, occupied, empty, selected, and
+  unassigned states while preserving neutral build-set navigation and selected-member editor
+  binding.
+- Added controls for enabling, disabling, resetting, resizing, moving, assigning, creating,
+  clearing, duplicating, and editing slot metadata with compact responsive styling.
+- Passed `npm run test:run -- src/app/party-selectors.test.ts src/app/party-workspace.test.tsx
+src/app/build-set-selectors.test.ts src/app/library-selectors.test.ts
+src/app/build-set-navigator.test.tsx src/app/template-dialogs.test.tsx src/app/App.test.tsx`.
+- Passed `npm run typecheck`.
+
+## Planning
+
+Planned in `SPRINT-018`.

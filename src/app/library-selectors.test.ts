@@ -8,6 +8,7 @@ import {
   fixtureCatalogFacts,
   staleSavedRecordFixture,
   unresolvedSavedRecordFixture,
+  validPartyBuildSetSnapshotFixture,
   validBuildSetSavedRecordFixture,
   validSavedRecordFixture
 } from "./library-fixtures";
@@ -209,6 +210,54 @@ describe("library selectors", () => {
     });
     expect(byProfession.rows.map((row) => row.id)).toEqual(["local-set"]);
     expect(byEntry.rows[0]?.diagnostics.resolution).toBe("unresolved");
+  });
+
+  it("summarizes and searches enabled and dormant party metadata", () => {
+    const enabled = validBuildSetSavedRecordFixture({
+      id: localBuildRecordId("local-enabled-party"),
+      name: "Enabled Party",
+      snapshot: validPartyBuildSetSnapshotFixture()
+    });
+    const dormant = validBuildSetSavedRecordFixture({
+      id: localBuildRecordId("local-dormant-party"),
+      name: "Dormant Party",
+      snapshot: validPartyBuildSetSnapshotFixture({
+        party: {
+          ...validPartyBuildSetSnapshotFixture().party!,
+          enabled: false,
+          slots: [
+            {
+              ...validPartyBuildSetSnapshotFixture().party!.slots[0]!,
+              role: "Interrupter",
+              notes: "Watches the backline."
+            },
+            validPartyBuildSetSnapshotFixture().party!.slots[1]!
+          ]
+        }
+      })
+    });
+    const view = selectLibraryView(
+      [enabled, dormant],
+      catalogs,
+      filters({ query: "interrupter" }),
+      fixtureCatalogFacts
+    );
+
+    expect(
+      selectLibraryView([enabled], catalogs, filters(), fixtureCatalogFacts).rows[0]
+    ).toMatchObject({
+      kindLabel: "Party",
+      partyState: "enabled",
+      partySummary: "enabled party: 1 occupied, 1 empty"
+    });
+    expect(
+      selectLibraryView([dormant], catalogs, filters(), fixtureCatalogFacts).rows[0]
+    ).toMatchObject({
+      kindLabel: "Dormant party",
+      partyState: "dormant",
+      partySummary: "dormant party: 1 occupied, 1 empty"
+    });
+    expect(view.rows.map((row) => row.id)).toEqual(["local-dormant-party"]);
   });
 });
 

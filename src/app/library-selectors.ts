@@ -36,6 +36,8 @@ export interface LibraryRecordRow {
   readonly record: PersistedSavedDocumentRecord;
   readonly recordKind: "build" | "build-set";
   readonly kindLabel: string;
+  readonly partyState: "none" | "enabled" | "dormant";
+  readonly partySummary: string | null;
   readonly entryCount: number;
   readonly name: string;
   readonly professionPair: string;
@@ -146,7 +148,9 @@ export function summarizeLibraryRecord(
     id: record.id,
     record,
     recordKind: record.document.kind,
-    kindLabel: record.document.kind === "build-set" ? "Build set" : "Build",
+    kindLabel: kindLabelForRecord(record),
+    partyState: partyStateForRecord(record),
+    partySummary: partySummaryForRecord(record),
     entryCount: record.document.kind === "build-set" ? record.document.snapshot.entries.length : 1,
     name: record.name,
     professionPair: professionPair(preview, catalogs),
@@ -209,6 +213,7 @@ function matchesQuery(row: LibraryRecordRow, query: string): boolean {
     ...row.skillNames,
     ...row.rawSkillLabels,
     row.kindLabel,
+    row.partySummary ?? "",
     ...entryLabels(row.record)
   ]
     .map(normalize)
@@ -332,8 +337,55 @@ function createEmptyPreviewSnapshot(name: string): PersistedBuildSnapshot {
 
 function entryLabels(record: PersistedSavedDocumentRecord): readonly string[] {
   return record.document.kind === "build-set"
-    ? record.document.snapshot.entries.flatMap((entry) => [entry.label, entry.kind])
+    ? [
+        ...record.document.snapshot.entries.flatMap((entry) => [entry.label, entry.kind]),
+        ...partySearchText(record)
+      ]
     : [];
+}
+
+function kindLabelForRecord(record: PersistedSavedDocumentRecord): string {
+  if (record.document.kind === "build") {
+    return "Build";
+  }
+  const party = record.document.snapshot.party;
+  if (party?.enabled === true) {
+    return "Party";
+  }
+  if (party !== null) {
+    return "Dormant party";
+  }
+  return "Build set";
+}
+
+function partyStateForRecord(record: PersistedSavedDocumentRecord): "none" | "enabled" | "dormant" {
+  if (record.document.kind !== "build-set" || record.document.snapshot.party === null) {
+    return "none";
+  }
+  return record.document.snapshot.party.enabled ? "enabled" : "dormant";
+}
+
+function partySummaryForRecord(record: PersistedSavedDocumentRecord): string | null {
+  if (record.document.kind !== "build-set" || record.document.snapshot.party === null) {
+    return null;
+  }
+  const party = record.document.snapshot.party;
+  const occupied = party.slots.filter((slot) => slot.entryId !== null).length;
+  const empty = party.slots.length - occupied;
+  return `${party.enabled ? "enabled" : "dormant"} party: ${occupied} occupied, ${empty} empty`;
+}
+
+function partySearchText(record: PersistedSavedDocumentRecord): readonly string[] {
+  if (record.document.kind !== "build-set" || record.document.snapshot.party === null) {
+    return [];
+  }
+  return record.document.snapshot.party.slots.flatMap((slot) => [
+    slot.memberLabel,
+    slot.role ?? "",
+    slot.memberKind,
+    slot.memberKindLabel ?? "",
+    slot.notes ?? ""
+  ]);
 }
 
 function professionName(

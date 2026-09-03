@@ -511,5 +511,53 @@ export type {
   TitleRankSkillDependencyResolution,
   TitleRankSkillResolution
 } from "./title-rank";
-export type { PartyBuild, PartySlot } from "./party";
+export {
+  DEFAULT_EMPTY_PARTY_SIZE,
+  MAX_PARTY_MEMBER_KIND_LABEL_LENGTH,
+  MAX_PARTY_MEMBER_LABEL_LENGTH,
+  MAX_PARTY_ROLE_LENGTH,
+  MAX_PARTY_SLOT_NOTES_LENGTH,
+  MAX_PARTY_SLOTS,
+  MIN_PARTY_SLOTS,
+  PARTY_ANNOTATION_SCHEMA_VERSION,
+  PARTY_SIZE_PRESETS,
+  assignPartySlotEntry,
+  clearPartyEntryReferences,
+  clearPartySlotEntry,
+  clonePartyAnnotations,
+  createPartyAnnotationsForEntries,
+  createPartySlotAnnotation,
+  defaultPartySlotLabel,
+  duplicatePartySlotMetadata,
+  isPartyMemberKind,
+  isPartySizePreset,
+  movePartySlot,
+  normalizePartyMemberKindLabel,
+  normalizePartyMemberLabel,
+  normalizePartyRole,
+  normalizePartySlotNotes,
+  partySizeForSlotCount,
+  partySizeValue,
+  partySlotId,
+  renamePartySlot,
+  repairSelectedPartySlotId,
+  resetPartySlotMetadata,
+  resizePartyAnnotations,
+  setPartyEnabled,
+  setPartySlotKind,
+  setPartySlotNotes,
+  setPartySlotRole,
+  unassignedPartyEntryIds,
+  validatePartyAnnotations
+} from "./party";
+export type {
+  PartyAnnotations,
+  PartyMemberKind,
+  PartySize,
+  PartySizePreset,
+  PartySlotAnnotation,
+  PartySlotId,
+  PartyStructuralIssue,
+  PartyStructuralIssueSeverity
+} from "./party";
 export type { Guide, GuideSection, GuideSectionKind } from "./guide";

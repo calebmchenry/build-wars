@@ -11,6 +11,7 @@ import { LibraryPanel } from "./components/LibraryPanel";
 import { ProfessionModeEditor } from "./components/ProfessionModeEditor";
 import { ShareControls } from "./components/ShareControls";
 import { BuildSetTransferDialog } from "./components/BuildSetTransferDialog";
+import { PartyTransferDialog } from "./components/PartyTransferDialog";
 import { SkillBar } from "./components/SkillBar";
 import { SkillBrowser } from "./components/SkillBrowser";
 import { SkillTooltip } from "./components/SkillTooltip";
@@ -51,6 +52,7 @@ export function App() {
   const [backupOpen, setBackupOpen] = useState(false);
   const [restoreOpen, setRestoreOpen] = useState(false);
   const [transferOpen, setTransferOpen] = useState(false);
+  const [partyTransferOpen, setPartyTransferOpen] = useState(false);
   const [workspaceTab, setWorkspaceTab] = useState<EditorWorkspaceTab>("skills");
   const latestWorkspaceRef = useRef<{
     readonly workspace: WorkspaceState;
@@ -172,6 +174,7 @@ export function App() {
             catalogs={catalogs}
             dispatch={workspaceDispatch}
             onOpenTransfer={() => setTransferOpen(true)}
+            onOpenPartyTransfer={() => setPartyTransferOpen(true)}
           />
           {hasSelectedLoadout ? (
             <EditorWorkspaceTabs
@@ -218,6 +221,12 @@ export function App() {
         workspace={workspace}
         dispatch={workspaceDispatch}
         onClose={() => setTransferOpen(false)}
+      />
+      <PartyTransferDialog
+        open={partyTransferOpen}
+        workspace={workspace}
+        dispatch={workspaceDispatch}
+        onClose={() => setPartyTransferOpen(false)}
       />
     </main>
   );

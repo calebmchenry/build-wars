@@ -2,27 +2,45 @@ import {
   authoredDocumentId,
   buildSetEntryId,
   catalogId,
+  partySlotId,
   type AuthoredDocumentId,
   type BuildSetEntryId,
   type BuildSetEntryKind,
   type GameMode,
+  type PartyMemberKind,
+  type PartySlotId,
   type ProfessionId
 } from "../domain";
 import {
   addBlankBuildSetEntry,
+  assignRuntimePartySlot,
   copySnapshotIntoBuildSet,
   createBuildSetFromEditor,
   createEmptyBuildSet,
+  createRuntimePartyMember,
+  clearRuntimePartySlot,
+  disableRuntimeParty,
+  duplicateRuntimePartyMember,
   duplicateSelectedBuildSetEntry,
+  enableRuntimeParty,
   hydrateRuntimeBuildSet,
   materializeBuildSetSnapshot,
   moveBuildSetRuntimeEntry,
+  moveRuntimePartySlot,
   removeBuildSetRuntimeEntry,
   renameBuildSetRuntimeEntry,
+  renameRuntimePartySlot,
+  resetRuntimeParty,
+  resetRuntimePartySlotMetadata,
+  resizeRuntimeParty,
   selectBuildSetEntry,
+  selectRuntimePartySlot,
   setBuildSetComparisonEntry,
   setBuildSetRuntimeEntryKind,
   setBuildSetRuntimeEntryNotes,
+  setRuntimePartySlotKind,
+  setRuntimePartySlotNotes,
+  setRuntimePartySlotRole,
   type RuntimeBuildSetDocument
 } from "./build-set-state";
 import {
@@ -209,6 +227,79 @@ export type WorkspaceAction =
   | {
       readonly type: "set-build-set-comparison-entry";
       readonly entryId: BuildSetEntryId | null;
+    }
+  | {
+      readonly type: "enable-party-mode";
+      readonly slotIds?: readonly PartySlotId[];
+    }
+  | {
+      readonly type: "disable-party-mode";
+    }
+  | {
+      readonly type: "reset-party-mode";
+      readonly confirmed: boolean;
+    }
+  | {
+      readonly type: "select-party-slot";
+      readonly slotId: PartySlotId;
+    }
+  | {
+      readonly type: "rename-party-slot";
+      readonly slotId: PartySlotId;
+      readonly memberLabel: string;
+    }
+  | {
+      readonly type: "set-party-slot-role";
+      readonly slotId: PartySlotId;
+      readonly role: string | null;
+    }
+  | {
+      readonly type: "set-party-slot-kind";
+      readonly slotId: PartySlotId;
+      readonly memberKind: PartyMemberKind;
+      readonly memberKindLabel: string | null;
+    }
+  | {
+      readonly type: "set-party-slot-notes";
+      readonly slotId: PartySlotId;
+      readonly notes: string | null;
+    }
+  | {
+      readonly type: "move-party-slot";
+      readonly slotId: PartySlotId;
+      readonly direction: "earlier" | "later";
+    }
+  | {
+      readonly type: "resize-party";
+      readonly size: number;
+      readonly slotIds?: readonly PartySlotId[];
+    }
+  | {
+      readonly type: "assign-party-slot";
+      readonly slotId: PartySlotId;
+      readonly entryId: BuildSetEntryId;
+    }
+  | {
+      readonly type: "create-party-member";
+      readonly slotId: PartySlotId;
+      readonly entryId: BuildSetEntryId;
+      readonly buildId: AuthoredDocumentId;
+      readonly label?: string;
+    }
+  | {
+      readonly type: "clear-party-slot";
+      readonly slotId: PartySlotId;
+    }
+  | {
+      readonly type: "duplicate-party-member";
+      readonly sourceSlotId: PartySlotId;
+      readonly targetSlotId: PartySlotId;
+      readonly entryId: BuildSetEntryId;
+      readonly buildId: AuthoredDocumentId;
+    }
+  | {
+      readonly type: "reset-party-slot-metadata";
+      readonly slotId: PartySlotId;
     }
   | {
       readonly type: "save-new";
@@ -447,6 +538,92 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
       return reduceBuildSetDocument(state, (document) =>
         setBuildSetComparisonEntry(document, action.entryId)
       );
+    case "enable-party-mode":
+      return reduceBuildSetTransition(state, (document) =>
+        enableRuntimeParty(
+          document,
+          state.editor,
+          action.slotIds === undefined ? {} : { slotIds: action.slotIds }
+        )
+      );
+    case "disable-party-mode":
+      return reduceBuildSetTransition(state, (document) =>
+        disableRuntimeParty(document, state.editor)
+      );
+    case "reset-party-mode":
+      return reduceBuildSetTransition(state, (document) =>
+        resetRuntimeParty(document, state.editor, action.confirmed)
+      );
+    case "select-party-slot":
+      return reduceBuildSetTransition(state, (document) =>
+        selectRuntimePartySlot(document, state.editor, action.slotId)
+      );
+    case "rename-party-slot":
+      return reduceBuildSetDocument(state, (document) =>
+        renameRuntimePartySlot(document, state.editor, action.slotId, action.memberLabel)
+      );
+    case "set-party-slot-role":
+      return reduceBuildSetDocument(state, (document) =>
+        setRuntimePartySlotRole(document, state.editor, action.slotId, action.role)
+      );
+    case "set-party-slot-kind":
+      return reduceBuildSetDocument(state, (document) =>
+        setRuntimePartySlotKind(
+          document,
+          state.editor,
+          action.slotId,
+          action.memberKind,
+          action.memberKindLabel
+        )
+      );
+    case "set-party-slot-notes":
+      return reduceBuildSetDocument(state, (document) =>
+        setRuntimePartySlotNotes(document, state.editor, action.slotId, action.notes)
+      );
+    case "move-party-slot":
+      return reduceBuildSetDocument(state, (document) =>
+        moveRuntimePartySlot(document, state.editor, action.slotId, action.direction)
+      );
+    case "resize-party":
+      return reduceBuildSetDocument(state, (document) =>
+        resizeRuntimeParty(document, state.editor, action.size, action.slotIds ?? [])
+      );
+    case "assign-party-slot":
+      return reduceBuildSetTransition(state, (document) =>
+        assignRuntimePartySlot(document, state.editor, action.slotId, action.entryId)
+      );
+    case "create-party-member":
+      return reduceBuildSetTransition(state, (document) =>
+        createRuntimePartyMember(
+          document,
+          state.editor,
+          action.label === undefined
+            ? { slotId: action.slotId, entryId: action.entryId, buildId: action.buildId }
+            : {
+                slotId: action.slotId,
+                entryId: action.entryId,
+                buildId: action.buildId,
+                label: action.label
+              }
+        )
+      );
+    case "clear-party-slot":
+      return reduceBuildSetTransition(state, (document) =>
+        clearRuntimePartySlot(document, state.editor, action.slotId)
+      );
+    case "duplicate-party-member":
+      return reduceBuildSetTransition(state, (document) =>
+        duplicateRuntimePartyMember(document, state.editor, {
+          sourceSlotId: action.sourceSlotId,
+          targetSlotId: action.targetSlotId,
+          entryId: action.entryId,
+          buildId: action.buildId
+        })
+      );
+    case "reset-party-slot-metadata":
+      return reduceBuildSetDocument(state, (document) =>
+        resetRuntimePartySlotMetadata(document, state.editor, action.slotId)
+      );
     case "save-new":
       return saveNewRecord(state, action.name, action.id, action.now, action.savedWith);
     case "update-associated":
@@ -662,6 +839,11 @@ export function professionFilterFromValue(value: string): ProfessionId | null {
 export function generateBuildSetEntryId(now: string, sequence: number): BuildSetEntryId {
   const normalized = now.replace(/[^0-9A-Za-z]/g, "");
   return buildSetEntryId(`entry-${normalized}-${sequence}`);
+}
+
+export function generatePartySlotId(now: string, sequence: number): PartySlotId {
+  const normalized = now.replace(/[^0-9A-Za-z]/g, "");
+  return partySlotId(`slot-${normalized}-${sequence}`);
 }
 
 export function generateAuthoredBuildSetId(now: string, sequence: number): AuthoredDocumentId {
@@ -886,12 +1068,27 @@ function cloneRecordDocumentForDuplicate(
     });
   }
   const snapshot = clonePersistedBuildSetSnapshot(document.snapshot);
+  const entryIdPairs = snapshot.entries.map((entry, index) => ({
+    from: entry.id,
+    to: buildSetEntryId(`${newId}:entry-${index + 1}`)
+  }));
+  const entryIdMap = new Map(entryIdPairs.map((pair) => [pair.from, pair.to]));
+  const selectedEntryId =
+    snapshot.lastSelectedEntryId === null
+      ? null
+      : (entryIdMap.get(snapshot.lastSelectedEntryId) ?? null);
+  const slotIdMap = new Map(
+    (snapshot.party?.slots ?? []).map((slot, index) => [
+      slot.id,
+      partySlotId(`${newId}:slot-${index + 1}`)
+    ])
+  );
   return persistedBuildSetDocument({
     ...snapshot,
     id: authoredDocumentId(`build-set:${newId}`),
     entries: snapshot.entries.map((entry, index) => ({
       ...entry,
-      id: buildSetEntryId(`${newId}:entry-${index + 1}`),
+      id: entryIdPairs[index]?.to ?? buildSetEntryId(`${newId}:entry-${index + 1}`),
       snapshot: {
         ...entry.snapshot,
         build: {
@@ -900,8 +1097,22 @@ function cloneRecordDocumentForDuplicate(
         }
       }
     })),
-    lastSelectedEntryId:
-      snapshot.entries[0] === undefined ? null : buildSetEntryId(`${newId}:entry-1`)
+    lastSelectedEntryId: selectedEntryId,
+    party:
+      snapshot.party === null
+        ? null
+        : {
+            ...snapshot.party,
+            slots: snapshot.party.slots.map((slot) => ({
+              ...slot,
+              id: slotIdMap.get(slot.id) ?? slot.id,
+              entryId: slot.entryId === null ? null : (entryIdMap.get(slot.entryId) ?? null)
+            }))
+          },
+    lastSelectedPartySlotId:
+      snapshot.lastSelectedPartySlotId === null
+        ? null
+        : (slotIdMap.get(snapshot.lastSelectedPartySlotId) ?? null)
   });
 }
 

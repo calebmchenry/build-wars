@@ -2,8 +2,10 @@
 id: BW-1706
 title: Party Docs and Closeout
 epic: EPIC-17
-status: ready
+status: done
 priority: high
+planned_sprint: SPRINT-018
+completed_sprint: SPRINT-018
 depends_on:
   - BW-1703
   - BW-1704
@@ -44,3 +46,19 @@ Document party semantics, sharing behavior, deferred hero catalog scope, and ver
 ## Verification
 
 - `npm run verify`
+
+## Closeout Evidence
+
+- Implemented in `SPRINT-018`.
+- Updated README and compendium records for party annotations, independent party order, nullable
+  slot references, reversible mode, presets, slot notes versus entry notes, unassigned loadouts,
+  selected-editor behavior, validation, persistence migration, native party JSON, multi-code
+  limits, selected-member URLs, and deferred hero/external-codec scope.
+- Kept BW-1701 parked in backlog with SPRINT-006 evidence; native Build Wars JSON does not claim
+  paw-ned2 or external team-template compatibility.
+- Passed `npm run test:run -- src/app test/domain test/template-compatibility`.
+- Passed `npm run verify`.
+
+## Planning
+
+Planned in `SPRINT-018`.

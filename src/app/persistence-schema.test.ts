@@ -17,6 +17,7 @@ import {
   oversizedEnvelopeFixture,
   unsupportedEnvelopeFixture,
   validLocalLibraryEnvelopeFixture,
+  validPartyBuildSetSnapshotFixture,
   validSavedRecordFixture,
   validWorkingDraftFixture,
   validSnapshotFixture
@@ -24,14 +25,17 @@ import {
 import {
   LOCAL_LIBRARY_KIND,
   LOCAL_LIBRARY_STORAGE_KEY,
+  PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION,
   createPersistedBuildSnapshot,
   fingerprintPersistedSnapshot,
   hydrateEditorFromSnapshot,
   parseLocalLibraryEnvelope,
   parseLocalLibraryJson,
+  persistedBuildSetDocument,
   selectedPersistedBuildSnapshot,
   serializeLocalLibraryEnvelope,
   type PersistedSavedDocumentRecord,
+  type PersistedBuildSetSnapshot,
   type PersistedWorkingDraft
 } from "./persistence-schema";
 
@@ -224,6 +228,98 @@ describe("local persistence schema", () => {
     ).toEqual(snapshot.build.titleRankOverrides);
   });
 
+  it("round-trips persisted build-set snapshot v2 party annotations", () => {
+    const buildSet = validPartyBuildSetSnapshotFixture();
+    const parsed = parseLocalLibraryEnvelope(
+      validLocalLibraryEnvelopeFixture({
+        workingDraft: validWorkingDraftFixture({
+          document: persistedBuildSetDocument(buildSet)
+        }),
+        savedDocuments: [validSavedRecordFixture({ document: persistedBuildSetDocument(buildSet) })]
+      })
+    );
+
+    expect(parsed.ok).toBe(true);
+    if (!parsed.ok) {
+      return;
+    }
+    const draft =
+      parsed.envelope.workingDraft?.document.kind === "build-set"
+        ? parsed.envelope.workingDraft.document.snapshot
+        : null;
+    const record =
+      parsed.envelope.savedDocuments[0]?.document.kind === "build-set"
+        ? parsed.envelope.savedDocuments[0].document.snapshot
+        : null;
+
+    expect(draft?.schemaVersion).toBe(PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION);
+    expect(draft?.party).toEqual(buildSet.party);
+    expect(draft?.lastSelectedPartySlotId).toBe(buildSet.lastSelectedPartySlotId);
+    expect(record?.party).toEqual(buildSet.party);
+    expect(selectedPersistedBuildSnapshot(persistedBuildSetDocument(buildSet))?.build.name).toBe(
+      buildSet.entries[0]?.snapshot.build.name
+    );
+  });
+
+  it("migrates legacy neutral build-set snapshots to v2 without party data", () => {
+    const legacy = legacyBuildSetSnapshotV1(validPartyBuildSetSnapshotFixture({ party: null }));
+    const parsed = parseLocalLibraryEnvelope(
+      validLocalLibraryEnvelopeFixture({
+        workingDraft: validWorkingDraftFixture({
+          document: {
+            kind: "build-set",
+            snapshot: legacy as PersistedBuildSetSnapshot
+          }
+        }),
+        savedDocuments: []
+      })
+    );
+
+    expect(parsed.ok).toBe(true);
+    expect(parsed.writeBlocked).toBe(false);
+    expect(
+      parsed.ok && parsed.envelope.workingDraft?.document.kind === "build-set"
+        ? parsed.envelope.workingDraft.document.snapshot
+        : null
+    ).toMatchObject({
+      schemaVersion: PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION,
+      party: null,
+      lastSelectedPartySlotId: null
+    });
+  });
+
+  it("rejects malformed party annotations instead of erasing them", () => {
+    const malformed = {
+      ...validPartyBuildSetSnapshotFixture(),
+      party: {
+        ...validPartyBuildSetSnapshotFixture().party,
+        slots: [
+          {
+            ...validPartyBuildSetSnapshotFixture().party!.slots[0],
+            entryId: "missing-entry"
+          },
+          validPartyBuildSetSnapshotFixture().party!.slots[1]
+        ]
+      }
+    };
+    const parsed = parseLocalLibraryEnvelope(
+      validLocalLibraryEnvelopeFixture({
+        savedDocuments: [
+          validSavedRecordFixture({
+            document: persistedBuildSetDocument(malformed as PersistedBuildSetSnapshot)
+          })
+        ]
+      })
+    );
+
+    expect(parsed.ok).toBe(true);
+    expect(parsed.writeBlocked).toBe(true);
+    expect(parsed.ok ? parsed.envelope.savedDocuments : []).toHaveLength(0);
+    expect(parsed.diagnostics.map((diagnostic) => diagnostic.code)).toContain(
+      "missing-party-entry-reference"
+    );
+  });
+
   it("rejects malformed persisted title overrides with bounded diagnostics", () => {
     expect(
       parseSingleTitleOverrides([
@@ -390,6 +486,16 @@ function draftSnapshot(draft: PersistedWorkingDraft | null | undefined) {
 
 function recordSnapshot(record: PersistedSavedDocumentRecord | undefined) {
   return record === undefined ? null : selectedPersistedBuildSnapshot(record.document);
+}
+
+function legacyBuildSetSnapshotV1(snapshot: PersistedBuildSetSnapshot): unknown {
+  return {
+    schemaVersion: 1,
+    id: snapshot.id,
+    name: snapshot.name,
+    entries: snapshot.entries,
+    lastSelectedEntryId: snapshot.lastSelectedEntryId
+  };
 }
 
 function parseSingleTitleOverrides(overrides: unknown): { readonly codes: readonly string[] } {

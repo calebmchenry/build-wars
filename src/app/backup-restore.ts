@@ -1,4 +1,9 @@
-import { containsBuildSetDangerousKey } from "../domain";
+import {
+  authoredDocumentId,
+  buildSetEntryId,
+  containsBuildSetDangerousKey,
+  partySlotId
+} from "../domain";
 import {
   LOCAL_LIBRARY_KIND,
   LOCAL_LIBRARY_SCHEMA_VERSION,
@@ -215,14 +220,14 @@ export function createRestorePreviewPlan(input: {
       const to = input.nextId(record.id);
       idRemaps.push({ from: record.id, to, reason: "duplicate-backup-id" });
       seenIncoming.add(to);
-      return { ...record, id: to };
+      return { ...record, id: to, document: remapRecordDocument(record.document, to) };
     }
     seenIncoming.add(record.id);
     if (currentIds.has(record.id)) {
       currentIdConflicts.push(record.id);
       const to = input.nextId(record.id);
       idRemaps.push({ from: record.id, to, reason: "current-id-conflict" });
-      return { ...record, id: to };
+      return { ...record, id: to, document: remapRecordDocument(record.document, to) };
     }
     return record;
   });
@@ -337,6 +342,72 @@ function rewriteDraft(
   }
   const remap = plan.idRemaps.find((candidate) => candidate.from === draft.associatedRecordId);
   return remap === undefined ? draft : { ...draft, associatedRecordId: remap.to };
+}
+
+function remapRecordDocument(
+  document: PersistedDocument,
+  newId: LocalBuildRecordId
+): PersistedDocument {
+  if (document.kind === "build") {
+    return {
+      kind: "build",
+      snapshot: {
+        ...document.snapshot,
+        build: {
+          ...document.snapshot.build,
+          id: authoredDocumentId(`build:${newId}`)
+        }
+      }
+    };
+  }
+  const entryIdPairs = document.snapshot.entries.map((entry, index) => ({
+    from: entry.id,
+    to: buildSetEntryId(`${newId}:entry-${index + 1}`)
+  }));
+  const entryIdMap = new Map(entryIdPairs.map((pair) => [pair.from, pair.to]));
+  const slotIdMap = new Map(
+    (document.snapshot.party?.slots ?? []).map((slot, index) => [
+      slot.id,
+      partySlotId(`${newId}:slot-${index + 1}`)
+    ])
+  );
+  return {
+    kind: "build-set",
+    snapshot: {
+      ...document.snapshot,
+      id: authoredDocumentId(`build-set:${newId}`),
+      entries: document.snapshot.entries.map((entry, index) => ({
+        ...entry,
+        id: entryIdPairs[index]?.to ?? buildSetEntryId(`${newId}:entry-${index + 1}`),
+        snapshot: {
+          ...entry.snapshot,
+          build: {
+            ...entry.snapshot.build,
+            id: authoredDocumentId(`build:${newId}:entry-${index + 1}`)
+          }
+        }
+      })),
+      lastSelectedEntryId:
+        document.snapshot.lastSelectedEntryId === null
+          ? null
+          : (entryIdMap.get(document.snapshot.lastSelectedEntryId) ?? null),
+      party:
+        document.snapshot.party === null
+          ? null
+          : {
+              ...document.snapshot.party,
+              slots: document.snapshot.party.slots.map((slot) => ({
+                ...slot,
+                id: slotIdMap.get(slot.id) ?? slot.id,
+                entryId: slot.entryId === null ? null : (entryIdMap.get(slot.entryId) ?? null)
+              }))
+            },
+      lastSelectedPartySlotId:
+        document.snapshot.lastSelectedPartySlotId === null
+          ? null
+          : (slotIdMap.get(document.snapshot.lastSelectedPartySlotId) ?? null)
+    }
+  };
 }
 
 function isRecord(input: unknown): input is Record<string, unknown> {

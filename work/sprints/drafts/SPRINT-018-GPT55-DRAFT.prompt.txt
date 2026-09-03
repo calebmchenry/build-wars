@@ -1,0 +1,12 @@
+Read `work/sprints/drafts/SPRINT-018-INTENT.md` and the project conventions. Write an independent sprint draft to `work/sprints/drafts/SPRINT-018-GPT55-DRAFT.md`.
+
+Optimize for architecture clarity, ambiguity surfacing, and scope boundaries.
+
+Constraints:
+- Do not use skills.
+- Do not run a planning workflow.
+- Do not modify implementation code.
+- Do not modify ticket files, ledger files, manifests, final sprint files, or other planning artifacts except `work/sprints/drafts/SPRINT-018-GPT55-DRAFT.md`.
+- Output only the markdown sprint document in the target file.
+
+Follow the sprint template structure: Overview, Use Cases, Architecture, Implementation, Files Summary, Definition of Done, Risks, Security, Dependencies, Open Questions.

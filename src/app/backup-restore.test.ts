@@ -6,6 +6,7 @@ import {
   corruptRecordEnvelopeFixture,
   fixtureCatalogFacts,
   validBuildSetSavedRecordFixture,
+  validPartyBuildSetSnapshotFixture,
   validSavedRecordFixture,
   validWorkingDraftFixture
 } from "./library-fixtures";
@@ -162,6 +163,58 @@ describe("backup and restore", () => {
 
     expect(restored.ok ? restored.draftDocument?.kind : null).toBe("build-set");
     expect(restored.ok ? restored.records.length : 0).toBe(2);
+  });
+
+  it("preserves and remaps party metadata through backup restore conflicts", () => {
+    const current = [validSavedRecordFixture({ id: localBuildRecordId("local-party") })];
+    const incoming = validBuildSetSavedRecordFixture({
+      id: localBuildRecordId("local-party"),
+      name: "Incoming party",
+      snapshot: validPartyBuildSetSnapshotFixture()
+    });
+    const backup = createBackupEnvelope({
+      exportedAt: NOW,
+      savedDocuments: [incoming],
+      workingDraft: validWorkingDraftFixture({
+        document: incoming.document,
+        associatedRecordId: incoming.id
+      }),
+      savedWith: fixtureCatalogFacts
+    });
+    const parsed = parseBackupEnvelope(backup);
+
+    expect(parsed.ok).toBe(true);
+    if (!parsed.ok) {
+      return;
+    }
+    const plan = createRestorePreviewPlan({
+      backup: parsed.backup,
+      currentRecords: current,
+      nextId: (sourceId) => localBuildRecordId(`${sourceId}-copy`),
+      id: "restore-party"
+    });
+    const restored = applyRestorePlan(plan, {
+      currentRecords: current,
+      mode: "merge",
+      restoreWorkingDraft: true
+    });
+
+    expect(restored.ok).toBe(true);
+    if (!restored.ok) {
+      return;
+    }
+    const restoredSet =
+      restored.records[1]?.document.kind === "build-set"
+        ? restored.records[1].document.snapshot
+        : null;
+    expect(restored.records[1]?.id).toBe("local-party-copy");
+    expect(restoredSet?.party?.slots.map((slot) => slot.id)).toEqual([
+      "local-party-copy:slot-1",
+      "local-party-copy:slot-2"
+    ]);
+    expect(restoredSet?.party?.slots[0]?.entryId).toBe("local-party-copy:entry-1");
+    expect(restoredSet?.lastSelectedPartySlotId).toBe("local-party-copy:slot-1");
+    expect(restored.draftAssociation).toBe("local-party-copy");
   });
 
   it("rejects malformed, unsupported, and dangerous backup inputs with bounded diagnostics", () => {

@@ -2,8 +2,10 @@
 id: EPIC-17
 title: Party Semantics and Sharing
 track: functional
-status: ready
+status: done
 priority: medium
+planned_sprint: SPRINT-018
+completed_sprint: SPRINT-018
 depends_on:
   - EPIC-16
 tickets:
@@ -71,3 +73,25 @@ team format adapters on top of that base instead of changing build-set entry sem
 * `BW-1704`: Party-level validation, incomplete-member handling, and mode consistency.
 * `BW-1705`: Native party export, multi-code copy/share, local save/load, and backup/restore.
 * `BW-1706`: Docs, deferred hero catalog/template compatibility scope, verification, and closeout.
+
+## Planning
+
+Planned in `SPRINT-018`. BW-1701 remains a backlog parking-lot ticket for future external
+team-template compatibility and is not part of the MVP party workflow.
+
+## Closeout Evidence
+
+Completed in `SPRINT-018`.
+
+- Build sets can opt into party semantics through versioned annotations without redefining
+  `BuildSetEntryKind` or embedding a second loadout graph.
+- Party workspace supports ordered nullable slots, labels, roles, member-kind labels, slot notes,
+  presets/custom sizes, unassigned loadouts, selected occupied-member editing, and empty-slot
+  create/assign flows.
+- Party validation is structural and aggregate only; it remains separate from the game rule engine
+  and adds no recommendation, synergy, hero legality, or meta-quality rules.
+- Native party JSON and general build-set transfer/backup preserve party metadata; multi-code copy
+  is explicit, bounded, and non-lossless.
+- BW-1701 remains backlog for future paw-ned2/team-template compatibility.
+- Passed `npm run test:run -- src/app test/domain test/template-compatibility`.
+- Passed `npm run verify`.

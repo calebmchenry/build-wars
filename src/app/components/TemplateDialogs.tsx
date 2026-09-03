@@ -48,7 +48,7 @@ export function TemplateControls({
       {selectedLoadoutOnly ? (
         <div className="share-warning">
           <strong>Selected loadout only</strong>
-          <p>Sibling loadouts use build-set transfer or backup JSON.</p>
+          <p>Sibling loadouts and party metadata use native JSON transfer or backup.</p>
         </div>
       ) : null}
       <ImportDialog

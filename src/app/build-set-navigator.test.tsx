@@ -75,6 +75,28 @@ describe("BuildSetNavigator", () => {
     fireEvent.click(screen.getByRole("button", { name: "Transfer" }));
     expect(onOpenTransfer).toHaveBeenCalledTimes(1);
   });
+
+  it("enables party mode from an empty set and creates a selected member", () => {
+    const onOpenPartyTransfer = vi.fn();
+    render(<Harness initial={emptySet()} onOpenPartyTransfer={onOpenPartyTransfer} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Enable Party" }));
+
+    expect(screen.getByRole("heading", { name: "Untitled Build Set" })).toBeInTheDocument();
+    expect(screen.getByText("Selected Empty Slot")).toBeInTheDocument();
+    expect(screen.getAllByText("Empty slot")).toHaveLength(4);
+
+    fireEvent.click(screen.getByRole("button", { name: "Create Member" }));
+
+    expect(screen.getByRole("button", { name: /1\. Member 1/ })).toHaveAttribute(
+      "aria-pressed",
+      "true"
+    );
+    expect(screen.getByLabelText("Member label for slot 1")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Party JSON" }));
+    expect(onOpenPartyTransfer).toHaveBeenCalledTimes(1);
+  });
 });
 
 function emptySet(): WorkspaceState {
@@ -104,10 +126,12 @@ function twoEntrySet(): WorkspaceState {
 
 function Harness({
   initial,
-  onOpenTransfer = () => undefined
+  onOpenTransfer = () => undefined,
+  onOpenPartyTransfer = () => undefined
 }: {
   readonly initial: WorkspaceState;
   readonly onOpenTransfer?: () => void;
+  readonly onOpenPartyTransfer?: () => void;
 }) {
   const [workspace, dispatch] = useReducer(workspaceReducer, initial);
   return (
@@ -116,6 +140,7 @@ function Harness({
       catalogs={catalogs}
       dispatch={dispatch}
       onOpenTransfer={onOpenTransfer}
+      onOpenPartyTransfer={onOpenPartyTransfer}
     />
   );
 }

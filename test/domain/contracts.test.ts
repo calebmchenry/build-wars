@@ -14,7 +14,10 @@ import {
   type EquipmentTemplate,
   type Guide,
   type Insignia,
-  type PartyBuild,
+  PARTY_ANNOTATION_SCHEMA_VERSION,
+  partySlotId,
+  buildSetEntryId,
+  type PartyAnnotations,
   type Profession,
   type RecordProvenance,
   type RemoteMediaMetadata,
@@ -78,7 +81,7 @@ describe("domain contracts", () => {
       | WeaponModifier
       | Build
       | EquipmentTemplate
-      | PartyBuild
+      | PartyAnnotations
       | Guide
       | SkillTemplateDocument
       | EquipmentTemplateDocument
@@ -98,10 +101,35 @@ describe("domain contracts", () => {
       syntheticProfession,
       syntheticAttribute,
       syntheticSkill,
-      syntheticFoundationBuild
+      syntheticFoundationBuild,
+      {
+        schemaVersion: PARTY_ANNOTATION_SCHEMA_VERSION,
+        enabled: true,
+        size: { kind: "preset", size: 2 },
+        slots: [
+          {
+            id: partySlotId("slot-1"),
+            entryId: buildSetEntryId("entry-1"),
+            memberLabel: "Leader",
+            role: "Frontline",
+            memberKind: "player",
+            memberKindLabel: null,
+            notes: null
+          },
+          {
+            id: partySlotId("slot-2"),
+            entryId: null,
+            memberLabel: "Member 2",
+            role: null,
+            memberKind: "unspecified",
+            memberKindLabel: null,
+            notes: null
+          }
+        ]
+      }
     ];
 
-    expect(publicModels).toHaveLength(4);
+    expect(publicModels).toHaveLength(5);
   });
 
   it("requires authored roots to carry a schema version", () => {

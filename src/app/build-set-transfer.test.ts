@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
 
 import { authoredDocumentId, buildSetEntryId } from "../domain";
-import { validBuildSetSnapshotFixture, validSnapshotFixture } from "./library-fixtures";
+import {
+  validBuildSetSnapshotFixture,
+  validPartyBuildSetSnapshotFixture,
+  validSnapshotFixture
+} from "./library-fixtures";
 import {
   BUILD_SET_TRANSFER_KIND,
   BUILD_SET_TRANSFER_MAX_BYTES,
@@ -59,6 +63,29 @@ describe("build set transfer", () => {
     const second = applyBuildSetTransferPreview(applied.preview);
     expect(second.ok).toBe(false);
     expect(second.ok ? null : second.reason).toContain("already");
+  });
+
+  it("preserves enabled and dormant party annotations in general build-set transfer", () => {
+    const enabled = validPartyBuildSetSnapshotFixture();
+    const dormant = validPartyBuildSetSnapshotFixture({
+      party: {
+        ...validPartyBuildSetSnapshotFixture().party!,
+        enabled: false
+      }
+    });
+    const enabledParsed = parseBuildSetTransferJson(
+      serializeBuildSetTransferEnvelope(
+        createBuildSetTransferEnvelope({ buildSet: enabled, exportedAt: NOW })
+      )
+    );
+    const dormantParsed = parseBuildSetTransferJson(
+      serializeBuildSetTransferEnvelope(
+        createBuildSetTransferEnvelope({ buildSet: dormant, exportedAt: NOW })
+      )
+    );
+
+    expect(enabledParsed.ok ? enabledParsed.envelope.buildSet.party : null).toEqual(enabled.party);
+    expect(dormantParsed.ok ? dormantParsed.envelope.buildSet.party : null).toEqual(dormant.party);
   });
 
   it("rejects malformed, dangerous, duplicate-entry, over-limit, and oversized transfers", () => {

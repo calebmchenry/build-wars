@@ -1,6 +1,6 @@
 import type { AuthoredDocumentId } from "./ids";
 import type { Build } from "./build";
-import type { PartyBuild } from "./party";
+import type { PartyAnnotations } from "./party";
 import type { AuthoredDocumentRoot } from "./source";
 
 export type GuideSectionKind = "text" | "build" | "party";
@@ -11,7 +11,7 @@ export interface GuideSection {
   readonly title: string;
   readonly text: string | null;
   readonly build: Build | null;
-  readonly party: PartyBuild | null;
+  readonly party: PartyAnnotations | null;
 }
 
 export interface Guide extends AuthoredDocumentRoot {

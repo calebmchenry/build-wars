@@ -1,13 +1,15 @@
 import {
-  BUILD_SET_SCHEMA_VERSION,
+  PARTY_ANNOTATION_SCHEMA_VERSION,
   authoredDocumentId,
   buildSetEntryId,
-  catalogId
+  catalogId,
+  partySlotId
 } from "../domain";
 import { importedUnresolvedEditorFixture, playableEditorFixture } from "./editor-fixtures";
 import {
   LOCAL_LIBRARY_KIND,
   LOCAL_LIBRARY_SCHEMA_VERSION,
+  PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION,
   createPersistedBuildSnapshot,
   emptyLocalLibraryEnvelope,
   localBuildRecordId,
@@ -52,10 +54,12 @@ export function validBuildSetSnapshotFixture(
   const first = validSnapshotFixture();
   const second = unresolvedSnapshotFixture();
   return {
-    schemaVersion: BUILD_SET_SCHEMA_VERSION,
+    schemaVersion: PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION,
     id: overrides.id ?? authoredDocumentId("build-set-fixture"),
     name: overrides.name ?? "Fixture Build Set",
     lastSelectedEntryId: overrides.lastSelectedEntryId ?? buildSetEntryId("entry-fixture-1"),
+    party: overrides.party ?? null,
+    lastSelectedPartySlotId: overrides.lastSelectedPartySlotId ?? null,
     entries: overrides.entries ?? [
       {
         id: buildSetEntryId("entry-fixture-1"),
@@ -72,6 +76,41 @@ export function validBuildSetSnapshotFixture(
         snapshot: second
       }
     ]
+  };
+}
+
+export function validPartyBuildSetSnapshotFixture(
+  overrides: Partial<PersistedBuildSetSnapshot> = {}
+): PersistedBuildSetSnapshot {
+  const snapshot = validBuildSetSnapshotFixture(overrides);
+  return {
+    ...snapshot,
+    party: overrides.party ?? {
+      schemaVersion: PARTY_ANNOTATION_SCHEMA_VERSION,
+      enabled: true,
+      size: { kind: "preset", size: 2 },
+      slots: [
+        {
+          id: partySlotId("slot-fixture-1"),
+          entryId: buildSetEntryId("entry-fixture-1"),
+          memberLabel: "Leader",
+          role: "Frontline",
+          memberKind: "player",
+          memberKindLabel: null,
+          notes: "Pulls first."
+        },
+        {
+          id: partySlotId("slot-fixture-2"),
+          entryId: null,
+          memberLabel: "Open Slot",
+          role: null,
+          memberKind: "unspecified",
+          memberKindLabel: null,
+          notes: null
+        }
+      ]
+    },
+    lastSelectedPartySlotId: overrides.lastSelectedPartySlotId ?? partySlotId("slot-fixture-1")
   };
 }
 

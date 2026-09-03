@@ -400,6 +400,7 @@ function LibraryRecord({
             {row.kindLabel} - {row.entryCount} loadout{row.entryCount === 1 ? "" : "s"} -{" "}
             {row.professionPair} - {row.modeLabel} - {row.updatedLabel}
           </span>
+          {row.partySummary === null ? null : <span>{row.partySummary}</span>}
         </div>
         <button
           type="button"

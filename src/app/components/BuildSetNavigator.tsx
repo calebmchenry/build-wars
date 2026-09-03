@@ -6,21 +6,26 @@ import { selectBuildSetNavigatorView, type BuildSetEntrySummary } from "../build
 import {
   generateBuildSetEntryId,
   generateNestedBuildId,
+  generatePartySlotId,
   type WorkspaceAction,
   type WorkspaceState
 } from "../workspace-state";
 import { BuildSetComparison } from "./BuildSetComparison";
+import { PartyDangerButton } from "./PartyDialogs";
+import { PartyWorkspace } from "./PartyWorkspace";
 
 export function BuildSetNavigator({
   workspace,
   catalogs,
   dispatch,
-  onOpenTransfer
+  onOpenTransfer,
+  onOpenPartyTransfer
 }: {
   readonly workspace: WorkspaceState;
   readonly catalogs: AppCatalogViews;
   readonly dispatch: Dispatch<WorkspaceAction>;
   readonly onOpenTransfer: () => void;
+  readonly onOpenPartyTransfer: () => void;
 }) {
   const sequenceRef = useRef(1);
   const view = selectBuildSetNavigatorView(workspace, catalogs);
@@ -30,6 +35,7 @@ export function BuildSetNavigator({
 
   const nextEntryId = () =>
     generateBuildSetEntryId(new Date().toISOString(), sequenceRef.current++);
+  const nextSlotId = () => generatePartySlotId(new Date().toISOString(), sequenceRef.current++);
   const addEntry = () => {
     const entryId = nextEntryId();
     dispatch({
@@ -46,6 +52,22 @@ export function BuildSetNavigator({
       entryId,
       buildId: generateNestedBuildId(entryId)
     });
+  };
+  const partyEnabled =
+    workspace.document.kind === "build-set" && workspace.document.party?.enabled === true;
+  const partyAnnotated =
+    workspace.document.kind === "build-set" && workspace.document.party !== null;
+  const enableParty = () => {
+    dispatch(
+      partyAnnotated
+        ? { type: "enable-party-mode" }
+        : {
+            type: "enable-party-mode",
+            slotIds: Array.from({ length: view.entryCount === 0 ? 4 : view.entryCount }, () =>
+              nextSlotId()
+            )
+          }
+    );
   };
 
   return (
@@ -68,6 +90,23 @@ export function BuildSetNavigator({
           <BuildSetAttentionRows entries={view.entries} dispatch={dispatch} />
         </div>
         <div className="build-set-actions">
+          {!partyEnabled ? (
+            <button type="button" onClick={enableParty}>
+              Enable Party
+            </button>
+          ) : (
+            <button type="button" onClick={() => dispatch({ type: "disable-party-mode" })}>
+              Disable Party
+            </button>
+          )}
+          {partyAnnotated ? (
+            <PartyDangerButton
+              message="Reset party annotations? Loadouts remain in the build set."
+              onConfirm={() => dispatch({ type: "reset-party-mode", confirmed: true })}
+            >
+              Reset Party
+            </PartyDangerButton>
+          ) : null}
           <button type="button" onClick={addEntry} disabled={view.atEntryCap}>
             Add Loadout
           </button>
@@ -83,7 +122,17 @@ export function BuildSetNavigator({
           </button>
         </div>
       </div>
-      {view.empty ? (
+      {partyEnabled ? (
+        <>
+          <PartyWorkspace
+            workspace={workspace}
+            catalogs={catalogs}
+            dispatch={dispatch}
+            onOpenPartyTransfer={onOpenPartyTransfer}
+          />
+          <BuildSetComparison workspace={workspace} catalogs={catalogs} />
+        </>
+      ) : view.empty ? (
         <div className="empty-state">
           <strong>Empty build set</strong>
           <button type="button" onClick={addEntry}>

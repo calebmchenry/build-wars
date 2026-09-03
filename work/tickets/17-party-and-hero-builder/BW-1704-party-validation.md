@@ -2,8 +2,10 @@
 id: BW-1704
 title: Party Validation
 epic: EPIC-17
-status: ready
+status: done
 priority: high
+planned_sprint: SPRINT-018
+completed_sprint: SPRINT-018
 depends_on:
   - BW-1702
   - BW-1703
@@ -42,3 +44,20 @@ Add narrow party-level validation and summaries that build on per-loadout valida
 
 - `npm run test:run -- src/app src/domain`
 - Focused tests for party validation issue codes and aggregate summaries
+
+## Closeout Evidence
+
+- Implemented in `SPRINT-018`.
+- Added deterministic structural party validation plus per-loadout aggregation for empty slots,
+  incomplete or unresolved members, unknown mode, mixed known PvE/PvP modes, stale references,
+  duplicate assignments, duplicate slot IDs, and invalid size state.
+- Kept party validation non-blocking and separate from the domain rule engine; no synergy,
+  recommendation, hero legality, or meta-quality rules were added.
+- Passed `npm run test:run -- test/domain/party.test.ts src/app/party-validation.test.ts
+src/app/party-selectors.test.ts src/app/party-workspace.test.tsx
+test/domain/rule-engine.test.ts src/app/build-set-selectors.test.ts`.
+- Passed `npm run typecheck`.
+
+## Planning
+
+Planned in `SPRINT-018`.

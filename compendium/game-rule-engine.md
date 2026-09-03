@@ -150,9 +150,21 @@ result contract.
 `RULE_ENGINE_VERSION` is `rule-engine:v3` because title-rank validation and the replacement title
 issue-code set now change validation behavior.
 
+## Party Validation Boundary
+
+SPRINT-018 adds party validation in `src/app/party-validation.ts`, not in the domain rule engine.
+That app layer materializes each occupied party slot, runs the existing selected-loadout validation
+path independently, and adds deterministic structural party diagnostics for empty slots, stale or
+duplicate references, duplicate slot IDs, invalid size state, incomplete or unresolved occupied
+members, unknown mode, and mixed known PvE/PvP modes.
+
+Party validation deliberately does not infer roles, evaluate hero legality, recommend composition,
+score synergy, check meta quality, or add PvP format policy. `validateBuild`, existing game-rule
+issue codes, and `RULE_ENGINE_VERSION` remain unchanged by party composition state.
+
 ## Deferred Scope
 
 Title ownership, account-wide title profiles, allegiance side selectors, condition evaluation, full
-rune/insignia composition, weapon effect math, modifier effect aggregation, hero, party,
-recommendation, guide, equipment/title share payloads, and export/publish policy validation remain
-deferred. Later domains should emit the same issue/result contract.
+rune/insignia composition, weapon effect math, modifier effect aggregation, hero legality, hero AI,
+party composition advice, recommendation, guide, equipment/title share payloads, and export/publish
+policy validation remain deferred. Later domains should emit the same issue/result contract.

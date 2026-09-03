@@ -1,21 +1,40 @@
 import {
-  BUILD_SET_SCHEMA_VERSION,
   MAX_BUILD_SET_ENTRIES,
+  assignPartySlotEntry,
   authoredDocumentId,
+  clearPartyEntryReferences,
+  clearPartySlotEntry,
   cloneBuildForBuildSetEntry,
+  clonePartyAnnotations,
+  createPartyAnnotationsForEntries,
+  duplicatePartySlotMetadata,
   normalizeBuildSetEntryLabel,
   normalizeBuildSetEntryNotes,
   normalizeBuildSetName,
+  partySizeForSlotCount,
+  repairSelectedPartySlotId,
+  resetPartySlotMetadata,
+  resizePartyAnnotations,
+  setPartyEnabled,
+  movePartySlot,
+  renamePartySlot,
+  setPartySlotKind,
+  setPartySlotNotes,
+  setPartySlotRole,
   uniqueBuildSetEntryLabel,
   type AuthoredDocumentId,
   type BuildSetEntryId,
-  type BuildSetEntryKind
+  type BuildSetEntryKind,
+  type PartyAnnotations,
+  type PartyMemberKind,
+  type PartySlotId
 } from "../domain";
 import { createBlankEditorState, type EditorState } from "./editor-state";
 import {
   clonePersistedBuildSnapshot,
   createPersistedBuildSnapshot,
   hydrateEditorFromSnapshot,
+  PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION,
   type PersistedBuildSetEntrySnapshot,
   type PersistedBuildSetSnapshot,
   type PersistedBuildSnapshot
@@ -36,6 +55,8 @@ export interface RuntimeBuildSetDocument {
   readonly entries: readonly RuntimeBuildSetEntry[];
   readonly selectedEntryId: BuildSetEntryId | null;
   readonly comparisonEntryId: BuildSetEntryId | null;
+  readonly party: PartyAnnotations | null;
+  readonly selectedPartySlotId: PartySlotId | null;
 }
 
 export interface MaterializedBuildSetEntry extends PersistedBuildSetEntrySnapshot {
@@ -60,6 +81,8 @@ export function createBuildSetFromEditor(input: {
     name: normalizeBuildSetName(input.name ?? `${input.editor.build.name} Set`),
     selectedEntryId: input.entryId,
     comparisonEntryId: null,
+    party: null,
+    selectedPartySlotId: null,
     entries: [
       {
         id: input.entryId,
@@ -82,6 +105,8 @@ export function createEmptyBuildSet(input: {
     name: normalizeBuildSetName(input.name ?? "Untitled Build Set"),
     selectedEntryId: null,
     comparisonEntryId: null,
+    party: null,
+    selectedPartySlotId: null,
     entries: []
   };
 }
@@ -90,7 +115,12 @@ export function hydrateRuntimeBuildSet(snapshot: PersistedBuildSetSnapshot): {
   readonly document: RuntimeBuildSetDocument;
   readonly editor: EditorState;
 } {
-  const selectedEntryId = repairSelected(snapshot.entries, snapshot.lastSelectedEntryId);
+  const party = snapshot.party === null ? null : clonePartyAnnotations(snapshot.party);
+  const selectedPartySlotId = repairSelectedPartySlotId(party, snapshot.lastSelectedPartySlotId);
+  const selectedEntryId =
+    party?.enabled === true
+      ? entryIdForPartySlot(party, selectedPartySlotId, snapshot.entries)
+      : repairSelected(snapshot.entries, snapshot.lastSelectedEntryId);
   const selectedEntry =
     selectedEntryId === null
       ? null
@@ -107,6 +137,8 @@ export function hydrateRuntimeBuildSet(snapshot: PersistedBuildSetSnapshot): {
       name: normalizeBuildSetName(snapshot.name),
       selectedEntryId,
       comparisonEntryId: comparisonAfterSelectionChange(snapshot.entries, selectedEntryId, null),
+      party,
+      selectedPartySlotId,
       entries: snapshot.entries.map((entry) => ({
         id: entry.id,
         label: normalizeBuildSetEntryLabel(entry.label),
@@ -122,26 +154,36 @@ export function materializeBuildSetSnapshot(
   document: RuntimeBuildSetDocument,
   activeEditor: EditorState
 ): MaterializedBuildSetView {
+  const lastSelectedPartySlotId = repairSelectedPartySlotId(
+    document.party,
+    document.selectedPartySlotId
+  );
+  const lastSelectedEntryId =
+    document.party?.enabled === true
+      ? entryIdForPartySlot(document.party, lastSelectedPartySlotId, document.entries)
+      : repairSelected(document.entries, document.selectedEntryId);
   const entries = document.entries.map((entry) => {
     const snapshot =
-      entry.id === document.selectedEntryId
+      entry.id === lastSelectedEntryId
         ? createPersistedBuildSnapshot(activeEditor)
-        : (entry.snapshot ?? createPersistedBuildSnapshot(activeEditor));
+        : requireInactiveSnapshot(entry);
     return {
       id: entry.id,
       label: normalizeBuildSetEntryLabel(entry.label),
       kind: entry.kind,
       notes: normalizeBuildSetEntryNotes(entry.notes),
       snapshot: clonePersistedBuildSnapshot(snapshot),
-      selected: entry.id === document.selectedEntryId
+      selected: entry.id === lastSelectedEntryId
     };
   });
   const snapshot: PersistedBuildSetSnapshot = {
-    schemaVersion: BUILD_SET_SCHEMA_VERSION,
+    schemaVersion: PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION,
     id: document.id,
     name: normalizeBuildSetName(document.name),
     entries,
-    lastSelectedEntryId: repairSelected(entries, document.selectedEntryId)
+    lastSelectedEntryId,
+    party: document.party === null ? null : clonePartyAnnotations(document.party),
+    lastSelectedPartySlotId
   };
   return { snapshot, entries };
 }
@@ -152,6 +194,13 @@ export function selectBuildSetEntry(
   entryId: BuildSetEntryId
 ): { readonly document: RuntimeBuildSetDocument; readonly editor: EditorState } {
   if (document.selectedEntryId === entryId) {
+    return { document, editor: activeEditor };
+  }
+  const partySlotId =
+    document.party?.enabled === true
+      ? (document.party.slots.find((slot) => slot.entryId === entryId)?.id ?? null)
+      : null;
+  if (document.party?.enabled === true && partySlotId === null) {
     return { document, editor: activeEditor };
   }
   const target = document.entries.find((entry) => entry.id === entryId);
@@ -174,6 +223,7 @@ export function selectBuildSetEntry(
       ...document,
       entries,
       selectedEntryId: entryId,
+      selectedPartySlotId: partySlotId ?? document.selectedPartySlotId,
       comparisonEntryId: comparisonAfterSelectionChange(
         entries,
         entryId,
@@ -212,6 +262,23 @@ export function addBlankBuildSetEntry(
     notes: null,
     snapshot: null
   };
+  if (document.party?.enabled === true) {
+    return {
+      editor: activeEditor,
+      document: {
+        ...document,
+        entries: [
+          ...runtimeEntriesFromMaterialized(materialized, document.selectedEntryId),
+          { ...entry, snapshot: createPersistedBuildSnapshot(editor) }
+        ],
+        comparisonEntryId: comparisonAfterSelectionChange(
+          materialized,
+          document.selectedEntryId,
+          document.comparisonEntryId
+        )
+      }
+    };
+  }
   return {
     editor,
     document: {
@@ -258,6 +325,23 @@ export function copySnapshotIntoBuildSet(
     notes: null,
     snapshot: null
   };
+  if (document.party?.enabled === true) {
+    return {
+      editor: activeEditor,
+      document: {
+        ...document,
+        entries: [
+          ...runtimeEntriesFromMaterialized(materialized, document.selectedEntryId),
+          { ...entry, snapshot: copiedSnapshot }
+        ],
+        comparisonEntryId: comparisonAfterSelectionChange(
+          materialized,
+          document.selectedEntryId,
+          document.comparisonEntryId
+        )
+      }
+    };
+  }
   return {
     editor: hydrateEditorFromSnapshot(copiedSnapshot),
     document: {
@@ -332,8 +416,15 @@ export function removeBuildSetRuntimeEntry(
   if (filtered.length === materialized.length) {
     return { document, editor: activeEditor };
   }
+  const party = document.party === null ? null : clearPartyEntryReferences(document.party, entryId);
   const removedSelected = document.selectedEntryId === entryId;
-  const selectedEntryId = removedSelected ? (filtered[0]?.id ?? null) : document.selectedEntryId;
+  const selectedPartySlotId = repairSelectedPartySlotId(party, document.selectedPartySlotId);
+  const selectedEntryId =
+    party?.enabled === true
+      ? entryIdForPartySlot(party, selectedPartySlotId, filtered)
+      : removedSelected
+        ? (filtered[0]?.id ?? null)
+        : document.selectedEntryId;
   const selected =
     selectedEntryId === null
       ? null
@@ -345,6 +436,8 @@ export function removeBuildSetRuntimeEntry(
         : hydrateEditorFromSnapshot(selected.snapshot),
     document: {
       ...document,
+      party,
+      selectedPartySlotId,
       entries: filtered.map((entry) => ({
         ...toInactiveRuntimeEntry(entry),
         snapshot: entry.id === selectedEntryId ? null : clonePersistedBuildSnapshot(entry.snapshot)
@@ -439,6 +532,351 @@ export function setBuildSetComparisonEntry(
   };
 }
 
+export function enableRuntimeParty(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  input: {
+    readonly slotIds?: readonly PartySlotId[];
+  } = {}
+): { readonly document: RuntimeBuildSetDocument; readonly editor: EditorState } {
+  const materialized = materializeRuntimeEntries(document, activeEditor);
+  const party =
+    document.party === null
+      ? createPartyAnnotationsForEntries(
+          input.slotIds === undefined
+            ? {
+                entries: materialized,
+                enabled: true
+              }
+            : {
+                entries: materialized,
+                slotIds: input.slotIds,
+                enabled: true
+              }
+        )
+      : setPartyEnabled(document.party, true);
+  const selectedPartySlotId =
+    party.slots.find((slot) => slot.entryId === document.selectedEntryId)?.id ??
+    repairSelectedPartySlotId(party, document.selectedPartySlotId);
+  return selectPartySlotFromMaterialized(
+    {
+      ...document,
+      entries: runtimeEntriesFromMaterialized(materialized, document.selectedEntryId),
+      party,
+      selectedPartySlotId
+    },
+    activeEditor,
+    selectedPartySlotId
+  );
+}
+
+export function disableRuntimeParty(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState
+): { readonly document: RuntimeBuildSetDocument; readonly editor: EditorState } {
+  if (document.party === null) {
+    return { document, editor: activeEditor };
+  }
+  const materialized = materializeRuntimeEntries(document, activeEditor);
+  const party = setPartyEnabled(document.party, false);
+  const selectedEntryId = repairSelected(materialized, document.selectedEntryId);
+  const selected =
+    selectedEntryId === null
+      ? null
+      : (materialized.find((entry) => entry.id === selectedEntryId) ?? null);
+  return {
+    editor:
+      selected === null
+        ? createBlankEditorState("Untitled Build")
+        : hydrateEditorFromSnapshot(selected.snapshot),
+    document: {
+      ...document,
+      party,
+      selectedPartySlotId: repairSelectedPartySlotId(party, document.selectedPartySlotId),
+      selectedEntryId,
+      comparisonEntryId: comparisonAfterSelectionChange(
+        materialized,
+        selectedEntryId,
+        document.comparisonEntryId
+      ),
+      entries: runtimeEntriesFromMaterialized(materialized, selectedEntryId)
+    }
+  };
+}
+
+export function resetRuntimeParty(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  confirmed: boolean
+): { readonly document: RuntimeBuildSetDocument; readonly editor: EditorState } {
+  if (!confirmed || document.party === null) {
+    return { document, editor: activeEditor };
+  }
+  const materialized = materializeRuntimeEntries(document, activeEditor);
+  const selectedEntryId = repairSelected(materialized, document.selectedEntryId);
+  const selected =
+    selectedEntryId === null
+      ? null
+      : (materialized.find((entry) => entry.id === selectedEntryId) ?? null);
+  return {
+    editor:
+      selected === null
+        ? createBlankEditorState("Untitled Build")
+        : hydrateEditorFromSnapshot(selected.snapshot),
+    document: {
+      ...document,
+      party: null,
+      selectedPartySlotId: null,
+      selectedEntryId,
+      comparisonEntryId: comparisonAfterSelectionChange(
+        materialized,
+        selectedEntryId,
+        document.comparisonEntryId
+      ),
+      entries: runtimeEntriesFromMaterialized(materialized, selectedEntryId)
+    }
+  };
+}
+
+export function selectRuntimePartySlot(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  slotId: PartySlotId
+): { readonly document: RuntimeBuildSetDocument; readonly editor: EditorState } {
+  if (document.party?.enabled !== true) {
+    return { document, editor: activeEditor };
+  }
+  const materialized = materializeRuntimeEntries(document, activeEditor);
+  return selectPartySlotFromMaterialized(
+    {
+      ...document,
+      entries: runtimeEntriesFromMaterialized(materialized, document.selectedEntryId)
+    },
+    activeEditor,
+    slotId
+  );
+}
+
+export function renameRuntimePartySlot(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  slotId: PartySlotId,
+  memberLabel: string
+): RuntimeBuildSetDocument {
+  return mutateParty(document, activeEditor, (party) =>
+    renamePartySlot(party, slotId, memberLabel)
+  );
+}
+
+export function setRuntimePartySlotRole(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  slotId: PartySlotId,
+  role: string | null
+): RuntimeBuildSetDocument {
+  return mutateParty(document, activeEditor, (party) => setPartySlotRole(party, slotId, role));
+}
+
+export function setRuntimePartySlotKind(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  slotId: PartySlotId,
+  memberKind: PartyMemberKind,
+  memberKindLabel: string | null
+): RuntimeBuildSetDocument {
+  return mutateParty(document, activeEditor, (party) =>
+    setPartySlotKind(party, slotId, memberKind, memberKindLabel)
+  );
+}
+
+export function setRuntimePartySlotNotes(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  slotId: PartySlotId,
+  notes: string | null
+): RuntimeBuildSetDocument {
+  return mutateParty(document, activeEditor, (party) => setPartySlotNotes(party, slotId, notes));
+}
+
+export function resetRuntimePartySlotMetadata(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  slotId: PartySlotId
+): RuntimeBuildSetDocument {
+  return mutateParty(document, activeEditor, (party) => resetPartySlotMetadata(party, slotId));
+}
+
+export function moveRuntimePartySlot(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  slotId: PartySlotId,
+  direction: "earlier" | "later"
+): RuntimeBuildSetDocument {
+  return mutateParty(document, activeEditor, (party) => movePartySlot(party, slotId, direction));
+}
+
+export function resizeRuntimeParty(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  size: number,
+  slotIds: readonly PartySlotId[] = []
+): RuntimeBuildSetDocument {
+  return mutateParty(document, activeEditor, (party) =>
+    resizePartyAnnotations(party, { size: partySizeForSlotCount(size), slotIds })
+  );
+}
+
+export function assignRuntimePartySlot(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  slotId: PartySlotId,
+  entryId: BuildSetEntryId
+): { readonly document: RuntimeBuildSetDocument; readonly editor: EditorState } {
+  if (document.party?.enabled !== true) {
+    return { document, editor: activeEditor };
+  }
+  const party = assignPartySlotEntry(document.party, slotId, entryId);
+  return selectRuntimePartySlot({ ...document, party }, activeEditor, slotId);
+}
+
+export function clearRuntimePartySlot(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  slotId: PartySlotId
+): { readonly document: RuntimeBuildSetDocument; readonly editor: EditorState } {
+  if (document.party?.enabled !== true) {
+    return { document, editor: activeEditor };
+  }
+  const materialized = materializeRuntimeEntries(document, activeEditor);
+  const party = clearPartySlotEntry(document.party, slotId);
+  return selectPartySlotFromMaterialized(
+    {
+      ...document,
+      party,
+      entries: runtimeEntriesFromMaterialized(materialized, null)
+    },
+    createBlankEditorState("Untitled Build"),
+    slotId
+  );
+}
+
+export function createRuntimePartyMember(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  input: {
+    readonly slotId: PartySlotId;
+    readonly entryId: BuildSetEntryId;
+    readonly buildId: AuthoredDocumentId;
+    readonly label?: string;
+  }
+): { readonly document: RuntimeBuildSetDocument; readonly editor: EditorState } {
+  if (document.party?.enabled !== true || document.entries.length >= MAX_BUILD_SET_ENTRIES) {
+    return { document, editor: activeEditor };
+  }
+  const slot = document.party.slots.find((candidate) => candidate.id === input.slotId);
+  if (slot === undefined || slot.entryId !== null) {
+    return { document, editor: activeEditor };
+  }
+  const materialized = materializeRuntimeEntries(document, activeEditor);
+  const blank = createBlankEditorState(input.label ?? slot.memberLabel);
+  const editor = {
+    ...blank,
+    build: {
+      ...blank.build,
+      id: input.buildId,
+      name: normalizeBuildSetEntryLabel(input.label ?? slot.memberLabel)
+    }
+  };
+  const entry: RuntimeBuildSetEntry = {
+    id: input.entryId,
+    label: uniqueBuildSetEntryLabel(materialized, input.label ?? slot.memberLabel, input.entryId),
+    kind: "build",
+    notes: null,
+    snapshot: null
+  };
+  const party = assignPartySlotEntry(document.party, input.slotId, input.entryId);
+  return {
+    editor,
+    document: {
+      ...document,
+      party,
+      selectedPartySlotId: input.slotId,
+      selectedEntryId: input.entryId,
+      comparisonEntryId: comparisonAfterSelectionChange(
+        materialized,
+        input.entryId,
+        document.comparisonEntryId
+      ),
+      entries: [...runtimeEntriesFromMaterialized(materialized, null), entry]
+    }
+  };
+}
+
+export function duplicateRuntimePartyMember(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  input: {
+    readonly sourceSlotId: PartySlotId;
+    readonly targetSlotId: PartySlotId;
+    readonly entryId: BuildSetEntryId;
+    readonly buildId: AuthoredDocumentId;
+  }
+): { readonly document: RuntimeBuildSetDocument; readonly editor: EditorState } {
+  if (document.party?.enabled !== true || document.entries.length >= MAX_BUILD_SET_ENTRIES) {
+    return { document, editor: activeEditor };
+  }
+  const sourceSlot = document.party.slots.find((slot) => slot.id === input.sourceSlotId);
+  const targetSlot = document.party.slots.find((slot) => slot.id === input.targetSlotId);
+  if (
+    sourceSlot?.entryId === null ||
+    sourceSlot?.entryId === undefined ||
+    targetSlot?.entryId !== null
+  ) {
+    return { document, editor: activeEditor };
+  }
+  const materialized = materializeRuntimeEntries(document, activeEditor);
+  const source = materialized.find((entry) => entry.id === sourceSlot.entryId);
+  if (source === undefined) {
+    return { document, editor: activeEditor };
+  }
+  const copiedBuild = cloneBuildForBuildSetEntry(source.snapshot.build, input.buildId);
+  const label = uniqueBuildSetEntryLabel(materialized, `${source.label} Copy`, input.entryId);
+  const snapshot = clonePersistedBuildSnapshot({
+    ...source.snapshot,
+    build: {
+      ...copiedBuild,
+      name: label
+    }
+  });
+  const entry: RuntimeBuildSetEntry = {
+    id: input.entryId,
+    label,
+    kind: "variant",
+    notes: source.notes,
+    snapshot: null
+  };
+  const party = assignPartySlotEntry(
+    renamePartySlot(
+      duplicatePartySlotMetadata(document.party, input.sourceSlotId, input.targetSlotId),
+      input.targetSlotId,
+      label
+    ),
+    input.targetSlotId,
+    input.entryId
+  );
+  return {
+    editor: hydrateEditorFromSnapshot(snapshot),
+    document: {
+      ...document,
+      party,
+      selectedPartySlotId: input.targetSlotId,
+      selectedEntryId: input.entryId,
+      comparisonEntryId: source.id,
+      entries: [...runtimeEntriesFromMaterialized(materialized, null), entry]
+    }
+  };
+}
+
 export function hydratedBuildSetFromTransfer(snapshot: PersistedBuildSetSnapshot): {
   readonly document: RuntimeBuildSetDocument;
   readonly editor: EditorState;
@@ -456,6 +894,23 @@ function materializeRuntimeEntries(
   return materializeBuildSetSnapshot(document, activeEditor).entries;
 }
 
+function requireInactiveSnapshot(entry: RuntimeBuildSetEntry): PersistedBuildSnapshot {
+  if (entry.snapshot === null) {
+    throw new Error(`Inactive build-set entry ${entry.id} is missing a persisted snapshot.`);
+  }
+  return entry.snapshot;
+}
+
+function runtimeEntriesFromMaterialized(
+  entries: readonly PersistedBuildSetEntrySnapshot[],
+  selectedEntryId: BuildSetEntryId | null
+): readonly RuntimeBuildSetEntry[] {
+  return entries.map((entry) => ({
+    ...toInactiveRuntimeEntry(entry),
+    snapshot: entry.id === selectedEntryId ? null : clonePersistedBuildSnapshot(entry.snapshot)
+  }));
+}
+
 function toInactiveRuntimeEntry(entry: PersistedBuildSetEntrySnapshot): RuntimeBuildSetEntry {
   return {
     id: entry.id,
@@ -470,6 +925,93 @@ function selectedRuntimeEntry(document: RuntimeBuildSetDocument): RuntimeBuildSe
   return document.selectedEntryId === null
     ? null
     : (document.entries.find((entry) => entry.id === document.selectedEntryId) ?? null);
+}
+
+function entryIdForPartySlot(
+  party: PartyAnnotations | null,
+  selectedSlotId: PartySlotId | null,
+  entries: readonly { readonly id: BuildSetEntryId }[]
+): BuildSetEntryId | null {
+  if (party === null || selectedSlotId === null) {
+    return null;
+  }
+  const entryId = party.slots.find((slot) => slot.id === selectedSlotId)?.entryId ?? null;
+  return entryId !== null && entries.some((entry) => entry.id === entryId) ? entryId : null;
+}
+
+function selectPartySlotFromMaterialized(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  slotId: PartySlotId | null
+): { readonly document: RuntimeBuildSetDocument; readonly editor: EditorState } {
+  if (document.party?.enabled !== true || slotId === null) {
+    return { document, editor: activeEditor };
+  }
+  const slot = document.party.slots.find((candidate) => candidate.id === slotId);
+  if (slot === undefined) {
+    return { document, editor: activeEditor };
+  }
+  const selectedEntryId = entryIdForPartySlot(document.party, slotId, document.entries);
+  const selected =
+    selectedEntryId === null
+      ? null
+      : (document.entries.find((entry) => entry.id === selectedEntryId) ?? null);
+  return {
+    editor:
+      selected === null
+        ? createBlankEditorState("Untitled Build")
+        : selected.snapshot === null
+          ? activeEditor
+          : hydrateEditorFromSnapshot(selected.snapshot),
+    document: {
+      ...document,
+      selectedPartySlotId: slotId,
+      selectedEntryId,
+      comparisonEntryId: comparisonAfterSelectionChange(
+        document.entries,
+        selectedEntryId,
+        document.comparisonEntryId
+      ),
+      entries: document.entries.map((entry) => ({
+        ...entry,
+        snapshot:
+          entry.id === selectedEntryId
+            ? null
+            : entry.snapshot === null
+              ? createPersistedBuildSnapshot(activeEditor)
+              : clonePersistedBuildSnapshot(entry.snapshot)
+      }))
+    }
+  };
+}
+
+function mutateParty(
+  document: RuntimeBuildSetDocument,
+  activeEditor: EditorState,
+  mutate: (party: PartyAnnotations) => PartyAnnotations
+): RuntimeBuildSetDocument {
+  if (document.party === null) {
+    return document;
+  }
+  const materialized = materializeRuntimeEntries(document, activeEditor);
+  const party = mutate(document.party);
+  const selectedPartySlotId = repairSelectedPartySlotId(party, document.selectedPartySlotId);
+  const selectedEntryId =
+    party.enabled === true
+      ? entryIdForPartySlot(party, selectedPartySlotId, materialized)
+      : repairSelected(materialized, document.selectedEntryId);
+  return {
+    ...document,
+    party,
+    selectedPartySlotId,
+    selectedEntryId,
+    comparisonEntryId: comparisonAfterSelectionChange(
+      materialized,
+      selectedEntryId,
+      document.comparisonEntryId
+    ),
+    entries: runtimeEntriesFromMaterialized(materialized, selectedEntryId)
+  };
 }
 
 function repairSelected(

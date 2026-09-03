@@ -94,7 +94,7 @@ describe("TemplateControls", () => {
 
     expect(screen.getByText("Selected loadout only")).toBeInTheDocument();
     expect(
-      screen.getByText("Sibling loadouts use build-set transfer or backup JSON.")
+      screen.getByText("Sibling loadouts and party metadata use native JSON transfer or backup.")
     ).toBeInTheDocument();
   });
 

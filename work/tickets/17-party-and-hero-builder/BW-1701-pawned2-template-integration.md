@@ -38,3 +38,8 @@ function`. No public team codec was exported from EPIC-05.
 - EPIC-16 and EPIC-17 can ship without paw-ned2 support.
 - Future external template compatibility work is explicit, separately prioritized, and test-gated.
 - Historical deferral evidence remains discoverable without steering MVP implementation.
+
+## Planning
+
+`SPRINT-018` keeps this ticket parked in backlog. Native Build Wars party JSON and multi-code copy
+do not satisfy or replace external team-template compatibility.
