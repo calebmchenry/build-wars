@@ -17,6 +17,7 @@ import type {
 import { BUILD_WARS_DRAG_MIME, browserSkillDragPayload } from "../drag-payload";
 import { applySkillBarIntent } from "../skill-bar-actions";
 import { SkillDisplay } from "./SkillDisplay";
+import { SkillTooltipTrigger } from "./SkillTooltip";
 
 const RESOURCE_FILTERS: readonly ResourceFilterKind[] = [
   "energy",
@@ -234,8 +235,10 @@ export function SkillBrowser({
                 {group.skills.map((skill) => {
                   const view = selectSkillDisplay(catalogs, state, skill.id, "skill-browser");
                   return (
-                    <div
+                    <SkillTooltipTrigger
                       key={Number(skill.id)}
+                      view={view}
+                      placement="left"
                       draggable
                       onDragStart={(event) => {
                         event.dataTransfer.setData(
@@ -292,7 +295,7 @@ export function SkillBrowser({
                           </div>
                         }
                       />
-                    </div>
+                    </SkillTooltipTrigger>
                   );
                 })}
               </div>

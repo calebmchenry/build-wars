@@ -1,10 +1,9 @@
 import { useState, type Dispatch, type KeyboardEvent } from "react";
 
-import type { GameMode, ValidationResult } from "../../domain";
+import type { ValidationResult } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
 import { issuesForLocation } from "../editor-selectors";
 import type { EditorAction, EditorState } from "../editor-state";
-import type { ComposerLoadoutContext } from "../composer-selectors";
 import { InlineIssues } from "./ProfessionModeEditor";
 import { ProfessionIconPicker } from "./ProfessionIconPicker";
 
@@ -12,13 +11,11 @@ export function ComposerHeader({
   state,
   catalogs,
   validation,
-  context,
   dispatch
 }: {
   readonly state: EditorState;
   readonly catalogs: AppCatalogViews;
   readonly validation: ValidationResult;
-  readonly context: ComposerLoadoutContext;
   readonly dispatch: Dispatch<EditorAction>;
 }) {
   const professionIssues = [
@@ -28,14 +25,11 @@ export function ComposerHeader({
 
   return (
     <section className="composer-header" aria-label="Build header">
-      <div className="composer-title-block">
-        <p className="eyebrow">{contextLabel(context)}</p>
-        <BuildNameField
-          key={`${state.build.id}:${state.build.name}`}
-          name={state.build.name}
-          onCommit={(name) => dispatch({ type: "set-build-name", name })}
-        />
-      </div>
+      <BuildNameField
+        key={`${state.build.id}:${state.build.name}`}
+        name={state.build.name}
+        onCommit={(name) => dispatch({ type: "set-build-name", name })}
+      />
       <div className="profession-pair">
         <ProfessionIconPicker
           label="Primary"
@@ -47,6 +41,9 @@ export function ComposerHeader({
             dispatch({ type: "set-profession", field: "primary", professionId })
           }
         />
+        <span className="profession-pair-separator" aria-hidden="true">
+          /
+        </span>
         <ProfessionIconPicker
           label="Secondary"
           value={state.build.secondaryProfessionId}
@@ -58,21 +55,7 @@ export function ComposerHeader({
           }
         />
       </div>
-      <fieldset className="segmented-control composer-mode-control">
-        <legend>Mode</legend>
-        {(["pve", "pvp", "unknown"] as const).map((mode) => (
-          <label key={mode}>
-            <input
-              type="radio"
-              name="composer-build-mode"
-              checked={state.build.mode === mode}
-              onChange={() => dispatch({ type: "set-mode", mode })}
-            />
-            <span>{modeLabel(mode)}</span>
-          </label>
-        ))}
-      </fieldset>
-      <InlineIssues issues={professionIssues} />
+      {professionIssues.length > 0 ? <InlineIssues issues={professionIssues} /> : null}
     </section>
   );
 }
@@ -89,16 +72,16 @@ function BuildNameField({
   const cancelName = () => setNameDraft(name);
 
   return (
-    <label className="build-name-field">
-      <span>Build name</span>
+    <div className="build-name-field">
       <input
+        aria-label="Build name"
         value={nameDraft}
         maxLength={120}
         onChange={(event) => setNameDraft(event.currentTarget.value)}
         onBlur={commitName}
         onKeyDown={(event) => handleNameKeyDown(event, commitName, cancelName)}
       />
-    </label>
+    </div>
   );
 }
 
@@ -117,21 +100,4 @@ function handleNameKeyDown(
     cancelName();
     event.currentTarget.blur();
   }
-}
-
-function contextLabel(context: ComposerLoadoutContext): string {
-  if (context.kind === "single-build") {
-    return "Focused composer";
-  }
-  if (context.kind === "party-slot") {
-    return `Party slot - ${context.label}`;
-  }
-  if (context.kind === "build-set-entry") {
-    return `Build-set loadout - ${context.label}`;
-  }
-  return context.label;
-}
-
-function modeLabel(mode: GameMode): string {
-  return mode === "unknown" ? "Unknown" : mode.toUpperCase();
 }

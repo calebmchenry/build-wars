@@ -14,33 +14,35 @@ export function StorageBanner({
     return null;
   }
 
+  const heading = storageHeading(durability);
+  const detail = rejectedPayloadSummary ?? diagnostics[0]?.message ?? storageMessage(durability);
+  const accessibleLabel = durability === "pending" ? heading : `${heading}. ${detail}`;
+
   return (
-    <section className={`storage-banner ${durability}`} aria-live="polite">
-      <strong>{storageHeading(durability)}</strong>
-      <p>{rejectedPayloadSummary ?? storageMessage(durability)}</p>
-      {diagnostics.length > 0 ? (
-        <ul>
-          {diagnostics.slice(0, 3).map((diagnostic) => (
-            <li key={`${diagnostic.code}:${diagnostic.path}`}>{diagnostic.message}</li>
-          ))}
-        </ul>
-      ) : null}
-    </section>
+    <div
+      className={`storage-banner ${durability}`}
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label={accessibleLabel}
+      title={detail}
+    >
+      {heading}
+    </div>
   );
 }
 
 function storageHeading(durability: WorkspaceDurability): string {
   switch (durability) {
     case "durable":
-      return "Local storage recovered";
+      return "Storage recovered";
     case "pending":
-      return "Saving locally";
+      return "Saving...";
     case "memory-only":
-      return "Memory-only editing";
+      return "Not saved";
     case "write-blocked":
-      return "Local storage needs recovery";
+      return "Storage needs recovery";
     case "conflict":
-      return "Local storage conflict";
+      return "Save conflict";
   }
 }
 

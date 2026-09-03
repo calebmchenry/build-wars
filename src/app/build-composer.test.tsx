@@ -20,7 +20,7 @@ describe("BuildComposer", () => {
 
     expect(screen.getByRole("region", { name: "Focused build composer" })).toBeInTheDocument();
     expect(screen.getByLabelText("Build name")).toHaveValue("Untitled Build");
-    expect(screen.getByRole("heading", { name: "Attributes" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /^Attributes \(/ })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Skill Bar" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Template Code" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Skills Catalog" })).toBeInTheDocument();

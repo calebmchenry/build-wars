@@ -21,6 +21,9 @@ describe("ProfessionIconPicker", () => {
 
     expect(screen.getByLabelText("Primary")).toHaveValue("1");
     expect(screen.getByRole("button", { name: /Primary profession: Warrior/ })).toHaveFocus();
+    expect(document.querySelector(".catalog-icon img")?.getAttribute("src")).toContain(
+      "profession-warrior-60"
+    );
   });
 
   it("distinguishes unresolved imported evidence from intentional Any", () => {

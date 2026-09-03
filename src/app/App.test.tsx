@@ -29,24 +29,18 @@ afterEach(() => {
 });
 
 describe("App", () => {
-  it("renders attribution before the catalog-driven editor workspace", () => {
+  it("renders the catalog-driven editor workspace", () => {
     render(<App />);
 
     expect(screen.getByRole("main", { name: "Build Wars" })).toHaveAttribute(
       "data-catalog-state",
       "ready"
     );
-    expect(screen.getByRole("heading", { name: "Catalog attribution" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Catalog attribution" })).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Skill Bar" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Skills Catalog" })).toBeInTheDocument();
     openSecondaryTools();
     expect(screen.getByRole("heading", { name: "Validation" })).toBeInTheDocument();
-
-    const attribution = screen.getByRole("heading", { name: "Catalog attribution" });
-    const skillBar = screen.getByRole("heading", { name: "Skill Bar" });
-    expect(
-      attribution.compareDocumentPosition(skillBar) & Node.DOCUMENT_POSITION_FOLLOWING
-    ).toBeTruthy();
   });
 
   it("keeps skills as the default workspace tab and does not dirty equipment on tab open", () => {
@@ -110,7 +104,7 @@ describe("App", () => {
     fireEvent.change(screen.getByLabelText("Primary"), { target: { value: "1" } });
     fireEvent.change(screen.getByLabelText("Secondary"), { target: { value: "2" } });
     fireEvent.change(screen.getByLabelText("Search"), { target: { value: "Healing Signet" } });
-    fireEvent.click(screen.getByRole("button", { name: "Place Healing Signet in slot 1" }));
+    fireEvent.click(screen.getByRole("button", { name: "Add Healing Signet to slot 1" }));
 
     expect(
       screen.getByRole("button", { name: /Skill slot 1: Healing Signet/ })
@@ -241,7 +235,7 @@ describe("App", () => {
     localStorage.setItem(LOCAL_LIBRARY_STORAGE_KEY, "{not-json");
 
     render(<App />);
-    expect(screen.getByText("Local storage needs recovery")).toBeInTheDocument();
+    expect(screen.getByText("Storage needs recovery")).toBeInTheDocument();
 
     fireEvent.change(screen.getByLabelText("Primary"), { target: { value: "1" } });
     act(() => vi.advanceTimersByTime(200));
@@ -292,12 +286,12 @@ describe("App", () => {
 
     expect(window.location.hash).toBe("");
     expect(screen.getByLabelText("Primary")).toHaveValue("7");
-    expect(screen.getByLabelText("PVP")).toBeChecked();
     openSecondaryTools();
     expect(screen.getByRole("button", { name: "Update" })).toBeDisabled();
 
     act(() => vi.advanceTimersByTime(160));
     const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
+    expect(parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.mode : null).toBe("pvp");
     expect(parsed.ok ? parsed.envelope.workingDraft?.associatedRecordId : "error").toBeNull();
     expect(parsed.ok ? parsed.envelope.savedDocuments : []).toHaveLength(0);
   });

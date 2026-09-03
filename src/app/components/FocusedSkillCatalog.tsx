@@ -1,6 +1,6 @@
-import { useMemo, useState, type Dispatch, type DragEvent } from "react";
+import { useMemo, useState, type Dispatch, type DragEvent, type KeyboardEvent } from "react";
 
-import { catalogId } from "../../domain";
+import { catalogId, type SkillId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
 import { BUILD_WARS_DRAG_MIME, browserSkillDragPayload } from "../drag-payload";
 import { selectSkillBrowser, selectSkillDisplay } from "../editor-selectors";
@@ -14,6 +14,7 @@ import type {
 } from "../editor-state";
 import { applySkillBarIntent } from "../skill-bar-actions";
 import { SkillDisplay } from "./SkillDisplay";
+import { SkillTooltipTrigger } from "./SkillTooltip";
 
 export function FocusedSkillCatalog({
   state,
@@ -201,28 +202,54 @@ export function FocusedSkillCatalog({
         <div className="focused-skill-results">
           {browser.groups.map((group) => {
             const collapsed = collapsedGroups.has(group.id);
+            const skillCountLabel = `${group.skills.length} ${
+              group.skills.length === 1 ? "Skill" : "Skills"
+            }`;
             return (
               <section key={group.id} className="focused-skill-group">
                 <button
                   type="button"
                   className="skill-group-toggle"
                   aria-expanded={!collapsed}
+                  aria-label={`${collapsed ? "Expand" : "Collapse"} ${group.label} (${skillCountLabel})`}
                   onClick={() =>
                     setCollapsedGroups((current) => toggledGroupSet(current, group.id))
                   }
                 >
-                  <span>{group.label}</span>
-                  <small>{group.skills.length}</small>
+                  <span className="skill-group-symbol" aria-hidden="true">
+                    {collapsed ? "+" : "-"}
+                  </span>
+                  <span className="skill-group-label">
+                    {group.label} ({skillCountLabel})
+                  </span>
                 </button>
                 {collapsed ? null : (
                   <div className="focused-skill-list">
                     {group.skills.map((skill) => {
                       const view = selectSkillDisplay(catalogs, state, skill.id, "skill-browser");
                       return (
-                        <div
+                        <SkillTooltipTrigger
                           key={Number(skill.id)}
+                          view={view}
+                          placement="left"
                           className="focused-skill-row"
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`Add ${skill.name} to slot ${targetSlot + 1}`}
                           draggable
+                          onClick={() =>
+                            placeCatalogSkill(state, catalogs, dispatch, skill.id, targetSlot)
+                          }
+                          onKeyDown={(event) =>
+                            placeCatalogSkillFromKeyboard(
+                              event,
+                              state,
+                              catalogs,
+                              dispatch,
+                              skill.id,
+                              targetSlot
+                            )
+                          }
                           onDragStart={(event) => {
                             event.dataTransfer.setData(
                               BUILD_WARS_DRAG_MIME,
@@ -236,53 +263,8 @@ export function FocusedSkillCatalog({
                           }}
                           onDragEnd={() => dispatch({ type: "cancel-drag" })}
                         >
-                          <SkillDisplay
-                            view={view}
-                            compact
-                            action={
-                              <div className="skill-actions">
-                                <button
-                                  type="button"
-                                  aria-label={`Place ${skill.name} in slot ${targetSlot + 1}`}
-                                  onClick={() =>
-                                    applySkillBarIntent(state, catalogs, dispatch, {
-                                      kind: "catalog-skill",
-                                      skillId: skill.id,
-                                      toIndex: targetSlot
-                                    })
-                                  }
-                                >
-                                  Place
-                                </button>
-                                <button
-                                  type="button"
-                                  aria-label={`Pick ${skill.name} for keyboard placement`}
-                                  onClick={() =>
-                                    dispatch({
-                                      type: "pick-keyboard",
-                                      placement: { kind: "browser-skill", skillId: skill.id }
-                                    })
-                                  }
-                                >
-                                  Pick
-                                </button>
-                                <button
-                                  type="button"
-                                  aria-label={`Open ${skill.name} details`}
-                                  onClick={() =>
-                                    dispatch({
-                                      type: "set-tooltip",
-                                      skillId: skill.id,
-                                      pinned: true
-                                    })
-                                  }
-                                >
-                                  Details
-                                </button>
-                              </div>
-                            }
-                          />
-                        </div>
+                          <SkillDisplay view={view} compact />
+                        </SkillTooltipTrigger>
                       );
                     })}
                   </div>
@@ -321,6 +303,35 @@ function selectedOrFirstEmptySlot(state: EditorState): number {
   }
   const emptyIndex = state.build.skillBar.findIndex((slot) => slot === null);
   return emptyIndex >= 0 ? emptyIndex : 0;
+}
+
+function placeCatalogSkill(
+  state: EditorState,
+  catalogs: AppCatalogViews,
+  dispatch: Dispatch<EditorAction>,
+  skillId: SkillId,
+  targetSlot: number
+): void {
+  applySkillBarIntent(state, catalogs, dispatch, {
+    kind: "catalog-skill",
+    skillId,
+    toIndex: targetSlot
+  });
+}
+
+function placeCatalogSkillFromKeyboard(
+  event: KeyboardEvent<HTMLElement>,
+  state: EditorState,
+  catalogs: AppCatalogViews,
+  dispatch: Dispatch<EditorAction>,
+  skillId: SkillId,
+  targetSlot: number
+): void {
+  if (event.key !== "Enter" && event.key !== " ") {
+    return;
+  }
+  event.preventDefault();
+  placeCatalogSkill(state, catalogs, dispatch, skillId, targetSlot);
 }
 
 function professionScopeValue(state: EditorState): string {

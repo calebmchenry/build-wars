@@ -36,6 +36,7 @@ data/generated/epic-03/*
 data/generated/epic-04/*
 !data/generated/epic-04/skills.catalog.json
 !data/generated/epic-04/skills.catalog.manifest.json
+!data/generated/epic-04/skill-icon-assets.manifest.json
 !data/generated/epic-10/
 data/generated/epic-10/*
 !data/generated/epic-10/runes.catalog.json

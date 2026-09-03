@@ -27,6 +27,7 @@ import runeCatalogJson from "../../data/generated/epic-10/runes.catalog.json";
 import skillCatalogJson from "../../data/generated/epic-04/skills.catalog.json";
 import weaponModCatalogJson from "../../data/generated/epic-12/weapon-mods.catalog.json";
 import weaponCatalogJson from "../../data/generated/epic-12/weapons.catalog.json";
+import { localProfessionIconAsset, localSkillIconAsset, type LocalIconAsset } from "./icon-assets";
 
 export const APPROVED_RUNTIME_CATALOG_IMPORTS = [
   "../../data/generated/epic-03/professions-attributes.catalog.json",
@@ -45,6 +46,7 @@ export interface PlaceholderIconDescriptor {
   readonly label: string;
   readonly initials: string;
   readonly mediaId: string | null;
+  readonly asset: LocalIconAsset | null;
 }
 
 export interface CatalogSourceLink {
@@ -260,20 +262,37 @@ function createCatalogViews(
     attribution: createAttributionView(professionAttributeCatalog, skillCatalog, equipment),
     equipment,
     placeholders: {
-      profession: (profession) => ({
-        surface: "profession-selector",
-        label:
-          profession === null ? "No profession selected" : `${profession.name} icon placeholder`,
-        initials:
-          profession === null ? "--" : initialsFor(profession.name, profession.abbreviation),
-        mediaId: profession?.iconId ?? null
-      }),
-      skill: (skill, surface) => ({
-        surface,
-        label: skill === null ? "Empty skill slot" : `${skill.name} icon placeholder`,
-        initials: skill === null ? "--" : initialsFor(skill.name, null),
-        mediaId: skill?.iconId ?? null
-      })
+      profession: (profession) => {
+        const asset = localProfessionIconAsset(profession);
+        return {
+          surface: "profession-selector",
+          label:
+            profession === null
+              ? "No profession selected"
+              : asset === null
+                ? `${profession.name} icon placeholder`
+                : asset.label,
+          initials:
+            profession === null ? "--" : initialsFor(profession.name, profession.abbreviation),
+          mediaId: profession?.iconId ?? null,
+          asset
+        };
+      },
+      skill: (skill, surface) => {
+        const asset = localSkillIconAsset(skill);
+        return {
+          surface,
+          label:
+            skill === null
+              ? "Empty skill slot"
+              : asset === null
+                ? `${skill.name} icon placeholder`
+                : asset.label,
+          initials: skill === null ? "--" : initialsFor(skill.name, null),
+          mediaId: skill?.iconId ?? null,
+          asset
+        };
+      }
     },
     crosswalk: {
       professionCatalogIdFromTemplateId: (templateId) =>

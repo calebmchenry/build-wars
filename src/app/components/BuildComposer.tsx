@@ -82,7 +82,6 @@ export function BuildComposer({
           state={workspace.editor}
           catalogs={catalogs}
           validation={validation.result}
-          context={context}
           dispatch={editorDispatch}
         />
         <FocusedAttributeEditor
@@ -98,7 +97,6 @@ export function BuildComposer({
           validation={validation}
           dispatch={editorDispatch}
           requestDraftReplacement={requestDraftReplacement}
-          selectedLoadoutOnly={context.selectedLoadoutOnly}
         />
       </div>
       <FocusedSkillCatalog state={workspace.editor} catalogs={catalogs} dispatch={editorDispatch} />

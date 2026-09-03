@@ -2,7 +2,6 @@ import { useEffect, useMemo, useReducer, useRef, useState, type Dispatch } from 
 
 import { promotedAppCatalogs, type AppCatalogLoadState } from "./catalogs";
 import { BuildComposer } from "./components/BuildComposer";
-import { CatalogAttribution } from "./components/CatalogAttribution";
 import type { EditorWorkspaceTab } from "./components/EditorWorkspaceTabs";
 import { ComposerSecondaryTools } from "./components/ComposerSecondaryTools";
 import { BackupDialog, RestoreDialog } from "./components/LibraryDialogs";
@@ -91,8 +90,7 @@ export function App() {
       : selectSkillDisplay(catalogs, state, state.tooltip.skillId, "tooltip");
 
   return (
-    <main className="app-shell editor-shell" aria-labelledby="app-title" data-catalog-state="ready">
-      <CatalogAttribution attribution={catalogs.attribution} />
+    <main className="app-shell editor-shell" aria-label="Build Wars" data-catalog-state="ready">
       <StorageBanner
         durability={workspace.draftSession.durability}
         diagnostics={workspace.storage.diagnostics}

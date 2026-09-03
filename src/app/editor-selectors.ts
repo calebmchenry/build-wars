@@ -15,12 +15,18 @@ import {
   type CatalogSkillRecord,
   type SkillId,
   type SkillProgressionSeries,
+  type SkillTooltipTextSegment,
   type SkillValueState,
   type ValidationIssue,
   type ValidationLocation,
   type ValidationResult
 } from "../domain";
 import type { AppCatalogViews, PlaceholderIconDescriptor } from "./catalogs";
+import {
+  skillActionIconForType,
+  type SkillActionIconView,
+  type SkillFactIconKind
+} from "./skill-icons";
 export { selectTitleRankPanelView } from "./title-rank-selectors";
 export type {
   TitleRankControlStatus,
@@ -102,6 +108,7 @@ export interface SkillFactView {
   readonly label: string;
   readonly value: string;
   readonly state: string;
+  readonly icon: SkillFactIconKind;
 }
 
 export interface SkillProgressionSeriesView {
@@ -126,9 +133,13 @@ export type SkillDisplayView =
       readonly skill: CatalogSkillRecord;
       readonly title: string;
       readonly subtitle: string;
+      readonly professionLabel: string | null;
+      readonly attributeLabel: string | null;
       readonly placeholder: PlaceholderIconDescriptor;
+      readonly actionIcon: SkillActionIconView;
       readonly facts: readonly SkillFactView[];
       readonly tooltipText: string;
+      readonly tooltipSegments: readonly SkillTooltipTextSegment[];
       readonly tooltipState: "rendered" | "unresolved";
       readonly tooltipDetail: string | null;
       readonly progression: readonly SkillProgressionSeriesView[];
@@ -411,14 +422,20 @@ export function selectSkillDisplay(
     mode: state.build.mode,
     ranks: rankContext.ranks
   });
+  const professionLabel = professionLabelForSkill(skill, catalogs);
+  const attributeLabel = attributeLabelForSkill(skill, catalogs);
   return {
     kind: "known",
     skill,
     title: skill.name,
     subtitle: subtitleForSkill(skill, catalogs),
+    professionLabel,
+    attributeLabel,
     placeholder: catalogs.placeholders.skill(skill, surface),
+    actionIcon: skillActionIconForType(skill.type),
     facts: [...costFacts(skill), ...timingFacts(skill), ...titleRankFacts(skill, catalogs, state)],
     tooltipText: tooltip.kind === "rendered" ? tooltip.text : tooltip.detail,
+    tooltipSegments: tooltip.kind === "rendered" ? tooltip.segments : [],
     tooltipState: tooltip.kind,
     tooltipDetail: tooltip.kind === "rendered" ? null : tooltip.detail,
     progression: progressionViews(skill, catalogs),
@@ -580,39 +597,41 @@ function titleRankFacts(
           : ranks.length === 1
             ? `rank ${ranks[0]} ${item.source === "override" ? "configured" : "default"}`
             : "per-series maximum",
-      state: key
+      state: key,
+      icon: "title"
     };
   });
 }
 
 function costFacts(skill: CatalogSkillRecord): readonly SkillFactView[] {
   return skillValueFacts("Cost", [
-    ["Energy", skill.costs.energy],
-    ["Adrenaline", skill.costs.adrenaline],
-    ["Sacrifice", skill.costs.sacrifice],
-    ["Upkeep", skill.costs.upkeep],
-    ["Overcast", skill.costs.overcast]
+    ["Energy", skill.costs.energy, "energy"],
+    ["Adrenaline", skill.costs.adrenaline, "adrenaline"],
+    ["Sacrifice", skill.costs.sacrifice, "sacrifice"],
+    ["Upkeep", skill.costs.upkeep, "upkeep"],
+    ["Overcast", skill.costs.overcast, "overcast"]
   ]);
 }
 
 function timingFacts(skill: CatalogSkillRecord): readonly SkillFactView[] {
   return skillValueFacts("Timing", [
-    ["Activation", skill.timings.activation],
-    ["Recharge", skill.timings.recharge],
-    ["Morale recharge", skill.timings.moraleBoostRecharge]
+    ["Activation", skill.timings.activation, "activation"],
+    ["Recharge", skill.timings.recharge, "recharge"],
+    ["Morale recharge", skill.timings.moraleBoostRecharge, "morale-recharge"]
   ]);
 }
 
 function skillValueFacts(
   prefix: string,
-  values: readonly (readonly [string, SkillValueState])[]
+  values: readonly (readonly [string, SkillValueState, SkillFactIconKind])[]
 ): readonly SkillFactView[] {
   return values
     .filter(([, state]) => state.state !== "absent" && state.state !== "not-applicable")
-    .map(([label, state]) => ({
+    .map(([label, state, icon]) => ({
       label: `${prefix}: ${label}`,
       value: state.text ?? (state.value === null ? state.state : String(state.value)),
-      state: state.state
+      state: state.state,
+      icon
     }));
 }
 
@@ -858,18 +877,30 @@ function attributeGroupLabel(skill: CatalogSkillRecord, catalogs: AppCatalogView
 }
 
 function subtitleForSkill(skill: CatalogSkillRecord, catalogs: AppCatalogViews): string {
-  const profession =
-    skill.professionId === null
-      ? "No profession"
-      : (catalogs.professions.find((entry) => Number(entry.id) === Number(skill.professionId))
-          ?.name ?? "Unknown profession");
-  const attribute =
-    skill.attributeId === null
-      ? "No attribute"
-      : (catalogs.attributes.find((entry) => Number(entry.id) === Number(skill.attributeId))
-          ?.name ?? "Unknown attribute");
+  const profession = professionLabelForSkill(skill, catalogs) ?? "No profession";
+  const attribute = attributeLabelForSkill(skill, catalogs) ?? "No attribute";
   const elite = skill.classification.elite ? "Elite" : "Non-elite";
   return `${skill.type} - ${profession} - ${attribute} - ${elite} - ${skill.classification.modeAvailability}`;
+}
+
+function professionLabelForSkill(
+  skill: CatalogSkillRecord,
+  catalogs: AppCatalogViews
+): string | null {
+  return skill.professionId === null
+    ? null
+    : (catalogs.professions.find((entry) => Number(entry.id) === Number(skill.professionId))
+        ?.name ?? "Unknown profession");
+}
+
+function attributeLabelForSkill(
+  skill: CatalogSkillRecord,
+  catalogs: AppCatalogViews
+): string | null {
+  return skill.attributeId === null
+    ? null
+    : (catalogs.attributes.find((entry) => Number(entry.id) === Number(skill.attributeId))?.name ??
+        "Unknown attribute");
 }
 
 function uniqueSorted(values: readonly string[]): readonly string[] {

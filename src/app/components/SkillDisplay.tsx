@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 import type { SkillDisplayView, SkillFactView } from "../editor-selectors";
 import { CatalogIcon } from "./CatalogIcon";
+import { SkillActionIcon, SkillFactIcon } from "./SkillIcons";
 
 export function SkillDisplay({
   view,
@@ -17,8 +18,11 @@ export function SkillDisplay({
     <article className={compact ? "skill-display compact-skill" : "skill-display"}>
       <CatalogIcon descriptor={view.placeholder} />
       <div className="skill-display-body">
-        <strong>{view.title}</strong>
-        <span>{view.subtitle}</span>
+        <strong className="skill-display-title">{view.title}</strong>
+        <div className="skill-display-subtitle">
+          {view.kind === "known" ? <SkillActionIcon icon={view.actionIcon} /> : null}
+          <span>{view.subtitle}</span>
+        </div>
         {facts.length > 0 ? <SkillFacts facts={facts} compact={compact} /> : null}
       </div>
       {action}
@@ -44,8 +48,8 @@ function SkillFacts({
             aria-label={`${fact.label} ${fact.value}`}
             title={`${fact.label}: ${fact.value}`}
           >
-            <b aria-hidden="true">{glyphForFact(fact.label)}</b>
-            {fact.value}
+            <SkillFactIcon kind={fact.icon} label={fact.label} />
+            <span className="skill-fact-value">{fact.value}</span>
           </span>
         ))}
       </div>
@@ -56,37 +60,15 @@ function SkillFacts({
     <dl>
       {shown.map((fact) => (
         <div key={`${fact.label}:${fact.value}`}>
-          <dt>{fact.label}</dt>
+          <dt>
+            <SkillFactIcon kind={fact.icon} label={fact.label} />
+            <span>{fact.label}</span>
+          </dt>
           <dd>{fact.value}</dd>
         </div>
       ))}
     </dl>
   );
-}
-
-function glyphForFact(label: string): string {
-  if (label.includes("Energy")) {
-    return "E";
-  }
-  if (label.includes("Adrenaline")) {
-    return "A";
-  }
-  if (label.includes("Sacrifice")) {
-    return "%";
-  }
-  if (label.includes("Upkeep")) {
-    return "U";
-  }
-  if (label.includes("Overcast")) {
-    return "O";
-  }
-  if (label.includes("Activation")) {
-    return "C";
-  }
-  if (label.includes("Recharge")) {
-    return "R";
-  }
-  return "F";
 }
 
 function factKey(label: string): string {

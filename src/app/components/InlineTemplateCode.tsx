@@ -1,6 +1,13 @@
-import { useState, type Dispatch } from "react";
+import {
+  useState,
+  type ClipboardEvent,
+  type Dispatch,
+  type FocusEvent,
+  type KeyboardEvent
+} from "react";
 
 import { hasAuthoredTitleRankOverrides } from "../../domain";
+import clipboardTextIcon from "../assets/clipboard-text.svg";
 import type { AppCatalogViews } from "../catalogs";
 import type { ValidationView } from "../editor-selectors";
 import { selectHasMeaningfulEquipment } from "../equipment-selectors";
@@ -12,48 +19,78 @@ export function InlineTemplateCode({
   catalogs,
   validation,
   dispatch,
-  requestDraftReplacement,
-  selectedLoadoutOnly
+  requestDraftReplacement
 }: {
   readonly state: EditorState;
   readonly catalogs: AppCatalogViews;
   readonly validation: ValidationView;
   readonly dispatch: Dispatch<EditorAction>;
   readonly requestDraftReplacement: (() => "cancel" | "discard") | undefined;
-  readonly selectedLoadoutOnly: boolean;
 }) {
-  const [importDraft, setImportDraft] = useState("");
   const preferred = preferredTemplateOutput(validation);
   const output = preferred?.code?.code ?? "";
   const blockedReasons =
     preferred === null ? allBlockedReasons(validation) : preferred.blockedReasons;
+  const [templateDraft, setTemplateDraftState] = useState({ output, value: output });
+  const visibleCode = templateDraft.output === output ? templateDraft.value : output;
+  const setTemplateDraft = (value: string) => setTemplateDraftState({ output, value });
+
+  const importCode = (input: string) => {
+    const code = input.trim();
+    if (code.length === 0) {
+      setTemplateDraft(output);
+      return;
+    }
+    setTemplateDraft(code);
+    if (code === output) {
+      return;
+    }
+    applyImport({
+      input: code,
+      state,
+      catalogs,
+      dispatch,
+      requestDraftReplacement
+    });
+  };
 
   return (
     <section className="inline-template-panel" aria-labelledby="inline-template-title">
-      <div className="panel-heading compact-heading">
-        <div>
-          <h2 id="inline-template-title">Template Code</h2>
-          <span>{preferred?.label ?? "Export blocked"}</span>
-        </div>
+      <h2 id="inline-template-title" className="sr-only">
+        Template Code
+      </h2>
+      <div className="inline-template-row">
+        <label className="sr-only" htmlFor="inline-template-code">
+          Template code
+        </label>
+        <input
+          id="inline-template-code"
+          className="template-code-input"
+          value={visibleCode}
+          aria-label="Template code"
+          placeholder={blockedReasons[0] ?? "Paste skill template code"}
+          spellCheck={false}
+          onChange={(event) => setTemplateDraft(event.currentTarget.value)}
+          onPaste={(event) => handleCodePaste(event, importCode)}
+          onBlur={(event) => handleCodeBlur(event, output, importCode)}
+          onKeyDown={(event) => handleCodeKeyDown(event, output, setTemplateDraft)}
+        />
         <button
           type="button"
+          className="icon-button template-copy-button"
           aria-label="Copy template code"
           disabled={output.length === 0}
           onClick={() => copyCode(output, dispatch)}
         >
-          Copy
+          <img
+            className="copy-icon"
+            src={clipboardTextIcon}
+            alt=""
+            draggable={false}
+            aria-hidden="true"
+          />
         </button>
       </div>
-      <label>
-        <span>Current template output</span>
-        <textarea
-          readOnly
-          value={output}
-          rows={2}
-          aria-label="Current template output"
-          placeholder={blockedReasons[0] ?? "No proven template output"}
-        />
-      </label>
       {blockedReasons.length > 0 && output.length === 0 ? (
         <ul className="inline-blocked-reasons">
           {blockedReasons.map((reason, index) => (
@@ -61,46 +98,6 @@ export function InlineTemplateCode({
           ))}
         </ul>
       ) : null}
-      {selectedLoadoutOnly ? (
-        <div className="share-warning">
-          <strong>Selected loadout only</strong>
-          <p>
-            Sibling loadouts, party metadata, equipment, title ranks, and notes use JSON transfer or
-            backup.
-          </p>
-        </div>
-      ) : null}
-      <label>
-        <span>Import skill template code</span>
-        <textarea
-          value={importDraft}
-          rows={3}
-          onChange={(event) => setImportDraft(event.currentTarget.value)}
-          onPaste={(event) =>
-            setImportDraft(event.currentTarget.value || event.clipboardData.getData("text"))
-          }
-        />
-      </label>
-      <div className="template-inline-actions">
-        <button
-          type="button"
-          onClick={() =>
-            applyImport({
-              input: importDraft,
-              state,
-              catalogs,
-              dispatch,
-              requestDraftReplacement,
-              onImported: () => setImportDraft("")
-            })
-          }
-        >
-          Apply
-        </button>
-        <button type="button" onClick={() => setImportDraft(output)} disabled={output.length === 0}>
-          Reset to current
-        </button>
-      </div>
     </section>
   );
 }
@@ -138,15 +135,13 @@ function applyImport({
   state,
   catalogs,
   dispatch,
-  requestDraftReplacement,
-  onImported
+  requestDraftReplacement
 }: {
   readonly input: string;
   readonly state: EditorState;
   readonly catalogs: AppCatalogViews;
   readonly dispatch: Dispatch<EditorAction>;
   readonly requestDraftReplacement: (() => "cancel" | "discard") | undefined;
-  readonly onImported: () => void;
 }): void {
   const imported = importSkillTemplateToEditor(input, state, catalogs);
   if (!imported.ok) {
@@ -170,7 +165,44 @@ function applyImport({
   }
   dispatch({ type: "replace-state", state: imported.state });
   dispatch({ type: "set-message", tone: "success", text: "Skill template imported." });
-  onImported();
+}
+
+function handleCodePaste(
+  event: ClipboardEvent<HTMLInputElement>,
+  importCode: (input: string) => void
+): void {
+  const pasted = event.clipboardData.getData("text");
+  if (pasted.trim().length === 0) {
+    return;
+  }
+  event.preventDefault();
+  importCode(pasted);
+}
+
+function handleCodeBlur(
+  event: FocusEvent<HTMLInputElement>,
+  output: string,
+  importCode: (input: string) => void
+): void {
+  if (event.currentTarget.value.trim() !== output) {
+    importCode(event.currentTarget.value);
+  }
+}
+
+function handleCodeKeyDown(
+  event: KeyboardEvent<HTMLInputElement>,
+  output: string,
+  setTemplateDraft: (input: string) => void
+): void {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    event.currentTarget.blur();
+  }
+  if (event.key === "Escape") {
+    event.preventDefault();
+    setTemplateDraft(output);
+    event.currentTarget.blur();
+  }
 }
 
 function copyCode(code: string, dispatch: Dispatch<EditorAction>): void {

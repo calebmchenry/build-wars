@@ -143,12 +143,14 @@ describe("editor selectors", () => {
     expect(view.kind === "known" ? view.facts : []).toContainEqual({
       label: "Title: Lightbringer",
       value: "rank 12 default",
-      state: "title:lightbringer-rank"
+      state: "title:lightbringer-rank",
+      icon: "title"
     });
     expect(lowered.kind === "known" ? lowered.facts : []).toContainEqual({
       label: "Title: Lightbringer",
       value: "rank 4 configured",
-      state: "title:lightbringer-rank"
+      state: "title:lightbringer-rank",
+      icon: "title"
     });
   });
 

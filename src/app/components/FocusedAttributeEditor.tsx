@@ -1,6 +1,6 @@
-import type { Dispatch } from "react";
+import { useState, type Dispatch } from "react";
 
-import { catalogId, type AttributeId } from "../../domain";
+import type { AttributeId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
 import { selectFocusedAttributeRows } from "../composer-selectors";
 import { selectAttributeBudgetView, type ValidationView } from "../editor-selectors";
@@ -20,88 +20,38 @@ export function FocusedAttributeEditor({
 }) {
   const budget = selectAttributeBudgetView(state, catalogs);
   const rows = selectFocusedAttributeRows(state, catalogs, validation);
-  const levels = catalogs.professionAttributeCatalog.attributePointRules.levelPointTotals;
+  const [collapsed, setCollapsed] = useState(false);
+  const listId = "focused-attribute-list";
 
   return (
     <section className="focused-attribute-panel" aria-labelledby="focused-attributes-title">
-      <div className="panel-heading compact-heading">
-        <div>
-          <h2 id="focused-attributes-title">Attributes</h2>
-          <span>
-            {budget.mode === "evaluated"
-              ? `${budget.remaining ?? 0} points left`
-              : budget.policyLabel}
+      <div className="attribute-section-heading">
+        <button
+          type="button"
+          className="attribute-section-toggle"
+          aria-label={`${collapsed ? "Expand" : "Collapse"} attributes`}
+          aria-expanded={!collapsed}
+          aria-controls={listId}
+          onClick={() => setCollapsed((current) => !current)}
+        >
+          <span className="skill-group-symbol" aria-hidden="true">
+            {collapsed ? "+" : "-"}
           </span>
-        </div>
-        <output aria-label="Attribute point spend">
+        </button>
+        <h2 id="focused-attributes-title">Attributes ({attributeBudgetLabel(budget)})</h2>
+        <output className="sr-only" aria-label="Attribute point spend">
           {budget.mode === "evaluated"
             ? `${budget.spend}/${budget.budget ?? 0}`
             : `Spend ${budget.spend}`}
         </output>
       </div>
-      <div className="composer-budget-controls">
-        <label>
-          <span>Level</span>
-          <select
-            value={state.pveBudget.level}
-            disabled={state.build.mode !== "pve"}
-            onChange={(event) =>
-              dispatch({ type: "set-pve-budget", level: Number(event.currentTarget.value) })
-            }
-          >
-            {levels.map((level) => (
-              <option key={level.level} value={level.level}>
-                {level.level}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          <span>Quest bonus</span>
-          <select
-            value={state.pveBudget.questBonus}
-            disabled={state.build.mode !== "pve"}
-            onChange={(event) =>
-              dispatch({
-                type: "set-pve-budget",
-                questBonus: event.currentTarget.value === "none" ? "none" : "maximum-applicable"
-              })
-            }
-          >
-            <option value="maximum-applicable">Maximum</option>
-            <option value="none">None</option>
-          </select>
-        </label>
-      </div>
-      <div className="focused-attribute-list">
-        {rows.map((row) => (
-          <AttributeRow key={row.key} row={row} dispatch={dispatch} />
-        ))}
-      </div>
-      <label className="manual-attribute">
-        <span>Add retained attribute</span>
-        <select
-          defaultValue=""
-          onChange={(event) => {
-            if (event.currentTarget.value.length === 0) {
-              return;
-            }
-            dispatch({
-              type: "set-attribute-rank",
-              attributeId: catalogId<"Attribute">(Number(event.currentTarget.value)),
-              rank: 1
-            });
-            event.currentTarget.value = "";
-          }}
-        >
-          <option value="">Choose attribute</option>
-          {catalogs.attributes.map((attribute) => (
-            <option key={Number(attribute.id)} value={Number(attribute.id)}>
-              {attribute.name}
-            </option>
+      <div id={listId} className="focused-attribute-content" hidden={collapsed}>
+        <div className="focused-attribute-list">
+          {rows.map((row) => (
+            <AttributeRow key={row.key} row={row} dispatch={dispatch} />
           ))}
-        </select>
-      </label>
+        </div>
+      </div>
     </section>
   );
 }
@@ -113,55 +63,86 @@ function AttributeRow({
   readonly row: ReturnType<typeof selectFocusedAttributeRows>[number];
   readonly dispatch: Dispatch<EditorAction>;
 }) {
-  const buildIndex = row.buildIndex;
   return (
     <div
       className={`focused-attribute-row${row.retained ? " retained-row" : ""}`}
       data-effective={row.effectiveModified ? "modified" : "base"}
     >
-      <button
-        type="button"
-        className="attribute-step"
-        aria-label={`Refund ${row.label}`}
-        title={row.decrement.disabledReason ?? `Refund ${row.decrement.cost ?? 0} points`}
-        disabled={!row.decrement.visible || row.decrement.disabled}
+      <AttributeStepButton
+        kind="decrement"
+        visible={row.decrement.visible}
+        cost={row.decrement.cost}
+        disabled={row.decrement.disabled}
+        disabledReason={row.decrement.disabledReason}
+        label={`Decrease ${row.label}`}
+        titlePrefix="Refund"
         onClick={() => applyRank(row.buildIndex, row.attributeId, row.rank - 1, dispatch)}
-      >
-        <span aria-hidden="true">-</span>
-        <small>{row.decrement.cost ?? 0}</small>
-      </button>
-      <div className="attribute-rank" aria-label={row.effectiveRankLabel}>
-        <strong>{row.rank}</strong>
-        <span>{row.effectiveRank === null ? "?" : row.effectiveRank}</span>
-      </div>
-      <button
-        type="button"
-        className="attribute-step"
-        aria-label={`Invest in ${row.label}`}
-        title={row.increment.disabledReason ?? `Invest ${row.increment.cost ?? 0} points`}
-        disabled={!row.increment.visible || row.increment.disabled}
+      />
+      <AttributeStepButton
+        kind="increment"
+        visible={row.increment.visible}
+        cost={row.increment.cost}
+        disabled={row.increment.disabled}
+        disabledReason={row.increment.disabledReason}
+        label={`Increase ${row.label}`}
+        titlePrefix="Invest"
         onClick={() => applyRank(row.buildIndex, row.attributeId, row.rank + 1, dispatch)}
-      >
-        <span aria-hidden="true">+</span>
-        <small>{row.increment.cost ?? 0}</small>
-      </button>
-      <div className="attribute-copy">
-        <strong>{row.label}</strong>
-        <span>{row.professionLabel}</span>
+      />
+      <div className="attribute-rank" aria-label={row.effectiveRankLabel}>
+        <strong>{row.effectiveRank ?? row.rank}</strong>
       </div>
-      {buildIndex === null ? null : (
-        <button
-          type="button"
-          className="icon-button clear-row-button"
-          aria-label={`Remove ${row.label}`}
-          onClick={() => dispatch({ type: "remove-attribute-row", index: buildIndex })}
-        >
-          Clear
-        </button>
-      )}
-      <InlineIssues issues={row.issues} />
+      <div className="attribute-copy" title={row.professionLabel}>
+        <strong>{row.label}</strong>
+        <span className="sr-only">{row.professionLabel}</span>
+      </div>
+      {row.issues.length > 0 ? <InlineIssues issues={row.issues} /> : null}
     </div>
   );
+}
+
+function AttributeStepButton({
+  kind,
+  visible,
+  cost,
+  disabled,
+  disabledReason,
+  label,
+  titlePrefix,
+  onClick
+}: {
+  readonly kind: "decrement" | "increment";
+  readonly visible: boolean;
+  readonly cost: number | null;
+  readonly disabled: boolean;
+  readonly disabledReason: string | null;
+  readonly label: string;
+  readonly titlePrefix: "Refund" | "Invest";
+  readonly onClick: () => void;
+}) {
+  if (!visible) {
+    return <span className="attribute-step-placeholder" aria-hidden="true" />;
+  }
+  return (
+    <button
+      type="button"
+      className={`attribute-step ${kind}`}
+      aria-label={label}
+      title={disabledReason ?? `${titlePrefix} ${cost ?? 0} points`}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      <span className="attribute-step-triangle" aria-hidden="true" />
+      <small>{cost ?? 0}</small>
+    </button>
+  );
+}
+
+function attributeBudgetLabel(budget: ReturnType<typeof selectAttributeBudgetView>): string {
+  if (budget.mode !== "evaluated") {
+    return budget.policyLabel;
+  }
+  const remaining = budget.remaining ?? 0;
+  return `${remaining} unused ${remaining === 1 ? "point" : "points"}`;
 }
 
 function applyRank(
@@ -170,7 +151,13 @@ function applyRank(
   rank: number,
   dispatch: Dispatch<EditorAction>
 ): void {
-  if (attributeId === null || rank < 0) {
+  if (attributeId === null) {
+    return;
+  }
+  if (rank <= 0) {
+    if (buildIndex !== null) {
+      dispatch({ type: "remove-attribute-row", index: buildIndex });
+    }
     return;
   }
   if (buildIndex === null) {

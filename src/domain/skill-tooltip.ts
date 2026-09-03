@@ -16,11 +16,17 @@ export type SkillTooltipUnresolvedReason =
   | "unsupported-description"
   | "unsupported-progression";
 
+export interface SkillTooltipTextSegment {
+  readonly text: string;
+  readonly tone: "normal" | "variable";
+}
+
 export type SkillTooltipOutcome =
   | {
       readonly kind: "rendered";
       readonly skill: CatalogSkillRecord;
       readonly text: string;
+      readonly segments: readonly SkillTooltipTextSegment[];
     }
   | {
       readonly kind: "unresolved";
@@ -77,27 +83,31 @@ export function renderSkillTooltipText(
     };
   }
 
-  const parts: string[] = [];
+  const segments: SkillTooltipTextSegment[] = [];
   for (const token of selected.description.tokens) {
     const rendered = renderToken(catalog, token, context);
     if (rendered.kind === "unresolved") {
       return { ...rendered, skill: selected };
     }
-    parts.push(rendered.value);
+    segments.push({ text: rendered.value, tone: rendered.tone });
   }
+
+  const text = segments
+    .map((segment) => segment.text)
+    .join("")
+    .replace(/[ \t]+\n/g, "\n")
+    .trim();
 
   return {
     kind: "rendered",
     skill: selected,
-    text: parts
-      .join("")
-      .replace(/[ \t]+\n/g, "\n")
-      .trim()
+    text,
+    segments: trimSegments(coalesceSegments(segments))
   };
 }
 
 type TokenRenderOutcome =
-  | { readonly kind: "rendered"; readonly value: string }
+  | { readonly kind: "rendered"; readonly value: string; readonly tone: "normal" | "variable" }
   | {
       readonly kind: "unresolved";
       readonly skill: CatalogSkillRecord | null;
@@ -111,13 +121,13 @@ function renderToken(
   context: SkillTooltipContext
 ): TokenRenderOutcome {
   if (token.kind === "literal" || token.kind === "reviewed-factual-marker") {
-    return { kind: "rendered", value: token.value };
+    return { kind: "rendered", value: token.value, tone: "normal" };
   }
   if (token.kind === "whitespace") {
-    return { kind: "rendered", value: " " };
+    return { kind: "rendered", value: " ", tone: "normal" };
   }
   if (token.kind === "line-break") {
-    return { kind: "rendered", value: "\n" };
+    return { kind: "rendered", value: "\n", tone: "normal" };
   }
 
   const series = catalog.progressionSeries.find((candidate) => candidate.id === token.seriesId);
@@ -175,7 +185,7 @@ function renderProgressionValue(
     };
   }
 
-  return { kind: "rendered", value: String(value) };
+  return { kind: "rendered", value: String(value), tone: "variable" };
 }
 
 function rankValue(
@@ -189,4 +199,40 @@ function isRankMap(
   ranks: Readonly<Record<string, number>> | ReadonlyMap<string, number>
 ): ranks is ReadonlyMap<string, number> {
   return typeof (ranks as ReadonlyMap<string, number>).get === "function";
+}
+
+function coalesceSegments(
+  segments: readonly SkillTooltipTextSegment[]
+): readonly SkillTooltipTextSegment[] {
+  const coalesced: SkillTooltipTextSegment[] = [];
+  for (const segment of segments) {
+    const previous = coalesced.at(-1);
+    if (previous !== undefined && previous.tone === segment.tone) {
+      coalesced[coalesced.length - 1] = {
+        text: `${previous.text}${segment.text}`,
+        tone: previous.tone
+      };
+    } else {
+      coalesced.push(segment);
+    }
+  }
+  return coalesced;
+}
+
+function trimSegments(
+  segments: readonly SkillTooltipTextSegment[]
+): readonly SkillTooltipTextSegment[] {
+  if (segments.length === 0) {
+    return [];
+  }
+  const trimmed = [...segments];
+  const first = trimmed[0];
+  if (first !== undefined) {
+    trimmed[0] = { ...first, text: first.text.trimStart() };
+  }
+  const last = trimmed.at(-1);
+  if (last !== undefined) {
+    trimmed[trimmed.length - 1] = { ...last, text: last.text.trimEnd() };
+  }
+  return trimmed.filter((segment) => segment.text.length > 0);
 }

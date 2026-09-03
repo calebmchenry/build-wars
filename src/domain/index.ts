@@ -366,6 +366,7 @@ export { renderSkillTooltipText } from "./skill-tooltip";
 export type {
   SkillTooltipContext,
   SkillTooltipOutcome,
+  SkillTooltipTextSegment,
   SkillTooltipUnresolvedReason
 } from "./skill-tooltip";
 export { validateBuild } from "./rule-engine";

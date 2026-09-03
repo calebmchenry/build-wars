@@ -25,6 +25,7 @@ This creates `.venv-data/`, which is ignored by Git, and installs the pinned par
 ```sh
 npm run data:test
 npm run data:regenerate
+npm run data:skill-icons -- --allow-live-network
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-03-professions-attributes
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py fixture --profile epic-04-skills
@@ -47,6 +48,7 @@ PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-11-insignias --root . --allow-live-network --stage fetch --source-plan work/runs/data-ingestion/epic-11/source-plans/<digest>.source-plan.json --confirm-source-set-digest <source-set-digest>
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-12-weapons-and-mods --root . --allow-live-network --stage discover
 PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/regenerate.py live --profile epic-12-weapons-and-mods --root . --allow-live-network --stage fetch --source-plan work/runs/data-ingestion/epic-12/source-plans/<digest>.source-plan.json --confirm-source-set-digest <source-set-digest>
+PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/cache_skill_icons.py --allow-live-network
 ```
 
 Exit codes:
@@ -55,6 +57,12 @@ Exit codes:
 - `2`: invalid mode/options, setup failure, missing offline snapshots, or blocking QA gate.
 
 `npm run verify` includes `npm run data:test`, which is fast and offline.
+
+`npm run data:skill-icons -- --allow-live-network` is a separate live cache pass for runtime skill
+icons. It reads the promoted EPIC-04 skill catalog, resolves Guild Wars Wiki icon `imageinfo`
+metadata in batches, downloads unambiguous icons into `public/gww-icons/skills/`, writes the local
+runtime manifest at `src/app/skill-icon-assets.generated.json`, and writes provenance at
+`data/generated/epic-04/skill-icon-assets.manifest.json`.
 
 ## Modes
 

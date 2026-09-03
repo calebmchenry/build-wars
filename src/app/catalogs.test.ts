@@ -30,11 +30,14 @@ describe("app catalog boundary", () => {
   it("uses stable placeholder descriptors without remote render URLs", () => {
     const catalogs = requireReadyCatalogs();
     const profession = catalogs.placeholders.profession(catalogs.professions[0] ?? null);
-    const skill = catalogs.placeholders.skill(catalogs.skills[0] ?? null, "skill-browser");
+    const skillRecord = catalogs.skills.find((candidate) => candidate.name === "Power Block");
+    const skill = catalogs.placeholders.skill(skillRecord ?? null, "skill-browser");
 
-    expect(profession.label).toContain("placeholder");
+    expect(profession.label).toBe("Warrior icon");
     expect(profession.mediaId).toMatch(/^remote-media:/);
-    expect(skill.label).toContain("placeholder");
+    expect(profession.asset?.src).toContain("profession-warrior-60");
+    expect(skill.label).toContain("Power Block");
+    expect(skill.asset?.src ?? "").not.toMatch(/^https?:\/\//);
     expect(skill).not.toHaveProperty("url");
   });
 

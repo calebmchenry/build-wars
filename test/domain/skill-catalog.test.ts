@@ -112,6 +112,10 @@ describe("skill catalog contracts", () => {
       throw new Error(`Expected unresolved tooltip, got ${missingRank.kind}`);
     }
     expect(rendered.text).toBe("Heal 172");
+    expect(rendered.segments).toEqual([
+      { text: "Heal ", tone: "normal" },
+      { text: "172", tone: "variable" }
+    ]);
     expect(missingRank.reason).toBe("missing-rank");
   });
 });

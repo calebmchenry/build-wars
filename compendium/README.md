@@ -8,6 +8,7 @@ The Compendium is an in-repo documentation system for agents.
 ## Decisions
 
 - [Project foundation](decisions/0001-project-foundation.md)
+- [Runtime Guild Wars Wiki icon assets](decisions/0002-runtime-gww-icon-assets.md)
 
 ## Source And QA
 

@@ -143,7 +143,7 @@ export function selectFocusedAttributeRows(
       : { runes: catalogs.equipment.validation.runes })
   });
 
-  return rows.map((row) => {
+  const focusedRows = rows.map((row) => {
     const effective = effectiveRankForRow(
       row.attributeId,
       state,
@@ -187,6 +187,70 @@ export function selectFocusedAttributeRows(
       }
     };
   });
+
+  return orderFocusedAttributeRows(focusedRows, state, catalogs);
+}
+
+function orderFocusedAttributeRows(
+  rows: readonly ComposerAttributeRowView[],
+  state: EditorState,
+  catalogs: AppCatalogViews
+): readonly ComposerAttributeRowView[] {
+  const attributeOrder = selectedProfessionAttributeOrder(state, catalogs);
+  const fallbackOffset = attributeOrder.size;
+  return rows
+    .map((row, index) => ({ row, index }))
+    .sort((left, right) => {
+      const leftOrder = focusedAttributeOrder(left.row, attributeOrder, fallbackOffset, left.index);
+      const rightOrder = focusedAttributeOrder(
+        right.row,
+        attributeOrder,
+        fallbackOffset,
+        right.index
+      );
+      return leftOrder - rightOrder || left.index - right.index;
+    })
+    .map(({ row }) => row);
+}
+
+function selectedProfessionAttributeOrder(
+  state: EditorState,
+  catalogs: AppCatalogViews
+): ReadonlyMap<number, number> {
+  const order = new Map<number, number>();
+  const seenProfessions = new Set<number>();
+  const professionIds = [state.build.primaryProfessionId, state.build.secondaryProfessionId];
+
+  for (const professionId of professionIds) {
+    if (professionId === null) {
+      continue;
+    }
+    const numericProfessionId = Number(professionId);
+    if (seenProfessions.has(numericProfessionId)) {
+      continue;
+    }
+    seenProfessions.add(numericProfessionId);
+    for (const attribute of catalogs.attributes) {
+      if (Number(attribute.professionId) !== numericProfessionId) {
+        continue;
+      }
+      order.set(Number(attribute.id), order.size);
+    }
+  }
+
+  return order;
+}
+
+function focusedAttributeOrder(
+  row: ComposerAttributeRowView,
+  attributeOrder: ReadonlyMap<number, number>,
+  fallbackOffset: number,
+  fallbackIndex: number
+): number {
+  if (row.attributeId === null) {
+    return fallbackOffset + fallbackIndex;
+  }
+  return attributeOrder.get(Number(row.attributeId)) ?? fallbackOffset + fallbackIndex;
 }
 
 function effectiveRankForRow(

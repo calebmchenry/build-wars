@@ -12,27 +12,25 @@ import { importSkillTemplateToEditor } from "./template-workflow";
 const catalogs = requireReadyCatalogs();
 
 describe("InlineTemplateCode", () => {
-  it("imports valid template text only after Apply", () => {
+  it("imports valid template text when pasted", () => {
     render(<Harness />);
 
-    fireEvent.change(screen.getByLabelText("Import skill template code"), {
-      target: { value: SKILL_TEMPLATE_PACKAGE_EXAMPLE }
-    });
     expect(screen.getByTestId("primary-profession")).toHaveTextContent("Any");
-
-    fireEvent.click(screen.getByRole("button", { name: "Apply" }));
+    fireEvent.paste(screen.getByLabelText("Template code"), {
+      clipboardData: { getData: () => SKILL_TEMPLATE_PACKAGE_EXAMPLE }
+    });
 
     expect(screen.getByRole("status")).toHaveTextContent("Skill template imported.");
     expect(screen.getByTestId("primary-profession")).not.toHaveTextContent("Any");
+    expect(screen.queryByRole("button", { name: "Apply" })).not.toBeInTheDocument();
   });
 
   it("leaves previous state unchanged after invalid input", () => {
     render(<Harness />);
 
-    fireEvent.change(screen.getByLabelText("Import skill template code"), {
-      target: { value: "not-a-template" }
+    fireEvent.paste(screen.getByLabelText("Template code"), {
+      clipboardData: { getData: () => "not-a-template" }
     });
-    fireEvent.click(screen.getByRole("button", { name: "Apply" }));
 
     expect(screen.getByRole("status")).toHaveTextContent("Template code must use");
     expect(screen.getByTestId("build-name")).toHaveTextContent("Untitled Build");
@@ -51,9 +49,7 @@ describe("InlineTemplateCode", () => {
     expect(screen.getByRole("status")).toHaveTextContent(
       "Copy was denied; template text remains selectable."
     );
-    expect(screen.getByLabelText("Current template output")).toHaveValue(
-      SKILL_TEMPLATE_PACKAGE_EXAMPLE
-    );
+    expect(screen.getByLabelText("Template code")).toHaveValue(SKILL_TEMPLATE_PACKAGE_EXAMPLE);
   });
 });
 
@@ -72,7 +68,6 @@ function Harness({
         validation={validation}
         dispatch={dispatch}
         requestDraftReplacement={() => "discard"}
-        selectedLoadoutOnly={false}
       />
       <div data-testid="build-name">{state.build.name}</div>
       <div data-testid="primary-profession">

@@ -48,8 +48,8 @@ describe("app runtime source boundary", () => {
     expect(offenders).toEqual([]);
   });
 
-  it("does not render remote media through image or preload primitives", () => {
-    const imageLike = /<(img|source|picture|canvas)\b|rel=["']preload["']|fetch\(/;
+  it("does not render remote media through network-bearing primitives", () => {
+    const imageLike = /<(source|picture|canvas)\b|rel=["']preload["']|fetch\(|srcSet=|srcset=/;
     const offenders = sourceFiles(appRoot)
       .filter((file) => !file.endsWith(".test.ts") && !file.endsWith(".test.tsx"))
       .flatMap((file) =>

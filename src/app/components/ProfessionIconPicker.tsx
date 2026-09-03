@@ -65,7 +65,6 @@ export function ProfessionIconPicker({
           ))}
         </select>
       </label>
-      <span className="picker-label">{label}</span>
       <button
         ref={buttonRef}
         type="button"
@@ -79,7 +78,6 @@ export function ProfessionIconPicker({
         onKeyDown={(event) => handleButtonKeyDown(event, listRef, () => setOpenKey(selectionKey))}
       >
         <CatalogIcon descriptor={selected?.descriptor ?? catalogs.placeholders.profession(null)} />
-        <span>{displayLabel}</span>
       </button>
       {rawUnresolved ? (
         <p className="picker-evidence">{raw.reason ?? `Imported ${raw.outcomeKind} profession`}</p>
@@ -126,7 +124,8 @@ function professionOptions(catalogs: AppCatalogViews): readonly ProfessionOption
         surface: "profession-selector",
         label: "Any profession",
         initials: "Any",
-        mediaId: null
+        mediaId: null,
+        asset: null
       }
     },
     ...catalogs.professions.map((profession) => ({
