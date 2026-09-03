@@ -17,11 +17,11 @@ Epics are ordered roughly by implementation dependency. The `track` column keeps
 | 10 | content | [Runes](10-runes/EPIC.md) | Catalog all runes, restrictions, bonuses, penalties, and stacking behavior. |
 | 11 | content | [Insignias](11-insignias/EPIC.md) | Catalog all insignias, restrictions, slot scaling, conditions, and effects. |
 | 12 | content | [Weapons and Mods](12-weapons-and-mods/EPIC.md) | Catalog weapon types, requirements, prefixes, suffixes, inscriptions, and upgrade constraints. |
-| 13 | content | [Armor and Equipment](13-armor-and-equipment/EPIC.md) | Catalog armor slots, equipment template ids, dye ids, and equipment display metadata. |
-| 14 | functional | [Equipment Editor](14-equipment-editor/EPIC.md) | Build armor, rune, insignia, weapon, mod, and weapon-set editing. |
-| 15 | content | [Title Tracks and PvE-only](15-title-tracks-and-pve-only/EPIC.md) | Catalog title skills, PvE-only limits, rank scaling, allegiance rules, and PvE-only effects. |
-| 16 | content | [Heroes and Henchmen](16-heroes-and-henchmen/EPIC.md) | Catalog heroes, henchmen, professions, portraits, default behavior, and party-slot metadata. |
-| 17 | functional | [Party and Hero Builder](17-party-and-hero-builder/EPIC.md) | Compose player, hero, mercenary, and team builds. |
+| 13 | functional | [Equipment Shell Model](13-armor-and-equipment/EPIC.md) | Define semantic equipment slots, headgear, and attachment points without skin/dye scope. |
+| 14 | functional | [Equipment Editor](14-equipment-editor/EPIC.md) | Build semantic armor, rune, insignia, weapon, mod, and weapon-set editing. |
+| 15 | functional | [Title Rank Controls and PvE-only](15-title-tracks-and-pve-only/EPIC.md) | Default title-scaled skills to max rank and provide compact controls for user rank overrides. |
+| 16 | functional | [Multi-Build Workspace](16-heroes-and-henchmen/EPIC.md) | View, compare, edit, duplicate, and save multiple complete build loadouts together. |
+| 17 | functional | [Party Semantics and Sharing](17-party-and-hero-builder/EPIC.md) | Add party labels, ordering, validation, and sharing on top of multi-build workspaces. |
 | 18 | content | [Community Build Knowledge](18-community-build-knowledge/EPIC.md) | Model PvX/GW1 Builds style metadata, variants, ratings, usage, counters, and synergy. |
 | 19 | functional | [Guide Authoring](19-guide-authoring/EPIC.md) | Write guides with embedded builds, variants, equipment, and skill links. |
 | 20 | functional | [Search and Discovery](20-search-and-discovery/EPIC.md) | Search and filter skills, builds, guides, parties, and imported community metadata. |

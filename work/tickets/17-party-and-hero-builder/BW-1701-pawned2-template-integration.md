@@ -1,30 +1,31 @@
 ---
 id: BW-1701
-title: paw-ned2 Template Integration
+title: External Team Template Compatibility Parking Lot
 epic: EPIC-17
-status: ready
-priority: high
+status: backlog
+priority: low
 depends_on:
-  - EPIC-05
+  - EPIC-16
 created: 2026-09-02
-updated: 2026-09-02
+updated: 2026-09-03
 ---
 
-# BW-1701: paw-ned2 Template Integration
+# BW-1701: External Team Template Compatibility Parking Lot
 
 ## Goal
 
-Re-evaluate paw-ned2/team template support under the party and hero builder epic, then ship a
-bounded raw team codec only if the dependency/runtime gates pass.
+Retain the historical paw-ned2/team-template deferral without making it part of the near-term
+multi-build or party workflow.
 
 ## Scope
 
-- Re-run Node.js floor, browser/Vite, Vitest, charset, malformed-length, nested-code, member-count,
-  text-limit, statefulness, and global/prototype behavior probes for the selected codec path.
-- Decide whether to keep `@buildwars/gw-templates`, adopt an audited fork, or explicitly own a local
-  team parser in a separate amendment.
-- If shipped, expose only raw JSON-compatible team facts first; do not map directly to `PartyBuild`
-  until EPIC-17 owns slot, hero, player, role, and assignment semantics.
+- Keep SPRINT-006 evidence linked for future reference.
+- Do not run new codec probes unless a future product decision explicitly prioritizes external team
+  template compatibility.
+- If revisited later, require a fresh bounded compatibility spike with runtime, security, malformed
+  input, browser, and round-trip tests.
+- Keep any future external codec isolated from the semantic build-set and party models until field
+  mapping is explicitly designed.
 
 ## SPRINT-006 Deferral Evidence
 
@@ -34,7 +35,6 @@ function`. No public team codec was exported from EPIC-05.
 
 ## Acceptance Criteria
 
-- paw-ned2 has a fresh ship/defer decision under EPIC-17.
-- Any shipped codec is bounded, deterministic, offline-tested, and preserves every surfaced field it
-  claims to support.
-- Team metadata is plain text only and is not treated as guide prose.
+- EPIC-16 and EPIC-17 can ship without paw-ned2 support.
+- Future external template compatibility work is explicit, separately prioritized, and test-gated.
+- Historical deferral evidence remains discoverable without steering MVP implementation.
