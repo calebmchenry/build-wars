@@ -3650,17 +3650,17 @@ def _epic04_manual_reviews(
             "reReviewTrigger": "Any PvE-only list page revision, row parser change, or promotion policy change.",
         },
         {
-            "id": "review:epic-04-description-structured-only:2026-09-01",
+            "id": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
             "reviewer": "Build Wars sprint executor",
             "reviewedAt": generated_at,
-            "scope": "EPIC-04 runtime description policy",
+            "scope": "EPIC-04 runtime concise description policy",
             "decision": "approved",
-            "rationale": "Source-authored descriptions are not copied into runtime text in schema v1; generated search text uses names and structured factual fields only.",
+            "rationale": "Reviewed concise infobox descriptions are approved as bounded runtime tooltip text; records without concise text keep structured-only fallback.",
             "evidence": [
                 {
                     "kind": "artifact",
                     "reference": str(source_plan["summary"]["sourcePlanDigest"]),
-                    "notes": "Description review is invalidated by source-plan, parser, tokenizer, or description-digest changes.",
+                    "notes": "Concise description review is invalidated by source-plan, parser, tokenizer, or description-digest changes.",
                 }
             ],
             "relatedFindingIds": [],
@@ -3674,7 +3674,7 @@ def _epic04_manual_reviews(
             "reviewedAt": generated_at,
             "scope": "EPIC-04 first promoted skills catalog baseline",
             "decision": "approved",
-            "rationale": "This promotion records the selected bounded snapshot set, EPIC-03 dependency digests, structured-only description policy, generated artifact, and QA state as the first baseline.",
+            "rationale": "This promotion records the selected bounded snapshot set, EPIC-03 dependency digests, concise description policy, generated artifact, and QA state as the first baseline.",
             "evidence": [
                 {
                     "kind": "artifact",

@@ -35,7 +35,7 @@
   "digest": {
     "algorithm": "sha256",
     "notes": null,
-    "value": "9d3c64ce5bb6256e3cb488307cb78615f1c14ce32a68b466529f37751ae22720"
+    "value": "2e3652745e36338545c4c9404d78c3bd7a9fa42e4d5f1463551b3384af3faada"
   },
   "generatedAt": "2026-09-03T23:09:13Z",
   "generator": "build-wars-ingest/0.1.0",
@@ -1630,19 +1630,19 @@
       "evidence": [
         {
           "kind": "artifact",
-          "notes": "Description review is invalidated by source-plan, parser, tokenizer, or description-digest changes.",
+          "notes": "Concise description review is invalidated by source-plan, parser, tokenizer, or description-digest changes.",
           "reference": "d21a5a8ee1bf9cbbe79d8c26d8a9cbae27bea12267260e42d7bef78251916169"
         }
       ],
       "expiresAt": null,
       "followUpTicketIds": [],
-      "id": "review:epic-04-description-structured-only:2026-09-01",
-      "rationale": "Source-authored descriptions are not copied into runtime text in schema v1; generated search text uses names and structured factual fields only.",
+      "id": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
+      "rationale": "Reviewed concise infobox descriptions are approved as bounded runtime tooltip text; records without concise text keep structured-only fallback.",
       "reReviewTrigger": "Any source revision, normalized description digest, tokenizer, parser, or projection change.",
       "relatedFindingIds": [],
       "reviewedAt": "2026-09-03T23:09:13Z",
       "reviewer": "Build Wars sprint executor",
-      "scope": "EPIC-04 runtime description policy"
+      "scope": "EPIC-04 runtime concise description policy"
     },
     {
       "decision": "approved",
@@ -1655,13 +1655,13 @@
         {
           "kind": "artifact",
           "notes": "Generated artifact digest is owned by the adjacent manifest.",
-          "reference": "9d3c64ce5bb6256e3cb488307cb78615f1c14ce32a68b466529f37751ae22720"
+          "reference": "2e3652745e36338545c4c9404d78c3bd7a9fa42e4d5f1463551b3384af3faada"
         }
       ],
       "expiresAt": null,
       "followUpTicketIds": [],
       "id": "review:epic-04-first-baseline:2026-09-01",
-      "rationale": "This promotion records the selected bounded snapshot set, EPIC-03 dependency digests, structured-only description policy, generated artifact, and QA state as the first baseline.",
+      "rationale": "This promotion records the selected bounded snapshot set, EPIC-03 dependency digests, concise description policy, generated artifact, and QA state as the first baseline.",
       "reReviewTrigger": "Any semantic projection, schema, source revision, dependency digest, QA gate, or promotion path change.",
       "relatedFindingIds": [],
       "reviewedAt": "2026-09-03T23:09:13Z",

@@ -39,11 +39,13 @@ describe("SkillBar", () => {
     const dataTransfer = createDataTransfer();
     const slotButtons = screen.getAllByRole("button", { name: /Skill slot/ });
     const slotItems = screen.getAllByRole("listitem");
+    const dragHandle = screen.getByTitle("Drag Healing Signet from slot 1");
 
-    fireEvent.dragStart(slotButtons[0]!, { dataTransfer });
+    expect(slotButtons[0]!).not.toHaveAttribute("draggable", "true");
+    fireEvent.dragStart(dragHandle, { dataTransfer });
     fireEvent.dragOver(slotItems[2]!, { dataTransfer });
     fireEvent.drop(slotItems[2]!, { dataTransfer });
-    fireEvent.dragEnd(slotButtons[0]!, { dataTransfer });
+    fireEvent.dragEnd(dragHandle, { dataTransfer });
 
     expect(
       screen.getByRole("button", { name: /Skill slot 3: Healing Signet/ })
@@ -54,10 +56,10 @@ describe("SkillBar", () => {
     render(<Harness />);
 
     const dataTransfer = createDataTransfer();
-    const slotButtons = screen.getAllByRole("button", { name: /Skill slot/ });
+    const dragHandle = screen.getByTitle("Drag Healing Signet from slot 1");
 
-    fireEvent.dragStart(slotButtons[0]!, { dataTransfer });
-    fireEvent.dragEnd(slotButtons[0]!, { dataTransfer });
+    fireEvent.dragStart(dragHandle, { dataTransfer });
+    fireEvent.dragEnd(dragHandle, { dataTransfer });
 
     expect(screen.getByRole("button", { name: /Skill slot 1: Empty/ })).toBeInTheDocument();
   });

@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { DragEvent, ReactNode } from "react";
 
 import type { SkillDisplayView, SkillFactView } from "../editor-selectors";
 import { CatalogIcon } from "./CatalogIcon";
@@ -7,18 +7,20 @@ import { SkillActionIcon, SkillFactIcon } from "./SkillIcons";
 export function SkillDisplay({
   view,
   action,
+  iconDragHandle,
   compact = false
 }: {
   readonly view: SkillDisplayView;
   readonly action?: ReactNode;
+  readonly iconDragHandle?: SkillIconDragHandle;
   readonly compact?: boolean;
 }) {
   const facts = view.kind === "known" ? view.facts : [];
   return (
     <article className={compact ? "skill-display compact-skill" : "skill-display"}>
-      <CatalogIcon descriptor={view.placeholder} />
+      <SkillDisplayIcon view={view} iconDragHandle={iconDragHandle} />
       <div className="skill-display-body">
-        <strong className="skill-display-title">{view.title}</strong>
+        <SkillDisplayTitle view={view} />
         <div className="skill-display-subtitle">
           {view.kind === "known" ? <SkillActionIcon icon={view.actionIcon} /> : null}
           <span>{view.subtitle}</span>
@@ -27,6 +29,57 @@ export function SkillDisplay({
       </div>
       {action}
     </article>
+  );
+}
+
+export interface SkillIconDragHandle {
+  readonly label: string;
+  readonly onDragStart: (event: DragEvent<HTMLSpanElement>) => void;
+  readonly onDragEnd?: (event: DragEvent<HTMLSpanElement>) => void;
+}
+
+function SkillDisplayIcon({
+  view,
+  iconDragHandle
+}: {
+  readonly view: SkillDisplayView;
+  readonly iconDragHandle: SkillIconDragHandle | undefined;
+}) {
+  const icon = <CatalogIcon descriptor={view.placeholder} />;
+  if (iconDragHandle === undefined) {
+    return icon;
+  }
+
+  return (
+    <span
+      className="skill-icon-drag-handle"
+      draggable
+      title={iconDragHandle.label}
+      onDragStart={iconDragHandle.onDragStart}
+      onDragEnd={iconDragHandle.onDragEnd}
+    >
+      {icon}
+    </span>
+  );
+}
+
+function SkillDisplayTitle({ view }: { readonly view: SkillDisplayView }) {
+  if (view.kind !== "known") {
+    return <strong className="skill-display-title">{view.title}</strong>;
+  }
+
+  return (
+    <a
+      className="skill-display-title skill-display-title-link"
+      href={view.skill.wikiUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      draggable={false}
+      onClick={(event) => event.stopPropagation()}
+      onKeyDown={(event) => event.stopPropagation()}
+    >
+      {view.title}
+    </a>
   );
 }
 

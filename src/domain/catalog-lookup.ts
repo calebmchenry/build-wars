@@ -197,6 +197,9 @@ export type SkillModeVariantOutcome =
       readonly mode: SkillMode;
     };
 
+const skillByIdCache = new WeakMap<SkillCatalog, ReadonlyMap<number, CatalogSkillRecord>>();
+const splitGroupByIdCache = new WeakMap<SkillCatalog, ReadonlyMap<string, SkillModeVariantGroup>>();
+
 export function lookupProfessionTemplateId(
   catalog: ProfessionAttributeCatalog,
   templateId: TemplateProfessionId
@@ -404,7 +407,7 @@ export function lookupSkillById(
   catalog: SkillCatalog,
   skillId: SkillId
 ): CatalogSkillRecord | null {
-  return catalog.skills.find((skill) => Number(skill.id) === Number(skillId)) ?? null;
+  return skillRecordsById(catalog).get(Number(skillId)) ?? null;
 }
 
 export function lookupRuneById(catalog: RuneCatalog, runeId: RuneId): CatalogRuneRecord | null {
@@ -504,7 +507,7 @@ export function resolveSkillModeVariant(
     return { kind: "single", skill, group: null };
   }
 
-  const group = catalog.splitGroups.find((candidate) => candidate.id === skill.splitGroupId);
+  const group = splitGroupsById(catalog).get(skill.splitGroupId);
   if (group === undefined || mode === "unknown") {
     return {
       kind: "ambiguous-mode",
@@ -531,6 +534,37 @@ export function resolveSkillModeVariant(
   }
 
   return { kind: "variant", skill: selected, group, mode };
+}
+
+function skillRecordsById(catalog: SkillCatalog): ReadonlyMap<number, CatalogSkillRecord> {
+  const cached = skillByIdCache.get(catalog);
+  if (cached !== undefined) {
+    return cached;
+  }
+  const indexed = new Map<number, CatalogSkillRecord>();
+  for (const skill of catalog.skills) {
+    const id = Number(skill.id);
+    if (!indexed.has(id)) {
+      indexed.set(id, skill);
+    }
+  }
+  skillByIdCache.set(catalog, indexed);
+  return indexed;
+}
+
+function splitGroupsById(catalog: SkillCatalog): ReadonlyMap<string, SkillModeVariantGroup> {
+  const cached = splitGroupByIdCache.get(catalog);
+  if (cached !== undefined) {
+    return cached;
+  }
+  const indexed = new Map<string, SkillModeVariantGroup>();
+  for (const group of catalog.splitGroups) {
+    if (!indexed.has(group.id)) {
+      indexed.set(group.id, group);
+    }
+  }
+  splitGroupByIdCache.set(catalog, indexed);
+  return indexed;
 }
 
 export function attributeBudgetForLevel(

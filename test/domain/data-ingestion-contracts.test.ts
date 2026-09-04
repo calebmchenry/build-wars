@@ -147,7 +147,7 @@ describe("data ingestion generated contracts", () => {
     expect(catalog.dependencyDigests[0]?.id).toBe("epic-03-professions-attributes");
     expect(catalog.sourceSet.acceptedSeedCount).toBe(catalog.skills.length);
     expect(firstSkill.templateId).toBe(firstSkill.id);
-    expect(firstSkill.description.state).toBe("structured-only");
+    expect(firstSkill.description.state).toBe("reviewed-text");
     expect(firstSkill.iconId === null || typeof firstSkill.iconId === "string").toBe(true);
     expect(catalog.remoteMedia.every((media) => media.cachedBytes === false)).toBe(true);
   });

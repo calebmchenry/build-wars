@@ -1,5 +1,5 @@
 {
-  "catalogVersion": "skills-7e8d6fb1495be8d3",
+  "catalogVersion": "skills-90b1adc85a4e367f",
   "dependencyDigests": [
     {
       "artifactDigest": "1cb3f79b7139cf26adbcf40b600094c2860796c60dcd9f1ba75bad694d07c8b4",
@@ -609,7 +609,7 @@
       "section": "dependencyDigests"
     },
     {
-      "digest": "d3a79911392c46d9ead0628e7999e483927a53be3f61c881bd860c5424ae2cdb",
+      "digest": "c5472ea9419627e78eb003228c8238180dafbe262a55d72ca4f0bd8f86bcc5c6",
       "section": "sourceSet"
     },
     {
@@ -617,7 +617,7 @@
       "section": "dispositions"
     },
     {
-      "digest": "48d5ed1890e23d91c7aa4d4d0335e8b6c527c27b45fb090f9d02d783c743bf21",
+      "digest": "8d271f2c748dc4ac253e12ddd84b8deda7e34f93179a393a9562671904b76fe1",
       "section": "skills"
     },
     {
@@ -689,43 +689,44 @@
         }
       },
       "description": {
-        "limitations": [
-          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
-        ],
-        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
-        "searchText": "Healing Signet Signet Warrior Tactics",
-        "sourceTextDigest": "3bf2cf8a17de1c6bf699210422b95c3190bf78b87acc5e64a8f3a9b789d5b638",
-        "state": "structured-only",
+        "limitations": [],
+        "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
+        "searchText": "Healing Signet Signet Warrior Tactics Signet. You gain Health.",
+        "sourceTextDigest": "a66a6d733b5a606ed4be245c6e0b322117b8f575ba08268326dd4c9ffb868d35",
+        "state": "reviewed-text",
         "tokens": [
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Skill type: "
-          },
-          {
             "kind": "literal",
-            "value": "Signet"
+            "value": "Signet."
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Profession: "
-          },
-          {
             "kind": "literal",
-            "value": "Warrior"
+            "value": "You"
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Attribute: "
+            "kind": "literal",
+            "value": "gain"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "progression-reference",
+            "seriesId": "progression:skill:1:1",
+            "valueSlot": 0
+          },
+          {
+            "kind": "whitespace"
           },
           {
             "kind": "literal",
-            "value": "Tactics"
+            "value": "Health."
           }
         ]
       },
@@ -752,7 +753,7 @@
         ],
         "notes": null,
         "reviewIds": [
-          "review:epic-04-description-structured-only:2026-09-01"
+          "review:epic-04-reviewed-concise-descriptions:2026-09-04"
         ],
         "sourceIds": [
           "source:gww:epic-04-fixture:skill:1:5101"
@@ -841,43 +842,44 @@
         }
       },
       "description": {
-        "limitations": [
-          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
-        ],
-        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
-        "searchText": "Flare Spell Elementalist Fire Magic",
-        "sourceTextDigest": "1ca80e39a304f418cf33044365275d82fc5f7ea0b67433eb4590d6c7a25245d7",
-        "state": "structured-only",
+        "limitations": [],
+        "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
+        "searchText": "Flare Spell Elementalist Fire Magic Spell. Deals fire damage.",
+        "sourceTextDigest": "9eeb6c041d504ab36594b87c1b05f66bf79406f359156a2bee9d6ab57bd4394d",
+        "state": "reviewed-text",
         "tokens": [
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Skill type: "
-          },
-          {
             "kind": "literal",
-            "value": "Spell"
+            "value": "Spell."
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Profession: "
-          },
-          {
             "kind": "literal",
-            "value": "Elementalist"
+            "value": "Deals"
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Attribute: "
+            "kind": "progression-reference",
+            "seriesId": "progression:skill:2:1",
+            "valueSlot": 0
+          },
+          {
+            "kind": "whitespace"
           },
           {
             "kind": "literal",
-            "value": "Fire Magic"
+            "value": "fire"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "literal",
+            "value": "damage."
           }
         ]
       },
@@ -904,7 +906,7 @@
         ],
         "notes": null,
         "reviewIds": [
-          "review:epic-04-description-structured-only:2026-09-01"
+          "review:epic-04-reviewed-concise-descriptions:2026-09-04"
         ],
         "sourceIds": [
           "source:gww:epic-04-fixture:skill:2:5102"
@@ -993,43 +995,58 @@
         }
       },
       "description": {
-        "limitations": [
-          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
-        ],
-        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
-        "searchText": "\"Save Yourselves!\" Shout Warrior Allegiance rank",
-        "sourceTextDigest": "b9b297e01afe131ec732f5167b54fe40ec01546bbf4443a1461b88d04917e188",
-        "state": "structured-only",
+        "limitations": [],
+        "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
+        "searchText": "\"Save Yourselves!\" Shout Warrior Allegiance rank Shout. For seconds, allies gain armor.",
+        "sourceTextDigest": "a43de1c84dc8b7500a9dce6748137cc0d0483ef2ba8c078fdbdd91ce6b8f94f7",
+        "state": "reviewed-text",
         "tokens": [
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Skill type: "
-          },
-          {
             "kind": "literal",
-            "value": "Shout"
+            "value": "Shout."
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Profession: "
-          },
-          {
             "kind": "literal",
-            "value": "Warrior"
+            "value": "For"
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Attribute: "
+            "kind": "progression-reference",
+            "seriesId": "progression:skill:3:1",
+            "valueSlot": 0
+          },
+          {
+            "kind": "whitespace"
           },
           {
             "kind": "literal",
-            "value": "Allegiance rank"
+            "value": "seconds,"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "literal",
+            "value": "allies"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "literal",
+            "value": "gain"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "literal",
+            "value": "armor."
           }
         ]
       },
@@ -1056,7 +1073,7 @@
         ],
         "notes": null,
         "reviewIds": [
-          "review:epic-04-description-structured-only:2026-09-01"
+          "review:epic-04-reviewed-concise-descriptions:2026-09-04"
         ],
         "sourceIds": [
           "source:gww:epic-04-fixture:skill:3:5103"
@@ -1145,43 +1162,43 @@
         }
       },
       "description": {
-        "limitations": [
-          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
-        ],
-        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
-        "searchText": "Training Beacon (PvE) Spell Mesmer Inspiration Magic",
-        "sourceTextDigest": "46a3108c9628c857acc2e9cc2daf31b8b6c7fbafe43eef74d9c1cf06b142d0c2",
-        "state": "structured-only",
+        "limitations": [],
+        "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
+        "searchText": "Training Beacon (PvE) Spell Mesmer Inspiration Magic Spell. Fixture PvE split description.",
+        "sourceTextDigest": "8feebf0cac49bfa143d45b610ce5ed50c3c716278f88eccbd374712d712f1a48",
+        "state": "reviewed-text",
         "tokens": [
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Skill type: "
-          },
-          {
             "kind": "literal",
-            "value": "Spell"
+            "value": "Spell."
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Profession: "
-          },
-          {
             "kind": "literal",
-            "value": "Mesmer"
+            "value": "Fixture"
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Attribute: "
+            "kind": "literal",
+            "value": "PvE"
+          },
+          {
+            "kind": "whitespace"
           },
           {
             "kind": "literal",
-            "value": "Inspiration Magic"
+            "value": "split"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "literal",
+            "value": "description."
           }
         ]
       },
@@ -1206,7 +1223,7 @@
         ],
         "notes": null,
         "reviewIds": [
-          "review:epic-04-description-structured-only:2026-09-01"
+          "review:epic-04-reviewed-concise-descriptions:2026-09-04"
         ],
         "sourceIds": [
           "source:gww:epic-04-fixture:skill:4:5104"
@@ -1295,43 +1312,43 @@
         }
       },
       "description": {
-        "limitations": [
-          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
-        ],
-        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
-        "searchText": "Training Beacon (PvP) Spell Mesmer Inspiration Magic",
-        "sourceTextDigest": "77f3d11c1cbeafc3f63f3b028d621fd16053d64cf0e4de098dd33333f4bda647",
-        "state": "structured-only",
+        "limitations": [],
+        "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
+        "searchText": "Training Beacon (PvP) Spell Mesmer Inspiration Magic Spell. Fixture PvP split description.",
+        "sourceTextDigest": "4bb07f183073220820aa9eaba32083ac791fb0bd5d70fc72af7b0c2c03472ec3",
+        "state": "reviewed-text",
         "tokens": [
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Skill type: "
-          },
-          {
             "kind": "literal",
-            "value": "Spell"
+            "value": "Spell."
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Profession: "
-          },
-          {
             "kind": "literal",
-            "value": "Mesmer"
+            "value": "Fixture"
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Attribute: "
+            "kind": "literal",
+            "value": "PvP"
+          },
+          {
+            "kind": "whitespace"
           },
           {
             "kind": "literal",
-            "value": "Inspiration Magic"
+            "value": "split"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "literal",
+            "value": "description."
           }
         ]
       },
@@ -1356,7 +1373,7 @@
         ],
         "notes": null,
         "reviewIds": [
-          "review:epic-04-description-structured-only:2026-09-01"
+          "review:epic-04-reviewed-concise-descriptions:2026-09-04"
         ],
         "sourceIds": [
           "source:gww:epic-04-fixture:skill:5:5105"
@@ -1445,43 +1462,58 @@
         }
       },
       "description": {
-        "limitations": [
-          "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
-        ],
-        "reviewId": "review:epic-04-description-structured-only:2026-09-01",
-        "searchText": "\"Save Yourselves!\" Shout Warrior Allegiance rank",
-        "sourceTextDigest": "b9b297e01afe131ec732f5167b54fe40ec01546bbf4443a1461b88d04917e188",
-        "state": "structured-only",
+        "limitations": [],
+        "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
+        "searchText": "\"Save Yourselves!\" Shout Warrior Allegiance rank Shout. For seconds, allies gain armor.",
+        "sourceTextDigest": "a43de1c84dc8b7500a9dce6748137cc0d0483ef2ba8c078fdbdd91ce6b8f94f7",
+        "state": "reviewed-text",
         "tokens": [
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Skill type: "
-          },
-          {
             "kind": "literal",
-            "value": "Shout"
+            "value": "Shout."
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Profession: "
-          },
-          {
             "kind": "literal",
-            "value": "Warrior"
+            "value": "For"
           },
           {
             "kind": "whitespace"
           },
           {
-            "kind": "reviewed-factual-marker",
-            "value": "Attribute: "
+            "kind": "progression-reference",
+            "seriesId": "progression:skill:6:1",
+            "valueSlot": 0
+          },
+          {
+            "kind": "whitespace"
           },
           {
             "kind": "literal",
-            "value": "Allegiance rank"
+            "value": "seconds,"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "literal",
+            "value": "allies"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "literal",
+            "value": "gain"
+          },
+          {
+            "kind": "whitespace"
+          },
+          {
+            "kind": "literal",
+            "value": "armor."
           }
         ]
       },
@@ -1508,7 +1540,7 @@
         ],
         "notes": null,
         "reviewIds": [
-          "review:epic-04-description-structured-only:2026-09-01"
+          "review:epic-04-reviewed-concise-descriptions:2026-09-04"
         ],
         "sourceIds": [
           "source:gww:epic-04-fixture:skill:6:5106"
@@ -1573,8 +1605,8 @@
     "rangedPageTitles": [
       "Guild Wars Wiki:Game integration/Skills/1-10"
     ],
-    "sourcePlanDigest": "be6dfc7f5c510322b38bd4f5dacbeccc042b76b04fd343ed4c8a6d6b3dd62a13",
-    "sourceSetDigest": "1cb32650a251f5f037c47b8d9e709f7d0e4d8c6fb36341b5911a28d9d70ade69",
+    "sourcePlanDigest": "d8b86a107d82004ded0fba7fae68b1e2fa743e593ee580db74a628f2a04f53ff",
+    "sourceSetDigest": "7308af0dbca98bedaf41e4759c30601a64ccf5737f8b13c98bb6589f6cea10c2",
     "supplementalSeedCount": 0
   },
   "splitGroups": [

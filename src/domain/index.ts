@@ -362,7 +362,7 @@ export type {
   TemplateSkillBar,
   TemplateSourceEnvelope
 } from "./template";
-export { renderSkillTooltipText } from "./skill-tooltip";
+export { formatSkillProgressionValue, renderSkillTooltipText } from "./skill-tooltip";
 export type {
   SkillTooltipContext,
   SkillTooltipOutcome,

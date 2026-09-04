@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
@@ -38,7 +39,7 @@ class SkillCatalogAssembly:
     diagnostics: list[Diagnostic]
 
 
-DESCRIPTION_REVIEW_ID = "review:epic-04-description-structured-only:2026-09-01"
+DESCRIPTION_REVIEW_ID = "review:epic-04-reviewed-concise-descriptions:2026-09-04"
 BASELINE_REVIEW_ID = "review:epic-04-first-baseline:2026-09-01"
 PROGRESSION_REVIEW_ID = "review:epic-04-structured-progressions:2026-09-01"
 
@@ -135,9 +136,11 @@ def assemble_skill_catalog(
             attribute_id=record["attributeId"],
             attribute_name=infobox.attribute_name,
             title_key=infobox.title_key,
+            inline_progression_text=infobox.description_source_text,
         )
         diagnostics.extend(progression.diagnostics)
         progression_series.extend(progression.series)
+        _align_description_progression_tokens(record, progression.series, infobox.description_source_text)
         record["progressionSeriesIds"] = [series["id"] for series in progression.series]
         if not record["classification"]["unsupported"] and len(remote_media_by_id) < profile.media_title_limit:
             metadata, icon_diagnostics = resolve_icon_metadata(
@@ -297,14 +300,18 @@ def validate_skill_catalog(catalog: dict[str, Any], *, snapshot_set_digest: str)
         )
     diagnostics.append(
         Diagnostic(
-            code="SKILL_DESCRIPTION_STRUCTURED_ONLY_REVIEW",
+            code="SKILL_DESCRIPTION_CONCISE_REVIEW",
             severity="info",
-            message="Runtime skill descriptions are structured-only unless a later digest-bound text review approves copied prose.",
+            message="Runtime skill descriptions use reviewed concise infobox text when available and structured-only fallback otherwise.",
             category="copied-text-without-attribution",
             scope_kind="release",
             artifact_path="data/generated/epic-04/skills.catalog.json",
             evidence=(
-                Evidence("review-note", DESCRIPTION_REVIEW_ID, "Source-authored descriptions excluded from runtime text."),
+                Evidence(
+                    "review-note",
+                    DESCRIPTION_REVIEW_ID,
+                    "Concise infobox descriptions approved for bounded runtime tooltip text.",
+                ),
             ),
             disposition="resolved",
         )
@@ -524,6 +531,98 @@ def _split_groups(skills: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def _excluded_disposition_count(dispositions: list[dict[str, Any]]) -> int:
     return sum(1 for disposition in dispositions if disposition["kind"] in {"excluded", "blocked"})
+
+
+def _align_description_progression_tokens(
+    record: dict[str, Any],
+    progression_series: list[dict[str, Any]],
+    raw_description: str | None,
+) -> None:
+    tokens = record["description"]["tokens"]
+    inline_values = _inline_progression_values(raw_description)
+    sequential_slots = _progression_slots(progression_series)
+    sequential_index = 0
+    progression_token_index = 0
+    aligned_tokens: list[dict[str, Any]] = []
+    for token in tokens:
+        if token.get("kind") != "progression-reference":
+            aligned_tokens.append(token)
+            continue
+        source_values = (
+            inline_values[progression_token_index]
+            if progression_token_index < len(inline_values)
+            else None
+        )
+        match = _matching_progression_slot(source_values, sequential_slots)
+        if match is None and sequential_index < len(sequential_slots):
+            match = sequential_slots[sequential_index]
+            sequential_index += 1
+        progression_token_index += 1
+        if match is None:
+            aligned_tokens.append(token)
+            continue
+        aligned_tokens.append(
+            {
+                "kind": "progression-reference",
+                "seriesId": match["seriesId"],
+                "valueSlot": match["valueSlot"],
+            }
+        )
+    record["description"]["tokens"] = aligned_tokens
+
+
+def _inline_progression_values(raw_description: str | None) -> list[tuple[float, float]]:
+    if raw_description is None:
+        return []
+    result: list[tuple[float, float]] = []
+    for match in re.finditer(r"\{\{\s*gr2?\s*\|([^{}]+)}}", raw_description, flags=re.IGNORECASE):
+        values = [_number(part) for part in match.group(1).split("|")]
+        numeric_values = [value for value in values if value is not None]
+        if len(numeric_values) >= 2:
+            result.append((numeric_values[0], numeric_values[-1]))
+    return result
+
+
+def _progression_slots(progression_series: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    slots: list[dict[str, Any]] = []
+    for series in progression_series:
+        if not series["values"]:
+            continue
+        first_row = series["values"][0]
+        last_row = series["values"][-1]
+        for slot in series["valueSlots"]:
+            index = int(slot["index"])
+            slots.append(
+                {
+                    "seriesId": series["id"],
+                    "valueSlot": index,
+                    "start": float(first_row["values"][index]),
+                    "end": float(last_row["values"][index]),
+                }
+            )
+    return slots
+
+
+def _matching_progression_slot(
+    source_values: tuple[float, float] | None,
+    slots: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    if source_values is None:
+        return None
+    start, end = source_values
+    for slot in slots:
+        if _same_number(slot["start"], start) and _same_number(slot["end"], end):
+            return slot
+    return None
+
+
+def _same_number(left: float, right: float) -> bool:
+    return abs(left - right) < 0.001
+
+
+def _number(value: str) -> float | None:
+    match = re.search(r"-?\d+(?:\.\d+)?", value)
+    return None if match is None else float(match.group(0))
 
 
 def _drop_nonsemantic(value: Any) -> Any:

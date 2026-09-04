@@ -100,9 +100,9 @@ from `calculateEffectiveAttributeRank`. Title-scaled series receive exact raw-ke
 the shared title-rank resolver, using implicit maximums by default and authored overrides when
 present. Resolved title scaling no longer renders maximum-title-rank assumption copy.
 
-The current promoted EPIC-04 catalog mostly exposes structured-only descriptions rather than copied
-source prose. The editor renders supported structured facts and progression tables separately and
-uses stable non-crashing unresolved states for gaps.
+The current promoted EPIC-04 catalog exposes reviewed concise descriptions for skill tooltips, with
+structured facts and progression tables available separately. The editor uses stable non-crashing
+unresolved states for gaps.
 
 ## Export Policy
 

@@ -46,8 +46,14 @@ describe("SkillDisplay and SkillTooltip", () => {
     expect(screen.getByLabelText("Skill type: Enchantment Spell")).toBeInTheDocument();
     expect(screen.getByLabelText("Cost: Energy 15")).toBeInTheDocument();
     expect(screen.getByLabelText("Cost: Sacrifice 33%")).toBeInTheDocument();
-    expect(screen.getByLabelText("Timing: Activation {{3/4}}")).toBeInTheDocument();
+    expect(screen.getByLabelText("Timing: Activation 3/4")).toBeInTheDocument();
     expect(screen.getByLabelText("Timing: Recharge 30")).toBeInTheDocument();
+    expect(screen.queryByText("{{3/4}}")).toBeNull();
+    expect(screen.getByRole("link", { name: "Verata's Aura" })).toHaveAttribute(
+      "href",
+      "https://wiki.guildwars.com/wiki/Verata's_Aura"
+    );
+    expect(screen.getByRole("link", { name: "Verata's Aura" })).toHaveAttribute("target", "_blank");
     const images = localImageSources();
     expect(images).toHaveLength(5);
     expect(images.some((src) => src.includes("verata-s-aura"))).toBe(true);
@@ -75,14 +81,49 @@ describe("SkillDisplay and SkillTooltip", () => {
     expect(tooltip).toHaveClass("from-skill-menu");
     expect(tooltip).toHaveTextContent("Healing Signet");
     expect(tooltip).toHaveTextContent("Signet.");
+    expect(tooltip).toHaveTextContent("You gain 82 Health.");
     expect(tooltip).toHaveTextContent("(Attrib: Tactics)");
-    expect(tooltip).toHaveTextContent("Concise description pending catalog review.");
+    expect(tooltip).not.toHaveTextContent("Concise description pending catalog review.");
 
     fireEvent.mouseLeave(trigger);
     expect(screen.queryByRole("tooltip", { hidden: true })).toBeNull();
 
     fireEvent.focus(button);
     expect(screen.getByRole("tooltip", { hidden: true })).toHaveTextContent("Healing Signet");
+  });
+
+  it("rounds interpolated progression values in visible tooltip text", () => {
+    const wordOfHealing = catalogs.skills.find((skill) => skill.name === "Word of Healing");
+    if (wordOfHealing === undefined || wordOfHealing.attributeId === null) {
+      throw new Error("Missing Word of Healing fixture data");
+    }
+    const state = playableEditorFixture();
+    const view = selectSkillDisplay(
+      catalogs,
+      {
+        ...state,
+        build: {
+          ...state.build,
+          attributes: [{ attributeId: wordOfHealing.attributeId, rank: 1 }]
+        }
+      },
+      wordOfHealing.id,
+      "skill-browser"
+    );
+    render(
+      <SkillTooltipTrigger view={view} placement="left">
+        <button type="button">Hover Word of Healing</button>
+      </SkillTooltipTrigger>
+    );
+
+    const button = screen.getByRole("button", { name: "Hover Word of Healing" });
+    fireEvent.mouseEnter(button.parentElement!);
+
+    const tooltip = screen.getByRole("tooltip", { hidden: true });
+    expect(tooltip).toHaveTextContent("Heals for 11.");
+    expect(tooltip).toHaveTextContent("Heals for 36 more");
+    expect(tooltip).not.toHaveTextContent("11.333");
+    expect(tooltip).not.toHaveTextContent("35.667");
   });
 });
 

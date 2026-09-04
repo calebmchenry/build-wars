@@ -2,13 +2,15 @@ import { describe, expect, it } from "vitest";
 
 import {
   catalogId,
+  formatSkillProgressionValue,
   lookupSkillByName,
   lookupSkillTemplateId,
   renderSkillTooltipText,
   resolveSkillModeVariant,
   SOURCE_POLICY_SCHEMA_VERSION,
   templateSkillId,
-  type SkillCatalog
+  type SkillCatalog,
+  type SkillProgressionSeries
 } from "../../src/domain";
 import golden from "../fixtures/data-ingestion/generated/fixture-skills.catalog.json";
 
@@ -36,8 +38,9 @@ describe("skill catalog contracts", () => {
     expect(healingSignet?.templateId).toBe(1);
     expect(healingSignet?.costs.energy.state).toBe("absent");
     expect(healingSignet?.timings.activation.value).toBe(2);
-    expect(healingSignet?.description.state).toBe("structured-only");
+    expect(healingSignet?.description.state).toBe("reviewed-text");
     expect(healingSignet?.description.searchText).toContain("Healing Signet");
+    expect(healingSignet?.description.searchText).toContain("You gain Health.");
     expect(JSON.stringify(catalog)).not.toContain("Fixture trainer prose");
     expect(catalog.remoteMedia.every((media) => media.cachedBytes === false)).toBe(true);
   });
@@ -117,5 +120,32 @@ describe("skill catalog contracts", () => {
       { text: "172", tone: "variable" }
     ]);
     expect(missingRank.reason).toBe("missing-rank");
+  });
+
+  it("formats interpolated progression values like the visible wiki table", () => {
+    const baseSeries = catalog.progressionSeries[0];
+    if (baseSeries === undefined) {
+      throw new Error("Missing progression fixture");
+    }
+    const integerEndpointSeries = {
+      ...baseSeries,
+      values: [
+        { rank: 0, values: [5] },
+        { rank: 1, values: [11.333] },
+        { rank: 15, values: [100] }
+      ]
+    } satisfies SkillProgressionSeries;
+    const decimalEndpointSeries = {
+      ...baseSeries,
+      values: [
+        { rank: 0, values: [0.17] },
+        { rank: 1, values: [0.237] },
+        { rank: 15, values: [1.17] }
+      ]
+    } satisfies SkillProgressionSeries;
+
+    expect(formatSkillProgressionValue(11.333, integerEndpointSeries, 0)).toBe("11");
+    expect(formatSkillProgressionValue(35.667, integerEndpointSeries, 0)).toBe("36");
+    expect(formatSkillProgressionValue(0.237, decimalEndpointSeries, 0)).toBe("0.237");
   });
 });

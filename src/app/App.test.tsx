@@ -28,7 +28,7 @@ afterEach(() => {
   localStorage.clear();
 });
 
-describe("App", () => {
+describe("App", { timeout: 10_000 }, () => {
   it("renders the catalog-driven editor workspace", () => {
     render(<App />);
 

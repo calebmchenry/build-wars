@@ -233,9 +233,9 @@ function GuildWarsSkillTooltip({
               <span
                 key={`${fact.label}:${fact.value}`}
                 className={`gw-skill-tooltip-fact fact-${fact.icon}`}
-                aria-label={`${fact.label} ${tooltipFactValue(fact.value)}`}
+                aria-label={`${fact.label} ${fact.value}`}
               >
-                <span>{tooltipFactValue(fact.value)}</span>
+                <span>{fact.value}</span>
                 <SkillFactIcon kind={fact.icon} label={fact.label} />
               </span>
             ))}
@@ -319,10 +319,6 @@ function tooltipDetailText(
   }
   details.push(...view.assumptions);
   return details;
-}
-
-function tooltipFactValue(value: string): string {
-  return value.replace(/^\{\{(.+)\}\}$/, "$1");
 }
 
 function placeTooltip(

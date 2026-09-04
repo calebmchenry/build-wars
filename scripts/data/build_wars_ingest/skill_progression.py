@@ -38,6 +38,7 @@ def extract_skill_progressions(
     attribute_id: int | None,
     attribute_name: str | None,
     title_key: str | None,
+    inline_progression_text: str | None = None,
 ) -> SkillProgressionExtraction:
     if mwparserfromhell is None:
         raise SkillProgressionError(f"mwparserfromhell is required: {_IMPORT_ERROR}")
@@ -87,7 +88,7 @@ def extract_skill_progressions(
     if not series:
         gr_series = _series_from_gr_templates(
             skill_id=skill_id,
-            wikitext=wikitext,
+            wikitext=inline_progression_text or wikitext,
             source_id=source_id,
             attribute_id=attribute_id,
             title_key=title_key,

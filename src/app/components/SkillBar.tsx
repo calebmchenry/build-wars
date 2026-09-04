@@ -7,6 +7,7 @@ import { selectSkillSlotDisplays } from "../editor-selectors";
 import type { EditorAction, EditorState } from "../editor-state";
 import { applySkillBarIntent } from "../skill-bar-actions";
 import { CatalogIcon } from "./CatalogIcon";
+import { setSkillIconDragImage } from "./skill-drag-image";
 import { SkillTooltipTrigger } from "./SkillTooltip";
 
 export function SkillBar({
@@ -42,22 +43,29 @@ export function SkillBar({
               <button
                 type="button"
                 className="slot-button"
-                draggable={filled}
                 aria-label={`Skill slot ${index + 1}: ${slot.title}`}
                 onClick={() => dispatch({ type: "select-slot", slotIndex: index })}
-                onDragStart={(event) => {
-                  if (!filled) {
-                    event.preventDefault();
-                    return;
-                  }
-                  event.dataTransfer.effectAllowed = "move";
-                  event.dataTransfer.setData(BUILD_WARS_DRAG_MIME, slotDragPayload(index));
-                  setLocalDragImage(event, slot.title);
-                  dispatch({ type: "start-drag", drag: { kind: "skill-slot", slotIndex: index } });
-                }}
-                onDragEnd={(event) => handleSlotDragEnd(event, index, state, catalogs, dispatch)}
               >
-                <span className="skill-slot-art" data-state={slot.kind}>
+                <span
+                  className={filled ? "skill-slot-art skill-slot-drag-handle" : "skill-slot-art"}
+                  data-state={slot.kind}
+                  draggable={filled}
+                  title={filled ? `Drag ${slot.title} from slot ${index + 1}` : undefined}
+                  onDragStart={(event) => {
+                    if (!filled) {
+                      event.preventDefault();
+                      return;
+                    }
+                    event.dataTransfer.effectAllowed = "move";
+                    event.dataTransfer.setData(BUILD_WARS_DRAG_MIME, slotDragPayload(index));
+                    setSkillIconDragImage(event);
+                    dispatch({
+                      type: "start-drag",
+                      drag: { kind: "skill-slot", slotIndex: index }
+                    });
+                  }}
+                  onDragEnd={(event) => handleSlotDragEnd(event, index, state, catalogs, dispatch)}
+                >
                   {slot.kind === "empty" ? null : <CatalogIcon descriptor={slot.placeholder} />}
                 </span>
                 <span className="skill-slot-number" aria-hidden="true">
@@ -109,7 +117,7 @@ function handleDrop(
 }
 
 function handleSlotDragEnd(
-  event: DragEvent<HTMLButtonElement>,
+  event: DragEvent<HTMLElement>,
   slotIndex: number,
   state: EditorState,
   catalogs: AppCatalogViews,
@@ -119,16 +127,4 @@ function handleSlotDragEnd(
     applySkillBarIntent(state, catalogs, dispatch, { kind: "remove-slot", fromIndex: slotIndex });
   }
   dispatch({ type: "cancel-drag" });
-}
-
-function setLocalDragImage(event: DragEvent<HTMLElement>, label: string): void {
-  if (event.dataTransfer.setDragImage === undefined || typeof document === "undefined") {
-    return;
-  }
-  const preview = document.createElement("div");
-  preview.className = "drag-preview";
-  preview.textContent = label;
-  document.body.append(preview);
-  event.dataTransfer.setDragImage(preview, 18, 18);
-  window.setTimeout(() => preview.remove(), 0);
 }

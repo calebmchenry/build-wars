@@ -26,6 +26,7 @@ class SkillInfoboxExtraction:
     icon_file_title: str | None
     attribute_name: str | None
     title_key: str | None
+    description_source_text: str | None
     source_text_digest: str | None
     diagnostics: list[Diagnostic]
 
@@ -104,6 +105,7 @@ def extract_skill_infobox(
             icon_file_title=None,
             attribute_name=None,
             title_key=None,
+            description_source_text=None,
             source_text_digest=None,
             diagnostics=diagnostics,
         )
@@ -164,11 +166,12 @@ def extract_skill_infobox(
         requested_title=requested_title,
     )
     description = _description_projection(
+        skill_id=skill_id,
         name=name,
         skill_type=skill_type,
         profession_name=profession_name,
         attribute_name=attribute_name,
-        raw_description=params.get("description") or params.get("concise description"),
+        raw_description=params.get("concise description") or params.get("description"),
         review_id=review_id,
         unsupported=False,
     )
@@ -208,6 +211,7 @@ def extract_skill_infobox(
         icon_file_title=_file_title(params.get("image")),
         attribute_name=attribute_name,
         title_key=_rank_title_key(attribute_name, infobox_id_label),
+        description_source_text=params.get("concise description") or params.get("description"),
         source_text_digest=description["sourceTextDigest"],
         diagnostics=sorted(diagnostics, key=lambda item: item.stable_key()),
     )
@@ -272,6 +276,7 @@ def _unsupported_record(
         "costs": _empty_costs(),
         "timings": _empty_timings(),
         "description": _description_projection(
+            skill_id=skill_id,
             name=canonical_title or requested_title,
             skill_type="Unknown",
             profession_name=None,
@@ -411,6 +416,7 @@ def _classification(
 
 def _description_projection(
     *,
+    skill_id: int,
     name: str,
     skill_type: str,
     profession_name: str | None,
@@ -427,6 +433,25 @@ def _description_projection(
             "sourceTextDigest": None,
             "reviewId": review_id,
             "limitations": ["No supported Skill infobox was present in the selected snapshot."],
+        }
+    source_text_digest = digest_bytes((raw_description or "").encode("utf-8")) if raw_description else None
+    concise_tokens = _description_text_tokens(raw_description, skill_id=skill_id)
+    if concise_tokens:
+        return {
+            "state": "reviewed-text",
+            "tokens": concise_tokens,
+            "searchText": _search_text(
+                [
+                    name,
+                    skill_type,
+                    profession_name,
+                    attribute_name,
+                    _clean_markup(raw_description),
+                ]
+            ),
+            "sourceTextDigest": source_text_digest,
+            "reviewId": review_id,
+            "limitations": [],
         }
     tokens = [
         {"kind": "reviewed-factual-marker", "value": "Skill type: "},
@@ -452,12 +477,68 @@ def _description_projection(
         "state": "structured-only",
         "tokens": tokens,
         "searchText": _search_text([name, skill_type, profession_name, attribute_name]),
-        "sourceTextDigest": digest_bytes((raw_description or "").encode("utf-8")) if raw_description else None,
+        "sourceTextDigest": source_text_digest,
         "reviewId": review_id,
         "limitations": [
             "Runtime text excludes source-authored descriptions until a digest-bound description review approves copied prose."
         ],
     }
+
+
+def _description_text_tokens(raw_description: str | None, *, skill_id: int) -> list[dict[str, Any]]:
+    if raw_description is None:
+        return []
+    text = raw_description.strip()
+    if not text:
+        return []
+    text = re.sub(r"<!--.*?-->", "", text, flags=re.DOTALL)
+    text = re.sub(r"\[\[([^|\]]+)\|([^\]]+)]]", r"\2", text)
+    text = re.sub(r"\[\[([^\]]+)]]", r"\1", text)
+    text = re.sub(r"<br\s*/?>", "\n", text, flags=re.IGNORECASE)
+    text = re.sub(r"</p\s*>", "\n", text, flags=re.IGNORECASE)
+    text = re.sub(r"<[^>]+>", "", text)
+    text = re.sub(r"\{\{(?:gray|sic)\|([^{}]+)}}", r"\1", text, flags=re.IGNORECASE)
+
+    tokens: list[dict[str, Any]] = []
+    position = 0
+    progression_index = 0
+    for match in re.finditer(r"\{\{\s*gr2?\s*\|[^{}]+}}", text, flags=re.IGNORECASE):
+        tokens.extend(_literal_description_tokens(text[position : match.start()]))
+        progression_index += 1
+        tokens.append(
+            {
+                "kind": "progression-reference",
+                "seriesId": f"progression:skill:{skill_id}:{progression_index}",
+                "valueSlot": 0,
+            }
+        )
+        position = match.end()
+    tokens.extend(_literal_description_tokens(text[position:]))
+    return _trim_description_tokens(tokens)
+
+
+def _literal_description_tokens(value: str) -> list[dict[str, Any]]:
+    if not value:
+        return []
+    tokens: list[dict[str, Any]] = []
+    for part in re.split(r"(\n+|\s+)", value):
+        if not part:
+            continue
+        if "\n" in part:
+            tokens.append({"kind": "line-break"})
+        elif part.isspace():
+            tokens.append({"kind": "whitespace"})
+        else:
+            tokens.append({"kind": "literal", "value": part})
+    return tokens
+
+
+def _trim_description_tokens(tokens: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    while tokens and tokens[0]["kind"] in {"whitespace", "line-break"}:
+        tokens.pop(0)
+    while tokens and tokens[-1]["kind"] in {"whitespace", "line-break"}:
+        tokens.pop()
+    return tokens
 
 
 def _value_state(raw: str | None, *, unit_default: str | None = None) -> dict[str, Any]:

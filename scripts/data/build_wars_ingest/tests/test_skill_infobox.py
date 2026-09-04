@@ -43,7 +43,7 @@ class SkillInfoboxTests(unittest.TestCase):
             )
         )
 
-    def test_core_infobox_fields_join_costs_and_description_state(self) -> None:
+    def test_core_infobox_fields_join_costs_and_concise_description(self) -> None:
         text = (FIXTURE_ROOT / "skills/healing-signet.wiki").read_text(encoding="utf-8")
 
         extraction = extract_skill_infobox(
@@ -64,7 +64,13 @@ class SkillInfoboxTests(unittest.TestCase):
         self.assertEqual(record["attributeId"], 21)
         self.assertEqual(record["costs"]["energy"]["state"], "absent")
         self.assertEqual(record["timings"]["activation"]["value"], 2)
-        self.assertEqual(record["description"]["state"], "structured-only")
+        self.assertEqual(record["description"]["state"], "reviewed-text")
+        self.assertEqual(record["description"]["tokens"][0], {"kind": "literal", "value": "Signet."})
+        self.assertIn(
+            {"kind": "progression-reference", "seriesId": "progression:skill:1:1", "valueSlot": 0},
+            record["description"]["tokens"],
+        )
+        self.assertIn("You gain Health.", record["description"]["searchText"])
         self.assertNotIn("Fixture trainer prose", json.dumps(record))
 
     def test_title_rank_skill_keeps_null_attribute_and_title_dependency_key(self) -> None:

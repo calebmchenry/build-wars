@@ -34,19 +34,19 @@
     },
     {
       "category": "copied-text-without-attribution",
-      "code": "SKILL_DESCRIPTION_STRUCTURED_ONLY_REVIEW",
+      "code": "SKILL_DESCRIPTION_CONCISE_REVIEW",
       "disposition": "resolved",
       "evidence": [
         {
           "kind": "review-note",
-          "notes": "Source-authored descriptions excluded from runtime text.",
-          "reference": "review:epic-04-description-structured-only:2026-09-01"
+          "notes": "Concise infobox descriptions approved for bounded runtime tooltip text.",
+          "reference": "review:epic-04-reviewed-concise-descriptions:2026-09-04"
         }
       ],
       "expiresAt": null,
       "followUpTicketIds": [],
-      "id": "qa:skill_description_structured_only_review:05ab5bb24a84",
-      "rationale": "Runtime skill descriptions are structured-only unless a later digest-bound text review approves copied prose.",
+      "id": "qa:skill_description_concise_review:cb5f49921238",
+      "rationale": "Runtime skill descriptions use reviewed concise infobox text when available and structured-only fallback otherwise.",
       "reReviewTrigger": null,
       "reviewedAt": null,
       "reviewer": null,

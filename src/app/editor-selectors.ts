@@ -3,6 +3,7 @@ import {
   calculateEffectiveAttributeRank,
   collectEquipmentAttributeRankAdjustments,
   equipmentAdjustmentsForAttribute,
+  formatSkillProgressionValue,
   lookupSkillById,
   purchasedRankCost,
   renderSkillTooltipText,
@@ -438,7 +439,7 @@ export function selectSkillDisplay(
     tooltipSegments: tooltip.kind === "rendered" ? tooltip.segments : [],
     tooltipState: tooltip.kind,
     tooltipDetail: tooltip.kind === "rendered" ? null : tooltip.detail,
-    progression: progressionViews(skill, catalogs),
+    progression: surface === "tooltip" ? progressionViews(skill, catalogs) : [],
     assumptions: rankContext.assumptions,
     raw
   };
@@ -537,7 +538,11 @@ function progressionViews(
                 const slot = series.valueSlots[index];
                 const suffix =
                   slot?.unit === null || slot?.unit === undefined ? "" : ` ${slot.unit}`;
-                return `${slot?.label ?? `Value ${index + 1}`}: ${value}${suffix}`;
+                return `${slot?.label ?? `Value ${index + 1}`}: ${formatSkillProgressionValue(
+                  value,
+                  series,
+                  index
+                )}${suffix}`;
               })
             }))
           }
@@ -629,10 +634,15 @@ function skillValueFacts(
     .filter(([, state]) => state.state !== "absent" && state.state !== "not-applicable")
     .map(([label, state, icon]) => ({
       label: `${prefix}: ${label}`,
-      value: state.text ?? (state.value === null ? state.state : String(state.value)),
+      value: skillFactValueText(state),
       state: state.state,
       icon
     }));
+}
+
+function skillFactValueText(state: SkillValueState): string {
+  const value = state.text ?? (state.value === null ? state.state : String(state.value));
+  return value.replace(/\{\{([0-9]+(?:\/[0-9]+|\.[0-9]+)?)\}\}/g, "$1");
 }
 
 function normalAttributesForSelectedProfessions(

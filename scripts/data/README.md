@@ -184,7 +184,7 @@ live refresh.
 `epic-04-skills` normalizes the Guild Wars skills source set into
 `data/generated/epic-04/skills.catalog.json`. The runtime catalog contains skill IDs, template IDs,
 canonical names, lookup keys, wiki URLs, EPIC-03 profession/attribute joins, campaigns, skill types,
-classification flags, independent cost/timing value states, structured-only description tokens,
+classification flags, independent cost/timing value states, reviewed concise description tokens,
 progression series, split groups, nullable metadata-only icons, source-set summary, dispositions,
 section digests, and a semantic `catalogVersion`.
 
@@ -199,10 +199,11 @@ paths, dependency digests, artifact digest, and review records. The QA JSON owns
 release gates. Runtime app code must not read those audit artifacts.
 
 Schema v1 excludes acquisition metadata, guide prose, strategy/usage notes, vendor/drop/quest
-instructions, community content, raw page bodies, rendered HTML, and copied source-authored
+instructions, community content, raw page bodies, rendered HTML, and unreviewed source-authored
 descriptions. Description state is explicit: `reviewed-text`, `structured-only`, `excluded`, or
-`unsupported`; the current promotion uses structured-only runtime text and records source text
-digests for future review invalidation.
+`unsupported`; the current promotion uses reviewed concise infobox descriptions when available,
+keeps structured-only fallback otherwise, and records source text digests for future review
+invalidation.
 
 ## EPIC-10 Profile
 

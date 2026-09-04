@@ -61,9 +61,10 @@ screenshots.
 ## Description And Progression Policy
 
 Runtime descriptions are explicit states: `reviewed-text`, `structured-only`, `excluded`, or
-`unsupported`. The first EPIC-04 promotion uses structured-only runtime text and records source text
-digests for future review invalidation. Copied source-authored descriptions require a later
-digest-bound review before runtime text can include them.
+`unsupported`. The current EPIC-04 promotion uses reviewed concise infobox descriptions when
+available, keeps structured-only fallback otherwise, and records source text digests for future
+review invalidation. Full copied source-authored descriptions still require a separate digest-bound
+review before runtime text can include them.
 
 Progression series store dependency kind, rank domain, value slots, finite rows, source form, and
 provenance. Title-rank dependencies use stable raw keys that `src/domain/title-rank.ts` normalizes

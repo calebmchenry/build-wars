@@ -1,4 +1,4 @@
-import { useMemo, useState, type Dispatch, type DragEvent, type KeyboardEvent } from "react";
+import { useMemo, useState, type Dispatch, type KeyboardEvent } from "react";
 
 import { catalogId, type SkillId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
@@ -14,6 +14,8 @@ import type {
 } from "../editor-state";
 import { applySkillBarIntent } from "../skill-bar-actions";
 import { SkillDisplay } from "./SkillDisplay";
+import { loadMoreBrowserResultsOnScroll } from "./skill-browser-scroll";
+import { setSkillIconDragImage } from "./skill-drag-image";
 import { SkillTooltipTrigger } from "./SkillTooltip";
 
 export function FocusedSkillCatalog({
@@ -199,7 +201,10 @@ export function FocusedSkillCatalog({
           </button>
         </div>
       ) : (
-        <div className="focused-skill-results">
+        <div
+          className="focused-skill-results"
+          onScroll={(event) => loadMoreBrowserResultsOnScroll(event, browser.hasMore, dispatch)}
+        >
           {browser.groups.map((group) => {
             const collapsed = collapsedGroups.has(group.id);
             const skillCountLabel = `${group.skills.length} ${
@@ -236,7 +241,6 @@ export function FocusedSkillCatalog({
                           role="button"
                           tabIndex={0}
                           aria-label={`Add ${skill.name} to slot ${targetSlot + 1}`}
-                          draggable
                           onClick={() =>
                             placeCatalogSkill(state, catalogs, dispatch, skill.id, targetSlot)
                           }
@@ -250,20 +254,26 @@ export function FocusedSkillCatalog({
                               targetSlot
                             )
                           }
-                          onDragStart={(event) => {
-                            event.dataTransfer.setData(
-                              BUILD_WARS_DRAG_MIME,
-                              browserSkillDragPayload(skill.id)
-                            );
-                            setLocalDragImage(event, skill.name);
-                            dispatch({
-                              type: "start-drag",
-                              drag: { kind: "browser-skill", skillId: skill.id }
-                            });
-                          }}
-                          onDragEnd={() => dispatch({ type: "cancel-drag" })}
                         >
-                          <SkillDisplay view={view} compact />
+                          <SkillDisplay
+                            view={view}
+                            compact
+                            iconDragHandle={{
+                              label: `Drag ${skill.name}`,
+                              onDragStart: (event) => {
+                                event.dataTransfer.setData(
+                                  BUILD_WARS_DRAG_MIME,
+                                  browserSkillDragPayload(skill.id)
+                                );
+                                setSkillIconDragImage(event);
+                                dispatch({
+                                  type: "start-drag",
+                                  drag: { kind: "browser-skill", skillId: skill.id }
+                                });
+                              },
+                              onDragEnd: () => dispatch({ type: "cancel-drag" })
+                            }}
+                          />
                         </SkillTooltipTrigger>
                       );
                     })}
@@ -272,15 +282,6 @@ export function FocusedSkillCatalog({
               </section>
             );
           })}
-          {browser.hasMore ? (
-            <button
-              type="button"
-              className="show-more"
-              onClick={() => dispatch({ type: "show-more-browser-results" })}
-            >
-              Show more
-            </button>
-          ) : null}
         </div>
       )}
     </section>
@@ -345,16 +346,4 @@ function professionScopeFromValue(value: string): BrowserProfessionScope {
   }
   const numericId = Number(value.replace("profession:", ""));
   return { kind: "profession", professionId: catalogId<"Profession">(numericId) };
-}
-
-function setLocalDragImage(event: DragEvent<HTMLElement>, label: string): void {
-  if (event.dataTransfer.setDragImage === undefined || typeof document === "undefined") {
-    return;
-  }
-  const preview = document.createElement("div");
-  preview.className = "drag-preview";
-  preview.textContent = label;
-  document.body.append(preview);
-  event.dataTransfer.setDragImage(preview, 18, 18);
-  window.setTimeout(() => preview.remove(), 0);
 }

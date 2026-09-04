@@ -1,4 +1,4 @@
-import type { Dispatch, DragEvent } from "react";
+import type { Dispatch } from "react";
 
 import { catalogId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
@@ -17,6 +17,8 @@ import type {
 import { BUILD_WARS_DRAG_MIME, browserSkillDragPayload } from "../drag-payload";
 import { applySkillBarIntent } from "../skill-bar-actions";
 import { SkillDisplay } from "./SkillDisplay";
+import { loadMoreBrowserResultsOnScroll } from "./skill-browser-scroll";
+import { setSkillIconDragImage } from "./skill-drag-image";
 import { SkillTooltipTrigger } from "./SkillTooltip";
 
 const RESOURCE_FILTERS: readonly ResourceFilterKind[] = [
@@ -227,7 +229,10 @@ export function SkillBrowser({
           </button>
         </div>
       ) : (
-        <div className={`skill-results ${state.browser.viewMode}`}>
+        <div
+          className={`skill-results ${state.browser.viewMode}`}
+          onScroll={(event) => loadMoreBrowserResultsOnScroll(event, browser.hasMore, dispatch)}
+        >
           {browser.groups.map((group) => (
             <section key={group.id} aria-labelledby={`group-${group.id}`}>
               <h3 id={`group-${group.id}`}>{group.label}</h3>
@@ -235,27 +240,25 @@ export function SkillBrowser({
                 {group.skills.map((skill) => {
                   const view = selectSkillDisplay(catalogs, state, skill.id, "skill-browser");
                   return (
-                    <SkillTooltipTrigger
-                      key={Number(skill.id)}
-                      view={view}
-                      placement="left"
-                      draggable
-                      onDragStart={(event) => {
-                        event.dataTransfer.setData(
-                          BUILD_WARS_DRAG_MIME,
-                          browserSkillDragPayload(skill.id)
-                        );
-                        setLocalDragImage(event, skill.name);
-                        dispatch({
-                          type: "start-drag",
-                          drag: { kind: "browser-skill", skillId: skill.id }
-                        });
-                      }}
-                      onDragEnd={() => dispatch({ type: "cancel-drag" })}
-                    >
+                    <SkillTooltipTrigger key={Number(skill.id)} view={view} placement="left">
                       <SkillDisplay
                         view={view}
                         compact={state.browser.viewMode !== "list"}
+                        iconDragHandle={{
+                          label: `Drag ${skill.name}`,
+                          onDragStart: (event) => {
+                            event.dataTransfer.setData(
+                              BUILD_WARS_DRAG_MIME,
+                              browserSkillDragPayload(skill.id)
+                            );
+                            setSkillIconDragImage(event);
+                            dispatch({
+                              type: "start-drag",
+                              drag: { kind: "browser-skill", skillId: skill.id }
+                            });
+                          },
+                          onDragEnd: () => dispatch({ type: "cancel-drag" })
+                        }}
                         action={
                           <div className="skill-actions">
                             <button
@@ -301,15 +304,6 @@ export function SkillBrowser({
               </div>
             </section>
           ))}
-          {browser.hasMore ? (
-            <button
-              type="button"
-              className="show-more"
-              onClick={() => dispatch({ type: "show-more-browser-results" })}
-            >
-              Show more
-            </button>
-          ) : null}
         </div>
       )}
     </section>
@@ -345,16 +339,4 @@ function viewLabel(view: BrowserViewMode): string {
     return "Expanded";
   }
   return "List";
-}
-
-function setLocalDragImage(event: DragEvent<HTMLElement>, label: string): void {
-  if (event.dataTransfer.setDragImage === undefined || typeof document === "undefined") {
-    return;
-  }
-  const preview = document.createElement("div");
-  preview.className = "drag-preview";
-  preview.textContent = label;
-  document.body.append(preview);
-  event.dataTransfer.setDragImage(preview, 18, 18);
-  window.setTimeout(() => preview.remove(), 0);
 }

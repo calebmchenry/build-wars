@@ -40,6 +40,11 @@ export interface SkillTooltipContext {
   readonly ranks: Readonly<Record<string, number>> | ReadonlyMap<string, number>;
 }
 
+const progressionSeriesByIdCache = new WeakMap<
+  SkillCatalog,
+  ReadonlyMap<string, SkillProgressionSeries>
+>();
+
 export function renderSkillTooltipText(
   catalog: SkillCatalog,
   skillId: SkillId,
@@ -130,7 +135,7 @@ function renderToken(
     return { kind: "rendered", value: "\n", tone: "normal" };
   }
 
-  const series = catalog.progressionSeries.find((candidate) => candidate.id === token.seriesId);
+  const series = progressionSeriesById(catalog).get(token.seriesId);
   if (series === undefined) {
     return {
       kind: "unresolved",
@@ -185,7 +190,48 @@ function renderProgressionValue(
     };
   }
 
-  return { kind: "rendered", value: String(value), tone: "variable" };
+  return {
+    kind: "rendered",
+    value: formatSkillProgressionValue(value, series, valueSlot),
+    tone: "variable"
+  };
+}
+
+export function formatSkillProgressionValue(
+  value: number,
+  series: SkillProgressionSeries,
+  valueSlot: number
+): string {
+  if (Number.isInteger(value)) {
+    return String(value);
+  }
+  if (slotHasDecimalEndpoint(series, valueSlot)) {
+    return String(value)
+      .replace(/(\.\d*?)0+$/, "$1")
+      .replace(/\.$/, "");
+  }
+  return String(Math.round(value));
+}
+
+function slotHasDecimalEndpoint(series: SkillProgressionSeries, valueSlot: number): boolean {
+  const first = series.values[0]?.values[valueSlot];
+  const last = series.values.at(-1)?.values[valueSlot];
+  return [first, last].some((value) => typeof value === "number" && !Number.isInteger(value));
+}
+
+function progressionSeriesById(catalog: SkillCatalog): ReadonlyMap<string, SkillProgressionSeries> {
+  const cached = progressionSeriesByIdCache.get(catalog);
+  if (cached !== undefined) {
+    return cached;
+  }
+  const indexed = new Map<string, SkillProgressionSeries>();
+  for (const series of catalog.progressionSeries) {
+    if (!indexed.has(series.id)) {
+      indexed.set(series.id, series);
+    }
+  }
+  progressionSeriesByIdCache.set(catalog, indexed);
+  return indexed;
 }
 
 function rankValue(
