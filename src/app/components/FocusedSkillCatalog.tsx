@@ -1,12 +1,14 @@
-import { useMemo, useState, type Dispatch, type KeyboardEvent } from "react";
+import { useState, type Dispatch, type KeyboardEvent } from "react";
 
 import { catalogId, type SkillId } from "../../domain";
+import filterIcon from "../assets/funnel.svg";
 import type { AppCatalogViews } from "../catalogs";
 import { BUILD_WARS_DRAG_MIME, browserSkillDragPayload } from "../drag-payload";
 import { selectSkillBrowser, selectSkillDisplay } from "../editor-selectors";
 import type {
   BrowserAvailabilityFilter,
   BrowserEliteFilter,
+  BrowserFilters,
   BrowserProfessionScope,
   BrowserSortMode,
   EditorAction,
@@ -17,6 +19,15 @@ import { SkillDisplay } from "./SkillDisplay";
 import { loadMoreBrowserResultsOnScroll } from "./skill-browser-scroll";
 import { setSkillIconDragImage } from "./skill-drag-image";
 import { SkillTooltipTrigger } from "./SkillTooltip";
+
+const ELITE_FILTER_OPTIONS: readonly {
+  readonly value: BrowserEliteFilter;
+  readonly label: string;
+}[] = [
+  { value: "any", label: "Any" },
+  { value: "elite", label: "Elite" },
+  { value: "non-elite", label: "Non-elite" }
+];
 
 export function FocusedSkillCatalog({
   state,
@@ -29,15 +40,15 @@ export function FocusedSkillCatalog({
 }) {
   const browser = selectSkillBrowser(state, catalogs);
   const [collapsedGroups, setCollapsedGroups] = useState<ReadonlySet<string>>(() => new Set());
+  const [filtersExpanded, setFiltersExpanded] = useState(false);
   const targetSlot = selectedOrFirstEmptySlot(state);
-  const renderedSkillCount = useMemo(
-    () =>
-      browser.groups.reduce(
-        (total, group) => (collapsedGroups.has(group.id) ? total : total + group.skills.length),
-        0
-      ),
-    [browser.groups, collapsedGroups]
-  );
+  const activeFilterCount = focusedFilterActiveCount(state.browser.filters);
+  const filterButtonLabel =
+    activeFilterCount === 0
+      ? filtersExpanded
+        ? "Hide skill filters"
+        : "Show skill filters"
+      : `${filtersExpanded ? "Hide" : "Show"} skill filters (${activeFilterCount} active)`;
 
   return (
     <section className="catalog-panel focused-skill-catalog" aria-labelledby="catalog-title">
@@ -46,54 +57,63 @@ export function FocusedSkillCatalog({
           Skills
         </button>
       </div>
-      <div className="panel-heading compact-heading">
-        <div>
-          <h2>Skills Catalog</h2>
-          <span>
-            {browser.renderedCount}/{browser.matchingCount} shown from {browser.totalCount}
-          </span>
-        </div>
-        <span className="catalog-batch-note">{renderedSkillCount} visible</span>
-      </div>
-      <div className="focused-catalog-controls">
-        <label className="wide-control">
-          <span>Search</span>
-          <input
-            type="search"
-            value={state.browser.filters.query}
-            onChange={(event) =>
-              dispatch({
-                type: "set-browser-filters",
-                filters: { query: event.currentTarget.value }
-              })
-            }
-            placeholder="Skill name"
+      <div className="focused-catalog-search-row">
+        <input
+          type="search"
+          value={state.browser.filters.query}
+          aria-label="Search skills by name"
+          onChange={(event) =>
+            dispatch({
+              type: "set-browser-filters",
+              filters: { query: event.currentTarget.value }
+            })
+          }
+          placeholder="Serach by name..."
+        />
+        <button
+          type="button"
+          className="icon-button catalog-filter-button"
+          aria-label={filterButtonLabel}
+          aria-expanded={filtersExpanded}
+          aria-controls="focused-skill-filters"
+          onClick={() => setFiltersExpanded((expanded) => !expanded)}
+        >
+          <img
+            className="filter-icon"
+            src={filterIcon}
+            alt=""
+            draggable={false}
+            aria-hidden="true"
           />
-        </label>
-        <label>
-          <span>Scope</span>
-          <select
-            value={professionScopeValue(state)}
-            onChange={(event) =>
-              dispatch({
-                type: "set-browser-filters",
-                filters: { professionScope: professionScopeFromValue(event.currentTarget.value) }
-              })
-            }
-          >
-            <option value="default">Selected professions</option>
-            <option value="all">All professions</option>
-            {catalogs.professions.map((profession) => (
-              <option key={Number(profession.id)} value={`profession:${Number(profession.id)}`}>
-                {profession.name}
-              </option>
-            ))}
-          </select>
-        </label>
+          {activeFilterCount > 0 ? (
+            <span className="filter-active-count" aria-hidden="true">
+              {activeFilterCount}
+            </span>
+          ) : null}
+        </button>
       </div>
-      <details className="catalog-filter-disclosure">
-        <summary>Filters</summary>
-        <div className="focused-catalog-controls advanced-controls">
+      {filtersExpanded ? (
+        <div id="focused-skill-filters" className="focused-catalog-controls advanced-controls">
+          <label>
+            <span>Professions</span>
+            <select
+              value={professionScopeValue(state)}
+              onChange={(event) =>
+                dispatch({
+                  type: "set-browser-filters",
+                  filters: { professionScope: professionScopeFromValue(event.currentTarget.value) }
+                })
+              }
+            >
+              <option value="default">Build professions</option>
+              <option value="all">All professions</option>
+              {catalogs.professions.map((profession) => (
+                <option key={Number(profession.id)} value={`profession:${Number(profession.id)}`}>
+                  {profession.name}
+                </option>
+              ))}
+            </select>
+          </label>
           <label>
             <span>Attribute</span>
             <select
@@ -141,24 +161,29 @@ export function FocusedSkillCatalog({
               ))}
             </select>
           </label>
+          <fieldset className="focused-filter-segment">
+            <legend>Elite</legend>
+            <div className="filter-segment-buttons">
+              {ELITE_FILTER_OPTIONS.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  className={state.browser.filters.elite === option.value ? "active" : ""}
+                  aria-pressed={state.browser.filters.elite === option.value}
+                  onClick={() =>
+                    dispatch({
+                      type: "set-browser-filters",
+                      filters: { elite: option.value }
+                    })
+                  }
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </fieldset>
           <label>
-            <span>Elite</span>
-            <select
-              value={state.browser.filters.elite}
-              onChange={(event) =>
-                dispatch({
-                  type: "set-browser-filters",
-                  filters: { elite: event.currentTarget.value as BrowserEliteFilter }
-                })
-              }
-            >
-              <option value="any">Any</option>
-              <option value="elite">Elite</option>
-              <option value="non-elite">Non-elite</option>
-            </select>
-          </label>
-          <label>
-            <span>Availability</span>
+            <span>Mode</span>
             <select
               value={state.browser.filters.availability}
               onChange={(event) =>
@@ -168,8 +193,8 @@ export function FocusedSkillCatalog({
                 })
               }
             >
-              <option value="default">Mode default</option>
-              <option value="both">Both</option>
+              <option value="default">Build mode</option>
+              <option value="both">PvE + PvP</option>
               <option value="pve-only">PvE only</option>
               <option value="pvp-only">PvP only</option>
               <option value="unknown">Unknown</option>
@@ -191,8 +216,17 @@ export function FocusedSkillCatalog({
               <option value="type">Type</option>
             </select>
           </label>
+          {activeFilterCount > 0 ? (
+            <button
+              type="button"
+              className="clear-focused-filters-button"
+              onClick={() => clearFocusedCatalogFilters(dispatch)}
+            >
+              Clear filters
+            </button>
+          ) : null}
         </div>
-      </details>
+      ) : null}
       {browser.matchingCount === 0 ? (
         <div className="empty-state">
           <strong>No matching skills</strong>
@@ -296,6 +330,31 @@ function toggledGroupSet(current: ReadonlySet<string>, id: string): ReadonlySet<
     next.add(id);
   }
   return next;
+}
+
+function focusedFilterActiveCount(filters: BrowserFilters): number {
+  return [
+    filters.professionScope.kind !== "default",
+    filters.attributeId !== null,
+    filters.skillType !== null,
+    filters.elite !== "any",
+    filters.availability !== "default",
+    filters.sortMode !== "attribute"
+  ].filter(Boolean).length;
+}
+
+function clearFocusedCatalogFilters(dispatch: Dispatch<EditorAction>): void {
+  dispatch({
+    type: "set-browser-filters",
+    filters: {
+      professionScope: { kind: "default" },
+      attributeId: null,
+      skillType: null,
+      elite: "any",
+      availability: "default",
+      sortMode: "attribute"
+    }
+  });
 }
 
 function selectedOrFirstEmptySlot(state: EditorState): number {

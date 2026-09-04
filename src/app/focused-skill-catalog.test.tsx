@@ -14,25 +14,70 @@ describe("FocusedSkillCatalog", () => {
   it("renders a bounded all-playable view when both professions are Any", () => {
     render(<Harness />);
 
-    expect(screen.getByRole("heading", { name: "Skills Catalog" })).toBeInTheDocument();
-    expect(screen.getByText(/48\/[0-9]+ shown from/)).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "Skills" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Skills Catalog" })).not.toBeInTheDocument();
+    expect(screen.queryByText(/shown from/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/[0-9]+ visible/)).not.toBeInTheDocument();
     expect(screen.getAllByText(/\([0-9]+ Skills\)$/).length).toBeGreaterThan(0);
     expect(screen.queryAllByText("Resurrection Signet").length).toBeLessThanOrEqual(1);
     expect(screen.queryByRole("button", { name: /Pick/ })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /Details/ })).not.toBeInTheDocument();
   });
 
+  it("keeps search compact and expands filters from the icon button", () => {
+    const { container } = render(<Harness />);
+
+    expect(screen.getByPlaceholderText("Serach by name...")).toBeInTheDocument();
+    expect(screen.queryByText("Search")).not.toBeInTheDocument();
+    expect(screen.queryByText("Professions")).not.toBeInTheDocument();
+
+    const filterButton = screen.getByRole("button", { name: "Show skill filters" });
+    expect(filterButton).toHaveAttribute("aria-expanded", "false");
+
+    fireEvent.click(filterButton);
+
+    expect(screen.getByRole("button", { name: "Hide skill filters" })).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
+    expect(screen.getByLabelText("Professions")).toBeInTheDocument();
+    expect(screen.getByLabelText("Attribute")).toBeInTheDocument();
+    expect(screen.getByLabelText("Mode")).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "Build mode" })).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "PvE + PvP" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Any" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.queryByRole("button", { name: "Clear filters" })).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Elite" }));
+
+    expect(screen.getByRole("button", { name: "Hide skill filters (1 active)" })).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
+    expect(container.querySelector(".filter-active-count")).toHaveTextContent("1");
+    expect(screen.getByRole("button", { name: "Clear filters" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
+
+    expect(screen.getByRole("button", { name: "Hide skill filters" })).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
+    expect(screen.getByRole("button", { name: "Any" })).toHaveAttribute("aria-pressed", "true");
+    expect(container.querySelector(".filter-active-count")).toBeNull();
+  });
+
   it("loads the next skill batch from result scrolling without a show-more button", () => {
     const { container } = render(<Harness />);
 
     expect(screen.queryByRole("button", { name: "Show more" })).not.toBeInTheDocument();
-    expect(screen.getByText(/48\/[0-9]+ shown from/)).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(48);
 
     const results = container.querySelector(".focused-skill-results");
     expect(results).not.toBeNull();
     fireEvent.scroll(results!);
 
-    expect(screen.getByText(/96\/[0-9]+ shown from/)).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(96);
   });
 
   it("filters through selected professions and places a skill with shared bar policy", () => {

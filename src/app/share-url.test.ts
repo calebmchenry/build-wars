@@ -13,7 +13,7 @@ describe("share URLs", () => {
     const result = buildShareUrl({
       baseUrl: "https://example.test/editor?panel=skills#old",
       bareCode: SKILL_TEMPLATE_PACKAGE_EXAMPLE,
-      mode: "pve"
+      mode: "pvp"
     });
 
     expect(result.ok).toBe(true);
@@ -23,21 +23,28 @@ describe("share URLs", () => {
     const url = new URL(result.value);
     expect(url.hash).toContain("bw=1");
     expect(url.hash).toContain(`code=${encodeURIComponent(SKILL_TEMPLATE_PACKAGE_EXAMPLE)}`);
-    expect(url.hash).toContain("mode=pve");
+    expect(url.hash).toContain("mode=pvp");
     expect(url.hash).not.toContain("tags");
     expect(url.hash).not.toContain("favorite");
     expect(url.hash).not.toContain("notes");
     expect(url.hash).not.toContain("local-");
   });
 
-  it("parses valid share fragments and optional unknown mode", () => {
+  it("defaults missing or legacy unknown share modes to PvE", () => {
     const parsed = parseShareFragment(
       `#bw=1&code=${encodeURIComponent(SKILL_TEMPLATE_PACKAGE_EXAMPLE)}`
+    );
+    const legacyUnknown = parseShareFragment(
+      `#bw=1&code=${encodeURIComponent(SKILL_TEMPLATE_PACKAGE_EXAMPLE)}&mode=unknown`
     );
 
     expect(parsed.ok ? parsed.value : null).toEqual({
       bareCode: SKILL_TEMPLATE_PACKAGE_EXAMPLE,
-      mode: "unknown"
+      mode: "pve"
+    });
+    expect(legacyUnknown.ok ? legacyUnknown.value : null).toEqual({
+      bareCode: SKILL_TEMPLATE_PACKAGE_EXAMPLE,
+      mode: "pve"
     });
   });
 

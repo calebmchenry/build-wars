@@ -233,7 +233,6 @@ export function LibraryPanel({
                 <option value="all">Any</option>
                 <option value="pve">PvE</option>
                 <option value="pvp">PvP</option>
-                <option value="unknown">Unknown</option>
               </select>
             </label>
             <label>

@@ -48,7 +48,7 @@ export function ShareControls({
       url: buildShareUrl({
         baseUrl: browserBaseUrl(),
         bareCode: selected.bareCode,
-        mode: targetEditor.build.mode
+        mode: targetEditor.build.mode === "pvp" ? "pvp" : "pve"
       })
     };
   }, [catalogs, targetEditor]);

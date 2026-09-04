@@ -66,9 +66,9 @@ The default profile is editing:
 - A secondary profession without a primary and identical primary/secondary IDs are errors.
 - Null skill slots are allowed, with one aggregate incomplete-bar warning.
 
-Automatic attribute budget applies only to PvE builds and uses the EPIC-03 level-20 maximum
-applicable quest budget. PvP and unknown modes require an explicit budget policy before overspend
-can be judged.
+The app supplies an explicit level-20 maximum attribute budget for both PvE and PvP editing. The
+domain rule engine still accepts unresolved budget policies for lower-level callers that do not
+provide one.
 
 Duplicate attribute rows report the second and later rows. Rank-cost and budget calculations use
 the first row for a resolved attribute ID and avoid cascade totals from later duplicates.

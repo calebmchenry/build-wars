@@ -2,6 +2,7 @@ import type { GameMode } from "../domain";
 
 export const SHARE_URL_VERSION = "1";
 export const SHARE_URL_MAX_LENGTH = 1_800;
+export type ShareUrlMode = Extract<GameMode, "pve" | "pvp">;
 
 export type ShareUrlErrorCode =
   | "no-share-fragment"
@@ -18,7 +19,7 @@ export type ShareUrlErrorCode =
 
 export interface ShareUrlPayload {
   readonly bareCode: string;
-  readonly mode: GameMode | "unknown";
+  readonly mode: ShareUrlMode;
 }
 
 export type ShareUrlResult<Value> =
@@ -39,7 +40,7 @@ export interface ShareUrlError {
 export function buildShareUrl(input: {
   readonly baseUrl: string;
   readonly bareCode: string;
-  readonly mode?: GameMode | "unknown";
+  readonly mode?: ShareUrlMode;
   readonly maxLength?: number;
 }): ShareUrlResult<string> {
   const maxLength = input.maxLength ?? SHARE_URL_MAX_LENGTH;
@@ -52,7 +53,7 @@ export function buildShareUrl(input: {
   const params = new URLSearchParams();
   params.set("bw", SHARE_URL_VERSION);
   params.set("code", input.bareCode);
-  if (input.mode !== undefined && input.mode !== "unknown") {
+  if (input.mode === "pvp") {
     params.set("mode", input.mode);
   }
   url.hash = params.toString();
@@ -93,15 +94,15 @@ export function parseShareFragment(hash: string): ShareUrlResult<ShareUrlPayload
   if (bareCode === null || bareCode.trim().length === 0) {
     return failure("missing-code", "Share URL is missing a skill template code.");
   }
-  const mode = params.get("mode") ?? "unknown";
+  const mode = params.get("mode") ?? "pve";
   if (mode !== "pve" && mode !== "pvp" && mode !== "unknown") {
-    return failure("invalid-mode", "Share URL mode must be pve, pvp, or unknown.");
+    return failure("invalid-mode", "Share URL mode must be pve or pvp.");
   }
   return {
     ok: true,
     value: {
       bareCode,
-      mode
+      mode: mode === "pvp" ? "pvp" : "pve"
     }
   };
 }

@@ -53,9 +53,8 @@ and type modes. Rendering is bounded by a batch size with explicit expansion.
 
 ## Budget Assumptions
 
-PvE uses the same explicit level and quest-bonus controls for display and validation. The default is
-level 20 with maximum applicable quest bonus. PvP and unknown mode use an explicit non-evaluated
-attribute budget policy rather than inheriting PvE points.
+The editor assumes a level-20 character with maximum attribute points for both PvE and PvP. The
+focused composer exposes mode as a PvP checkbox; unchecked means PvE.
 
 ## Interaction Model
 
@@ -107,8 +106,8 @@ unresolved states for gaps.
 ## Export Policy
 
 Template import uses EPIC-05 `decodeSkillTemplate` and `resolveSkillTemplateDocument`. Successful
-import is transactional and sets build mode to `unknown`. Failed parse, decode, or resolve leaves
-the prior editor state unchanged.
+import is transactional and preserves the current PvE/PvP mode. Failed parse, decode, or resolve
+leaves the prior editor state unchanged.
 
 In party mode, template import and export remain selected-member operations. They require an
 occupied selected slot and preserve build-set entry identity plus any party slot label, role, kind,

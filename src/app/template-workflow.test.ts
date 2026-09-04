@@ -36,7 +36,7 @@ describe("template workflow", () => {
     if (!imported.ok) {
       throw new Error(imported.error.message);
     }
-    expect(imported.state.build.mode).toBe("unknown");
+    expect(imported.state.build.mode).toBe("pve");
     expect(Number(imported.state.build.primaryProfessionId)).toBe(7);
 
     const validation = selectValidationView(imported.state, catalogs);
@@ -46,6 +46,13 @@ describe("template workflow", () => {
     const failed = importSkillTemplateToEditor("not-a-code", imported.state, catalogs);
     expect(failed.ok).toBe(false);
     expect(failed.state).toBe(imported.state);
+  });
+
+  it("preserves the existing build mode when importing a skill template", () => {
+    const current = editorReducer(createBlankEditorState(), { type: "set-mode", mode: "pvp" });
+    const imported = importSkillTemplateToEditor(SKILL_TEMPLATE_PACKAGE_EXAMPLE, current, catalogs);
+
+    expect(imported.ok && imported.state.build.mode).toBe("pvp");
   });
 
   it("derives exact eligibility from reconstructed template fields", () => {
@@ -88,6 +95,26 @@ describe("template workflow", () => {
     const projection = projectEditorToSkillTemplate(blocked, catalogs, { allowRawOverlay: false });
     expect(projection.document).toBeNull();
     expect(projection.diagnostics[0]?.code).toBe("missing-skill-template-id");
+  });
+
+  it("does not treat authored attribute row order as canonical export lossiness", () => {
+    const base = playableEditorFixture();
+    const state = {
+      ...base,
+      build: {
+        ...base.build,
+        attributes: [
+          { attributeId: catalogId<"Attribute">(25), rank: 1 },
+          { attributeId: catalogId<"Attribute">(17), rank: 1 },
+          { attributeId: catalogId<"Attribute">(19), rank: 1 }
+        ]
+      }
+    };
+    const validation = selectValidationView(state, catalogs);
+
+    expect(validation.result.issues.filter((issue) => issue.severity === "error")).toEqual([]);
+    expect(validation.exportPolicy.canonical.available).toBe(true);
+    expect(validation.exportPolicy.canonical.code?.bareCode.startsWith("O")).toBe(true);
   });
 
   it("blocks primary Any from canonical export while preserving secondary Any semantics", () => {

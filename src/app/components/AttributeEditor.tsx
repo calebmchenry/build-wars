@@ -2,6 +2,7 @@ import type { Dispatch } from "react";
 
 import { catalogId, type AttributeId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
+import { legalAttributesForSelectedProfessions } from "../attribute-eligibility";
 import {
   selectAttributeBudgetView,
   selectAttributeRows,
@@ -24,7 +25,12 @@ export function AttributeEditor({
   const budget = selectAttributeBudgetView(state, catalogs);
   const rows = selectAttributeRows(state, catalogs, validation.result);
   const ranks = catalogs.professionAttributeCatalog.attributePointRules.purchasedRankCosts;
-  const levels = catalogs.professionAttributeCatalog.attributePointRules.levelPointTotals;
+  const allocatedAttributeIds = new Set(
+    state.build.attributes.map((attribute) => Number(attribute.attributeId))
+  );
+  const addableAttributes = legalAttributesForSelectedProfessions(state, catalogs).filter(
+    (attribute) => !allocatedAttributeIds.has(Number(attribute.id))
+  );
 
   return (
     <section className="editor-panel attribute-panel" aria-labelledby="attributes-title">
@@ -35,38 +41,6 @@ export function AttributeEditor({
         </span>
       </div>
       <div className="budget-row">
-        <label>
-          <span>Level</span>
-          <select
-            value={state.pveBudget.level}
-            disabled={state.build.mode !== "pve"}
-            onChange={(event) =>
-              dispatch({ type: "set-pve-budget", level: Number(event.currentTarget.value) })
-            }
-          >
-            {levels.map((level) => (
-              <option key={level.level} value={level.level}>
-                {level.level}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          <span>Quest bonus</span>
-          <select
-            value={state.pveBudget.questBonus}
-            disabled={state.build.mode !== "pve"}
-            onChange={(event) =>
-              dispatch({
-                type: "set-pve-budget",
-                questBonus: event.currentTarget.value === "none" ? "none" : "maximum-applicable"
-              })
-            }
-          >
-            <option value="maximum-applicable">Maximum</option>
-            <option value="none">None</option>
-          </select>
-        </label>
         <output aria-label="Attribute points">
           {budget.mode === "evaluated"
             ? `${budget.spend}/${budget.budget ?? 0}`
@@ -151,7 +125,7 @@ export function AttributeEditor({
           }}
         >
           <option value="">Choose attribute</option>
-          {catalogs.attributes.map((attribute) => (
+          {addableAttributes.map((attribute) => (
             <option key={Number(attribute.id)} value={Number(attribute.id)}>
               {attribute.name}
             </option>

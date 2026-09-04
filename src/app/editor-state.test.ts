@@ -98,10 +98,10 @@ describe("editor state reducer", () => {
         templateName: "Imported"
       }
     };
-    const next = editorReducer(state, { type: "set-mode", mode: "unknown" });
+    const next = editorReducer(state, { type: "set-mode", mode: "pvp" });
 
     expect(next.rawTemplate.templateName).toBe("Imported");
-    expect(next.build.mode).toBe("unknown");
+    expect(next.build.mode).toBe("pvp");
   });
 
   it("sets and resets structural title rank overrides without touching skill or equipment state", () => {

@@ -2,6 +2,7 @@ import type { Dispatch } from "react";
 
 import { catalogId, type ProfessionId, type ValidationResult } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
+import { setProfessionWithAttributeCleanup } from "../attribute-eligibility";
 import { issuesForLocation } from "../editor-selectors";
 import type { EditorAction, EditorState } from "../editor-state";
 
@@ -29,7 +30,7 @@ export function ProfessionModeEditor({
     <section className="editor-panel character-panel" aria-labelledby="character-title">
       <div className="panel-heading">
         <h2 id="character-title">Character</h2>
-        <span>{state.build.mode.toUpperCase()}</span>
+        <span>{state.build.mode === "pvp" ? "PVP" : "PVE"}</span>
       </div>
       <div className="control-grid">
         <label>
@@ -37,11 +38,14 @@ export function ProfessionModeEditor({
           <select
             value={idValue(state.build.primaryProfessionId)}
             onChange={(event) =>
-              dispatch({
-                type: "set-profession",
-                field: "primary",
-                professionId: professionValue(event.currentTarget.value)
-              })
+              dispatch(
+                setProfessionWithAttributeCleanup(
+                  state,
+                  catalogs,
+                  "primary",
+                  professionValue(event.currentTarget.value)
+                )
+              )
             }
           >
             <option value="">None</option>
@@ -57,11 +61,14 @@ export function ProfessionModeEditor({
           <select
             value={idValue(state.build.secondaryProfessionId)}
             onChange={(event) =>
-              dispatch({
-                type: "set-profession",
-                field: "secondary",
-                professionId: professionValue(event.currentTarget.value)
-              })
+              dispatch(
+                setProfessionWithAttributeCleanup(
+                  state,
+                  catalogs,
+                  "secondary",
+                  professionValue(event.currentTarget.value)
+                )
+              )
             }
           >
             <option value="">None</option>
@@ -75,7 +82,7 @@ export function ProfessionModeEditor({
       </div>
       <fieldset className="segmented-control">
         <legend>Mode</legend>
-        {(["pve", "pvp", "unknown"] as const).map((mode) => (
+        {(["pve", "pvp"] as const).map((mode) => (
           <label key={mode}>
             <input
               type="radio"

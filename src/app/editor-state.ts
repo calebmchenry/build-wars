@@ -15,6 +15,8 @@ import {
 } from "../domain";
 import { reduceEquipmentEditorAction, type EquipmentEditorAction } from "./equipment-editor-state";
 
+export type EditableGameMode = Extract<GameMode, "pve" | "pvp">;
+
 export type RawOverlayNamespace = "profession" | "attribute" | "skill";
 export type RawOverlayOutcomeKind =
   "none" | "empty" | "known" | "reserved" | "unsupported" | "dispositioned" | "unknown";
@@ -169,10 +171,11 @@ export type EditorAction =
       readonly type: "set-profession";
       readonly field: "primary" | "secondary";
       readonly professionId: ProfessionId | null;
+      readonly clearAttributeIds?: readonly AttributeId[];
     }
   | {
       readonly type: "set-mode";
-      readonly mode: GameMode;
+      readonly mode: EditableGameMode;
     }
   | {
       readonly type: "set-build-name";
@@ -411,7 +414,7 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
     case "replace-state":
       return action.state;
     case "set-profession":
-      return setProfession(state, action.field, action.professionId);
+      return setProfession(state, action.field, action.professionId, action.clearAttributeIds);
     case "set-mode":
       return {
         ...state,
@@ -574,7 +577,8 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
 function setProfession(
   state: EditorState,
   field: "primary" | "secondary",
-  professionId: ProfessionId | null
+  professionId: ProfessionId | null,
+  clearAttributeIds: readonly AttributeId[] = []
 ): EditorState {
   const build =
     field === "primary"
@@ -584,7 +588,26 @@ function setProfession(
     field === "primary"
       ? { ...state.rawTemplate, primaryProfession: null }
       : { ...state.rawTemplate, secondaryProfession: null };
-  return { ...state, build, rawTemplate };
+  if (clearAttributeIds.length === 0) {
+    return { ...state, build, rawTemplate };
+  }
+
+  const clearIds = new Set(clearAttributeIds.map((attributeId) => Number(attributeId)));
+  return {
+    ...state,
+    build: {
+      ...build,
+      attributes: build.attributes.filter(
+        (attribute) => !clearIds.has(Number(attribute.attributeId))
+      )
+    },
+    rawTemplate: {
+      ...rawTemplate,
+      attributes: rawTemplate.attributes.filter(
+        (_, index) => !clearIds.has(Number(state.build.attributes[index]?.attributeId))
+      )
+    }
+  };
 }
 
 function setAttributeRank(state: EditorState, attributeId: AttributeId, rank: number): EditorState {

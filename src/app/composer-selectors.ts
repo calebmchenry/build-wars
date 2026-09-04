@@ -8,6 +8,7 @@ import {
   type PartySlotId
 } from "../domain";
 import type { AppCatalogViews } from "./catalogs";
+import { legalAttributesForSelectedProfessions } from "./attribute-eligibility";
 import {
   selectAttributeBudgetView,
   selectAttributeRows,
@@ -218,24 +219,8 @@ function selectedProfessionAttributeOrder(
   catalogs: AppCatalogViews
 ): ReadonlyMap<number, number> {
   const order = new Map<number, number>();
-  const seenProfessions = new Set<number>();
-  const professionIds = [state.build.primaryProfessionId, state.build.secondaryProfessionId];
-
-  for (const professionId of professionIds) {
-    if (professionId === null) {
-      continue;
-    }
-    const numericProfessionId = Number(professionId);
-    if (seenProfessions.has(numericProfessionId)) {
-      continue;
-    }
-    seenProfessions.add(numericProfessionId);
-    for (const attribute of catalogs.attributes) {
-      if (Number(attribute.professionId) !== numericProfessionId) {
-        continue;
-      }
-      order.set(Number(attribute.id), order.size);
-    }
+  for (const attribute of legalAttributesForSelectedProfessions(state, catalogs)) {
+    order.set(Number(attribute.id), order.size);
   }
 
   return order;

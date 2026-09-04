@@ -188,7 +188,7 @@ export function selectLibraryFacets(
     professions: catalogs.professions
       .filter((profession) => usedProfessions.has(Number(profession.id)))
       .map((profession) => ({ id: profession.id, name: profession.name })),
-    modes: ["all", "pve", "pvp", "unknown"]
+    modes: ["all", "pve", "pvp"]
   };
 }
 
@@ -315,7 +315,7 @@ function createEmptyPreviewSnapshot(name: string): PersistedBuildSnapshot {
       catalogVersion: null,
       id: authoredDocumentId("build:empty-build-set-preview"),
       name,
-      mode: "unknown",
+      mode: "pve",
       primaryProfessionId: null,
       secondaryProfessionId: null,
       attributes: [],

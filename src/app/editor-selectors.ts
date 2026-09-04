@@ -24,6 +24,10 @@ import {
 } from "../domain";
 import type { AppCatalogViews, PlaceholderIconDescriptor } from "./catalogs";
 import {
+  attributeIsLegalForSelectedProfessions,
+  legalAttributesForSelectedProfessions
+} from "./attribute-eligibility";
+import {
   skillActionIconForType,
   type SkillActionIconView,
   type SkillFactIconKind
@@ -187,13 +191,11 @@ export function selectValidationView(
 }
 
 export function selectAttributeBudgetPolicy(state: EditorState): AttributeBudgetPolicy {
-  if (state.build.mode !== "pve") {
-    return { kind: "none" };
-  }
+  void state;
   return {
     kind: "level",
-    level: state.pveBudget.level,
-    questBonus: state.pveBudget.questBonus
+    level: 20,
+    questBonus: "maximum-applicable"
   };
 }
 
@@ -263,29 +265,17 @@ export function selectAttributeBudgetView(
     const cost = purchasedRankCost(catalogs.professionAttributeCatalog, allocation.rank);
     return cost === null ? total : total + cost;
   }, 0);
-  if (state.build.mode !== "pve") {
-    return {
-      mode: "not-evaluated",
-      spend,
-      budget: null,
-      remaining: null,
-      policyLabel: "Attribute budget not evaluated for PvP or unknown mode."
-    };
-  }
   const budget = attributeBudgetForLevel(
     catalogs.professionAttributeCatalog,
-    state.pveBudget.level,
-    state.pveBudget.questBonus
+    20,
+    "maximum-applicable"
   );
   return {
     mode: budget === null ? "unresolved" : "evaluated",
     spend,
     budget,
     remaining: budget === null ? null : budget - spend,
-    policyLabel:
-      state.pveBudget.questBonus === "maximum-applicable"
-        ? `Level ${state.pveBudget.level} with maximum applicable quest bonus`
-        : `Level ${state.pveBudget.level} without quest bonus`
+    policyLabel: "Level 20 with maximum attribute points"
   };
 }
 
@@ -317,7 +307,7 @@ export function selectAttributeRows(
       professionLabel: professionNameForAttribute(attribute, catalogs),
       rank: allocation.rank,
       spend: purchasedRankCost(catalogs.professionAttributeCatalog, allocation.rank),
-      retained: attribute === null || !attributeBelongsToSelectedProfessions(attribute, state),
+      retained: attribute === null || !attributeIsLegalForSelectedProfessions(attribute, state),
       raw,
       issues: issuesByRow.get(index) ?? []
     });
@@ -649,25 +639,7 @@ function normalAttributesForSelectedProfessions(
   state: EditorState,
   catalogs: AppCatalogViews
 ): readonly CatalogAttributeRecord[] {
-  const selected = selectedProfessionIds(state);
-  if (selected.size === 0) {
-    return [];
-  }
-  return catalogs.attributes
-    .filter((attribute) => selected.has(Number(attribute.professionId)))
-    .sort((left, right) => {
-      if (left.isPrimaryOnly !== right.isPrimaryOnly) {
-        return left.isPrimaryOnly ? -1 : 1;
-      }
-      return left.name.localeCompare(right.name, "en-US");
-    });
-}
-
-function attributeBelongsToSelectedProfessions(
-  attribute: CatalogAttributeRecord,
-  state: EditorState
-): boolean {
-  return selectedProfessionIds(state).has(Number(attribute.professionId));
+  return legalAttributesForSelectedProfessions(state, catalogs);
 }
 
 function selectedProfessionIds(state: EditorState): ReadonlySet<number> {

@@ -42,8 +42,12 @@ describe("editor selectors", () => {
     expect(budget.budget).toBe(200);
 
     const pvp = editorReducer(state, { type: "set-mode", mode: "pvp" });
-    expect(selectAttributeBudgetPolicy(pvp)).toEqual({ kind: "none" });
-    expect(selectAttributeBudgetView(pvp, catalogs).mode).toBe("not-evaluated");
+    expect(selectAttributeBudgetPolicy(pvp)).toEqual({
+      kind: "level",
+      level: 20,
+      questBonus: "maximum-applicable"
+    });
+    expect(selectAttributeBudgetView(pvp, catalogs).budget).toBe(200);
   });
 
   it("retains authored and unresolved attribute rows beside normal selected rows", () => {

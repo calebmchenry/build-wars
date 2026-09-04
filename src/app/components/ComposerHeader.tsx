@@ -3,6 +3,7 @@ import { useState, type Dispatch, type KeyboardEvent } from "react";
 import type { ValidationResult } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
 import { issuesForLocation } from "../editor-selectors";
+import { setProfessionWithAttributeCleanup } from "../attribute-eligibility";
 import type { EditorAction, EditorState } from "../editor-state";
 import { InlineIssues } from "./ProfessionModeEditor";
 import { ProfessionIconPicker } from "./ProfessionIconPicker";
@@ -30,6 +31,16 @@ export function ComposerHeader({
         name={state.build.name}
         onCommit={(name) => dispatch({ type: "set-build-name", name })}
       />
+      <label className="pvp-mode-toggle">
+        <input
+          type="checkbox"
+          checked={state.build.mode === "pvp"}
+          onChange={(event) =>
+            dispatch({ type: "set-mode", mode: event.currentTarget.checked ? "pvp" : "pve" })
+          }
+        />
+        <span>PvP</span>
+      </label>
       <div className="profession-pair">
         <ProfessionIconPicker
           label="Primary"
@@ -38,7 +49,7 @@ export function ComposerHeader({
           resetKey={state.build.id}
           catalogs={catalogs}
           onChange={(professionId) =>
-            dispatch({ type: "set-profession", field: "primary", professionId })
+            dispatch(setProfessionWithAttributeCleanup(state, catalogs, "primary", professionId))
           }
         />
         <span className="profession-pair-separator" aria-hidden="true">
@@ -51,7 +62,7 @@ export function ComposerHeader({
           resetKey={state.build.id}
           catalogs={catalogs}
           onChange={(professionId) =>
-            dispatch({ type: "set-profession", field: "secondary", professionId })
+            dispatch(setProfessionWithAttributeCleanup(state, catalogs, "secondary", professionId))
           }
         />
       </div>

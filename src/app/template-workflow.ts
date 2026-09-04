@@ -116,7 +116,7 @@ export function importSkillTemplateToEditor(
 
   return {
     ok: true,
-    state: editorStateFromTemplate(decoded.value, resolved.value, catalogs),
+    state: editorStateFromTemplate(decoded.value, resolved.value, currentState, catalogs),
     document: decoded.value,
     resolution: resolved.value,
     diagnostics: decoded.diagnostics
@@ -262,6 +262,7 @@ export function projectEditorToSkillTemplate(
 function editorStateFromTemplate(
   document: SkillTemplateDocument,
   resolution: ResolvedSkillTemplateView,
+  currentState: EditorState,
   catalogs: AppCatalogViews
 ): EditorState {
   const state = createBlankEditorState(document.source.templateName ?? "Imported Build");
@@ -288,7 +289,7 @@ function editorStateFromTemplate(
       ...state.build,
       name: document.source.templateName ?? state.build.name,
       catalogVersion: `${catalogs.versions.professionAttributes}+${catalogs.versions.skills}`,
-      mode: "unknown",
+      mode: currentState.build.mode,
       primaryProfessionId: primary,
       secondaryProfessionId: secondary,
       attributes: attributeRows,

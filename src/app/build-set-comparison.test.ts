@@ -31,7 +31,6 @@ describe("build set comparison", () => {
     expect(view.changedGroups.map((group) => group.key)).toEqual([
       "identity",
       "professions",
-      "mode",
       "skills",
       "attributes",
       "raw"

@@ -209,7 +209,7 @@ function skillTemplateFieldsFingerprint(fields: AdapterSkillFields): string {
   return templateFingerprint("skill-template", {
     primaryProfessionId: fields.primaryProfessionId,
     secondaryProfessionId: fields.secondaryProfessionId,
-    attributes: fields.attributes.map((attribute) => ({
+    attributes: canonicalSkillAttributes(fields.attributes).map((attribute) => ({
       attributeId: attribute.attributeId,
       rank: attribute.rank
     })),
@@ -219,6 +219,12 @@ function skillTemplateFieldsFingerprint(fields: AdapterSkillFields): string {
 
 function skillFieldsEqual(left: AdapterSkillFields, right: AdapterSkillFields): boolean {
   return skillTemplateFieldsFingerprint(left) === skillTemplateFieldsFingerprint(right);
+}
+
+function canonicalSkillAttributes(
+  attributes: AdapterSkillFields["attributes"]
+): readonly AdapterSkillFields["attributes"][number][] {
+  return [...attributes].sort((left, right) => left.attributeId - right.attributeId);
 }
 
 function skillBarFromNumbers(skillIds: readonly number[]): TemplateResult<TemplateSkillBar> {

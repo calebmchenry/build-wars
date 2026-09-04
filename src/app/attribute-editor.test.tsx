@@ -13,6 +13,7 @@ import { selectFocusedAttributeRows } from "./composer-selectors";
 import { FocusedAttributeEditor } from "./components/FocusedAttributeEditor";
 import { playableEditorFixture } from "./editor-fixtures";
 import { selectValidationView } from "./editor-selectors";
+import { setProfessionWithAttributeCleanup } from "./attribute-eligibility";
 import { editorReducer, type EditorState } from "./editor-state";
 
 const catalogs = requireReadyCatalogs();
@@ -58,7 +59,6 @@ describe("FocusedAttributeEditor", () => {
       "Swordsmanship",
       "Tactics",
       "Beast Mastery",
-      "Expertise",
       "Wilderness Survival",
       "Marksmanship"
     ];
@@ -76,6 +76,48 @@ describe("FocusedAttributeEditor", () => {
     });
 
     expect(focusedAttributeLabels(invested)).toEqual(expectedOrder);
+  });
+
+  it("omits the primary attribute of the secondary profession", () => {
+    const base = playableEditorFixture();
+    const state = {
+      ...base,
+      build: {
+        ...base.build,
+        primaryProfessionId: catalogId<"Profession">(3),
+        secondaryProfessionId: catalogId<"Profession">(1),
+        attributes: []
+      },
+      rawTemplate: {
+        ...base.rawTemplate,
+        attributes: []
+      }
+    };
+
+    expect(focusedAttributeLabels(state)).toEqual([
+      "Healing Prayers",
+      "Smiting Prayers",
+      "Protection Prayers",
+      "Divine Favor",
+      "Axe Mastery",
+      "Hammer Mastery",
+      "Swordsmanship",
+      "Tactics"
+    ]);
+  });
+
+  it("clears allocated attributes that stop being legal when a profession changes", () => {
+    const state = playableEditorFixture();
+    const next = editorReducer(
+      state,
+      setProfessionWithAttributeCleanup(state, catalogs, "secondary", catalogId<"Profession">(3))
+    );
+
+    expect(Number(next.build.secondaryProfessionId)).toBe(3);
+    expect(next.build.attributes.map((attribute) => Number(attribute.attributeId))).toEqual([
+      17, 19
+    ]);
+    expect(next.rawTemplate.attributes).toHaveLength(2);
   });
 
   it("marks effective ranks modified when equipment adjustments apply", () => {
@@ -122,7 +164,9 @@ function cappedAndOverBudgetState(): EditorState {
       ...state.build,
       attributes: [
         { attributeId: catalogId<"Attribute">(17), rank: 0 },
-        { attributeId: catalogId<"Attribute">(19), rank: 12 }
+        { attributeId: catalogId<"Attribute">(18), rank: 12 },
+        { attributeId: catalogId<"Attribute">(19), rank: 12 },
+        { attributeId: catalogId<"Attribute">(25), rank: 12 }
       ]
     }
   };

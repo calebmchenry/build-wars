@@ -108,10 +108,11 @@ separate JSON single-build exchange codec or encode whole build sets into URL fr
 The URL fragment grammar is:
 
 ```text
-#bw=1&code=<percent-encoded-bare-skill-template-code>&mode=pve|pvp|unknown
+#bw=1&code=<percent-encoded-bare-skill-template-code>&mode=pvp
 ```
 
-`mode` may be omitted when unknown. Share URLs exclude tags, notes, favorite state, local IDs,
+`mode` is omitted for PvE and present only for PvP. Legacy missing or unknown mode values load as
+PvE. Share URLs exclude tags, notes, favorite state, local IDs,
 backup metadata, catalog snapshots, equipment, runes, insignias, weapon mods, title-rank overrides,
 party data, guide data, validation prose, and whole-library JSON.
 

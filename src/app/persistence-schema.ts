@@ -258,7 +258,7 @@ export function persistedCatalogFactsFromValidation(
 
 export function createPersistedBuildSnapshot(state: EditorState): PersistedBuildSnapshot {
   return {
-    build: cloneBuild(state.build),
+    build: concreteBuild(state.build),
     pveBudget: { ...state.pveBudget },
     rawTemplate: cloneRawTemplateOverlay(state.rawTemplate)
   };
@@ -267,7 +267,7 @@ export function createPersistedBuildSnapshot(state: EditorState): PersistedBuild
 export function hydrateEditorFromSnapshot(snapshot: PersistedBuildSnapshot): EditorState {
   return {
     ...createBlankEditorState(snapshot.build.name),
-    build: cloneBuild(snapshot.build),
+    build: concreteBuild(snapshot.build),
     pveBudget: { ...snapshot.pveBudget },
     rawTemplate: cloneRawTemplateOverlay(snapshot.rawTemplate),
     dialogs: {
@@ -1098,7 +1098,7 @@ function validateBuild(
   const name = stringField(record.name, `${path}.name`, diagnostics, MAX_NAME, {
     allowEmpty: false
   });
-  const mode = enumField(record.mode, `${path}.mode`, diagnostics, GAME_MODES);
+  const mode = concreteGameMode(enumField(record.mode, `${path}.mode`, diagnostics, GAME_MODES));
   const primaryProfessionId = nullableCatalogId<"Profession">(
     record.primaryProfessionId,
     `${path}.primaryProfessionId`,
@@ -1148,6 +1148,20 @@ function validateBuild(
     skillBar,
     titleRankOverrides,
     equipment
+  };
+}
+
+function concreteGameMode(mode: GameMode | null): Extract<GameMode, "pve" | "pvp"> | null {
+  if (mode === null) {
+    return null;
+  }
+  return mode === "pvp" ? "pvp" : "pve";
+}
+
+function concreteBuild(build: Build): Build {
+  return {
+    ...cloneBuild(build),
+    mode: build.mode === "pvp" ? "pvp" : "pve"
   };
 }
 

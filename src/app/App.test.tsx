@@ -101,6 +101,11 @@ describe("App", { timeout: 10_000 }, () => {
   it("supports blank-to-playable authoring through visible controls", () => {
     render(<App />);
 
+    const pvpToggle = screen.getByRole("checkbox", { name: "PvP" });
+    expect(pvpToggle).not.toBeChecked();
+    fireEvent.click(pvpToggle);
+    expect(pvpToggle).toBeChecked();
+
     fireEvent.change(screen.getByLabelText("Primary"), { target: { value: "1" } });
     fireEvent.change(screen.getByLabelText("Secondary"), { target: { value: "2" } });
     fireEvent.change(screen.getByLabelText("Search"), { target: { value: "Healing Signet" } });
