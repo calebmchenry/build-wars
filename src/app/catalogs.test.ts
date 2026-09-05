@@ -26,6 +26,8 @@ describe("app catalog boundary", () => {
     expect(catalogs.equipment.readiness.insignias.status).toBe("ready");
     expect(catalogs.equipment.readiness.weapons.status).toBe("ready");
     expect(catalogs.equipment.readiness.weaponModifiers.status).toBe("ready");
+    expect(catalogs.skillMetadata.recordsBySkillId.size).toBe(804);
+    expect(catalogs.skillMetadata.errors).toEqual([]);
     expect(catalogs.equipment.runes.length).toBeGreaterThan(100);
     expect(catalogs.equipment.insignias.length).toBeGreaterThan(40);
     expect(catalogs.equipment.weapons.length).toBeGreaterThan(0);
@@ -57,6 +59,28 @@ describe("app catalog boundary", () => {
 
     expect(result.status).toBe("error");
     expect(result.status === "error" ? result.error.issues.length : 0).toBeGreaterThan(0);
+  });
+
+  it("rejects invalid authored skill metadata overlays", () => {
+    const result = loadAppCatalogs({
+      skillMetadata: {
+        schemaVersion: 1,
+        kind: "build-wars-skill-metadata-overlay",
+        records: [
+          {
+            skillId: 2197,
+            name: "Body Blow",
+            sourceTextDigest: "stale",
+            metadata: ["applies:body_slam"]
+          }
+        ]
+      }
+    });
+
+    expect(result.status).toBe("error");
+    expect(result.status === "error" ? result.error.issues.join(" ") : "").toContain(
+      "applies:body_slam"
+    );
   });
 
   it("degrades invalid equipment slices without rejecting core app catalogs", () => {

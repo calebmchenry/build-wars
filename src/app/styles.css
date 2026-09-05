@@ -1733,6 +1733,55 @@ textarea {
   margin-bottom: 12px;
 }
 
+.skill-metadata-filters {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.skill-metadata-filter-group {
+  min-width: 0;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: 8px;
+}
+
+.skill-metadata-filter-group legend {
+  padding: 0 4px;
+  color: var(--color-label);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.skill-metadata-filter-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  gap: 6px 8px;
+}
+
+.metadata-checkbox-row {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  align-items: center;
+  min-height: 28px;
+  color: var(--color-text);
+  font-size: 0.82rem;
+  font-weight: 550;
+}
+
+.metadata-checkbox-row input {
+  width: auto;
+}
+
+.metadata-checkbox-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .skill-results {
   max-height: 760px;
   overflow: auto;

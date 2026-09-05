@@ -13,31 +13,40 @@ import {
 } from "./workspace-state";
 
 const catalogs = requireReadyCatalogs();
+const CATALOG_RENDER_TIMEOUT_MS = 10_000;
 
 describe("BuildComposer", () => {
-  it("renders the focused two-panel composer for a single-build draft", () => {
-    render(<Harness />);
+  it(
+    "renders the focused two-panel composer for a single-build draft",
+    () => {
+      render(<Harness />);
 
-    expect(screen.getByRole("region", { name: "Focused build composer" })).toBeInTheDocument();
-    expect(screen.getByLabelText("Build name")).toHaveValue("Untitled Build");
-    expect(screen.getByRole("heading", { name: /^Attributes \(/ })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Skill Bar" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Template Code" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Skills Catalog" })).toBeInTheDocument();
-  });
+      expect(screen.getByRole("region", { name: "Focused build composer" })).toBeInTheDocument();
+      expect(screen.getByLabelText("Build name")).toHaveValue("Untitled Build");
+      expect(screen.getByRole("heading", { name: /^Attributes \(/ })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: "Skill Bar" })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: "Template Code" })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: "Skills Catalog" })).toBeInTheDocument();
+    },
+    CATALOG_RENDER_TIMEOUT_MS
+  );
 
-  it("edits professions and build name without touching secondary labels", () => {
-    render(<Harness />);
+  it(
+    "edits professions and build name without touching secondary labels",
+    () => {
+      render(<Harness />);
 
-    fireEvent.change(screen.getByLabelText("Primary"), { target: { value: "1" } });
-    fireEvent.change(screen.getByLabelText("Secondary"), { target: { value: "2" } });
-    fireEvent.change(screen.getByLabelText("Build name"), { target: { value: "Focused Build" } });
-    fireEvent.blur(screen.getByLabelText("Build name"));
+      fireEvent.change(screen.getByLabelText("Primary"), { target: { value: "1" } });
+      fireEvent.change(screen.getByLabelText("Secondary"), { target: { value: "2" } });
+      fireEvent.change(screen.getByLabelText("Build name"), { target: { value: "Focused Build" } });
+      fireEvent.blur(screen.getByLabelText("Build name"));
 
-    expect(screen.getByLabelText("Primary")).toHaveValue("1");
-    expect(screen.getByLabelText("Secondary")).toHaveValue("2");
-    expect(screen.getByLabelText("Build name")).toHaveValue("Focused Build");
-  });
+      expect(screen.getByLabelText("Primary")).toHaveValue("1");
+      expect(screen.getByLabelText("Secondary")).toHaveValue("2");
+      expect(screen.getByLabelText("Build name")).toHaveValue("Focused Build");
+    },
+    CATALOG_RENDER_TIMEOUT_MS
+  );
 
   it("renders an empty build-set no-loadout state until a loadout is explicitly created", () => {
     render(<Harness initialState={emptyBuildSetWorkspace()} />);

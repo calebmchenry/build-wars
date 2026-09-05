@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 
-import { catalogId, type SkillBar } from "../domain";
+import {
+  catalogId,
+  createSkillMetadataIndex,
+  SKILL_METADATA_OVERLAY_KIND,
+  SKILL_METADATA_OVERLAY_SCHEMA_VERSION,
+  type SkillBar,
+  type SkillMetadataToken
+} from "../domain";
 import {
   requireTitleRankTestCatalogs,
   titleRankTestSkillIds
@@ -152,6 +159,45 @@ describe("editor selectors", () => {
     expect(attacks.every((skill) => skill.typeId.includes("attack"))).toBe(true);
     expect(exactSkills.length).toBeGreaterThan(0);
     expect(exactSkills.every((skill) => skill.typeId === "skill")).toBe(true);
+  });
+
+  it("filters skill browser results by authored metadata", () => {
+    const catalogsWithMetadata = {
+      ...catalogs,
+      skillMetadata: createSkillMetadataIndex(
+        skillMetadataOverlay([
+          ["Immolate", ["applies:burning", "deals:fire"]],
+          ["Inspired Hex", ["removes:hex"]]
+        ]),
+        catalogs.skills
+      )
+    };
+    const state = editorReducer(createBlankEditorState(), {
+      type: "set-browser-filters",
+      filters: {
+        professionScope: { kind: "all" },
+        metadata: ["applies:burning", "deals:fire"]
+      }
+    });
+    const skills = selectSkillBrowser(state, catalogsWithMetadata).groups.flatMap(
+      (group) => group.skills
+    );
+
+    expect(skills.map((skill) => skill.name)).toContain("Immolate");
+    expect(skills).toHaveLength(1);
+
+    const removesHex = selectSkillBrowser(
+      editorReducer(createBlankEditorState(), {
+        type: "set-browser-filters",
+        filters: {
+          professionScope: { kind: "all" },
+          metadata: ["removes:hex"]
+        }
+      }),
+      catalogsWithMetadata
+    ).groups.flatMap((group) => group.skills);
+
+    expect(removesHex.map((skill) => skill.name)).toContain("Inspired Hex");
   });
 
   it("uses default and authored title ranks for title-scaled skill display", () => {
@@ -328,3 +374,24 @@ describe("editor selectors", () => {
     ).toBe("stale");
   });
 });
+
+function skillMetadataOverlay(
+  records: readonly (readonly [string, readonly SkillMetadataToken[]])[]
+): unknown {
+  return {
+    schemaVersion: SKILL_METADATA_OVERLAY_SCHEMA_VERSION,
+    kind: SKILL_METADATA_OVERLAY_KIND,
+    records: records.map(([name, metadata]) => {
+      const skill = catalogs.skills.find((candidate) => candidate.name === name);
+      if (skill === undefined) {
+        throw new Error(`Missing skill fixture: ${name}`);
+      }
+      return {
+        skillId: skill.id,
+        name: skill.name,
+        sourceTextDigest: skill.description.sourceTextDigest,
+        metadata
+      };
+    })
+  };
+}

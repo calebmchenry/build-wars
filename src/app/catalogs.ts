@@ -1,4 +1,9 @@
-import { createTitleRankCatalog, isSkillTypeId, skillTypeIdFromLabel } from "../domain";
+import {
+  createSkillMetadataIndex,
+  createTitleRankCatalog,
+  isSkillTypeId,
+  skillTypeIdFromLabel
+} from "../domain";
 import type {
   AttributeId,
   CatalogAttributeRecord,
@@ -14,6 +19,7 @@ import type {
   ProfessionId,
   SkillCatalog,
   SkillId,
+  SkillMetadataIndex,
   SkillValidationCatalog,
   SourceReference,
   TemplateAttributeId,
@@ -21,6 +27,7 @@ import type {
   TemplateSkillId,
   TitleRankCatalog
 } from "../domain";
+import skillMetadataOverlayJson from "../domain/skill-metadata-overlay.json";
 import insigniaCatalogJson from "../../data/generated/epic-11/insignias.catalog.json";
 import professionAttributeCatalogJson from "../../data/generated/epic-03/professions-attributes.catalog.json";
 import runeCatalogJson from "../../data/generated/epic-10/runes.catalog.json";
@@ -35,7 +42,8 @@ export const APPROVED_RUNTIME_CATALOG_IMPORTS = [
   "../../data/generated/epic-10/runes.catalog.json",
   "../../data/generated/epic-11/insignias.catalog.json",
   "../../data/generated/epic-12/weapons.catalog.json",
-  "../../data/generated/epic-12/weapon-mods.catalog.json"
+  "../../data/generated/epic-12/weapon-mods.catalog.json",
+  "../domain/skill-metadata-overlay.json"
 ] as const;
 
 export type CatalogSurface =
@@ -105,6 +113,7 @@ export interface EquipmentCatalogViews {
 export interface AppCatalogViews {
   readonly professionAttributeCatalog: ProfessionAttributeCatalog;
   readonly skillCatalog: SkillCatalog;
+  readonly skillMetadata: SkillMetadataIndex;
   readonly professions: readonly CatalogProfessionRecord[];
   readonly attributes: readonly CatalogAttributeRecord[];
   readonly skills: readonly CatalogSkillRecord[];
@@ -166,6 +175,7 @@ export const promotedAppCatalogs = loadAppCatalogs();
 export function loadAppCatalogs(input?: {
   readonly professionAttributes?: unknown;
   readonly skills?: unknown;
+  readonly skillMetadata?: unknown;
   readonly runes?: unknown;
   readonly insignias?: unknown;
   readonly weapons?: unknown;
@@ -174,6 +184,7 @@ export function loadAppCatalogs(input?: {
   const professionAttributes =
     input?.professionAttributes ?? (professionAttributeCatalogJson as unknown);
   const skills = input?.skills ?? (skillCatalogJson as unknown);
+  const skillMetadata = input?.skillMetadata ?? (skillMetadataOverlayJson as unknown);
   const runes = input?.runes ?? (runeCatalogJson as unknown);
   const insignias = input?.insignias ?? (insigniaCatalogJson as unknown);
   const weapons = input?.weapons ?? (weaponCatalogJson as unknown);
@@ -186,12 +197,23 @@ export function loadAppCatalogs(input?: {
   if (issues.length > 0) {
     return { status: "error", error: new AppCatalogError(issues) };
   }
+  const skillMetadataIndex = createSkillMetadataIndex(
+    skillMetadata,
+    (skills as SkillCatalog).skills
+  );
+  if (skillMetadataIndex.errors.length > 0) {
+    return {
+      status: "error",
+      error: new AppCatalogError(skillMetadataIndex.errors.map((issue) => issue.message))
+    };
+  }
 
   return {
     status: "ready",
     catalogs: createCatalogViews(
       professionAttributes as ProfessionAttributeCatalog,
       skills as SkillCatalog,
+      skillMetadataIndex,
       {
         runes,
         insignias,
@@ -214,6 +236,7 @@ export function requireReadyCatalogs(
 function createCatalogViews(
   professionAttributeCatalog: ProfessionAttributeCatalog,
   skillCatalog: SkillCatalog,
+  skillMetadata: SkillMetadataIndex,
   equipmentInput: {
     readonly runes: unknown;
     readonly insignias: unknown;
@@ -237,6 +260,7 @@ function createCatalogViews(
   return {
     professionAttributeCatalog,
     skillCatalog,
+    skillMetadata,
     professions: professionAttributeCatalog.professions,
     attributes: professionAttributeCatalog.attributes,
     skills: skillCatalog.skills,

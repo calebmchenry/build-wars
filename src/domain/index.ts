@@ -497,6 +497,30 @@ export {
 } from "./skill-types";
 export type { SkillTypeDefinition, SkillTypeId } from "./skill-types";
 export {
+  SKILL_METADATA_OVERLAY_KIND,
+  SKILL_METADATA_OVERLAY_SCHEMA_VERSION,
+  SKILL_METADATA_FILTER_GROUPS,
+  createSkillMetadataIndex,
+  expandSkillMetadataTokens,
+  isSkillMetadataToken,
+  skillHasMetadataTokens,
+  skillMetadataTokensForSkill
+} from "./skill-metadata";
+export type {
+  AuthoredSkillMetadataOverlay,
+  AuthoredSkillMetadataRecord,
+  SkillMetadataIndex,
+  SkillMetadataIndexIssue,
+  SkillMetadataIndexRecord,
+  SkillMetadataIndexWarning,
+  SkillMetadataAppliesSubject,
+  SkillMetadataDealsSubject,
+  SkillMetadataFilterGroup,
+  SkillMetadataFilterOption,
+  SkillMetadataRemovesSubject,
+  SkillMetadataToken
+} from "./skill-metadata";
+export {
   TITLE_RANK_OVERRIDE_LIMIT,
   createTitleRankCatalog,
   hasAuthoredTitleRankOverrides,

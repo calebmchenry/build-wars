@@ -17,6 +17,7 @@ import type {
 import { BUILD_WARS_DRAG_MIME, browserSkillDragPayload } from "../drag-payload";
 import { applySkillBarIntent } from "../skill-bar-actions";
 import { SkillDisplay } from "./SkillDisplay";
+import { SkillMetadataFilterControls } from "./SkillMetadataFilterControls";
 import { setSkillIconDragImage } from "./skill-drag-image";
 import { SkillTooltipTrigger } from "./SkillTooltip";
 
@@ -221,6 +222,7 @@ export function SkillBrowser({
           </label>
         ))}
       </div>
+      <SkillMetadataFilterControls selected={state.browser.filters.metadata} dispatch={dispatch} />
       {browser.matchingCount === 0 ? (
         <div className="empty-state">
           <strong>No matching skills</strong>

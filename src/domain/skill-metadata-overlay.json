@@ -1,0 +1,4842 @@
+{
+  "schemaVersion": 1,
+  "kind": "build-wars-skill-metadata-overlay",
+  "records": [
+    {
+      "skillId": 10,
+      "name": "Hex Breaker",
+      "sourceTextDigest": "5e976ef5e664ba89abc1792ba881f59b6c9471172b96b02b514c3a1e3d723931",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 19,
+      "name": "Fragility",
+      "sourceTextDigest": "81673dffd8c5bb3d3a2d34a765d858e367d855ecab641dd2d91d9823f74c78b3",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 21,
+      "name": "Inspired Enchantment",
+      "sourceTextDigest": "908a5dfceb6ac957ce23c2d75663dd2ab161b2154e96c73042b47e54b3e8c93a",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 22,
+      "name": "Inspired Hex",
+      "sourceTextDigest": "f7c98e320e8fda6fbe4d854950e1c688ff1db6f53587ad0d61aa49af9e040847",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 23,
+      "name": "Power Spike",
+      "sourceTextDigest": "4ae8a15f66821b38b651a8c7fb423f74028575c23b820ca38def6c2480f2e368",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 26,
+      "name": "Empathy",
+      "sourceTextDigest": "18e58ebf30c0f226845ef9cef443b55b646771662d7f938305dfa5e351d3233c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 27,
+      "name": "Shatter Delusions",
+      "sourceTextDigest": "ea3b66969d9a58ae20ff62f93141ba83839e2449cfc91a5e8963a8c9995a1940",
+      "metadata": ["removes:hex", "deals:damage"]
+    },
+    {
+      "skillId": 28,
+      "name": "Backfire",
+      "sourceTextDigest": "9e4384a72f0de0c36f9911db30a45b28327d6469f1136f77e80b44cf201bd470",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 33,
+      "name": "Illusionary Weaponry",
+      "sourceTextDigest": "fa9e9b2ec7b45c647b3e0a12d3c746e5011fa5148ee95fbfadea9ac9b27157d2",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 37,
+      "name": "Illusion of Haste",
+      "sourceTextDigest": "c925453f2eff49c1f10ed56b47a06c35b1b213c5876306d6efde328e5c469228",
+      "metadata": ["applies:crippled", "removes:condition"]
+    },
+    {
+      "skillId": 39,
+      "name": "Energy Surge",
+      "sourceTextDigest": "1cd36eca67ffc716ea3dbde986b52c28f622a2e1314aad9460690f7a656df844",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 42,
+      "name": "Energy Burn",
+      "sourceTextDigest": "658a30dce11b93e9b7b6572ccd519b46a5a30b607218d59e2420d067be0bdd5c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 43,
+      "name": "Clumsiness",
+      "sourceTextDigest": "d9199aae2e3da2d231cf93864c1c8c74096a3177711887f8d780cc3c36cf0970",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 44,
+      "name": "Phantom Pain",
+      "sourceTextDigest": "8db38e7f0e0879f945f2a0f88746d025a9f6199ab76792141db0848be80ea76c",
+      "metadata": ["applies:deep_wound"]
+    },
+    {
+      "skillId": 47,
+      "name": "Ineptitude",
+      "sourceTextDigest": "0eb6c00582c082948754362c1749b718a69de7e15c2c437f7a622c4526a7ffb5",
+      "metadata": ["applies:blind", "deals:damage"]
+    },
+    {
+      "skillId": 49,
+      "name": "Mind Wrack",
+      "sourceTextDigest": "a6ade39f3af45546ee5efd7f550d0a0a2ce06207f7cc3a7e9c9e1397ac02af03",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 50,
+      "name": "Wastrel's Worry",
+      "sourceTextDigest": "0805b8d87fb0aac49b89d6f3e773da4b2ed5bc121c8b6bd09ff7c06a69401029",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 55,
+      "name": "Fevered Dreams",
+      "sourceTextDigest": "699e9b7c7996b978d724ea03d9e9e40945430db09de17d61353b3c2f41b865f9",
+      "metadata": ["applies:dazed"]
+    },
+    {
+      "skillId": 57,
+      "name": "Cry of Frustration",
+      "sourceTextDigest": "53de68a90e46103fadbb10ce1680d7f310736bd400c7571464d2ac50baac3213",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 58,
+      "name": "Signet of Midnight",
+      "sourceTextDigest": "aa38dc43b890ee6104d20d532b83cfa560d3a77c0b6c48677ba7cce816315e23",
+      "metadata": ["applies:blind"]
+    },
+    {
+      "skillId": 59,
+      "name": "Signet of Weariness",
+      "sourceTextDigest": "c7aebdb95e9a59c34b5fba99521b0e12e327e81654c3cd5432e51948aab98e5b",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 63,
+      "name": "Keystone Signet",
+      "sourceTextDigest": "cf0a5c6a85b880b0d8e22d364b814ea36c1f07d1b173f46fe6a40dd354ce93d8",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 67,
+      "name": "Shatter Hex",
+      "sourceTextDigest": "836df35181d68d6b767c506e846721f218010b09ac539b0dd84f1a2a943f950c",
+      "metadata": ["removes:hex", "deals:damage"]
+    },
+    {
+      "skillId": 68,
+      "name": "Drain Enchantment",
+      "sourceTextDigest": "14ed11413e885711845dba8afde284bd2b28066e41113350778e9e26add29ef0",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 69,
+      "name": "Shatter Enchantment",
+      "sourceTextDigest": "9ef91dc3b4efd2a401ac62fa94ac2c77c8df7257ae9900c1c9d4e257f4f110a2",
+      "metadata": ["removes:enchantment", "deals:damage"]
+    },
+    {
+      "skillId": 77,
+      "name": "Chaos Storm",
+      "sourceTextDigest": "28ee6d7e0e28b36581c6a198e1071acdda1715a4f76c957281bdc54d4f1f1b50",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 78,
+      "name": "Epidemic",
+      "sourceTextDigest": "24893bb6b5d4bf0e807583527fafae56cd8196f651b691c2d064a0d10233ab5a",
+      "metadata": ["applies:condition"]
+    },
+    {
+      "skillId": 89,
+      "name": "Deathly Chill",
+      "sourceTextDigest": "ebb3fc67b17d85e6cf1e041c5ebff5c1d6f54d87b838826df272727d95eaf342",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 90,
+      "name": "Verata's Sacrifice",
+      "sourceTextDigest": "c7efe9ed54bf920561e7b8d3ecc72d01be4f968cc3e088f41538c4478f838795",
+      "metadata": ["applies:condition", "removes:condition"]
+    },
+    {
+      "skillId": 94,
+      "name": "Well of the Profane",
+      "sourceTextDigest": "cf7e7e9f42cfcc67634f7becc0f5775096ca0bc838cf268922d3a7dc2112b78e",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 95,
+      "name": "Putrid Explosion",
+      "sourceTextDigest": "c0ee82549d3875ae2eabd3ce463396b35453c98dba0dd25b8c6798ab39ae9259",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 97,
+      "name": "Necrotic Traversal",
+      "sourceTextDigest": "68be1b92e7eb51852ac24ff39cdff298f9d2724d1ace9f3e1b685684992cdbe6",
+      "metadata": ["applies:poison", "applies:disease"]
+    },
+    {
+      "skillId": 100,
+      "name": "Soul Barbs",
+      "sourceTextDigest": "49e2079fb63116e8e28952185b9dc1d2b6336720563d33643d2aa623b0e2fc43",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 101,
+      "name": "Barbs",
+      "sourceTextDigest": "856a5c7a083c975fbace5d9f79ec2313fdf0c3694a7e10766943b22a11d11a80",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 102,
+      "name": "Shadow Strike",
+      "sourceTextDigest": "30a2cadc20c52e45137c778df7b21ec845090fdde3eefabd19160dadf27025e4",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 103,
+      "name": "Price of Failure",
+      "sourceTextDigest": "133f7c3bfdb2d76f13c89a686d8ca6e99ac1f905d7157667b3b91dd70adb968f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 104,
+      "name": "Death Nova",
+      "sourceTextDigest": "5038324f1b0501dd23a1d8131ee7fe379e6f98dcdcbc822b19219fcbafa6c179",
+      "metadata": ["applies:poison", "deals:damage"]
+    },
+    {
+      "skillId": 105,
+      "name": "Deathly Swarm",
+      "sourceTextDigest": "2179c9d143644a122fce39fb1aee945da35ef808fa60c01092ec476f647a547c",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 106,
+      "name": "Rotting Flesh",
+      "sourceTextDigest": "28a81d8def7894c082f42b6096b818a4b4267756cdd759ffd9da39f0bbbc0a65",
+      "metadata": ["applies:disease"]
+    },
+    {
+      "skillId": 107,
+      "name": "Virulence",
+      "sourceTextDigest": "42233f64ab433b12a5755ec7cfd163be88dddf203aa8dcf2969560e6e660fedd",
+      "metadata": ["applies:poison", "applies:disease", "applies:weakness"]
+    },
+    {
+      "skillId": 112,
+      "name": "Desecrate Enchantments",
+      "sourceTextDigest": "74f565104766a86d5358a617501299a7cfb9e466561436da8e1244e5147fd767",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 113,
+      "name": "Tainted Flesh",
+      "sourceTextDigest": "75da28eb408e6bfea4202b7a2437175b0ebeb1511ef968b790fbf46b7e31bb9a",
+      "metadata": ["applies:disease"]
+    },
+    {
+      "skillId": 116,
+      "name": "Dark Aura",
+      "sourceTextDigest": "160d0377c957732b4511bf3a05b7f86d052c64e508e48fef8b55edc72a54e25b",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 117,
+      "name": "Enfeeble",
+      "sourceTextDigest": "4913ef3a0282b1b3c8ddce8714f332bc036a26eac451686d862dfcf2d1538f12",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 118,
+      "name": "Enfeebling Blood",
+      "sourceTextDigest": "c42a4cd1e55b562a700cbd5725e9a9f40973ed413a7bec9b8c6014cec40573fc",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 121,
+      "name": "Spiteful Spirit",
+      "sourceTextDigest": "20943022cb9341425447061c3598262e2094b8c58a18617bc41140460160e22e",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 125,
+      "name": "Wither",
+      "sourceTextDigest": "388953dd7de7ccbf7c6394c4ec4df51b939f417225f0c4637cf6ade08127c851",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 130,
+      "name": "Demonic Flesh",
+      "sourceTextDigest": "75b3776a7e75f6a1443696e94052b2c51930281c525a535a603feb91d0f54b8c",
+      "metadata": ["deals:shadow"]
+    },
+    {
+      "skillId": 131,
+      "name": "Barbed Signet",
+      "sourceTextDigest": "49e78d871fa8aca76b678137aef0e02db823213a1575890758d8d490acb29fa2",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 132,
+      "name": "Plague Signet",
+      "sourceTextDigest": "314f0405d18248d8dcabee5d90bd4731f597ed81557f826904c18a19bfdda570",
+      "metadata": ["applies:condition", "removes:condition"]
+    },
+    {
+      "skillId": 133,
+      "name": "Dark Pact",
+      "sourceTextDigest": "e82d7d56925d81ca9c9a827b4e09ebebd0b528d3b04781d58da81cf3a03dabe1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 134,
+      "name": "Order of Pain",
+      "sourceTextDigest": "b9387db2626bed0311da52508611516ee4b0a51e368ef1869ee7d8affe616ff6",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 139,
+      "name": "Infuse Condition",
+      "sourceTextDigest": "6ee1fd5182a03cde8903fa5f64f09b0bcb20bb8b92c88128d4243431ee57aae0",
+      "metadata": ["applies:condition", "removes:condition"]
+    },
+    {
+      "skillId": 140,
+      "name": "Malaise",
+      "sourceTextDigest": "0d92cd08a48ce0ff5070cf3396fa78b9ab823120a875997a77c48f97ecfa34cf",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 141,
+      "name": "Rend Enchantments",
+      "sourceTextDigest": "9bda2ad389731a8f56ddaa63e98b6d77786bcdbaf039a32ee761415884bebf6a",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 143,
+      "name": "Strip Enchantment",
+      "sourceTextDigest": "42ff3584fc7735de4477d060c2feae0f088aa189a3d77a682c617237551d468d",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 144,
+      "name": "Chilblains",
+      "sourceTextDigest": "358897d9ae21edba5e7b29f6d3a5dcb792741202206c47131707b545bdcdb702",
+      "metadata": ["applies:poison", "removes:enchantment", "deals:cold"]
+    },
+    {
+      "skillId": 145,
+      "name": "Signet of Agony",
+      "sourceTextDigest": "580bd7d8c7329846bea7dbdfdbea1d77fca1181e6377c6b8f54541aa54d49bf5",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 149,
+      "name": "Plague Sending",
+      "sourceTextDigest": "dade7f590ba747a7892d852f51ca8de255ae6baa1dabc64ef52e7d5249054ace",
+      "metadata": ["applies:condition", "removes:condition"]
+    },
+    {
+      "skillId": 150,
+      "name": "Mark of Pain",
+      "sourceTextDigest": "5b1c7d78f870242059a895f0cebae73c84ec7c8e4e83574532a038b755030f58",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 151,
+      "name": "Feast of Corruption",
+      "sourceTextDigest": "04285a8605395a1f1f39e4cba97e440330c87ac486b1d4605d597d41127a4b81",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 154,
+      "name": "Plague Touch",
+      "sourceTextDigest": "989380b0307f7ceafdebabe30007510703286a05702d0e7fe51153700a75bc18",
+      "metadata": ["applies:condition", "removes:condition"]
+    },
+    {
+      "skillId": 155,
+      "name": "Vile Touch",
+      "sourceTextDigest": "42e56c85743ba84fdc56c6b92484286c123d2d9f987d5f3b4c515e108be7ca14",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 158,
+      "name": "Touch of Agony",
+      "sourceTextDigest": "f52201fdcda9f6dd8574fd9906871ba22b8739a2d54c0d209aee2221ced4b84a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 159,
+      "name": "Weaken Armor",
+      "sourceTextDigest": "543da13d585d65c8ae6f6d72b2f71b02845d9acc84052e1c5b605d07603162fd",
+      "metadata": ["applies:cracked_armor"]
+    },
+    {
+      "skillId": 163,
+      "name": "Whirlwind",
+      "sourceTextDigest": "5690c7b776f5c1f3d625faa96cf52cdb55ca6995871574fac01e60360f257622",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 167,
+      "name": "Eruption",
+      "sourceTextDigest": "8c259c265d3c2fec5e4c0d9512c8aa611927d95dab3ce6f103d7ecd1f7029feb",
+      "metadata": ["applies:blind", "deals:earth"]
+    },
+    {
+      "skillId": 168,
+      "name": "Magnetic Aura",
+      "sourceTextDigest": "3a911fe172ed2fc010dac92f52ffe44df552d5f884943b52bffd05e6cc7f13e4",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 170,
+      "name": "Earthquake",
+      "sourceTextDigest": "0d58fcca52c22cd8cc919278ce1fba2769fdbe561c0a65183c1c6b8a988db72c",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 171,
+      "name": "Stoning",
+      "sourceTextDigest": "3a4b17c1f0b936bda948f76cb98b986bc73aa6b1ff1994c463bd11f6d677ca03",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 172,
+      "name": "Stone Daggers",
+      "sourceTextDigest": "78768594a2a56191f3b326ea3f538b3d0a4a4b9cb8431d18060e892a1f8116a7",
+      "metadata": ["applies:bleeding", "deals:earth"]
+    },
+    {
+      "skillId": 174,
+      "name": "Aftershock",
+      "sourceTextDigest": "acf9be66ea4e977b48f9995076546eaa043ae00d3b6d7c2b97f51e41865c05b3",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 178,
+      "name": "Ether Prodigy",
+      "sourceTextDigest": "fbd2ffae9b989838adf4ad21b0c9be828739db2c6ef7b18c9e6567cf1aa3506d",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 179,
+      "name": "Incendiary Bonds",
+      "sourceTextDigest": "5c6988ffc4b269aeb888381170c96d5d82e92e69546c43537bd857817841e55f",
+      "metadata": ["applies:burning", "deals:fire"]
+    },
+    {
+      "skillId": 182,
+      "name": "Conjure Flame",
+      "sourceTextDigest": "e85a1f9841f880daffd0dbda93c7be61f9ddfe043637a5a18b38a096dc6a231d",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 183,
+      "name": "Inferno",
+      "sourceTextDigest": "cf5fe0bfe69369982d58f68ea02e4556b1904a1c4c12b3d7c110df43d6bd5257",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 185,
+      "name": "Mind Burn",
+      "sourceTextDigest": "cce45e487e05d32393f295d96bcf80681f8c145faa2bdc4a30c17206afb003a5",
+      "metadata": ["applies:burning", "deals:fire"]
+    },
+    {
+      "skillId": 186,
+      "name": "Fireball",
+      "sourceTextDigest": "970766b324c2b7e42308ca073b4fa4968302007adfc4780a65e5296b0afc8d9c",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 187,
+      "name": "Meteor",
+      "sourceTextDigest": "44474b930c06d92da8bc695c970a77c1e7c06729e95be6f338e353aa14e1687e",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 188,
+      "name": "Flame Burst",
+      "sourceTextDigest": "8d7b95be635f110e9f7bf373b554163d0b355a05d04895fff56d7cb850861e6d",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 189,
+      "name": "Rodgort's Invocation",
+      "sourceTextDigest": "01f61c6a3214d476fadd41883e29440eba41a731ec8b3255fecc4c5d905dc7c5",
+      "metadata": ["applies:burning", "deals:fire"]
+    },
+    {
+      "skillId": 190,
+      "name": "Mark of Rodgort",
+      "sourceTextDigest": "77ee79539e98ba81ad73263762ddc726f6a0691bc4b18f3f6343014c5e5d679f",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 191,
+      "name": "Immolate",
+      "sourceTextDigest": "c90da03cb57254b8314dfdd75c577d9424b6ff82e0a7ce48f4b09ad9feacec41",
+      "metadata": ["applies:burning", "deals:fire"]
+    },
+    {
+      "skillId": 192,
+      "name": "Meteor Shower",
+      "sourceTextDigest": "b21b1affc323535f7eff79c369ad77b83c8ececbb8844153548b75102ffb9e1a",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 193,
+      "name": "Phoenix",
+      "sourceTextDigest": "ef2b0dcabb6b45069526843af8ffd49a78a54394ea49c21bb656d74bacc36b85",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 194,
+      "name": "Flare",
+      "sourceTextDigest": "7edbe3b32932594266092e84fb9be95f71d4f79428b297e77769a4452eea6d36",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 195,
+      "name": "Lava Font",
+      "sourceTextDigest": "8d9f9947b1c0ed3d80a41bab1bc32dc001b7ebf251739de700c231e68e6feef8",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 196,
+      "name": "Searing Heat",
+      "sourceTextDigest": "e5288a50b0faa364d71ddef14613c2bb14735fcd90e42301c57518afc6184e13",
+      "metadata": ["applies:burning", "deals:fire"]
+    },
+    {
+      "skillId": 197,
+      "name": "Fire Storm",
+      "sourceTextDigest": "92cc532347b9c311505bd37c88d7f218ac5fd1a91fb21f43dff1403a9e8df7f0",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 204,
+      "name": "Rust",
+      "sourceTextDigest": "afbdc6e3b88aac0843da73596e6eb8cfc9e8344eb8320213292eb503f61124aa",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 205,
+      "name": "Lightning Surge",
+      "sourceTextDigest": "6fbdc2744dc97d2e2da1198b4fd0bbdfde6f1f27ab0d1fcba6455cd2beb41546",
+      "metadata": ["applies:cracked_armor", "deals:lightning"]
+    },
+    {
+      "skillId": 207,
+      "name": "Conjure Frost",
+      "sourceTextDigest": "1a3adb447b6692210fbed1a4f9bcf807faa9699fdeca5daa9d7ee836745f61e8",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 209,
+      "name": "Mind Freeze",
+      "sourceTextDigest": "a9adf4f41f41b1f89695ac4a88ff3d9334045abc143fa745eb01bf861d20d32d",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 211,
+      "name": "Ice Spikes",
+      "sourceTextDigest": "e63f019a18fd347c98241b3603dc14a108827b91d9e67b8eae25e2d8bc4526b9",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 212,
+      "name": "Frozen Burst",
+      "sourceTextDigest": "3a6116a45be0a66704ed91cdb35030e4cb9f21fc1269605f36b93193bd3f1cc3",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 213,
+      "name": "Shard Storm",
+      "sourceTextDigest": "7ed579816adecb83e061d6a4036ddfa735b5b1b029eeba23d17163fe22b0ed82",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 214,
+      "name": "Ice Spear",
+      "sourceTextDigest": "d42d4377f652b3ceca07d7cad548fd8175edb638c4ac9b714c344e502eba3cc7",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 215,
+      "name": "Maelstrom",
+      "sourceTextDigest": "a4a16a417454ecced162451c10b6309b4b1bb0a045d2de5c1d70b02a402ead28",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 217,
+      "name": "Crystal Wave",
+      "sourceTextDigest": "c65cd71c2190a93a691e1ff2f6f3d40e2b1c0cb3ab2ddcd83ca6ba33f5a8c580",
+      "metadata": ["removes:condition", "deals:damage"]
+    },
+    {
+      "skillId": 219,
+      "name": "Obsidian Flame",
+      "sourceTextDigest": "aa28bf1c5834fd06299f142a35b4857406f35f1a0f57d2ca7f5af990b3af9227",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 220,
+      "name": "Blinding Flash",
+      "sourceTextDigest": "255a3bd4294cc92a0bbe77531a856dd97f9e810457a1695cbf67f6ff1b71001b",
+      "metadata": ["applies:blind"]
+    },
+    {
+      "skillId": 221,
+      "name": "Conjure Lightning",
+      "sourceTextDigest": "ec59c8ad2393eb95cfd0dd8f1d3f33ae414f0005c620d9f42d87d2715ea990ab",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 222,
+      "name": "Lightning Strike",
+      "sourceTextDigest": "12a509861245048bb83cf6c3fdc20dd946a45a553f3c47f265443a4d959444b4",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 223,
+      "name": "Chain Lightning",
+      "sourceTextDigest": "e7b65647e8796a069a2ebc9e7f1a927c0a9839966d47244d4fa707a66e7de96c",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 224,
+      "name": "Enervating Charge",
+      "sourceTextDigest": "4bbe14cd5f952dc0b4c478898764d9a55d19881ba0747ad29b27b6b3886fe7a1",
+      "metadata": ["applies:weakness", "deals:lightning"]
+    },
+    {
+      "skillId": 226,
+      "name": "Mind Shock",
+      "sourceTextDigest": "bc59fc514e3a240af08bb498cabe8e497e0f30a62adc62b6fc3fe8b5a997f183",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 227,
+      "name": "Glimmering Mark",
+      "sourceTextDigest": "00c92fa5e83144645a472e6314843cc0219d5c0d76a2ee89f5083fe0de2b08e1",
+      "metadata": ["applies:blind", "deals:damage"]
+    },
+    {
+      "skillId": 228,
+      "name": "Thunderclap",
+      "sourceTextDigest": "17079ec966fd3e871ba97363b2b32fa3f35d0f644ca517e11b7aff83c51c12f9",
+      "metadata": ["applies:weakness", "applies:cracked_armor", "deals:lightning"]
+    },
+    {
+      "skillId": 229,
+      "name": "Lightning Orb",
+      "sourceTextDigest": "7701540565efbb3596c6719028a903461aff86c01697e1b520b0aec7459ee3af",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 230,
+      "name": "Lightning Javelin",
+      "sourceTextDigest": "2f78dffa0e9c4096aacd702969e3bc5eaabcf0047ba6791bed88ebbf33f02eee",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 231,
+      "name": "Shock",
+      "sourceTextDigest": "9597e9d71c4059c59a6dfd42d0781ca70787628291204609d1dd719b412238ea",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 232,
+      "name": "Lightning Touch",
+      "sourceTextDigest": "db862409b43d1a5006b3cb5658c913cd79af78a17016bece79cda0b9689fe643",
+      "metadata": ["applies:blind", "applies:cracked_armor", "deals:lightning"]
+    },
+    {
+      "skillId": 234,
+      "name": "Deep Freeze",
+      "sourceTextDigest": "460dbc33a6aebe382ded56b03c17c314b73d62bb3c28c46f6fe80ac894ff2566",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 237,
+      "name": "Water Trident",
+      "sourceTextDigest": "755ac702d4852b36a73996a8d77b803fbd4c57b63364cc0edbe3b7303697679b",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 240,
+      "name": "Smite",
+      "sourceTextDigest": "1aabbbb446762f4fd9d2256e71360386f74b0b7b20fc26ae827bbfb6b17a3c7d",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 243,
+      "name": "Strength of Honor",
+      "sourceTextDigest": "f33f47ae997b9bf07170a8d8857f1a79088b9598fd45ff58e376bd823eb99e61",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 247,
+      "name": "Symbol of Wrath",
+      "sourceTextDigest": "b8e9c2311b3445c639eda26249eef0d9a7212ae333c95cfb471cebe143fadb7c",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 248,
+      "name": "Retribution",
+      "sourceTextDigest": "b6bfd2e63cc753af154b660a6a27fedd595f7230c121eea84e3adac5886e78bc",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 249,
+      "name": "Holy Wrath",
+      "sourceTextDigest": "5b802d6fc311d2a30f54879ea7f49b66f8415f120d2741bb1a02145340162802",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 251,
+      "name": "Scourge Healing",
+      "sourceTextDigest": "61160541c02d9c133bf44fb0b3ac272382c82b88b22689ddcd0a95263a1d0f91",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 252,
+      "name": "Banish",
+      "sourceTextDigest": "0d66f2ee1b17ba9c6ea33b578e907529411742137de6999181b8f80b5046b904",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 262,
+      "name": "Shield of Judgment",
+      "sourceTextDigest": "0fefce967511656350a6d2ab6dff79f27f170946699dab9d26c40adcdefae85b",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 266,
+      "name": "Peace and Harmony",
+      "sourceTextDigest": "e54b66e11a6bcafee346e1d296a7adc299c175d255de8465dc87a6ef315fc08d",
+      "metadata": ["removes:condition", "removes:hex"]
+    },
+    {
+      "skillId": 267,
+      "name": "Judge's Insight",
+      "sourceTextDigest": "35a03a62429ff38640a3513359136a80618818d93a2665b53cacc2fe70760afe",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 271,
+      "name": "Zealot's Fire",
+      "sourceTextDigest": "45dedf6dbcd1eb185812b0b3bb6d5c1da275cd528059be811a1419226e653aeb",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 272,
+      "name": "Balthazar's Aura",
+      "sourceTextDigest": "ff1905e75fac57a276fb5c1cb6872275d077fb8c3271a5e9811af81cff824284",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 275,
+      "name": "Mend Condition",
+      "sourceTextDigest": "fa391d1041fe77245aaf3977a84251e97da2b5e7ebbcb6db0ce19a3a8171c214",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 276,
+      "name": "Restore Condition",
+      "sourceTextDigest": "2c004cf0f0666adae0fbd0454af15886ebca991f2916dbfdac62d40c9821b02e",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 277,
+      "name": "Mend Ailment",
+      "sourceTextDigest": "f8a5878259ddd283ca5674e9bc9170668ac9f68fc2cc4a2299ef8b04738f1bcd",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 278,
+      "name": "Purge Conditions",
+      "sourceTextDigest": "dd6dcc909d9f6212f78124d449d8dde4b47ee91eec9221af22fea4781025cdc5",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 294,
+      "name": "Signet of Judgment",
+      "sourceTextDigest": "685b2355cd4720e7a40f210b07dac21f47e903d61258cbbe319118f2bc385743",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 295,
+      "name": "Purge Signet",
+      "sourceTextDigest": "2f6d2450fc37c77973e17c111cea54fceba47917060f1de508e7c7fd08174523",
+      "metadata": ["removes:condition", "removes:hex"]
+    },
+    {
+      "skillId": 296,
+      "name": "Bane Signet",
+      "sourceTextDigest": "932d32c651b53ec3b78557adb3be72bebaa6b453c89abed4387a1affb42cccdc",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 298,
+      "name": "Martyr",
+      "sourceTextDigest": "5df7a2adef5186e47e4aa07ab531020289d399c21d860906d9f228463755ae26",
+      "metadata": ["applies:condition", "removes:condition"]
+    },
+    {
+      "skillId": 300,
+      "name": "Contemplation of Purity",
+      "sourceTextDigest": "88cac8bf9006308749b34cf495e51ecce0eb7c2109d034742cc0342b91878798",
+      "metadata": ["removes:condition", "removes:hex", "removes:enchantment"]
+    },
+    {
+      "skillId": 301,
+      "name": "Remove Hex",
+      "sourceTextDigest": "e92a31e375b6c0cc8759f9b71445f974266a01a753dfc0080bd2be39f3b2d9c6",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 302,
+      "name": "Smite Hex",
+      "sourceTextDigest": "d711cfff5f17904061606ebfc05d4991ef11113161dd1fe354ec7dc1c3185f60",
+      "metadata": ["removes:hex", "deals:holy"]
+    },
+    {
+      "skillId": 303,
+      "name": "Convert Hexes",
+      "sourceTextDigest": "6f8be4902c286a8ce3a5f656c4e3f6a77e3f16238872001587c8d4b28b882249",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 309,
+      "name": "Holy Veil",
+      "sourceTextDigest": "e6f2a3eec858ffef97dd19462c811d676bda5308288306ec649770a300486be0",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 311,
+      "name": "Draw Conditions",
+      "sourceTextDigest": "eb5ee7c6a149de7c658074c50916fbf221dc7f5dbcbc4ab06f6af96fc44d1ef1",
+      "metadata": ["applies:condition", "removes:condition"]
+    },
+    {
+      "skillId": 312,
+      "name": "Holy Strike",
+      "sourceTextDigest": "7552dad0bf8332cef7905a3278bd7c80dafbf600e8bc31182b6802b3400124de",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 315,
+      "name": "Vengeance",
+      "sourceTextDigest": "790f74d1c15bc3f0abeec041cd7545ecbe657b7b08e409ddd198cee676599b50",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 320,
+      "name": "Hamstring",
+      "sourceTextDigest": "e5bd2b1aa8fdfef1d15e922afcca81551040eca9349a65dbdad0429c7454ba11",
+      "metadata": ["applies:crippled"]
+    },
+    {
+      "skillId": 321,
+      "name": "Wild Blow",
+      "sourceTextDigest": "fa86f312e82a92975d955362b4076d2bd2196b1fc785e2f9b157d11d79f4b98f",
+      "metadata": ["removes:stance"]
+    },
+    {
+      "skillId": 322,
+      "name": "Power Attack",
+      "sourceTextDigest": "1f614bcc842d1866c2c4a93911ac498afa9d8dbdc50478afc18750d3e541c49c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 323,
+      "name": "Desperation Blow",
+      "sourceTextDigest": "3c0f9ed5f4175bd25454609b5f9f3ee57f50ff686124d42a641dbc8ae1989014",
+      "metadata": [
+        "applies:bleeding",
+        "applies:crippled",
+        "applies:deep_wound",
+        "applies:weakness",
+        "deals:damage"
+      ]
+    },
+    {
+      "skillId": 324,
+      "name": "Thrill of Victory",
+      "sourceTextDigest": "645d3f561e5e49467ee5e3540352527c4fad7059d784c8255532213bb75e9b55",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 326,
+      "name": "Protector's Strike",
+      "sourceTextDigest": "9558065798485727fb3c60af137b02e3177887d9fe0f056a34264369f4416af3",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 327,
+      "name": "Griffon's Sweep",
+      "sourceTextDigest": "924ab7f9eba511aea399d2fac8de078f206e721d0c36fdb37465d1171e6b1be4",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 328,
+      "name": "Pure Strike",
+      "sourceTextDigest": "26f65710e722a2799bab27804f00ae56a4f8ed3b56a9f27827242b231ab98d16",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 329,
+      "name": "Skull Crack",
+      "sourceTextDigest": "3407eea62bfcea0a050d1a8ad3c12dce2c28b1005d8ff715b0fff975454be1f4",
+      "metadata": ["applies:dazed"]
+    },
+    {
+      "skillId": 330,
+      "name": "Cyclone Axe",
+      "sourceTextDigest": "e2ff4bf66609ad0408e43a35bed136902c99ad63b8085bd59763742b0d5c91a6",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 332,
+      "name": "Bull's Strike",
+      "sourceTextDigest": "e052e0a81559dbe9585e9f2ddb4508f005ddf40b49cdc1c966b7aa7fdc4b98f6",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 334,
+      "name": "Axe Rake",
+      "sourceTextDigest": "ab93d5770654b57ae06d3606ec75089b0272f764dccfeac9e430f56dc2892c2f",
+      "metadata": ["applies:crippled", "deals:damage"]
+    },
+    {
+      "skillId": 335,
+      "name": "Cleave",
+      "sourceTextDigest": "c853e715136db93862eaddbd67289b9bcde56a2b0bfebc62bac83fbd5d711d6e",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 336,
+      "name": "Executioner's Strike",
+      "sourceTextDigest": "7db210b91f3d9baf2b1d35b631494f25538effb6f322f7baff015b25f6f25410",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 337,
+      "name": "Dismember",
+      "sourceTextDigest": "85d974281b2c6019fc13e406df453cda61a8fe7200dd4c5979e3eb998164ec05",
+      "metadata": ["applies:deep_wound"]
+    },
+    {
+      "skillId": 338,
+      "name": "Eviscerate",
+      "sourceTextDigest": "79e1334aeb7ed1ba2fa1c65a11e282d47ea845e2cc1c20f86b5dc0bc09cd067f",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 339,
+      "name": "Penetrating Blow",
+      "sourceTextDigest": "b79f9ee98b1dd6df5685f19cf75d22f6bb89e7adf284958579a3da387870870c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 341,
+      "name": "Swift Chop",
+      "sourceTextDigest": "4569de2ca7b05c0a225f5a444547b6b2f72f2992513c6d8c90d1c354023ea717",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 342,
+      "name": "Axe Twist",
+      "sourceTextDigest": "f4bf1d72e711c149d6f2f5a0b62f535d236064a9789088170b0ad7e3e298cb77",
+      "metadata": ["applies:weakness", "deals:damage"]
+    },
+    {
+      "skillId": 350,
+      "name": "Belly Smash",
+      "sourceTextDigest": "09615bbd588845e33520cb499ea6cd413660713899cd3259df677abfbc7f9202",
+      "metadata": ["applies:blind"]
+    },
+    {
+      "skillId": 351,
+      "name": "Mighty Blow",
+      "sourceTextDigest": "27e23900383eda545abc34f085475581c440fdac4cfeebfd2e8762ca73e105be",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 352,
+      "name": "Crushing Blow",
+      "sourceTextDigest": "b072daffd8e3908e101cb51a8ba7376eebd8d72d1c7b74d1b3df1f5c5db2b64f",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 353,
+      "name": "Crude Swing",
+      "sourceTextDigest": "bcfb03a9d7bbb789fbc55d88dc590fc514befee38fe9bb017b67fda84b990aeb",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 355,
+      "name": "Devastating Hammer",
+      "sourceTextDigest": "0c41c17adae9cf91c5cb66e754febbf0cd2b3ac298fd54175518d1f8e16cbdfb",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 356,
+      "name": "Irresistible Blow",
+      "sourceTextDigest": "5c9278556f542f0b8a8c836d947b0201c5782a9c8aa4bf187000c3cf37067c86",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 358,
+      "name": "Backbreaker",
+      "sourceTextDigest": "f3ba693a726ae383c6b6ca6f7806ab032bf604d114bcda3c4fa6c8e0fae6d8bf",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 359,
+      "name": "Heavy Blow",
+      "sourceTextDigest": "126b7e0b02c4676da1dc7face6867b4de090755c5f1d404be4e2c735545a9cfd",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 360,
+      "name": "Staggering Blow",
+      "sourceTextDigest": "f7403ac09ed5e985f9390cc1da1176ef0a6487acc1f9809d392e7e3f4342dff1",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 364,
+      "name": "\"Charge!\"",
+      "sourceTextDigest": "ec353c6955f807a4b54e78cd58b2d20f76dbf3f8186cbc8a129a7153d45b7dee",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 372,
+      "name": "Gladiator's Defense",
+      "sourceTextDigest": "1405a369aeaf12bb34db558e3bed64428a194aeaeec3e57cff95d347575111e0",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 373,
+      "name": "Deflect Arrows",
+      "sourceTextDigest": "44ae092088f8d0795293815a22c5391fa61973b9659104448702f5a97000c3b4",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 381,
+      "name": "Hundred Blades",
+      "sourceTextDigest": "2f8f466f531a5aa5d5bb750704f636ee6695e0ef62c21dbcb26121d6884eb512",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 382,
+      "name": "Sever Artery",
+      "sourceTextDigest": "3c7d22846357724eccdbe3e9396c10880d14916505f6b0daa544a0b760502cdb",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 383,
+      "name": "Galrath Slash",
+      "sourceTextDigest": "6e151b6a5d015551e9065d325b2bc775d22d2d90bab0292e326e08ea8e5c44f9",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 384,
+      "name": "Gash",
+      "sourceTextDigest": "3928240614cb8da0343f7e1dc739ea5c34f35136ae3af649322ecaf61cb2c713",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 385,
+      "name": "Final Thrust",
+      "sourceTextDigest": "cf88963400f03291daced585ef563875fa2ce7d18e8cc5deab299210ba1d23c1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 386,
+      "name": "Seeking Blade",
+      "sourceTextDigest": "a08eac11c91c74b841e661b99db7054e245f5d8750e31ba795b936faa2bc85b1",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 387,
+      "name": "Riposte",
+      "sourceTextDigest": "8b20debe134b41d463e08be3a1c41dbfbf2a13e29c3838780d5d7a622bce3c29",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 388,
+      "name": "Deadly Riposte",
+      "sourceTextDigest": "72470084f4f0c1fb1d6794c7df5c64ad3ddeafdacfef9b2192d562417b4c8799",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 390,
+      "name": "Savage Slash",
+      "sourceTextDigest": "a56d4f9335ae86ecd6a87a78ea19909a0009276cb4dec78d68c8c87e23e4a263",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 391,
+      "name": "Hunter's Shot",
+      "sourceTextDigest": "b19829450a3c9b457ae46f5e4492ead5ef12800257055f58016dab704f8dc1a9",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 392,
+      "name": "Pin Down",
+      "sourceTextDigest": "4b65f673cbffd4f7bde327a2549d6e5177150967df2395a7eb6b02e63c950b14",
+      "metadata": ["applies:crippled"]
+    },
+    {
+      "skillId": 393,
+      "name": "Crippling Shot",
+      "sourceTextDigest": "26e34c8981f0a60ccc2db2f4bca910900ff1a2ccf67b0497580f46d86ce625b1",
+      "metadata": ["applies:crippled"]
+    },
+    {
+      "skillId": 394,
+      "name": "Power Shot",
+      "sourceTextDigest": "96f873c98e01e947ee326196918dc1748f07165704df0db42c444c54f4e45992",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 395,
+      "name": "Barrage",
+      "sourceTextDigest": "3943a3d104dd54ff162b4617fbd2ddef7ceca2b7a96734b129e554d8b05990e1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 396,
+      "name": "Dual Shot",
+      "sourceTextDigest": "ee786fe8f123efda5e6c25402cf0014b63d54bcdf3d4021b537dcc4e0240885c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 398,
+      "name": "Penetrating Attack",
+      "sourceTextDigest": "3d9b33f5e356029ad6ea9714e68500a9928bddad27f9a2a3c401cd0f9208f1c2",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 399,
+      "name": "Distracting Shot",
+      "sourceTextDigest": "d576aa95a87b572cbcd2bac5fc52485b4e4b5770e419dacca2bc95546ae8a279",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 400,
+      "name": "Precision Shot",
+      "sourceTextDigest": "1a2a8e3ed360841e4406e5a43aed925bcea36852a4f2cacababa96062f65e785",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 402,
+      "name": "Determined Shot",
+      "sourceTextDigest": "4c439eb94bceed3a2689868aff6502fdc4d76749004d03dd24637c73a1038221",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 404,
+      "name": "Poison Arrow",
+      "sourceTextDigest": "7cecb91943fec4b2cdc1f1b3832411670a8cd3733d0f123d3fb30fbeca28242b",
+      "metadata": ["applies:poison"]
+    },
+    {
+      "skillId": 407,
+      "name": "Point Blank Shot",
+      "sourceTextDigest": "ca8ed7fb6bbcd8fe4e0252211107f93feb17a57c6cfd9cdbfe2185aa218de770",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 408,
+      "name": "Concussion Shot",
+      "sourceTextDigest": "67b97dd7d36361c3b89ba62066fed0a8fe4aad0f303bd06ca0511edc3e461f00",
+      "metadata": ["applies:dazed", "deals:damage"]
+    },
+    {
+      "skillId": 409,
+      "name": "Punishing Shot",
+      "sourceTextDigest": "27924dcde559cc3d375a66ca0a148cccc45bb0f85e3e1449423eb1f01e67f40a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 424,
+      "name": "Throw Dirt",
+      "sourceTextDigest": "8fa330f2e1034c4f5e8525d0b2fb136a67010844f8260003afaadd693bd4f08b",
+      "metadata": ["applies:blind"]
+    },
+    {
+      "skillId": 426,
+      "name": "Savage Shot",
+      "sourceTextDigest": "ba8a036df0506bbbebf1a0aace2c31ad0133f05a6cfce8370e38fe4a7bc547b1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 427,
+      "name": "Antidote Signet",
+      "sourceTextDigest": "8bab7c3dec2b196623dcd042e1c10ae8cece56d45ff3c75b93804777773c1533",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 428,
+      "name": "Incendiary Arrows",
+      "sourceTextDigest": "8761b8670eeb2be6264cc1fe6b350651693e572663fcb9dfe8b3f49a4b88def9",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 429,
+      "name": "Melandru's Arrows",
+      "sourceTextDigest": "3219e3fdd1c413ccc6c68e191a22971e97425485e76207682ebefed1f7cf0ec8",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 431,
+      "name": "Ignite Arrows",
+      "sourceTextDigest": "e52406a04765c3a9025a90dd4d74adc371bd44859cf7547bbc43eeed6a7b9967",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 432,
+      "name": "Read the Wind",
+      "sourceTextDigest": "c6c2297782d1d0b87804ffddb27f12dadd81b7a4e82c30f27f0c92bbc1b220fd",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 433,
+      "name": "Kindle Arrows",
+      "sourceTextDigest": "4d03bf12aa32399fd321d88facb024165be23d54b028ae512ae2a8768efe2288",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 434,
+      "name": "Choking Gas",
+      "sourceTextDigest": "096e3d1a11a672f79212b1a6796c093100879c15f12a618426e33c60c8d06577",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 435,
+      "name": "Apply Poison",
+      "sourceTextDigest": "ca8ebd8ce4edc4abbae21d33a94322b614b25eff746501f1c0d9753e8472b7ba",
+      "metadata": ["applies:poison"]
+    },
+    {
+      "skillId": 437,
+      "name": "Bestial Pounce",
+      "sourceTextDigest": "760d853f90b4baf254a75668e8a3e76aa4a614007e0eecb76d63b1f0f888b0e0",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 438,
+      "name": "Maiming Strike",
+      "sourceTextDigest": "7a68145589d58958e08e26548223ab55a9ad1770be5a43177fd8f3d1aec561be",
+      "metadata": ["applies:crippled", "deals:damage"]
+    },
+    {
+      "skillId": 439,
+      "name": "Feral Lunge",
+      "sourceTextDigest": "c499e41759962c8d377f0cd5371fcf1de6d8aa5e84267f32cce303eaf318fabe",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 440,
+      "name": "Scavenger Strike",
+      "sourceTextDigest": "15a885be64bf3f48dc8beb22195de8223f407b86ec9603eca04d09e09af2a5c3",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 441,
+      "name": "Melandru's Assault",
+      "sourceTextDigest": "ab116bdf3e003fda51cea0cb594b628f378124c67149ed241d580a9efa558c79",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 442,
+      "name": "Ferocious Strike",
+      "sourceTextDigest": "800b68d655d5f31af98350ff00e35c263b80be350aefa0f8b71d1e239c9543fd",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 443,
+      "name": "Predator's Pounce",
+      "sourceTextDigest": "57c73d442e290b55bdafa303c823284df08d57620872ac5dfc0e21f72d1b01cd",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 444,
+      "name": "Brutal Strike",
+      "sourceTextDigest": "bdfdf59e6bfc9b66b592e38c187137cfa9e163c01bc3b64042647a988f5447e3",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 445,
+      "name": "Disrupting Lunge",
+      "sourceTextDigest": "1cfa871474b94ae675da641022c335b827609640729ff24faa2c027cd9988e7d",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 450,
+      "name": "Whirling Defense",
+      "sourceTextDigest": "2589aceac2990ff81703e7bfcd2c432e5841e9c8c688809c09d007ab9b9fbd79",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 457,
+      "name": "Dust Trap",
+      "sourceTextDigest": "7e40c083ec2979a8f8f81e15d44efca9e99a69b3a3cab7d6d22755577d400ee5",
+      "metadata": ["applies:blind", "deals:damage"]
+    },
+    {
+      "skillId": 458,
+      "name": "Barbed Trap",
+      "sourceTextDigest": "f74f11d26acc6845ada1e8c2253f01f57076c1a8b0f51c661c915c358acd0d29",
+      "metadata": ["applies:bleeding", "applies:crippled", "deals:damage"]
+    },
+    {
+      "skillId": 459,
+      "name": "Flame Trap",
+      "sourceTextDigest": "59a5c9d531dc520fbe69aabf7540192f353683b85ad2fdf1755369e9afe34d9b",
+      "metadata": ["applies:burning", "deals:fire"]
+    },
+    {
+      "skillId": 461,
+      "name": "Spike Trap",
+      "sourceTextDigest": "89f51c42c0cb738ea2cf26725a50f8c81622a9becfd6b53071274ddb7be552fc",
+      "metadata": ["applies:crippled", "deals:damage"]
+    },
+    {
+      "skillId": 462,
+      "name": "Winter",
+      "sourceTextDigest": "d1fe650f66214384dc4bea066b7debfc5fae9a1e61b949b7bdc4c36c8380a99d",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 463,
+      "name": "Winnowing",
+      "sourceTextDigest": "eec03ca0b053ef1bd021a43be55cfc6bfe8f5a264024a408874a6226e93046a0",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 464,
+      "name": "Edge of Extinction",
+      "sourceTextDigest": "0b825e5356d28efc7b9a5c8e6914e79823f28875cb77ad71170aae929634d313",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 465,
+      "name": "Greater Conflagration",
+      "sourceTextDigest": "74d4ed492313de3eadb0bbc216e01b96d3041ee794c2f88a1274779b033b2b31",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 466,
+      "name": "Conflagration",
+      "sourceTextDigest": "ba04348e6604217b2cbd0efcaf6b1fa9849463c6d8a666adeab766f260b01027",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 472,
+      "name": "Favorable Winds",
+      "sourceTextDigest": "0a35de11b9a7f4feb5a4e65a52dc19f86b32ae37ea16daa0cedfec17f13dcaff",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 562,
+      "name": "Lightning Orb",
+      "sourceTextDigest": "7701540565efbb3596c6719028a903461aff86c01697e1b520b0aec7459ee3af",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 571,
+      "name": "Disrupting Dagger",
+      "sourceTextDigest": "63279606cb1f07a8922c43beec6070eb023ea7cf314b79de3a63ceb5f431c0e1",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 763,
+      "name": "Jaundiced Gaze",
+      "sourceTextDigest": "d34499a80c6a3ee6dd51316fcd7158f1c65493f0a0ac7ff7f3436f021f55a2b1",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 766,
+      "name": "Gaze of Contempt",
+      "sourceTextDigest": "88b1a08deb560215cc12eb79837bde5c68c5eabac4b578ca8148fe014e26ca84",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 769,
+      "name": "Viper's Defense",
+      "sourceTextDigest": "0d7de508ddadc87e36e1d6c29f7e99deeef510927f1b8e81048ea819d460095c",
+      "metadata": ["applies:poison"]
+    },
+    {
+      "skillId": 770,
+      "name": "Return",
+      "sourceTextDigest": "c569bb9b63676842e40d71744a53f4b52985e0a14dfc8f7e41459fa78c0fbde3",
+      "metadata": ["applies:crippled"]
+    },
+    {
+      "skillId": 775,
+      "name": "Death Blossom",
+      "sourceTextDigest": "a81969e42456a8a1a92b258e194a7cd1a40ac3a6a2f271e3221cbfdf57395cad",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 776,
+      "name": "Twisting Fangs",
+      "sourceTextDigest": "8e50e4d9d2f8273669ad01b31f1c1b1df855933de6d69275dde6ec3b96af610c",
+      "metadata": ["applies:bleeding", "applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 777,
+      "name": "Horns of the Ox",
+      "sourceTextDigest": "71092fd9b6b7dea2589206c9bed7a9fe1816213005d69d38bb369ea474d22ea5",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 778,
+      "name": "Falling Spider",
+      "sourceTextDigest": "4133ced55bccd829d4e47f79c4db375869652d2407e4a167c82f99457304f8a7",
+      "metadata": ["applies:poison", "deals:damage"]
+    },
+    {
+      "skillId": 779,
+      "name": "Black Lotus Strike",
+      "sourceTextDigest": "90a6bdbd3f616ce7f734e8c4ce7f70dbb271e29a1a112aab96cabdb8b5b85022",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 780,
+      "name": "Fox Fangs",
+      "sourceTextDigest": "0e620e782622ef9ececd85991875e8e42ceb48b8249894e9cac521fac139783d",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 781,
+      "name": "Moebius Strike",
+      "sourceTextDigest": "86cacd411d02ec0930eb6f440a7396b8aa4a955a852541cc793dbd55277fd051",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 782,
+      "name": "Jagged Strike",
+      "sourceTextDigest": "689699400d54e2f5ac046cbd284e42d8d14997668c9b7c662185565ada091c25",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 783,
+      "name": "Unsuspecting Strike",
+      "sourceTextDigest": "38d06976164a400827b155fb23fbb4af3b787e7e4341ef5c86b64c4b880e52f7",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 784,
+      "name": "Entangling Asp",
+      "sourceTextDigest": "bdd3bf20c89040d4abe8ee4ef2939948523398c8ba35df1cf109041dd1344e01",
+      "metadata": ["applies:poison"]
+    },
+    {
+      "skillId": 786,
+      "name": "Iron Palm",
+      "sourceTextDigest": "6151fe4f74396a2cd52449a7f501eab32da600e608bedb2c39fb12ca9d721880",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 788,
+      "name": "Blind Was Mingson",
+      "sourceTextDigest": "1d123936ca2b8acb1fcf19f88811321934589b6f751285f9110d51e76d309ba7",
+      "metadata": ["applies:blind"]
+    },
+    {
+      "skillId": 789,
+      "name": "Grasping Was Kuurong",
+      "sourceTextDigest": "e36f8e1c0aaa13c0805e7fc258a4914a322e4dc29e40d173f3a281c20e8ebf69",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 792,
+      "name": "Splinter Weapon",
+      "sourceTextDigest": "5f2008b5470d4b157c03ab121e14a796768886bcbe0e7f2adc4ae26b71a77f3f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 799,
+      "name": "Beguiling Haze",
+      "sourceTextDigest": "e9e45302aa7ecec7cc6477695fe8f31d08709ab053c59d5feffe234a8a132c7e",
+      "metadata": ["applies:dazed"]
+    },
+    {
+      "skillId": 805,
+      "name": "Animate Vampiric Horror",
+      "sourceTextDigest": "e38113386c3dabf28a0a41016c4bea2c03a9a600b0698621fdf98d17efe0d04f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 806,
+      "name": "Cultist's Fervor",
+      "sourceTextDigest": "b9729ba25ee30ab75feaf1d5f0d75b6055c3da54c143818f84644faa4df9d20e",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 809,
+      "name": "Shatterstone",
+      "sourceTextDigest": "e5dc477cf289f1e3d08cfdaa1ac150f17ca2c9c13acaf801755211702219d848",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 817,
+      "name": "Discord",
+      "sourceTextDigest": "f97966ac91b6a971afa3e010976aef08d51de1f6cef2234738d9f2d061e52272",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 821,
+      "name": "Icy Veins",
+      "sourceTextDigest": "8aa06e36b66b96c8c485396bcae657e72aba0b5f4a3d63690ceba920b9605ca1",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 822,
+      "name": "Weaken Knees",
+      "sourceTextDigest": "e57cb95a85619f1220737576f102db98925bd3265bdf476c39071547dd5c78c7",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 823,
+      "name": "Burning Speed",
+      "sourceTextDigest": "2090db4a9d8031a3939cf0fbc4db56954c40867ca2b7771f658a9e53980028cf",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 824,
+      "name": "Lava Arrows",
+      "sourceTextDigest": "e9179bcd3615b182560149b8a3905fdce465bc6fe97ac7b6f9555830cc78bcc2",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 825,
+      "name": "Bed of Coals",
+      "sourceTextDigest": "4ee3c97cecae8fe48ab3d2e7b3d51a3f2a79ca194c4f830605002444105d2138",
+      "metadata": ["applies:burning", "deals:fire"]
+    },
+    {
+      "skillId": 828,
+      "name": "Vile Miasma",
+      "sourceTextDigest": "4d0d3b67b4f44bbf8b7b8c18cd318bfedae0107b64d15b2664fccf1fb7e6605d",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 830,
+      "name": "Ray of Judgment",
+      "sourceTextDigest": "3ac938792de5ed20451023837edbe7d0161a8a730d13f2766c9c542d61973a51",
+      "metadata": ["applies:burning", "deals:holy"]
+    },
+    {
+      "skillId": 836,
+      "name": "Ride the Lightning",
+      "sourceTextDigest": "89ebbec5aeafd9a401b86cc483a82071bce3e2bad0f0b95763e214afb4eea4ed",
+      "metadata": ["applies:blind", "deals:lightning"]
+    },
+    {
+      "skillId": 840,
+      "name": "Poisoned Heart",
+      "sourceTextDigest": "d8d0e51b744cc2c8fddb684864711c6b0b15f772f368faf20e3524866dcbcba0",
+      "metadata": ["applies:poison"]
+    },
+    {
+      "skillId": 841,
+      "name": "Fetid Ground",
+      "sourceTextDigest": "f2cf56e85ba7c7dc2f1e42c4167b804a6c2245f431f8e5067ed24c210ca9a406",
+      "metadata": ["applies:poison", "deals:cold"]
+    },
+    {
+      "skillId": 842,
+      "name": "Arc Lightning",
+      "sourceTextDigest": "0dc45ca107ae8f9bad5a6ac2cb58cc768c5b12355f5fc05cc8e1d04d82e79f3a",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 843,
+      "name": "Gust",
+      "sourceTextDigest": "fbcce679cfc9440e9b2795dcb9b6cb0fd462ec39b8a58c6f73b0b166bd3ca124",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 844,
+      "name": "Churning Earth",
+      "sourceTextDigest": "c5665318df8d75507d86832b2721f47157ebba7d26b147584c98386b961ae08f",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 845,
+      "name": "Liquid Flame",
+      "sourceTextDigest": "db18631471f98fc0a465f22dedb4022996af2da270fb43f1ee7eb29c289c19c5",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 846,
+      "name": "Steam",
+      "sourceTextDigest": "fe1c7169494ed07b4fc5730e26823074b7272e3ab64c6bc0cbd7683f140db2e5",
+      "metadata": ["applies:blind", "deals:fire", "deals:cold"]
+    },
+    {
+      "skillId": 848,
+      "name": "Reverse Hex",
+      "sourceTextDigest": "2189ec3e25ea63aea395cc8b2f610f42e4450ab3f834209eed824b0e0aac18ab",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 849,
+      "name": "Lacerating Chop",
+      "sourceTextDigest": "2ac9673b4d86e3e0c9d665d8b137c9b64e67db4ecd09b39d2c9c4963bb83e763",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 850,
+      "name": "Fierce Blow",
+      "sourceTextDigest": "3a861f9b57dae562c38a3c2898e5e949a3475454fc09142f4b807f068f0e5d78",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 852,
+      "name": "Splinter Shot",
+      "sourceTextDigest": "289b2796c2f1476606c8b045803381dbc41b8e3bafa2f3e293ff912d4fab0e2c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 853,
+      "name": "Melandru's Shot",
+      "sourceTextDigest": "e37c101fe0608b67797bdf42b1a8d5e05143d9f50cd921bc2791e2e44bcc8d6c",
+      "metadata": ["applies:bleeding", "applies:crippled", "deals:damage"]
+    },
+    {
+      "skillId": 854,
+      "name": "Snare",
+      "sourceTextDigest": "bbbfc9b9f47e8badf537131167843962c9ea1a185076bab4474f292c3249379d",
+      "metadata": ["applies:crippled"]
+    },
+    {
+      "skillId": 858,
+      "name": "Dancing Daggers",
+      "sourceTextDigest": "a5a449e965df3118edcdaf587cbdec518e923c1bed81754f3f82c10be0a3b810",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 860,
+      "name": "Signet of Disruption",
+      "sourceTextDigest": "6ca5642c045148ed223e8bca58d2ef13371553e7c372d1b346591e4f358f7c12",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 862,
+      "name": "Ravenous Gaze",
+      "sourceTextDigest": "da837b3c1b5eaa5469d01837b32099c8aff83f7303e4cb1b9dc199d73f8d2e65",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 863,
+      "name": "Order of Apostasy",
+      "sourceTextDigest": "afb61691ddbc4924670f00c066841240bbef9481bb42298ca6d9e0357aad9f02",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 864,
+      "name": "Oppressive Gaze",
+      "sourceTextDigest": "4059d8595ef4b9ae654a8200008c90d505d0e52426fde89d4061cc6b3b80ff2c",
+      "metadata": ["applies:poison", "applies:weakness", "deals:damage"]
+    },
+    {
+      "skillId": 865,
+      "name": "Lightning Hammer",
+      "sourceTextDigest": "a9bdd065b3cf9c22c4bdf2489efe082380b9a8dc73edaf18b3611cff3f13310b",
+      "metadata": ["applies:cracked_armor", "deals:lightning"]
+    },
+    {
+      "skillId": 866,
+      "name": "Vapor Blade",
+      "sourceTextDigest": "33c8b6defa159c25aeb8dee72e38499b1f58574db3601beba9b99000a1482585",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 870,
+      "name": "Pestilence",
+      "sourceTextDigest": "57a2fdb97ed81818783e3dfe9f0ea6ca89f635de4b7e3f1258214732599420e5",
+      "metadata": ["applies:condition"]
+    },
+    {
+      "skillId": 871,
+      "name": "Shadowsong",
+      "sourceTextDigest": "0c8b57ae572225cdd1efc6f5bc594530cdf40e3efab5e60c035fef7014041fe6",
+      "metadata": ["applies:blind", "deals:damage"]
+    },
+    {
+      "skillId": 876,
+      "name": "Signet of Shadows",
+      "sourceTextDigest": "d81d6cd2ac2b48cd08d1e9c0a6cabd7d1e74f587e10a15cedbff2552cd1a5202",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 877,
+      "name": "Lyssa's Balance",
+      "sourceTextDigest": "3b0f4a8d21b985db0373c14c1a392d0299a4993b7311cb5bc7d65ff05b10b064",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 878,
+      "name": "Visions of Regret",
+      "sourceTextDigest": "b0ad83a566499ff263b7f5df4cda715c7b9941064767f72b6aeb79bd2b523fce",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 879,
+      "name": "Illusion of Pain",
+      "sourceTextDigest": "7132bc86c8196fc27cf639e0cbf16cf1d589d571eb69c3605d839c2a144c8cdf",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 882,
+      "name": "Signet of Disenchantment",
+      "sourceTextDigest": "8db55df7c3bb6ab6fe3935feb1fe41ed5f862276e2b9649bb25e9201fce907d3",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 884,
+      "name": "Searing Flames",
+      "sourceTextDigest": "760e831d5dad8eb9edc129edaa0ca7cc69f5bdef8dc98a1d8932f69fc3f09aaf",
+      "metadata": ["applies:burning", "deals:fire"]
+    },
+    {
+      "skillId": 888,
+      "name": "Whirling Axe",
+      "sourceTextDigest": "cf4cef7b846da30fe0c0671f9ef322570ccf2be3a081477bb87a4dd2f09515fb",
+      "metadata": ["removes:stance", "deals:damage"]
+    },
+    {
+      "skillId": 889,
+      "name": "Forceful Blow",
+      "sourceTextDigest": "ae61b461dd50db2b1ddbd5dfe9aa4c1c64f451640e1efa48d51399c5ea5a42a6",
+      "metadata": ["applies:weakness", "removes:stance", "deals:damage"]
+    },
+    {
+      "skillId": 892,
+      "name": "Quivering Blade",
+      "sourceTextDigest": "3dce3efb4bfa36c14b7e8a406c22cc9bfd981cdb0473fc9d4f452ed94a110824",
+      "metadata": ["applies:dazed", "deals:damage"]
+    },
+    {
+      "skillId": 898,
+      "name": "Overload",
+      "sourceTextDigest": "7d0991ee06a2cde639a0514988c1c81211721f2798dca6a28e4a2d4edf5e8343",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 899,
+      "name": "Images of Remorse",
+      "sourceTextDigest": "4b6ee5f98ed031d86de06c8413a8e9a63851ea355fca7b0d49daf31c61ff32c0",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 901,
+      "name": "Soul Bind",
+      "sourceTextDigest": "1abc9c00775034492eeafa787ecf2aa77c395295e95197c5406938064ccf8722",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 902,
+      "name": "Blood of the Aggressor",
+      "sourceTextDigest": "4ad962ac8b211e38f653fffafbefc66a1dc8b77137681b16883bc08a7db37204",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 903,
+      "name": "Icy Prism",
+      "sourceTextDigest": "c6888ea15151864ba875911326ccc6c89135784036a35303ac1d17f94a8222f4",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 904,
+      "name": "Furious Axe",
+      "sourceTextDigest": "a3c3349cda915d3f18790587302298ca206ae793eeb8ba776a7fd5a9c105cdcb",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 905,
+      "name": "Auspicious Blow",
+      "sourceTextDigest": "0fe7a2e98bb7e21c6e076af9c066c6ae50ed97af854c04f00d8c3628b0d28ca2",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 907,
+      "name": "Dragon Slash",
+      "sourceTextDigest": "dbabbcb335842c5632a9e393e3de8334caee2b965951ec9637de25d2b3957575",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 908,
+      "name": "Marauder's Shot",
+      "sourceTextDigest": "600791e0da15581165f3af1c9f3363e918671a7b6d0760a0843ab8283f9de8e4",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 909,
+      "name": "Focused Shot",
+      "sourceTextDigest": "7d7025322845b849c30f8fc14aab56b45dbe57f90f80fd2f64471fcd60f36268",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 910,
+      "name": "Spirit Rift",
+      "sourceTextDigest": "446b921b0eb887bc3ba8673263a8fa5de5054601602e0774d39b4d6a9d08ee27",
+      "metadata": ["applies:cracked_armor", "deals:lightning"]
+    },
+    {
+      "skillId": 914,
+      "name": "Consume Soul",
+      "sourceTextDigest": "70a0f122524d218f278f9dced38ff430065f35135e36840f12b2b5686cc7ecac",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 916,
+      "name": "Lamentation",
+      "sourceTextDigest": "7db378ea2acb43787482ba5eb84c505286ad1bb168a8198645568a08f0283ac4",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 917,
+      "name": "Rupture Soul",
+      "sourceTextDigest": "686c7739e17b1c6cd25b41ff4bcb160fafe7d4b906299058577645bf66845646",
+      "metadata": ["applies:blind", "deals:lightning"]
+    },
+    {
+      "skillId": 919,
+      "name": "Spirit Burn",
+      "sourceTextDigest": "13aceb0f9ea08b500e8856bb4771a4d56274bf3f5242ee5ac003d6a78eaca188",
+      "metadata": ["applies:burning", "deals:lightning"]
+    },
+    {
+      "skillId": 920,
+      "name": "Destruction",
+      "sourceTextDigest": "a34b1d17cf084df3b593529f24d72c6ef649b1ae4727c69de855afe667807d5f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 921,
+      "name": "Dissonance",
+      "sourceTextDigest": "6d2617650e6c0df3b9a0e201a9d82a00b0f52d8c76a07387b1d803bc79e8652a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 923,
+      "name": "Disenchantment",
+      "sourceTextDigest": "821210e798ca73da5480ab1bee7784c763a2ce5c18f8c53591aea3476a0e2a61",
+      "metadata": ["removes:enchantment", "deals:damage"]
+    },
+    {
+      "skillId": 926,
+      "name": "Sharpen Daggers",
+      "sourceTextDigest": "0e222c80c77424b7fc15a3102d47eaa8f23249c7f3a9c065b25fba8c6e398a40",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 927,
+      "name": "Shameful Fear",
+      "sourceTextDigest": "d8b5d5a660ff4f4c2843335677a8c2bacc048837307311da04e708105eca241b",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 933,
+      "name": "Shatter Storm",
+      "sourceTextDigest": "558dd289122ca21934d7d7b84979308f8c67510bd36daa7a6283f480600665f8",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 934,
+      "name": "Unnatural Signet",
+      "sourceTextDigest": "d5221c517d3b5adc0e5da0cb8e995e4fe872c1d6a654999f10bc0c974b4acf10",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 935,
+      "name": "Rising Bile",
+      "sourceTextDigest": "330549479861b88b9a4c8d9683c3633ea9ea946f9084e61f3ae1500710b420d7",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 936,
+      "name": "Envenom Enchantments",
+      "sourceTextDigest": "2eb19521ead571a5790525cb40ee08fdddb24ab3ec5e6f96171c260779bc841b",
+      "metadata": ["applies:poison", "removes:enchantment"]
+    },
+    {
+      "skillId": 937,
+      "name": "Shockwave",
+      "sourceTextDigest": "2955a64d88a7a5f361f392ac2215d0a33c88d13c9c60ae5bfd4836d8a64070e3",
+      "metadata": ["applies:blind", "applies:weakness", "applies:cracked_armor", "deals:earth"]
+    },
+    {
+      "skillId": 941,
+      "name": "Blessed Light",
+      "sourceTextDigest": "5759842c2f424ffa2f0924083ec4a4d6fd28c8f911ce2a6113b82e6060059ee6",
+      "metadata": ["removes:condition", "removes:hex"]
+    },
+    {
+      "skillId": 942,
+      "name": "Withdraw Hexes",
+      "sourceTextDigest": "cef2f59dad18c2123254c69a26937b4a71de1b85f0dd52610fbbd02cd9562aa1",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 943,
+      "name": "Extinguish",
+      "sourceTextDigest": "40d7f04edee84faa9f6b5a341ee2c9fa9aca444622359ef0ea78ad07d30f803b",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 944,
+      "name": "Signet of Strength",
+      "sourceTextDigest": "a8369d7d8c2b41534b9b7d2a3f2cffcfe66c83861ad5e62becf958376c86125f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 947,
+      "name": "Brambles",
+      "sourceTextDigest": "0587837edf8fef25bc6335be5b8354084f362d51077e71f82ab1f17e00024f67",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 948,
+      "name": "Desperate Strike",
+      "sourceTextDigest": "847d39e1b6bc955235aa31c7b3b9493457d001cdae4a2190f584c8c4f870d6d1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 954,
+      "name": "Expel Hexes",
+      "sourceTextDigest": "1816afa3df6178c3b24a540d1c4bc1129835733deca619f6b8ca2f64e91854b7",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 955,
+      "name": "Rip Enchantment",
+      "sourceTextDigest": "8c8815a59bd74643bb6c86936d181a65a64f9250f8e2516da05dd76b5dff8671",
+      "metadata": ["applies:bleeding", "removes:enchantment"]
+    },
+    {
+      "skillId": 960,
+      "name": "Release Enchantments",
+      "sourceTextDigest": "233ffaedbd2c4106ec396fb8f5a20bd6f8d465ccd817a0339a3eae8227b1ab05",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 961,
+      "name": "Lacerate",
+      "sourceTextDigest": "0b0ca070c20a96b6dc94b8188770535b13ba750da276de410bde1d9c89675647",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 973,
+      "name": "Blinding Powder",
+      "sourceTextDigest": "ad322942de0e70f2ac4ff1e1466cdf2c9f8929aeba8a66174c40762e4390566e",
+      "metadata": ["applies:blind"]
+    },
+    {
+      "skillId": 974,
+      "name": "Mantis Touch",
+      "sourceTextDigest": "c752f198c96c7af712f9ccd6091ba07f8d8657bbd4ae829749081db19edc36b0",
+      "metadata": ["applies:crippled"]
+    },
+    {
+      "skillId": 976,
+      "name": "Repeating Strike",
+      "sourceTextDigest": "dbb3c5da73e4acc6939f33e174060d95a1827567d9dc4bb73c26677d3aa951b7",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 979,
+      "name": "Mistrust",
+      "sourceTextDigest": "b376b13f8bb17e7c1282b353637e72156cd743bf0f76b1a34ab95ebe485ae99e",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 983,
+      "name": "Weapon of Shadow",
+      "sourceTextDigest": "08d8fd59d187ff3e404bbb37e278d6a6f220720e8471e3be6841d437f2d52113",
+      "metadata": ["applies:blind"]
+    },
+    {
+      "skillId": 985,
+      "name": "Caltrops",
+      "sourceTextDigest": "07546be1e26eadc78b4e1b5da8eca46525271e8cb74f552986498cdb69ddeed8",
+      "metadata": ["applies:bleeding", "applies:crippled"]
+    },
+    {
+      "skillId": 986,
+      "name": "Nine Tail Strike",
+      "sourceTextDigest": "fff383f5172e031fc8e2fe1ed3f4314a8e5db6702173dd8ae65499fa092c531b",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 988,
+      "name": "Temple Strike",
+      "sourceTextDigest": "821ba32352cae07f8381ed02d826c58234790d3c03193b22e5d1c6307e80fa83",
+      "metadata": ["applies:blind", "applies:dazed"]
+    },
+    {
+      "skillId": 989,
+      "name": "Golden Phoenix Strike",
+      "sourceTextDigest": "d7ac266c1a06c975cf3f00876101400867f64965c67edd2d0716460a67a3bed1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 990,
+      "name": "Expunge Enchantments",
+      "sourceTextDigest": "03eaeea25df0fa5312d6d8c178d50a577dd8c0959a1cbdab3eaeda9f32e6dce2",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 991,
+      "name": "Deny Hexes",
+      "sourceTextDigest": "46f6da20694ac35bef49867abace8909550052afdf48da5829cd5f131df2c7c4",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 992,
+      "name": "Triple Chop",
+      "sourceTextDigest": "a0f1b5f1aa27eaf14b3ae80466b32e8d3365c02d7b5b4de1fa7840b07b10fe17",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 993,
+      "name": "Enraged Smash",
+      "sourceTextDigest": "9fb4cfecc1406fe7f860afa0eda3cafbed346b9e5fbcf1bd07195b6590f8925c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 994,
+      "name": "Renewing Smash",
+      "sourceTextDigest": "4e7f2348044c8a27ca150b363b4e2f114882e632b21aba6fb827c1ddd561b150",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 996,
+      "name": "Standing Slash",
+      "sourceTextDigest": "f455f6ec700ea09c0763919b78e36e2214f120604f43fcc759098324bcb64dcd",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 997,
+      "name": "Famine",
+      "sourceTextDigest": "1930b72a1b1c96b8e3f1c27125189de5298156439fe90aee3c48ac68e26a1c3b",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1019,
+      "name": "Critical Strike",
+      "sourceTextDigest": "975c136e08b767811492ae89f548aeb5ff259b8c6a93c242f8e0dec948a45852",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1020,
+      "name": "Blades of Steel",
+      "sourceTextDigest": "da6a2abd4aa3f6b5a922d41d36900589e57e937a07a50b0e7b410e30791d3277",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1021,
+      "name": "Jungle Strike",
+      "sourceTextDigest": "fbe2dd1f96da3bc5c7f2accd27887d816c7d2ce8ef4ce19af6f201652ebc0032",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1022,
+      "name": "Wild Strike",
+      "sourceTextDigest": "d5aabe999c71136b744bd4da7829b8e7b51eefececdbdf09a4491fa225c5787a",
+      "metadata": ["removes:stance", "deals:damage"]
+    },
+    {
+      "skillId": 1023,
+      "name": "Leaping Mantis Sting",
+      "sourceTextDigest": "c5f715a221c0dd35c065abd122cf15b784d799e146211d281873d044aa82999c",
+      "metadata": ["applies:crippled", "deals:damage"]
+    },
+    {
+      "skillId": 1024,
+      "name": "Black Mantis Thrust",
+      "sourceTextDigest": "63c8debcbac57bf114ce5b2d5a52e28f27b9ae23830f40b03851d27283e13611",
+      "metadata": ["applies:crippled", "deals:damage"]
+    },
+    {
+      "skillId": 1026,
+      "name": "Golden Lotus Strike",
+      "sourceTextDigest": "eac693e3784610d0c687d0680c7507a0cbf28b1b70950c50f8bbf85368bf12be",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1029,
+      "name": "Dark Apostasy",
+      "sourceTextDigest": "81b013782c1c6e942cfecd61fa4094b3fea69c15dc8a93482d2dccf292111308",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1033,
+      "name": "Impale",
+      "sourceTextDigest": "6836b3b9d736047cca79400bf60859a7192c580a5edb914f1079814d85fc2985",
+      "metadata": ["applies:deep_wound", "deals:earth"]
+    },
+    {
+      "skillId": 1034,
+      "name": "Seeping Wound",
+      "sourceTextDigest": "ddc46d45f81569c931fbcf317d12c6cd23a3799edf7a38fbc37daa030f754054",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1036,
+      "name": "Signet of Malice",
+      "sourceTextDigest": "4c307b563d274330e3ed9d26f9b7c74a7b0ea6fba1c23e1c8a78969f22ee7a86",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1038,
+      "name": "Crippling Dagger",
+      "sourceTextDigest": "c51bfb80e60853bfd0715b14d8984a6362b3817ba7e00f43a4d3b83ddfe06639",
+      "metadata": ["applies:crippled", "deals:earth"]
+    },
+    {
+      "skillId": 1041,
+      "name": "Unseen Fury",
+      "sourceTextDigest": "7fb215b6a0386d7506a0fe5f31f452b5a815d25ca89a41ab2d0eaef094eb28c4",
+      "metadata": ["applies:blind"]
+    },
+    {
+      "skillId": 1042,
+      "name": "Flashing Blades",
+      "sourceTextDigest": "ac7cecaf844da8ba8d0124ffe53552947042168be8501b4cb648e39606e3cd98",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1045,
+      "name": "Palm Strike",
+      "sourceTextDigest": "2297e26a00f931f44aaa3383b79427c721c79b8fb6da369c1b53f51ebc97560e",
+      "metadata": ["applies:crippled", "deals:damage"]
+    },
+    {
+      "skillId": 1048,
+      "name": "Revealed Enchantment",
+      "sourceTextDigest": "908a5dfceb6ac957ce23c2d75663dd2ab161b2154e96c73042b47e54b3e8c93a",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1049,
+      "name": "Revealed Hex",
+      "sourceTextDigest": "f7c98e320e8fda6fbe4d854950e1c688ff1db6f53587ad0d61aa49af9e040847",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 1052,
+      "name": "Accumulated Pain",
+      "sourceTextDigest": "02acb191861822e6c8f43c29bfc94eedac38424adc59df6f421464ba347d9c5b",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 1059,
+      "name": "Hex Eater Signet",
+      "sourceTextDigest": "83b3d8403373f0c9148c135815cd44f651b72fc86ac64e71e0db6a7a639765a8",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 1061,
+      "name": "Feedback",
+      "sourceTextDigest": "8e67faaac3376b03e48389898f818c7433e4dcd0a8a27deaf169a7de5c479b05",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1067,
+      "name": "Lifebane Strike",
+      "sourceTextDigest": "453f3f556a00570a0b27972c1ce24128c606a05724ca0724401f8d3b21b3c976",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1068,
+      "name": "Bitter Chill",
+      "sourceTextDigest": "2a4157b32fc6940bd13990fd68df266f09a9459ab363f8fc6c71e1c88147dd2d",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 1070,
+      "name": "Defile Enchantments",
+      "sourceTextDigest": "74f565104766a86d5358a617501299a7cfb9e466561436da8e1244e5147fd767",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1076,
+      "name": "Blood Drinker",
+      "sourceTextDigest": "789986bbd4270473c180f6a1e1b21a2cd9ed04b8b4b984bcd86140f7afb6cedd",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 1078,
+      "name": "Wallow's Bite",
+      "sourceTextDigest": "f52201fdcda9f6dd8574fd9906871ba22b8739a2d54c0d209aee2221ced4b84a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1079,
+      "name": "Enfeebling Touch",
+      "sourceTextDigest": "e4224e5051734e04b7b680bd43de9592048c85e1c216ce0885c53ce2685bcf48",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 1081,
+      "name": "Teinai's Wind",
+      "sourceTextDigest": "38da6b9d40127348e3e1aad689a673805016d9abeb9a04db3335a7b41ea6c404",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 1082,
+      "name": "Shock Arrow",
+      "sourceTextDigest": "c25e4b5c625edca0674eb3726cbf3eecd9d31027ca5613a7b01eec8ebcb2bec3",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1083,
+      "name": "Unsteady Ground",
+      "sourceTextDigest": "598eaaffd77169d9033487970d54e3555785a28192a0ce4570c6c2225b552649",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 1084,
+      "name": "Sliver Armor",
+      "sourceTextDigest": "08738b78e4109c5c0a70ce3d890230ae930f7fdfc8e3bdf736c65e90bfdb5d0b",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 1085,
+      "name": "Ash Blast",
+      "sourceTextDigest": "610da8923e0ec1e87f43196cd4b4106590cefac5225a9ac3a4ae62bb0580f1dc",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 1086,
+      "name": "Dragon's Stomp",
+      "sourceTextDigest": "9e667e369596bd288a45a8e44e8812f6d02d7ae6a4fbc3ffda7c0f0b320ae721",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 1088,
+      "name": "Second Wind",
+      "sourceTextDigest": "8e39a8343db088767e3f1f535737973b5136107c9decd1b3e2a52863cf336d64",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1090,
+      "name": "Smoldering Embers",
+      "sourceTextDigest": "cc5045be05d43fef0d6605a14071c973d0f67faa8894b7a8d5fd19081f6461c6",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 1091,
+      "name": "Double Dragon",
+      "sourceTextDigest": "5d99e9332a10cfb7608ed1dff81f1ddf65cc892ad183614e4d866463c662500e",
+      "metadata": ["applies:burning", "deals:fire"]
+    },
+    {
+      "skillId": 1094,
+      "name": "Breath of Fire",
+      "sourceTextDigest": "cab92f389c65a42b8da222d440568aba4895632e87831ced82187e9e19966bcc",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 1095,
+      "name": "Star Burst",
+      "sourceTextDigest": "6d823cb71b4e26aa468aec78e132fc003f8c025c89feb9a90bddc4bc2a609555",
+      "metadata": ["applies:burning", "deals:fire"]
+    },
+    {
+      "skillId": 1098,
+      "name": "Mirror of Ice",
+      "sourceTextDigest": "9175a9d4cebdc4b9d0ee50056293706970df107e2b982dbf15788254ef3b9c74",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 1099,
+      "name": "Teinai's Crystals",
+      "sourceTextDigest": "61e7f57cde1bf8e9a01064c613d8d9c6641e70e59a726e3f8de7be60c7f233a6",
+      "metadata": ["applies:cracked_armor", "deals:damage"]
+    },
+    {
+      "skillId": 1113,
+      "name": "Kirin's Wrath",
+      "sourceTextDigest": "5c59ce97f9fe132ebee759447964c7be952480efc5d8c9d17aab6bd560469067",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 1123,
+      "name": "Life Sheath",
+      "sourceTextDigest": "7fbf765a9c9336cbcd399295e6c8b55d15cf99df3535f2d6851cffae01388210",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1126,
+      "name": "Empathic Removal",
+      "sourceTextDigest": "546f87f82e479bb244e0d3e0941eaf9726b2fbd467422be02f58f31be31f08d3",
+      "metadata": ["removes:condition", "removes:hex"]
+    },
+    {
+      "skillId": 1129,
+      "name": "Word of Censure",
+      "sourceTextDigest": "6ea9b32e423d3e0fd21d9e405dc7dd3254211182aae027d435d83bab39303484",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 1130,
+      "name": "Spear of Light",
+      "sourceTextDigest": "7259050b16f110fa702f3b79fca2f8280d47744df053c462aa6740f7ec1ac3d0",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 1131,
+      "name": "Stonesoul Strike",
+      "sourceTextDigest": "7552dad0bf8332cef7905a3278bd7c80dafbf600e8bc31182b6802b3400124de",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 1133,
+      "name": "Drunken Blow",
+      "sourceTextDigest": "3c0f9ed5f4175bd25454609b5f9f3ee57f50ff686124d42a641dbc8ae1989014",
+      "metadata": [
+        "applies:bleeding",
+        "applies:crippled",
+        "applies:deep_wound",
+        "applies:weakness",
+        "deals:damage"
+      ]
+    },
+    {
+      "skillId": 1134,
+      "name": "Leviathan's Sweep",
+      "sourceTextDigest": "924ab7f9eba511aea399d2fac8de078f206e721d0c36fdb37465d1171e6b1be4",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1135,
+      "name": "Jaizhenju Strike",
+      "sourceTextDigest": "26f65710e722a2799bab27804f00ae56a4f8ed3b56a9f27827242b231ab98d16",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1136,
+      "name": "Penetrating Chop",
+      "sourceTextDigest": "b79f9ee98b1dd6df5685f19cf75d22f6bb89e7adf284958579a3da387870870c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1144,
+      "name": "Silverwing Slash",
+      "sourceTextDigest": "6e151b6a5d015551e9065d325b2bc775d22d2d90bab0292e326e08ea8e5c44f9",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1146,
+      "name": "Shove",
+      "sourceTextDigest": "483254d5699e0aad718e3100cdcb17377b67af04ee4a5994ddbfd8af719dfc0d",
+      "metadata": ["removes:stance", "deals:damage"]
+    },
+    {
+      "skillId": 1191,
+      "name": "Sundering Attack",
+      "sourceTextDigest": "3d9b33f5e356029ad6ea9714e68500a9928bddad27f9a2a3c401cd0f9208f1c2",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1192,
+      "name": "Zojun's Shot",
+      "sourceTextDigest": "ca8ed7fb6bbcd8fe4e0252211107f93feb17a57c6cfd9cdbfe2185aa218de770",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1197,
+      "name": "Needling Shot",
+      "sourceTextDigest": "9678e34a8fab38cd59cadd2376fd4ac73142b153fe73e511c7e62c4448390d9f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1198,
+      "name": "Broad Head Arrow",
+      "sourceTextDigest": "d5ab4a674e0237dacd31153cf14e7834b483caf19c0cb6f0edb7fa8a78b0c077",
+      "metadata": ["applies:dazed"]
+    },
+    {
+      "skillId": 1199,
+      "name": "Glass Arrows",
+      "sourceTextDigest": "e4c1e31d6261a7a464a09742417db802ef4a452023c5260563bafe2e0f45e47a",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 1201,
+      "name": "Savage Pounce",
+      "sourceTextDigest": "936daa32e149ca6485532f80d41031196eae4213f216055c48225c7e83ff4a7c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1202,
+      "name": "Enraged Lunge",
+      "sourceTextDigest": "13f4f7bade2f6ad73551ba1e97ac4fc3d7e5c4bf56890be55992c1cb5c4cd4ef",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 1203,
+      "name": "Bestial Mauling",
+      "sourceTextDigest": "0d539a1904a0ee2ba010f8dea36861bda485dec01db246e279c6e847056fe658",
+      "metadata": ["applies:dazed", "deals:damage"]
+    },
+    {
+      "skillId": 1205,
+      "name": "Poisonous Bite",
+      "sourceTextDigest": "b5b776e5a3c3f327b2b6692278baa3401acfb9511dc15976b86c35afe2c3fca8",
+      "metadata": ["applies:poison"]
+    },
+    {
+      "skillId": 1206,
+      "name": "Pounce",
+      "sourceTextDigest": "4576f2af6dc9c356e53a1ce239cc92c3f35d17a0b120da5733d2473508ddc19b",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1211,
+      "name": "Viper's Nest",
+      "sourceTextDigest": "4b426ae00ee998fd8cf49096e829d8aa202a810e4c2eab1a4776ab2b9b13eb45",
+      "metadata": ["applies:poison", "deals:damage"]
+    },
+    {
+      "skillId": 1215,
+      "name": "Clamor of Souls",
+      "sourceTextDigest": "7972d3eb55016b01dce2218350b0153f296c801861236c9ef1583dc31c7b8c1e",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1218,
+      "name": "Cruel Was Daoshen",
+      "sourceTextDigest": "1271e62d3fce17a51cbece9354198521e5c896018ce65c9fddbfd7aa4937a930",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1221,
+      "name": "Resilient Was Xiko",
+      "sourceTextDigest": "d07e586c773b2b56ae8ca7404e851df3acfa75ff1fff80d57bbf5781df2c226a",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1225,
+      "name": "Channeled Strike",
+      "sourceTextDigest": "ca654410ff5fdf8c77e40fc6678a492f201010f326ff47b793396c61c9509563",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1226,
+      "name": "Spirit Boon Strike",
+      "sourceTextDigest": "ca5eabdd709cb5477c51a94dd00471c743be08f619bb2d0c36b72b87988e2abc",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1227,
+      "name": "Essence Strike",
+      "sourceTextDigest": "449536f674acafc49d1d79ff32f85810a96b08e7b99dbd36c2f74cc80aac93b5",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1229,
+      "name": "Explosive Growth",
+      "sourceTextDigest": "f797e9403e7232452b41e343facd4dac121697182f4c203d27586d8e1f6344fd",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1234,
+      "name": "Mend Body and Soul",
+      "sourceTextDigest": "9bb4a15fb32444524cd15773d8158397b3b7b01f0cb984479b9c6654fa65b107",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1236,
+      "name": "Binding Chains",
+      "sourceTextDigest": "d6ba1ec1f35ff3193d60e8ca1f18eae1ce4020f73ec24cc5065648e134886746",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1237,
+      "name": "Painful Bond",
+      "sourceTextDigest": "c178e10975cfe387fe1763110f01436864177bede487a92f52506295c25bd154",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1239,
+      "name": "Signet of Spirits",
+      "sourceTextDigest": "2a3aa729e98ba759af8ef3c50aced567ae0eb98f251db8a4683182d29edaeb1f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1245,
+      "name": "Gaze from Beyond",
+      "sourceTextDigest": "628fa35da9bb9e98b9e4074978fb1aa0b220ff6cdb5e28836b384a48e965177f",
+      "metadata": ["applies:blind", "deals:lightning"]
+    },
+    {
+      "skillId": 1246,
+      "name": "Ancestors' Rage",
+      "sourceTextDigest": "19041b4effd61d9a240a570e6feda91a0be6100a9895e40ffe6a8272882a17b7",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1247,
+      "name": "Pain",
+      "sourceTextDigest": "875560c049488e83a0a54da06aba9c01c672e7bc78c44491269d8637a478e288",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1258,
+      "name": "Brutal Weapon",
+      "sourceTextDigest": "878706973bb4aacfce3aee17cf3f7ea19ebd4be7dc1b024427d28bca20d32fff",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1264,
+      "name": "Doom",
+      "sourceTextDigest": "0e9c1aaace711fa8a753e796300364271e1c475b93e21d08cfb5d91e9b74d65f",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1269,
+      "name": "Signet of Rage",
+      "sourceTextDigest": "b198271439de3c1d15d9dafd392daaaafe990ba7c9110f796635981301cdcfd2",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 1319,
+      "name": "Final Thrust",
+      "sourceTextDigest": "cf88963400f03291daced585ef563875fa2ce7d18e8cc5deab299210ba1d23c1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1333,
+      "name": "Extend Conditions",
+      "sourceTextDigest": "2e4fbe782c654a58fae3f1371e6499e6db2821bc5c145cfa8c1b61a0745c15ab",
+      "metadata": ["applies:condition"]
+    },
+    {
+      "skillId": 1334,
+      "name": "Hypochondria",
+      "sourceTextDigest": "f13d38515efb2fd302c69f40942515fdc00817ee5a3a3a8e8840769cd593a902",
+      "metadata": ["applies:condition", "removes:condition"]
+    },
+    {
+      "skillId": 1335,
+      "name": "Wastrel's Demise",
+      "sourceTextDigest": "f6b1fa7466b01688bb5607bfe81a377d9fae8e123ca1d1805e419f4502cbed09",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1336,
+      "name": "Spiritual Pain",
+      "sourceTextDigest": "bc5c28253e58ae75905619cda3997710797c5eb5dc3a9211e25efc1871a5e2c1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1337,
+      "name": "Drain Delusions",
+      "sourceTextDigest": "3776153a57a7b16a07919911dcbf4ac9ae1da1ba8d919203f1e7e178d7629a13",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 1341,
+      "name": "Frustration",
+      "sourceTextDigest": "5b86dc7e1aea5aa9ede2acd43e691b3465245ac770a5d19067de00223daf6144",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1345,
+      "name": "Enchanter's Conundrum",
+      "sourceTextDigest": "6c8148853d7b6a0b1ab242166634e5b2aa601310ace12eab9288ffb9625e37dc",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1347,
+      "name": "Discharge Enchantment",
+      "sourceTextDigest": "a4507ac79973825e8028a2047e77f7cf03dc6ffbcf630046fa4c1af7e1f88d94",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1348,
+      "name": "Hex Eater Vortex",
+      "sourceTextDigest": "b5f1fb006701c1a1c50ed8c003c650ecdab25d0fad041fec8259669e2a016788",
+      "metadata": ["removes:hex", "removes:enchantment", "deals:damage"]
+    },
+    {
+      "skillId": 1349,
+      "name": "Mirror of Disenchantment",
+      "sourceTextDigest": "22aac238a225e662a52d584e85a116b055b18f6a2c474fa5278b07201958ab5e",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1351,
+      "name": "Animate Shambling Horror",
+      "sourceTextDigest": "9c6750c779af27ae82863c61283b62b61e1df88455406ffddca20cb046fde015",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 1352,
+      "name": "Order of Undeath",
+      "sourceTextDigest": "bf700d15ed956e278de03bbb5e634d8989b583e7a37a17081d38c95fdcfcec8e",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1353,
+      "name": "Putrid Flesh",
+      "sourceTextDigest": "b66bf9ee5be346c90c57b01fbdb31218f7a04a54249419d4216d39714e1a2308",
+      "metadata": ["applies:disease"]
+    },
+    {
+      "skillId": 1355,
+      "name": "Jagged Bones",
+      "sourceTextDigest": "15f80a873b47a5549b20dd39bf18b09fb6759642e177c83d996746ad2c27862c",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 1356,
+      "name": "Contagion",
+      "sourceTextDigest": "cfab655c63930f0ea0789b8b6561f64aa26dead5022749a649be46a5e7f96be8",
+      "metadata": ["applies:condition"]
+    },
+    {
+      "skillId": 1358,
+      "name": "Ulcerous Lungs",
+      "sourceTextDigest": "0e797b0c7b58ecee367056d293375d5100554cb098db033074cfeb53cae464dc",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 1359,
+      "name": "Pain of Disenchantment",
+      "sourceTextDigest": "f7e102c94409f657fd04d17c2a12fa551af37feb9bd8e05fad75279c7cd527d5",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1360,
+      "name": "Mark of Fury",
+      "sourceTextDigest": "4c39664f58cb5e9ab6c8b980e4bc6bf1eb3fb7dedce70b26323904c8779d5a58",
+      "metadata": ["applies:cracked_armor"]
+    },
+    {
+      "skillId": 1362,
+      "name": "Corrupt Enchantment",
+      "sourceTextDigest": "03c25b0b7b873e9bddf6ec01af7f21b1aebd4500b810c8d8deb3b277f9b3bb46",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1363,
+      "name": "Signet of Sorrow",
+      "sourceTextDigest": "d232f9a20886520dd0c6a61c0433b09d6f03ecdab04eff632831f9b8a1837cb7",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1364,
+      "name": "Signet of Suffering",
+      "sourceTextDigest": "884e288b5f702afdfe37258b9e16b9b527af62321b11ab88c593141eb61e2989",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 1367,
+      "name": "Blinding Surge",
+      "sourceTextDigest": "6a807be6e163985ba17b0d89dcd430b9d5d95a1c6c23398df52c180f0688ce62",
+      "metadata": ["applies:blind", "deals:lightning"]
+    },
+    {
+      "skillId": 1368,
+      "name": "Chilling Winds",
+      "sourceTextDigest": "83c928c5820c45a5d9bb6bcc683ee2dcde95dc3043708eed45164806380ecf44",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 1369,
+      "name": "Lightning Bolt",
+      "sourceTextDigest": "9bbd4a942680bfea213eb8a386090641271f6f9a5ef1ee135eab5cfe524a5d1e",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1371,
+      "name": "Stone Striker",
+      "sourceTextDigest": "97862f3d7f27b1b2c5cdc53c74e48292586ba449c578a7c3684a1c20a5817b6c",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 1372,
+      "name": "Sandstorm",
+      "sourceTextDigest": "8ab6482055c2b62c6535badecdc5f597dac37de253c97f65aa618ebd04a8fa43",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 1373,
+      "name": "Stone Sheath",
+      "sourceTextDigest": "ccc00210cce78baf4573b2055f634dcbfef4d97ecce5fa3f54804e7436cf7047",
+      "metadata": ["applies:weakness", "deals:earth"]
+    },
+    {
+      "skillId": 1374,
+      "name": "Ebon Hawk",
+      "sourceTextDigest": "78f2c9852a677e56fcb87a2922439df720a401e4517b352fb4e1e7477d7fe272",
+      "metadata": ["applies:weakness", "deals:earth"]
+    },
+    {
+      "skillId": 1379,
+      "name": "Glowing Gaze",
+      "sourceTextDigest": "9121dcaa0a94000add34960d3e275094defe48145e5682f93060dae915c38b71",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 1380,
+      "name": "Savannah Heat",
+      "sourceTextDigest": "f202e74befb55c1f3ccbba5dd99cf46635d81e7173b30a5166c08091a89181ca",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 1381,
+      "name": "Flame Djinn's Haste",
+      "sourceTextDigest": "edd74f5fbf12ffdd8c37285710e292dd5ccc90b2912f4ac547c646eda99e8a2f",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 1382,
+      "name": "Freezing Gust",
+      "sourceTextDigest": "cef2856e54b90c5aa8460f79dbda9a56a35d88a9078a38b3882081ce1f380b94",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 1390,
+      "name": "Judge's Intervention",
+      "sourceTextDigest": "6726677f3b347d8b91d24b9d17202d202933c8eaabffaba1715e10a1ff884e95",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 1398,
+      "name": "Scourge Enchantment",
+      "sourceTextDigest": "db9d9e8b45f5c585fc0b80fe76fa5b6f29f33a562db619783483b3bc6e130c16",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1400,
+      "name": "Reversal of Damage",
+      "sourceTextDigest": "60ed2e7bd38d30607ea6e61e3f4f8673641d7d09f7e16d3f81e7b5c26c5d37a4",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1401,
+      "name": "Mending Touch",
+      "sourceTextDigest": "0c5b138bf1a55807a423ea32c27c13e3b222887f5a30db7ad669cde5a409c4ba",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1402,
+      "name": "Critical Chop",
+      "sourceTextDigest": "449b15e3ae15afb4d501a744b15b5f9329b9fe6870df81e7458349dbaa257eb8",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1403,
+      "name": "Agonizing Chop",
+      "sourceTextDigest": "e14390c4c048dc5195b29a08ca02ad5db89a1d28b12f63b4158fe7d8f3253428",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1405,
+      "name": "Charging Strike",
+      "sourceTextDigest": "bec4ce8a903f671ae65815e4decb63484895864a39e5b629b24c9f7c923b2542",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1406,
+      "name": "Headbutt",
+      "sourceTextDigest": "df8c3fd1b43277ca4d66461afcaff7e4c5dff27785eabeb6716bb91a53a52e90",
+      "metadata": ["applies:dazed", "deals:damage"]
+    },
+    {
+      "skillId": 1409,
+      "name": "Mokele Smash",
+      "sourceTextDigest": "7bbc1630d12fc468af1c2a5082a13f2c5a1caf81fab74de40cf4398ab5519ce5",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1410,
+      "name": "Overbearing Smash",
+      "sourceTextDigest": "76be5642e2c11a5534adea4fe56a8fa42325e2e28fbbe112c6d2afba7140f0fe",
+      "metadata": ["applies:dazed", "deals:damage"]
+    },
+    {
+      "skillId": 1412,
+      "name": "\"You're All Alone!\"",
+      "sourceTextDigest": "189f8a8263ebc1f3fe07f3fab2123c67ab14be34ae2649fbf0588708289f116a",
+      "metadata": ["applies:crippled", "applies:weakness"]
+    },
+    {
+      "skillId": 1415,
+      "name": "Crippling Slash",
+      "sourceTextDigest": "0542048f919370fe2fdd315a7c23737d5c38360e051dfb81b59a4c3704f757a3",
+      "metadata": ["applies:bleeding", "applies:crippled"]
+    },
+    {
+      "skillId": 1416,
+      "name": "Barbarous Slice",
+      "sourceTextDigest": "31e37826256ea35c06fcf0dab2f4d2cb797cc78844c44e624d83b004fe806259",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 1465,
+      "name": "Prepared Shot",
+      "sourceTextDigest": "d109ebf4d220ac2793a25ec0cf42b9b88a24211c7d62de5f0ab80acc7bd21a4e",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1466,
+      "name": "Burning Arrow",
+      "sourceTextDigest": "a5e7ce9cc13a72063389ff7105d7516f33c1605505f7afcea3444dbb6feedda6",
+      "metadata": ["applies:burning", "deals:damage"]
+    },
+    {
+      "skillId": 1467,
+      "name": "Arcing Shot",
+      "sourceTextDigest": "caecf00d6ceb56fd36dec1fab3a6e615a4ef6fd256222ca5e3ed2a1d655c48ad",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1468,
+      "name": "Strike as One",
+      "sourceTextDigest": "1a8fcb1435689c0519c5b812162a738f09d6d69f8fc221813a0bc4db3543dcd1",
+      "metadata": ["applies:bleeding", "applies:crippled"]
+    },
+    {
+      "skillId": 1469,
+      "name": "Crossfire",
+      "sourceTextDigest": "517175b5a1599baf22601f1557e86ce05916819bb8ab5eee7d3f8260915c9154",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1470,
+      "name": "Barbed Arrows",
+      "sourceTextDigest": "8da572a27a7f61f991c1df090df1585b1e0b1ed065e80457b9f0c4240bfd4e86",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 1476,
+      "name": "Tripwire",
+      "sourceTextDigest": "140a5ed05962530e5b9dd0d69c0d09c69cd0ab4204a5dab069361db5177d4c4f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1478,
+      "name": "Renewing Surge",
+      "sourceTextDigest": "3c6e6c3957962a0c2701c1da505b773a1a4db30aeb9a245863fb48716aed9a86",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1480,
+      "name": "Spirit's Gift",
+      "sourceTextDigest": "aacc3cbfc7fb45fe47073b1cedd285f11470e4ac6d6f9913b7c1b5783d6ed33e",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1483,
+      "name": "Banishing Strike",
+      "sourceTextDigest": "7c3215a6cc852912ba0a99b3a791be3dfb3013e24d06a2cc09081c8c37fa8d06",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 1484,
+      "name": "Mystic Sweep",
+      "sourceTextDigest": "030b7b170ba69bebc61342ab40896a424b9ea9a0b10c8283af85ee25aa8d089b",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1485,
+      "name": "Eremite's Attack",
+      "sourceTextDigest": "47870b5f57bdc1eca64176f826726599b0213d1e21b7527308f71c2cde2098a9",
+      "metadata": ["removes:enchantment", "deals:damage"]
+    },
+    {
+      "skillId": 1486,
+      "name": "Reap Impurities",
+      "sourceTextDigest": "36f69fd04136d7ec747767e894cf1efe9af2eda6a8b92de24320e9c777e0f81e",
+      "metadata": ["removes:condition", "deals:holy"]
+    },
+    {
+      "skillId": 1487,
+      "name": "Twin Moon Sweep",
+      "sourceTextDigest": "f0b960a0a4f3516b81e3ed6b9838d56f81391f965e6b119659d367e02efd0ea2",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1488,
+      "name": "Victorious Sweep",
+      "sourceTextDigest": "9689dae05cb4c95f5c9ceee26142de030dc3353ce6553f6c0f2e542b93351060",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1489,
+      "name": "Irresistible Sweep",
+      "sourceTextDigest": "3b4d29e479282e98f9c6f02dc3e48760a1c001d18c518db3e490d04f9831529d",
+      "metadata": ["removes:enchantment", "removes:stance", "deals:damage"]
+    },
+    {
+      "skillId": 1490,
+      "name": "Pious Assault",
+      "sourceTextDigest": "0244581fba9d8a735cf1f912f7fb55ee8abda7e5412ed7e11d5aed4c40d10999",
+      "metadata": ["removes:enchantment", "deals:damage"]
+    },
+    {
+      "skillId": 1491,
+      "name": "Mystic Twister",
+      "sourceTextDigest": "31bb7c89b64d9f0a0b7e2e25ad2f2b73d11122a39c067c99ef9e57badd5fd069",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 1493,
+      "name": "Grenth's Fingers",
+      "sourceTextDigest": "f769307d5512fef93e210ef38e987f054d41dc817a84bb0619a5fb021bea2de9",
+      "metadata": ["applies:condition", "removes:condition", "deals:cold"]
+    },
+    {
+      "skillId": 1495,
+      "name": "Aura of Thorns",
+      "sourceTextDigest": "2f889db33858c2add46cdd6331f9c26c2bf998862580f02396d38e7f1cec9232",
+      "metadata": ["applies:bleeding", "applies:crippled"]
+    },
+    {
+      "skillId": 1496,
+      "name": "Balthazar's Rage",
+      "sourceTextDigest": "263296568cd6de609074770582b77f2f86eb6af4c789905da257205f39954968",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 1497,
+      "name": "Dust Cloak",
+      "sourceTextDigest": "88d5f11b62c9a13b363de7fa68c5bd86fc31da748ef117b4dfd5347604bf3afe",
+      "metadata": ["applies:blind", "deals:earth"]
+    },
+    {
+      "skillId": 1498,
+      "name": "Staggering Force",
+      "sourceTextDigest": "4e18d75b19c137e828e68e12c771390429c395bd0ada7e2221c4e32120ed8212",
+      "metadata": ["applies:cracked_armor", "deals:earth"]
+    },
+    {
+      "skillId": 1500,
+      "name": "Mirage Cloak",
+      "sourceTextDigest": "4da7fa87879dde6e0e40fd16711038fdb8863e1be64149bbb756f62048dec002",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 1507,
+      "name": "Heart of Holy Flame",
+      "sourceTextDigest": "f3c3f8a67ee89c73916736fea6190464bec0adbb4d5be9251a70202cb68df5cf",
+      "metadata": ["applies:burning", "deals:holy"]
+    },
+    {
+      "skillId": 1510,
+      "name": "Sand Shards",
+      "sourceTextDigest": "08e5ef276a43ef22e4e42d308e679df0f0433854b95101535d6b21b0b2acc729",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 1513,
+      "name": "Guiding Hands",
+      "sourceTextDigest": "b734d57179c2f45268682f6924e4c8e3d2507d3946b2f8479cfaf8cc3a580011",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1515,
+      "name": "Armor of Sanctity",
+      "sourceTextDigest": "c03f601371194e1d5591a2d8ed53eea10f143146bf131d8b9885fc1d9b1c414c",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 1518,
+      "name": "Avatar of Balthazar",
+      "sourceTextDigest": "864fdf703358da5a78c7ee161a90e8b38135c3db44bf8c37bfd9e92012ae2a8c",
+      "metadata": ["applies:burning", "deals:holy"]
+    },
+    {
+      "skillId": 1519,
+      "name": "Avatar of Dwayna",
+      "sourceTextDigest": "dbcb975ca40fd560b6fb5bce2d8d375d0106edc7bf36f89fd0d16401701afcb6",
+      "metadata": ["removes:hex", "deals:holy"]
+    },
+    {
+      "skillId": 1520,
+      "name": "Avatar of Grenth",
+      "sourceTextDigest": "23d32f4c90bfc512700d7672914e38dd5bdff374eef1436f8858b24a32c932e6",
+      "metadata": ["applies:disease", "deals:damage"]
+    },
+    {
+      "skillId": 1521,
+      "name": "Avatar of Lyssa",
+      "sourceTextDigest": "b68e6d6c4bd1a4549760c075e494ec68229d798ba198f7beb9e89599d9b87349",
+      "metadata": ["deals:chaos"]
+    },
+    {
+      "skillId": 1522,
+      "name": "Avatar of Melandru",
+      "sourceTextDigest": "2e4d0c41e1564a7af41d1462e01a164380de6d5fd03a2aecf30b850d469da6cd",
+      "metadata": ["removes:condition", "deals:earth"]
+    },
+    {
+      "skillId": 1529,
+      "name": "Pious Restoration",
+      "sourceTextDigest": "d9a1210b88fb6a5a715e99c662b0cf50e07c3ed681ab0551f8eabab34d88afad",
+      "metadata": ["removes:hex", "removes:enchantment"]
+    },
+    {
+      "skillId": 1530,
+      "name": "Signet of Pious Light",
+      "sourceTextDigest": "2d49168b43888d93fd0c8f3128fb9e72211c554e983bb49f19d5eed89396689b",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1532,
+      "name": "Mystic Sandstorm",
+      "sourceTextDigest": "b3553871a80def0182c3000135b92c4ab38e9b353c8d814653281dfda3d5ef4b",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 1533,
+      "name": "Winds of Disenchantment",
+      "sourceTextDigest": "f35b91435a095471420f535662401d160c7fadc3fb6ff5aa7390b140e22a462e",
+      "metadata": ["removes:enchantment", "deals:cold"]
+    },
+    {
+      "skillId": 1534,
+      "name": "Rending Touch",
+      "sourceTextDigest": "03aa4af965b64382d9d74118dc92ba7aa912c8856845b2709c253b560d5c15e9",
+      "metadata": ["removes:enchantment", "deals:cold"]
+    },
+    {
+      "skillId": 1535,
+      "name": "Crippling Sweep",
+      "sourceTextDigest": "184df88f705455244ee1e33c3d00a1f798435d07b9c1bcc10c90985ce3e4e768",
+      "metadata": ["applies:crippled", "deals:damage"]
+    },
+    {
+      "skillId": 1536,
+      "name": "Wounding Strike",
+      "sourceTextDigest": "6fdbb67e6fd2c700eaee0162085c0cb66c524a5da31c1bcd8379e89d7beaf026",
+      "metadata": ["applies:bleeding", "applies:deep_wound", "removes:enchantment", "deals:damage"]
+    },
+    {
+      "skillId": 1537,
+      "name": "Wearying Strike",
+      "sourceTextDigest": "19ca115a6522144fd4bfbf3750567892086b285f2f319f74774931f3665c3c07",
+      "metadata": ["applies:deep_wound", "applies:weakness", "removes:enchantment"]
+    },
+    {
+      "skillId": 1538,
+      "name": "Lyssa's Assault",
+      "sourceTextDigest": "10fff4934e0d6a031dd0b99712541a2c652e7e2e0e9de613f3233aee1b5ba0ee",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1539,
+      "name": "Chilling Victory",
+      "sourceTextDigest": "f6b49f5176eeac5351a3802814579a05f91e89d847d502e1adf81235598df7ff",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 1540,
+      "name": "Conviction",
+      "sourceTextDigest": "dc166c3d58bc78c3f47b931d86fd581f9a576752040efed6d55c1ae833691f0e",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1541,
+      "name": "Enchanted Haste",
+      "sourceTextDigest": "067539202515ddcdfa35b6ab12260d57b47c2b4d7833803a2753ae7950d31515",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1542,
+      "name": "Pious Concentration",
+      "sourceTextDigest": "cc199c451c064535502b66ee75015f7099f8d288ec834cb1763b6267893cb3fc",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1543,
+      "name": "Pious Haste",
+      "sourceTextDigest": "ea35a8d3df1af327d0b55ca6744cf0e5136f5e25577c3f88701700faa238a3d5",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1544,
+      "name": "Whirling Charge",
+      "sourceTextDigest": "336d2cf6180ac09ddfb4f4db8393badd67a265b227f4cd1d217cf59d32556ff9",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 1545,
+      "name": "Test of Faith",
+      "sourceTextDigest": "36f54f6b93a095641d2a2c1b9849a77ca249f42b754f4ea89a5e1eb1afad6078",
+      "metadata": ["applies:dazed", "removes:enchantment", "deals:cold"]
+    },
+    {
+      "skillId": 1546,
+      "name": "Blazing Spear",
+      "sourceTextDigest": "ef9d6e40be5f7fe98026deddc56e9913d4c9b43cf99d52e6c4679eba327a9555",
+      "metadata": ["applies:burning", "deals:damage"]
+    },
+    {
+      "skillId": 1547,
+      "name": "Mighty Throw",
+      "sourceTextDigest": "4a1d1d18d2a0eb3c72716ed2d0c6b453e0e61f782f5d1b0351a46e4e206dffb0",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1548,
+      "name": "Cruel Spear",
+      "sourceTextDigest": "9cb2d17b74bf78a2beaa64f0855270792881bb8a345e7a643c65b4b88e152478",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 1549,
+      "name": "Harrier's Toss",
+      "sourceTextDigest": "752a801cc9594ecfaf3ca7d1e895b7c05d7c5ab21060824f46c5cbe902b4c174",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1550,
+      "name": "Unblockable Throw",
+      "sourceTextDigest": "bbe4358038ef39c1cfa699ef643d8febe225512c0b931217331e6b3179173ede",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1551,
+      "name": "Spear of Lightning",
+      "sourceTextDigest": "2fbc3fc93df339fbd162d7cc92fc74baeb4e5c117c1298ac185fcbfd8b1a4fe9",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1552,
+      "name": "Wearying Spear",
+      "sourceTextDigest": "cd1180be4a9b90525c899ea285f250f3c6a3f73dd71a51dd8c88c4b0a0ee4bbf",
+      "metadata": ["applies:weakness", "deals:damage"]
+    },
+    {
+      "skillId": 1554,
+      "name": "Crippling Anthem",
+      "sourceTextDigest": "e3fd202333193d49f7f163cab476ea716c7b4b6edc3fe05d340bff705bac306d",
+      "metadata": ["applies:crippled"]
+    },
+    {
+      "skillId": 1557,
+      "name": "Anthem of Flame",
+      "sourceTextDigest": "df9ae26185ae8ac0bf0201f09f0541a765305ea64cf34d2de9bdf2aab1155835",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 1559,
+      "name": "Anthem of Envy",
+      "sourceTextDigest": "56af27adabac44b594b301646445a00383a2515e6ad6c811f97a51c18089bb85",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1570,
+      "name": "Song of Purification",
+      "sourceTextDigest": "b5244a2c8a6de0321633b9fd93a43e2df1582062c7dae967d49132d946da4c8e",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1571,
+      "name": "Hexbreaker Aria",
+      "sourceTextDigest": "6b7bb175422e49299c6d1e672df35e9a5f8ee1e41c455e229d529863194d6bd6",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 1572,
+      "name": "\"Brace Yourself!\"",
+      "sourceTextDigest": "0bee14f076bec18fb3a00a4210f545d1151b9027500a75456c45ea0ca4dd9308",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1573,
+      "name": "Awe",
+      "sourceTextDigest": "46088d178b4d96005bea21a42f8ea4b7675fc99b6ce2f89296f2f44c51da65d9",
+      "metadata": ["applies:dazed"]
+    },
+    {
+      "skillId": 1575,
+      "name": "Blazing Finale",
+      "sourceTextDigest": "6138ccc7be67c7e5d1c2a2ec68c5e607fde09f1fcca65896152a923e44c2d868",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 1576,
+      "name": "Burning Refrain",
+      "sourceTextDigest": "912a25ac2801338517f4a12f467a530a7d2edba8671237f97662af7806d664be",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 1579,
+      "name": "Purifying Finale",
+      "sourceTextDigest": "637aa8278c27a103a297062c2282c0c1a4970d5617ef214b4a992d219255f789",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1588,
+      "name": "Cautery Signet",
+      "sourceTextDigest": "3f64fa13db59d81a0e29dfa538d5e015748e9c488e21f3ab7d2e5e3367b610ce",
+      "metadata": ["applies:burning", "removes:condition"]
+    },
+    {
+      "skillId": 1599,
+      "name": "\"It's Just a Flesh Wound.\"",
+      "sourceTextDigest": "7297fbb5872f7b278914680816ba58d11dfda6ed58f1fa0b875f3894ac56e9e0",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1600,
+      "name": "Barbed Spear",
+      "sourceTextDigest": "bd0eff75b45367c5b39f0eb81f42f4787668458735d9ae9b8bf61f7584c717d3",
+      "metadata": ["applies:bleeding"]
+    },
+    {
+      "skillId": 1601,
+      "name": "Vicious Attack",
+      "sourceTextDigest": "b567df9dd37c80714720315d1c5c4c05030d0d87fb0d0aca3fbb49b332da6ffd",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 1602,
+      "name": "Stunning Strike",
+      "sourceTextDigest": "09202dd384146d240d41b79c904791d9915003e346f1da9706a5f29e8feeeb5b",
+      "metadata": ["applies:dazed", "deals:damage"]
+    },
+    {
+      "skillId": 1603,
+      "name": "Merciless Spear",
+      "sourceTextDigest": "2d45e232820e13296228313860af69c53dfd1207b1afec453edc2ce809e1be87",
+      "metadata": ["applies:deep_wound"]
+    },
+    {
+      "skillId": 1605,
+      "name": "Wild Throw",
+      "sourceTextDigest": "5e22d3277a4b56f02bbe55f2923e5d374af44a0528ce4becbeeefc45a18a78d9",
+      "metadata": ["removes:stance", "deals:damage"]
+    },
+    {
+      "skillId": 1633,
+      "name": "Malicious Strike",
+      "sourceTextDigest": "609de2182b8c018854fff91791e372417ce925fafe45adae9afa9f4aa10d0609",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1634,
+      "name": "Shattering Assault",
+      "sourceTextDigest": "aa9590661cc403963b886b9eaca33f4fb618778e45d3eb2b6b6b2e7fe60f8622",
+      "metadata": ["removes:enchantment", "deals:damage"]
+    },
+    {
+      "skillId": 1635,
+      "name": "Golden Skull Strike",
+      "sourceTextDigest": "a1849723cc2121b178d79c247492dabf010b38e57508e8cad892e29f883a1178",
+      "metadata": ["applies:dazed"]
+    },
+    {
+      "skillId": 1636,
+      "name": "Black Spider Strike",
+      "sourceTextDigest": "4786fa29ded7cd8a52acb02f97f79808d56f67ef8a46440a6b5df561a1b0260b",
+      "metadata": ["applies:poison", "deals:damage"]
+    },
+    {
+      "skillId": 1637,
+      "name": "Golden Fox Strike",
+      "sourceTextDigest": "9579930c64de4e3b0084d483c0080afd632887360717568a4f6d55ec16792263",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1639,
+      "name": "Assassin's Remedy",
+      "sourceTextDigest": "291c4a3f5780a06501e38391fa5c2f4187504b3a63816dfdb026e98a90a8038d",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1642,
+      "name": "Hidden Caltrops",
+      "sourceTextDigest": "ea141968c30639b6cdf0e0ca48a6c0f3d3b75e0d8c3aac7f4f17191778bef332",
+      "metadata": ["applies:crippled"]
+    },
+    {
+      "skillId": 1643,
+      "name": "Assault Enchantments",
+      "sourceTextDigest": "faa513da40088aa6cdcee77443f76e89a85c8b58009cbf41cd09e65c6240065e",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1645,
+      "name": "Lift Enchantment",
+      "sourceTextDigest": "aa086271e5057f9d33d8d44874a29a6a518f6a0db44fe2e61a6a69a73b08f3fc",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1646,
+      "name": "Augury of Death",
+      "sourceTextDigest": "78acc602017dd44cf2113d3fcdbd95102314af1f8bc1c235d72ea0836ffe919c",
+      "metadata": ["applies:deep_wound"]
+    },
+    {
+      "skillId": 1647,
+      "name": "Signet of Toxic Shock",
+      "sourceTextDigest": "b8f68a655449618a209c92fedfeded2dcbd9d19a8c83f62e06c06f9dad4411df",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1648,
+      "name": "Signet of Twilight",
+      "sourceTextDigest": "f2c2d85c4b15b902eb7802f4011de27b02fd4cfdef81ce3c3b88fe49ce71333c",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1656,
+      "name": "Air of Disenchantment",
+      "sourceTextDigest": "cc46ea2bfce46b4dd5a75cf595d6b353eb31ea956d90e412acc44f72c9ca4db1",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 1657,
+      "name": "Signet of Clumsiness",
+      "sourceTextDigest": "3d1fe9e17352c3a5ad162818179de52ebd72b687e00dbd2d414d1362aac2e00a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1659,
+      "name": "Toxic Chill",
+      "sourceTextDigest": "16c218fdcaba7b213ad3aa7a7ea3f7ce140ea74b932bbff31eaf5fb434d6fe1a",
+      "metadata": ["applies:poison", "deals:cold"]
+    },
+    {
+      "skillId": 1661,
+      "name": "Glowstone",
+      "sourceTextDigest": "b91891dad14dec76bf1ec6e25c9d6d4b7e55874c185c5cab990cafc3ff28a1f5",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 1662,
+      "name": "Mind Blast",
+      "sourceTextDigest": "faac4e6ff87330c6f6255f25df2998485c846240a95597464bb91a99f162263a",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 1663,
+      "name": "Elemental Flame",
+      "sourceTextDigest": "cbc16e118ae943c4c856a04aa4f931e63b68ee9f9f54342a4bba5db4df686663",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 1664,
+      "name": "Invoke Lightning",
+      "sourceTextDigest": "5d7e6e637b8beb926319ea5a2be25377ee4415f6f04250be6f7c2939840e43de",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1689,
+      "name": "Signet of Mystic Wrath",
+      "sourceTextDigest": "1dae6d67c77506ba9e921dedd96d710b96df60a5f2fb3938e2f37fad40f92ffd",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 1690,
+      "name": "Signet of Removal",
+      "sourceTextDigest": "22a539370255b7a349bd7ae116c08a098e5091660eba5cfd5764ec430b806ac8",
+      "metadata": ["removes:condition", "removes:hex"]
+    },
+    {
+      "skillId": 1691,
+      "name": "Dismiss Condition",
+      "sourceTextDigest": "9b5a6d806a5d4aa76c6e329fea6ef046e7e5c02eee27e09a833d74f7e657f602",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1692,
+      "name": "Divert Hexes",
+      "sourceTextDigest": "959112e5e7dbd4e230ea1931d372bd760ee1adc9ed694334d2e95972a5f68a3d",
+      "metadata": ["removes:condition", "removes:hex"]
+    },
+    {
+      "skillId": 1693,
+      "name": "Counterattack",
+      "sourceTextDigest": "839078cef076531e311230f7935b6cd74b628e99510029c59f865192330dc4b1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1694,
+      "name": "Magehunter Strike",
+      "sourceTextDigest": "046b221dfb6a7a3f9c9c5ab20ffdb50482680a92b20df9e8c1847b040832741e",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1695,
+      "name": "Soldier's Strike",
+      "sourceTextDigest": "0fdc282bbffbaf24ba01b4d6a0a88f0e0ff0b6791a89ee398550104127e39968",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1696,
+      "name": "Decapitate",
+      "sourceTextDigest": "838ea990281bc49354ddee6e3a4f9c06f620c3b450ed7d60a5a2ffe36321d0f4",
+      "metadata": ["applies:deep_wound", "applies:weakness", "deals:damage"]
+    },
+    {
+      "skillId": 1702,
+      "name": "Steelfang Slash",
+      "sourceTextDigest": "ba97baa439c26da9ff7d27076e8703d5adce1de6118689fd2a4df66f604c6bd7",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1719,
+      "name": "Screaming Shot",
+      "sourceTextDigest": "01284aba73fe372129907d15e021748c5b0b01c9beb513e570750662770c65f3",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 1720,
+      "name": "Keen Arrow",
+      "sourceTextDigest": "a3ffee57140b126d6bd8df0bec566e07f48128dec5c53dbf81a16c41756f32e2",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1729,
+      "name": "Smoke Trap",
+      "sourceTextDigest": "3ab595a81a34dc9b227bdaa994a9f633051819e2c3b2f024326e5c4df3cc89fe",
+      "metadata": ["applies:dazed"]
+    },
+    {
+      "skillId": 1732,
+      "name": "Destructive Was Glaive",
+      "sourceTextDigest": "13bc2eac5413bb1943410985d8d97ec6ebd458813658c891754d2c0c7e7d3bfe",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1733,
+      "name": "Wielder's Strike",
+      "sourceTextDigest": "b0dd7ee021aa148f009a97c6c3a4b989cae86451d552e1127e833e364d9c4371",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1734,
+      "name": "Gaze of Fury",
+      "sourceTextDigest": "102c30540b02a3d7032cd63c940609fc63e384603aa75b6df7851b3207b32121",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1736,
+      "name": "Spirit's Strength",
+      "sourceTextDigest": "6f3adc5ffb32c2dbb1cb19df63d59ca36f69c6e8a1891795c66794d98ebe149a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1740,
+      "name": "Wielder's Remedy",
+      "sourceTextDigest": "e69589e8769c8d14dd114e18513a209a504f92d0175ace5b5cb95eb0928260e9",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1742,
+      "name": "Signet of Ghostly Might",
+      "sourceTextDigest": "81e5001eb1ffb798a965b464cd046b7c5848be33d4ae3819f92267f96b10a057",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1744,
+      "name": "Caretaker's Charge",
+      "sourceTextDigest": "3ba49031ff3200fc1eb4c0a96a095f55afe4a9ea6d2c20445d1cc6a2dfa1142b",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 1745,
+      "name": "Anguish",
+      "sourceTextDigest": "db607da1be5d5e91c1a68d8fd840eccbc2239c0fc72315bf87b7c207ec56ded2",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1752,
+      "name": "Weapon of Remedy",
+      "sourceTextDigest": "fcd0dd36165445647d6ba2359f296953544f1a8fa2314a552cca9a4425a956b8",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1753,
+      "name": "Rending Sweep",
+      "sourceTextDigest": "cb529fafa1c803babac16ec711deb368754c5f6c39c6196f74eae10716f82b00",
+      "metadata": ["removes:enchantment", "deals:damage"]
+    },
+    {
+      "skillId": 1755,
+      "name": "Mystic Corruption",
+      "sourceTextDigest": "c9d77d464c93dfc1743ec6f284212f34819955ccb2a2664fccd431fdc17f7f64",
+      "metadata": ["applies:disease", "removes:condition"]
+    },
+    {
+      "skillId": 1756,
+      "name": "Grenth's Grasp",
+      "sourceTextDigest": "2fdfb9089454e217c077993e643a2cabbac14d3f07077003d02084e3d7f18200",
+      "metadata": ["applies:crippled", "removes:condition"]
+    },
+    {
+      "skillId": 1757,
+      "name": "Veil of Thorns",
+      "sourceTextDigest": "99c1b2461c69f03017173cf8c5a542dc4d9b1b4df129bfb29eb067307e89d1a1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1758,
+      "name": "Harrier's Grasp",
+      "sourceTextDigest": "8cafcfaa4ed8e1b170bfbb9c23a6816ae546c6fb07ba706c5f2854d9519bd59d",
+      "metadata": ["applies:crippled", "removes:condition"]
+    },
+    {
+      "skillId": 1759,
+      "name": "Vow of Strength",
+      "sourceTextDigest": "5c19afa2d79829f56f7494b1337bf40b41894f8cbedf7baab9bbe41d646dccfc",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1760,
+      "name": "Ebon Dust Aura",
+      "sourceTextDigest": "8c383701c96169947a661e952ca6b3f12a164f3033742641feeae941a1fbcd3b",
+      "metadata": ["applies:blind", "removes:condition", "deals:earth"]
+    },
+    {
+      "skillId": 1763,
+      "name": "Zealous Renewal",
+      "sourceTextDigest": "9558e48f568457288a2211a566018480a1f991eba8e33b3df106b6dd5c918d92",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 1764,
+      "name": "Attacker's Insight",
+      "sourceTextDigest": "f98e2665f615eee0eeedbd9cef4abca357d2f5ad39bf62fa959ec7b67dcafd8c",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 1765,
+      "name": "Rending Aura",
+      "sourceTextDigest": "11933ad44b87f0f787479785ad4c09c54a8e3e6b2d563f608a2bd60f470ee470",
+      "metadata": ["applies:cracked_armor", "removes:enchantment", "deals:cold"]
+    },
+    {
+      "skillId": 1767,
+      "name": "Reaper's Sweep",
+      "sourceTextDigest": "d98b869f012a77c365b8c0a85f1095dd5d3d6b9e148a8ca3aa278ddc1aabb069",
+      "metadata": ["applies:crippled", "removes:enchantment"]
+    },
+    {
+      "skillId": 1768,
+      "name": "Harrier's Haste",
+      "sourceTextDigest": "ceeabecf67bf6f8486b43caba354cafe776b165b424e5242602a72f46d3a632b",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1772,
+      "name": "Lyric of Purification",
+      "sourceTextDigest": "e642587743f1777f191fa457afdc82991722d7860f831596dc987deae28fccf1",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1777,
+      "name": "Remedy Signet",
+      "sourceTextDigest": "346fe1f947710530418633c9579f0a6a6c473705a5df75916030df2b54c0405c",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 1781,
+      "name": "\"Find Their Weakness!\"",
+      "sourceTextDigest": "879cafa1b67b46b4411da831902b7d629ee2e161aa5d87970e584becf123e520",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 1783,
+      "name": "Slayer's Spear",
+      "sourceTextDigest": "f936b391ce574897356266ae83acda572fe315f61404882e93260d3ef9e867a3",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 1784,
+      "name": "Swift Javelin",
+      "sourceTextDigest": "c3594f05ddd053a16c5a9f1f1ede82f11dc8044006b340028e5119b4329f528d",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1814,
+      "name": "Lightbringer's Gaze",
+      "sourceTextDigest": "b3e0f0b66bb68a4316ba776761e79df51a1023e508fbc89d28143a88e11ae88e",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 1948,
+      "name": "Shadow Sanctuary",
+      "sourceTextDigest": "45df81c6c411958c35dc8305241898e8b9778ab72f9aea475b4510d8e10d4ef0",
+      "metadata": ["applies:blind"]
+    },
+    {
+      "skillId": 1950,
+      "name": "Signet of Corruption",
+      "sourceTextDigest": "04d98db3cefba154fd3aa466d8936dbe02d55588ec1f8fed1d0a42b461ff9cbb",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1953,
+      "name": "Triple Shot",
+      "sourceTextDigest": "6ae2172f120aadb04c5b7f4afa276bdca339fa4844041caf311c53263d58f09f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1955,
+      "name": "Aura of Holy Might",
+      "sourceTextDigest": "1567addeb10a6c70a05adba25c12ca37bfb79ede3de2d0277f2b5ce3150265aa",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 1957,
+      "name": "Spear of Fury",
+      "sourceTextDigest": "70fc1c8d33e63670ef660e5270a7ba35d471954b50dc59c415a9a940224a544c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1987,
+      "name": "Lotus Strike",
+      "sourceTextDigest": "d54a0108e765de0a467407a93e58207670c512fbd57b6a90a7bbf1f3aae92248",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1988,
+      "name": "Golden Fang Strike",
+      "sourceTextDigest": "26f482205e71457dd3b5b29f04e8b0ce4ace039eb9153df67896db41d8abe62e",
+      "metadata": ["applies:deep_wound"]
+    },
+    {
+      "skillId": 1990,
+      "name": "Falling Lotus Strike",
+      "sourceTextDigest": "e0feea1ddee46a45a60b77e9553b795cc859340b4e72e84abfd221fbec5d2a24",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1997,
+      "name": "Withering Aura",
+      "sourceTextDigest": "7f1d09ff7fe3bd3f5d9f5afd3b1a89f3388bb557b7b494a03c81ccfa38d2e92d",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 1998,
+      "name": "Cacophony",
+      "sourceTextDigest": "7cb1c9d05605170c4e673e0f288cfb614bb62853a6532d48c69509ce91231bb7",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 1999,
+      "name": "Winter's Embrace",
+      "sourceTextDigest": "3de07b7b4cce08200df0a321ef04ce1b690cfd58d9356edaf969333c30d1446c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2000,
+      "name": "Earthen Shackles",
+      "sourceTextDigest": "8c26c3978bdf73fac034d466207f7a8dc95a01f5ddbd179e6aa3d16a098b75a6",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 2001,
+      "name": "Ward of Weakness",
+      "sourceTextDigest": "1f0b7643c580798bf8193909c2f00e12550032e01aa6de1ca1c4c444656d7db6",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 2003,
+      "name": "Cure Hex",
+      "sourceTextDigest": "c71e2254acf3ad72de856064d5322ce80d850b7e083368779cfb7d982c914ac7",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 2004,
+      "name": "Smite Condition",
+      "sourceTextDigest": "e1ae085d4a4dcb33055fc51f344a3dd429b3c00fe6d57a9f4ea938d583bc24d0",
+      "metadata": ["removes:condition", "deals:holy"]
+    },
+    {
+      "skillId": 2006,
+      "name": "Castigation Signet",
+      "sourceTextDigest": "8e4dbdf95c8cc029a54415eea684e2d541bf6a323de06e9295c5e813c9624469",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 2007,
+      "name": "Purifying Veil",
+      "sourceTextDigest": "44bebffc0e67ee7efa891f9a53c28e72ee0725c0fb69fbef64198056b6a2837f",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 2008,
+      "name": "Pulverizing Smash",
+      "sourceTextDigest": "be42fe572841190f28298ca098d800905e2ca91604239bc6b8b721df89a4d47b",
+      "metadata": ["applies:deep_wound", "applies:weakness"]
+    },
+    {
+      "skillId": 2011,
+      "name": "Grapple",
+      "sourceTextDigest": "cf194312b6483f53a62ef1f36b8576d6a63bddbb14deac0e08cd0a13319e39f0",
+      "metadata": ["removes:stance"]
+    },
+    {
+      "skillId": 2012,
+      "name": "Radiant Scythe",
+      "sourceTextDigest": "b7e38e2ed4260fdfcaa750804bb5e012c74e71f805fe59a7a42b68c29073c879",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2014,
+      "name": "Signet of Pious Restraint",
+      "sourceTextDigest": "5b27b2b2e0e37f0957b0fbdfff58100ccbdd96ad9b03527d3ed9a94515ffbc08",
+      "metadata": ["applies:crippled", "removes:enchantment"]
+    },
+    {
+      "skillId": 2015,
+      "name": "Farmer's Scythe",
+      "sourceTextDigest": "74adf662e42994477958c0687795684e585b37830f0e2cd8a2fe99c2e3895762",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2017,
+      "name": "Anthem of Weariness",
+      "sourceTextDigest": "ffb007d680715458bddc5a855c446bd6b88a0001b403bfffd4cacf66ec29c38c",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 2052,
+      "name": "Shadow Fang",
+      "sourceTextDigest": "ff45afcc659f826508076e26f88d049f32c7da5b931313bd020ef6eedb3165d5",
+      "metadata": ["applies:deep_wound"]
+    },
+    {
+      "skillId": 2053,
+      "name": "Calculated Risk",
+      "sourceTextDigest": "78f7dc52013ee3f277b07c2799370c77a1559c0096c47a799c4275cb778ca3d0",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2054,
+      "name": "Shrinking Armor",
+      "sourceTextDigest": "68eeb6890b731028b45807584b504cd14bea46589a43b71847cf0c2f42bc57d4",
+      "metadata": ["applies:cracked_armor"]
+    },
+    {
+      "skillId": 2055,
+      "name": "Aneurysm",
+      "sourceTextDigest": "6617cf2803399ff22fc56792685c77fbf95c231f3599ed5cb2547cbae0d17f93",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2056,
+      "name": "Wandering Eye",
+      "sourceTextDigest": "67dd9f70a5e58bd90472476de70a739258eb654ea25e656d426ea3185def6d0d",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2057,
+      "name": "Foul Feast",
+      "sourceTextDigest": "10c3217bf6d75d097e686064faf2bb89122a865fe60b77ad1264689ab9dcb59b",
+      "metadata": ["applies:condition", "removes:condition"]
+    },
+    {
+      "skillId": 2058,
+      "name": "Putrid Bile",
+      "sourceTextDigest": "0ed2718d0648d4f5d66895658abdda6d9670fecd361a985a24d3d7ea0e0fabd6",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2059,
+      "name": "Shell Shock",
+      "sourceTextDigest": "23d3c4d51901f52824ee110557e4b6ae2ee1bdab94c421ed1a748bbba3cea11c",
+      "metadata": ["applies:cracked_armor", "deals:lightning"]
+    },
+    {
+      "skillId": 2060,
+      "name": "Glyph of Immolation",
+      "sourceTextDigest": "d54728fd0e30df81c3b2310be08261b0cfc08c005e76e7e060545ab8dc32f1c0",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 2064,
+      "name": "Spotless Mind",
+      "sourceTextDigest": "03df68b51eb4476d294bb71dc9a7f136398a407123e7cc3857f1d05c51fbfa61",
+      "metadata": ["removes:hex"]
+    },
+    {
+      "skillId": 2065,
+      "name": "Spotless Soul",
+      "sourceTextDigest": "0a9c2ccc83b55d2d2e6ccb5173e159962f3a5b5010bb473b48a9d5596b641cb6",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 2069,
+      "name": "Sloth Hunter's Shot",
+      "sourceTextDigest": "e63d9c52fdd9da50d19c2709d7faaf47f37e1069901e5f91bfea9f8318857631",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2070,
+      "name": "Aura Slicer",
+      "sourceTextDigest": "a1b67183c053350a3fbdec4a22f2a15ee4df72ccb043addbfba2c2320e39032f",
+      "metadata": ["applies:bleeding", "applies:cracked_armor"]
+    },
+    {
+      "skillId": 2071,
+      "name": "Zealous Sweep",
+      "sourceTextDigest": "6df8fdcd349147c04b0ad385e9b3aacc3519bca72147cd6ec089cf023eaffce1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2072,
+      "name": "Pure Was Li Ming",
+      "sourceTextDigest": "0c6d3d42f28df8543b139918f30653bddb054ebfaf454b4fff15535056ae0905",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 2074,
+      "name": "Chest Thumper",
+      "sourceTextDigest": "f091ff040d3b26d192706f72fc7d65d1ec6aff862a506fe933744aaf57d3a618",
+      "metadata": ["applies:deep_wound"]
+    },
+    {
+      "skillId": 2091,
+      "name": "Shadow Sanctuary",
+      "sourceTextDigest": "45df81c6c411958c35dc8305241898e8b9778ab72f9aea475b4510d8e10d4ef0",
+      "metadata": ["applies:blind"]
+    },
+    {
+      "skillId": 2093,
+      "name": "Signet of Corruption",
+      "sourceTextDigest": "04d98db3cefba154fd3aa466d8936dbe02d55588ec1f8fed1d0a42b461ff9cbb",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2096,
+      "name": "Triple Shot",
+      "sourceTextDigest": "6ae2172f120aadb04c5b7f4afa276bdca339fa4844041caf311c53263d58f09f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2098,
+      "name": "Aura of Holy Might",
+      "sourceTextDigest": "1567addeb10a6c70a05adba25c12ca37bfb79ede3de2d0277f2b5ce3150265aa",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 2099,
+      "name": "Spear of Fury",
+      "sourceTextDigest": "70fc1c8d33e63670ef660e5270a7ba35d471954b50dc59c415a9a940224a544c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2102,
+      "name": "Cry of Pain",
+      "sourceTextDigest": "f254a35954c1e4f4b2b79bb85818e7a42b654869e8d4f6ab9496766069ed4d1f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2103,
+      "name": "Necrosis",
+      "sourceTextDigest": "78df2905d7e4e73f5b64432b9d7c31224149446181d78029b1183453b4b49cd1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2104,
+      "name": "Intensity",
+      "sourceTextDigest": "bf48d56bcb4b964ce2906872a72219ca9f7a3a8c87321e30b9a8d3a66a7ee5ed",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2107,
+      "name": "Whirlwind Attack",
+      "sourceTextDigest": "3f66f9fad4c68f73cbdb96455fed04656d9a9f30cad4b44a7f19bf4cd9a6797a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2116,
+      "name": "Sneak Attack",
+      "sourceTextDigest": "9efd500d40b5aa4b7512595c6a07fe2d68ce305b6c24c0c692617cb2535249d3",
+      "metadata": ["applies:blind"]
+    },
+    {
+      "skillId": 2135,
+      "name": "Trampling Ox",
+      "sourceTextDigest": "040c33db1ceca85695961973506e1c73b4f0acc6a8aa705f0964c5ad32caf008",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2136,
+      "name": "Smoke Powder Defense",
+      "sourceTextDigest": "25da35dd9fd24d11da922378eedc024ea0fa8bfebeca334dfc5adf394668ee03",
+      "metadata": ["applies:blind", "deals:damage"]
+    },
+    {
+      "skillId": 2140,
+      "name": "Piercing Trap",
+      "sourceTextDigest": "ee9856b01835261dbca0f77dd08c83802dc81b22d657928120eea32448996902",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2142,
+      "name": "Feral Aggression",
+      "sourceTextDigest": "8fe2366fdf917869b6eade49e3cef5d46e3ffd7796dd358573c5d4635f073001",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2143,
+      "name": "Disrupting Shot",
+      "sourceTextDigest": "5a872c83799f354e375866f7b9c80d1da2ab1488731ccf3b76aa97238e2bc779",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2144,
+      "name": "Volley",
+      "sourceTextDigest": "df27659218f145e892ba0315f86a301648d7ecb5ec3e736adbe0a99c7bb73f2a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2145,
+      "name": "Expert Focus",
+      "sourceTextDigest": "fa61d46241e9e663c9320fb0f87c3f4ff6e8ff7356174ced5484957023ec5823",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2146,
+      "name": "Pious Fury",
+      "sourceTextDigest": "9de0547079929557f2ce7a81a0457158e9597031f3a0001c23213d2cb0f0245c",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 2147,
+      "name": "Crippling Victory",
+      "sourceTextDigest": "e3f3f9dc19db36789838584d4e1c42fd8fe879055e5775a1e3137032098dbd85",
+      "metadata": ["applies:crippled", "deals:earth"]
+    },
+    {
+      "skillId": 2148,
+      "name": "Sundering Weapon",
+      "sourceTextDigest": "1093c3343562c4e0b33200f590fbeee05c34c021cd432189a3c699703213bf3f",
+      "metadata": ["applies:cracked_armor"]
+    },
+    {
+      "skillId": 2150,
+      "name": "Maiming Spear",
+      "sourceTextDigest": "48ee8cf46905db87ffb27059e95e4461288786caf383699f3674a1e9ec30e670",
+      "metadata": ["applies:crippled"]
+    },
+    {
+      "skillId": 2186,
+      "name": "Signet of Deadly Corruption",
+      "sourceTextDigest": "65daa8ebe4958d0a553cc72935bbf8a27e15f88b3fbef249d07a821843c2c44a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2188,
+      "name": "Defile Defenses",
+      "sourceTextDigest": "5b824ca420edf431389bd162c8ba1b7acc95edfc0b7be9d6283df027f26ea196",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2190,
+      "name": "Magnetic Surge",
+      "sourceTextDigest": "e5c90ba9dce8dd74823684144d5abd34659f06952ba3599cb9b0eba027f92d79",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2192,
+      "name": "Glowing Ice",
+      "sourceTextDigest": "1580148e02012f0d5ef135b0958a36c1ee8f7017bc5276395d3c2d1672b0f4a8",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 2193,
+      "name": "Energy Blast",
+      "sourceTextDigest": "615837c34f6b7b1a4f4c34dfcda1a89401119ab870f56b0a0751d9c9cb0526d0",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2195,
+      "name": "Symbolic Strike",
+      "sourceTextDigest": "f5241baaed5c5204998d9dc7c4110d2a038e31a525a4cc1ac21c9e3f96785a71",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2197,
+      "name": "Body Blow",
+      "sourceTextDigest": "8618635ada65f0608737410809103acd34148fcf8ca815577a06b920f94b6986",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 2198,
+      "name": "Body Shot",
+      "sourceTextDigest": "11e58c42c9c95c342a143ee7a0111af5ebf9e7313c209a777cf845e0198d3ba5",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2199,
+      "name": "Poison Tip Signet",
+      "sourceTextDigest": "8b0adc858d314dcc9cc29b1b7ca77d7d89c37616ba08bdd707a0298c091d1f35",
+      "metadata": ["applies:poison"]
+    },
+    {
+      "skillId": 2201,
+      "name": "Shield of Force",
+      "sourceTextDigest": "5d53322437305bb92b7cbbd040ded6d30450a32cb28b1ef8bf34f4195d0b7308",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 2202,
+      "name": "Mending Grip",
+      "sourceTextDigest": "31a9f5806805a05a4ca723ec5dd4e43901f02119b875c5b956868052c115f1b7",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 2208,
+      "name": "Burning Shield",
+      "sourceTextDigest": "cde7edcdf39196683fa8fc6023cb06386edd34a4ef666bd77c3a14aead7a4535",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 2209,
+      "name": "Holy Spear",
+      "sourceTextDigest": "7fd4f7bdb8fed8741492ffaad6dab8e2ad65e42767c686eff8d0de189a63d457",
+      "metadata": ["applies:burning", "deals:holy"]
+    },
+    {
+      "skillId": 2210,
+      "name": "Spear Swipe",
+      "sourceTextDigest": "352e6f2ac48a38e6851535893c9b027c46d0947fbf05c5255e317251c6638d00",
+      "metadata": ["applies:dazed", "deals:damage"]
+    },
+    {
+      "skillId": 2211,
+      "name": "Alkar's Alchemical Acid",
+      "sourceTextDigest": "7b17774bbf2a1b2016b60d11d129e299c8143a318175b775798fd7f090b1fd97",
+      "metadata": ["applies:cracked_armor", "deals:damage"]
+    },
+    {
+      "skillId": 2212,
+      "name": "Light of Deldrimor",
+      "sourceTextDigest": "b7f2d80df59f31907dd76cc7160af6f04889e553c05b3b51a22fd63f31887651",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 2213,
+      "name": "Ear Bite",
+      "sourceTextDigest": "b8beedcbebf2737a4b01cfa1ca8cf1da7c2e60929871dee9116a6218c23bfb3d",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 2214,
+      "name": "Low Blow",
+      "sourceTextDigest": "ea01a832db062cfd637f69c135dccc7fb79b31bbd65caba4c5ba0079d4ba26f4",
+      "metadata": ["applies:cracked_armor", "deals:damage"]
+    },
+    {
+      "skillId": 2215,
+      "name": "Brawling Headbutt",
+      "sourceTextDigest": "fecc85941969948db0c8235c2aa9894357be74bc4d99abbc9cfa386318e62aa2",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2217,
+      "name": "\"By Ural's Hammer!\"",
+      "sourceTextDigest": "8bb3d9966960c462b58461aeb689a9240e0c513efcb601fa9c48e2c166a59900",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2219,
+      "name": "Great Dwarf Weapon",
+      "sourceTextDigest": "4a057de2165892ab61c4f924a99daf96941e083aed41d46d4912e17f1685368f",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2221,
+      "name": "Breath of the Great Dwarf",
+      "sourceTextDigest": "b28854f3ad204e3680e461c42c5b7c84a2fd2b4defc3fc3f3c48b8743d09dc70",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 2222,
+      "name": "Snow Storm",
+      "sourceTextDigest": "5774036a2b54411722b0694a0c9ff15c98d2520c7be3dbccb04f39e2ce1cb272",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 2223,
+      "name": "Black Powder Mine",
+      "sourceTextDigest": "e3e77f2b8ba262cca9108b02ce3b4b227b4b2515ecb15d9f06892ec7c44e5f83",
+      "metadata": ["applies:bleeding", "applies:blind", "deals:damage"]
+    },
+    {
+      "skillId": 2228,
+      "name": "Deft Strike",
+      "sourceTextDigest": "fcfb35ed67659ce2f3e6cd6b43e31f1a7bcfaddd8d6fd20440b3ff5dc46f7d02",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 2229,
+      "name": "Signet of Infection",
+      "sourceTextDigest": "47e3efd69476276e43a21d171f89b722f3a9d62a60ae66d95db73b28fc6b173b",
+      "metadata": ["applies:disease"]
+    },
+    {
+      "skillId": 2233,
+      "name": "Ebon Battle Standard of Honor",
+      "sourceTextDigest": "358f9860d9d1afe0e6f13846c024a70a8786d0b70bb0f00a4cf7975432a8f017",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2234,
+      "name": "Ebon Vanguard Sniper Support",
+      "sourceTextDigest": "4757f588ef1beab0f72a09482fdbc86f800df0bf9b981b3531f8e49458afb01f",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 2236,
+      "name": "Well of Ruin",
+      "sourceTextDigest": "0026382f15c61ceecab3ca5f7d9f76d240e7b82ebc0e7ea324f815c28706244d",
+      "metadata": ["applies:cracked_armor"]
+    },
+    {
+      "skillId": 2238,
+      "name": "Spear of Redemption",
+      "sourceTextDigest": "4021f5e6df11ee305088caadcb07008e8f730073e244ffa4b1395b4c6b46daf7",
+      "metadata": ["removes:condition", "deals:damage"]
+    },
+    {
+      "skillId": 2353,
+      "name": "\"Finish Him!\"",
+      "sourceTextDigest": "49a3b0a77b652446c37e4bae685793457f28abd5ac36d3f41e65583ba334a7c7",
+      "metadata": ["applies:deep_wound", "applies:cracked_armor", "deals:damage"]
+    },
+    {
+      "skillId": 2354,
+      "name": "\"Dodge This!\"",
+      "sourceTextDigest": "4a9771f5ab1b4b30be4a712dd5754a0787f23e4987dc1f6cf676d4fa7149747c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2355,
+      "name": "\"I Am the Strongest!\"",
+      "sourceTextDigest": "4a3c9186df35896bbd0951996854691de41948fae510663c55c4cc08d5c082a9",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2357,
+      "name": "A Touch of Guile",
+      "sourceTextDigest": "d9f75482fbbf0be768ce74b94d96a9cc3424d75972b713df3430b3f212e8a25e",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2358,
+      "name": "\"You Move Like a Dwarf!\"",
+      "sourceTextDigest": "c906b3b9e730e457062c07c7bd62470753720777213e6a656d8ab303c07734f0",
+      "metadata": ["applies:crippled", "deals:damage"]
+    },
+    {
+      "skillId": 2359,
+      "name": "\"You Are All Weaklings!\"",
+      "sourceTextDigest": "6ade1ad27934203bdbf08d6dd5320305abb11adb9d2ad243ae152d54bdf282b5",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 2361,
+      "name": "Club of a Thousand Bears",
+      "sourceTextDigest": "5f45fd6551002f179d55435a8d64282f6c614cdc013cc2b893b6d48b992981ae",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2413,
+      "name": "Technobabble",
+      "sourceTextDigest": "77794f1409a8230c6139ac12732777243c953b18963a03c1bee23dd6e724d6b6",
+      "metadata": ["applies:dazed", "deals:damage"]
+    },
+    {
+      "skillId": 2414,
+      "name": "Radiation Field",
+      "sourceTextDigest": "80eef5cfcee497b67530782110773aed76769e401fc35e932efe20b16c322c03",
+      "metadata": ["applies:disease"]
+    },
+    {
+      "skillId": 2418,
+      "name": "Pain Inverter",
+      "sourceTextDigest": "e1beb98902b0395f7dfd8b737fd64ee53e095cb64e3bfa99963f98e353534379",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2421,
+      "name": "Weakness Trap",
+      "sourceTextDigest": "54b27c06fa91dd7173b59bd9066be745a1b9bef7af9b2d121e4a79be8300bef3",
+      "metadata": ["applies:weakness", "deals:lightning"]
+    },
+    {
+      "skillId": 2628,
+      "name": "Enfeeble",
+      "sourceTextDigest": "4913ef3a0282b1b3c8ddce8714f332bc036a26eac451686d862dfcf2d1538f12",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 2632,
+      "name": "Searing Flames",
+      "sourceTextDigest": "760e831d5dad8eb9edc129edaa0ca7cc69f5bdef8dc98a1d8932f69fc3f09aaf",
+      "metadata": ["applies:burning", "deals:fire"]
+    },
+    {
+      "skillId": 2633,
+      "name": "Glowing Gaze",
+      "sourceTextDigest": "9121dcaa0a94000add34960d3e275094defe48145e5682f93060dae915c38b71",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 2634,
+      "name": "Steam",
+      "sourceTextDigest": "fe1c7169494ed07b4fc5730e26823074b7272e3ab64c6bc0cbd7683f140db2e5",
+      "metadata": ["applies:blind", "deals:fire", "deals:cold"]
+    },
+    {
+      "skillId": 2635,
+      "name": "Flame Djinn's Haste",
+      "sourceTextDigest": "edd74f5fbf12ffdd8c37285710e292dd5ccc90b2912f4ac547c646eda99e8a2f",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 2636,
+      "name": "Liquid Flame",
+      "sourceTextDigest": "db18631471f98fc0a465f22dedb4022996af2da270fb43f1ee7eb29c289c19c5",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 2639,
+      "name": "Smite Condition",
+      "sourceTextDigest": "e1ae085d4a4dcb33055fc51f344a3dd429b3c00fe6d57a9f4ea938d583bc24d0",
+      "metadata": ["removes:condition", "deals:holy"]
+    },
+    {
+      "skillId": 2640,
+      "name": "Crippling Slash",
+      "sourceTextDigest": "0542048f919370fe2fdd315a7c23737d5c38360e051dfb81b59a4c3704f757a3",
+      "metadata": ["applies:bleeding", "applies:crippled"]
+    },
+    {
+      "skillId": 2644,
+      "name": "Burning Arrow",
+      "sourceTextDigest": "a5e7ce9cc13a72063389ff7105d7516f33c1605505f7afcea3444dbb6feedda6",
+      "metadata": ["applies:burning", "deals:damage"]
+    },
+    {
+      "skillId": 2646,
+      "name": "Falling Lotus Strike",
+      "sourceTextDigest": "e0feea1ddee46a45a60b77e9553b795cc859340b4e72e84abfd221fbec5d2a24",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2647,
+      "name": "Anthem of Weariness",
+      "sourceTextDigest": "ffb007d680715458bddc5a855c446bd6b88a0001b403bfffd4cacf66ec29c38c",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 2734,
+      "name": "Mind Wrack (PvP)",
+      "sourceTextDigest": "9182b410e5bf91eb1f35a56fd1fb3f343a6fae8fb73cb0b23e514fbae462d4da",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2803,
+      "name": "Mind Freeze (PvP)",
+      "sourceTextDigest": "a9adf4f41f41b1f89695ac4a88ff3d9334045abc143fa745eb01bf861d20d32d",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 2804,
+      "name": "Mind Shock (PvP)",
+      "sourceTextDigest": "bc59fc514e3a240af08bb498cabe8e497e0f30a62adc62b6fc3fe8b5a997f183",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 2807,
+      "name": "Ride the Lightning (PvP)",
+      "sourceTextDigest": "89ebbec5aeafd9a401b86cc483a82071bce3e2bad0f0b95763e214afb4eea4ed",
+      "metadata": ["applies:blind", "deals:lightning"]
+    },
+    {
+      "skillId": 2808,
+      "name": "Enraged Smash (PvP)",
+      "sourceTextDigest": "ed9c980f0639fbb8e62cbcfdc70c38c3a2936a953d490b5d48cbd52187461ea5",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2809,
+      "name": "Obsidian Flame (PvP)",
+      "sourceTextDigest": "aee7024222d928ac242487d0ff366bdcd81c469212189e82a4a1f68d11007e5d",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2859,
+      "name": "Enfeeble (PvP)",
+      "sourceTextDigest": "4913ef3a0282b1b3c8ddce8714f332bc036a26eac451686d862dfcf2d1538f12",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 2861,
+      "name": "Penetrating Attack (PvP)",
+      "sourceTextDigest": "ca3601b97cf4c4e31728e30b0218e11ec0cc723df3ef1669717042a880f81d2c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2863,
+      "name": "Discord (PvP)",
+      "sourceTextDigest": "f97966ac91b6a971afa3e010976aef08d51de1f6cef2234738d9f2d061e52272",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2864,
+      "name": "Sundering Attack (PvP)",
+      "sourceTextDigest": "ca3601b97cf4c4e31728e30b0218e11ec0cc723df3ef1669717042a880f81d2c",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2867,
+      "name": "Ancestors' Rage (PvP)",
+      "sourceTextDigest": "b2dc0025e79b90fdcae90da3511e8a1a4cc36f26e30834fe3884f56917c5e2e9",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 2868,
+      "name": "Splinter Weapon (PvP)",
+      "sourceTextDigest": "165ad3082ec684e6b08af7f7e6bd5b42c866fb06efb848d4e9432821d896caa5",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2869,
+      "name": "Assassin's Remedy (PvP)",
+      "sourceTextDigest": "291c4a3f5780a06501e38391fa5c2f4187504b3a63816dfdb026e98a90a8038d",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 2875,
+      "name": "Harrier's Toss (PvP)",
+      "sourceTextDigest": "752a801cc9594ecfaf3ca7d1e895b7c05d7c5ab21060824f46c5cbe902b4c174",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2885,
+      "name": "Enfeebling Blood (PvP)",
+      "sourceTextDigest": "a7b3debef07a2ddb766b2f0ac5b6696557f9f7da134547325060f26c2a3bcb6f",
+      "metadata": ["applies:weakness"]
+    },
+    {
+      "skillId": 2887,
+      "name": "Signet of Judgment (PvP)",
+      "sourceTextDigest": "521ff33867057a9e3bb9a5316709abdc38c25b7e8fc923b921db9b076ec1d075",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 2925,
+      "name": "Sloth Hunter's Shot (PvP)",
+      "sourceTextDigest": "fa456830da5348fe77345d29e38b0c69c2f7f83c5951848b6de9dd4db381e833",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2966,
+      "name": "Signet of Ghostly Might (PvP)",
+      "sourceTextDigest": "11f3a6a0fb64f1bed441b58b402ed28ff61c9ea19d77c507d73839db800f7d17",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2998,
+      "name": "Fragility (PvP)",
+      "sourceTextDigest": "443b0c24c4e0792c5b291a3865cd77de28ab338aed72c51d13cf074905acd4f4",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 2999,
+      "name": "Strength of Honor (PvP)",
+      "sourceTextDigest": "c0682dccdf3e96aa3e6da0a74d6fe2c19e0bf51ba00110c05a5e1785a0cf01a5",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3006,
+      "name": "Shadowsong (PvP)",
+      "sourceTextDigest": "d44546d0c1621831d967184341c7c74ba83998624d306ff9732785182dc7bd62",
+      "metadata": ["applies:blind", "deals:damage"]
+    },
+    {
+      "skillId": 3007,
+      "name": "Pain (PvP)",
+      "sourceTextDigest": "01bff00959ec186654a59b87a37ce54d752638b3eb3c1f1a6b4d805ff8c43dca",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3008,
+      "name": "Destruction (PvP)",
+      "sourceTextDigest": "a8f24c4539410bf54babd46974bcb81c7d8af70b42b5782f61a1e2fdd3ad52a4",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3014,
+      "name": "Dissonance (PvP)",
+      "sourceTextDigest": "9492f04da5e1de5c40e0605bca3bf09b77dfef733b2a2f290070edc9c6e776ec",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3017,
+      "name": "Disenchantment (PvP)",
+      "sourceTextDigest": "353f809c396af90cf17ee5f1bb0ed1a65adbc74348c4372b8a94b6d423e12724",
+      "metadata": ["removes:enchantment", "deals:damage"]
+    },
+    {
+      "skillId": 3021,
+      "name": "Savannah Heat (PvP)",
+      "sourceTextDigest": "c19c95434cae7bf9dc167c843ec3710d1902e98d84c88ae2889c22e3a04052e9",
+      "metadata": ["deals:fire"]
+    },
+    {
+      "skillId": 3022,
+      "name": "Gaze of Fury (PvP)",
+      "sourceTextDigest": "b804e0be406feb5f28a3e0c64afa34541ab9384c14425d892e772a345c6a8656",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3023,
+      "name": "Anguish (PvP)",
+      "sourceTextDigest": "30b1f43e621673c18fd5effb2550cfa1dc25e4f4d75905720ad8f163eb2ebb39",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3027,
+      "name": "\"Brace Yourself!\" (PvP)",
+      "sourceTextDigest": "8095825abb3fde48bb59407a8f12eab53f76259f48d47623e6675e7528f0fb4d",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3028,
+      "name": "Blazing Finale (PvP)",
+      "sourceTextDigest": "75fbb3c1de86bbf2a8a8af830d671ad51c481b29074d11781ecfd8cbcf66d1f4",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 3034,
+      "name": "\"Find Their Weakness!\" (PvP)",
+      "sourceTextDigest": "047b188d1ebaf0d175efcb4d2c45da31e52c6cac68cfde06622971ade2cf45e3",
+      "metadata": ["applies:deep_wound"]
+    },
+    {
+      "skillId": 3042,
+      "name": "Pain",
+      "sourceTextDigest": "875560c049488e83a0a54da06aba9c01c672e7bc78c44491269d8637a478e288",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3047,
+      "name": "Melandru's Assault (PvP)",
+      "sourceTextDigest": "c9cc34b2e46f838f2442e49f5c650d313fd84a84bd596af9664cde71fddbba57",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3051,
+      "name": "Enraged Lunge (PvP)",
+      "sourceTextDigest": "bcf379e679318f3c6e7aab8a7d8f5702b1c22dd4a9f0e2e5d406f1a301cf1ca5",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3053,
+      "name": "Signet of Deadly Corruption (PvP)",
+      "sourceTextDigest": "371d2e8eb4fb7ac95d5f38cd1f6bf0fdce24ae93840b919a7c5921485cea1aab",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3059,
+      "name": "Signet of Agony (PvP)",
+      "sourceTextDigest": "580bd7d8c7329846bea7dbdfdbea1d77fca1181e6377c6b8f54541aa54d49bf5",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 3061,
+      "name": "Death Blossom (PvP)",
+      "sourceTextDigest": "a81969e42456a8a1a92b258e194a7cd1a40ac3a6a2f271e3221cbfdf57395cad",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3143,
+      "name": "Renewing Smash (PvP)",
+      "sourceTextDigest": "e4770fbdf618f8a36b953b6ebb8c0dd80afdc2a7b710f9d45b596ae242b66b68",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3145,
+      "name": "Glass Arrows (PvP)",
+      "sourceTextDigest": "2b83bb1f986ec920e3887f6b9a388050f060eb0dbdb88b037b95b16e00b73444",
+      "metadata": ["applies:bleeding", "deals:damage"]
+    },
+    {
+      "skillId": 3147,
+      "name": "Keen Arrow (PvP)",
+      "sourceTextDigest": "6d04ffdbd710fb3a4420e531b1e59ff86307b046e4e58805b74bdd3132fd2cd1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3148,
+      "name": "Anthem of Envy (PvP)",
+      "sourceTextDigest": "fc717c4ca4b587db2ee4731243151820f465c51b67c87297d8f9d8e5cf126255",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3151,
+      "name": "Empathy (PvP)",
+      "sourceTextDigest": "d37b39b872513c3b11478b28e66bada2ecee338501c5773ec04014044b5302b6",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3157,
+      "name": "Destructive Was Glaive (PvP)",
+      "sourceTextDigest": "fe89e2f3d6ffcf073bb4263f47f747cb482a7a0adb9aad5f2d118d13a8e81933",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 3180,
+      "name": "Shatter Delusions (PvP)",
+      "sourceTextDigest": "ea3b66969d9a58ae20ff62f93141ba83839e2449cfc91a5e8963a8c9995a1940",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3181,
+      "name": "Illusionary Weaponry (PvP)",
+      "sourceTextDigest": "b833fdd6f3f88ea7bec14f816af467c4a8b9f9f2aac9104be47df226376ec290",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3184,
+      "name": "Accumulated Pain (PvP)",
+      "sourceTextDigest": "d92dc6b69f7ef6f7884cc8135da4d64f7f44678143bcc10dce76a029b7476743",
+      "metadata": ["applies:deep_wound", "deals:damage"]
+    },
+    {
+      "skillId": 3188,
+      "name": "Unnatural Signet (PvP)",
+      "sourceTextDigest": "6a48ea5372514b29d1d371bf583844c8d0cd718363ccfa10ff386756f1348e7a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3189,
+      "name": "Spiritual Pain (PvP)",
+      "sourceTextDigest": "56cd2b16bbe018826678eb5bb73b4c7fde9f5686394f2290f3edd2c29534bb3d",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3190,
+      "name": "Frustration (PvP)",
+      "sourceTextDigest": "3d143157b3cfeaba8b1f39191bda2d55f1e4304dcb914a37a46f0ef8468d4c46",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3191,
+      "name": "Mistrust (PvP)",
+      "sourceTextDigest": "39350dfde2c1cbfba13ff9b825ac34df0949e9918b675b528f05536ddbb7049b",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3192,
+      "name": "Enchanter's Conundrum (PvP)",
+      "sourceTextDigest": "6c8148853d7b6a0b1ab242166634e5b2aa601310ace12eab9288ffb9625e37dc",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3193,
+      "name": "Signet of Clumsiness (PvP)",
+      "sourceTextDigest": "3d1fe9e17352c3a5ad162818179de52ebd72b687e00dbd2d414d1362aac2e00a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3194,
+      "name": "Mirror of Disenchantment (PvP)",
+      "sourceTextDigest": "22aac238a225e662a52d584e85a116b055b18f6a2c474fa5278b07201958ab5e",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 3195,
+      "name": "Wandering Eye (PvP)",
+      "sourceTextDigest": "71a785187582d4f226a4c30a707f1d5026895e9bca93ecea8c4fb010cba3da71",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3196,
+      "name": "Calculated Risk (PvP)",
+      "sourceTextDigest": "4e11a5cedf1cf661ca151a46078394493e4c8ebf5a36766bf51b798c7003c5bb",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3234,
+      "name": "Visions of Regret (PvP)",
+      "sourceTextDigest": "546cea6cbf8d9c1708a6bdf7d46a8b5c8d19fc2b4355ca1b9470d1a93df3252e",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3251,
+      "name": "Fox Fangs (PvP)",
+      "sourceTextDigest": "ea5c2587db7291ed57a60e6a1f99b1bc2ab4461f42141a08dc1f8c9c2f191ba3",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3252,
+      "name": "Wild Strike (PvP)",
+      "sourceTextDigest": "d5aabe999c71136b744bd4da7829b8e7b51eefececdbdf09a4491fa225c5787a",
+      "metadata": ["removes:stance", "deals:damage"]
+    },
+    {
+      "skillId": 3263,
+      "name": "Banishing Strike (PvP)",
+      "sourceTextDigest": "7c3215a6cc852912ba0a99b3a791be3dfb3013e24d06a2cc09081c8c37fa8d06",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 3264,
+      "name": "Twin Moon Sweep (PvP)",
+      "sourceTextDigest": "9b8219f6820341c9d609fadfd75886a52e863846bce6c2413a35635a85a37bcc",
+      "metadata": ["removes:enchantment", "deals:damage"]
+    },
+    {
+      "skillId": 3265,
+      "name": "Irresistible Sweep (PvP)",
+      "sourceTextDigest": "e29619fa65b8f9709ce143864c59f15fbaed2379f6dc759779a21a2093170d80",
+      "metadata": ["removes:enchantment", "removes:stance", "deals:damage"]
+    },
+    {
+      "skillId": 3266,
+      "name": "Pious Assault (PvP)",
+      "sourceTextDigest": "75b2111643be78131234312c12649f59e9d5c9ef14a316b4bb3039ebc464f930",
+      "metadata": ["removes:enchantment", "deals:damage"]
+    },
+    {
+      "skillId": 3269,
+      "name": "Guiding Hands (PvP)",
+      "sourceTextDigest": "b734d57179c2f45268682f6924e4c8e3d2507d3946b2f8479cfaf8cc3a580011",
+      "metadata": ["removes:condition"]
+    },
+    {
+      "skillId": 3270,
+      "name": "Avatar of Dwayna (PvP)",
+      "sourceTextDigest": "d01414c2f0255757ab68494181f20f10814f5f0467fd62dd84f7aa6fd44bc15a",
+      "metadata": ["removes:hex", "deals:holy"]
+    },
+    {
+      "skillId": 3271,
+      "name": "Avatar of Melandru (PvP)",
+      "sourceTextDigest": "f89e683d956ea895913c787aec4ed5c839824195af277590867ea9af31a2f543",
+      "metadata": ["removes:condition", "deals:earth"]
+    },
+    {
+      "skillId": 3273,
+      "name": "Signet of Pious Restraint (PvP)",
+      "sourceTextDigest": "05394f9f2c1cc13380432cd8876e5d5e4905ec9a73e2db8be050e7d62d4a8cff",
+      "metadata": ["applies:crippled", "removes:enchantment"]
+    },
+    {
+      "skillId": 3289,
+      "name": "Fevered Dreams (PvP)",
+      "sourceTextDigest": "70429b4b6909d856e53953447ed0bb847008426ac9b7616b381bbee6d52345a4",
+      "metadata": ["applies:condition"]
+    },
+    {
+      "skillId": 3346,
+      "name": "Aura of Thorns (PvP)",
+      "sourceTextDigest": "2f889db33858c2add46cdd6331f9c26c2bf998862580f02396d38e7f1cec9232",
+      "metadata": ["applies:bleeding", "applies:crippled"]
+    },
+    {
+      "skillId": 3347,
+      "name": "Dust Cloak (PvP)",
+      "sourceTextDigest": "e6c2ee65c996d96f7faff878d5a488128341a167b62842aca1b7b629d315dbad",
+      "metadata": ["applies:blind", "deals:earth"]
+    },
+    {
+      "skillId": 3367,
+      "name": "Wounding Strike (PvP)",
+      "sourceTextDigest": "6ebad7b7d2f30f2b82f60cabe796bb119d538d9caedb9676e2acff91f0114427",
+      "metadata": ["applies:bleeding", "applies:deep_wound", "removes:enchantment"]
+    },
+    {
+      "skillId": 3368,
+      "name": "Pious Fury (PvP)",
+      "sourceTextDigest": "caf1e9ff199420f1ae413cdc2e436528320361f4687e1d82763a15669bd7cc51",
+      "metadata": ["removes:enchantment"]
+    },
+    {
+      "skillId": 3373,
+      "name": "Illusion of Haste (PvP)",
+      "sourceTextDigest": "e6f899510716fb7da29692520e965af27a9456c358aa31dd20894ee6ea9d0e6d",
+      "metadata": ["applies:crippled"]
+    },
+    {
+      "skillId": 3374,
+      "name": "Illusion of Pain (PvP)",
+      "sourceTextDigest": "8b0372690d7d9236e5bef0e34b1a1c5ac2c9e5cdf3df24ce44363a8f130ed68b",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3396,
+      "name": "Lightning Hammer (PvP)",
+      "sourceTextDigest": "9bd553bcd6b61e9c65c47af02c24feb9c671c3c04cb665cf211839ddd1e36c95",
+      "metadata": ["deals:lightning"]
+    },
+    {
+      "skillId": 3397,
+      "name": "Elemental Flame (PvP)",
+      "sourceTextDigest": "ecd56d1c5dcd64dc12d20d0fa60da51847051b2a45f45d7308ad4561b9c6a7f6",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 3423,
+      "name": "Soul Taker",
+      "sourceTextDigest": "e6331f06761c7b7fd8e57a9d2706ed76e765bdb9ed6e447badc0e52e29a34ad1",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3425,
+      "name": "Judgment Strike",
+      "sourceTextDigest": "6478a64d1eae36ae9a2af9fd9579ef1a704f5a228e36ae2531bf218673ad9903",
+      "metadata": ["deals:holy"]
+    },
+    {
+      "skillId": 3427,
+      "name": "\"Together as One!\"",
+      "sourceTextDigest": "9a920aba9a16a92fd43b7aee135b6fa3a83fde7033b6c58f9a4083330a7519b2",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3437,
+      "name": "Farmer's Scythe (PvP)",
+      "sourceTextDigest": "11e3649ba181729942dfd59bc89c13efc06bba291a39b0756186431ff38def19",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3442,
+      "name": "Mighty Throw (PvP)",
+      "sourceTextDigest": "4a1d1d18d2a0eb3c72716ed2d0c6b453e0e61f782f5d1b0351a46e4e206dffb0",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3444,
+      "name": "Hundred Blades (PvP)",
+      "sourceTextDigest": "0f890d5ca286d1f591c312e35407c58b275c289ffa1013bb90dee31becda5995",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3446,
+      "name": "Soul Ignition",
+      "sourceTextDigest": "f11651050f6e0bb7f041dbfa5bbb86e38cb15c6f7bcefaf1c45e9d7234baef22",
+      "metadata": ["applies:burning"]
+    },
+    {
+      "skillId": 3447,
+      "name": "Wastrel's Worry (PvP)",
+      "sourceTextDigest": "0805b8d87fb0aac49b89d6f3e773da4b2ed5bc121c8b6bd09ff7c06a69401029",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3448,
+      "name": "Peace and Harmony (PvP)",
+      "sourceTextDigest": "faaa53b05944e9f6cf3ae134b369a95cbb9bca1a70d2d6bf81fb83c12fcad1ff",
+      "metadata": ["removes:condition", "removes:hex"]
+    },
+    {
+      "skillId": 3449,
+      "name": "Protector's Strike (PvP)",
+      "sourceTextDigest": "9558065798485727fb3c60af137b02e3177887d9fe0f056a34264369f4416af3",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3450,
+      "name": "Crippling Shot (PvP)",
+      "sourceTextDigest": "26e34c8981f0a60ccc2db2f4bca910900ff1a2ccf67b0497580f46d86ce625b1",
+      "metadata": ["applies:crippled"]
+    },
+    {
+      "skillId": 3455,
+      "name": "Auspicious Blow (PvP)",
+      "sourceTextDigest": "b90c85b5a84bc5d297ae7ff595b9daffc34a77f46b70915e3fed8daad2b2521a",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3459,
+      "name": "Melandru's Shot (PvP)",
+      "sourceTextDigest": "e37c101fe0608b67797bdf42b1a8d5e05143d9f50cd921bc2791e2e44bcc8d6c",
+      "metadata": ["applies:bleeding", "applies:crippled", "deals:damage"]
+    },
+    {
+      "skillId": 3465,
+      "name": "Charging Strike (PvP)",
+      "sourceTextDigest": "87c6c2e5c390fac276fa3f6769625f769d580c777e027e90eb889b66152797dc",
+      "metadata": ["deals:damage"]
+    },
+    {
+      "skillId": 3467,
+      "name": "Mystic Corruption (PvP)",
+      "sourceTextDigest": "388f55f761f6bc8a2b4ce98d310753e0568c01ac320c8f3a1e06cfed992d15a0",
+      "metadata": ["applies:disease", "removes:condition"]
+    },
+    {
+      "skillId": 3468,
+      "name": "Harrier's Grasp (PvP)",
+      "sourceTextDigest": "69ed77ca1b8f3218274c1d2f89e088e63ab01692ac2b9162ffbdb45d228eb43e",
+      "metadata": ["applies:crippled", "removes:condition"]
+    },
+    {
+      "skillId": 3469,
+      "name": "Mirage Cloak (PvP)",
+      "sourceTextDigest": "a519c36f11184669f102c5fdb188317da4687be6909d93f2923299a48840c7de",
+      "metadata": ["deals:earth"]
+    },
+    {
+      "skillId": 3471,
+      "name": "Pious Restoration (PvP)",
+      "sourceTextDigest": "e71d4575e7d9d268d9e1b23f693e093ef3ab3c8177a3fddf056204750a52d3ce",
+      "metadata": ["removes:hex", "removes:enchantment"]
+    },
+    {
+      "skillId": 3472,
+      "name": "Whirling Charge (PvP)",
+      "sourceTextDigest": "f1c461cdf0cbe150b5f2de8a17dd92a4e15eef37ec32f5291a11724c21e83d73",
+      "metadata": ["deals:cold"]
+    },
+    {
+      "skillId": 3473,
+      "name": "Aura Slicer (PvP)",
+      "sourceTextDigest": "a1b67183c053350a3fbdec4a22f2a15ee4df72ccb043addbfba2c2320e39032f",
+      "metadata": ["applies:bleeding", "applies:cracked_armor"]
+    }
+  ]
+}

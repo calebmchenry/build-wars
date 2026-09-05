@@ -8,6 +8,7 @@ import {
   purchasedRankCost,
   renderSkillTooltipText,
   resolveTitleRanksForSkill,
+  skillHasMetadataTokens,
   skillTypeLabelForId,
   skillTypeMatches,
   validateBuild,
@@ -358,7 +359,8 @@ export function selectSkillBrowser(
     .filter((skill) => matchesSkillType(skill, filters.skillType))
     .filter((skill) => matchesElite(skill, filters.elite))
     .filter((skill) => matchesAvailability(skill, state, filters.availability))
-    .filter((skill) => matchesResourceFilters(skill, filters.resources));
+    .filter((skill) => matchesResourceFilters(skill, filters.resources))
+    .filter((skill) => skillHasMetadataTokens(skill, filters.metadata, catalogs.skillMetadata));
   const ordered = sortSkills(filtered, filters.sortMode, catalogs);
 
   return {

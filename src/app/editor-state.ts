@@ -10,6 +10,7 @@ import {
   type ProfessionId,
   type SkillBar,
   type SkillId,
+  type SkillMetadataToken,
   type SkillTypeId,
   type TitleRankOverrideMutationFacts,
   type TemplateSourceEnvelope
@@ -87,6 +88,7 @@ export interface BrowserFilters {
   readonly elite: BrowserEliteFilter;
   readonly availability: BrowserAvailabilityFilter;
   readonly resources: Readonly<Record<ResourceFilterKind, ResourceFilterValue>>;
+  readonly metadata: readonly SkillMetadataToken[];
   readonly sortMode: BrowserSortMode;
 }
 
@@ -353,6 +355,7 @@ export function createDefaultBrowserFilters(): BrowserFilters {
     elite: "any",
     availability: "default",
     resources: EMPTY_RESOURCE_FILTERS,
+    metadata: [],
     sortMode: "attribute"
   };
 }

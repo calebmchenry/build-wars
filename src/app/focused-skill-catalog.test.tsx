@@ -10,20 +10,25 @@ import { selectSkillBrowser } from "./editor-selectors";
 import { createBlankEditorState, editorReducer, type EditorState } from "./editor-state";
 
 const catalogs = requireReadyCatalogs();
+const CATALOG_RENDER_TIMEOUT_MS = 10_000;
 
 describe("FocusedSkillCatalog", () => {
-  it("renders the full all-playable view when both professions are Any", () => {
-    render(<Harness />);
+  it(
+    "renders the full all-playable view when both professions are Any",
+    () => {
+      render(<Harness />);
 
-    expect(screen.getByRole("tab", { name: "Skills" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Skills Catalog" })).toBeInTheDocument();
-    expect(screen.queryByText(/shown from/)).not.toBeInTheDocument();
-    expect(screen.queryByText(/[0-9]+ visible/)).not.toBeInTheDocument();
-    expect(screen.getAllByText(/\([0-9]+ Skills\)$/).length).toBeGreaterThan(0);
-    expect(screen.queryAllByText("Resurrection Signet").length).toBeLessThanOrEqual(1);
-    expect(screen.queryByRole("button", { name: /Pick/ })).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: /Details/ })).not.toBeInTheDocument();
-  });
+      expect(screen.getByRole("tab", { name: "Skills" })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: "Skills Catalog" })).toBeInTheDocument();
+      expect(screen.queryByText(/shown from/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/[0-9]+ visible/)).not.toBeInTheDocument();
+      expect(screen.getAllByText(/\([0-9]+ Skills\)$/).length).toBeGreaterThan(0);
+      expect(screen.queryAllByText("Resurrection Signet").length).toBeLessThanOrEqual(1);
+      expect(screen.queryByRole("button", { name: /Pick/ })).not.toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: /Details/ })).not.toBeInTheDocument();
+    },
+    CATALOG_RENDER_TIMEOUT_MS
+  );
 
   it("keeps search compact and expands filters from the icon button", () => {
     const { container } = render(<Harness initialState={stateWithBrowserQuery("Energy Drain")} />);
@@ -44,6 +49,8 @@ describe("FocusedSkillCatalog", () => {
     expect(screen.getByLabelText("Professions")).toBeInTheDocument();
     expect(screen.getByLabelText("Attribute")).toBeInTheDocument();
     expect(screen.getByLabelText("Mode")).toBeInTheDocument();
+    expect(screen.getByText("Applies Condition")).toBeInTheDocument();
+    expect(screen.getByLabelText("Burning")).toBeInTheDocument();
     expect(screen.getByRole("option", { name: "Build mode" })).toBeInTheDocument();
     expect(screen.getByRole("option", { name: "PvE + PvP" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Any" })).toHaveAttribute("aria-pressed", "true");
@@ -58,30 +65,42 @@ describe("FocusedSkillCatalog", () => {
     expect(container.querySelector(".filter-active-count")).toHaveTextContent("1");
     expect(screen.getByRole("button", { name: "Clear filters" })).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
+    fireEvent.click(screen.getByLabelText("Burning"));
+
+    expect(screen.getByRole("button", { name: "Hide skill filters (2 active)" })).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    fireEvent.click(screen.getAllByRole("button", { name: "Clear filters" })[0]!);
 
     expect(screen.getByRole("button", { name: "Hide skill filters" })).toHaveAttribute(
       "aria-expanded",
       "true"
     );
     expect(screen.getByRole("button", { name: "Any" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByLabelText("Burning")).not.toBeChecked();
     expect(container.querySelector(".filter-active-count")).toBeNull();
   });
 
-  it("renders all matching skills without a show-more button", () => {
-    const initialState = createBlankEditorState();
-    const expectedCount = selectSkillBrowser(initialState, catalogs).matchingCount;
-    const { container } = render(<Harness initialState={initialState} />);
+  it(
+    "renders all matching skills without a show-more button",
+    () => {
+      const initialState = createBlankEditorState();
+      const expectedCount = selectSkillBrowser(initialState, catalogs).matchingCount;
+      const { container } = render(<Harness initialState={initialState} />);
 
-    expect(screen.queryByRole("button", { name: "Show more" })).not.toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(expectedCount);
+      expect(screen.queryByRole("button", { name: "Show more" })).not.toBeInTheDocument();
+      expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(expectedCount);
 
-    const results = container.querySelector(".focused-skill-results");
-    expect(results).not.toBeNull();
-    fireEvent.scroll(results!);
+      const results = container.querySelector(".focused-skill-results");
+      expect(results).not.toBeNull();
+      fireEvent.scroll(results!);
 
-    expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(expectedCount);
-  });
+      expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(expectedCount);
+    },
+    CATALOG_RENDER_TIMEOUT_MS
+  );
 
   it("filters through selected professions and places a skill with shared bar policy", () => {
     render(

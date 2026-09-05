@@ -16,6 +16,7 @@ import type {
 } from "../editor-state";
 import { applySkillBarIntent } from "../skill-bar-actions";
 import { SkillDisplay } from "./SkillDisplay";
+import { SkillMetadataFilterControls } from "./SkillMetadataFilterControls";
 import { setSkillIconDragImage } from "./skill-drag-image";
 import { SkillTooltipTrigger } from "./SkillTooltip";
 
@@ -219,6 +220,10 @@ export function FocusedSkillCatalog({
               <option value="type">Type</option>
             </select>
           </label>
+          <SkillMetadataFilterControls
+            selected={state.browser.filters.metadata}
+            dispatch={dispatch}
+          />
           {activeFilterCount > 0 ? (
             <button
               type="button"
@@ -339,6 +344,7 @@ function focusedFilterActiveCount(filters: BrowserFilters): number {
     filters.skillType !== null,
     filters.elite !== "any",
     filters.availability !== "default",
+    ...filters.metadata.map(() => true),
     filters.sortMode !== "attribute"
   ].filter(Boolean).length;
 }
@@ -352,6 +358,7 @@ function clearFocusedCatalogFilters(dispatch: Dispatch<EditorAction>): void {
       skillType: null,
       elite: "any",
       availability: "default",
+      metadata: [],
       sortMode: "attribute"
     }
   });
