@@ -111,6 +111,30 @@ describe("editor selectors", () => {
     expect(browser.groups[0]?.skills[0]?.normalizedName).toContain("shot");
   });
 
+  it("filters skill browser results by full skill text phrase", () => {
+    const state = editorReducer(createBlankEditorState(), {
+      type: "set-browser-filters",
+      filters: {
+        professionScope: { kind: "all" },
+        textQuery: "nearby dead Boss",
+        sortMode: "name"
+      }
+    });
+    const skills = selectSkillBrowser(state, catalogs).groups.flatMap((group) => group.skills);
+
+    expect(skills.map((skill) => skill.name)).toEqual(["Signet of Capture"]);
+
+    const reorderedWords = editorReducer(createBlankEditorState(), {
+      type: "set-browser-filters",
+      filters: {
+        professionScope: { kind: "all" },
+        textQuery: "nearby Boss dead"
+      }
+    });
+
+    expect(selectSkillBrowser(reorderedWords, catalogs).matchingCount).toBe(0);
+  });
+
   it("applies explicit attribute and resource filters without matching no-attribute skills", () => {
     const state = editorReducer(
       editorReducer(createBlankEditorState(), {

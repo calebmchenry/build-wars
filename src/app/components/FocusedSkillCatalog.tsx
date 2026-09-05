@@ -98,6 +98,21 @@ export function FocusedSkillCatalog({
       {filtersExpanded ? (
         <div id="focused-skill-filters" className="focused-catalog-controls advanced-controls">
           <label>
+            <span>Text</span>
+            <input
+              type="search"
+              value={state.browser.filters.textQuery}
+              aria-label="Text"
+              onChange={(event) =>
+                dispatch({
+                  type: "set-browser-filters",
+                  filters: { textQuery: event.currentTarget.value }
+                })
+              }
+              placeholder="Text contains..."
+            />
+          </label>
+          <label>
             <span>Professions</span>
             <select
               value={professionScopeValue(state)}
@@ -339,6 +354,7 @@ function toggledGroupSet(current: ReadonlySet<string>, id: string): ReadonlySet<
 
 function focusedFilterActiveCount(filters: BrowserFilters): number {
   return [
+    filters.textQuery.trim().length > 0,
     filters.professionScope.kind !== "default",
     filters.attributeId !== null,
     filters.skillType !== null,
@@ -353,6 +369,7 @@ function clearFocusedCatalogFilters(dispatch: Dispatch<EditorAction>): void {
   dispatch({
     type: "set-browser-filters",
     filters: {
+      textQuery: "",
       professionScope: { kind: "default" },
       attributeId: null,
       skillType: null,

@@ -66,7 +66,7 @@ export function SkillBrowser({
       </div>
       <div className="browser-filters">
         <label className="wide-control">
-          <span>Search</span>
+          <span>Name</span>
           <input
             type="search"
             value={state.browser.filters.query}
@@ -77,6 +77,20 @@ export function SkillBrowser({
               })
             }
             placeholder="Skill name"
+          />
+        </label>
+        <label className="wide-control">
+          <span>Text</span>
+          <input
+            type="search"
+            value={state.browser.filters.textQuery}
+            onChange={(event) =>
+              dispatch({
+                type: "set-browser-filters",
+                filters: { textQuery: event.currentTarget.value }
+              })
+            }
+            placeholder="Text contains"
           />
         </label>
         <label>

@@ -47,6 +47,7 @@ describe("FocusedSkillCatalog", () => {
       "true"
     );
     expect(screen.getByLabelText("Professions")).toBeInTheDocument();
+    expect(screen.getByLabelText("Text")).toBeInTheDocument();
     expect(screen.getByLabelText("Attribute")).toBeInTheDocument();
     expect(screen.getByLabelText("Mode")).toBeInTheDocument();
     expect(screen.getByText("Applies Condition")).toBeInTheDocument();
@@ -72,6 +73,13 @@ describe("FocusedSkillCatalog", () => {
       "true"
     );
 
+    fireEvent.change(screen.getByLabelText("Text"), { target: { value: "nearby dead boss" } });
+
+    expect(screen.getByRole("button", { name: "Hide skill filters (3 active)" })).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
+
     fireEvent.click(screen.getAllByRole("button", { name: "Clear filters" })[0]!);
 
     expect(screen.getByRole("button", { name: "Hide skill filters" })).toHaveAttribute(
@@ -80,6 +88,7 @@ describe("FocusedSkillCatalog", () => {
     );
     expect(screen.getByRole("button", { name: "Any" })).toHaveAttribute("aria-pressed", "true");
     expect(screen.getByLabelText("Burning")).not.toBeChecked();
+    expect(screen.getByLabelText("Text")).toHaveValue("");
     expect(container.querySelector(".filter-active-count")).toBeNull();
   });
 

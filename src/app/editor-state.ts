@@ -82,6 +82,7 @@ export type BrowserViewMode = "list" | "small-grid" | "large-grid";
 
 export interface BrowserFilters {
   readonly query: string;
+  readonly textQuery: string;
   readonly professionScope: BrowserProfessionScope;
   readonly attributeId: AttributeId | null;
   readonly skillType: SkillTypeId | null;
@@ -349,6 +350,7 @@ export function createBlankBuild(name = "Untitled Build"): Build {
 export function createDefaultBrowserFilters(): BrowserFilters {
   return {
     query: "",
+    textQuery: "",
     professionScope: { kind: "default" },
     attributeId: null,
     skillType: null,

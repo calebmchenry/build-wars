@@ -13,9 +13,9 @@ describe("SkillBrowser", () => {
   it(
     "renders complete results and recovers from no-result filters",
     () => {
-      render(<Harness />);
+      const { container } = render(<Harness />);
 
-      fireEvent.change(screen.getByRole("searchbox"), { target: { value: "zzzz-no-skill" } });
+      fireEvent.change(requiredSearchInput(container, 0), { target: { value: "zzzz-no-skill" } });
       expect(screen.getByText("No matching skills")).toBeInTheDocument();
 
       fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
@@ -30,6 +30,17 @@ describe("SkillBrowser", () => {
     fireEvent.click(screen.getByRole("button", { name: "Compact" }));
     expect(screen.getByRole("button", { name: "Compact" })).toHaveAttribute("aria-pressed", "true");
   });
+
+  it(
+    "filters by skill text separately from name search",
+    () => {
+      render(<Harness initialState={stateWithBrowserTextQuery("nearby dead boss")} />);
+
+      expect(screen.getByText("Signet of Capture")).toBeInTheDocument();
+      expect(screen.queryByText("Healing Signet")).not.toBeInTheDocument();
+    },
+    CATALOG_RENDER_TIMEOUT_MS
+  );
 });
 
 function Harness({
@@ -53,4 +64,26 @@ function stateWithBrowserQuery(query: string): EditorState {
       }
     }
   };
+}
+
+function stateWithBrowserTextQuery(textQuery: string): EditorState {
+  const state = createBlankEditorState();
+  return {
+    ...state,
+    browser: {
+      ...state.browser,
+      filters: {
+        ...state.browser.filters,
+        textQuery
+      }
+    }
+  };
+}
+
+function requiredSearchInput(container: HTMLElement, index: number): HTMLInputElement {
+  const input = container.querySelectorAll<HTMLInputElement>("input[type='search']")[index];
+  if (input === undefined) {
+    throw new Error(`Missing search input ${index}`);
+  }
+  return input;
 }

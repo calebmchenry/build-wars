@@ -352,8 +352,10 @@ export function selectSkillBrowser(
   );
   const filters = state.browser.filters;
   const normalizedQuery = normalizeQuery(filters.query);
+  const normalizedTextQuery = normalizeQuery(filters.textQuery);
   const filtered = playableSkills
     .filter((skill) => matchesQuery(skill, normalizedQuery))
+    .filter((skill) => matchesTextQuery(skill, normalizedTextQuery))
     .filter((skill) => matchesProfessionScope(skill, state, filters))
     .filter((skill) => matchesAttributeFilter(skill, filters.attributeId))
     .filter((skill) => matchesSkillType(skill, filters.skillType))
@@ -708,6 +710,13 @@ function matchesQuery(skill: CatalogSkillRecord, normalizedQuery: string): boole
   }
   const normalizedName = normalizeQuery(skill.normalizedName || skill.name);
   return normalizedName.includes(normalizedQuery);
+}
+
+function matchesTextQuery(skill: CatalogSkillRecord, normalizedTextQuery: string): boolean {
+  if (normalizedTextQuery.length === 0) {
+    return true;
+  }
+  return normalizeQuery(skill.description.searchText).includes(normalizedTextQuery);
 }
 
 function matchesProfessionScope(
