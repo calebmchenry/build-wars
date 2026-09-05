@@ -3,7 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>Build Wars</title>
+    <script>
+      (() => {
+        const key = "build-wars.theme";
+        let preference = "system";
+        try {
+          const stored = window.localStorage.getItem(key);
+          if (stored === "light" || stored === "dark" || stored === "system") {
+            preference = stored;
+          }
+        } catch {
+          preference = "system";
+        }
+        const systemDark =
+          typeof window.matchMedia === "function" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme =
+          preference === "dark" || (preference === "system" && systemDark) ? "dark" : "light";
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

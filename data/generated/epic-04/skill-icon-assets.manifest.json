@@ -30774,7 +30774,7 @@
   "runtimeManifestPath": "src/app/skill-icon-assets.generated.json",
   "schemaVersion": 1,
   "sourceCatalog": {
-    "catalogVersion": "skills-0864806ef394ff5b",
+    "catalogVersion": "skills-aecbed468fb10782",
     "path": "data/generated/epic-04/skills.catalog.json",
     "skillCount": 1541
   },

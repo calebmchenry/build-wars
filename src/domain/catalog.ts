@@ -279,28 +279,35 @@ export interface SkillClassification {
   readonly modeAvailability: SkillModeAvailability;
 }
 
+export type SkillDescriptionTokenTone = "muted";
+
 export interface SkillDescriptionLiteralToken {
   readonly kind: "literal";
   readonly value: string;
+  readonly tone?: SkillDescriptionTokenTone;
 }
 
 export interface SkillDescriptionWhitespaceToken {
   readonly kind: "whitespace";
+  readonly tone?: SkillDescriptionTokenTone;
 }
 
 export interface SkillDescriptionLineBreakToken {
   readonly kind: "line-break";
+  readonly tone?: SkillDescriptionTokenTone;
 }
 
 export interface SkillDescriptionProgressionToken {
   readonly kind: "progression-reference";
   readonly seriesId: string;
   readonly valueSlot: number;
+  readonly tone?: SkillDescriptionTokenTone;
 }
 
 export interface SkillDescriptionReviewedMarkerToken {
   readonly kind: "reviewed-factual-marker";
   readonly value: string;
+  readonly tone?: SkillDescriptionTokenTone;
 }
 
 export type SkillDescriptionToken =

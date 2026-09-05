@@ -18,7 +18,7 @@ export type SkillTooltipUnresolvedReason =
 
 export interface SkillTooltipTextSegment {
   readonly text: string;
-  readonly tone: "normal" | "variable";
+  readonly tone: "normal" | "variable" | "muted";
 }
 
 export type SkillTooltipOutcome =
@@ -112,7 +112,11 @@ export function renderSkillTooltipText(
 }
 
 type TokenRenderOutcome =
-  | { readonly kind: "rendered"; readonly value: string; readonly tone: "normal" | "variable" }
+  | {
+      readonly kind: "rendered";
+      readonly value: string;
+      readonly tone: SkillTooltipTextSegment["tone"];
+    }
   | {
       readonly kind: "unresolved";
       readonly skill: CatalogSkillRecord | null;
@@ -126,13 +130,13 @@ function renderToken(
   context: SkillTooltipContext
 ): TokenRenderOutcome {
   if (token.kind === "literal" || token.kind === "reviewed-factual-marker") {
-    return { kind: "rendered", value: token.value, tone: "normal" };
+    return { kind: "rendered", value: token.value, tone: descriptionTokenTone(token) };
   }
   if (token.kind === "whitespace") {
-    return { kind: "rendered", value: " ", tone: "normal" };
+    return { kind: "rendered", value: " ", tone: descriptionTokenTone(token) };
   }
   if (token.kind === "line-break") {
-    return { kind: "rendered", value: "\n", tone: "normal" };
+    return { kind: "rendered", value: "\n", tone: descriptionTokenTone(token) };
   }
 
   const series = progressionSeriesById(catalog).get(token.seriesId);
@@ -145,13 +149,14 @@ function renderToken(
     };
   }
 
-  return renderProgressionValue(series, token.valueSlot, context);
+  return renderProgressionValue(series, token.valueSlot, context, descriptionTokenTone(token));
 }
 
 function renderProgressionValue(
   series: SkillProgressionSeries,
   valueSlot: number,
-  context: SkillTooltipContext
+  context: SkillTooltipContext,
+  tone: "normal" | "muted"
 ): TokenRenderOutcome {
   if (series.dependency.kind === "title-rank") {
     const key = series.dependency.titleKey;
@@ -193,8 +198,12 @@ function renderProgressionValue(
   return {
     kind: "rendered",
     value: formatSkillProgressionValue(value, series, valueSlot),
-    tone: "variable"
+    tone: tone === "muted" ? "muted" : "variable"
   };
+}
+
+function descriptionTokenTone(token: SkillDescriptionToken): "normal" | "muted" {
+  return token.tone === "muted" ? "muted" : "normal";
 }
 
 export function formatSkillProgressionValue(

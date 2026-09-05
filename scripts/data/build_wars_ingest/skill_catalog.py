@@ -561,13 +561,14 @@ def _align_description_progression_tokens(
         if match is None:
             aligned_tokens.append(token)
             continue
-        aligned_tokens.append(
-            {
-                "kind": "progression-reference",
-                "seriesId": match["seriesId"],
-                "valueSlot": match["valueSlot"],
-            }
-        )
+        aligned_token = {
+            "kind": "progression-reference",
+            "seriesId": match["seriesId"],
+            "valueSlot": match["valueSlot"],
+        }
+        if token.get("tone") is not None:
+            aligned_token["tone"] = token["tone"]
+        aligned_tokens.append(aligned_token)
     record["description"]["tokens"] = aligned_tokens
 
 

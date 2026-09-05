@@ -55,6 +55,9 @@ CAMPAIGN_ALIASES = {
 }
 
 NO_ATTRIBUTE_NAMES = {"", "none", "no attribute", "n/a", "na"}
+INLINE_TEXT_TEMPLATE_NAMES = {"gray", "grey", "sic"}
+MUTED_START_MARKER = "\x1eBW_MUTED_START\x1e"
+MUTED_END_MARKER = "\x1eBW_MUTED_END\x1e"
 
 
 def extract_skill_infobox_ids(wikitext: str) -> list[int]:
@@ -497,27 +500,50 @@ def _description_text_tokens(raw_description: str | None, *, skill_id: int) -> l
     text = re.sub(r"<br\s*/?>", "\n", text, flags=re.IGNORECASE)
     text = re.sub(r"</p\s*>", "\n", text, flags=re.IGNORECASE)
     text = re.sub(r"<[^>]+>", "", text)
-    text = re.sub(r"\{\{(?:gray|sic)\|([^{}]+)}}", r"\1", text, flags=re.IGNORECASE)
+    text = _unwrap_inline_text_templates(text, mark_tone=True)
 
     tokens: list[dict[str, Any]] = []
     position = 0
     progression_index = 0
-    for match in re.finditer(r"\{\{\s*gr2?\s*\|[^{}]+}}", text, flags=re.IGNORECASE):
-        tokens.extend(_literal_description_tokens(text[position : match.start()]))
-        progression_index += 1
-        tokens.append(
-            {
-                "kind": "progression-reference",
-                "seriesId": f"progression:skill:{skill_id}:{progression_index}",
-                "valueSlot": 0,
-            }
-        )
+    muted_depth = 0
+    token_pattern = re.compile(
+        re.escape(MUTED_START_MARKER)
+        + "|"
+        + re.escape(MUTED_END_MARKER)
+        + r"|\{\{\s*gr2?\s*\|[^{}]+}}",
+        flags=re.IGNORECASE,
+    )
+    for match in token_pattern.finditer(text):
+        tone = "muted" if muted_depth > 0 else "normal"
+        tokens.extend(_literal_description_tokens(text[position : match.start()], tone=tone))
+        matched = match.group(0)
+        if matched == MUTED_START_MARKER:
+            muted_depth += 1
+        elif matched == MUTED_END_MARKER:
+            muted_depth = max(0, muted_depth - 1)
+        else:
+            progression_index += 1
+            tokens.append(
+                _description_token(
+                    {
+                        "kind": "progression-reference",
+                        "seriesId": f"progression:skill:{skill_id}:{progression_index}",
+                        "valueSlot": 0,
+                    },
+                    tone=tone,
+                )
+            )
         position = match.end()
-    tokens.extend(_literal_description_tokens(text[position:]))
+    tokens.extend(
+        _literal_description_tokens(
+            text[position:],
+            tone="muted" if muted_depth > 0 else "normal",
+        )
+    )
     return _trim_description_tokens(tokens)
 
 
-def _literal_description_tokens(value: str) -> list[dict[str, Any]]:
+def _literal_description_tokens(value: str, *, tone: str = "normal") -> list[dict[str, Any]]:
     if not value:
         return []
     tokens: list[dict[str, Any]] = []
@@ -525,12 +551,18 @@ def _literal_description_tokens(value: str) -> list[dict[str, Any]]:
         if not part:
             continue
         if "\n" in part:
-            tokens.append({"kind": "line-break"})
+            tokens.append(_description_token({"kind": "line-break"}, tone=tone))
         elif part.isspace():
-            tokens.append({"kind": "whitespace"})
+            tokens.append(_description_token({"kind": "whitespace"}, tone=tone))
         else:
-            tokens.append({"kind": "literal", "value": part})
+            tokens.append(_description_token({"kind": "literal", "value": part}, tone=tone))
     return tokens
+
+
+def _description_token(token: dict[str, Any], *, tone: str) -> dict[str, Any]:
+    if tone == "normal":
+        return token
+    return {**token, "tone": tone}
 
 
 def _trim_description_tokens(tokens: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -585,10 +617,49 @@ def _clean_markup(value: str | None) -> str | None:
     text = re.sub(r"\[\[([^|\]]+)\|([^\]]+)]]", r"\2", text)
     text = re.sub(r"\[\[([^\]]+)]]", r"\1", text)
     text = re.sub(r"<[^>]+>", "", text)
-    text = re.sub(r"\{\{(?:gray|sic)\|([^{}]+)}}", r"\1", text, flags=re.IGNORECASE)
+    text = _unwrap_inline_text_templates(text)
     text = re.sub(r"\{\{[^{}]+}}", "", text)
     text = re.sub(r"\s+", " ", text).strip()
     return text or None
+
+
+def _unwrap_inline_text_templates(value: str, *, mark_tone: bool = False) -> str:
+    if "{{" not in value:
+        return value
+    if mwparserfromhell is None:
+        return _unwrap_simple_inline_text_templates(value, mark_tone=mark_tone)
+    code = mwparserfromhell.parse(value)
+    changed = True
+    while changed:
+        changed = False
+        for template in list(code.filter_templates(recursive=True)):
+            if normalize_template_name(str(template.name)) not in INLINE_TEXT_TEMPLATE_NAMES:
+                continue
+            replacement = str(template.params[0].value) if template.params else ""
+            if mark_tone and normalize_template_name(str(template.name)) in {"gray", "grey"}:
+                replacement = f"{MUTED_START_MARKER}{replacement}{MUTED_END_MARKER}"
+            code.replace(template, replacement)
+            changed = True
+            break
+    return str(code)
+
+
+def _unwrap_simple_inline_text_templates(value: str, *, mark_tone: bool = False) -> str:
+    previous = None
+    text = value
+    while previous != text:
+        previous = text
+        if mark_tone:
+            text = re.sub(
+                r"\{\{gr[ae]y\|([^{}]+)}}",
+                rf"{MUTED_START_MARKER}\1{MUTED_END_MARKER}",
+                text,
+                flags=re.IGNORECASE,
+            )
+        else:
+            text = re.sub(r"\{\{gr[ae]y\|([^{}]+)}}", r"\1", text, flags=re.IGNORECASE)
+        text = re.sub(r"\{\{sic\|([^{}]+)}}", r"\1", text, flags=re.IGNORECASE)
+    return text
 
 
 def _file_title(value: str | None) -> str | None:

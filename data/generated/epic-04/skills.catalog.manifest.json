@@ -35,7 +35,7 @@
   "digest": {
     "algorithm": "sha256",
     "notes": null,
-    "value": "2e3652745e36338545c4c9404d78c3bd7a9fa42e4d5f1463551b3384af3faada"
+    "value": "e494dd41f26165c886300b56e2a9c3007e310daf47d3a8219766963057167f77"
   },
   "generatedAt": "2026-09-03T23:09:13Z",
   "generator": "build-wars-ingest/0.1.0",
@@ -1655,7 +1655,7 @@
         {
           "kind": "artifact",
           "notes": "Generated artifact digest is owned by the adjacent manifest.",
-          "reference": "2e3652745e36338545c4c9404d78c3bd7a9fa42e4d5f1463551b3384af3faada"
+          "reference": "e494dd41f26165c886300b56e2a9c3007e310daf47d3a8219766963057167f77"
         }
       ],
       "expiresAt": null,

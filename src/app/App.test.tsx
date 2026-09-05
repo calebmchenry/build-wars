@@ -16,15 +16,18 @@ import {
   type PersistedWorkingDraft
 } from "./persistence-schema";
 import { buildShareUrl } from "./share-url";
+import { THEME_STORAGE_KEY } from "./theme";
 
 beforeEach(() => {
   localStorage.clear();
+  document.documentElement.removeAttribute("data-theme");
   window.history.replaceState(null, "", "/");
 });
 
 afterEach(() => {
   vi.restoreAllMocks();
   vi.useRealTimers();
+  document.documentElement.removeAttribute("data-theme");
   localStorage.clear();
 });
 
@@ -41,6 +44,15 @@ describe("App", { timeout: 10_000 }, () => {
     expect(screen.getByRole("heading", { name: "Skills Catalog" })).toBeInTheDocument();
     openSecondaryTools();
     expect(screen.getByRole("heading", { name: "Validation" })).toBeInTheDocument();
+  });
+
+  it("applies and persists the selected theme preference", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Dark" }));
+
+    expect(document.documentElement).toHaveAttribute("data-theme", "dark");
+    expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe("dark");
   });
 
   it("keeps skills as the default workspace tab and does not dirty equipment on tab open", () => {

@@ -273,10 +273,7 @@ function TooltipDescriptionSegments({
           const key = `${segmentIndex}:${lineIndex}`;
           const lineNode =
             line.length === 0 ? null : (
-              <span
-                key={`${key}:text`}
-                className={segment.tone === "variable" ? "gw-skill-tooltip-variable" : undefined}
-              >
+              <span key={`${key}:text`} className={tooltipSegmentClassName(segment.tone)}>
                 {line}
               </span>
             );
@@ -287,6 +284,16 @@ function TooltipDescriptionSegments({
       )}
     </>
   );
+}
+
+function tooltipSegmentClassName(segmentTone: "normal" | "variable" | "muted"): string | undefined {
+  if (segmentTone === "variable") {
+    return "gw-skill-tooltip-variable";
+  }
+  if (segmentTone === "muted") {
+    return "gw-skill-tooltip-muted";
+  }
+  return undefined;
 }
 
 function isHeaderFact(fact: SkillFactView): boolean {

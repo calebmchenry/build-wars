@@ -15,7 +15,7 @@ describe("FocusedSkillCatalog", () => {
     render(<Harness />);
 
     expect(screen.getByRole("tab", { name: "Skills" })).toBeInTheDocument();
-    expect(screen.queryByRole("heading", { name: "Skills Catalog" })).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Skills Catalog" })).toBeInTheDocument();
     expect(screen.queryByText(/shown from/)).not.toBeInTheDocument();
     expect(screen.queryByText(/[0-9]+ visible/)).not.toBeInTheDocument();
     expect(screen.getAllByText(/\([0-9]+ Skills\)$/).length).toBeGreaterThan(0);
@@ -27,7 +27,7 @@ describe("FocusedSkillCatalog", () => {
   it("keeps search compact and expands filters from the icon button", () => {
     const { container } = render(<Harness />);
 
-    expect(screen.getByPlaceholderText("Serach by name...")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Search by name...")).toBeInTheDocument();
     expect(screen.queryByText("Search")).not.toBeInTheDocument();
     expect(screen.queryByText("Professions")).not.toBeInTheDocument();
 

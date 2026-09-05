@@ -122,6 +122,43 @@ describe("skill catalog contracts", () => {
     expect(missingRank.reason).toBe("missing-rank");
   });
 
+  it("preserves muted description tone from catalog tokens", () => {
+    const withMutedTokens = {
+      ...catalog,
+      skills: catalog.skills.map((skill) =>
+        Number(skill.id) === 1
+          ? {
+              ...skill,
+              description: {
+                ...skill.description,
+                tokens: [
+                  { kind: "literal", value: "Signet." },
+                  { kind: "whitespace" },
+                  { kind: "literal", value: "Cannot", tone: "muted" },
+                  { kind: "whitespace", tone: "muted" },
+                  { kind: "literal", value: "self-target.", tone: "muted" }
+                ]
+              }
+            }
+          : skill
+      )
+    } as SkillCatalog;
+
+    const rendered = renderSkillTooltipText(withMutedTokens, catalogId<"Skill">(1), {
+      mode: "pve",
+      ranks: {}
+    });
+
+    if (rendered.kind !== "rendered") {
+      throw new Error(`Expected rendered tooltip, got ${rendered.kind}`);
+    }
+    expect(rendered.text).toBe("Signet. Cannot self-target.");
+    expect(rendered.segments).toEqual([
+      { text: "Signet. ", tone: "normal" },
+      { text: "Cannot self-target.", tone: "muted" }
+    ]);
+  });
+
   it("formats interpolated progression values like the visible wiki table", () => {
     const baseSeries = catalog.progressionSeries[0];
     if (baseSeries === undefined) {

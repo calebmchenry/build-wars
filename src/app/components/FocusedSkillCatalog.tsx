@@ -52,8 +52,11 @@ export function FocusedSkillCatalog({
 
   return (
     <section className="catalog-panel focused-skill-catalog" aria-labelledby="catalog-title">
+      <h2 id="catalog-title" className="sr-only">
+        Skills Catalog
+      </h2>
       <div className="catalog-tabs" role="tablist" aria-label="Catalog tabs">
-        <button type="button" role="tab" aria-selected="true" id="catalog-title">
+        <button type="button" role="tab" aria-selected="true">
           Skills
         </button>
       </div>
@@ -61,14 +64,14 @@ export function FocusedSkillCatalog({
         <input
           type="search"
           value={state.browser.filters.query}
-          aria-label="Search skills by name"
+          aria-label="Search"
           onChange={(event) =>
             dispatch({
               type: "set-browser-filters",
               filters: { query: event.currentTarget.value }
             })
           }
-          placeholder="Serach by name..."
+          placeholder="Search by name..."
         />
         <button
           type="button"

@@ -112,6 +112,51 @@ class SkillCatalogTests(unittest.TestCase):
             ],
         )
 
+    def test_concise_description_progression_alignment_preserves_token_tone(self) -> None:
+        record = {
+            "description": {
+                "tokens": [
+                    {
+                        "kind": "progression-reference",
+                        "seriesId": "progression:skill:17:2",
+                        "valueSlot": 0,
+                        "tone": "muted",
+                    },
+                ]
+            }
+        }
+        progression_series = [
+            {
+                "id": "progression:skill:17:1",
+                "valueSlots": [
+                    {"index": 0, "label": "Duration", "unit": None},
+                    {"index": 1, "label": "Energy", "unit": None},
+                ],
+                "values": [
+                    {"rank": 0, "values": [5, 1]},
+                    {"rank": 15, "values": [20, 5]},
+                ],
+            }
+        ]
+
+        _align_description_progression_tokens(
+            record,
+            progression_series,
+            "{{gray|Prevention cost: lose {{gr|1|5}} Energy.}}",
+        )
+
+        self.assertEqual(
+            record["description"]["tokens"],
+            [
+                {
+                    "kind": "progression-reference",
+                    "seriesId": "progression:skill:17:1",
+                    "valueSlot": 1,
+                    "tone": "muted",
+                },
+            ],
+        )
+
     def test_complete_snapshot_set_replays_offline(self) -> None:
         tmp = Path(tempfile.mkdtemp(prefix="bw_skill_catalog_offline_"))
         try:

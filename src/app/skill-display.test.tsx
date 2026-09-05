@@ -92,6 +92,37 @@ describe("SkillDisplay and SkillTooltip", () => {
     expect(screen.getByRole("tooltip", { hidden: true })).toHaveTextContent("Healing Signet");
   });
 
+  it("renders wiki gray tooltip clauses as muted text", () => {
+    const state = playableEditorFixture();
+    const view = selectSkillDisplay(
+      catalogs,
+      {
+        ...state,
+        build: {
+          ...state.build,
+          primaryProfessionId: catalogId<"Profession">(4),
+          secondaryProfessionId: null,
+          attributes: [{ attributeId: catalogId<"Attribute">(4), rank: 12 }]
+        }
+      },
+      catalogId<"Skill">(119),
+      "skill-browser"
+    );
+    render(
+      <SkillTooltipTrigger view={view} placement="left">
+        <button type="button">Hover Blood is Power</button>
+      </SkillTooltipTrigger>
+    );
+
+    fireEvent.mouseEnter(
+      screen.getByRole("button", { name: "Hover Blood is Power" }).parentElement!
+    );
+
+    const muted = document.querySelector(".gw-skill-tooltip-muted");
+    expect(muted).not.toBeNull();
+    expect(muted).toHaveTextContent("Cannot self-target.");
+  });
+
   it("rounds interpolated progression values in visible tooltip text", () => {
     const wordOfHealing = catalogs.skills.find((skill) => skill.name === "Word of Healing");
     if (wordOfHealing === undefined || wordOfHealing.attributeId === null) {

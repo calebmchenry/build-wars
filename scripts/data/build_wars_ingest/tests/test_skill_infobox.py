@@ -93,6 +93,56 @@ class SkillInfoboxTests(unittest.TestCase):
         self.assertEqual(extraction.title_key, "allegiance:luxon")
         self.assertEqual(extraction.record["costs"]["adrenaline"]["value"], 8)
 
+    def test_nested_gray_templates_are_unwrapped_from_concise_description(self) -> None:
+        text = """{{Skill infobox
+| id = 17
+| name = Mantra of Resolve
+| campaign = Core
+| profession = Mesmer
+| attribute = Inspiration Magic
+| type = Stance
+| concise description = Stance. ({{gr|5|20}} seconds.) Prevents interrupts against you. {{gray|Prevention cost: lose {{gr|1|5}} Energy or Mantra of Resolve ends.}} {{grey|Failure cost: lose all Energy.}}
+}}"""
+
+        extraction = extract_skill_infobox(
+            skill_id=17,
+            template_id=17,
+            requested_title="Mantra of Resolve",
+            canonical_title="Mantra of Resolve",
+            page_identity=page_identity("Mantra of Resolve"),
+            wikitext=text,
+            source_reference=source_ref(),
+            profession_catalog=self.pa_catalog,
+            review_id="review:fixture",
+        )
+
+        description = extraction.record["description"]
+        self.assertNotIn("{{gray|", description["searchText"])
+        self.assertNotIn("{{grey|", description["searchText"])
+        self.assertIn("Prevention cost: lose Energy or Mantra of Resolve ends.", description["searchText"])
+        self.assertIn("Failure cost: lose all Energy.", description["searchText"])
+        literal_values = [token["value"] for token in description["tokens"] if token["kind"] == "literal"]
+        self.assertNotIn("{{gray|Prevention", literal_values)
+        self.assertNotIn("{{grey|Failure", literal_values)
+        self.assertIn({"kind": "literal", "value": "Prevention", "tone": "muted"}, description["tokens"])
+        self.assertIn({"kind": "literal", "value": "Failure", "tone": "muted"}, description["tokens"])
+        self.assertEqual(
+            [
+                token
+                for token in description["tokens"]
+                if token["kind"] == "progression-reference"
+            ],
+            [
+                {"kind": "progression-reference", "seriesId": "progression:skill:17:1", "valueSlot": 0},
+                {
+                    "kind": "progression-reference",
+                    "seriesId": "progression:skill:17:2",
+                    "valueSlot": 0,
+                    "tone": "muted",
+                },
+            ],
+        )
+
     def test_missing_infobox_is_explicitly_unsupported(self) -> None:
         extraction = extract_skill_infobox(
             skill_id=99,

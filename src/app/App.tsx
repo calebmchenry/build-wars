@@ -9,6 +9,7 @@ import { BuildSetTransferDialog } from "./components/BuildSetTransferDialog";
 import { PartyTransferDialog } from "./components/PartyTransferDialog";
 import { SkillTooltip } from "./components/SkillTooltip";
 import { StorageBanner } from "./components/StorageBanner";
+import { ThemeControls } from "./components/ThemeControls";
 import { selectComposerLoadoutContext } from "./composer-selectors";
 import { selectSkillDisplay, selectValidationView } from "./editor-selectors";
 import type { EditorAction } from "./editor-state";
@@ -16,6 +17,15 @@ import { browserLocalStorage, readLocalLibrary, writeLocalLibrary } from "./loca
 import { persistedCatalogFactsFromValidation } from "./persistence-schema";
 import { consumeShareFragment, parseShareFragment } from "./share-url";
 import { importSkillTemplateToEditor } from "./template-workflow";
+import {
+  applyResolvedTheme,
+  readThemePreference,
+  resolveThemePreference,
+  subscribeToSystemTheme,
+  systemPrefersDark,
+  writeThemePreference,
+  type ThemePreference
+} from "./theme";
 import {
   createInitialWorkspaceState,
   createWorkspaceEnvelope,
@@ -40,6 +50,11 @@ export function App() {
   const [transferOpen, setTransferOpen] = useState(false);
   const [partyTransferOpen, setPartyTransferOpen] = useState(false);
   const [workspaceTab, setWorkspaceTab] = useState<EditorWorkspaceTab>("skills");
+  const [themePreference, setThemePreference] = useState<ThemePreference>(() =>
+    readThemePreference()
+  );
+  const [systemDark, setSystemDark] = useState(systemPrefersDark);
+  const resolvedTheme = resolveThemePreference(themePreference, systemDark);
   const latestWorkspaceRef = useRef<{
     readonly workspace: WorkspaceState;
     readonly savedWith: ReturnType<typeof persistedCatalogFactsFromValidation> | null;
@@ -58,6 +73,13 @@ export function App() {
   useEffect(() => {
     latestWorkspaceRef.current = { workspace, savedWith };
   }, [workspace, savedWith]);
+  useEffect(() => subscribeToSystemTheme(setSystemDark), []);
+  useEffect(() => {
+    applyResolvedTheme(resolvedTheme);
+  }, [resolvedTheme]);
+  useEffect(() => {
+    writeThemePreference(themePreference);
+  }, [themePreference]);
   useWorkspaceAutosave(workspace, savedWith, storage, workspaceDispatch, lastFlushTokenRef);
   usePagehideFlush(latestWorkspaceRef, storage, workspaceDispatch);
 
@@ -91,6 +113,11 @@ export function App() {
 
   return (
     <main className="app-shell editor-shell" aria-label="Build Wars" data-catalog-state="ready">
+      <ThemeControls
+        preference={themePreference}
+        resolvedTheme={resolvedTheme}
+        onChange={setThemePreference}
+      />
       <StorageBanner
         durability={workspace.draftSession.durability}
         diagnostics={workspace.storage.diagnostics}
