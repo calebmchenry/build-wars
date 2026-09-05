@@ -19,6 +19,28 @@ import { editorReducer, type EditorState } from "./editor-state";
 const catalogs = requireReadyCatalogs();
 
 describe("FocusedAttributeEditor", () => {
+  it("defaults expanded and toggles attribute rows closed and open", () => {
+    render(<Harness />);
+
+    const collapseButton = screen.getByRole("button", { name: "Collapse attributes" });
+    expect(collapseButton).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("button", { name: "Decrease Strength" })).toBeInTheDocument();
+
+    fireEvent.click(collapseButton);
+
+    const expandButton = screen.getByRole("button", { name: "Expand attributes" });
+    expect(expandButton).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByRole("button", { name: "Decrease Strength" })).not.toBeInTheDocument();
+
+    fireEvent.click(expandButton);
+
+    expect(screen.getByRole("button", { name: "Collapse attributes" })).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
+    expect(screen.getByRole("button", { name: "Decrease Strength" })).toBeInTheDocument();
+  });
+
   it("shows investment and refund costs from the shared point rules", () => {
     render(<Harness />);
 

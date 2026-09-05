@@ -58,6 +58,51 @@ NO_ATTRIBUTE_NAMES = {"", "none", "no attribute", "n/a", "na"}
 INLINE_TEXT_TEMPLATE_NAMES = {"gray", "grey", "sic"}
 MUTED_START_MARKER = "\x1eBW_MUTED_START\x1e"
 MUTED_END_MARKER = "\x1eBW_MUTED_END\x1e"
+KNOWN_SKILL_TYPE_IDS = {
+    "base-skill",
+    "skill",
+    "attack",
+    "melee-attack",
+    "axe-attack",
+    "dagger-attack",
+    "lead-attack",
+    "off-hand-attack",
+    "dual-attack",
+    "hammer-attack",
+    "pet-attack",
+    "scythe-attack",
+    "sword-attack",
+    "ranged-attack",
+    "bow-attack",
+    "spear-attack",
+    "ritual",
+    "binding-ritual",
+    "nature-ritual",
+    "ebon-vanguard-ritual",
+    "spell",
+    "enchantment-spell",
+    "flash-enchantment-spell",
+    "hex-spell",
+    "item-spell",
+    "touch-spell",
+    "touch-enchantment-spell",
+    "touch-hex-spell",
+    "ward-spell",
+    "weapon-spell",
+    "well-spell",
+    "signet",
+    "touch-signet",
+    "touch",
+    "touch-skill",
+    "chant",
+    "echo",
+    "form",
+    "glyph",
+    "preparation",
+    "shout",
+    "stance",
+    "trap",
+}
 
 
 def extract_skill_infobox_ids(wikitext: str) -> list[int]:
@@ -128,6 +173,19 @@ def extract_skill_infobox(
     name = _clean_markup(params.get("name")) or canonical_title
     campaign = _campaign(params.get("campaign"))
     skill_type = _clean_markup(params.get("type")) or "Unknown"
+    skill_type_id = skill_type_id_from_label(skill_type)
+    if skill_type_id is None:
+        skill_type_id = "base-skill"
+        diagnostics.append(
+            _diag(
+                "SKILL_TYPE_UNKNOWN",
+                f"Skill type did not resolve to a known Build Wars skill type: {skill_type}",
+                skill_id,
+                source_id,
+                severity="error",
+                field_path="/typeId",
+            )
+        )
     raw_profession = _clean_markup(params.get("profession"))
     raw_attribute = _clean_markup(params.get("attribute"))
     profession_id, profession_name, profession_diagnostics = _join_profession(
@@ -190,6 +248,7 @@ def extract_skill_infobox(
         "professionId": profession_id,
         "attributeId": attribute_id,
         "type": skill_type,
+        "typeId": skill_type_id,
         "classification": classification,
         "costs": {
             "energy": _value_state(params.get("energy")),
@@ -262,6 +321,7 @@ def _unsupported_record(
         "professionId": None,
         "attributeId": None,
         "type": "Unknown",
+        "typeId": "base-skill",
         "classification": {
             "elite": False,
             "common": False,
@@ -372,6 +432,13 @@ def _join_attribute(
             )
         ],
     )
+
+
+def skill_type_id_from_label(value: str) -> str | None:
+    skill_type_id = re.sub(r"[^a-z0-9]+", "-", value.strip().casefold()).strip("-")
+    if skill_type_id in KNOWN_SKILL_TYPE_IDS:
+        return skill_type_id
+    return None
 
 
 def _classification(

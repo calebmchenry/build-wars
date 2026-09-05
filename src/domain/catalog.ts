@@ -22,6 +22,7 @@ import type {
   SourceReference
 } from "./source";
 import type { ArmorSlot } from "./equipment";
+import type { SkillTypeId } from "./skill-types";
 
 export interface CatalogRecord<Id> {
   readonly id: Id;
@@ -431,6 +432,7 @@ export interface CatalogSkillRecord {
   readonly professionId: ProfessionId | null;
   readonly attributeId: AttributeId | null;
   readonly type: string;
+  readonly typeId: SkillTypeId;
   readonly classification: SkillClassification;
   readonly costs: SkillCostProfile;
   readonly timings: SkillTimingProfile;

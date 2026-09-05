@@ -8,7 +8,10 @@ import {
   purchasedRankCost,
   renderSkillTooltipText,
   resolveTitleRanksForSkill,
+  skillTypeLabelForId,
+  skillTypeMatches,
   validateBuild,
+  SKILL_TYPES,
   type AttributeBudgetPolicy,
   type AttributeId,
   type BuildValidationInput,
@@ -16,6 +19,7 @@ import {
   type CatalogSkillRecord,
   type SkillId,
   type SkillProgressionSeries,
+  type SkillTypeId,
   type SkillTooltipTextSegment,
   type SkillValueState,
   type ValidationIssue,
@@ -99,13 +103,16 @@ export interface SkillBrowserGroupView {
   readonly skills: readonly CatalogSkillRecord[];
 }
 
+export interface SkillBrowserTypeOption {
+  readonly id: SkillTypeId;
+  readonly label: string;
+}
+
 export interface SkillBrowserView {
   readonly totalCount: number;
   readonly matchingCount: number;
-  readonly renderedCount: number;
-  readonly hasMore: boolean;
   readonly groups: readonly SkillBrowserGroupView[];
-  readonly availableTypes: readonly string[];
+  readonly availableTypes: readonly SkillBrowserTypeOption[];
   readonly availableAttributes: readonly CatalogAttributeRecord[];
 }
 
@@ -353,15 +360,12 @@ export function selectSkillBrowser(
     .filter((skill) => matchesAvailability(skill, state, filters.availability))
     .filter((skill) => matchesResourceFilters(skill, filters.resources));
   const ordered = sortSkills(filtered, filters.sortMode, catalogs);
-  const bounded = ordered.slice(0, state.browser.batchSize);
 
   return {
     totalCount: playableSkills.length,
     matchingCount: ordered.length,
-    renderedCount: bounded.length,
-    hasMore: ordered.length > bounded.length,
-    groups: groupSkills(bounded, filters.sortMode, catalogs),
-    availableTypes: uniqueSorted(playableSkills.map((skill) => skill.type).filter(Boolean)),
+    groups: groupSkills(ordered, filters.sortMode, catalogs),
+    availableTypes: availableSkillTypes(playableSkills),
     availableAttributes: catalogs.attributes
   };
 }
@@ -734,8 +738,8 @@ function matchesAttributeFilter(
   );
 }
 
-function matchesSkillType(skill: CatalogSkillRecord, skillType: string | null): boolean {
-  return skillType === null || skill.type === skillType;
+function matchesSkillType(skill: CatalogSkillRecord, skillType: SkillTypeId | null): boolean {
+  return skillType === null || skillTypeMatches(skill.typeId, skillType);
 }
 
 function matchesElite(skill: CatalogSkillRecord, elite: BrowserFilters["elite"]): boolean {
@@ -815,7 +819,7 @@ function primarySortKey(
     return "";
   }
   if (sortMode === "type") {
-    return skill.type;
+    return skillTypeLabelForId(skill.typeId);
   }
   return skillCatalogSection(skill, catalogs).sortKey;
 }
@@ -833,8 +837,8 @@ function groupSkills(
     const section =
       sortMode === "type"
         ? {
-            id: `type:${normalizeQuery(skill.type) || "unknown"}`,
-            label: skill.type || "Unknown type"
+            id: `type:${skill.typeId}`,
+            label: skillTypeLabelForId(skill.typeId)
           }
         : skillCatalogSection(skill, catalogs);
     const existing = groups.get(section.id) ?? [];
@@ -844,7 +848,7 @@ function groupSkills(
     id,
     label:
       sortMode === "type"
-        ? groupSkills[0]?.type || "Unknown type"
+        ? skillTypeLabelForId(groupSkills[0]!.typeId)
         : skillCatalogSection(groupSkills[0]!, catalogs).label,
     skills: groupSkills
   }));
@@ -983,8 +987,16 @@ function attributeLabelForSkill(
         "Unknown attribute");
 }
 
-function uniqueSorted(values: readonly string[]): readonly string[] {
-  return [...new Set(values)].sort((left, right) => left.localeCompare(right, "en-US"));
+function availableSkillTypes(
+  skills: readonly CatalogSkillRecord[]
+): readonly SkillBrowserTypeOption[] {
+  return SKILL_TYPES.filter(
+    (skillType) =>
+      skillType.filterable && skills.some((skill) => skillTypeMatches(skill.typeId, skillType.id))
+  ).map((skillType) => ({
+    id: skillType.id,
+    label: skillType.label
+  }));
 }
 
 function addRawDiagnostic(

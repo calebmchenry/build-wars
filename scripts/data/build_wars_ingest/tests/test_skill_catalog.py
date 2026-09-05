@@ -8,7 +8,11 @@ from pathlib import Path
 
 from build_wars_ingest.config import FIXTURE_GENERATED_AT
 from build_wars_ingest.pipeline import PipelineOptions, run_pipeline
-from build_wars_ingest.skill_catalog import _align_description_progression_tokens, semantic_catalog_version
+from build_wars_ingest.skill_catalog import (
+    _align_description_progression_tokens,
+    semantic_catalog_version,
+    validate_skill_catalog,
+)
 
 FIXTURE_ROOT = Path("test/fixtures/data-ingestion")
 
@@ -33,6 +37,7 @@ class SkillCatalogTests(unittest.TestCase):
             self.assertEqual(catalog["sourceSet"]["acceptedSeedCount"], 6)
             self.assertEqual([skill["id"] for skill in catalog["skills"]], [1, 2, 3, 4, 5, 6])
             self.assertEqual(catalog["skills"][0]["description"]["state"], "reviewed-text")
+            self.assertEqual(catalog["skills"][0]["typeId"], "signet")
             self.assertIn("You gain Health.", catalog["skills"][0]["description"]["searchText"])
             self.assertEqual(catalog["skills"][0]["costs"]["energy"]["state"], "absent")
             self.assertTrue(catalog["skills"][2]["classification"]["title"])
@@ -69,6 +74,27 @@ class SkillCatalogTests(unittest.TestCase):
 
             self.assertEqual(semantic_catalog_version(base), semantic_catalog_version(timestamp_only))
             self.assertNotEqual(semantic_catalog_version(base), semantic_catalog_version(semantic))
+        finally:
+            shutil.rmtree(tmp)
+
+    def test_catalog_validation_requires_canonical_skill_type_ids(self) -> None:
+        tmp = Path(tempfile.mkdtemp(prefix="bw_skill_catalog_type_id_"))
+        try:
+            result = run_pipeline(
+                PipelineOptions(
+                    mode="fixture",
+                    profile="epic-04-skills",
+                    output_root=tmp,
+                    fixture_root=FIXTURE_ROOT,
+                    generated_at=FIXTURE_GENERATED_AT,
+                )
+            )
+            catalog = json.loads(json.dumps(result.generated))
+            catalog["skills"][0]["typeId"] = "Signet"
+
+            diagnostics = validate_skill_catalog(catalog, snapshot_set_digest="fixture")
+
+            self.assertIn("SKILL_TYPE_ID_UNKNOWN", [diagnostic.code for diagnostic in diagnostics])
         finally:
             shutil.rmtree(tmp)
 

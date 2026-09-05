@@ -49,7 +49,8 @@ be represented in the bar.
 The browser supports name substring search, default selected-profession scoping, explicit profession
 scope, attribute, skill type, elite state, mode availability, and resource-state filters for energy,
 adrenaline, sacrifice, upkeep, and overcast. Results sort/group by attribute by default, with name
-and type modes. Rendering is bounded by a batch size with explicit expansion.
+and type modes. Matching results render directly because the promoted skill catalog is small enough
+for the browser UI to keep every filtered result present.
 
 ## Budget Assumptions
 

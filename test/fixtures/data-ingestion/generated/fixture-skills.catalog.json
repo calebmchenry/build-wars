@@ -1,5 +1,5 @@
 {
-  "catalogVersion": "skills-90b1adc85a4e367f",
+  "catalogVersion": "skills-cce6f4fb180bdb47",
   "dependencyDigests": [
     {
       "artifactDigest": "1cb3f79b7139cf26adbcf40b600094c2860796c60dcd9f1ba75bad694d07c8b4",
@@ -617,7 +617,7 @@
       "section": "dispositions"
     },
     {
-      "digest": "8d271f2c748dc4ac253e12ddd84b8deda7e34f93179a393a9562671904b76fe1",
+      "digest": "58913844eba40e18a6efccd2addbe8f25048ed4c1e4ba147f86f240c3a32e132",
       "section": "skills"
     },
     {
@@ -785,6 +785,7 @@
         }
       },
       "type": "Signet",
+      "typeId": "signet",
       "wikiUrl": "https://wiki.guildwars.com/wiki/Healing_Signet"
     },
     {
@@ -938,6 +939,7 @@
         }
       },
       "type": "Spell",
+      "typeId": "spell",
       "wikiUrl": "https://wiki.guildwars.com/wiki/Flare"
     },
     {
@@ -1105,6 +1107,7 @@
         }
       },
       "type": "Shout",
+      "typeId": "shout",
       "wikiUrl": "https://wiki.guildwars.com/wiki/\"Save_Yourselves!\""
     },
     {
@@ -1255,6 +1258,7 @@
         }
       },
       "type": "Spell",
+      "typeId": "spell",
       "wikiUrl": "https://wiki.guildwars.com/wiki/Training_Beacon_(PvE)"
     },
     {
@@ -1405,6 +1409,7 @@
         }
       },
       "type": "Spell",
+      "typeId": "spell",
       "wikiUrl": "https://wiki.guildwars.com/wiki/Training_Beacon_(PvP)"
     },
     {
@@ -1572,6 +1577,7 @@
         }
       },
       "type": "Shout",
+      "typeId": "shout",
       "wikiUrl": "https://wiki.guildwars.com/wiki/\"Save_Yourselves!\""
     }
   ],

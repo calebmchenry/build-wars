@@ -1,5 +1,6 @@
 import {
   catalogId,
+  skillTypeIdFromLabel,
   templateAttributeId,
   templateProfessionId,
   templateSkillId,
@@ -496,10 +497,15 @@ export function skill(input: {
   readonly progressionSeriesIds?: readonly string[];
   readonly type?: string;
 }): CatalogSkillRecord {
+  const type = input.type ?? "Skill";
   const classification = {
     ...baseSkillClassification(),
     ...(input.classification ?? {})
   } satisfies SkillClassification;
+  const typeId = skillTypeIdFromLabel(type);
+  if (typeId === null) {
+    throw new Error(`Fixture skill type is not recognized: ${type}`);
+  }
   return {
     id: input.id,
     templateId: templateSkillId(Number(input.id)),
@@ -518,7 +524,8 @@ export function skill(input: {
     campaign: "core",
     professionId: input.professionId,
     attributeId: input.attributeId,
-    type: input.type ?? "Skill",
+    type,
+    typeId,
     classification,
     costs: costProfile(),
     timings: timingProfile(),

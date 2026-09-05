@@ -62,6 +62,7 @@ class SkillInfoboxTests(unittest.TestCase):
         self.assertEqual(record["name"], "Healing Signet")
         self.assertEqual(record["professionId"], 1)
         self.assertEqual(record["attributeId"], 21)
+        self.assertEqual(record["typeId"], "signet")
         self.assertEqual(record["costs"]["energy"]["state"], "absent")
         self.assertEqual(record["timings"]["activation"]["value"], 2)
         self.assertEqual(record["description"]["state"], "reviewed-text")
@@ -157,8 +158,40 @@ class SkillInfoboxTests(unittest.TestCase):
         )
 
         self.assertTrue(extraction.record["classification"]["unsupported"])
+        self.assertEqual(extraction.record["typeId"], "base-skill")
         self.assertEqual(extraction.record["description"]["state"], "unsupported")
         self.assertEqual(extraction.diagnostics[0].code, "SKILL_INFOBOX_MISSING")
+
+    def test_unknown_skill_type_is_a_blocking_diagnostic(self) -> None:
+        text = """{{Skill infobox
+| id = 18
+| name = Unknown Type Fixture
+| campaign = Core
+| profession = Mesmer
+| attribute = Inspiration Magic
+| type = Improvised Action
+| concise description = Does something.
+}}"""
+
+        extraction = extract_skill_infobox(
+            skill_id=18,
+            template_id=18,
+            requested_title="Unknown Type Fixture",
+            canonical_title="Unknown Type Fixture",
+            page_identity=page_identity("Unknown Type Fixture"),
+            wikitext=text,
+            source_reference=source_ref(),
+            profession_catalog=self.pa_catalog,
+            review_id="review:fixture",
+        )
+
+        self.assertEqual(extraction.record["type"], "Improvised Action")
+        self.assertEqual(extraction.record["typeId"], "base-skill")
+        type_diagnostics = [
+            diagnostic for diagnostic in extraction.diagnostics if diagnostic.code == "SKILL_TYPE_UNKNOWN"
+        ]
+        self.assertEqual(len(type_diagnostics), 1)
+        self.assertEqual(type_diagnostics[0].severity, "error")
 
 
 if __name__ == "__main__":

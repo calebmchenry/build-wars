@@ -487,6 +487,16 @@ export type {
   BuildSetValidationIssue
 } from "./build-set";
 export {
+  FILTERABLE_SKILL_TYPE_IDS,
+  SKILL_TYPES,
+  SKILL_TYPE_PARENT_IDS,
+  isSkillTypeId,
+  skillTypeIdFromLabel,
+  skillTypeLabelForId,
+  skillTypeMatches
+} from "./skill-types";
+export type { SkillTypeDefinition, SkillTypeId } from "./skill-types";
+export {
   TITLE_RANK_OVERRIDE_LIMIT,
   createTitleRankCatalog,
   hasAuthoredTitleRankOverrides,

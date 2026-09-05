@@ -1,6 +1,6 @@
 import { useState, type Dispatch, type KeyboardEvent } from "react";
 
-import { catalogId, type SkillId } from "../../domain";
+import { catalogId, isSkillTypeId, type SkillId } from "../../domain";
 import filterIcon from "../assets/funnel.svg";
 import type { AppCatalogViews } from "../catalogs";
 import { BUILD_WARS_DRAG_MIME, browserSkillDragPayload } from "../drag-payload";
@@ -16,7 +16,6 @@ import type {
 } from "../editor-state";
 import { applySkillBarIntent } from "../skill-bar-actions";
 import { SkillDisplay } from "./SkillDisplay";
-import { loadMoreBrowserResultsOnScroll } from "./skill-browser-scroll";
 import { setSkillIconDragImage } from "./skill-drag-image";
 import { SkillTooltipTrigger } from "./SkillTooltip";
 
@@ -149,17 +148,18 @@ export function FocusedSkillCatalog({
             <span>Type</span>
             <select
               value={state.browser.filters.skillType ?? ""}
-              onChange={(event) =>
+              onChange={(event) => {
+                const value = event.currentTarget.value;
                 dispatch({
                   type: "set-browser-filters",
-                  filters: { skillType: event.currentTarget.value || null }
-                })
-              }
+                  filters: { skillType: isSkillTypeId(value) ? value : null }
+                });
+              }}
             >
               <option value="">Any</option>
               {browser.availableTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
+                <option key={type.id} value={type.id}>
+                  {type.label}
                 </option>
               ))}
             </select>
@@ -238,10 +238,7 @@ export function FocusedSkillCatalog({
           </button>
         </div>
       ) : (
-        <div
-          className="focused-skill-results"
-          onScroll={(event) => loadMoreBrowserResultsOnScroll(event, browser.hasMore, dispatch)}
-        >
+        <div className="focused-skill-results">
           {browser.groups.map((group) => {
             const collapsed = collapsedGroups.has(group.id);
             const skillCountLabel = `${group.skills.length} ${

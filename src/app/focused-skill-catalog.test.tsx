@@ -6,12 +6,13 @@ import { catalogId } from "../domain";
 import { requireReadyCatalogs } from "./catalogs";
 import { FocusedSkillCatalog } from "./components/FocusedSkillCatalog";
 import { BUILD_WARS_DRAG_MIME, parseDragPayload } from "./drag-payload";
+import { selectSkillBrowser } from "./editor-selectors";
 import { createBlankEditorState, editorReducer, type EditorState } from "./editor-state";
 
 const catalogs = requireReadyCatalogs();
 
 describe("FocusedSkillCatalog", () => {
-  it("renders a bounded all-playable view when both professions are Any", () => {
+  it("renders the full all-playable view when both professions are Any", () => {
     render(<Harness />);
 
     expect(screen.getByRole("tab", { name: "Skills" })).toBeInTheDocument();
@@ -25,7 +26,7 @@ describe("FocusedSkillCatalog", () => {
   });
 
   it("keeps search compact and expands filters from the icon button", () => {
-    const { container } = render(<Harness />);
+    const { container } = render(<Harness initialState={stateWithBrowserQuery("Energy Drain")} />);
 
     expect(screen.getByPlaceholderText("Search by name...")).toBeInTheDocument();
     expect(screen.queryByText("Search")).not.toBeInTheDocument();
@@ -67,17 +68,19 @@ describe("FocusedSkillCatalog", () => {
     expect(container.querySelector(".filter-active-count")).toBeNull();
   });
 
-  it("loads the next skill batch from result scrolling without a show-more button", () => {
-    const { container } = render(<Harness />);
+  it("renders all matching skills without a show-more button", () => {
+    const initialState = createBlankEditorState();
+    const expectedCount = selectSkillBrowser(initialState, catalogs).matchingCount;
+    const { container } = render(<Harness initialState={initialState} />);
 
     expect(screen.queryByRole("button", { name: "Show more" })).not.toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(48);
+    expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(expectedCount);
 
     const results = container.querySelector(".focused-skill-results");
     expect(results).not.toBeNull();
     fireEvent.scroll(results!);
 
-    expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(96);
+    expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(expectedCount);
   });
 
   it("filters through selected professions and places a skill with shared bar policy", () => {
@@ -191,7 +194,7 @@ describe("FocusedSkillCatalog", () => {
   });
 
   it("collapses and expands attribute groups as UI-only state", () => {
-    render(<Harness />);
+    render(<Harness initialState={stateWithBrowserQuery("Healing Signet")} />);
 
     const firstGroup = screen.getAllByRole("button", { expanded: true })[0]!;
     fireEvent.click(firstGroup);
@@ -213,6 +216,20 @@ function Harness({
       <div role="status">{state.transient?.text ?? ""}</div>
     </>
   );
+}
+
+function stateWithBrowserQuery(query: string): EditorState {
+  const state = createBlankEditorState();
+  return {
+    ...state,
+    browser: {
+      ...state.browser,
+      filters: {
+        ...state.browser.filters,
+        query
+      }
+    }
+  };
 }
 
 function createDataTransfer() {

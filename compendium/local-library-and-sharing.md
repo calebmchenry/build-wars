@@ -30,8 +30,8 @@ saved document records, and bounded metadata. The durable snapshot intentionally
 - saved-record metadata: local ID, name, timestamps, favorite, tags, and notes
 
 Full editor UI state is not durable. Browser filters, dialog text, tooltip state, drag/keyboard
-state, selected skill slot, transient messages, batch size, and counters are reconstructed from
-current defaults on hydration.
+state, selected skill slot, transient messages, and counters are reconstructed from current defaults
+on hydration.
 
 The storage key remains `build-wars:v1`; it is a discovery key, not the payload schema version.
 Schema-1 libraries migrate in memory into schema 2 by wrapping saved builds and working drafts as

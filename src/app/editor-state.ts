@@ -10,6 +10,7 @@ import {
   type ProfessionId,
   type SkillBar,
   type SkillId,
+  type SkillTypeId,
   type TitleRankOverrideMutationFacts,
   type TemplateSourceEnvelope
 } from "../domain";
@@ -82,7 +83,7 @@ export interface BrowserFilters {
   readonly query: string;
   readonly professionScope: BrowserProfessionScope;
   readonly attributeId: AttributeId | null;
-  readonly skillType: string | null;
+  readonly skillType: SkillTypeId | null;
   readonly elite: BrowserEliteFilter;
   readonly availability: BrowserAvailabilityFilter;
   readonly resources: Readonly<Record<ResourceFilterKind, ResourceFilterValue>>;
@@ -92,7 +93,6 @@ export interface BrowserFilters {
 export interface BrowserState {
   readonly filters: BrowserFilters;
   readonly viewMode: BrowserViewMode;
-  readonly batchSize: number;
 }
 
 export type DialogKind = "import" | "export";
@@ -149,9 +149,6 @@ export interface EditorState {
   readonly transient: TransientMessage | null;
   readonly nextMessageId: number;
 }
-
-export const DEFAULT_BROWSER_BATCH_SIZE = 48;
-export const BROWSER_BATCH_INCREMENT = 48;
 
 const EMPTY_RESOURCE_FILTERS: Readonly<Record<ResourceFilterKind, ResourceFilterValue>> = {
   energy: "any",
@@ -253,9 +250,6 @@ export type EditorAction =
       readonly viewMode: BrowserViewMode;
     }
   | {
-      readonly type: "show-more-browser-results";
-    }
-  | {
       readonly type: "clear-browser-filters";
     }
   | {
@@ -315,8 +309,7 @@ export function createBlankEditorState(name = "Untitled Build"): EditorState {
     rawTemplate: emptyRawTemplateOverlay(),
     browser: {
       filters: createDefaultBrowserFilters(),
-      viewMode: "list",
-      batchSize: DEFAULT_BROWSER_BATCH_SIZE
+      viewMode: "list"
     },
     dialogs: {
       open: null,
@@ -499,16 +492,7 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
         ...state,
         browser: {
           ...state.browser,
-          viewMode: action.viewMode,
-          batchSize: DEFAULT_BROWSER_BATCH_SIZE
-        }
-      };
-    case "show-more-browser-results":
-      return {
-        ...state,
-        browser: {
-          ...state.browser,
-          batchSize: state.browser.batchSize + BROWSER_BATCH_INCREMENT
+          viewMode: action.viewMode
         }
       };
     case "clear-browser-filters":
@@ -516,8 +500,7 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
         ...state,
         browser: {
           ...state.browser,
-          filters: createDefaultBrowserFilters(),
-          batchSize: DEFAULT_BROWSER_BATCH_SIZE
+          filters: createDefaultBrowserFilters()
         }
       };
     case "open-dialog":
@@ -827,8 +810,7 @@ function setBrowserFilters(state: EditorState, filters: Partial<BrowserFilters>)
       filters: {
         ...state.browser.filters,
         ...filters
-      },
-      batchSize: DEFAULT_BROWSER_BATCH_SIZE
+      }
     }
   };
 }

@@ -123,6 +123,7 @@ function titleSkill(input: {
     professionId: input.professionId ?? null,
     attributeId: null,
     type: "Signet",
+    typeId: "signet",
     classification: {
       ...input.base.classification,
       common: false,

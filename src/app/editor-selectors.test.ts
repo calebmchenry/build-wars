@@ -88,7 +88,7 @@ describe("editor selectors", () => {
     ).toBe(true);
   });
 
-  it("filters, sorts, groups, and bounds browser results deterministically", () => {
+  it("filters, sorts, groups, and returns all matching browser results deterministically", () => {
     const state = editorReducer(
       editorReducer(playableEditorFixture(), {
         type: "set-browser-filters",
@@ -99,7 +99,7 @@ describe("editor selectors", () => {
     const browser = selectSkillBrowser(state, catalogs);
 
     expect(browser.matchingCount).toBeGreaterThan(0);
-    expect(browser.renderedCount).toBeLessThanOrEqual(state.browser.batchSize);
+    expect(browser.groups.flatMap((group) => group.skills)).toHaveLength(browser.matchingCount);
     expect(browser.groups[0]?.label).toBe("All skills");
     expect(browser.groups[0]?.skills[0]?.normalizedName).toContain("shot");
   });
@@ -129,6 +129,29 @@ describe("editor selectors", () => {
         .flatMap((group) => group.skills)
         .every((skill) => skill.costs.energy.state === "number")
     ).toBe(true);
+  });
+
+  it("filters skill types through the taxonomy while keeping exact Skill separate", () => {
+    const base = createBlankEditorState();
+    const attacks = selectSkillBrowser(
+      editorReducer(base, {
+        type: "set-browser-filters",
+        filters: { professionScope: { kind: "all" }, skillType: "attack" }
+      }),
+      catalogs
+    ).groups.flatMap((group) => group.skills);
+    const exactSkills = selectSkillBrowser(
+      editorReducer(base, {
+        type: "set-browser-filters",
+        filters: { professionScope: { kind: "all" }, skillType: "skill" }
+      }),
+      catalogs
+    ).groups.flatMap((group) => group.skills);
+
+    expect(attacks.some((skill) => skill.typeId === "axe-attack")).toBe(true);
+    expect(attacks.every((skill) => skill.typeId.includes("attack"))).toBe(true);
+    expect(exactSkills.length).toBeGreaterThan(0);
+    expect(exactSkills.every((skill) => skill.typeId === "skill")).toBe(true);
   });
 
   it("uses default and authored title ranks for title-scaled skill display", () => {
@@ -204,10 +227,6 @@ describe("editor selectors", () => {
     const base = createBlankEditorState();
     const state = {
       ...base,
-      browser: {
-        ...base.browser,
-        batchSize: 2000
-      },
       build: {
         ...base.build,
         mode: "pve",

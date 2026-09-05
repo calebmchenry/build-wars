@@ -1,4 +1,4 @@
-import { createTitleRankCatalog } from "../domain";
+import { createTitleRankCatalog, isSkillTypeId, skillTypeIdFromLabel } from "../domain";
 import type {
   AttributeId,
   CatalogAttributeRecord,
@@ -565,6 +565,29 @@ function validateSkillCatalog(value: unknown): readonly string[] {
   }
   if (!Array.isArray(value.skills)) {
     issues.push("skill list is missing");
+  } else {
+    for (const skill of value.skills) {
+      if (!isRecord(skill)) {
+        issues.push("skill list contains a non-object record");
+        continue;
+      }
+      const name = typeof skill.name === "string" ? skill.name : "unknown skill";
+      if (typeof skill.typeId !== "string" || !isSkillTypeId(skill.typeId)) {
+        issues.push(`${name} skill typeId is missing or unknown`);
+        continue;
+      }
+      if (typeof skill.type === "string") {
+        const sourceTypeId = skillTypeIdFromLabel(skill.type);
+        const classification = isRecord(skill.classification) ? skill.classification : null;
+        if (sourceTypeId !== null && sourceTypeId !== skill.typeId) {
+          issues.push(`${name} skill typeId does not match source type`);
+        } else if (sourceTypeId === null && classification?.unsupported !== true) {
+          issues.push(`${name} skill source type is not recognized`);
+        }
+      } else {
+        issues.push(`${name} skill type is missing`);
+      }
+    }
   }
   if (!Array.isArray(value.progressionSeries)) {
     issues.push("skill progression series is missing");

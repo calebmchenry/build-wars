@@ -145,7 +145,7 @@ The template code should be visible directly under the skill bar.
 The first catalog tab is skills.
 
 - Default results are filtered by the active professions.
-- The "Any" profession state defaults to bounded all-playable results when no
+- The "Any" profession state defaults to all-playable results when no
   concrete profession is selected.
 - Skills are grouped by attribute with collapsible sections.
 - The initial view should be compact rows: icon, name, and right-aligned modeled

@@ -31,7 +31,7 @@ export function FocusedAttributeEditor({
           className="attribute-section-toggle"
           aria-label={`${collapsed ? "Expand" : "Collapse"} attributes`}
           aria-expanded={!collapsed}
-          aria-controls={listId}
+          aria-controls={collapsed ? undefined : listId}
           onClick={() => setCollapsed((current) => !current)}
         >
           <span className="skill-group-symbol" aria-hidden="true">
@@ -45,13 +45,15 @@ export function FocusedAttributeEditor({
             : `Spend ${budget.spend}`}
         </output>
       </div>
-      <div id={listId} className="focused-attribute-content" hidden={collapsed}>
-        <div className="focused-attribute-list">
-          {rows.map((row) => (
-            <AttributeRow key={row.key} row={row} dispatch={dispatch} />
-          ))}
+      {collapsed ? null : (
+        <div id={listId} className="focused-attribute-content">
+          <div className="focused-attribute-list">
+            {rows.map((row) => (
+              <AttributeRow key={row.key} row={row} dispatch={dispatch} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

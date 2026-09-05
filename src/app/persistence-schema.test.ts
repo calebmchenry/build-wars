@@ -92,8 +92,7 @@ describe("local persistence schema", () => {
         filters: {
           ...createBlankEditorState().browser.filters,
           query: "transient search"
-        },
-        batchSize: 999
+        }
       },
       dialogs: {
         open: "import" as const,
@@ -107,7 +106,6 @@ describe("local persistence schema", () => {
 
     expect(hydrated.build.name).toBe("Browser State Must Not Persist");
     expect(hydrated.browser.filters.query).toBe("");
-    expect(hydrated.browser.batchSize).toBe(48);
     expect(hydrated.dialogs.open).toBeNull();
     expect(hydrated.dialogs.importInput).toBe("");
     expect(hydrated.selectedSlotIndex).toBeNull();

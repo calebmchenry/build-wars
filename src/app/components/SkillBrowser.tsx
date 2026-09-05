@@ -1,6 +1,6 @@
 import type { Dispatch } from "react";
 
-import { catalogId } from "../../domain";
+import { catalogId, isSkillTypeId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
 import { selectSkillBrowser, selectSkillDisplay } from "../editor-selectors";
 import type {
@@ -17,7 +17,6 @@ import type {
 import { BUILD_WARS_DRAG_MIME, browserSkillDragPayload } from "../drag-payload";
 import { applySkillBarIntent } from "../skill-bar-actions";
 import { SkillDisplay } from "./SkillDisplay";
-import { loadMoreBrowserResultsOnScroll } from "./skill-browser-scroll";
 import { setSkillIconDragImage } from "./skill-drag-image";
 import { SkillTooltipTrigger } from "./SkillTooltip";
 
@@ -47,7 +46,7 @@ export function SkillBrowser({
         <div>
           <h2 id="browser-title">Skill Browser</h2>
           <span>
-            {browser.renderedCount}/{browser.matchingCount} shown from {browser.totalCount}
+            {browser.matchingCount}/{browser.totalCount} shown
           </span>
         </div>
         <div className="view-buttons" aria-label="Browser view">
@@ -131,17 +130,18 @@ export function SkillBrowser({
           <span>Type</span>
           <select
             value={state.browser.filters.skillType ?? ""}
-            onChange={(event) =>
+            onChange={(event) => {
+              const value = event.currentTarget.value;
               dispatch({
                 type: "set-browser-filters",
-                filters: { skillType: event.currentTarget.value || null }
-              })
-            }
+                filters: { skillType: isSkillTypeId(value) ? value : null }
+              });
+            }}
           >
             <option value="">Any</option>
             {browser.availableTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
+              <option key={type.id} value={type.id}>
+                {type.label}
               </option>
             ))}
           </select>
@@ -229,10 +229,7 @@ export function SkillBrowser({
           </button>
         </div>
       ) : (
-        <div
-          className={`skill-results ${state.browser.viewMode}`}
-          onScroll={(event) => loadMoreBrowserResultsOnScroll(event, browser.hasMore, dispatch)}
-        >
+        <div className={`skill-results ${state.browser.viewMode}`}>
           {browser.groups.map((group) => (
             <section key={group.id} aria-labelledby={`group-${group.id}`}>
               <h3 id={`group-${group.id}`}>{group.label}</h3>

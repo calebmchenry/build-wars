@@ -17,7 +17,9 @@ from .profiles import (
     EPIC_04_PROFILE_ID,
     EPIC_04_PVE_ONLY_SKILL_LIST_TITLE,
 )
+from .skill_infobox import KNOWN_SKILL_TYPE_IDS
 from .skill_infobox import extract_skill_infobox
+from .skill_infobox import skill_type_id_from_label
 from .skill_progression import extract_skill_progressions, split_evidence_from_title
 
 
@@ -249,6 +251,45 @@ def validate_skill_catalog(catalog: dict[str, Any], *, snapshot_set_digest: str)
                     "catalog",
                     severity="critical",
                     disposition="non-waivable",
+                )
+            )
+    for skill in skills:
+        type_id = skill.get("typeId")
+        if not isinstance(type_id, str) or type_id not in KNOWN_SKILL_TYPE_IDS:
+            diagnostics.append(
+                _diag(
+                    "SKILL_TYPE_ID_UNKNOWN",
+                    f"Generated skill record has an unknown typeId: {type_id}",
+                    int(skill.get("id") or 0),
+                    "catalog",
+                    severity="critical",
+                    disposition="non-waivable",
+                    field_path="/typeId",
+                )
+            )
+            continue
+        raw_type_id = skill_type_id_from_label(str(skill.get("type") or ""))
+        unsupported = bool(skill.get("classification", {}).get("unsupported", False))
+        if raw_type_id is None and not unsupported:
+            diagnostics.append(
+                _diag(
+                    "SKILL_TYPE_UNKNOWN",
+                    f"Generated skill record has an unmapped source type: {skill.get('type')}",
+                    int(skill.get("id") or 0),
+                    "catalog",
+                    severity="error",
+                    field_path="/type",
+                )
+            )
+        elif raw_type_id is not None and raw_type_id != type_id:
+            diagnostics.append(
+                _diag(
+                    "SKILL_TYPE_ID_MISMATCH",
+                    f"Generated skill record typeId {type_id} did not match source type {skill.get('type')}",
+                    int(skill.get("id") or 0),
+                    "catalog",
+                    severity="error",
+                    field_path="/typeId",
                 )
             )
     if any(media.get("cachedBytes") is not False for media in catalog["remoteMedia"]):
@@ -654,7 +695,8 @@ def _diag(
     source_id: str,
     *,
     severity: str,
-    disposition: str,
+    disposition: str = "open",
+    field_path: str | None = None,
 ) -> Diagnostic:
     return Diagnostic(
         code=code,
@@ -663,6 +705,7 @@ def _diag(
         category="schema-shape-error",
         scope_kind="record" if skill_id else "artifact",
         record_id=skill_id or None,
+        field_path=field_path,
         source_ids=(source_id,),
         evidence=(Evidence("source", source_id, None),),
         disposition=disposition,  # type: ignore[arg-type]
