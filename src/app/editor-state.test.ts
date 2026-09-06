@@ -13,6 +13,11 @@ import {
   editorReducer,
   type EditorState
 } from "./editor-state";
+import { requireReadyCatalogs } from "./catalogs";
+import { playableEditorFixture } from "./editor-fixtures";
+import { setProfessionWithAttributeCleanup } from "./attribute-eligibility";
+
+const catalogs = requireReadyCatalogs();
 
 describe("editor state reducer", () => {
   it("constructs a blank in-memory build with exactly eight skill slots", () => {
@@ -102,6 +107,57 @@ describe("editor state reducer", () => {
 
     expect(next.rawTemplate.templateName).toBe("Imported");
     expect(next.build.mode).toBe("pvp");
+  });
+
+  it("clears stale skills and updates custom profession filters when a profession changes", () => {
+    const base = playableEditorFixture();
+    const state: EditorState = {
+      ...base,
+      rawTemplate: {
+        ...base.rawTemplate,
+        skillBar: [
+          null,
+          null,
+          null,
+          null,
+          null,
+          createRawOverlayEntry({
+            namespace: "skill",
+            templateId: 391,
+            catalogId: 391,
+            outcomeKind: "known",
+            label: "Hunter's Shot"
+          }),
+          null,
+          null
+        ]
+      },
+      browser: {
+        ...base.browser,
+        filters: {
+          ...base.browser.filters,
+          professionScope: {
+            kind: "custom",
+            professionIds: [catalogId<"Profession">(1), catalogId<"Profession">(2)]
+          }
+        }
+      }
+    };
+
+    const next = editorReducer(
+      state,
+      setProfessionWithAttributeCleanup(state, catalogs, "secondary", catalogId<"Profession">(3))
+    );
+
+    expect(Number(next.build.secondaryProfessionId)).toBe(3);
+    expect(
+      next.build.skillBar.map((skillId) => (skillId === null ? null : Number(skillId)))
+    ).toEqual([1, 316, 319, 331, 351, null, null, null]);
+    expect(next.rawTemplate.skillBar[5]).toBeNull();
+    expect(next.browser.filters.professionScope).toEqual({
+      kind: "custom",
+      professionIds: [catalogId<"Profession">(1), catalogId<"Profession">(3)]
+    });
   });
 
   it("sets and resets structural title rank overrides without touching skill or equipment state", () => {

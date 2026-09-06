@@ -173,6 +173,8 @@ export type EditorAction =
       readonly field: "primary" | "secondary";
       readonly professionId: ProfessionId | null;
       readonly clearAttributeIds?: readonly AttributeId[];
+      readonly clearSkillSlotIndexes?: readonly number[];
+      readonly browserProfessionScope?: BrowserProfessionScope;
     }
   | {
       readonly type: "set-mode";
@@ -413,7 +415,14 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
     case "replace-state":
       return action.state;
     case "set-profession":
-      return setProfession(state, action.field, action.professionId, action.clearAttributeIds);
+      return setProfession(
+        state,
+        action.field,
+        action.professionId,
+        action.clearAttributeIds,
+        action.clearSkillSlotIndexes,
+        action.browserProfessionScope
+      );
     case "set-mode":
       return {
         ...state,
@@ -567,7 +576,9 @@ function setProfession(
   state: EditorState,
   field: "primary" | "secondary",
   professionId: ProfessionId | null,
-  clearAttributeIds: readonly AttributeId[] = []
+  clearAttributeIds: readonly AttributeId[] = [],
+  clearSkillSlotIndexes: readonly number[] = [],
+  browserProfessionScope?: BrowserProfessionScope
 ): EditorState {
   const build =
     field === "primary"
@@ -577,25 +588,48 @@ function setProfession(
     field === "primary"
       ? { ...state.rawTemplate, primaryProfession: null }
       : { ...state.rawTemplate, secondaryProfession: null };
-  if (clearAttributeIds.length === 0) {
-    return { ...state, build, rawTemplate };
+  const browser =
+    browserProfessionScope === undefined
+      ? state.browser
+      : {
+          ...state.browser,
+          filters: {
+            ...state.browser.filters,
+            professionScope: browserProfessionScope
+          }
+        };
+
+  if (clearAttributeIds.length === 0 && clearSkillSlotIndexes.length === 0) {
+    return { ...state, build, rawTemplate, browser };
   }
 
   const clearIds = new Set(clearAttributeIds.map((attributeId) => Number(attributeId)));
+  const clearSlotIndexes = new Set(
+    clearSkillSlotIndexes.filter((slotIndex) => validSlotIndex(slotIndex))
+  );
   return {
     ...state,
     build: {
       ...build,
       attributes: build.attributes.filter(
         (attribute) => !clearIds.has(Number(attribute.attributeId))
-      )
+      ),
+      skillBar:
+        clearSlotIndexes.size === 0
+          ? build.skillBar
+          : clearTupleSlots(build.skillBar, clearSlotIndexes, null)
     },
     rawTemplate: {
       ...rawTemplate,
       attributes: rawTemplate.attributes.filter(
         (_, index) => !clearIds.has(Number(state.build.attributes[index]?.attributeId))
-      )
-    }
+      ),
+      skillBar:
+        clearSlotIndexes.size === 0
+          ? rawTemplate.skillBar
+          : clearTupleSlots(rawTemplate.skillBar, clearSlotIndexes, null)
+    },
+    browser
   };
 }
 
@@ -835,6 +869,23 @@ function replaceTupleSlot<Value>(
     slotIndex === 5 ? value : tuple[5],
     slotIndex === 6 ? value : tuple[6],
     slotIndex === 7 ? value : tuple[7]
+  ];
+}
+
+function clearTupleSlots<Value>(
+  tuple: readonly [Value, Value, Value, Value, Value, Value, Value, Value],
+  slotIndexes: ReadonlySet<number>,
+  value: Value
+): readonly [Value, Value, Value, Value, Value, Value, Value, Value] {
+  return [
+    slotIndexes.has(0) ? value : tuple[0],
+    slotIndexes.has(1) ? value : tuple[1],
+    slotIndexes.has(2) ? value : tuple[2],
+    slotIndexes.has(3) ? value : tuple[3],
+    slotIndexes.has(4) ? value : tuple[4],
+    slotIndexes.has(5) ? value : tuple[5],
+    slotIndexes.has(6) ? value : tuple[6],
+    slotIndexes.has(7) ? value : tuple[7]
   ];
 }
 
