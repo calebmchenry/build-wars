@@ -104,7 +104,11 @@ export function SkillBrowser({
               })
             }
           >
-            <option value="default">Selected</option>
+            {state.browser.filters.professionScope.kind === "custom" &&
+            state.browser.filters.professionScope.professionIds.length !== 1 ? (
+              <option value="custom">Custom</option>
+            ) : null}
+            <option value="default">Selected professions</option>
             <option value="all">All</option>
             {catalogs.professions.map((profession) => (
               <option key={Number(profession.id)} value={`profession:${Number(profession.id)}`}>
@@ -188,7 +192,10 @@ export function SkillBrowser({
               })
             }
           >
-            <option value="default">Mode default</option>
+            <option value="default">Selected mode</option>
+            <option value="all">All modes</option>
+            <option value="pve">PvE</option>
+            <option value="pvp">PvP</option>
             <option value="both">Both</option>
             <option value="pve-only">PvE only</option>
             <option value="pvp-only">PvP only</option>
@@ -241,7 +248,7 @@ export function SkillBrowser({
         <div className="empty-state">
           <strong>No matching skills</strong>
           <button type="button" onClick={() => dispatch({ type: "clear-browser-filters" })}>
-            Clear filters
+            Reset filters
           </button>
         </div>
       ) : (
@@ -333,15 +340,23 @@ function selectedOrFirstEmptySlot(state: EditorState): number {
 
 function professionScopeValue(state: EditorState): string {
   const scope = state.browser.filters.professionScope;
-  return scope.kind === "profession" ? `profession:${Number(scope.professionId)}` : scope.kind;
+  if (scope.kind === "custom") {
+    return scope.professionIds.length === 1
+      ? `profession:${Number(scope.professionIds[0])}`
+      : "custom";
+  }
+  return scope.kind;
 }
 
 function professionScopeFromValue(value: string): BrowserProfessionScope {
   if (value === "default" || value === "all") {
     return { kind: value };
   }
+  if (value === "custom") {
+    return { kind: "all" };
+  }
   const numericId = Number(value.replace("profession:", ""));
-  return { kind: "profession", professionId: catalogId<"Profession">(numericId) };
+  return { kind: "custom", professionIds: [catalogId<"Profession">(numericId)] };
 }
 
 function viewLabel(view: BrowserViewMode): string {

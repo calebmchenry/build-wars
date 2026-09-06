@@ -33,63 +33,125 @@ describe("FocusedSkillCatalog", () => {
   it("keeps search compact and expands filters from the icon button", () => {
     const { container } = render(<Harness initialState={stateWithBrowserQuery("Energy Drain")} />);
 
-    expect(screen.getByPlaceholderText("Search by name...")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Search...")).toBeInTheDocument();
     expect(screen.queryByText("Search")).not.toBeInTheDocument();
-    expect(screen.queryByText("Professions")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Profession" })).not.toBeInTheDocument();
 
-    const filterButton = screen.getByRole("button", { name: "Show skill filters" });
+    const filterButton = screen.getByRole("button", { name: "Show skill filters (1 active)" });
     expect(filterButton).toHaveAttribute("aria-expanded", "false");
 
     fireEvent.click(filterButton);
-
-    expect(screen.getByRole("button", { name: "Hide skill filters" })).toHaveAttribute(
-      "aria-expanded",
-      "true"
-    );
-    expect(screen.getByLabelText("Professions")).toBeInTheDocument();
-    expect(screen.getByLabelText("Text")).toBeInTheDocument();
-    expect(screen.getByLabelText("Attribute")).toBeInTheDocument();
-    expect(screen.getByLabelText("Mode")).toBeInTheDocument();
-    expect(screen.getByText("Applies Condition")).toBeInTheDocument();
-    expect(screen.getByLabelText("Burning")).toBeInTheDocument();
-    expect(screen.getByRole("option", { name: "Build mode" })).toBeInTheDocument();
-    expect(screen.getByRole("option", { name: "PvE + PvP" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Any" })).toHaveAttribute("aria-pressed", "true");
-    expect(screen.queryByRole("button", { name: "Clear filters" })).not.toBeInTheDocument();
-
-    fireEvent.click(screen.getByRole("button", { name: "Elite" }));
 
     expect(screen.getByRole("button", { name: "Hide skill filters (1 active)" })).toHaveAttribute(
       "aria-expanded",
       "true"
     );
-    expect(container.querySelector(".filter-active-count")).toHaveTextContent("1");
-    expect(screen.getByRole("button", { name: "Clear filters" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Profession" })).toBeInTheDocument();
+    expect(screen.getByLabelText("Text")).toBeInTheDocument();
+    expect(screen.getByLabelText("Attribute")).toBeInTheDocument();
+    expect(screen.getByLabelText("Mode")).toBeInTheDocument();
+    expect(screen.getByText("Applies Condition")).toBeInTheDocument();
+    expect(screen.getByLabelText("Burning")).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "All modes" })).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "PvE" })).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "Both modes only" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Any" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.queryByRole("button", { name: "Reset filters" })).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByLabelText("Burning"));
+    fireEvent.click(screen.getByRole("button", { name: "Elite" }));
 
     expect(screen.getByRole("button", { name: "Hide skill filters (2 active)" })).toHaveAttribute(
       "aria-expanded",
       "true"
     );
+    expect(container.querySelector(".filter-active-count")).toHaveTextContent("2");
+    expect(screen.getByRole("button", { name: "Reset filters" })).toBeInTheDocument();
 
-    fireEvent.change(screen.getByLabelText("Text"), { target: { value: "nearby dead boss" } });
+    fireEvent.click(screen.getByLabelText("Burning"));
 
     expect(screen.getByRole("button", { name: "Hide skill filters (3 active)" })).toHaveAttribute(
       "aria-expanded",
       "true"
     );
 
-    fireEvent.click(screen.getAllByRole("button", { name: "Clear filters" })[0]!);
+    fireEvent.change(screen.getByLabelText("Text"), { target: { value: "nearby dead boss" } });
 
-    expect(screen.getByRole("button", { name: "Hide skill filters" })).toHaveAttribute(
+    expect(screen.getByRole("button", { name: "Hide skill filters (4 active)" })).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    fireEvent.click(screen.getAllByRole("button", { name: "Reset filters" })[0]!);
+
+    expect(screen.getByRole("button", { name: "Hide skill filters (1 active)" })).toHaveAttribute(
       "aria-expanded",
       "true"
     );
     expect(screen.getByRole("button", { name: "Any" })).toHaveAttribute("aria-pressed", "true");
     expect(screen.getByLabelText("Burning")).not.toBeChecked();
     expect(screen.getByLabelText("Text")).toHaveValue("");
-    expect(container.querySelector(".filter-active-count")).toBeNull();
+    expect(container.querySelector(".filter-active-count")).toHaveTextContent("1");
+    expect(screen.queryByRole("button", { name: "Reset filters" })).not.toBeInTheDocument();
+  });
+
+  it("renders build default filters as removable chips and reset restores them", () => {
+    render(<Harness initialState={stateWithBuildProfessions(1, 2)} />);
+
+    expect(screen.getByRole("button", { name: "Remove Warrior filter" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Remove Ranger filter" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Remove Mode: PvE filter" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Remove Warrior filter" }));
+
+    expect(screen.queryByRole("button", { name: "Remove Warrior filter" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Remove Ranger filter" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Show skill filters (2 active)" }));
+    fireEvent.click(screen.getByRole("button", { name: "Reset filters" }));
+
+    expect(screen.getByRole("button", { name: "Remove Warrior filter" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Remove Ranger filter" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Remove Mode: PvE filter" })).toBeInTheDocument();
+  });
+
+  it("collapses extra active filters behind an overflow chip", () => {
+    const base = stateWithBuildProfessions(1, 2);
+
+    render(
+      <Harness
+        initialState={{
+          ...base,
+          browser: {
+            ...base.browser,
+            filters: {
+              ...base.browser.filters,
+              elite: "elite",
+              metadata: ["applies:burning"] as const
+            }
+          }
+        }}
+      />
+    );
+
+    expect(screen.getByRole("button", { name: "2 hidden skill filters" })).toHaveTextContent(
+      "+2 filters"
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "2 hidden skill filters" }));
+
+    expect(screen.getByRole("button", { name: "Remove Elite filter" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Remove Applies: Burning filter" })
+    ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Remove Elite filter" }));
+
+    expect(screen.getByRole("button", { name: "1 hidden skill filters" })).toHaveTextContent(
+      "+1 filters"
+    );
+    expect(
+      screen.getByRole("button", { name: "Remove Applies: Burning filter" })
+    ).toBeInTheDocument();
   });
 
   it(
@@ -256,6 +318,18 @@ function stateWithBrowserQuery(query: string): EditorState {
         ...state.browser.filters,
         query
       }
+    }
+  };
+}
+
+function stateWithBuildProfessions(primary: number, secondary: number | null): EditorState {
+  const state = createBlankEditorState();
+  return {
+    ...state,
+    build: {
+      ...state.build,
+      primaryProfessionId: catalogId<"Profession">(primary),
+      secondaryProfessionId: secondary === null ? null : catalogId<"Profession">(secondary)
     }
   };
 }

@@ -6,16 +6,24 @@ import type { AppCatalogViews } from "../catalogs";
 import { BUILD_WARS_DRAG_MIME, browserSkillDragPayload } from "../drag-payload";
 import { selectSkillBrowser, selectSkillDisplay } from "../editor-selectors";
 import type {
-  BrowserAvailabilityFilter,
   BrowserEliteFilter,
-  BrowserFilters,
-  BrowserProfessionScope,
   BrowserSortMode,
   EditorAction,
   EditorState
 } from "../editor-state";
 import { applySkillBarIntent } from "../skill-bar-actions";
+import {
+  hasCustomizedSkillFilters,
+  resetFocusedSkillFilters,
+  selectActiveSkillFilterChips
+} from "../skill-filter-state";
 import { SkillDisplay } from "./SkillDisplay";
+import {
+  SkillFilterSearchInput,
+  SkillModeFilterControl,
+  SkillProfessionFilterMenu,
+  SkillResourceFilterControls
+} from "./SkillFilterSearch";
 import { SkillMetadataFilterControls } from "./SkillMetadataFilterControls";
 import { setSkillIconDragImage } from "./skill-drag-image";
 import { SkillTooltipTrigger } from "./SkillTooltip";
@@ -42,7 +50,8 @@ export function FocusedSkillCatalog({
   const [collapsedGroups, setCollapsedGroups] = useState<ReadonlySet<string>>(() => new Set());
   const [filtersExpanded, setFiltersExpanded] = useState(false);
   const targetSlot = selectedOrFirstEmptySlot(state);
-  const activeFilterCount = focusedFilterActiveCount(state.browser.filters);
+  const activeFilterCount = selectActiveSkillFilterChips(state, catalogs).length;
+  const hasCustomizedFilters = hasCustomizedSkillFilters(state);
   const filterButtonLabel =
     activeFilterCount === 0
       ? filtersExpanded
@@ -61,18 +70,7 @@ export function FocusedSkillCatalog({
         </button>
       </div>
       <div className="focused-catalog-search-row">
-        <input
-          type="search"
-          value={state.browser.filters.query}
-          aria-label="Search"
-          onChange={(event) =>
-            dispatch({
-              type: "set-browser-filters",
-              filters: { query: event.currentTarget.value }
-            })
-          }
-          placeholder="Search by name..."
-        />
+        <SkillFilterSearchInput state={state} catalogs={catalogs} dispatch={dispatch} />
         <button
           type="button"
           className="icon-button catalog-filter-button"
@@ -112,26 +110,7 @@ export function FocusedSkillCatalog({
               placeholder="Text contains..."
             />
           </label>
-          <label>
-            <span>Professions</span>
-            <select
-              value={professionScopeValue(state)}
-              onChange={(event) =>
-                dispatch({
-                  type: "set-browser-filters",
-                  filters: { professionScope: professionScopeFromValue(event.currentTarget.value) }
-                })
-              }
-            >
-              <option value="default">Build professions</option>
-              <option value="all">All professions</option>
-              {catalogs.professions.map((profession) => (
-                <option key={Number(profession.id)} value={`profession:${Number(profession.id)}`}>
-                  {profession.name}
-                </option>
-              ))}
-            </select>
-          </label>
+          <SkillProfessionFilterMenu state={state} catalogs={catalogs} dispatch={dispatch} />
           <label>
             <span>Attribute</span>
             <select
@@ -201,24 +180,7 @@ export function FocusedSkillCatalog({
               ))}
             </div>
           </fieldset>
-          <label>
-            <span>Mode</span>
-            <select
-              value={state.browser.filters.availability}
-              onChange={(event) =>
-                dispatch({
-                  type: "set-browser-filters",
-                  filters: { availability: event.currentTarget.value as BrowserAvailabilityFilter }
-                })
-              }
-            >
-              <option value="default">Build mode</option>
-              <option value="both">PvE + PvP</option>
-              <option value="pve-only">PvE only</option>
-              <option value="pvp-only">PvP only</option>
-              <option value="unknown">Unknown</option>
-            </select>
-          </label>
+          <SkillModeFilterControl state={state} dispatch={dispatch} />
           <label>
             <span>Sort</span>
             <select
@@ -235,17 +197,21 @@ export function FocusedSkillCatalog({
               <option value="type">Type</option>
             </select>
           </label>
+          <SkillResourceFilterControls
+            filters={state.browser.filters.resources}
+            dispatch={dispatch}
+          />
           <SkillMetadataFilterControls
             selected={state.browser.filters.metadata}
             dispatch={dispatch}
           />
-          {activeFilterCount > 0 ? (
+          {hasCustomizedFilters ? (
             <button
               type="button"
               className="clear-focused-filters-button"
-              onClick={() => clearFocusedCatalogFilters(dispatch)}
+              onClick={() => resetFocusedSkillFilters(dispatch)}
             >
-              Clear filters
+              Reset filters
             </button>
           ) : null}
         </div>
@@ -254,7 +220,7 @@ export function FocusedSkillCatalog({
         <div className="empty-state">
           <strong>No matching skills</strong>
           <button type="button" onClick={() => dispatch({ type: "clear-browser-filters" })}>
-            Clear filters
+            Reset filters
           </button>
         </div>
       ) : (
@@ -352,35 +318,6 @@ function toggledGroupSet(current: ReadonlySet<string>, id: string): ReadonlySet<
   return next;
 }
 
-function focusedFilterActiveCount(filters: BrowserFilters): number {
-  return [
-    filters.textQuery.trim().length > 0,
-    filters.professionScope.kind !== "default",
-    filters.attributeId !== null,
-    filters.skillType !== null,
-    filters.elite !== "any",
-    filters.availability !== "default",
-    ...filters.metadata.map(() => true),
-    filters.sortMode !== "attribute"
-  ].filter(Boolean).length;
-}
-
-function clearFocusedCatalogFilters(dispatch: Dispatch<EditorAction>): void {
-  dispatch({
-    type: "set-browser-filters",
-    filters: {
-      textQuery: "",
-      professionScope: { kind: "default" },
-      attributeId: null,
-      skillType: null,
-      elite: "any",
-      availability: "default",
-      metadata: [],
-      sortMode: "attribute"
-    }
-  });
-}
-
 function selectedOrFirstEmptySlot(state: EditorState): number {
   if (state.selectedSlotIndex !== null) {
     return state.selectedSlotIndex;
@@ -416,17 +353,4 @@ function placeCatalogSkillFromKeyboard(
   }
   event.preventDefault();
   placeCatalogSkill(state, catalogs, dispatch, skillId, targetSlot);
-}
-
-function professionScopeValue(state: EditorState): string {
-  const scope = state.browser.filters.professionScope;
-  return scope.kind === "profession" ? `profession:${Number(scope.professionId)}` : scope.kind;
-}
-
-function professionScopeFromValue(value: string): BrowserProfessionScope {
-  if (value === "default" || value === "all") {
-    return { kind: value };
-  }
-  const numericId = Number(value.replace("profession:", ""));
-  return { kind: "profession", professionId: catalogId<"Profession">(numericId) };
 }

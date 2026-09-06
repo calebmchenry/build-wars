@@ -18,7 +18,7 @@ describe("SkillBrowser", () => {
       fireEvent.change(requiredSearchInput(container, 0), { target: { value: "zzzz-no-skill" } });
       expect(screen.getByText("No matching skills")).toBeInTheDocument();
 
-      fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
+      fireEvent.click(screen.getByRole("button", { name: "Reset filters" }));
       expect(screen.queryByText("No matching skills")).not.toBeInTheDocument();
     },
     CATALOG_RENDER_TIMEOUT_MS

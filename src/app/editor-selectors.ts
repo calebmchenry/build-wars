@@ -727,10 +727,10 @@ function matchesProfessionScope(
   if (filters.professionScope.kind === "all") {
     return true;
   }
-  if (filters.professionScope.kind === "profession") {
+  if (filters.professionScope.kind === "custom") {
+    const selected = new Set(filters.professionScope.professionIds.map((id) => Number(id)));
     return (
-      skill.professionId === null ||
-      Number(skill.professionId) === Number(filters.professionScope.professionId)
+      selected.size === 0 || skill.professionId === null || selected.has(Number(skill.professionId))
     );
   }
   const selected = selectedProfessionIds(state);
@@ -766,6 +766,15 @@ function matchesAvailability(
   availability: BrowserFilters["availability"]
 ): boolean {
   const skillAvailability = skill.classification.modeAvailability;
+  if (availability === "all") {
+    return true;
+  }
+  if (availability === "pve") {
+    return skillAvailability === "both" || skillAvailability === "pve-only";
+  }
+  if (availability === "pvp") {
+    return skillAvailability === "both" || skillAvailability === "pvp-only";
+  }
   if (availability !== "default") {
     return skillAvailability === availability;
   }

@@ -33,6 +33,7 @@ export function SkillFactIcon({
   return (
     <span
       className={`skill-fact-icon fact-${kind}`}
+      data-has-asset={asset === null ? "false" : "true"}
       {...(decorative ? { "aria-hidden": true } : { role: "img", "aria-label": label })}
       title={label}
     >

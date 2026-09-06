@@ -71,12 +71,13 @@ export type BrowserProfessionScope =
       readonly kind: "all";
     }
   | {
-      readonly kind: "profession";
-      readonly professionId: ProfessionId;
+      readonly kind: "custom";
+      readonly professionIds: readonly ProfessionId[];
     };
 
 export type BrowserEliteFilter = "any" | "elite" | "non-elite";
-export type BrowserAvailabilityFilter = "default" | "both" | "pve-only" | "pvp-only" | "unknown";
+export type BrowserAvailabilityFilter =
+  "default" | "all" | "pve" | "pvp" | "both" | "pve-only" | "pvp-only" | "unknown";
 export type BrowserSortMode = "attribute" | "name" | "type";
 export type BrowserViewMode = "list" | "small-grid" | "large-grid";
 
