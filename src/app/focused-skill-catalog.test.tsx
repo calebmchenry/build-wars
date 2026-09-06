@@ -154,6 +154,42 @@ describe("FocusedSkillCatalog", () => {
     ).toBeInTheDocument();
   });
 
+  it("dismisses button-opened filter menus on outside clicks", () => {
+    const base = stateWithBuildProfessions(1, 2);
+
+    render(
+      <>
+        <Harness
+          initialState={{
+            ...base,
+            browser: {
+              ...base.browser,
+              filters: {
+                ...base.browser.filters,
+                elite: "elite",
+                metadata: ["applies:burning"] as const
+              }
+            }
+          }}
+        />
+        <button type="button">Outside</button>
+      </>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "2 hidden skill filters" }));
+    expect(screen.getByRole("menu")).toBeInTheDocument();
+
+    fireEvent.pointerDown(screen.getByRole("button", { name: "Outside" }));
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Show skill filters (5 active)" }));
+    fireEvent.click(screen.getByRole("button", { name: "Profession" }));
+    expect(screen.getByRole("group", { name: "Profession filters" })).toBeInTheDocument();
+
+    fireEvent.pointerDown(screen.getByRole("button", { name: "Outside" }));
+    expect(screen.queryByRole("group", { name: "Profession filters" })).not.toBeInTheDocument();
+  });
+
   it(
     "renders all matching skills without a show-more button",
     () => {

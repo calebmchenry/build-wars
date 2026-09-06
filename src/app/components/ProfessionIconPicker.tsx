@@ -4,6 +4,7 @@ import { catalogId, type ProfessionId } from "../../domain";
 import type { AppCatalogViews, PlaceholderIconDescriptor } from "../catalogs";
 import type { RawTemplateOverlayEntry } from "../editor-state";
 import { CatalogIcon } from "./CatalogIcon";
+import { useOutsidePointerDown } from "./useOutsidePointerDown";
 
 interface ProfessionOption {
   readonly key: string;
@@ -28,6 +29,7 @@ export function ProfessionIconPicker({
   readonly onChange: (professionId: ProfessionId | null) => void;
 }) {
   const [openKey, setOpenKey] = useState<string | null>(null);
+  const rootRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
   const menuId = `${label.toLocaleLowerCase("en-US")}-profession-picker`;
@@ -41,8 +43,14 @@ export function ProfessionIconPicker({
       ? `Unresolved ${raw.label}`
       : (selected?.label ?? `Unresolved profession ${Number(value)}`);
 
+  useOutsidePointerDown(open, rootRef, () => setOpenKey(null));
+
   return (
-    <div className="profession-picker" data-state={rawUnresolved ? "unresolved" : "resolved"}>
+    <div
+      ref={rootRef}
+      className="profession-picker"
+      data-state={rawUnresolved ? "unresolved" : "resolved"}
+    >
       <label className="sr-only">
         <span>{label}</span>
         <select
@@ -97,7 +105,9 @@ export function ProfessionIconPicker({
               type="button"
               role="option"
               aria-selected={sameProfession(option.professionId, value)}
+              aria-label={option.label}
               className={sameProfession(option.professionId, value) ? "selected-option" : ""}
+              title={option.label}
               onClick={() => {
                 onChange(option.professionId);
                 setOpenKey(null);
@@ -105,7 +115,6 @@ export function ProfessionIconPicker({
               }}
             >
               <CatalogIcon descriptor={option.descriptor} />
-              <span>{option.label}</span>
             </button>
           ))}
         </div>

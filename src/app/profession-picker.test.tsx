@@ -26,6 +26,24 @@ describe("ProfessionIconPicker", () => {
     );
   });
 
+  it("closes the menu when clicking outside", () => {
+    render(
+      <>
+        <Harness />
+        <button type="button">Outside</button>
+      </>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: /Primary profession: Any/ }));
+    expect(screen.getByRole("listbox", { name: "Primary profession options" })).toBeInTheDocument();
+
+    fireEvent.pointerDown(screen.getByRole("button", { name: "Outside" }));
+
+    expect(
+      screen.queryByRole("listbox", { name: "Primary profession options" })
+    ).not.toBeInTheDocument();
+  });
+
   it("distinguishes unresolved imported evidence from intentional Any", () => {
     render(
       <ProfessionIconPicker

@@ -1,4 +1,4 @@
-import { useState, type CSSProperties, type Dispatch, type KeyboardEvent } from "react";
+import { useRef, useState, type CSSProperties, type Dispatch, type KeyboardEvent } from "react";
 
 import type { CatalogProfessionRecord } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
@@ -20,6 +20,7 @@ import {
   type SkillFilterChip
 } from "../skill-filter-state";
 import { CatalogIcon } from "./CatalogIcon";
+import { useOutsidePointerDown } from "./useOutsidePointerDown";
 
 const MAX_VISIBLE_FILTER_CHIPS = 3;
 
@@ -33,12 +34,19 @@ export function SkillFilterSearchInput({
   readonly dispatch: Dispatch<EditorAction>;
 }) {
   const [overflowOpen, setOverflowOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
   const chips = selectActiveSkillFilterChips(state, catalogs);
   const visibleChips = chips.slice(0, MAX_VISIBLE_FILTER_CHIPS);
   const overflowChips = chips.slice(MAX_VISIBLE_FILTER_CHIPS);
 
+  useOutsidePointerDown(overflowOpen, rootRef, () => setOverflowOpen(false));
+
   return (
-    <div className="skill-token-search" data-has-chips={chips.length > 0 ? "true" : "false"}>
+    <div
+      ref={rootRef}
+      className="skill-token-search"
+      data-has-chips={chips.length > 0 ? "true" : "false"}
+    >
       {visibleChips.map((chip) => (
         <SkillFilterChipView
           key={chip.key}
@@ -99,12 +107,15 @@ export function SkillProfessionFilterMenu({
   readonly dispatch: Dispatch<EditorAction>;
 }) {
   const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
   const selectedProfessionIds = new Set(
     professionIdsForFilterEditing(state, catalogs).map((professionId) => Number(professionId))
   );
 
+  useOutsidePointerDown(open, rootRef, () => setOpen(false));
+
   return (
-    <div className="filter-menu-control">
+    <div ref={rootRef} className="filter-menu-control">
       <span>Profession</span>
       <button
         type="button"
