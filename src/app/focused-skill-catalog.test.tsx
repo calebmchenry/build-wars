@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { useReducer } from "react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -48,13 +48,31 @@ describe("FocusedSkillCatalog", () => {
     );
     expect(screen.getByRole("button", { name: "Profession" })).toBeInTheDocument();
     expect(screen.getByLabelText("Text")).toBeInTheDocument();
-    expect(screen.getByLabelText("Attribute")).toBeInTheDocument();
     expect(screen.getByLabelText("Mode")).toBeInTheDocument();
-    expect(screen.getByText("Applies Condition")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Cost filters" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Inflicts" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Removes" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Deals Damage" })).toBeInTheDocument();
+    expect(screen.queryByLabelText("Attribute")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Advanced filters (0)" })).toHaveAttribute(
+      "aria-expanded",
+      "false"
+    );
+    expect(screen.queryByLabelText("Burning")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Inflicts" }));
+    expect(screen.getByRole("group", { name: "Inflicts filters" })).toBeInTheDocument();
     expect(screen.getByLabelText("Burning")).toBeInTheDocument();
     expect(screen.getByRole("option", { name: "All modes" })).toBeInTheDocument();
     expect(screen.getByRole("option", { name: "PvE" })).toBeInTheDocument();
     expect(screen.getByRole("option", { name: "Both modes only" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Advanced filters (0)" }));
+
+    expect(screen.getByRole("button", { name: "Advanced filters (0)" })).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
+    expect(screen.getByLabelText("Attribute")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Any" })).toHaveAttribute("aria-pressed", "true");
     expect(screen.queryByRole("button", { name: "Reset filters" })).not.toBeInTheDocument();
 
@@ -64,6 +82,7 @@ describe("FocusedSkillCatalog", () => {
       "aria-expanded",
       "true"
     );
+    expect(screen.getByRole("button", { name: "Advanced filters (1)" })).toHaveClass("active");
     expect(container.querySelector(".filter-active-count")).toHaveTextContent("2");
     expect(screen.getByRole("button", { name: "Reset filters" })).toBeInTheDocument();
 
@@ -88,10 +107,90 @@ describe("FocusedSkillCatalog", () => {
       "true"
     );
     expect(screen.getByRole("button", { name: "Any" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Advanced filters (0)" })).not.toHaveClass("active");
     expect(screen.getByLabelText("Burning")).not.toBeChecked();
     expect(screen.getByLabelText("Text")).toHaveValue("");
     expect(container.querySelector(".filter-active-count")).toHaveTextContent("1");
     expect(screen.queryByRole("button", { name: "Reset filters" })).not.toBeInTheDocument();
+  });
+
+  it("switches skill display modes from the icon button beside filters", () => {
+    const { container } = render(
+      <Harness initialState={stateWithBrowserQuery("Healing Signet")} />
+    );
+
+    const searchRow = container.querySelector(".focused-catalog-search-row");
+    expect(searchRow?.children[1]).toHaveClass("display-mode-control");
+    expect(searchRow?.children[2]).toHaveClass("catalog-filter-button");
+
+    fireEvent.click(screen.getByRole("button", { name: "Skill display: Rows" }));
+
+    expect(screen.getByRole("menu", { name: "Skill display modes" })).toBeInTheDocument();
+    expect(screen.getByRole("menuitemradio", { name: "Rows" })).toHaveAttribute(
+      "aria-checked",
+      "true"
+    );
+
+    fireEvent.click(screen.getByRole("menuitemradio", { name: "Small icons" }));
+
+    expect(screen.getByRole("button", { name: "Skill display: Small icons" })).toHaveAttribute(
+      "aria-expanded",
+      "false"
+    );
+    expect(container.querySelector(".focused-skill-list")).toHaveClass(
+      "focused-skill-icon-grid",
+      "small-icon-grid"
+    );
+    expect(screen.getByRole("button", { name: "Add Healing Signet to slot 1" })).toHaveClass(
+      "focused-skill-icon-tile"
+    );
+    expect(screen.getByRole("button", { name: "Add Healing Signet to slot 1" })).toHaveAttribute(
+      "data-view-mode",
+      "small-grid"
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Skill display: Small icons" }));
+    fireEvent.click(screen.getByRole("menuitemradio", { name: "Large icons" }));
+
+    expect(container.querySelector(".focused-skill-list")).toHaveClass(
+      "focused-skill-icon-grid",
+      "large-icon-grid"
+    );
+    expect(screen.getByRole("button", { name: "Add Healing Signet to slot 1" })).toHaveAttribute(
+      "data-view-mode",
+      "large-grid"
+    );
+  });
+
+  it("marks dropdown filter buttons active when their group has selected filters", () => {
+    const { container } = render(<Harness />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Show skill filters (1 active)" }));
+
+    const filterPanel = container.querySelector("#focused-skill-filters");
+    if (filterPanel === null) {
+      throw new Error("Missing focused skill filters");
+    }
+    const filters = within(filterPanel as HTMLElement);
+    const costButton = filters.getByRole("button", { name: "Cost filters" });
+    const inflictsButton = filters.getByRole("button", { name: "Inflicts" });
+    const professionButton = filters.getByRole("button", { name: "Profession" });
+
+    expect(costButton).not.toHaveClass("active");
+    expect(inflictsButton).not.toHaveClass("active");
+    expect(professionButton).not.toHaveClass("active");
+
+    fireEvent.click(costButton);
+    fireEvent.click(filters.getByLabelText("Energy"));
+
+    expect(costButton).toHaveClass("active");
+    expect(costButton).toHaveTextContent("Cost (1)");
+
+    fireEvent.click(costButton);
+    fireEvent.click(inflictsButton);
+    fireEvent.click(filters.getByLabelText("Burning"));
+
+    expect(inflictsButton).toHaveClass("active");
   });
 
   it("renders build default filters as removable chips and reset restores them", () => {
@@ -141,7 +240,7 @@ describe("FocusedSkillCatalog", () => {
 
     expect(screen.getByRole("button", { name: "Remove Elite filter" })).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "Remove Applies: Burning filter" })
+      screen.getByRole("button", { name: "Remove Inflicts: Burning filter" })
     ).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Remove Elite filter" }));
@@ -150,7 +249,7 @@ describe("FocusedSkillCatalog", () => {
       "+1 filters"
     );
     expect(
-      screen.getByRole("button", { name: "Remove Applies: Burning filter" })
+      screen.getByRole("button", { name: "Remove Inflicts: Burning filter" })
     ).toBeInTheDocument();
   });
 
@@ -327,6 +426,36 @@ describe("FocusedSkillCatalog", () => {
     expect(firstGroup).toHaveAttribute("aria-expanded", "false");
     fireEvent.click(firstGroup);
     expect(firstGroup).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("expands and collapses all visible attribute groups", () => {
+    const { container } = render(<Harness initialState={stateWithBrowserQuery("Signet")} />);
+    const results = container.querySelector(".focused-skill-results");
+    if (results === null) {
+      throw new Error("Missing focused skill results");
+    }
+    const resultControls = within(results as HTMLElement);
+
+    const collapseAll = screen.getByRole("button", { name: "Collapse all" });
+    const expandAll = screen.getByRole("button", { name: "Expand all" });
+
+    expect(resultControls.getAllByRole("button", { expanded: true }).length).toBeGreaterThan(1);
+    expect(expandAll).toBeDisabled();
+    expect(collapseAll).not.toBeDisabled();
+
+    fireEvent.click(collapseAll);
+
+    expect(resultControls.queryAllByRole("button", { expanded: true })).toHaveLength(0);
+    expect(resultControls.getAllByRole("button", { expanded: false }).length).toBeGreaterThan(1);
+    expect(collapseAll).toBeDisabled();
+    expect(expandAll).not.toBeDisabled();
+
+    fireEvent.click(expandAll);
+
+    expect(resultControls.getAllByRole("button", { expanded: true }).length).toBeGreaterThan(1);
+    expect(resultControls.queryAllByRole("button", { expanded: false })).toHaveLength(0);
+    expect(expandAll).toBeDisabled();
+    expect(collapseAll).not.toBeDisabled();
   });
 });
 

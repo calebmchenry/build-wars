@@ -1,4 +1,11 @@
-import { useRef, useState, type CSSProperties, type Dispatch, type KeyboardEvent } from "react";
+import {
+  useRef,
+  useState,
+  type CSSProperties,
+  type Dispatch,
+  type KeyboardEvent,
+  type ReactNode
+} from "react";
 
 import type { CatalogProfessionRecord } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
@@ -21,8 +28,42 @@ import {
 } from "../skill-filter-state";
 import { CatalogIcon } from "./CatalogIcon";
 import { useOutsidePointerDown } from "./useOutsidePointerDown";
+import { useViewportAwarePopover } from "./useViewportAwarePopover";
 
 const MAX_VISIBLE_FILTER_CHIPS = 3;
+
+export function SkillAdvancedFilterSection({
+  id,
+  activeCount,
+  expanded,
+  onToggle,
+  children
+}: {
+  readonly id: string;
+  readonly activeCount: number;
+  readonly expanded: boolean;
+  readonly onToggle: () => void;
+  readonly children: ReactNode;
+}) {
+  return (
+    <div className="advanced-filter-section">
+      <button
+        type="button"
+        className={`advanced-filter-toggle${activeCount > 0 ? " active" : ""}`}
+        aria-expanded={expanded}
+        aria-controls={id}
+        onClick={onToggle}
+      >
+        {`Advanced filters (${activeCount})`}
+      </button>
+      {expanded ? (
+        <div id={id} className="advanced-filter-grid">
+          {children}
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 export function SkillFilterSearchInput({
   state,
@@ -107,19 +148,20 @@ export function SkillProfessionFilterMenu({
   readonly dispatch: Dispatch<EditorAction>;
 }) {
   const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement | null>(null);
+  const { anchorRef, popoverRef } = useViewportAwarePopover(open);
   const selectedProfessionIds = new Set(
     professionIdsForFilterEditing(state, catalogs).map((professionId) => Number(professionId))
   );
+  const active = selectedProfessionIds.size > 0;
 
-  useOutsidePointerDown(open, rootRef, () => setOpen(false));
+  useOutsidePointerDown(open, anchorRef, () => setOpen(false));
 
   return (
-    <div ref={rootRef} className="filter-menu-control">
+    <div ref={anchorRef} className="filter-menu-control">
       <span>Profession</span>
       <button
         type="button"
-        className="filter-menu-button"
+        className={`filter-menu-button${active ? " active" : ""}`}
         aria-haspopup="true"
         aria-expanded={open}
         onClick={() => setOpen((current) => !current)}
@@ -128,6 +170,7 @@ export function SkillProfessionFilterMenu({
       </button>
       {open ? (
         <div
+          ref={popoverRef}
           className="filter-menu-popover profession-filter-menu"
           role="group"
           aria-label="Profession filters"
@@ -198,30 +241,57 @@ export function SkillResourceFilterControls({
   readonly filters: Readonly<Record<ResourceFilterKind, ResourceFilterValue>>;
   readonly dispatch: Dispatch<EditorAction>;
 }) {
+  const [open, setOpen] = useState(false);
+  const { anchorRef, popoverRef } = useViewportAwarePopover(open);
+  const selectedCount = RESOURCE_FILTERS.filter((resource) => filters[resource] !== "any").length;
+  const active = selectedCount > 0;
+
+  useOutsidePointerDown(open, anchorRef, () => setOpen(false));
+
   return (
-    <div className="focused-resource-filters" aria-label="Resource filters">
-      {RESOURCE_FILTERS.map((resource) => (
-        <label key={resource}>
-          <span>{RESOURCE_FILTER_LABELS[resource]}</span>
-          <select
-            value={filters[resource]}
-            onChange={(event) =>
-              dispatch({
-                type: "set-resource-filter",
-                resource,
-                value: event.currentTarget.value as ResourceFilterValue
-              })
+    <div ref={anchorRef} className="filter-menu-control">
+      <span>Cost</span>
+      <button
+        type="button"
+        className={`filter-menu-button${active ? " active" : ""}`}
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-label={selectedCount === 0 ? "Cost filters" : `${selectedCount} cost filters selected`}
+        onClick={() => setOpen((current) => !current)}
+      >
+        {selectedCount === 0 ? "Cost" : `Cost (${selectedCount})`}
+      </button>
+      {open ? (
+        <div
+          ref={popoverRef}
+          className="filter-menu-popover cost-filter-menu"
+          role="group"
+          aria-label="Cost filters"
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              event.preventDefault();
+              setOpen(false);
             }
-          >
-            <option value="any">Any</option>
-            <option value="explicit">Explicit</option>
-            <option value="zero">Zero</option>
-            <option value="number">Number</option>
-            <option value="percentage">Percent</option>
-            <option value="special">Special</option>
-          </select>
-        </label>
-      ))}
+          }}
+        >
+          {RESOURCE_FILTERS.map((resource) => (
+            <label key={resource} className="filter-menu-checkbox">
+              <input
+                type="checkbox"
+                checked={filters[resource] !== "any"}
+                onChange={() =>
+                  dispatch({
+                    type: "set-resource-filter",
+                    resource,
+                    value: filters[resource] === "any" ? "explicit" : "any"
+                  })
+                }
+              />
+              <span>{RESOURCE_FILTER_LABELS[resource]}</span>
+            </label>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }

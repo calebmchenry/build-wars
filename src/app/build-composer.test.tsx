@@ -48,6 +48,36 @@ describe("BuildComposer", () => {
     CATALOG_RENDER_TIMEOUT_MS
   );
 
+  it("syncs the default skill mode filter from the PvP checkbox without reverse updates", () => {
+    render(<Harness />);
+
+    const pvpToggle = screen.getByRole("checkbox", { name: "PvP" });
+    fireEvent.click(screen.getByRole("button", { name: /Show skill filters/ }));
+    const modeFilter = screen.getByLabelText("Mode");
+
+    expect(pvpToggle).not.toBeChecked();
+    expect(modeFilter).toHaveValue("pve");
+
+    fireEvent.click(pvpToggle);
+
+    expect(pvpToggle).toBeChecked();
+    expect(modeFilter).toHaveValue("pvp");
+
+    fireEvent.change(modeFilter, { target: { value: "pve" } });
+
+    expect(pvpToggle).toBeChecked();
+    expect(modeFilter).toHaveValue("pve");
+
+    fireEvent.click(screen.getByRole("button", { name: "Reset filters" }));
+
+    expect(modeFilter).toHaveValue("pvp");
+
+    fireEvent.click(pvpToggle);
+
+    expect(pvpToggle).not.toBeChecked();
+    expect(modeFilter).toHaveValue("pve");
+  });
+
   it("renders an empty build-set no-loadout state until a loadout is explicitly created", () => {
     render(<Harness initialState={emptyBuildSetWorkspace()} />);
 

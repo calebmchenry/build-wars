@@ -8,7 +8,7 @@ import {
   purchasedRankCost,
   renderSkillTooltipText,
   resolveTitleRanksForSkill,
-  skillHasMetadataTokens,
+  skillMetadataTokensForSkill,
   skillTypeLabelForId,
   skillTypeMatches,
   validateBuild,
@@ -19,6 +19,7 @@ import {
   type CatalogAttributeRecord,
   type CatalogSkillRecord,
   type SkillId,
+  type SkillMetadataToken,
   type SkillProgressionSeries,
   type SkillTypeId,
   type SkillTooltipTextSegment,
@@ -362,7 +363,7 @@ export function selectSkillBrowser(
     .filter((skill) => matchesElite(skill, filters.elite))
     .filter((skill) => matchesAvailability(skill, state, filters.availability))
     .filter((skill) => matchesResourceFilters(skill, filters.resources))
-    .filter((skill) => skillHasMetadataTokens(skill, filters.metadata, catalogs.skillMetadata));
+    .filter((skill) => matchesMetadataFilters(skill, filters.metadata, catalogs.skillMetadata));
   const ordered = sortSkills(filtered, filters.sortMode, catalogs);
 
   return {
@@ -791,19 +792,51 @@ function matchesResourceFilters(
   skill: CatalogSkillRecord,
   filters: Readonly<Record<ResourceFilterKind, ResourceFilterValue>>
 ): boolean {
-  return (Object.keys(filters) as ResourceFilterKind[]).every((resource) => {
-    const filter = filters[resource];
-    if (filter === "any") {
-      return true;
-    }
-    const state = skill.costs[resource].state;
-    if (filter === "explicit") {
-      return (
-        state === "zero" || state === "number" || state === "percentage" || state === "special"
-      );
-    }
-    return state === filter;
-  });
+  const activeFilters = (Object.keys(filters) as ResourceFilterKind[])
+    .map((resource) => ({ resource, filter: filters[resource] }))
+    .filter(({ filter }) => filter !== "any");
+
+  if (activeFilters.length === 0) {
+    return true;
+  }
+
+  return activeFilters.some(({ resource, filter }) =>
+    skillCostStateMatchesFilter(skill.costs[resource].state, filter)
+  );
+}
+
+function skillCostStateMatchesFilter(
+  state: SkillValueState["state"],
+  filter: ResourceFilterValue
+): boolean {
+  if (filter === "any") {
+    return true;
+  }
+  if (filter === "explicit") {
+    return state === "zero" || state === "number" || state === "percentage" || state === "special";
+  }
+  return state === filter;
+}
+
+function matchesMetadataFilters(
+  skill: CatalogSkillRecord,
+  filters: readonly SkillMetadataToken[],
+  index: AppCatalogViews["skillMetadata"]
+): boolean {
+  if (filters.length === 0) {
+    return true;
+  }
+
+  const skillTokens = new Set(skillMetadataTokensForSkill(skill, index));
+  const filtersByGroup = new Map<string, SkillMetadataToken[]>();
+  for (const filter of filters) {
+    const group = filter.split(":", 1)[0] ?? filter;
+    filtersByGroup.set(group, [...(filtersByGroup.get(group) ?? []), filter]);
+  }
+
+  return [...filtersByGroup.values()].every((groupFilters) =>
+    groupFilters.some((filter) => skillTokens.has(filter))
+  );
 }
 
 function sortSkills(

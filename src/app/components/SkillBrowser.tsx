@@ -1,33 +1,28 @@
-import type { Dispatch } from "react";
+import { useState, type Dispatch } from "react";
 
 import { catalogId, isSkillTypeId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
 import { selectSkillBrowser, selectSkillDisplay } from "../editor-selectors";
 import type {
-  BrowserAvailabilityFilter,
   BrowserEliteFilter,
   BrowserProfessionScope,
   BrowserSortMode,
   BrowserViewMode,
   EditorAction,
-  EditorState,
-  ResourceFilterKind,
-  ResourceFilterValue
+  EditorState
 } from "../editor-state";
 import { BUILD_WARS_DRAG_MIME, browserSkillDragPayload } from "../drag-payload";
 import { applySkillBarIntent } from "../skill-bar-actions";
+import { advancedSkillFilterCount } from "../skill-filter-state";
 import { SkillDisplay } from "./SkillDisplay";
+import {
+  SkillAdvancedFilterSection,
+  SkillModeFilterControl,
+  SkillResourceFilterControls
+} from "./SkillFilterSearch";
 import { SkillMetadataFilterControls } from "./SkillMetadataFilterControls";
 import { setSkillIconDragImage } from "./skill-drag-image";
 import { SkillTooltipTrigger } from "./SkillTooltip";
-
-const RESOURCE_FILTERS: readonly ResourceFilterKind[] = [
-  "energy",
-  "adrenaline",
-  "sacrifice",
-  "upkeep",
-  "overcast"
-];
 
 export function SkillBrowser({
   state,
@@ -40,6 +35,8 @@ export function SkillBrowser({
 }) {
   const browser = selectSkillBrowser(state, catalogs);
   const targetSlot = selectedOrFirstEmptySlot(state);
+  const [advancedFiltersExpanded, setAdvancedFiltersExpanded] = useState(false);
+  const hiddenAdvancedFilterCount = advancedSkillFilterCount(state.browser.filters);
 
   return (
     <section className="editor-panel browser-panel" aria-labelledby="browser-title">
@@ -117,133 +114,103 @@ export function SkillBrowser({
             ))}
           </select>
         </label>
-        <label>
-          <span>Attribute</span>
-          <select
-            value={
-              state.browser.filters.attributeId === null
-                ? ""
-                : Number(state.browser.filters.attributeId)
-            }
-            onChange={(event) =>
-              dispatch({
-                type: "set-browser-filters",
-                filters: {
-                  attributeId:
-                    event.currentTarget.value.length === 0
-                      ? null
-                      : catalogId<"Attribute">(Number(event.currentTarget.value))
-                }
-              })
-            }
-          >
-            <option value="">Any</option>
-            {browser.availableAttributes.map((attribute) => (
-              <option key={Number(attribute.id)} value={Number(attribute.id)}>
-                {attribute.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          <span>Type</span>
-          <select
-            value={state.browser.filters.skillType ?? ""}
-            onChange={(event) => {
-              const value = event.currentTarget.value;
-              dispatch({
-                type: "set-browser-filters",
-                filters: { skillType: isSkillTypeId(value) ? value : null }
-              });
-            }}
-          >
-            <option value="">Any</option>
-            {browser.availableTypes.map((type) => (
-              <option key={type.id} value={type.id}>
-                {type.label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          <span>Elite</span>
-          <select
-            value={state.browser.filters.elite}
-            onChange={(event) =>
-              dispatch({
-                type: "set-browser-filters",
-                filters: { elite: event.currentTarget.value as BrowserEliteFilter }
-              })
-            }
-          >
-            <option value="any">Any</option>
-            <option value="elite">Elite</option>
-            <option value="non-elite">Non-elite</option>
-          </select>
-        </label>
-        <label>
-          <span>Availability</span>
-          <select
-            value={state.browser.filters.availability}
-            onChange={(event) =>
-              dispatch({
-                type: "set-browser-filters",
-                filters: { availability: event.currentTarget.value as BrowserAvailabilityFilter }
-              })
-            }
-          >
-            <option value="default">Selected mode</option>
-            <option value="all">All modes</option>
-            <option value="pve">PvE</option>
-            <option value="pvp">PvP</option>
-            <option value="both">Both</option>
-            <option value="pve-only">PvE only</option>
-            <option value="pvp-only">PvP only</option>
-            <option value="unknown">Unknown</option>
-          </select>
-        </label>
-        <label>
-          <span>Sort</span>
-          <select
-            value={state.browser.filters.sortMode}
-            onChange={(event) =>
-              dispatch({
-                type: "set-browser-filters",
-                filters: { sortMode: event.currentTarget.value as BrowserSortMode }
-              })
-            }
-          >
-            <option value="attribute">Attribute</option>
-            <option value="name">Name</option>
-            <option value="type">Type</option>
-          </select>
-        </label>
-      </div>
-      <div className="resource-filters" aria-label="Resource filters">
-        {RESOURCE_FILTERS.map((resource) => (
-          <label key={resource}>
-            <span>{resource}</span>
+        <SkillModeFilterControl state={state} dispatch={dispatch} />
+        <SkillResourceFilterControls
+          filters={state.browser.filters.resources}
+          dispatch={dispatch}
+        />
+        <SkillMetadataFilterControls
+          selected={state.browser.filters.metadata}
+          dispatch={dispatch}
+        />
+        <SkillAdvancedFilterSection
+          id="browser-advanced-skill-filters"
+          activeCount={hiddenAdvancedFilterCount}
+          expanded={advancedFiltersExpanded}
+          onToggle={() => setAdvancedFiltersExpanded((expanded) => !expanded)}
+        >
+          <label>
+            <span>Attribute</span>
             <select
-              value={state.browser.filters.resources[resource]}
+              value={
+                state.browser.filters.attributeId === null
+                  ? ""
+                  : Number(state.browser.filters.attributeId)
+              }
               onChange={(event) =>
                 dispatch({
-                  type: "set-resource-filter",
-                  resource,
-                  value: event.currentTarget.value as ResourceFilterValue
+                  type: "set-browser-filters",
+                  filters: {
+                    attributeId:
+                      event.currentTarget.value.length === 0
+                        ? null
+                        : catalogId<"Attribute">(Number(event.currentTarget.value))
+                  }
+                })
+              }
+            >
+              <option value="">Any</option>
+              {browser.availableAttributes.map((attribute) => (
+                <option key={Number(attribute.id)} value={Number(attribute.id)}>
+                  {attribute.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <span>Type</span>
+            <select
+              value={state.browser.filters.skillType ?? ""}
+              onChange={(event) => {
+                const value = event.currentTarget.value;
+                dispatch({
+                  type: "set-browser-filters",
+                  filters: { skillType: isSkillTypeId(value) ? value : null }
+                });
+              }}
+            >
+              <option value="">Any</option>
+              {browser.availableTypes.map((type) => (
+                <option key={type.id} value={type.id}>
+                  {type.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <span>Elite</span>
+            <select
+              value={state.browser.filters.elite}
+              onChange={(event) =>
+                dispatch({
+                  type: "set-browser-filters",
+                  filters: { elite: event.currentTarget.value as BrowserEliteFilter }
                 })
               }
             >
               <option value="any">Any</option>
-              <option value="explicit">Explicit</option>
-              <option value="zero">Zero</option>
-              <option value="number">Number</option>
-              <option value="percentage">Percent</option>
-              <option value="special">Special</option>
+              <option value="elite">Elite</option>
+              <option value="non-elite">Non-elite</option>
             </select>
           </label>
-        ))}
+          <label>
+            <span>Sort</span>
+            <select
+              value={state.browser.filters.sortMode}
+              onChange={(event) =>
+                dispatch({
+                  type: "set-browser-filters",
+                  filters: { sortMode: event.currentTarget.value as BrowserSortMode }
+                })
+              }
+            >
+              <option value="attribute">Attribute</option>
+              <option value="name">Name</option>
+              <option value="type">Type</option>
+            </select>
+          </label>
+        </SkillAdvancedFilterSection>
       </div>
-      <SkillMetadataFilterControls selected={state.browser.filters.metadata} dispatch={dispatch} />
       {browser.matchingCount === 0 ? (
         <div className="empty-state">
           <strong>No matching skills</strong>

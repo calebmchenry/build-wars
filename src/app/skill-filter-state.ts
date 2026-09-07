@@ -10,6 +10,7 @@ import type { Dispatch } from "react";
 import type { AppCatalogViews } from "./catalogs";
 import type {
   BrowserAvailabilityFilter,
+  BrowserFilters,
   BrowserProfessionScope,
   BrowserSortMode,
   EditorAction,
@@ -176,7 +177,10 @@ export function selectActiveSkillFilterChips(
     chips.push({
       kind: "resource",
       key: `resource:${resource}`,
-      label: `${RESOURCE_FILTER_LABELS[resource]}: ${RESOURCE_VALUE_LABELS[value]}`,
+      label:
+        value === "explicit"
+          ? `Cost: ${RESOURCE_FILTER_LABELS[resource]}`
+          : `Cost: ${RESOURCE_FILTER_LABELS[resource]} ${RESOURCE_VALUE_LABELS[value]}`,
       resource
     });
   }
@@ -220,6 +224,15 @@ export function hasCustomizedSkillFilters(state: EditorState): boolean {
     filters.metadata.length > 0 ||
     filters.sortMode !== "attribute"
   );
+}
+
+export function advancedSkillFilterCount(filters: BrowserFilters): number {
+  return [
+    filters.attributeId !== null,
+    filters.skillType !== null,
+    filters.elite !== "any",
+    filters.sortMode !== "attribute"
+  ].filter(Boolean).length;
 }
 
 export function removeSkillFilterChip(
@@ -439,7 +452,7 @@ function metadataTokenLabel(token: SkillMetadataToken): string {
 
 function metadataGroupLabel(groupId: (typeof SKILL_METADATA_FILTER_GROUPS)[number]["id"]): string {
   if (groupId === "applies") {
-    return "Applies";
+    return "Inflicts";
   }
   if (groupId === "removes") {
     return "Removes";

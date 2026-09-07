@@ -135,6 +135,45 @@ describe("editor selectors", () => {
     expect(selectSkillBrowser(reorderedWords, catalogs).matchingCount).toBe(0);
   });
 
+  it("resolves default skill mode filtering from the build mode", () => {
+    const base = editorReducer(createBlankEditorState(), {
+      type: "set-browser-filters",
+      filters: { professionScope: { kind: "all" } }
+    });
+    const pveSkills = selectSkillBrowser(base, catalogs).groups.flatMap((group) => group.skills);
+    const pvpState = editorReducer(base, { type: "set-mode", mode: "pvp" });
+    const pvpSkills = selectSkillBrowser(pvpState, catalogs).groups.flatMap(
+      (group) => group.skills
+    );
+
+    expect(pveSkills.some((skill) => skill.classification.modeAvailability === "pve-only")).toBe(
+      true
+    );
+    expect(pveSkills.every((skill) => skill.classification.modeAvailability !== "pvp-only")).toBe(
+      true
+    );
+    expect(pvpSkills.some((skill) => skill.classification.modeAvailability === "pvp-only")).toBe(
+      true
+    );
+    expect(pvpSkills.every((skill) => skill.classification.modeAvailability !== "pve-only")).toBe(
+      true
+    );
+
+    const explicitPveFilter = editorReducer(pvpState, {
+      type: "set-browser-filters",
+      filters: { availability: "pve" }
+    });
+    const explicitPveSkills = selectSkillBrowser(explicitPveFilter, catalogs).groups.flatMap(
+      (group) => group.skills
+    );
+
+    expect(explicitPveFilter.build.mode).toBe("pvp");
+    expect(explicitPveFilter.browser.filters.availability).toBe("pve");
+    expect(
+      explicitPveSkills.every((skill) => skill.classification.modeAvailability !== "pvp-only")
+    ).toBe(true);
+  });
+
   it("applies explicit attribute and resource filters without matching no-attribute skills", () => {
     const state = editorReducer(
       editorReducer(createBlankEditorState(), {
@@ -159,6 +198,52 @@ describe("editor selectors", () => {
       browser.groups
         .flatMap((group) => group.skills)
         .every((skill) => skill.costs.energy.state === "number")
+    ).toBe(true);
+  });
+
+  it("matches any selected cost within the resource filter group", () => {
+    const state = editorReducer(
+      editorReducer(
+        editorReducer(createBlankEditorState(), {
+          type: "set-browser-filters",
+          filters: { professionScope: { kind: "all" } }
+        }),
+        {
+          type: "set-resource-filter",
+          resource: "energy",
+          value: "explicit"
+        }
+      ),
+      {
+        type: "set-resource-filter",
+        resource: "adrenaline",
+        value: "explicit"
+      }
+    );
+    const skills = selectSkillBrowser(state, catalogs).groups.flatMap((group) => group.skills);
+    const hasExplicitCost = (state: string) =>
+      state === "zero" || state === "number" || state === "percentage" || state === "special";
+
+    expect(skills.length).toBeGreaterThan(0);
+    expect(
+      skills.every(
+        (skill) =>
+          hasExplicitCost(skill.costs.energy.state) || hasExplicitCost(skill.costs.adrenaline.state)
+      )
+    ).toBe(true);
+    expect(
+      skills.some(
+        (skill) =>
+          hasExplicitCost(skill.costs.energy.state) &&
+          !hasExplicitCost(skill.costs.adrenaline.state)
+      )
+    ).toBe(true);
+    expect(
+      skills.some(
+        (skill) =>
+          hasExplicitCost(skill.costs.adrenaline.state) &&
+          !hasExplicitCost(skill.costs.energy.state)
+      )
     ).toBe(true);
   });
 
@@ -222,6 +307,47 @@ describe("editor selectors", () => {
     ).groups.flatMap((group) => group.skills);
 
     expect(removesHex.map((skill) => skill.name)).toContain("Inspired Hex");
+  });
+
+  it("matches any metadata option within a group and requires selected groups", () => {
+    const catalogsWithMetadata = {
+      ...catalogs,
+      skillMetadata: createSkillMetadataIndex(
+        skillMetadataOverlay([
+          ["Body Blow", ["applies:deep_wound", "deals:damage"]],
+          ["Immolate", ["applies:burning", "deals:fire"]],
+          ["Inspired Hex", ["removes:hex"]]
+        ]),
+        catalogs.skills
+      )
+    };
+    const inflicted = selectSkillBrowser(
+      editorReducer(createBlankEditorState(), {
+        type: "set-browser-filters",
+        filters: {
+          professionScope: { kind: "all" },
+          metadata: ["applies:burning", "applies:deep_wound"]
+        }
+      }),
+      catalogsWithMetadata
+    ).groups.flatMap((group) => group.skills);
+    const burningFire = selectSkillBrowser(
+      editorReducer(createBlankEditorState(), {
+        type: "set-browser-filters",
+        filters: {
+          professionScope: { kind: "all" },
+          metadata: ["applies:burning", "applies:deep_wound", "deals:fire"]
+        }
+      }),
+      catalogsWithMetadata
+    ).groups.flatMap((group) => group.skills);
+
+    expect(inflicted.map((skill) => skill.name)).toEqual(
+      expect.arrayContaining(["Body Blow", "Immolate"])
+    );
+    expect(inflicted.map((skill) => skill.name)).not.toContain("Inspired Hex");
+    expect(burningFire.map((skill) => skill.name)).toContain("Immolate");
+    expect(burningFire.map((skill) => skill.name)).not.toContain("Body Blow");
   });
 
   it("uses default and authored title ranks for title-scaled skill display", () => {

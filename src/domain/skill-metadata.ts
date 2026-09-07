@@ -89,7 +89,7 @@ export interface SkillMetadataIndex {
 export const SKILL_METADATA_FILTER_GROUPS: readonly SkillMetadataFilterGroup[] = [
   {
     id: "applies",
-    label: "Applies Condition",
+    label: "Inflicts",
     options: [
       { token: "applies:condition", label: "Any condition" },
       { token: "applies:burning", label: "Burning" },

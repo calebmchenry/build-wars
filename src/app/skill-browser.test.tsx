@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { useReducer } from "react";
 import { describe, expect, it } from "vitest";
 
+import { catalogId } from "../domain";
 import { requireReadyCatalogs } from "./catalogs";
 import { SkillBrowser } from "./components/SkillBrowser";
 import { createBlankEditorState, editorReducer, type EditorState } from "./editor-state";
@@ -29,6 +30,31 @@ describe("SkillBrowser", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Compact" }));
     expect(screen.getByRole("button", { name: "Compact" })).toHaveAttribute("aria-pressed", "true");
+  });
+
+  it(
+    "renders default availability as the current build mode",
+    () => {
+      render(<Harness initialState={stateWithBuildMode("pvp")} />);
+
+      expect(screen.getByLabelText("Mode")).toHaveValue("pvp");
+    },
+    CATALOG_RENDER_TIMEOUT_MS
+  );
+
+  it("collapses lower-priority filters behind advanced filters", () => {
+    render(<Harness initialState={stateWithAdvancedFilters()} />);
+
+    expect(screen.getByLabelText("Text")).toBeInTheDocument();
+    expect(screen.getByLabelText("Mode")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Cost filters" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Inflicts" })).toBeInTheDocument();
+    expect(screen.queryByLabelText("Attribute")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Advanced filters (2)" }));
+
+    expect(screen.getByLabelText("Attribute")).toHaveValue("0");
+    expect(screen.getByLabelText("Elite")).toHaveValue("elite");
   });
 
   it(
@@ -75,6 +101,39 @@ function stateWithBrowserTextQuery(textQuery: string): EditorState {
       filters: {
         ...state.browser.filters,
         textQuery
+      }
+    }
+  };
+}
+
+function stateWithBuildMode(mode: "pve" | "pvp"): EditorState {
+  const state = createBlankEditorState();
+  return {
+    ...state,
+    build: {
+      ...state.build,
+      mode
+    },
+    browser: {
+      ...state.browser,
+      filters: {
+        ...state.browser.filters,
+        query: "zzzz-no-skill"
+      }
+    }
+  };
+}
+
+function stateWithAdvancedFilters(): EditorState {
+  const state = createBlankEditorState();
+  return {
+    ...state,
+    browser: {
+      ...state.browser,
+      filters: {
+        ...state.browser.filters,
+        attributeId: catalogId<"Attribute">(0),
+        elite: "elite"
       }
     }
   };
