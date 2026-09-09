@@ -434,8 +434,14 @@ describe("editor selectors", () => {
     const visibleSkills = browser.groups.flatMap((group) => group.skills);
     const visibleNames = visibleSkills.map((skill) => skill.name);
 
-    expect(visibleNames).toContain("Spear of Fury");
-    expect(visibleNames).toContain('"Save Yourselves!"');
+    expect(visibleNames).toEqual(
+      expect.arrayContaining([
+        "Spear of Fury (Kurzick)",
+        "Spear of Fury (Luxon)",
+        '"Save Yourselves!" (Kurzick)',
+        '"Save Yourselves!" (Luxon)'
+      ])
+    );
     expect(visibleNames).toContain("Whirlwind Attack");
     expect(visibleNames).toContain('"There\'s Nothing to Fear!"');
     expect(browser.groups.map((group) => group.label)).toEqual(

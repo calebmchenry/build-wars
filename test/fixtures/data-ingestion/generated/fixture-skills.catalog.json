@@ -1,5 +1,5 @@
 {
-  "catalogVersion": "skills-cce6f4fb180bdb47",
+  "catalogVersion": "skills-741bdc2afa49ba2e",
   "dependencyDigests": [
     {
       "artifactDigest": "1cb3f79b7139cf26adbcf40b600094c2860796c60dcd9f1ba75bad694d07c8b4",
@@ -31,29 +31,7 @@
       ]
     }
   ],
-  "dispositions": [
-    {
-      "id": "disposition:skill:6:same-page-variant",
-      "kind": "same-page-variant",
-      "provenance": {
-        "claimIds": [
-          "claim:skill:6:same-page-variant"
-        ],
-        "notes": null,
-        "reviewIds": [
-          "review:epic-04-first-baseline:2026-09-01"
-        ],
-        "sourceIds": [
-          "source:gww:epic-04-fixture:skill:6:5106"
-        ]
-      },
-      "reason": "Multiple accepted seed IDs resolve to the same canonical page; each ID remains a separate catalog record.",
-      "requestedTitle": "\"Save Yourselves!\"",
-      "reviewId": "review:epic-04-first-baseline:2026-09-01",
-      "skillId": 6,
-      "templateId": 6
-    }
-  ],
+  "dispositions": [],
   "generatedAt": "2026-09-01T00:00:00Z",
   "generator": "build-wars-ingest/0.1.0",
   "profile": {
@@ -609,15 +587,15 @@
       "section": "dependencyDigests"
     },
     {
-      "digest": "c5472ea9419627e78eb003228c8238180dafbe262a55d72ca4f0bd8f86bcc5c6",
+      "digest": "e1e9e1d02529aea592f04b748aceba8d10ce70adb77f16f053793bafe183385b",
       "section": "sourceSet"
     },
     {
-      "digest": "7b8799c4b9982b27a93f1f9f43640bb59906f0038a3eac5a4c69042d630bf106",
+      "digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
       "section": "dispositions"
     },
     {
-      "digest": "58913844eba40e18a6efccd2addbe8f25048ed4c1e4ba147f86f240c3a32e132",
+      "digest": "8503691b00f50952186dccf552e513437a410addedfb2ac6c43a25832caf632d",
       "section": "skills"
     },
     {
@@ -625,7 +603,7 @@
       "section": "progressionSeries"
     },
     {
-      "digest": "febf2f66744ec45ae74eb7d810068a176156cba8bf4afbef239d8aee795f47bf",
+      "digest": "b17112173f90a8b5319fdb33ae43eebaa08548ed110951890266c308235507d9",
       "section": "splitGroups"
     },
     {
@@ -999,7 +977,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "\"Save Yourselves!\" Shout Warrior Allegiance rank Shout. For seconds, allies gain armor.",
+        "searchText": "\"Save Yourselves!\" (Luxon) Shout Warrior Allegiance rank Shout. For seconds, allies gain armor.",
         "sourceTextDigest": "a43de1c84dc8b7500a9dce6748137cc0d0483ef2ba8c078fdbdd91ce6b8f94f7",
         "state": "reviewed-text",
         "tokens": [
@@ -1054,8 +1032,8 @@
       },
       "iconId": null,
       "id": 3,
-      "name": "\"Save Yourselves!\"",
-      "normalizedName": "\"save yourselves!\"",
+      "name": "\"Save Yourselves!\" (Luxon)",
+      "normalizedName": "\"save yourselves!\" (luxon)",
       "pageIdentity": {
         "canonicalTitle": "\"Save Yourselves!\"",
         "normalizedTitle": "\"Save Yourselves!\"",
@@ -1469,7 +1447,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "\"Save Yourselves!\" Shout Warrior Allegiance rank Shout. For seconds, allies gain armor.",
+        "searchText": "\"Save Yourselves!\" (Kurzick) Shout Warrior Allegiance rank Shout. For seconds, allies gain armor.",
         "sourceTextDigest": "a43de1c84dc8b7500a9dce6748137cc0d0483ef2ba8c078fdbdd91ce6b8f94f7",
         "state": "reviewed-text",
         "tokens": [
@@ -1524,8 +1502,8 @@
       },
       "iconId": null,
       "id": 6,
-      "name": "\"Save Yourselves!\"",
-      "normalizedName": "\"save yourselves!\"",
+      "name": "\"Save Yourselves!\" (Kurzick)",
+      "normalizedName": "\"save yourselves!\" (kurzick)",
       "pageIdentity": {
         "canonicalTitle": "\"Save Yourselves!\"",
         "normalizedTitle": "\"Save Yourselves!\"",
@@ -1584,7 +1562,7 @@
   "sourceSet": {
     "acceptedSeedCount": 6,
     "catalogRecordCount": 6,
-    "dispositionCount": 1,
+    "dispositionCount": 0,
     "indexTitle": "Guild Wars Wiki:Game integration/Skills",
     "maximumAcceptedId": 6,
     "minimumAcceptedId": 1,
@@ -1633,7 +1611,7 @@
         "claimIds": [
           "claim:split:skill:4:mode-variant"
         ],
-        "notes": "Split relationship inferred only from explicit PvE/PvP title suffix evidence.",
+        "notes": "Explicit PvP title paired with its unique unsuffixed or PvE-suffixed counterpart.",
         "reviewIds": [
           "review:epic-04-first-baseline:2026-09-01"
         ],

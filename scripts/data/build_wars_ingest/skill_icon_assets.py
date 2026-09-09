@@ -154,6 +154,13 @@ def main(argv: list[str] | None = None) -> int:
             generated_at=generated_at,
             public_subdir=args.public_subdir,
         )
+        faction_ids = {
+            str(skill["id"]) for skill in skills
+            if re.search(r" \((Kurzick|Luxon)\)$", str(skill["name"]))
+        }
+        missing_factions = faction_ids - result["runtimeManifest"]["assetsBySkillId"].keys()
+        if missing_factions:
+            raise SkillIconAssetError(f"Faction icons unresolved; manifests were not changed: {sorted(missing_factions)}")
         if not args.skip_download:
             download_skill_icon_assets(
                 asset_records=result["provenanceManifest"]["assets"],
@@ -506,6 +513,11 @@ def _candidate_title_groups(
     remote_media_by_id: dict[str, dict[str, Any]],
     page_images_by_title: dict[str, list[str]],
 ) -> list[list[str]]:
+    # Shared allegiance pages contain a stacked Kurzick/Luxon image. Only the
+    # explicitly named faction asset is eligible; a missing one must not fall
+    # back to the other faction, a composite, or an unrelated page image.
+    if re.search(r" \((Kurzick|Luxon)\)$", str(skill.get("name", ""))):
+        return [candidate_file_titles(str(skill["name"]))]
     groups: list[list[str]] = []
     icon_id = skill.get("iconId")
     if isinstance(icon_id, str):
@@ -589,6 +601,7 @@ def _supported_skill_icon_info(imageinfo: dict[str, Any]) -> bool:
         imageinfo.get("mime") in {"image/jpeg", "image/png"}
         and isinstance(width, int)
         and isinstance(height, int)
+        and width == height
         and 40 <= width <= 256
         and 40 <= height <= 256
     )

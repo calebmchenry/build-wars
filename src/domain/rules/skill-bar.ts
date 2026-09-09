@@ -181,7 +181,10 @@ function validatePveOnlyLimit(context: BuildValidationContext): readonly Validat
     return [];
   }
   const pveOnlySlots = resolvedSlots(context.skillSlots).filter(
-    (slot) => !isCompositionFactUnsupported(slot.skill) && hasConsistentPveOnlyFacts(slot.skill)
+    (slot) =>
+      !isCompositionFactUnsupported(slot.skill) &&
+      !slot.skill.classification.split &&
+      hasConsistentPveOnlyFacts(slot.skill)
   );
   return pveOnlySlots.slice(3).map((slot) =>
     createValidationIssue({

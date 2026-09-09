@@ -4,6 +4,7 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
+from .icons import candidate_file_titles
 from .models import Diagnostic, Evidence, digest_bytes
 from .wikitext import normalize_param_name, normalize_template_name
 
@@ -29,6 +30,7 @@ class SkillInfoboxExtraction:
     description_source_text: str | None
     source_text_digest: str | None
     diagnostics: list[Diagnostic]
+    exclusion_reason: str | None = None
 
 
 PROFESSION_ALIASES = {
@@ -111,6 +113,16 @@ def extract_skill_infobox_ids(wikitext: str) -> list[int]:
         return []
     params = _template_params(templates[0])
     return _infobox_ids(params.get("id"))
+
+
+def extract_skill_icon_candidates(wikitext: str, skill_id: int, canonical_title: str) -> list[str]:
+    templates = _skill_infobox_templates(wikitext)
+    params = _template_params(templates[0]) if templates else {}
+    label = _infobox_id_label(params.get("id"), skill_id)
+    if label in {"kurzick", "luxon"}:
+        name = _clean_markup(params.get("name")) or canonical_title
+        return [f"File:{name} ({label.title()}).jpg"]
+    return candidate_file_titles(canonical_title, _file_title(params.get("image")))
 
 
 def extract_skill_infobox(
@@ -205,18 +217,25 @@ def extract_skill_infobox(
 
     infobox_ids = _infobox_ids(params.get("id"))
     infobox_id_label = _infobox_id_label(params.get("id"), skill_id)
-    if infobox_ids and skill_id not in infobox_ids:
+    exclusion_reason = None
+    if skill_id not in infobox_ids:
+        exclusion_reason = f"Source-set skill ID {skill_id} was not listed in infobox IDs {infobox_ids}"
         diagnostics.append(
             _diag(
                 "SKILL_INFOBOX_ID_MISMATCH",
-                f"Source-set skill ID {skill_id} was not listed in infobox IDs {infobox_ids}",
+                exclusion_reason,
                 skill_id,
                 source_id,
                 severity="warning",
-                disposition="accepted-risk",
+                disposition="excluded",
                 field_path="/id",
             )
         )
+    elif infobox_id_label == "non-player":
+        exclusion_reason = f"Infobox explicitly identifies skill ID {skill_id} as NPC or monster only."
+
+    if infobox_id_label in {"kurzick", "luxon"}:
+        name = f"{name} ({infobox_id_label.title()})"
 
     classification = _classification(
         name=name,
@@ -226,6 +245,8 @@ def extract_skill_infobox(
         params=params,
         requested_title=requested_title,
     )
+    classification["nonPlayer"] = classification["nonPlayer"] or infobox_id_label == "non-player"
+    classification["unsupported"] = exclusion_reason is not None
     description = _description_projection(
         skill_id=skill_id,
         name=name,
@@ -270,12 +291,13 @@ def extract_skill_infobox(
     }
     return SkillInfoboxExtraction(
         record=record,
-        icon_file_title=_file_title(params.get("image")),
+        icon_file_title=(f"File:{name}.jpg" if infobox_id_label in {"kurzick", "luxon"} else _file_title(params.get("image"))),
         attribute_name=attribute_name,
         title_key=_rank_title_key(attribute_name, infobox_id_label),
         description_source_text=params.get("concise description") or params.get("description"),
         source_text_digest=description["sourceTextDigest"],
         diagnostics=sorted(diagnostics, key=lambda item: item.stable_key()),
+        exclusion_reason=exclusion_reason,
     )
 
 
@@ -755,16 +777,18 @@ def _truthy(value: str | None) -> bool:
 def _infobox_ids(value: str | None) -> list[int]:
     if value is None:
         return []
-    return [int(match) for match in re.findall(r"\d+", value)]
+    return [int(match) for match in re.findall(r"\d+", re.sub(r"<!--.*?-->", "", value, flags=re.DOTALL))]
 
 
 def _infobox_id_label(value: str | None, skill_id: int) -> str | None:
     if value is None:
         return None
     for part in value.split(","):
-        if skill_id not in [int(match) for match in re.findall(r"\d+", part)]:
+        if skill_id not in _infobox_ids(part):
             continue
         labels = [label.strip().casefold() for label in re.findall(r"<!--\s*([^>]+?)\s*-->", part)]
+        if any(re.search(r"\b(npc|monster)\b", label) for label in labels):
+            return "non-player"
         if any("kurzick" in label for label in labels):
             return "kurzick"
         if any("luxon" in label for label in labels):

@@ -189,7 +189,7 @@
     },
     {
       "assetKey": "012a2ae275204e5aec88a4302386daabd3ba9f3d",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/6/6a/Dragon_Slash.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Dragon_Slash.jpg",
       "downloadSha1": "012a2ae275204e5aec88a4302386daabd3ba9f3d",
@@ -212,7 +212,7 @@
     },
     {
       "assetKey": "014cdb63f8d47580a318f47aee2daafb904c60e7",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/f/f3/Harrier%27s_Grasp_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Harrier%27s_Grasp_(PvP).jpg",
       "downloadSha1": "014cdb63f8d47580a318f47aee2daafb904c60e7",
@@ -536,7 +536,7 @@
     },
     {
       "assetKey": "043676e1d9ea593ca668014496a32ca76df32315",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/1/14/Offering_of_Spirit.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Offering_of_Spirit.jpg",
       "downloadSha1": "043676e1d9ea593ca668014496a32ca76df32315",
@@ -1746,7 +1746,7 @@
     },
     {
       "assetKey": "0f51031bda05a2ce3576fa341c1e6e0695cd3aaa",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/d3/Conviction.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Conviction.jpg",
       "downloadSha1": "0f51031bda05a2ce3576fa341c1e6e0695cd3aaa",
@@ -2714,8 +2714,7 @@
       "remoteTimestamp": "2008-07-11T20:05:28Z",
       "sizeBytes": 4299,
       "skillIds": [
-        1414,
-        2642
+        1414
       ],
       "skillNames": [
         "Enraging Charge"
@@ -2876,8 +2875,7 @@
       "remoteTimestamp": "2008-07-11T20:43:13Z",
       "sizeBytes": 3856,
       "skillIds": [
-        995,
-        2643
+        995
       ],
       "skillNames": [
         "Tiger Stance"
@@ -2980,30 +2978,6 @@
       "width": 64
     },
     {
-      "assetKey": "1983ee87d226ef2239b746a1a7ef5e6cbed405a6",
-      "cacheState": "already-current",
-      "canonicalUrl": "https://wiki.guildwars.com/images/5/5c/Aura_of_Holy_Might.jpg",
-      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Aura_of_Holy_Might.jpg",
-      "downloadSha1": "1983ee87d226ef2239b746a1a7ef5e6cbed405a6",
-      "fileTitle": "File:Aura of Holy Might.jpg",
-      "height": 128,
-      "localPublicPath": "/gww-icons/skills/aura-of-holy-might.jpg",
-      "mimeType": "image/jpeg",
-      "remoteSha1": "1983ee87d226ef2239b746a1a7ef5e6cbed405a6",
-      "remoteSha1Matches": true,
-      "remoteTimestamp": "2008-07-07T23:19:39Z",
-      "sizeBytes": 7695,
-      "skillIds": [
-        1955,
-        2098
-      ],
-      "skillNames": [
-        "Aura of Holy Might"
-      ],
-      "src": "/gww-icons/skills/aura-of-holy-might.jpg",
-      "width": 64
-    },
-    {
       "assetKey": "19ddc19bc44877d77826359bd3568070dabaeb1f",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/e/e8/Glimmer_of_Light.jpg",
@@ -3028,7 +3002,7 @@
     },
     {
       "assetKey": "1a026289ebe45f782ef67886260d1a054ed4e477",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/c/c0/Peace_and_Harmony_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Peace_and_Harmony_(PvP).jpg",
       "downloadSha1": "1a026289ebe45f782ef67886260d1a054ed4e477",
@@ -3135,8 +3109,7 @@
       "remoteTimestamp": "2008-07-11T19:52:05Z",
       "sizeBytes": 3791,
       "skillIds": [
-        1415,
-        2640
+        1415
       ],
       "skillNames": [
         "Crippling Slash"
@@ -3330,7 +3303,7 @@
     },
     {
       "assetKey": "1c0bd866a16381a6884063da39df346b1c1f8657",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/d1/Barbed_Signet.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Barbed_Signet.jpg",
       "downloadSha1": "1c0bd866a16381a6884063da39df346b1c1f8657",
@@ -3422,7 +3395,7 @@
     },
     {
       "assetKey": "1ca09be88d64eb3257a00d1bd395b8ee9685ec91",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/7/7d/Shadow_Shroud_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Shadow_Shroud_(PvP).jpg",
       "downloadSha1": "1ca09be88d64eb3257a00d1bd395b8ee9685ec91",
@@ -3535,6 +3508,29 @@
         "Ebon Vanguard Sniper Support"
       ],
       "src": "/gww-icons/skills/ebon-vanguard-sniper-support.jpg",
+      "width": 64
+    },
+    {
+      "assetKey": "1dbf5f729fa9fb29601c4b5f1b540b631db555f9",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/b/bc/Aura_of_Holy_Might_%28Luxon%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Aura_of_Holy_Might_(Luxon).jpg",
+      "downloadSha1": "1dbf5f729fa9fb29601c4b5f1b540b631db555f9",
+      "fileTitle": "File:Aura of Holy Might (Luxon).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/aura-of-holy-might-luxon.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "1dbf5f729fa9fb29601c4b5f1b540b631db555f9",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-07T23:21:09Z",
+      "sizeBytes": 4662,
+      "skillIds": [
+        1955
+      ],
+      "skillNames": [
+        "Aura of Holy Might (Luxon)"
+      ],
+      "src": "/gww-icons/skills/aura-of-holy-might-luxon.jpg",
       "width": 64
     },
     {
@@ -3932,7 +3928,7 @@
     },
     {
       "assetKey": "21080c03eb2159c5c9a114b159213663951b933e",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/e/e0/Ward_Against_Melee.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Ward_Against_Melee.jpg",
       "downloadSha1": "21080c03eb2159c5c9a114b159213663951b933e",
@@ -4184,6 +4180,29 @@
       "width": 64
     },
     {
+      "assetKey": "22af7ff66e51abf7437faa0abdb5ea287bb3f86c",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/a/a6/Shadow_Sanctuary_%28Kurzick%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Shadow_Sanctuary_(Kurzick).jpg",
+      "downloadSha1": "22af7ff66e51abf7437faa0abdb5ea287bb3f86c",
+      "fileTitle": "File:Shadow Sanctuary (Kurzick).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/shadow-sanctuary-kurzick.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "22af7ff66e51abf7437faa0abdb5ea287bb3f86c",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-11T01:40:31Z",
+      "sizeBytes": 4351,
+      "skillIds": [
+        2091
+      ],
+      "skillNames": [
+        "Shadow Sanctuary (Kurzick)"
+      ],
+      "src": "/gww-icons/skills/shadow-sanctuary-kurzick.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "23106c56790b236a1764d36a2b2bff412944d228",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/f/f5/Blessed_Signet.jpg",
@@ -4323,7 +4342,7 @@
     },
     {
       "assetKey": "23fd007076f8d22f1aeaeb8b96443109bb8379e0",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/1/1b/Infuriating_Heat_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Infuriating_Heat_(PvP).jpg",
       "downloadSha1": "23fd007076f8d22f1aeaeb8b96443109bb8379e0",
@@ -4442,7 +4461,7 @@
     },
     {
       "assetKey": "24dec7afff6da3e2f4824f39fa829ee9f3ab9592",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/de/Frenzy_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Frenzy_(PvP).jpg",
       "downloadSha1": "24dec7afff6da3e2f4824f39fa829ee9f3ab9592",
@@ -4513,7 +4532,7 @@
     },
     {
       "assetKey": "2527f8f40131843c5925891479403c222edbe45c",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/dd/Auspicious_Blow_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Auspicious_Blow_(PvP).jpg",
       "downloadSha1": "2527f8f40131843c5925891479403c222edbe45c",
@@ -4678,7 +4697,7 @@
     },
     {
       "assetKey": "2642b9c29b4f418e4963136fcd1b7974a2f4e078",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/7/78/Soul_Twisting_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Soul_Twisting_(PvP).jpg",
       "downloadSha1": "2642b9c29b4f418e4963136fcd1b7974a2f4e078",
@@ -5813,8 +5832,7 @@
       "remoteTimestamp": "2008-07-13T21:00:19Z",
       "sizeBytes": 4194,
       "skillIds": [
-        845,
-        2636
+        845
       ],
       "skillNames": [
         "Liquid Flame"
@@ -6143,8 +6161,7 @@
       "sizeBytes": 5389,
       "skillIds": [
         1255,
-        3020,
-        3043
+        3020
       ],
       "skillNames": [
         "Wanderlust",
@@ -6201,7 +6218,7 @@
     },
     {
       "assetKey": "348461e31198826a4a6e30e1556fdb275a71d534",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/dc/Protector%27s_Defense_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Protector%27s_Defense_(PvP).jpg",
       "downloadSha1": "348461e31198826a4a6e30e1556fdb275a71d534",
@@ -6295,7 +6312,7 @@
     },
     {
       "assetKey": "34f1ed02550a358a2d0f96a5981353b81c5323dc",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/8/84/Mend_Body_and_Soul.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Mend_Body_and_Soul.jpg",
       "downloadSha1": "34f1ed02550a358a2d0f96a5981353b81c5323dc",
@@ -6434,30 +6451,6 @@
       "width": 64
     },
     {
-      "assetKey": "35dfd701dfb3f56fbd477d8317c3ad1fc8e0f485",
-      "cacheState": "already-current",
-      "canonicalUrl": "https://wiki.guildwars.com/images/1/1c/%22Save_Yourselves%21%22.jpg",
-      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:%22Save_Yourselves!%22.jpg",
-      "downloadSha1": "35dfd701dfb3f56fbd477d8317c3ad1fc8e0f485",
-      "fileTitle": "File:\"Save Yourselves!\".jpg",
-      "height": 128,
-      "localPublicPath": "/gww-icons/skills/save-yourselves.jpg",
-      "mimeType": "image/jpeg",
-      "remoteSha1": "35dfd701dfb3f56fbd477d8317c3ad1fc8e0f485",
-      "remoteSha1Matches": true,
-      "remoteTimestamp": "2008-07-11T20:31:41Z",
-      "sizeBytes": 9361,
-      "skillIds": [
-        1954,
-        2097
-      ],
-      "skillNames": [
-        "\"Save Yourselves!\""
-      ],
-      "src": "/gww-icons/skills/save-yourselves.jpg",
-      "width": 64
-    },
-    {
       "assetKey": "35e953602a0c221b1c8f48a26beda324c797cad9",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/f/f9/Spirit%27s_Strength.jpg",
@@ -6574,7 +6567,7 @@
     },
     {
       "assetKey": "364571cee9a89c23d416fd9dcdb4bd4d1f3a0a5c",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/e/e1/Castigation_Signet.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Castigation_Signet.jpg",
       "downloadSha1": "364571cee9a89c23d416fd9dcdb4bd4d1f3a0a5c",
@@ -6995,6 +6988,29 @@
       "width": 64
     },
     {
+      "assetKey": "38e3b7c14ccac69310de5cf9fc2992957592af8e",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/7/7f/Summon_Spirits_%28Kurzick%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Summon_Spirits_(Kurzick).jpg",
+      "downloadSha1": "38e3b7c14ccac69310de5cf9fc2992957592af8e",
+      "fileTitle": "File:Summon Spirits (Kurzick).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/summon-spirits-kurzick.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "38e3b7c14ccac69310de5cf9fc2992957592af8e",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-08T03:03:00Z",
+      "sizeBytes": 3447,
+      "skillIds": [
+        2100
+      ],
+      "skillNames": [
+        "Summon Spirits (Kurzick)"
+      ],
+      "src": "/gww-icons/skills/summon-spirits-kurzick.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "38ea274b8d756fdf05443b02b73fd3c7d14c9177",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/b/b2/Earthen_Shackles.jpg",
@@ -7111,6 +7127,29 @@
         "Ether Renewal (PvP)"
       ],
       "src": "/gww-icons/skills/ether-renewal-pvp.jpg",
+      "width": 64
+    },
+    {
+      "assetKey": "397d301127e55eb7f21cce675c1c81d962cb8f62",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/1/12/Spear_of_Fury_%28Luxon%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Spear_of_Fury_(Luxon).jpg",
+      "downloadSha1": "397d301127e55eb7f21cce675c1c81d962cb8f62",
+      "fileTitle": "File:Spear of Fury (Luxon).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/spear-of-fury-luxon.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "397d301127e55eb7f21cce675c1c81d962cb8f62",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-04-18T22:35:15Z",
+      "sizeBytes": 4749,
+      "skillIds": [
+        1957
+      ],
+      "skillNames": [
+        "Spear of Fury (Luxon)"
+      ],
+      "src": "/gww-icons/skills/spear-of-fury-luxon.jpg",
       "width": 64
     },
     {
@@ -7507,6 +7546,29 @@
       "width": 64
     },
     {
+      "assetKey": "3c4526c860b5caa1aa2fb46927cc9ed2b3933a0b",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/0/00/Ether_Nightmare_%28Luxon%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Ether_Nightmare_(Luxon).jpg",
+      "downloadSha1": "3c4526c860b5caa1aa2fb46927cc9ed2b3933a0b",
+      "fileTitle": "File:Ether Nightmare (Luxon).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/ether-nightmare-luxon.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "3c4526c860b5caa1aa2fb46927cc9ed2b3933a0b",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-12T23:13:27Z",
+      "sizeBytes": 4983,
+      "skillIds": [
+        1949
+      ],
+      "skillNames": [
+        "Ether Nightmare (Luxon)"
+      ],
+      "src": "/gww-icons/skills/ether-nightmare-luxon.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "3c4aed91489bbdfe29995a22665f8de1d96091ba",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/a/a1/Backfire.jpg",
@@ -7531,7 +7593,7 @@
     },
     {
       "assetKey": "3c70d17f2d9b06df088648b921d7a5f08bf26918",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/4/4b/Flail_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Flail_(PvP).jpg",
       "downloadSha1": "3c70d17f2d9b06df088648b921d7a5f08bf26918",
@@ -7570,8 +7632,7 @@
       "sizeBytes": 4633,
       "skillIds": [
         1247,
-        3007,
-        3042
+        3007
       ],
       "skillNames": [
         "Pain",
@@ -8265,7 +8326,7 @@
     },
     {
       "assetKey": "4195f00962c36643ebf2a59373a54a17fa3b5925",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/1/10/Charging_Strike_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Charging_Strike_(PvP).jpg",
       "downloadSha1": "4195f00962c36643ebf2a59373a54a17fa3b5925",
@@ -8616,7 +8677,7 @@
     },
     {
       "assetKey": "457a81df2775c2f1721ab2ae0235b251031d5281",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/7/72/Tranquility_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Tranquility_(PvP).jpg",
       "downloadSha1": "457a81df2775c2f1721ab2ae0235b251031d5281",
@@ -8852,7 +8913,7 @@
     },
     {
       "assetKey": "46cb70844e761a6a9c95e2db3ba62fc7d787c630",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/da/Mantra_of_Inscriptions.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Mantra_of_Inscriptions.jpg",
       "downloadSha1": "46cb70844e761a6a9c95e2db3ba62fc7d787c630",
@@ -8921,7 +8982,7 @@
     },
     {
       "assetKey": "4741a9eb4d1a7d074e3d830e047e1700913083e4",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/b/be/Ward_Against_Elements.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Ward_Against_Elements.jpg",
       "downloadSha1": "4741a9eb4d1a7d074e3d830e047e1700913083e4",
@@ -9481,7 +9542,7 @@
     },
     {
       "assetKey": "4bf89dc16901aafe45e005cc9a205700ff062e0a",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/df/Hundred_Blades_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Hundred_Blades_(PvP).jpg",
       "downloadSha1": "4bf89dc16901aafe45e005cc9a205700ff062e0a",
@@ -9531,7 +9592,7 @@
     },
     {
       "assetKey": "4c292df0d48663131596664e6de6331f75586787",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/5/5b/Aura_Slicer_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Aura_Slicer_(PvP).jpg",
       "downloadSha1": "4c292df0d48663131596664e6de6331f75586787",
@@ -9556,7 +9617,7 @@
     },
     {
       "assetKey": "4c57d7dfbb2b1c624bd26125e3205a388cba4ddf",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/1/1c/Signet_of_Creation.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Signet_of_Creation.jpg",
       "downloadSha1": "4c57d7dfbb2b1c624bd26125e3205a388cba4ddf",
@@ -9786,7 +9847,7 @@
     },
     {
       "assetKey": "4eb50dfebd0de195504a84f95bbecdfaf250760e",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/5/53/Ebon_Battle_Standard_of_Courage.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Ebon_Battle_Standard_of_Courage.jpg",
       "downloadSha1": "4eb50dfebd0de195504a84f95bbecdfaf250760e",
@@ -10343,6 +10404,29 @@
       "width": 64
     },
     {
+      "assetKey": "513ab8604a0a9e1c5431ca1ed09d18798be7f184",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/9/99/Shadow_Sanctuary_%28Luxon%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Shadow_Sanctuary_(Luxon).jpg",
+      "downloadSha1": "513ab8604a0a9e1c5431ca1ed09d18798be7f184",
+      "fileTitle": "File:Shadow Sanctuary (Luxon).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/shadow-sanctuary-luxon.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "513ab8604a0a9e1c5431ca1ed09d18798be7f184",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-11T01:40:58Z",
+      "sizeBytes": 4283,
+      "skillIds": [
+        1948
+      ],
+      "skillNames": [
+        "Shadow Sanctuary (Luxon)"
+      ],
+      "src": "/gww-icons/skills/shadow-sanctuary-luxon.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "515a5781ad9f9b2116eaa280e9e37842fca39993",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/1/19/Critical_Defenses.jpg",
@@ -10461,7 +10545,7 @@
     },
     {
       "assetKey": "51b534a4af140442d9e2fcad674ac1c637a1fa54",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/0/03/Charm_Animal_%28Codex%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Charm_Animal_(Codex).jpg",
       "downloadSha1": "51b534a4af140442d9e2fcad674ac1c637a1fa54",
@@ -10475,8 +10559,6 @@
       "sizeBytes": 4605,
       "skillIds": [
         411,
-        3065,
-        3066,
         3068
       ],
       "skillNames": [
@@ -10583,6 +10665,29 @@
       "width": 64
     },
     {
+      "assetKey": "51fec3ed2ce83eeff1a30d357410eb5a3ffaf2b7",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/8/84/Spear_of_Fury_%28Kurzick%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Spear_of_Fury_(Kurzick).jpg",
+      "downloadSha1": "51fec3ed2ce83eeff1a30d357410eb5a3ffaf2b7",
+      "fileTitle": "File:Spear of Fury (Kurzick).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/spear-of-fury-kurzick.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "51fec3ed2ce83eeff1a30d357410eb5a3ffaf2b7",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-04-18T22:34:59Z",
+      "sizeBytes": 4294,
+      "skillIds": [
+        2099
+      ],
+      "skillNames": [
+        "Spear of Fury (Kurzick)"
+      ],
+      "src": "/gww-icons/skills/spear-of-fury-kurzick.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "51ffa6d4463b86e64e2329d7f39d71f7a5a43aab",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/5/59/Signet_of_Mystic_Speed.jpg",
@@ -10607,7 +10712,7 @@
     },
     {
       "assetKey": "52257b4aecfaa609996a8050384419591ec411e4",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/f/f7/Mirage_Cloak_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Mirage_Cloak_(PvP).jpg",
       "downloadSha1": "52257b4aecfaa609996a8050384419591ec411e4",
@@ -10817,30 +10922,6 @@
       "width": 64
     },
     {
-      "assetKey": "53c4ff241c09862859307224a3a288ff3bd125ba",
-      "cacheState": "already-current",
-      "canonicalUrl": "https://wiki.guildwars.com/images/b/be/Spear_of_Fury.jpg",
-      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Spear_of_Fury.jpg",
-      "downloadSha1": "53c4ff241c09862859307224a3a288ff3bd125ba",
-      "fileTitle": "File:Spear of Fury.jpg",
-      "height": 128,
-      "localPublicPath": "/gww-icons/skills/spear-of-fury.jpg",
-      "mimeType": "image/jpeg",
-      "remoteSha1": "53c4ff241c09862859307224a3a288ff3bd125ba",
-      "remoteSha1Matches": true,
-      "remoteTimestamp": "2008-04-18T22:34:29Z",
-      "sizeBytes": 8695,
-      "skillIds": [
-        1957,
-        2099
-      ],
-      "skillNames": [
-        "Spear of Fury"
-      ],
-      "src": "/gww-icons/skills/spear-of-fury.jpg",
-      "width": 64
-    },
-    {
       "assetKey": "54d84ab9a79b10ea13192058e5d1aa0362f5f882",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/8/81/Contemplation_of_Purity.jpg",
@@ -10933,6 +11014,29 @@
       "width": 64
     },
     {
+      "assetKey": "5589a0a5335aebe0cc526d14a5765d07a60f6ded",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/8/8a/Summon_Spirits_%28Luxon%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Summon_Spirits_(Luxon).jpg",
+      "downloadSha1": "5589a0a5335aebe0cc526d14a5765d07a60f6ded",
+      "fileTitle": "File:Summon Spirits (Luxon).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/summon-spirits-luxon.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "5589a0a5335aebe0cc526d14a5765d07a60f6ded",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-08T03:03:21Z",
+      "sizeBytes": 5195,
+      "skillIds": [
+        2051
+      ],
+      "skillNames": [
+        "Summon Spirits (Luxon)"
+      ],
+      "src": "/gww-icons/skills/summon-spirits-luxon.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "55d7e4893658be25fa88341ece3c74cca6144014",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/5/5c/Natural_Stride.jpg",
@@ -10947,8 +11051,7 @@
       "remoteTimestamp": "2008-04-22T23:05:08Z",
       "sizeBytes": 3318,
       "skillIds": [
-        1727,
-        2645
+        1727
       ],
       "skillNames": [
         "Natural Stride"
@@ -11510,6 +11613,29 @@
         "Signet of Sorrow"
       ],
       "src": "/gww-icons/skills/signet-of-sorrow.jpg",
+      "width": 64
+    },
+    {
+      "assetKey": "597e349ed7122ef1cbeabede0b849ab932550f1e",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/7/7c/Selfless_Spirit_%28Luxon%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Selfless_Spirit_(Luxon).jpg",
+      "downloadSha1": "597e349ed7122ef1cbeabede0b849ab932550f1e",
+      "fileTitle": "File:Selfless Spirit (Luxon).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/selfless-spirit-luxon.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "597e349ed7122ef1cbeabede0b849ab932550f1e",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-10T00:44:24Z",
+      "sizeBytes": 5876,
+      "skillIds": [
+        1952
+      ],
+      "skillNames": [
+        "Selfless Spirit (Luxon)"
+      ],
+      "src": "/gww-icons/skills/selfless-spirit-luxon.jpg",
       "width": 64
     },
     {
@@ -12231,7 +12357,7 @@
     },
     {
       "assetKey": "60367ed4d5902e4d196285c7faeb357f909ca892",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/c/c9/Primal_Rage_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Primal_Rage_(PvP).jpg",
       "downloadSha1": "60367ed4d5902e4d196285c7faeb357f909ca892",
@@ -12463,7 +12589,7 @@
     },
     {
       "assetKey": "6243d87ca8088c8b3cfc735ea6f8b0f96a7a336a",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/1/13/Avatar_of_Grenth.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Avatar_of_Grenth.jpg",
       "downloadSha1": "6243d87ca8088c8b3cfc735ea6f8b0f96a7a336a",
@@ -13092,7 +13218,7 @@
     },
     {
       "assetKey": "6598eb82dccf51df8aade005df44889d66385c31",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/d6/Fleeting_Stability_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Fleeting_Stability_(PvP).jpg",
       "downloadSha1": "6598eb82dccf51df8aade005df44889d66385c31",
@@ -13136,6 +13262,29 @@
         "Warrior's Cunning"
       ],
       "src": "/gww-icons/skills/warrior-s-cunning.jpg",
+      "width": 64
+    },
+    {
+      "assetKey": "65d6f69da9ca42c09793bc8b1950efb9409027fc",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/1/1b/Triple_Shot_%28Kurzick%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Triple_Shot_(Kurzick).jpg",
+      "downloadSha1": "26f679a489e137d256f0058f7f00c147f2cd429b",
+      "fileTitle": "File:Triple Shot (Kurzick).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/triple-shot-kurzick.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "65d6f69da9ca42c09793bc8b1950efb9409027fc",
+      "remoteSha1Matches": false,
+      "remoteTimestamp": "2008-04-22T23:22:55Z",
+      "sizeBytes": 3779,
+      "skillIds": [
+        2096
+      ],
+      "skillNames": [
+        "Triple Shot (Kurzick)"
+      ],
+      "src": "/gww-icons/skills/triple-shot-kurzick.jpg",
       "width": 64
     },
     {
@@ -13466,7 +13615,7 @@
     },
     {
       "assetKey": "67cf57191e9b45f10041a7fc4a60b97ad489de9d",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/da/Protector%27s_Strike_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Protector%27s_Strike_(PvP).jpg",
       "downloadSha1": "67cf57191e9b45f10041a7fc4a60b97ad489de9d",
@@ -13583,7 +13732,7 @@
     },
     {
       "assetKey": "688a25af2a138a85829ab0ddd8d9f1b063f924c8",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/5/53/Spirit_Rift.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Spirit_Rift.jpg",
       "downloadSha1": "688a25af2a138a85829ab0ddd8d9f1b063f924c8",
@@ -14161,30 +14310,6 @@
       "width": 64
     },
     {
-      "assetKey": "6de5d1bd608a30161deaf8b9f8d26f144558a04f",
-      "cacheState": "already-current",
-      "canonicalUrl": "https://wiki.guildwars.com/images/1/18/Signet_of_Corruption.jpg",
-      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Signet_of_Corruption.jpg",
-      "downloadSha1": "6de5d1bd608a30161deaf8b9f8d26f144558a04f",
-      "fileTitle": "File:Signet of Corruption.jpg",
-      "height": 128,
-      "localPublicPath": "/gww-icons/skills/signet-of-corruption.jpg",
-      "mimeType": "image/jpeg",
-      "remoteSha1": "6de5d1bd608a30161deaf8b9f8d26f144558a04f",
-      "remoteSha1Matches": true,
-      "remoteTimestamp": "2008-07-08T22:20:23Z",
-      "sizeBytes": 9264,
-      "skillIds": [
-        1950,
-        2093
-      ],
-      "skillNames": [
-        "Signet of Corruption"
-      ],
-      "src": "/gww-icons/skills/signet-of-corruption.jpg",
-      "width": 64
-    },
-    {
       "assetKey": "6e2bc57c7d8b78f12f65452b8c6882e3c050c49d",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/9/99/Wailing_Weapon.jpg",
@@ -14209,7 +14334,7 @@
     },
     {
       "assetKey": "6e351203e5626326dc626594054ad0a76272d20d",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/3/3a/Shadowsong_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Shadowsong_(PvP).jpg",
       "downloadSha1": "6e351203e5626326dc626594054ad0a76272d20d",
@@ -14349,7 +14474,7 @@
     },
     {
       "assetKey": "6f32046c7bb57a71a8b3a34b8ae8c58331c8d173",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/e/e6/Otyugh%27s_Cry_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Otyugh%27s_Cry_(PvP).jpg",
       "downloadSha1": "6f32046c7bb57a71a8b3a34b8ae8c58331c8d173",
@@ -14374,7 +14499,7 @@
     },
     {
       "assetKey": "6f3b24812ef0591a7eb4ec82fc64db2ff993d3c0",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/7/76/Crippling_Shot_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Crippling_Shot_(PvP).jpg",
       "downloadSha1": "6f3b24812ef0591a7eb4ec82fc64db2ff993d3c0",
@@ -14445,7 +14570,7 @@
     },
     {
       "assetKey": "6fbb361f8005748e18869f42b375d1bba3c23bfa",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/a/a4/Blinding_Surge.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Blinding_Surge.jpg",
       "downloadSha1": "6fbb361f8005748e18869f42b375d1bba3c23bfa",
@@ -15096,6 +15221,29 @@
       "width": 64
     },
     {
+      "assetKey": "73a2c171d54bbacdbe6aadafd76cc4e151c70422",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/f/fb/Signet_of_Corruption_%28Luxon%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Signet_of_Corruption_(Luxon).jpg",
+      "downloadSha1": "73a2c171d54bbacdbe6aadafd76cc4e151c70422",
+      "fileTitle": "File:Signet of Corruption (Luxon).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/signet-of-corruption-luxon.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "73a2c171d54bbacdbe6aadafd76cc4e151c70422",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-08T22:22:36Z",
+      "sizeBytes": 5142,
+      "skillIds": [
+        1950
+      ],
+      "skillNames": [
+        "Signet of Corruption (Luxon)"
+      ],
+      "src": "/gww-icons/skills/signet-of-corruption-luxon.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "73a56b2c2ad14e77d3932822696ea72f55303b24",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/a/a0/Asuran_Scan.jpg",
@@ -15185,30 +15333,6 @@
         "Barbarous Slice"
       ],
       "src": "/gww-icons/skills/barbarous-slice.jpg",
-      "width": 64
-    },
-    {
-      "assetKey": "755ad0a1441085c5a6f03aa553b42cc79105b731",
-      "cacheState": "already-current",
-      "canonicalUrl": "https://wiki.guildwars.com/images/2/27/Elemental_Lord.jpg",
-      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Elemental_Lord.jpg",
-      "downloadSha1": "755ad0a1441085c5a6f03aa553b42cc79105b731",
-      "fileTitle": "File:Elemental Lord.jpg",
-      "height": 128,
-      "localPublicPath": "/gww-icons/skills/elemental-lord.jpg",
-      "mimeType": "image/jpeg",
-      "remoteSha1": "755ad0a1441085c5a6f03aa553b42cc79105b731",
-      "remoteSha1Matches": true,
-      "remoteTimestamp": "2008-07-13T20:19:02Z",
-      "sizeBytes": 9055,
-      "skillIds": [
-        1951,
-        2094
-      ],
-      "skillNames": [
-        "Elemental Lord"
-      ],
-      "src": "/gww-icons/skills/elemental-lord.jpg",
       "width": 64
     },
     {
@@ -15656,7 +15780,7 @@
     },
     {
       "assetKey": "78b52769841abcdbab62082a25e3283ce864b9cd",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/a/a9/%22Coward%21%22_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:%22Coward!%22_(PvP).jpg",
       "downloadSha1": "78b52769841abcdbab62082a25e3283ce864b9cd",
@@ -15773,7 +15897,7 @@
     },
     {
       "assetKey": "798d2475d8ee74769c08e3a63585fdefe7f93fc4",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/f/fa/Pious_Restoration_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Pious_Restoration_(PvP).jpg",
       "downloadSha1": "798d2475d8ee74769c08e3a63585fdefe7f93fc4",
@@ -15821,7 +15945,7 @@
     },
     {
       "assetKey": "79e8e8eda75ad159bb97c498fb0d2a27ab2b64fa",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/b/b6/%22Find_Their_Weakness%21%22_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:%22Find_Their_Weakness!%22_(PvP).jpg",
       "downloadSha1": "79e8e8eda75ad159bb97c498fb0d2a27ab2b64fa",
@@ -16335,7 +16459,7 @@
     },
     {
       "assetKey": "7e39738d3a2b7e4709a3cad0789bef0ea91d8fc5",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/3/3f/Soul_Ignition.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Soul_Ignition.jpg",
       "downloadSha1": "7e39738d3a2b7e4709a3cad0789bef0ea91d8fc5",
@@ -16477,7 +16601,7 @@
     },
     {
       "assetKey": "80c1d7067cbc57e7b8d414949fe9f172c989c563",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/6/6d/Eremite%27s_Attack.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Eremite%27s_Attack.jpg",
       "downloadSha1": "80c1d7067cbc57e7b8d414949fe9f172c989c563",
@@ -16706,6 +16830,29 @@
       "width": 64
     },
     {
+      "assetKey": "838526ced328052d3cc9799cafc426f9693b969c",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/8/87/%22Save_Yourselves%21%22_%28Kurzick%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:%22Save_Yourselves!%22_(Kurzick).jpg",
+      "downloadSha1": "838526ced328052d3cc9799cafc426f9693b969c",
+      "fileTitle": "File:\"Save Yourselves!\" (Kurzick).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/save-yourselves-kurzick.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "838526ced328052d3cc9799cafc426f9693b969c",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-11T20:32:06Z",
+      "sizeBytes": 4430,
+      "skillIds": [
+        2097
+      ],
+      "skillNames": [
+        "\"Save Yourselves!\" (Kurzick)"
+      ],
+      "src": "/gww-icons/skills/save-yourselves-kurzick.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "843a488b94ff8c35eb5181a4e89a7fc27a2a1e1a",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/db/Bonetti%27s_Defense.jpg",
@@ -16730,7 +16877,7 @@
     },
     {
       "assetKey": "8447f02737d176b5cb42dfab9d7ffd5b628191bf",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/0/03/Lightning_Orb.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Lightning_Orb.jpg",
       "downloadSha1": "8447f02737d176b5cb42dfab9d7ffd5b628191bf",
@@ -16743,8 +16890,7 @@
       "remoteTimestamp": "2008-07-13T20:58:05Z",
       "sizeBytes": 4252,
       "skillIds": [
-        229,
-        562
+        229
       ],
       "skillNames": [
         "Lightning Orb"
@@ -17141,8 +17287,7 @@
       "remoteTimestamp": "2017-12-30T03:06:29Z",
       "sizeBytes": 4816,
       "skillIds": [
-        932,
-        2626
+        932
       ],
       "skillNames": [
         "Complicate"
@@ -17165,8 +17310,7 @@
       "remoteTimestamp": "2008-07-13T20:39:17Z",
       "sizeBytes": 4555,
       "skillIds": [
-        1379,
-        2633
+        1379
       ],
       "skillNames": [
         "Glowing Gaze"
@@ -17268,7 +17412,7 @@
     },
     {
       "assetKey": "8873e60da1d249fca0ed68f2618743afc882e35c",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/9/95/Shield_Guardian_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Shield_Guardian_(PvP).jpg",
       "downloadSha1": "8873e60da1d249fca0ed68f2618743afc882e35c",
@@ -18245,6 +18389,29 @@
       "width": 64
     },
     {
+      "assetKey": "92b9957f7fbdb09c9ca7564dab7402d520f33a0a",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/c/cd/Triple_Shot_%28Luxon%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Triple_Shot_(Luxon).jpg",
+      "downloadSha1": "92b9957f7fbdb09c9ca7564dab7402d520f33a0a",
+      "fileTitle": "File:Triple Shot (Luxon).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/triple-shot-luxon.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "92b9957f7fbdb09c9ca7564dab7402d520f33a0a",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-04-22T23:55:05Z",
+      "sizeBytes": 5982,
+      "skillIds": [
+        1953
+      ],
+      "skillNames": [
+        "Triple Shot (Luxon)"
+      ],
+      "src": "/gww-icons/skills/triple-shot-luxon.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "92bc489c80f157765f4cb2811bdfc6d10c056d14",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/f/f8/Mantra_of_Flame.jpg",
@@ -18433,6 +18600,29 @@
       "width": 64
     },
     {
+      "assetKey": "93f2b3c6d720c949d30aa3dc8a74e30aef80eb54",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/6/65/%22Save_Yourselves%21%22_%28Luxon%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:%22Save_Yourselves!%22_(Luxon).jpg",
+      "downloadSha1": "93f2b3c6d720c949d30aa3dc8a74e30aef80eb54",
+      "fileTitle": "File:\"Save Yourselves!\" (Luxon).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/save-yourselves-luxon.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "93f2b3c6d720c949d30aa3dc8a74e30aef80eb54",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-11T20:32:26Z",
+      "sizeBytes": 5268,
+      "skillIds": [
+        1954
+      ],
+      "skillNames": [
+        "\"Save Yourselves!\" (Luxon)"
+      ],
+      "src": "/gww-icons/skills/save-yourselves-luxon.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "9405195d5bea648df8b064c56bc36783d922a57b",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/0/02/Reverse_Hex.jpg",
@@ -18572,7 +18762,7 @@
     },
     {
       "assetKey": "95816bf83d97e639d9931b9cd6101800f21227fd",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/4/4b/Wastrel%27s_Demise.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Wastrel%27s_Demise.jpg",
       "downloadSha1": "95816bf83d97e639d9931b9cd6101800f21227fd",
@@ -18921,7 +19111,7 @@
     },
     {
       "assetKey": "98bf21ff61f02272d1a355558de4b8c5a6280e52",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/7/77/Tease_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Tease_(PvP).jpg",
       "downloadSha1": "98bf21ff61f02272d1a355558de4b8c5a6280e52",
@@ -19216,8 +19406,7 @@
       "remoteTimestamp": "2008-07-11T20:07:28Z",
       "sizeBytes": 4452,
       "skillIds": [
-        385,
-        1319
+        385
       ],
       "skillNames": [
         "Final Thrust"
@@ -19318,6 +19507,29 @@
       "width": 64
     },
     {
+      "assetKey": "9c7e1db784f45e33a0da600a64945816d73ebad9",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/a/a6/Aura_of_Holy_Might_%28Kurzick%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Aura_of_Holy_Might_(Kurzick).jpg",
+      "downloadSha1": "9c7e1db784f45e33a0da600a64945816d73ebad9",
+      "fileTitle": "File:Aura of Holy Might (Kurzick).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/aura-of-holy-might-kurzick.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "9c7e1db784f45e33a0da600a64945816d73ebad9",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-07T23:20:38Z",
+      "sizeBytes": 3395,
+      "skillIds": [
+        2098
+      ],
+      "skillNames": [
+        "Aura of Holy Might (Kurzick)"
+      ],
+      "src": "/gww-icons/skills/aura-of-holy-might-kurzick.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "9c83feba012e6e36fa102967a646e11342c5f387",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/0/01/Animate_Vampiric_Horror.jpg",
@@ -19342,7 +19554,7 @@
     },
     {
       "assetKey": "9c95fcde311e5ab246c13471012177d999942450",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/db/Spirit_Burn.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Spirit_Burn.jpg",
       "downloadSha1": "9c95fcde311e5ab246c13471012177d999942450",
@@ -19387,27 +19599,26 @@
       "width": 64
     },
     {
-      "assetKey": "9ca73ed52587eee79445247d71bf254490195f56",
+      "assetKey": "9cbb72cce03f34052b701099fe7f84fa2dac6c35",
       "cacheState": "already-current",
-      "canonicalUrl": "https://wiki.guildwars.com/images/9/9c/Summon_Spirits.jpg",
-      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Summon_Spirits.jpg",
-      "downloadSha1": "9ca73ed52587eee79445247d71bf254490195f56",
-      "fileTitle": "File:Summon Spirits.jpg",
-      "height": 128,
-      "localPublicPath": "/gww-icons/skills/summon-spirits.jpg",
+      "canonicalUrl": "https://wiki.guildwars.com/images/9/94/Ether_Nightmare_%28Kurzick%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Ether_Nightmare_(Kurzick).jpg",
+      "downloadSha1": "9cbb72cce03f34052b701099fe7f84fa2dac6c35",
+      "fileTitle": "File:Ether Nightmare (Kurzick).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/ether-nightmare-kurzick.jpg",
       "mimeType": "image/jpeg",
-      "remoteSha1": "9ca73ed52587eee79445247d71bf254490195f56",
+      "remoteSha1": "9cbb72cce03f34052b701099fe7f84fa2dac6c35",
       "remoteSha1Matches": true,
-      "remoteTimestamp": "2008-07-08T03:02:30Z",
-      "sizeBytes": 8306,
+      "remoteTimestamp": "2008-07-12T23:13:07Z",
+      "sizeBytes": 3839,
       "skillIds": [
-        2051,
-        2100
+        2092
       ],
       "skillNames": [
-        "Summon Spirits"
+        "Ether Nightmare (Kurzick)"
       ],
-      "src": "/gww-icons/skills/summon-spirits.jpg",
+      "src": "/gww-icons/skills/ether-nightmare-kurzick.jpg",
       "width": 64
     },
     {
@@ -19552,7 +19763,7 @@
     },
     {
       "assetKey": "9daf2d3acc88d9e254e6a9572ea2132265081ec4",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/4/43/Spirit_Siphon.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Spirit_Siphon.jpg",
       "downloadSha1": "9daf2d3acc88d9e254e6a9572ea2132265081ec4",
@@ -21055,7 +21266,7 @@
     },
     {
       "assetKey": "ae822e4ee738404701f567dec0c65035c240e282",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/3/32/Chilling_Victory.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Chilling_Victory.jpg",
       "downloadSha1": "ae822e4ee738404701f567dec0c65035c240e282",
@@ -21103,7 +21314,7 @@
     },
     {
       "assetKey": "ae9c80dbfa4f34151b28111180e71c9bf25610b1",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/8/8c/Energy_Drain.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Energy_Drain.jpg",
       "downloadSha1": "ae9c80dbfa4f34151b28111180e71c9bf25610b1",
@@ -21879,8 +22090,7 @@
       "remoteTimestamp": "2008-07-10T00:51:29Z",
       "sizeBytes": 5112,
       "skillIds": [
-        2004,
-        2639
+        2004
       ],
       "skillNames": [
         "Smite Condition"
@@ -22022,8 +22232,7 @@
       "remoteTimestamp": "2008-04-18T22:12:10Z",
       "sizeBytes": 6468,
       "skillIds": [
-        2017,
-        2647
+        2017
       ],
       "skillNames": [
         "Anthem of Weariness"
@@ -22069,8 +22278,7 @@
       "remoteTimestamp": "2008-07-11T20:41:44Z",
       "sizeBytes": 3276,
       "skillIds": [
-        851,
-        2641
+        851
       ],
       "skillNames": [
         "Sun and Moon Slash"
@@ -22625,7 +22833,6 @@
       "sizeBytes": 4318,
       "skillIds": [
         2146,
-        2648,
         3368
       ],
       "skillNames": [
@@ -22836,8 +23043,7 @@
       "remoteTimestamp": "2009-04-28T00:35:49Z",
       "sizeBytes": 3773,
       "skillIds": [
-        1466,
-        2644
+        1466
       ],
       "skillNames": [
         "Burning Arrow"
@@ -22847,7 +23053,7 @@
     },
     {
       "assetKey": "c0642594c88f812882e349fcecf724a37c36731a",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/4/4b/Farmer%27s_Scythe_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Farmer%27s_Scythe_(PvP).jpg",
       "downloadSha1": "c0642594c88f812882e349fcecf724a37c36731a",
@@ -22918,7 +23124,7 @@
     },
     {
       "assetKey": "c0e00cb472585679f05b97af0c94c5e6d7010299",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/8/8f/Distortion.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Distortion.jpg",
       "downloadSha1": "c0e00cb472585679f05b97af0c94c5e6d7010299",
@@ -22954,8 +23160,7 @@
       "remoteTimestamp": "2008-07-13T20:27:06Z",
       "sizeBytes": 4466,
       "skillIds": [
-        1381,
-        2635
+        1381
       ],
       "skillNames": [
         "Flame Djinn's Haste"
@@ -23084,7 +23289,7 @@
     },
     {
       "assetKey": "c1aa3847a68c6469f6f6dd755b49400a809a0732",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/5/56/Essence_Strike.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Essence_Strike.jpg",
       "downloadSha1": "c1aa3847a68c6469f6f6dd755b49400a809a0732",
@@ -23261,7 +23466,6 @@
       "sizeBytes": 4297,
       "skillIds": [
         117,
-        2628,
         2859
       ],
       "skillNames": [
@@ -23482,7 +23686,7 @@
     },
     {
       "assetKey": "c4c88cbc433ed7cc0015a544fe555fdd668e8e74",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/1/15/Whirling_Charge_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Whirling_Charge_(PvP).jpg",
       "downloadSha1": "c4c88cbc433ed7cc0015a544fe555fdd668e8e74",
@@ -23503,30 +23707,6 @@
         "Whirling Charge (PvP)"
       ],
       "src": "/gww-icons/skills/whirling-charge-pvp.jpg",
-      "width": 64
-    },
-    {
-      "assetKey": "c4cf4310cb8d74d3799fa76f2b75682ba4b00c2a",
-      "cacheState": "already-current",
-      "canonicalUrl": "https://wiki.guildwars.com/images/6/68/Ether_Nightmare.jpg",
-      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Ether_Nightmare.jpg",
-      "downloadSha1": "c4cf4310cb8d74d3799fa76f2b75682ba4b00c2a",
-      "fileTitle": "File:Ether Nightmare.jpg",
-      "height": 128,
-      "localPublicPath": "/gww-icons/skills/ether-nightmare.jpg",
-      "mimeType": "image/jpeg",
-      "remoteSha1": "c4cf4310cb8d74d3799fa76f2b75682ba4b00c2a",
-      "remoteSha1Matches": true,
-      "remoteTimestamp": "2008-07-12T23:12:50Z",
-      "sizeBytes": 8469,
-      "skillIds": [
-        1949,
-        2092
-      ],
-      "skillNames": [
-        "Ether Nightmare"
-      ],
-      "src": "/gww-icons/skills/ether-nightmare.jpg",
       "width": 64
     },
     {
@@ -23554,7 +23734,7 @@
     },
     {
       "assetKey": "c506a89b12fe6845be270b7c22e0e2510eca2bb1",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/1/15/Ritual_Lord.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Ritual_Lord.jpg",
       "downloadSha1": "c506a89b12fe6845be270b7c22e0e2510eca2bb1",
@@ -23785,6 +23965,29 @@
       "width": 64
     },
     {
+      "assetKey": "c6ceca813fa68e668ebf6153e8f38a478e57a87d",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/9/96/Signet_of_Corruption_%28Kurzick%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Signet_of_Corruption_(Kurzick).jpg",
+      "downloadSha1": "c6ceca813fa68e668ebf6153e8f38a478e57a87d",
+      "fileTitle": "File:Signet of Corruption (Kurzick).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/signet-of-corruption-kurzick.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "c6ceca813fa68e668ebf6153e8f38a478e57a87d",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-08T22:21:06Z",
+      "sizeBytes": 4449,
+      "skillIds": [
+        2093
+      ],
+      "skillNames": [
+        "Signet of Corruption (Kurzick)"
+      ],
+      "src": "/gww-icons/skills/signet-of-corruption-kurzick.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "c729968b6e79827bef11281ca5feae565243b4fe",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/b/b3/Holy_Haste.jpg",
@@ -23993,7 +24196,7 @@
     },
     {
       "assetKey": "c8e89bdb27876a375a8840e4fcb3770e0fb3c579",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/5/53/Guided_Weapon_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Guided_Weapon_(PvP).jpg",
       "downloadSha1": "c8e89bdb27876a375a8840e4fcb3770e0fb3c579",
@@ -24077,8 +24280,7 @@
       "remoteTimestamp": "2008-07-08T22:23:07Z",
       "sizeBytes": 5696,
       "skillIds": [
-        1365,
-        2630
+        1365
       ],
       "skillNames": [
         "Signet of Lost Souls"
@@ -25016,7 +25218,7 @@
     },
     {
       "assetKey": "cf6cbd0b9b8b2e7e32b048c1e5660e45095c1302",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/6/67/Energy_Tap.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Energy_Tap.jpg",
       "downloadSha1": "cf6cbd0b9b8b2e7e32b048c1e5660e45095c1302",
@@ -25410,6 +25612,29 @@
       "width": 64
     },
     {
+      "assetKey": "d357670df6947e7a5c960c3b96987b5f6dc12fe3",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/4/4f/Elemental_Lord_%28Luxon%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Elemental_Lord_(Luxon).jpg",
+      "downloadSha1": "d357670df6947e7a5c960c3b96987b5f6dc12fe3",
+      "fileTitle": "File:Elemental Lord (Luxon).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/elemental-lord-luxon.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "d357670df6947e7a5c960c3b96987b5f6dc12fe3",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-13T20:19:51Z",
+      "sizeBytes": 5374,
+      "skillIds": [
+        1951
+      ],
+      "skillNames": [
+        "Elemental Lord (Luxon)"
+      ],
+      "src": "/gww-icons/skills/elemental-lord-luxon.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "d39c34055cd456da51450499b6ea94613b841f20",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/0/0c/Guiding_Hands_%28PvP%29.jpg",
@@ -25481,30 +25706,6 @@
       "width": 64
     },
     {
-      "assetKey": "d428a7a5213ceec60ce24c4fa906f88942336468",
-      "cacheState": "already-current",
-      "canonicalUrl": "https://wiki.guildwars.com/images/1/17/Shadow_Sanctuary.jpg",
-      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Shadow_Sanctuary.jpg",
-      "downloadSha1": "d428a7a5213ceec60ce24c4fa906f88942336468",
-      "fileTitle": "File:Shadow Sanctuary.jpg",
-      "height": 128,
-      "localPublicPath": "/gww-icons/skills/shadow-sanctuary.jpg",
-      "mimeType": "image/jpeg",
-      "remoteSha1": "d428a7a5213ceec60ce24c4fa906f88942336468",
-      "remoteSha1Matches": true,
-      "remoteTimestamp": "2008-07-11T01:40:05Z",
-      "sizeBytes": 8280,
-      "skillIds": [
-        1948,
-        2091
-      ],
-      "skillNames": [
-        "Shadow Sanctuary"
-      ],
-      "src": "/gww-icons/skills/shadow-sanctuary.jpg",
-      "width": 64
-    },
-    {
       "assetKey": "d49129e7d314a5f19549b67b8058b808740e9b39",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/5/55/Agonizing_Chop.jpg",
@@ -25551,30 +25752,6 @@
       "width": 64
     },
     {
-      "assetKey": "d4d424fb9de24ce0d127217336fd530d180a7a51",
-      "cacheState": "already-current",
-      "canonicalUrl": "https://wiki.guildwars.com/images/f/f0/Triple_Shot.jpg",
-      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Triple_Shot.jpg",
-      "downloadSha1": "d4d424fb9de24ce0d127217336fd530d180a7a51",
-      "fileTitle": "File:Triple Shot.jpg",
-      "height": 128,
-      "localPublicPath": "/gww-icons/skills/triple-shot.jpg",
-      "mimeType": "image/jpeg",
-      "remoteSha1": "d4d424fb9de24ce0d127217336fd530d180a7a51",
-      "remoteSha1Matches": true,
-      "remoteTimestamp": "2008-04-22T23:54:40Z",
-      "sizeBytes": 9450,
-      "skillIds": [
-        1953,
-        2096
-      ],
-      "skillNames": [
-        "Triple Shot"
-      ],
-      "src": "/gww-icons/skills/triple-shot.jpg",
-      "width": 64
-    },
-    {
       "assetKey": "d4e3a4a5b32874fdf9e5033e0223f8de5fa93fe7",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/1/1a/Spike_Trap.jpg",
@@ -25599,7 +25776,7 @@
     },
     {
       "assetKey": "d56c823f3e5fc57bf6bc50ca78b870640a7c5abb",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/2/2c/Whirlwind_Attack.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Whirlwind_Attack.jpg",
       "downloadSha1": "d56c823f3e5fc57bf6bc50ca78b870640a7c5abb",
@@ -25681,8 +25858,7 @@
       "remoteTimestamp": "2008-07-11T01:23:18Z",
       "sizeBytes": 4978,
       "skillIds": [
-        1990,
-        2646
+        1990
       ],
       "skillNames": [
         "Falling Lotus Strike"
@@ -26016,7 +26192,7 @@
     },
     {
       "assetKey": "d8eb55b6f53032451e20bcf9bee9315c92640239",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/0/09/Nature%27s_Renewal_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Nature%27s_Renewal_(PvP).jpg",
       "downloadSha1": "d8eb55b6f53032451e20bcf9bee9315c92640239",
@@ -26133,7 +26309,7 @@
     },
     {
       "assetKey": "d9b72b034e05eb569df2856819ddaa23f961d8a8",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/1/11/Mystic_Corruption_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Mystic_Corruption_(PvP).jpg",
       "downloadSha1": "d9b72b034e05eb569df2856819ddaa23f961d8a8",
@@ -26158,7 +26334,7 @@
     },
     {
       "assetKey": "d9ce5c2db88286f1151d276c72417e9411449644",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/d/dc/Sum_of_All_Fears.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Sum_of_All_Fears.jpg",
       "downloadSha1": "d9ce5c2db88286f1151d276c72417e9411449644",
@@ -26605,7 +26781,7 @@
     },
     {
       "assetKey": "dd41889bb7d176d14de5c4ef6ee83d055a937a85",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/9/90/Mystic_Sweep.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Mystic_Sweep.jpg",
       "downloadSha1": "dd41889bb7d176d14de5c4ef6ee83d055a937a85",
@@ -26767,30 +26943,6 @@
       "width": 64
     },
     {
-      "assetKey": "dec553cf297ad40b68a41b21ba02315ab7b5d425",
-      "cacheState": "already-current",
-      "canonicalUrl": "https://wiki.guildwars.com/images/3/3e/Selfless_Spirit.jpg",
-      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Selfless_Spirit.jpg",
-      "downloadSha1": "dec553cf297ad40b68a41b21ba02315ab7b5d425",
-      "fileTitle": "File:Selfless Spirit.jpg",
-      "height": 128,
-      "localPublicPath": "/gww-icons/skills/selfless-spirit.jpg",
-      "mimeType": "image/jpeg",
-      "remoteSha1": "dec553cf297ad40b68a41b21ba02315ab7b5d425",
-      "remoteSha1Matches": true,
-      "remoteTimestamp": "2008-07-10T00:43:49Z",
-      "sizeBytes": 9272,
-      "skillIds": [
-        1952,
-        2095
-      ],
-      "skillNames": [
-        "Selfless Spirit"
-      ],
-      "src": "/gww-icons/skills/selfless-spirit.jpg",
-      "width": 64
-    },
-    {
       "assetKey": "ded9388a04d934ac5384cb7345d092f1bdaa02c5",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/f/f4/Pounce.jpg",
@@ -26828,8 +26980,7 @@
       "remoteTimestamp": "2008-07-13T21:09:27Z",
       "sizeBytes": 4743,
       "skillIds": [
-        884,
-        2632
+        884
       ],
       "skillNames": [
         "Searing Flames"
@@ -26931,7 +27082,7 @@
     },
     {
       "assetKey": "dfe81b150b646b4f71ec22d964b1310ed1880d21",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/8/84/Dash_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Dash_(PvP).jpg",
       "downloadSha1": "dfe81b150b646b4f71ec22d964b1310ed1880d21",
@@ -27268,8 +27419,7 @@
       "remoteTimestamp": "2008-07-13T21:22:20Z",
       "sizeBytes": 3063,
       "skillIds": [
-        846,
-        2634
+        846
       ],
       "skillNames": [
         "Steam"
@@ -27325,7 +27475,7 @@
     },
     {
       "assetKey": "e2b2ee8a6fda184571c527c9a0a709542cdf0397",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/3/39/Mending.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Mending.jpg",
       "downloadSha1": "e2b2ee8a6fda184571c527c9a0a709542cdf0397",
@@ -27582,7 +27732,7 @@
     },
     {
       "assetKey": "e446f1d1c683a3a7b80df81c758c0b407aebe335",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/4/4a/Melandru%27s_Shot_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Melandru%27s_Shot_(PvP).jpg",
       "downloadSha1": "e446f1d1c683a3a7b80df81c758c0b407aebe335",
@@ -27722,7 +27872,7 @@
     },
     {
       "assetKey": "e5cfa0638a6405941dc8c2f65d45c95662aec071",
-      "cacheState": "downloaded",
+      "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/1/1e/Wastrel%27s_Worry_%28PvP%29.jpg",
       "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Wastrel%27s_Worry_(PvP).jpg",
       "downloadSha1": "e5cfa0638a6405941dc8c2f65d45c95662aec071",
@@ -28117,6 +28267,29 @@
         "Kindle Arrows"
       ],
       "src": "/gww-icons/skills/kindle-arrows.jpg",
+      "width": 64
+    },
+    {
+      "assetKey": "e9a7d0bf1cc69b2134ee85312304d26537317248",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/d/d0/Elemental_Lord_%28Kurzick%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Elemental_Lord_(Kurzick).jpg",
+      "downloadSha1": "e9a7d0bf1cc69b2134ee85312304d26537317248",
+      "fileTitle": "File:Elemental Lord (Kurzick).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/elemental-lord-kurzick.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "e9a7d0bf1cc69b2134ee85312304d26537317248",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-11-06T08:03:13Z",
+      "sizeBytes": 4031,
+      "skillIds": [
+        2094
+      ],
+      "skillNames": [
+        "Elemental Lord (Kurzick)"
+      ],
+      "src": "/gww-icons/skills/elemental-lord-kurzick.jpg",
       "width": 64
     },
     {
@@ -28603,6 +28776,29 @@
       "width": 64
     },
     {
+      "assetKey": "ee79968cdef3014735de3445bac458b4b502fd3d",
+      "cacheState": "already-current",
+      "canonicalUrl": "https://wiki.guildwars.com/images/6/6b/Selfless_Spirit_%28Kurzick%29.jpg",
+      "descriptionUrl": "https://wiki.guildwars.com/wiki/File:Selfless_Spirit_(Kurzick).jpg",
+      "downloadSha1": "ee79968cdef3014735de3445bac458b4b502fd3d",
+      "fileTitle": "File:Selfless Spirit (Kurzick).jpg",
+      "height": 64,
+      "localPublicPath": "/gww-icons/skills/selfless-spirit-kurzick.jpg",
+      "mimeType": "image/jpeg",
+      "remoteSha1": "ee79968cdef3014735de3445bac458b4b502fd3d",
+      "remoteSha1Matches": true,
+      "remoteTimestamp": "2008-07-10T00:44:07Z",
+      "sizeBytes": 3703,
+      "skillIds": [
+        2095
+      ],
+      "skillNames": [
+        "Selfless Spirit (Kurzick)"
+      ],
+      "src": "/gww-icons/skills/selfless-spirit-kurzick.jpg",
+      "width": 64
+    },
+    {
       "assetKey": "ee7f9f49b1b9d7b2d1d92404a94d36431812dd87",
       "cacheState": "already-current",
       "canonicalUrl": "https://wiki.guildwars.com/images/9/96/Punishing_Shot.jpg",
@@ -28663,8 +28859,7 @@
       "remoteTimestamp": "2008-07-08T22:08:56Z",
       "sizeBytes": 5162,
       "skillIds": [
-        808,
-        2627
+        808
       ],
       "skillNames": [
         "Reaper's Mark"
@@ -30769,19 +30964,19 @@
       "width": 64
     }
   ],
-  "generatedAt": "2026-09-03T23:06:58Z",
+  "generatedAt": "2026-09-08T16:00:00Z",
   "generator": "build-wars-ingest/0.1.0",
   "runtimeManifestPath": "src/app/skill-icon-assets.generated.json",
   "schemaVersion": 1,
   "sourceCatalog": {
-    "catalogVersion": "skills-c5faaa2b75aaca98",
+    "catalogVersion": "skills-9396e01d21481cd1",
     "path": "data/generated/epic-04/skills.catalog.json",
-    "skillCount": 1541
+    "skillCount": 1516
   },
   "summary": {
-    "runtimeSkillIconCount": 1541,
-    "skillCount": 1541,
-    "uniqueAssetCount": 1320,
+    "runtimeSkillIconCount": 1516,
+    "skillCount": 1516,
+    "uniqueAssetCount": 1330,
     "unresolvedSkillCount": 0
   },
   "unresolved": [],

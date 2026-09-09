@@ -1141,12 +1141,6 @@
       "src": "/gww-icons/skills/barbed-signet.jpg",
       "width": 64
     },
-    "1319": {
-      "height": 64,
-      "label": "Final Thrust icon",
-      "src": "/gww-icons/skills/final-thrust.jpg",
-      "width": 64
-    },
     "132": {
       "height": 64,
       "label": "Plague Signet icon",
@@ -3530,15 +3524,15 @@
       "width": 64
     },
     "1948": {
-      "height": 128,
-      "label": "Shadow Sanctuary icon",
-      "src": "/gww-icons/skills/shadow-sanctuary.jpg",
+      "height": 64,
+      "label": "Shadow Sanctuary (Luxon) icon",
+      "src": "/gww-icons/skills/shadow-sanctuary-luxon.jpg",
       "width": 64
     },
     "1949": {
-      "height": 128,
-      "label": "Ether Nightmare icon",
-      "src": "/gww-icons/skills/ether-nightmare.jpg",
+      "height": 64,
+      "label": "Ether Nightmare (Luxon) icon",
+      "src": "/gww-icons/skills/ether-nightmare-luxon.jpg",
       "width": 64
     },
     "195": {
@@ -3548,45 +3542,45 @@
       "width": 64
     },
     "1950": {
-      "height": 128,
-      "label": "Signet of Corruption icon",
-      "src": "/gww-icons/skills/signet-of-corruption.jpg",
+      "height": 64,
+      "label": "Signet of Corruption (Luxon) icon",
+      "src": "/gww-icons/skills/signet-of-corruption-luxon.jpg",
       "width": 64
     },
     "1951": {
-      "height": 128,
-      "label": "Elemental Lord icon",
-      "src": "/gww-icons/skills/elemental-lord.jpg",
+      "height": 64,
+      "label": "Elemental Lord (Luxon) icon",
+      "src": "/gww-icons/skills/elemental-lord-luxon.jpg",
       "width": 64
     },
     "1952": {
-      "height": 128,
-      "label": "Selfless Spirit icon",
-      "src": "/gww-icons/skills/selfless-spirit.jpg",
+      "height": 64,
+      "label": "Selfless Spirit (Luxon) icon",
+      "src": "/gww-icons/skills/selfless-spirit-luxon.jpg",
       "width": 64
     },
     "1953": {
-      "height": 128,
-      "label": "Triple Shot icon",
-      "src": "/gww-icons/skills/triple-shot.jpg",
+      "height": 64,
+      "label": "Triple Shot (Luxon) icon",
+      "src": "/gww-icons/skills/triple-shot-luxon.jpg",
       "width": 64
     },
     "1954": {
-      "height": 128,
-      "label": "\"Save Yourselves!\" icon",
-      "src": "/gww-icons/skills/save-yourselves.jpg",
+      "height": 64,
+      "label": "\"Save Yourselves!\" (Luxon) icon",
+      "src": "/gww-icons/skills/save-yourselves-luxon.jpg",
       "width": 64
     },
     "1955": {
-      "height": 128,
-      "label": "Aura of Holy Might icon",
-      "src": "/gww-icons/skills/aura-of-holy-might.jpg",
+      "height": 64,
+      "label": "Aura of Holy Might (Luxon) icon",
+      "src": "/gww-icons/skills/aura-of-holy-might-luxon.jpg",
       "width": 64
     },
     "1957": {
-      "height": 128,
-      "label": "Spear of Fury icon",
-      "src": "/gww-icons/skills/spear-of-fury.jpg",
+      "height": 64,
+      "label": "Spear of Fury (Luxon) icon",
+      "src": "/gww-icons/skills/spear-of-fury-luxon.jpg",
       "width": 64
     },
     "196": {
@@ -3842,9 +3836,9 @@
       "width": 64
     },
     "2051": {
-      "height": 128,
-      "label": "Summon Spirits icon",
-      "src": "/gww-icons/skills/summon-spirits.jpg",
+      "height": 64,
+      "label": "Summon Spirits (Luxon) icon",
+      "src": "/gww-icons/skills/summon-spirits-luxon.jpg",
       "width": 64
     },
     "2052": {
@@ -4016,57 +4010,57 @@
       "width": 64
     },
     "2091": {
-      "height": 128,
-      "label": "Shadow Sanctuary icon",
-      "src": "/gww-icons/skills/shadow-sanctuary.jpg",
+      "height": 64,
+      "label": "Shadow Sanctuary (Kurzick) icon",
+      "src": "/gww-icons/skills/shadow-sanctuary-kurzick.jpg",
       "width": 64
     },
     "2092": {
-      "height": 128,
-      "label": "Ether Nightmare icon",
-      "src": "/gww-icons/skills/ether-nightmare.jpg",
+      "height": 64,
+      "label": "Ether Nightmare (Kurzick) icon",
+      "src": "/gww-icons/skills/ether-nightmare-kurzick.jpg",
       "width": 64
     },
     "2093": {
-      "height": 128,
-      "label": "Signet of Corruption icon",
-      "src": "/gww-icons/skills/signet-of-corruption.jpg",
+      "height": 64,
+      "label": "Signet of Corruption (Kurzick) icon",
+      "src": "/gww-icons/skills/signet-of-corruption-kurzick.jpg",
       "width": 64
     },
     "2094": {
-      "height": 128,
-      "label": "Elemental Lord icon",
-      "src": "/gww-icons/skills/elemental-lord.jpg",
+      "height": 64,
+      "label": "Elemental Lord (Kurzick) icon",
+      "src": "/gww-icons/skills/elemental-lord-kurzick.jpg",
       "width": 64
     },
     "2095": {
-      "height": 128,
-      "label": "Selfless Spirit icon",
-      "src": "/gww-icons/skills/selfless-spirit.jpg",
+      "height": 64,
+      "label": "Selfless Spirit (Kurzick) icon",
+      "src": "/gww-icons/skills/selfless-spirit-kurzick.jpg",
       "width": 64
     },
     "2096": {
-      "height": 128,
-      "label": "Triple Shot icon",
-      "src": "/gww-icons/skills/triple-shot.jpg",
+      "height": 64,
+      "label": "Triple Shot (Kurzick) icon",
+      "src": "/gww-icons/skills/triple-shot-kurzick.jpg",
       "width": 64
     },
     "2097": {
-      "height": 128,
-      "label": "\"Save Yourselves!\" icon",
-      "src": "/gww-icons/skills/save-yourselves.jpg",
+      "height": 64,
+      "label": "\"Save Yourselves!\" (Kurzick) icon",
+      "src": "/gww-icons/skills/save-yourselves-kurzick.jpg",
       "width": 64
     },
     "2098": {
-      "height": 128,
-      "label": "Aura of Holy Might icon",
-      "src": "/gww-icons/skills/aura-of-holy-might.jpg",
+      "height": 64,
+      "label": "Aura of Holy Might (Kurzick) icon",
+      "src": "/gww-icons/skills/aura-of-holy-might-kurzick.jpg",
       "width": 64
     },
     "2099": {
-      "height": 128,
-      "label": "Spear of Fury icon",
-      "src": "/gww-icons/skills/spear-of-fury.jpg",
+      "height": 64,
+      "label": "Spear of Fury (Kurzick) icon",
+      "src": "/gww-icons/skills/spear-of-fury-kurzick.jpg",
       "width": 64
     },
     "21": {
@@ -4082,9 +4076,9 @@
       "width": 64
     },
     "2100": {
-      "height": 128,
-      "label": "Summon Spirits icon",
-      "src": "/gww-icons/skills/summon-spirits.jpg",
+      "height": 64,
+      "label": "Summon Spirits (Kurzick) icon",
+      "src": "/gww-icons/skills/summon-spirits-kurzick.jpg",
       "width": 64
     },
     "2101": {
@@ -5053,130 +5047,16 @@
       "src": "/gww-icons/skills/shield-of-judgment.jpg",
       "width": 64
     },
-    "2626": {
-      "height": 64,
-      "label": "Complicate icon",
-      "src": "/gww-icons/skills/complicate.jpg",
-      "width": 64
-    },
-    "2627": {
-      "height": 64,
-      "label": "Reaper's Mark icon",
-      "src": "/gww-icons/skills/reaper-s-mark.jpg",
-      "width": 64
-    },
-    "2628": {
-      "height": 64,
-      "label": "Enfeeble icon",
-      "src": "/gww-icons/skills/enfeeble-pvp.jpg",
-      "width": 64
-    },
     "263": {
       "height": 64,
       "label": "Protective Bond icon",
       "src": "/gww-icons/skills/protective-bond.jpg",
       "width": 64
     },
-    "2630": {
-      "height": 64,
-      "label": "Signet of Lost Souls icon",
-      "src": "/gww-icons/skills/signet-of-lost-souls.jpg",
-      "width": 64
-    },
-    "2632": {
-      "height": 64,
-      "label": "Searing Flames icon",
-      "src": "/gww-icons/skills/searing-flames.jpg",
-      "width": 64
-    },
-    "2633": {
-      "height": 64,
-      "label": "Glowing Gaze icon",
-      "src": "/gww-icons/skills/glowing-gaze.jpg",
-      "width": 64
-    },
-    "2634": {
-      "height": 64,
-      "label": "Steam icon",
-      "src": "/gww-icons/skills/steam.jpg",
-      "width": 64
-    },
-    "2635": {
-      "height": 64,
-      "label": "Flame Djinn's Haste icon",
-      "src": "/gww-icons/skills/flame-djinn-s-haste.jpg",
-      "width": 64
-    },
-    "2636": {
-      "height": 64,
-      "label": "Liquid Flame icon",
-      "src": "/gww-icons/skills/liquid-flame.jpg",
-      "width": 64
-    },
-    "2639": {
-      "height": 64,
-      "label": "Smite Condition icon",
-      "src": "/gww-icons/skills/smite-condition.jpg",
-      "width": 64
-    },
     "264": {
       "height": 64,
       "label": "Pacifism icon",
       "src": "/gww-icons/skills/pacifism.jpg",
-      "width": 64
-    },
-    "2640": {
-      "height": 64,
-      "label": "Crippling Slash icon",
-      "src": "/gww-icons/skills/crippling-slash.jpg",
-      "width": 64
-    },
-    "2641": {
-      "height": 64,
-      "label": "Sun and Moon Slash icon",
-      "src": "/gww-icons/skills/sun-and-moon-slash.jpg",
-      "width": 64
-    },
-    "2642": {
-      "height": 64,
-      "label": "Enraging Charge icon",
-      "src": "/gww-icons/skills/enraging-charge.jpg",
-      "width": 64
-    },
-    "2643": {
-      "height": 64,
-      "label": "Tiger Stance icon",
-      "src": "/gww-icons/skills/tiger-stance.jpg",
-      "width": 64
-    },
-    "2644": {
-      "height": 64,
-      "label": "Burning Arrow icon",
-      "src": "/gww-icons/skills/burning-arrow.jpg",
-      "width": 64
-    },
-    "2645": {
-      "height": 64,
-      "label": "Natural Stride icon",
-      "src": "/gww-icons/skills/natural-stride.jpg",
-      "width": 64
-    },
-    "2646": {
-      "height": 64,
-      "label": "Falling Lotus Strike icon",
-      "src": "/gww-icons/skills/falling-lotus-strike.jpg",
-      "width": 64
-    },
-    "2647": {
-      "height": 64,
-      "label": "Anthem of Weariness icon",
-      "src": "/gww-icons/skills/anthem-of-weariness.jpg",
-      "width": 64
-    },
-    "2648": {
-      "height": 64,
-      "label": "Pious Fury icon",
-      "src": "/gww-icons/skills/pious-fury-pvp.jpg",
       "width": 64
     },
     "265": {
@@ -5941,18 +5821,6 @@
       "src": "/gww-icons/skills/anthem-of-disruption-pvp.jpg",
       "width": 64
     },
-    "3042": {
-      "height": 64,
-      "label": "Pain icon",
-      "src": "/gww-icons/skills/pain.jpg",
-      "width": 64
-    },
-    "3043": {
-      "height": 64,
-      "label": "Wanderlust icon",
-      "src": "/gww-icons/skills/wanderlust.jpg",
-      "width": 64
-    },
     "3045": {
       "height": 64,
       "label": "Comfort Animal (PvP) icon",
@@ -6047,18 +5915,6 @@
       "height": 64,
       "label": "Mantra of Resolve (PvP) icon",
       "src": "/gww-icons/skills/mantra-of-resolve-pvp.jpg",
-      "width": 64
-    },
-    "3065": {
-      "height": 64,
-      "label": "Charm Animal icon",
-      "src": "/gww-icons/skills/charm-animal-codex.jpg",
-      "width": 64
-    },
-    "3066": {
-      "height": 64,
-      "label": "Charm Animal icon",
-      "src": "/gww-icons/skills/charm-animal-codex.jpg",
       "width": 64
     },
     "3068": {
@@ -7789,12 +7645,6 @@
       "src": "/gww-icons/skills/soothing-images.jpg",
       "width": 64
     },
-    "562": {
-      "height": 64,
-      "label": "Lightning Orb icon",
-      "src": "/gww-icons/skills/lightning-orb.jpg",
-      "width": 64
-    },
     "57": {
       "height": 64,
       "label": "Cry of Frustration icon",
@@ -9248,13 +9098,13 @@
       "width": 64
     }
   },
-  "generatedAt": "2026-09-03T23:06:58Z",
+  "generatedAt": "2026-09-08T16:00:00Z",
   "schemaVersion": 1,
-  "sourceCatalogVersion": "skills-c5faaa2b75aaca98",
+  "sourceCatalogVersion": "skills-9396e01d21481cd1",
   "summary": {
-    "runtimeSkillIconCount": 1541,
-    "skillCount": 1541,
-    "uniqueAssetCount": 1320,
+    "runtimeSkillIconCount": 1516,
+    "skillCount": 1516,
+    "uniqueAssetCount": 1330,
     "unresolvedSkillCount": 0
   }
 }

@@ -74,6 +74,28 @@ modeling remain outside the skill catalog.
 PvE/PvP split groups are explicit. Unknown mode returns an ambiguous outcome when variants differ;
 EPIC-06 and UI work own runtime mode selection policy.
 
+## Skill Identity And Icon Checks
+
+Game-integration links enumerate IDs; the skill infobox determines which IDs can become playable
+records. IDs absent from the infobox or annotated as NPC/monster-only become excluded dispositions.
+Their numeric template IDs remain representable for import and export. They are not guessed aliases
+of the player skill.
+
+Kurzick and Luxon IDs retain separate title dependencies and have faction suffixes in their names.
+Icon generation requests the matching `File:<skill> (Kurzick).jpg` or
+`File:<skill> (Luxon).jpg`. Shared wiki pages can contain a stacked image of both icons; runtime skill
+assets must be square. A missing faction icon cannot fall back to the shared page image or the other
+faction, and stops manifest replacement.
+
+An explicit `(PvP)` skill is paired with its unique unsuffixed or `(PvE)` counterpart. Each variant's
+availability matches its mode. PvE members of these split groups do not count toward the three
+PvE-only skill limit.
+
+Catalog QA blocks duplicate selectable names, unexplained shared-page IDs, mismatched faction
+dependencies, and incomplete or inconsistent mode pairs before replacing promoted artifacts.
+Python regression fixtures exercise these gates; `src/app/skill-catalog-integrity.test.ts` also
+checks the promoted catalog, actual faction icon bytes, mode filtering, and template dispositions.
+
 ## Downstream Boundaries
 
 - EPIC-05 may preserve unknown authored skill IDs and map known template IDs to catalog records.

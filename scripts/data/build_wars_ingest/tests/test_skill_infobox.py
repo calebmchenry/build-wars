@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 from build_wars_ingest.models import source_reference
-from build_wars_ingest.skill_infobox import extract_skill_infobox
+from build_wars_ingest.skill_infobox import extract_skill_infobox, extract_skill_icon_candidates, extract_skill_infobox_ids
 
 FIXTURE_ROOT = Path("test/fixtures/data-ingestion")
 
@@ -42,6 +42,42 @@ class SkillInfoboxTests(unittest.TestCase):
                 encoding="utf-8"
             )
         )
+
+    def test_id_evidence_excludes_unlisted_and_npc_variants(self) -> None:
+        text = (FIXTURE_ROOT / "skills/healing-signet.wiki").read_text(encoding="utf-8")
+        text = text.replace("| id = 1", "| id = 1, 98<!-- npc -->, 99<!-- monster only -->")
+        for skill_id in (1, 98, 99, 100):
+            with self.subTest(skill_id=skill_id):
+                extraction = extract_skill_infobox(
+                    skill_id=skill_id, template_id=skill_id,
+                    requested_title="Healing Signet", canonical_title="Healing Signet",
+                    page_identity=page_identity("Healing Signet"), wikitext=text,
+                    source_reference=source_ref(), profession_catalog=self.pa_catalog, review_id="review:fixture",
+                )
+                self.assertEqual(extraction.exclusion_reason is not None, skill_id != 1)
+                self.assertEqual(extraction.record["classification"]["nonPlayer"], skill_id in (98, 99))
+                if skill_id == 100:
+                    mismatch = next(d for d in extraction.diagnostics if d.code == "SKILL_INFOBOX_ID_MISMATCH")
+                    self.assertEqual(mismatch.disposition, "excluded")
+
+    def test_id_numbers_in_comments_are_not_skill_ids(self) -> None:
+        self.assertEqual(extract_skill_infobox_ids("{{Skill infobox|id=1<!-- old 98 -->, 2}}"), [1, 2])
+
+    def test_faction_ids_have_distinct_names_icons_and_title_dependencies(self) -> None:
+        text = (FIXTURE_ROOT / "skills/save-yourselves.wiki").read_text(encoding="utf-8")
+        for skill_id, faction in ((3, "Luxon"), (6, "Kurzick")):
+            with self.subTest(faction=faction):
+                extraction = extract_skill_infobox(
+                    skill_id=skill_id, template_id=skill_id,
+                    requested_title='"Save Yourselves!"', canonical_title='"Save Yourselves!"',
+                    page_identity=page_identity('"Save Yourselves!"'), wikitext=text,
+                    source_reference=source_ref(), profession_catalog=self.pa_catalog, review_id="review:fixture",
+                )
+                name = f'"Save Yourselves!" ({faction})'
+                self.assertEqual(extraction.record["name"], name)
+                self.assertEqual(extraction.icon_file_title, f"File:{name}.jpg")
+                self.assertEqual(extraction.title_key, f"allegiance:{faction.lower()}")
+                self.assertEqual(extract_skill_icon_candidates(text, skill_id, '"Save Yourselves!"'), [f"File:{name}.jpg"])
 
     def test_core_infobox_fields_join_costs_and_concise_description(self) -> None:
         text = (FIXTURE_ROOT / "skills/healing-signet.wiki").read_text(encoding="utf-8")

@@ -1365,12 +1365,6 @@
       "metadata": ["deals:damage"]
     },
     {
-      "skillId": 562,
-      "name": "Lightning Orb",
-      "sourceTextDigest": "7701540565efbb3596c6719028a903461aff86c01697e1b520b0aec7459ee3af",
-      "metadata": ["deals:lightning"]
-    },
-    {
       "skillId": 571,
       "name": "Disrupting Dagger",
       "sourceTextDigest": "63279606cb1f07a8922c43beec6070eb023ea7cf314b79de3a63ceb5f431c0e1",
@@ -2535,12 +2529,6 @@
       "metadata": ["deals:holy"]
     },
     {
-      "skillId": 1319,
-      "name": "Final Thrust",
-      "sourceTextDigest": "cf88963400f03291daced585ef563875fa2ce7d18e8cc5deab299210ba1d23c1",
-      "metadata": ["deals:damage"]
-    },
-    {
       "skillId": 1333,
       "name": "Extend Conditions",
       "sourceTextDigest": "2e4fbe782c654a58fae3f1371e6499e6db2821bc5c145cfa8c1b61a0745c15ab",
@@ -3598,31 +3586,31 @@
     },
     {
       "skillId": 1948,
-      "name": "Shadow Sanctuary",
+      "name": "Shadow Sanctuary (Luxon)",
       "sourceTextDigest": "45df81c6c411958c35dc8305241898e8b9778ab72f9aea475b4510d8e10d4ef0",
       "metadata": ["applies:blind"]
     },
     {
       "skillId": 1950,
-      "name": "Signet of Corruption",
+      "name": "Signet of Corruption (Luxon)",
       "sourceTextDigest": "04d98db3cefba154fd3aa466d8936dbe02d55588ec1f8fed1d0a42b461ff9cbb",
       "metadata": ["deals:damage"]
     },
     {
       "skillId": 1953,
-      "name": "Triple Shot",
+      "name": "Triple Shot (Luxon)",
       "sourceTextDigest": "6ae2172f120aadb04c5b7f4afa276bdca339fa4844041caf311c53263d58f09f",
       "metadata": ["deals:damage"]
     },
     {
       "skillId": 1955,
-      "name": "Aura of Holy Might",
+      "name": "Aura of Holy Might (Luxon)",
       "sourceTextDigest": "1567addeb10a6c70a05adba25c12ca37bfb79ede3de2d0277f2b5ce3150265aa",
       "metadata": ["deals:holy"]
     },
     {
       "skillId": 1957,
-      "name": "Spear of Fury",
+      "name": "Spear of Fury (Luxon)",
       "sourceTextDigest": "70fc1c8d33e63670ef660e5270a7ba35d471954b50dc59c415a9a940224a544c",
       "metadata": ["deals:damage"]
     },
@@ -3832,31 +3820,31 @@
     },
     {
       "skillId": 2091,
-      "name": "Shadow Sanctuary",
+      "name": "Shadow Sanctuary (Kurzick)",
       "sourceTextDigest": "45df81c6c411958c35dc8305241898e8b9778ab72f9aea475b4510d8e10d4ef0",
       "metadata": ["applies:blind"]
     },
     {
       "skillId": 2093,
-      "name": "Signet of Corruption",
+      "name": "Signet of Corruption (Kurzick)",
       "sourceTextDigest": "04d98db3cefba154fd3aa466d8936dbe02d55588ec1f8fed1d0a42b461ff9cbb",
       "metadata": ["deals:damage"]
     },
     {
       "skillId": 2096,
-      "name": "Triple Shot",
+      "name": "Triple Shot (Kurzick)",
       "sourceTextDigest": "6ae2172f120aadb04c5b7f4afa276bdca339fa4844041caf311c53263d58f09f",
       "metadata": ["deals:damage"]
     },
     {
       "skillId": 2098,
-      "name": "Aura of Holy Might",
+      "name": "Aura of Holy Might (Kurzick)",
       "sourceTextDigest": "1567addeb10a6c70a05adba25c12ca37bfb79ede3de2d0277f2b5ce3150265aa",
       "metadata": ["deals:holy"]
     },
     {
       "skillId": 2099,
-      "name": "Spear of Fury",
+      "name": "Spear of Fury (Kurzick)",
       "sourceTextDigest": "70fc1c8d33e63670ef660e5270a7ba35d471954b50dc59c415a9a940224a544c",
       "metadata": ["deals:damage"]
     },
@@ -4203,72 +4191,6 @@
       "metadata": ["applies:weakness", "deals:lightning"]
     },
     {
-      "skillId": 2628,
-      "name": "Enfeeble",
-      "sourceTextDigest": "4913ef3a0282b1b3c8ddce8714f332bc036a26eac451686d862dfcf2d1538f12",
-      "metadata": ["applies:weakness"]
-    },
-    {
-      "skillId": 2632,
-      "name": "Searing Flames",
-      "sourceTextDigest": "760e831d5dad8eb9edc129edaa0ca7cc69f5bdef8dc98a1d8932f69fc3f09aaf",
-      "metadata": ["applies:burning", "deals:fire"]
-    },
-    {
-      "skillId": 2633,
-      "name": "Glowing Gaze",
-      "sourceTextDigest": "9121dcaa0a94000add34960d3e275094defe48145e5682f93060dae915c38b71",
-      "metadata": ["deals:fire"]
-    },
-    {
-      "skillId": 2634,
-      "name": "Steam",
-      "sourceTextDigest": "fe1c7169494ed07b4fc5730e26823074b7272e3ab64c6bc0cbd7683f140db2e5",
-      "metadata": ["applies:blind", "deals:fire", "deals:cold"]
-    },
-    {
-      "skillId": 2635,
-      "name": "Flame Djinn's Haste",
-      "sourceTextDigest": "edd74f5fbf12ffdd8c37285710e292dd5ccc90b2912f4ac547c646eda99e8a2f",
-      "metadata": ["deals:fire"]
-    },
-    {
-      "skillId": 2636,
-      "name": "Liquid Flame",
-      "sourceTextDigest": "db18631471f98fc0a465f22dedb4022996af2da270fb43f1ee7eb29c289c19c5",
-      "metadata": ["deals:fire"]
-    },
-    {
-      "skillId": 2639,
-      "name": "Smite Condition",
-      "sourceTextDigest": "e1ae085d4a4dcb33055fc51f344a3dd429b3c00fe6d57a9f4ea938d583bc24d0",
-      "metadata": ["removes:condition", "deals:holy"]
-    },
-    {
-      "skillId": 2640,
-      "name": "Crippling Slash",
-      "sourceTextDigest": "0542048f919370fe2fdd315a7c23737d5c38360e051dfb81b59a4c3704f757a3",
-      "metadata": ["applies:bleeding", "applies:crippled"]
-    },
-    {
-      "skillId": 2644,
-      "name": "Burning Arrow",
-      "sourceTextDigest": "a5e7ce9cc13a72063389ff7105d7516f33c1605505f7afcea3444dbb6feedda6",
-      "metadata": ["applies:burning", "deals:damage"]
-    },
-    {
-      "skillId": 2646,
-      "name": "Falling Lotus Strike",
-      "sourceTextDigest": "e0feea1ddee46a45a60b77e9553b795cc859340b4e72e84abfd221fbec5d2a24",
-      "metadata": ["deals:damage"]
-    },
-    {
-      "skillId": 2647,
-      "name": "Anthem of Weariness",
-      "sourceTextDigest": "ffb007d680715458bddc5a855c446bd6b88a0001b403bfffd4cacf66ec29c38c",
-      "metadata": ["applies:weakness"]
-    },
-    {
       "skillId": 2734,
       "name": "Mind Wrack (PvP)",
       "sourceTextDigest": "9182b410e5bf91eb1f35a56fd1fb3f343a6fae8fb73cb0b23e514fbae462d4da",
@@ -4453,12 +4375,6 @@
       "name": "\"Find Their Weakness!\" (PvP)",
       "sourceTextDigest": "047b188d1ebaf0d175efcb4d2c45da31e52c6cac68cfde06622971ade2cf45e3",
       "metadata": ["applies:deep_wound"]
-    },
-    {
-      "skillId": 3042,
-      "name": "Pain",
-      "sourceTextDigest": "875560c049488e83a0a54da06aba9c01c672e7bc78c44491269d8637a478e288",
-      "metadata": ["deals:damage"]
     },
     {
       "skillId": 3047,

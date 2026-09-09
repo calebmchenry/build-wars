@@ -85,6 +85,7 @@ from .weapon_source_set import (
     write_source_plan as write_weapon_source_plan,
 )
 from .skill_catalog import SkillCatalogError, assemble_skill_catalog, load_epic03_dependency
+from .skill_infobox import extract_skill_icon_candidates
 from .skill_ids import SkillIdSource, enumerate_skill_ids
 from .skill_source_set import (
     SkillSourceSetError,
@@ -3000,32 +3001,6 @@ def _write_epic04_catalog_result(
     )
     qa_relative = profile.qa_relative_path
     unique_snapshot_manifest_paths = sorted(set(snapshot_manifest_paths))
-    artifact_path, manifest_path, manifest = write_generated_artifact(
-        root=roots.generated_root,
-        relative_path=profile.generated_relative_path,
-        value=assembled.catalog,
-        generated_at=generated_at,
-        input_snapshot_manifest_paths=unique_snapshot_manifest_paths,
-        source_ids=source_ids,
-        record_count=len(assembled.catalog["skills"]),
-        qa_report_path=(Path("data/qa") / qa_relative).as_posix(),
-        commit_decision="exact-path-allowlisted",
-        notes="Runtime-eligible EPIC-04 skills catalog; source plans, snapshot-set manifests, raw snapshots, and QA summaries remain ignored.",
-        extra_fields={
-            "sourcePlanPath": _relative_to_root(roots.root, manifest_source_plan_path),
-            "sourcePlanDigest": source_plan["summary"]["sourcePlanDigest"],
-            "sourceSetDigest": source_plan["summary"]["sourceSetDigest"],
-            "selectedSnapshotSetManifestPath": _relative_to_root(roots.root, snapshot_set_manifest_path),
-            "selectedSnapshotSetDigest": snapshot_set_digest,
-            "dependencyDigests": assembled.catalog["dependencyDigests"],
-            "manualReviews": _epic04_manual_reviews(
-                generated_at=generated_at,
-                source_plan=source_plan,
-                snapshot_set_digest=snapshot_set_digest,
-                artifact_digest=catalog_artifact_digest,
-            ),
-        },
-    )
     report = build_report(
         artifact_path=(Path("data/generated") / profile.generated_relative_path).as_posix(),
         artifact_manifest_path=(Path("data/generated") / profile.generated_relative_path.with_suffix(".manifest.json")).as_posix(),
@@ -3055,6 +3030,38 @@ def _write_epic04_catalog_result(
             diagnostics=all_diagnostics,
             notes="EPIC-04 skills catalog QA report covering source-set accounting, joins, costs, descriptions, progressions, splits, icons, provenance, determinism, and release gates.",
         )
+    if report["appConsumptionGate"] != "pass" or report["publicReleaseGate"] != "pass":
+        blocking_codes = sorted({
+            finding["code"] for finding in report["findings"]
+            if finding["disposition"] not in {"resolved", "excluded", "accepted-risk"}
+        })
+        raise PipelineError(f"EPIC-04 catalog failed QA; promoted artifacts were not changed: {blocking_codes}")
+    artifact_path, manifest_path, manifest = write_generated_artifact(
+        root=roots.generated_root,
+        relative_path=profile.generated_relative_path,
+        value=assembled.catalog,
+        generated_at=generated_at,
+        input_snapshot_manifest_paths=unique_snapshot_manifest_paths,
+        source_ids=source_ids,
+        record_count=len(assembled.catalog["skills"]),
+        qa_report_path=(Path("data/qa") / qa_relative).as_posix(),
+        commit_decision="exact-path-allowlisted",
+        notes="Runtime-eligible EPIC-04 skills catalog; source plans, snapshot-set manifests, raw snapshots, and QA summaries remain ignored.",
+        extra_fields={
+            "sourcePlanPath": _relative_to_root(roots.root, manifest_source_plan_path),
+            "sourcePlanDigest": source_plan["summary"]["sourcePlanDigest"],
+            "sourceSetDigest": source_plan["summary"]["sourceSetDigest"],
+            "selectedSnapshotSetManifestPath": _relative_to_root(roots.root, snapshot_set_manifest_path),
+            "selectedSnapshotSetDigest": snapshot_set_digest,
+            "dependencyDigests": assembled.catalog["dependencyDigests"],
+            "manualReviews": _epic04_manual_reviews(
+                generated_at=generated_at,
+                source_plan=source_plan,
+                snapshot_set_digest=snapshot_set_digest,
+                artifact_digest=catalog_artifact_digest,
+            ),
+        },
+    )
     qa_path, summary_path = write_report(root=roots.qa_root, relative_path=qa_relative, report=report)
     return PipelineResult(
         artifact_path=artifact_path,
@@ -3518,8 +3525,9 @@ def _skill_icon_titles(detail_pages: list[dict[str, Any]], limit: int) -> list[s
     for detail in detail_pages:
         if len(titles) >= limit:
             break
-        explicit = _skill_infobox_image(str(detail.get("content", "")))
-        for candidate in candidate_file_titles(str(detail["canonicalTitle"]), explicit):
+        for candidate in extract_skill_icon_candidates(
+            str(detail.get("content", "")), int(detail["skillId"]), str(detail["canonicalTitle"])
+        ):
             if candidate not in titles:
                 titles.append(candidate)
             if len(titles) >= limit:

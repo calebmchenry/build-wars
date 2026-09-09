@@ -35,9 +35,9 @@
   "digest": {
     "algorithm": "sha256",
     "notes": null,
-    "value": "04841d06d26dbdc0e6ba3b6fe055c28d5cbaca933ab2325955430453362e5a2e"
+    "value": "bb43734b5c8493e1a2bd48823e5afb7001ac8152e72d4980aef76125b1bd61c7"
   },
-  "generatedAt": "2026-09-03T23:09:13Z",
+  "generatedAt": "2026-09-08T16:00:00Z",
   "generator": "build-wars-ingest/0.1.0",
   "inputSnapshotManifestPaths": [
     "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2538605-bf42f8/guild-wars-wiki-game-integration-skills-85b4437275-bd13aa42850ed9af.manifest.json",
@@ -1565,7 +1565,7 @@
     "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2739378-6880c5/overload-3b78242882-d59e9ec4540bbef3.manifest.json",
     "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2739391-74a62b/soul-ignition-b5a0196142-0e2ea9616a86aac4.manifest.json",
     "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2739412-ddf481/mirage-cloak-547f3485bb-792f61c0c76781d3.manifest.json",
-    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-2b34fd09f4416a153440888359beda3a7eaeb942c6dd23ecf8b4e9e1f909-54ff8c/epic-04-skill-icon-imageinfo-a8aaab45f1-fc4384b2d1c511d6.manifest.json"
+    "data/source-snapshots/guild-wars-wiki-827a3b/page-366031/rev-d2a0b9aaf8d3b5031182cfd0cf5b92d8d7bc6d0e5da181a1dcf3ed5e7c81-d14ce6/epic-04-skill-icon-imageinfo-a8aaab45f1-84c58128ca167901.manifest.json"
   ],
   "manualReviews": [
     {
@@ -1583,7 +1583,7 @@
       "rationale": "The missing /Skills/0 page is retained only as blocker history; the approved live index and ranged pages provide the ID lookup, while profession list pages and the PvE-only list define promoted source-set seed authority.",
       "reReviewTrigger": "Any source-set index, ranged page revision, profession list revision, PvE-only list revision, accepted seed policy, or source-plan digest change.",
       "relatedFindingIds": [],
-      "reviewedAt": "2026-09-03T23:09:13Z",
+      "reviewedAt": "2026-09-08T16:00:00Z",
       "reviewer": "Build Wars sprint executor",
       "scope": "EPIC-04 source-set digest, ranged-page amendment, profession skill list authority, and PvE-only skill list authority"
     },
@@ -1602,7 +1602,7 @@
       "rationale": "Guild Wars Wiki profession skill list pages define which skill records are promoted into the runtime profession-skill catalog; off-list game-integration skills are not promoted in this schema version.",
       "reReviewTrigger": "Any profession list page revision, row parser change, or promotion policy change.",
       "relatedFindingIds": [],
-      "reviewedAt": "2026-09-03T23:09:13Z",
+      "reviewedAt": "2026-09-08T16:00:00Z",
       "reviewer": "Build Wars sprint executor",
       "scope": "EPIC-04 playable profession skill membership"
     },
@@ -1621,7 +1621,7 @@
       "rationale": "Guild Wars Wiki List of PvE-only skills supplies the promoted PvE-only seed rows not covered by profession skill lists and preserves title-track PvE grouping evidence.",
       "reReviewTrigger": "Any PvE-only list page revision, row parser change, or promotion policy change.",
       "relatedFindingIds": [],
-      "reviewedAt": "2026-09-03T23:09:13Z",
+      "reviewedAt": "2026-09-08T16:00:00Z",
       "reviewer": "Build Wars sprint executor",
       "scope": "EPIC-04 PvE-only skill membership"
     },
@@ -1640,7 +1640,7 @@
       "rationale": "Reviewed concise infobox descriptions are approved as bounded runtime tooltip text; records without concise text keep structured-only fallback.",
       "reReviewTrigger": "Any source revision, normalized description digest, tokenizer, parser, or projection change.",
       "relatedFindingIds": [],
-      "reviewedAt": "2026-09-03T23:09:13Z",
+      "reviewedAt": "2026-09-08T16:00:00Z",
       "reviewer": "Build Wars sprint executor",
       "scope": "EPIC-04 runtime concise description policy"
     },
@@ -1650,12 +1650,12 @@
         {
           "kind": "artifact",
           "notes": "Selected complete snapshot-set manifest digest.",
-          "reference": "fc2fb90b9163ccc1dbc5eb3476015fbc40c3e2d16891ea186211ea0731e42874"
+          "reference": "c30ce089b5ec4beb5d8c887013e246b2b266d09e4a6f15f418f0eca20df3a485"
         },
         {
           "kind": "artifact",
           "notes": "Generated artifact digest is owned by the adjacent manifest.",
-          "reference": "04841d06d26dbdc0e6ba3b6fe055c28d5cbaca933ab2325955430453362e5a2e"
+          "reference": "bb43734b5c8493e1a2bd48823e5afb7001ac8152e72d4980aef76125b1bd61c7"
         }
       ],
       "expiresAt": null,
@@ -1664,17 +1664,17 @@
       "rationale": "This promotion records the selected bounded snapshot set, EPIC-03 dependency digests, concise description policy, generated artifact, and QA state as the first baseline.",
       "reReviewTrigger": "Any semantic projection, schema, source revision, dependency digest, QA gate, or promotion path change.",
       "relatedFindingIds": [],
-      "reviewedAt": "2026-09-03T23:09:13Z",
+      "reviewedAt": "2026-09-08T16:00:00Z",
       "reviewer": "Build Wars sprint executor",
       "scope": "EPIC-04 first promoted skills catalog baseline"
     }
   ],
   "notes": "Runtime-eligible EPIC-04 skills catalog; source plans, snapshot-set manifests, raw snapshots, and QA summaries remain ignored.",
   "qaReportPath": "data/qa/epic-04/skills.catalog.qa.json",
-  "recordCount": 1541,
+  "recordCount": 1516,
   "schemaVersion": 1,
-  "selectedSnapshotSetDigest": "fc2fb90b9163ccc1dbc5eb3476015fbc40c3e2d16891ea186211ea0731e42874",
-  "selectedSnapshotSetManifestPath": "work/runs/data-ingestion/epic-04/snapshot-sets/skills-bea0d9655e80d42f.snapshot-set.json",
+  "selectedSnapshotSetDigest": "c30ce089b5ec4beb5d8c887013e246b2b266d09e4a6f15f418f0eca20df3a485",
+  "selectedSnapshotSetManifestPath": "work/runs/data-ingestion/epic-04/snapshot-sets/skills-272c4b495a1a00ab.snapshot-set.json",
   "sourceIds": [
     "source:gww:epic-04-live:index:39321:2538605",
     "source:gww:epic-04-live:profession-list:1008:2731524",
@@ -3201,7 +3201,7 @@
     "source:gww:epic-04-live:supplemental-skill:321799:2738648",
     "source:gww:epic-04-live:supplemental-skill:321800:2738649",
     "source:gww:epic-04-live:supplemental-skill:321801:2738650",
-    "source:gww:epic-04-skill-icons:2b34fd09f441"
+    "source:gww:epic-04-skill-icons:d2a0b9aaf8d3"
   ],
   "sourcePlanDigest": "d21a5a8ee1bf9cbbe79d8c26d8a9cbae27bea12267260e42d7bef78251916169",
   "sourcePlanPath": "work/runs/data-ingestion/epic-04/source-plans/skills-d21a5a8ee1bf9cbb.source-plan.json",

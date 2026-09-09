@@ -1,9 +1,13 @@
 from __future__ import annotations
 
 import json
+import tempfile
 import unittest
+from contextlib import redirect_stderr
+from io import StringIO
+from pathlib import Path
 
-from build_wars_ingest.skill_icon_assets import build_skill_icon_asset_manifests
+from build_wars_ingest.skill_icon_assets import build_skill_icon_asset_manifests, main
 
 
 def image_page(title: str, sha1: str, *, mime: str = "image/jpeg") -> dict[str, object]:
@@ -27,6 +31,57 @@ def image_page(title: str, sha1: str, *, mime: str = "image/jpeg") -> dict[str, 
 
 
 class SkillIconAssetTests(unittest.TestCase):
+    def test_missing_faction_icon_does_not_overwrite_runtime_manifests(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "catalog.json").write_text(json.dumps({"skills": [{"id": 1, "name": "Faction Fixture (Luxon)"}]}))
+            (root / "images.json").write_text(json.dumps({"pages": [image_page("File:Faction Fixture (Kurzick).jpg", "a" * 40)]}))
+            (root / "runtime.json").write_text("previous runtime")
+            (root / "provenance.json").write_text("previous provenance")
+            with redirect_stderr(StringIO()):
+                result = main([
+                    "--root", tmp, "--catalog", "catalog.json", "--imageinfo-json", "images.json",
+                    "--runtime-manifest", "runtime.json", "--provenance-manifest", "provenance.json", "--skip-download",
+                ])
+            self.assertEqual(result, 2)
+            self.assertEqual((root / "runtime.json").read_text(), "previous runtime")
+            self.assertEqual((root / "provenance.json").read_text(), "previous provenance")
+
+    def test_faction_icons_do_not_use_shared_composite_or_other_faction(self) -> None:
+        skills = [
+            {"id": index, "name": f"Faction Fixture ({faction})", "iconId": "shared",
+             "pageIdentity": {"canonicalTitle": "Faction Fixture"}}
+            for index, faction in enumerate(("Kurzick", "Luxon"), start=1)
+        ]
+        shared = image_page("File:Faction Fixture.jpg", "a" * 40)
+        shared["imageinfo"][0]["height"] = 128
+        kurzick = image_page("File:Faction Fixture (Kurzick).jpg", "b" * 40)
+        luxon = image_page("File:Faction Fixture (Luxon).jpg", "c" * 40)
+        catalog = {"skills": skills, "remoteMedia": [{"id": "shared", "fileTitle": shared["title"]}]}
+        for pages, expected_count in (([shared, kurzick, luxon], 2), ([shared, kurzick], 1)):
+            result = build_skill_icon_asset_manifests(
+                catalog=catalog, skills=skills, imageinfo_pages=pages,
+                page_images_by_title={"faction fixture": [shared["title"], kurzick["title"]]},
+                generated_at="2026-09-08T16:00:00Z",
+            )
+            runtime = result["runtimeManifest"]
+            self.assertEqual(runtime["summary"]["runtimeSkillIconCount"], expected_count)
+            self.assertEqual(runtime["assetsBySkillId"]["1"]["src"], "/gww-icons/skills/faction-fixture-kurzick.jpg")
+            if expected_count == 2:
+                self.assertEqual(runtime["assetsBySkillId"]["2"]["src"], "/gww-icons/skills/faction-fixture-luxon.jpg")
+            else:
+                self.assertNotIn("2", runtime["assetsBySkillId"])
+
+    def test_composite_images_are_never_accepted_as_square_skill_icons(self) -> None:
+        skill = {"id": 1, "name": "Composite Fixture"}
+        page = image_page("File:Composite Fixture.jpg", "d" * 40)
+        page["imageinfo"][0]["height"] = 128
+        result = build_skill_icon_asset_manifests(
+            catalog={"skills": [skill]}, skills=[skill], imageinfo_pages=[page],
+            generated_at="2026-09-08T16:00:00Z",
+        )
+        self.assertEqual(result["runtimeManifest"]["assetsBySkillId"], {})
+
     def test_builds_local_runtime_manifest_and_provenance_from_imageinfo(self) -> None:
         catalog = {
             "catalogVersion": "skills-test",

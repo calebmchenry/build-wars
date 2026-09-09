@@ -130,6 +130,11 @@ def assemble_skill_catalog(
             review_id=DESCRIPTION_REVIEW_ID,
         )
         diagnostics.extend(infobox.diagnostics)
+        if infobox.exclusion_reason is not None:
+            dispositions.append(_disposition(
+                {**seed, "sourceId": source_id}, "excluded", infobox.exclusion_reason, BASELINE_REVIEW_ID
+            ))
+            continue
         record = infobox.record
         progression = extract_skill_progressions(
             skill_id=skill_id,
@@ -159,8 +164,6 @@ def assemble_skill_catalog(
                 record["iconId"] = clean_metadata["id"]
         skills.append(record)
 
-    duplicate_dispositions = _same_page_dispositions(skills)
-    dispositions.extend(duplicate_dispositions)
     _apply_split_groups(skills)
     split_groups = _split_groups(skills)
     for group in split_groups:
@@ -228,6 +231,7 @@ def section_digests(catalog: dict[str, Any]) -> list[dict[str, str]]:
 def validate_skill_catalog(catalog: dict[str, Any], *, snapshot_set_digest: str) -> list[Diagnostic]:
     diagnostics: list[Diagnostic] = []
     skills = catalog["skills"]
+    diagnostics.extend(_validate_skill_identities(catalog))
     source_set = catalog["sourceSet"]
     if source_set["acceptedSeedCount"] != len(skills) + _excluded_disposition_count(catalog["dispositions"]):
         diagnostics.append(
@@ -469,33 +473,65 @@ def _review_icon_diagnostic(diagnostic: Diagnostic) -> Diagnostic:
     )
 
 
-def _same_page_dispositions(skills: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _validate_skill_identities(catalog: dict[str, Any]) -> list[Diagnostic]:
+    skills = catalog["skills"]
     by_canonical: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    by_name: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    by_id = {skill["id"]: skill for skill in skills}
+    series_by_id = {series["id"]: series for series in catalog["progressionSeries"]}
+    groups = {group["id"]: group for group in catalog["splitGroups"]}
+    diagnostics: list[Diagnostic] = []
     for skill in skills:
         by_canonical[str(skill["pageIdentity"]["canonicalTitle"]).casefold()].append(skill)
-    dispositions: list[dict[str, Any]] = []
+        by_name[str(skill["normalizedName"])].append(skill)
+        title_keys = {
+            series_by_id[series_id]["dependency"]["titleKey"]
+            for series_id in skill["progressionSeriesIds"] if series_id in series_by_id
+        }
+        factions = {key.split(":", 1)[1] for key in title_keys if key in {"allegiance:kurzick", "allegiance:luxon"}}
+        if factions and (len(factions) != 1 or not skill["name"].endswith(f" ({next(iter(factions)).title()})")):
+            diagnostics.append(_diag(
+                "SKILL_FACTION_IDENTITY_MISMATCH", "Faction name must match the ID-specific title dependency.",
+                int(skill["id"]), "catalog", severity="critical", disposition="non-waivable",
+            ))
+        group = groups.get(skill["splitGroupId"])
+        _, mode = split_evidence_from_title(str(skill["name"]))
+        if (mode is not None or skill["classification"]["split"]) and (
+            group is None or not skill["classification"]["split"]
+            or sum(member["skillId"] == skill["id"] for member in group["members"]) != 1
+        ):
+            diagnostics.append(_diag(
+                "SKILL_SPLIT_UNRESOLVED", "Mode-specific skill must belong to a complete split group.",
+                int(skill["id"]), "catalog", severity="critical", disposition="non-waivable",
+            ))
+    for group in groups.values():
+        members = group["members"]
+        if len(members) != 2 or {member["mode"] for member in members} != {"pve", "pvp"} or any(
+            member["skillId"] not in by_id
+            or by_id[member["skillId"]]["splitGroupId"] != group["id"]
+            or by_id[member["skillId"]]["classification"]["modeAvailability"] != f"{member['mode']}-only"
+            for member in members
+        ):
+            diagnostics.append(_diag(
+                "SKILL_SPLIT_INVALID", "Split group must link exactly one consistent PvE and PvP record.",
+                0, "catalog", severity="critical", disposition="non-waivable",
+            ))
+    for members in by_name.values():
+        if len(members) > 1:
+            diagnostics.append(_diag(
+                "SKILL_CATALOG_DUPLICATE_NAME", f"Playable skill name is ambiguous: {members[0]['name']}",
+                int(members[0]["id"]), "catalog", severity="critical", disposition="non-waivable",
+            ))
     for members in by_canonical.values():
         if len(members) <= 1:
             continue
-        for skill in sorted(members, key=lambda item: int(item["id"]))[1:]:
-            dispositions.append(
-                {
-                    "id": f"disposition:skill:{skill['id']}:same-page-variant",
-                    "skillId": skill["id"],
-                    "templateId": skill["templateId"],
-                    "requestedTitle": skill["pageIdentity"]["requestedTitle"],
-                    "kind": "same-page-variant",
-                    "reason": "Multiple accepted seed IDs resolve to the same canonical page; each ID remains a separate catalog record.",
-                    "reviewId": BASELINE_REVIEW_ID,
-                    "provenance": {
-                        "sourceIds": skill["provenance"]["sourceIds"],
-                        "claimIds": [f"claim:skill:{skill['id']}:same-page-variant"],
-                        "reviewIds": [BASELINE_REVIEW_ID],
-                        "notes": None,
-                    },
-                }
-            )
-    return dispositions
+        base = members[0]["pageIdentity"]["canonicalTitle"]
+        if len(members) != 2 or {skill["name"] for skill in members} != {f"{base} (Kurzick)", f"{base} (Luxon)"}:
+            diagnostics.append(_diag(
+                "SKILL_SHARED_PAGE_UNCLASSIFIED", "Shared-page IDs require explicit, distinct faction identities.",
+                int(members[0]["id"]), "catalog", severity="critical", disposition="non-waivable",
+            ))
+    return diagnostics
 
 
 def _disposition(
@@ -525,29 +561,33 @@ def _apply_split_groups(skills: list[dict[str, Any]]) -> None:
     by_base: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for skill in skills:
         base, mode = split_evidence_from_title(str(skill["name"]))
-        if mode is not None:
-            skill["_splitMode"] = mode
-            by_base[base].append(skill)
+        skill["_splitMode"] = mode or "pve"
+        by_base[base].append(skill)
     for members in by_base.values():
         modes = {skill["_splitMode"] for skill in members}
-        if {"pve", "pvp"}.issubset(modes):
+        if len(members) == 2 and modes == {"pve", "pvp"}:
             group_id = f"split:skill:{min(int(skill['id']) for skill in members)}"
             for skill in members:
                 skill["_splitGroupId"] = group_id
+                mode = skill["_splitMode"]
+                skill["classification"]["modeAvailability"] = f"{mode}-only"
+                skill["classification"]["pveOnly"] = mode == "pve"
+                skill["classification"]["pvpOnly"] = mode == "pvp"
 
 
 def _split_groups(skills: list[dict[str, Any]]) -> list[dict[str, Any]]:
     groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for skill in skills:
         group_id = skill.pop("_splitGroupId", None)
-        skill.pop("_splitMode", None)
         if group_id is not None:
             groups[str(group_id)].append(skill)
+        else:
+            skill.pop("_splitMode", None)
     result: list[dict[str, Any]] = []
     for group_id, members in sorted(groups.items()):
         group_members = []
         for skill in sorted(members, key=lambda item: int(item["id"])):
-            _, mode = split_evidence_from_title(str(skill["name"]))
+            mode = skill.pop("_splitMode")
             if mode in {"pve", "pvp"}:
                 group_members.append({"mode": mode, "skillId": skill["id"]})
         if len({member["mode"] for member in group_members}) < 2:
@@ -563,7 +603,7 @@ def _split_groups(skills: list[dict[str, Any]]) -> list[dict[str, Any]]:
                     "sourceIds": sorted({source_id for skill in members for source_id in skill["provenance"]["sourceIds"]}),
                     "claimIds": [f"claim:{group_id}:mode-variant"],
                     "reviewIds": [BASELINE_REVIEW_ID],
-                    "notes": "Split relationship inferred only from explicit PvE/PvP title suffix evidence.",
+                    "notes": "Explicit PvP title paired with its unique unsuffixed or PvE-suffixed counterpart.",
                 },
             }
         )

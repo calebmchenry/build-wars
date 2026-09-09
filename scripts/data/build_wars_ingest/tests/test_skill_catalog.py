@@ -4,11 +4,17 @@ import json
 import shutil
 import tempfile
 import unittest
+from copy import deepcopy
 from pathlib import Path
+from unittest.mock import patch
 
 from build_wars_ingest.config import FIXTURE_GENERATED_AT
-from build_wars_ingest.pipeline import PipelineOptions, run_pipeline
+from build_wars_ingest.pipeline import PipelineError, PipelineOptions, run_pipeline
+from build_wars_ingest.profiles import profile_by_id
 from build_wars_ingest.skill_catalog import (
+    Epic03Dependency,
+    SkillCatalogAssembly,
+    assemble_skill_catalog,
     _align_description_progression_tokens,
     semantic_catalog_version,
     validate_skill_catalog,
@@ -18,6 +24,64 @@ FIXTURE_ROOT = Path("test/fixtures/data-ingestion")
 
 
 class SkillCatalogTests(unittest.TestCase):
+    def test_source_ids_cannot_create_unverified_or_npc_playable_copies(self) -> None:
+        text = (FIXTURE_ROOT / "skills/healing-signet.wiki").read_text().replace(
+            "| id = 1", "| id = 1, 8<!-- npc -->"
+        )
+        source = {"id": "source:fixture", "retrievedAt": FIXTURE_GENERATED_AT}
+        seeds = [{"skillId": i, "templateId": i, "requestedTitle": "Healing Signet", "sourceId": source["id"]} for i in (1, 7, 8)]
+        assembled = assemble_skill_catalog(
+            profile=profile_by_id("epic-04-skills"), generated_at=FIXTURE_GENERATED_AT,
+            source_plan={"acceptedSeeds": seeds, "rangedPages": [], "summary": {
+                "sourceSetDigest": "fixture", "sourcePlanDigest": "fixture", "acceptedSeedCount": 3,
+                "minimumAcceptedId": 1, "maximumAcceptedId": 8, "numericGapCount": 5,
+            }},
+            detail_pages=[{**seed, "canonicalTitle": "Healing Signet", "content": text, "sourceReference": source} for seed in seeds],
+            imageinfo_pages=[], snapshot_set_digest="fixture",
+            dependency=Epic03Dependency(
+                catalog=json.loads((FIXTURE_ROOT / "generated/fixture-professions-attributes.catalog.json").read_text()),
+                artifact_digest="fixture", manifest_digest="fixture", qa_gate="pass",
+            ),
+        )
+        self.assertEqual([s["id"] for s in assembled.catalog["skills"]], [1])
+        self.assertEqual([(d["templateId"], d["kind"]) for d in assembled.catalog["dispositions"]], [(7, "excluded"), (8, "excluded")])
+        self.assertFalse(any(d.severity == "critical" for d in assembled.diagnostics))
+
+    def test_identity_qa_blocks_duplicate_names_and_missing_split_relationships(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            result = run_pipeline(PipelineOptions(
+                mode="fixture", profile="epic-04-skills", output_root=Path(tmp),
+                fixture_root=FIXTURE_ROOT, generated_at=FIXTURE_GENERATED_AT,
+            ))
+            duplicate = deepcopy(result.generated)
+            duplicate["skills"][1]["name"] = duplicate["skills"][0]["name"]
+            duplicate["skills"][1]["normalizedName"] = duplicate["skills"][0]["normalizedName"]
+            unlinked = deepcopy(result.generated)
+            unlinked["splitGroups"] = []
+            faction = deepcopy(result.generated)
+            luxon = next(s for s in faction["skills"] if s["name"].endswith(" (Luxon)"))
+            luxon["name"] = luxon["name"].replace(" (Luxon)", " (Kurzick)")
+            for catalog, code in ((duplicate, "SKILL_CATALOG_DUPLICATE_NAME"), (unlinked, "SKILL_SPLIT_UNRESOLVED"), (faction, "SKILL_FACTION_IDENTITY_MISMATCH")):
+                diagnostics = validate_skill_catalog(catalog, snapshot_set_digest="fixture")
+                self.assertTrue(any(d.code == code and d.disposition == "non-waivable" for d in diagnostics))
+
+    def test_failed_identity_qa_does_not_replace_promoted_artifacts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            options = PipelineOptions(
+                mode="fixture", profile="epic-04-skills", output_root=Path(tmp),
+                fixture_root=FIXTURE_ROOT, generated_at=FIXTURE_GENERATED_AT,
+            )
+            fixture = run_pipeline(options)
+            paths = (fixture.artifact_path, fixture.manifest_path, fixture.qa_report_path)
+            before = [p.read_bytes() for p in paths]
+            invalid = deepcopy(fixture.generated)
+            invalid["splitGroups"] = []
+            assembled = SkillCatalogAssembly(invalid, validate_skill_catalog(invalid, snapshot_set_digest="fixture"))
+            with patch("build_wars_ingest.pipeline.assemble_skill_catalog", return_value=assembled):
+                with self.assertRaisesRegex(PipelineError, "failed QA"):
+                    run_pipeline(options)
+            self.assertEqual([p.read_bytes() for p in paths], before)
+
     def test_fixture_catalog_contains_runtime_safe_skill_records(self) -> None:
         tmp = Path(tempfile.mkdtemp(prefix="bw_skill_catalog_"))
         try:
