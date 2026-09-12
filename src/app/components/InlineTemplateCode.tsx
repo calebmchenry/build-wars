@@ -6,13 +6,12 @@ import {
   type KeyboardEvent
 } from "react";
 
-import { hasAuthoredTitleRankOverrides } from "../../domain";
 import clipboardTextIcon from "../assets/clipboard-text.svg";
 import type { AppCatalogViews } from "../catalogs";
 import type { ValidationView } from "../editor-selectors";
-import { selectHasMeaningfulEquipment } from "../equipment-selectors";
 import type { EditorAction, EditorState } from "../editor-state";
-import { importSkillTemplateToEditor } from "../template-workflow";
+import { applyTemplateImport } from "../template-import";
+import { TemplateFileControls } from "./TemplateFileControls";
 
 export function InlineTemplateCode({
   state,
@@ -45,7 +44,7 @@ export function InlineTemplateCode({
     if (code === output) {
       return;
     }
-    applyImport({
+    applyTemplateImport({
       input: code,
       state,
       catalogs,
@@ -90,6 +89,13 @@ export function InlineTemplateCode({
             aria-hidden="true"
           />
         </button>
+        <TemplateFileControls
+          state={state}
+          catalogs={catalogs}
+          validation={validation}
+          dispatch={dispatch}
+          requestDraftReplacement={requestDraftReplacement}
+        />
       </div>
       {blockedReasons.length > 0 && output.length === 0 ? (
         <ul className="inline-blocked-reasons">
@@ -128,43 +134,6 @@ function allBlockedReasons(validation: ValidationView): readonly string[] {
 
 function uniqueMessages(messages: readonly string[]): readonly string[] {
   return [...new Set(messages)];
-}
-
-function applyImport({
-  input,
-  state,
-  catalogs,
-  dispatch,
-  requestDraftReplacement
-}: {
-  readonly input: string;
-  readonly state: EditorState;
-  readonly catalogs: AppCatalogViews;
-  readonly dispatch: Dispatch<EditorAction>;
-  readonly requestDraftReplacement: (() => "cancel" | "discard") | undefined;
-}): void {
-  const imported = importSkillTemplateToEditor(input, state, catalogs);
-  if (!imported.ok) {
-    dispatch({ type: "set-message", tone: "error", text: imported.error.message });
-    return;
-  }
-  const replacementWarnings = [
-    ...(selectHasMeaningfulEquipment(state.build.equipment) ? ["authored equipment"] : []),
-    ...(hasAuthoredTitleRankOverrides(state.build) ? ["authored title ranks"] : [])
-  ];
-  if (
-    replacementWarnings.length > 0 &&
-    !window.confirm(
-      `Importing a skill template will discard ${replacementWarnings.join(" and ")} from this draft.`
-    )
-  ) {
-    return;
-  }
-  if ((requestDraftReplacement?.() ?? "discard") === "cancel") {
-    return;
-  }
-  dispatch({ type: "replace-state", state: imported.state });
-  dispatch({ type: "set-message", tone: "success", text: "Skill template imported." });
 }
 
 function handleCodePaste(

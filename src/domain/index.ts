@@ -32,6 +32,14 @@ export {
   templateSkillId
 } from "./ids";
 export { FOUNDATION_SCHEMA_VERSION, SOURCE_POLICY_SCHEMA_VERSION } from "./source";
+export { calculateSkillAttributeEffects, SKILL_EFFECT_ATTRIBUTES } from "./skill-attribute-effects";
+export type {
+  SkillAttributeEffect,
+  SkillAttributeEffects,
+  SkillAttributeMetric,
+  SkillEffectAttribute,
+  SkillInherentRanks
+} from "./skill-attribute-effects";
 export type {
   ArtifactCommitDecision,
   ArtifactDigest,

@@ -68,10 +68,12 @@ to an occupied selected slot. Selecting an empty party slot snapshots the outgoi
 selected loadout, disables selected-loadout controls, and shows create or assign actions instead of
 materializing a placeholder build.
 
-Secondary tools preserve library, build-set, party, equipment, title-rank, sharing, backup,
-restore, transfer, modal template fallback, and full validation workflows behind a keyboard-reachable
-disclosure. `Skills` remains the default secondary workspace tab for title ranks; `Equipment`
-continues to lazy-author semantic equipment only after the first meaningful equipment edit.
+The Secondary Tools disclosure has been removed from the app. Load and Save buttons beside the
+inline template code open a shared file browser modal. It supports a user-selected game template
+folder, subfolders, search, hover/focus skill-bar previews, explicit load, and named saves with
+overwrite confirmation. See [Template Files](template-files.md) for browser capabilities and
+verification. Existing persisted drafts and library records remain readable by the persistence
+layer; removing the old tools does not delete stored data.
 
 Users can place skills from either catalog surface, replace a slot, move to an empty slot, swap
 filled slots, clear slots, use a visible removal target, and use keyboard pick/place/cancel
@@ -80,17 +82,18 @@ through one app-layer planner before the catalog-free reducer applies an eight-s
 payloads are opaque app JSON under an internal MIME type and are validated before they can mutate
 state.
 
-The title-rank panel derives relevant rows from selected skill slots, shows remaining discovered
+The retained title-rank component derives relevant rows from selected skill slots, shows remaining discovered
 titles in a disclosure, and stores only non-default per-build overrides. Opening the all-title
 disclosure or rendering title controls does not create authored override state.
 
-The `Equipment` tab renders the EPIC-14 semantic equipment editor. Opening the tab does not
+The retained equipment components implement the EPIC-14 semantic equipment editor. Opening a panel does not
 materialize `Build.equipment`; only the first meaningful equipment edit creates canonical equipment
 state.
 
-Dialogs use an app modal primitive with initial focus, Escape close, Tab containment, trigger focus
-restoration, and bounded viewport height. Clipboard writes are best-effort only; failures leave the
-template text selectable.
+The template file browser uses a native modal dialog with an inert background, Escape close, Tab
+containment, trigger focus restoration, and bounded viewport height. Escape dismisses a visible
+template preview before closing the dialog. Clipboard writes are best-effort only; failures leave
+the template text selectable.
 
 ## Tooltips
 

@@ -1,24 +1,30 @@
 import {
   attributeBudgetForLevel,
   calculateEffectiveAttributeRank,
+  calculateSkillAttributeEffects,
   collectEquipmentAttributeRankAdjustments,
   equipmentAdjustmentsForAttribute,
   formatSkillProgressionValue,
   lookupSkillById,
   purchasedRankCost,
   renderSkillTooltipText,
+  resolveSkillModeVariant,
   resolveTitleRanksForSkill,
   skillMetadataTokensForSkill,
   skillTypeLabelForId,
   skillTypeMatches,
   validateBuild,
   SKILL_TYPES,
+  SKILL_EFFECT_ATTRIBUTES,
   type AttributeBudgetPolicy,
   type AttributeId,
   type BuildValidationInput,
   type CatalogAttributeRecord,
   type CatalogSkillRecord,
   type SkillId,
+  type SkillAttributeEffect,
+  type SkillEffectAttribute,
+  type SkillInherentRanks,
   type SkillMetadataToken,
   type SkillProgressionSeries,
   type SkillTypeId,
@@ -123,6 +129,8 @@ export interface SkillFactView {
   readonly value: string;
   readonly state: string;
   readonly icon: SkillFactIconKind;
+  readonly attributeEffect?: Extract<SkillAttributeEffect, { readonly kind: "modified" }>;
+  readonly effectNote?: string;
 }
 
 export interface SkillProgressionSeriesView {
@@ -406,8 +414,8 @@ export function selectSkillDisplay(
       raw
     };
   }
-  const skill = lookupSkillById(catalogs.skillCatalog, skillId);
-  if (skill === null) {
+  const authoredSkill = lookupSkillById(catalogs.skillCatalog, skillId);
+  if (authoredSkill === null) {
     return {
       kind: "unresolved",
       title: raw?.label ?? `Unresolved skill ${Number(skillId)}`,
@@ -417,6 +425,8 @@ export function selectSkillDisplay(
     };
   }
 
+  const variant = resolveSkillModeVariant(catalogs.skillCatalog, authoredSkill, state.build.mode);
+  const skill = variant.skill;
   const rankContext = selectTooltipRankContext(state, catalogs, skill);
   const tooltip = renderSkillTooltipText(catalogs.skillCatalog, skill.id, {
     mode: state.build.mode,
@@ -433,7 +443,15 @@ export function selectSkillDisplay(
     attributeLabel,
     placeholder: catalogs.placeholders.skill(skill, surface),
     actionIcon: skillActionIconForType(skill.type),
-    facts: [...costFacts(skill), ...timingFacts(skill), ...titleRankFacts(skill, catalogs, state)],
+    facts: [
+      ...attributeAdjustedFacts(
+        skill,
+        state,
+        rankContext.inherentRanks,
+        variant.kind === "single" || variant.kind === "variant"
+      ),
+      ...titleRankFacts(skill, catalogs, state)
+    ],
     tooltipText: tooltip.kind === "rendered" ? tooltip.text : tooltip.detail,
     tooltipSegments: tooltip.kind === "rendered" ? tooltip.segments : [],
     tooltipState: tooltip.kind,
@@ -470,6 +488,7 @@ function selectTooltipRankContext(
   skill: CatalogSkillRecord
 ): {
   readonly ranks: Readonly<Record<string, number>>;
+  readonly inherentRanks: SkillInherentRanks;
   readonly assumptions: readonly string[];
 } {
   const ranks: Record<string, number> = {};
@@ -514,7 +533,36 @@ function selectTooltipRankContext(
         result.kind === "resolved" ? result.finalRank : 0;
     }
   }
-  return { ranks, assumptions };
+  const inherentRank = (key: SkillEffectAttribute): number | null => {
+    const attribute = catalogs.attributes.find(
+      (candidate) => candidate.id === SKILL_EFFECT_ATTRIBUTES[key].id
+    );
+    if (attribute === undefined) {
+      return null;
+    }
+    if (!attributeIsLegalForSelectedProfessions(attribute, state)) {
+      return 0;
+    }
+    if (equipmentAdjustmentSummary.unresolved.length > 0) {
+      return null;
+    }
+    const result = calculateEffectiveAttributeRank({
+      build: state.build,
+      professionAttributes: catalogs.validation.professionAttributes,
+      attributeId: attribute.id,
+      adjustments: equipmentAdjustmentsForAttribute(equipmentAdjustmentSummary, attribute.id)
+    });
+    return result.kind === "resolved" ? result.finalRank : null;
+  };
+  return {
+    ranks,
+    inherentRanks: {
+      expertise: inherentRank("expertise"),
+      mysticism: inherentRank("mysticism"),
+      fastCasting: inherentRank("fastCasting")
+    },
+    assumptions
+  };
 }
 
 function progressionViews(
@@ -615,6 +663,38 @@ function costFacts(skill: CatalogSkillRecord): readonly SkillFactView[] {
     ["Upkeep", skill.costs.upkeep, "upkeep"],
     ["Overcast", skill.costs.overcast, "overcast"]
   ]);
+}
+
+function attributeAdjustedFacts(
+  skill: CatalogSkillRecord,
+  state: EditorState,
+  ranks: SkillInherentRanks,
+  modeResolved: boolean
+): readonly SkillFactView[] {
+  const facts = [...costFacts(skill), ...timingFacts(skill)];
+  if (!modeResolved) {
+    return facts.map((fact) => ({ ...fact, effectNote: "Base value; skill mode is unresolved." }));
+  }
+  const effects = calculateSkillAttributeEffects({ skill, mode: state.build.mode, ranks });
+  return facts.map((fact) => {
+    if (fact.icon !== "energy" && fact.icon !== "activation" && fact.icon !== "recharge") {
+      return fact;
+    }
+    const effect = effects[fact.icon];
+    if (effect.kind === "modified") {
+      return { ...fact, value: String(effect.effectiveValue), attributeEffect: effect };
+    }
+    if (effect.kind === "unresolved") {
+      const reason = {
+        "unknown-rank": "attribute rank is unresolved",
+        "unknown-mode": "choose PvE or PvP to calculate recharge",
+        "unsupported-value": "this value cannot be adjusted",
+        "combined-energy-effects": "combined attribute effects are not supported"
+      }[effect.reason];
+      return { ...fact, effectNote: `Base value; ${reason}.` };
+    }
+    return fact;
+  });
 }
 
 function timingFacts(skill: CatalogSkillRecord): readonly SkillFactView[] {

@@ -1,13 +1,10 @@
-import { act, fireEvent, render, screen, within } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { StrictMode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { createEmptyEquipmentLoadout, knownEquipmentSelection, type RuneId } from "../domain";
 import { SKILL_TEMPLATE_PACKAGE_EXAMPLE } from "../template-compatibility";
 import { App } from "./App";
 import { validLocalLibraryEnvelopeFixture } from "./library-fixtures";
-import { createBackupEnvelope, serializeBackupEnvelope } from "./backup-restore";
-import { fixtureCatalogFacts, validSavedRecordFixture } from "./library-fixtures";
 import {
   LOCAL_LIBRARY_STORAGE_KEY,
   parseLocalLibraryJson,
@@ -42,8 +39,9 @@ describe("App", { timeout: 10_000 }, () => {
     expect(screen.queryByRole("heading", { name: "Catalog attribution" })).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Skill Bar" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Skills Catalog" })).toBeInTheDocument();
-    openSecondaryTools();
-    expect(screen.getByRole("heading", { name: "Validation" })).toBeInTheDocument();
+    expect(screen.queryByText("Secondary tools")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Load template" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Save template" })).toBeInTheDocument();
   });
 
   it("applies and persists the selected theme preference", () => {
@@ -53,61 +51,6 @@ describe("App", { timeout: 10_000 }, () => {
 
     expect(document.documentElement).toHaveAttribute("data-theme", "dark");
     expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe("dark");
-  });
-
-  it("keeps skills as the default workspace tab and does not dirty equipment on tab open", () => {
-    vi.useFakeTimers();
-    render(<App />);
-
-    openSecondaryTools();
-    const workspaceTabs = screen.getByRole("tablist", { name: "Workspace tabs" });
-    expect(within(workspaceTabs).getByRole("tab", { name: "Skills" })).toHaveAttribute(
-      "aria-selected",
-      "true"
-    );
-    expect(screen.queryByRole("heading", { name: "Equipment" })).not.toBeInTheDocument();
-
-    fireEvent.click(within(workspaceTabs).getByRole("tab", { name: "Equipment" }));
-    act(() => vi.advanceTimersByTime(300));
-
-    expect(within(workspaceTabs).getByRole("tab", { name: "Equipment" })).toHaveAttribute(
-      "aria-selected",
-      "true"
-    );
-    expect(screen.getByRole("heading", { name: "Equipment" })).toBeInTheDocument();
-    const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
-    expect(
-      parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.equipment : "error"
-    ).toBeNull();
-  });
-
-  it("autosaves semantic equipment after the first armor edit", () => {
-    vi.useFakeTimers();
-    render(<App />);
-
-    fireEvent.change(screen.getByLabelText("Primary"), { target: { value: "1" } });
-    openSecondaryTools();
-    fireEvent.click(
-      within(screen.getByRole("tablist", { name: "Workspace tabs" })).getByRole("tab", {
-        name: "Equipment"
-      })
-    );
-    fireEvent.focus(screen.getByRole("combobox", { name: "Head rune" }));
-    fireEvent.change(screen.getByRole("combobox", { name: "Head rune" }), {
-      target: { value: "Rune of Minor Strength" }
-    });
-    fireEvent.click(screen.getByRole("option", { name: /Rune of Minor Strength/ }));
-
-    act(() => vi.advanceTimersByTime(160));
-    const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
-
-    expect(parsed.ok).toBe(true);
-    expect(
-      parsed.ok
-        ? draftSnapshot(parsed.envelope.workingDraft)?.build.equipment?.armor[0]?.rune
-        : null
-    ).toEqual({ kind: "known", id: 40 });
-    expect(parsed.ok ? parsed.envelope.savedDocuments : []).toHaveLength(0);
   });
 
   it("supports blank-to-playable authoring through visible controls", () => {
@@ -129,17 +72,6 @@ describe("App", { timeout: 10_000 }, () => {
     expect(screen.getByText("Healing Signet placed in slot 1.")).toBeInTheDocument();
   }, 10_000);
 
-  it("opens the export dialog and shows canonical gate output or reasons", () => {
-    render(<App />);
-
-    openSecondaryTools();
-    fireEvent.click(screen.getByRole("button", { name: "Export" }));
-
-    const dialog = screen.getByRole("dialog", { name: "Export skill template" });
-    expect(within(dialog).getByRole("heading", { name: "Canonical" })).toBeInTheDocument();
-    expect(within(dialog).getByLabelText("Wrapper name")).toBeInTheDocument();
-  });
-
   it("restores a valid working draft from local storage on boot", () => {
     const envelope = validLocalLibraryEnvelopeFixture();
     localStorage.setItem(LOCAL_LIBRARY_STORAGE_KEY, serializeLocalLibraryEnvelope(envelope));
@@ -151,82 +83,6 @@ describe("App", { timeout: 10_000 }, () => {
     expect(
       screen.getByRole("button", { name: /Skill slot 1: Healing Signet/ })
     ).toBeInTheDocument();
-  });
-
-  it("warns that share URLs omit meaningful equipment from a valid stored draft", () => {
-    const envelope = validLocalLibraryEnvelopeFixture();
-    const equipment = createEmptyEquipmentLoadout();
-    localStorage.setItem(
-      LOCAL_LIBRARY_STORAGE_KEY,
-      serializeLocalLibraryEnvelope({
-        ...envelope,
-        workingDraft:
-          envelope.workingDraft === null
-            ? null
-            : {
-                ...envelope.workingDraft,
-                document: {
-                  kind: "build",
-                  snapshot: {
-                    ...draftSnapshot(envelope.workingDraft)!,
-                    build: {
-                      ...draftSnapshot(envelope.workingDraft)!.build,
-                      equipment: {
-                        ...equipment,
-                        armor: equipment.armor.map((piece) =>
-                          piece.slot === "head"
-                            ? { ...piece, rune: knownEquipmentSelection(40 as RuneId) }
-                            : piece
-                        )
-                      }
-                    }
-                  }
-                }
-              }
-      })
-    );
-
-    render(<App />);
-
-    openSecondaryTools();
-    expect(screen.getByText("Equipment omitted from skill template sharing")).toBeInTheDocument();
-    const shareUrl = screen.getByLabelText("Share URL") as HTMLTextAreaElement;
-    expect(shareUrl.value).not.toContain("equipment");
-    expect(shareUrl.value).not.toContain("rune");
-  });
-
-  it("warns that share URLs omit authored title ranks from a valid stored draft", () => {
-    const envelope = validLocalLibraryEnvelopeFixture();
-    localStorage.setItem(
-      LOCAL_LIBRARY_STORAGE_KEY,
-      serializeLocalLibraryEnvelope({
-        ...envelope,
-        workingDraft:
-          envelope.workingDraft === null
-            ? null
-            : {
-                ...envelope.workingDraft,
-                document: {
-                  kind: "build",
-                  snapshot: {
-                    ...draftSnapshot(envelope.workingDraft)!,
-                    build: {
-                      ...draftSnapshot(envelope.workingDraft)!.build,
-                      titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }]
-                    }
-                  }
-                }
-              }
-      })
-    );
-
-    render(<App />);
-
-    openSecondaryTools();
-    expect(screen.getByText("Title ranks omitted from skill template sharing")).toBeInTheDocument();
-    const shareUrl = screen.getByLabelText("Share URL") as HTMLTextAreaElement;
-    expect(shareUrl.value).not.toContain("title");
-    expect(shareUrl.value).not.toContain("lightbringer");
   });
 
   it("coalesces draft autosave without creating a saved library record", () => {
@@ -303,8 +159,6 @@ describe("App", { timeout: 10_000 }, () => {
 
     expect(window.location.hash).toBe("");
     expect(screen.getByLabelText("Primary")).toHaveValue("7");
-    openSecondaryTools();
-    expect(screen.getByRole("button", { name: "Update" })).toBeDisabled();
 
     act(() => vi.advanceTimersByTime(160));
     const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
@@ -330,7 +184,6 @@ describe("App", { timeout: 10_000 }, () => {
 
     render(<App />);
 
-    openSecondaryTools();
     expect(screen.getByText("Shared draft is not replacing stored draft")).toBeInTheDocument();
     act(() => vi.advanceTimersByTime(300));
     expect(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY)).toBe(before);
@@ -340,96 +193,10 @@ describe("App", { timeout: 10_000 }, () => {
     const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
     expect(parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.mode : null).toBe("pvp");
   });
-
-  it("saves, finds, favorites, duplicates, and deletes records from the library panel", () => {
-    vi.useFakeTimers();
-    render(<App />);
-
-    openSecondaryTools();
-    fireEvent.change(libraryPanel().getByLabelText("Save name"), {
-      target: { value: "Panel Save" }
-    });
-    fireEvent.click(libraryPanel().getByRole("button", { name: "Save New" }));
-    act(() => vi.advanceTimersByTime(1));
-
-    expect(libraryPanel().getByRole("heading", { name: "Panel Save" })).toBeInTheDocument();
-    expect(libraryPanel().getByRole("button", { name: "Update" })).toBeEnabled();
-
-    fireEvent.click(libraryPanel().getByRole("button", { name: "Favorite Panel Save" }));
-    fireEvent.click(libraryPanel().getByRole("button", { name: "Duplicate" }));
-    expect(libraryPanel().getByRole("heading", { name: "Panel Save Copy" })).toBeInTheDocument();
-
-    fireEvent.change(libraryPanel().getByLabelText("Library search"), {
-      target: { value: "missing" }
-    });
-    expect(libraryPanel().getByText("No saved builds match")).toBeInTheDocument();
-    fireEvent.click(libraryPanel().getByRole("button", { name: "Clear search" }));
-
-    fireEvent.click(libraryPanel().getAllByRole("button", { name: "Delete" })[0]!);
-    const dialog = screen.getByRole("dialog", { name: "Delete saved build" });
-    fireEvent.click(within(dialog).getByRole("button", { name: "Delete" }));
-    expect(libraryPanel().queryByRole("heading", { name: "Panel Save" })).not.toBeInTheDocument();
-  });
-
-  it("uses the dirty guard before loading a saved record from the panel", () => {
-    vi.spyOn(window, "confirm").mockReturnValue(false);
-    const envelope = validLocalLibraryEnvelopeFixture({ workingDraft: null });
-    localStorage.setItem(LOCAL_LIBRARY_STORAGE_KEY, serializeLocalLibraryEnvelope(envelope));
-    render(<App />);
-
-    fireEvent.change(screen.getByLabelText("Primary"), { target: { value: "1" } });
-    openSecondaryTools();
-    fireEvent.click(screen.getAllByRole("button", { name: "Load" })[0]!);
-
-    expect(window.confirm).toHaveBeenCalledWith("Discard unsaved draft changes?");
-    expect(screen.getByLabelText("Secondary")).toHaveValue("");
-  });
-
-  it("exports selectable backup JSON and restores from a previewed backup", () => {
-    const backupText = serializeBackupEnvelope(
-      createBackupEnvelope({
-        exportedAt: "2026-09-02T19:25:41Z",
-        savedBuilds: [validSavedRecordFixture({ name: "Restored Build" })],
-        workingDraft: null,
-        savedWith: fixtureCatalogFacts
-      })
-    );
-    render(<App />);
-
-    openSecondaryTools();
-    fireEvent.click(screen.getByRole("button", { name: "Backup" }));
-    const backupDialog = screen.getByRole("dialog", { name: "Backup local library" });
-    expect((screen.getByLabelText("Backup JSON") as HTMLTextAreaElement).value).toContain(
-      "build-wars-library-backup"
-    );
-    fireEvent.click(within(backupDialog).getByRole("button", { name: "Close" }));
-
-    fireEvent.click(screen.getByRole("button", { name: "Restore" }));
-    const dialog = screen.getByRole("dialog", { name: "Restore local library" });
-    fireEvent.change(within(dialog).getByLabelText("Backup JSON"), {
-      target: { value: backupText }
-    });
-    fireEvent.click(within(dialog).getByRole("button", { name: "Preview" }));
-    expect(within(dialog).getByText("Restore preview")).toBeInTheDocument();
-    fireEvent.click(within(dialog).getByRole("button", { name: "Apply Restore" }));
-
-    expect(screen.getByRole("heading", { name: "Restored Build" })).toBeInTheDocument();
-  });
 });
 
 function draftSnapshot(draft: PersistedWorkingDraft | null | undefined) {
   return draft === null || draft === undefined
     ? null
     : selectedPersistedBuildSnapshot(draft.document);
-}
-
-function openSecondaryTools() {
-  const summary = screen.getByText("Secondary tools");
-  if (summary.closest("details")?.open !== true) {
-    fireEvent.click(summary);
-  }
-}
-
-function libraryPanel() {
-  return within(screen.getByRole("region", { name: "Local Library" }));
 }

@@ -1,8 +1,10 @@
 import type { DragEvent, ReactNode } from "react";
 
 import type { SkillDisplayView, SkillFactView } from "../editor-selectors";
+import { skillFactAccessibleLabel } from "../skill-fact-text";
 import { CatalogIcon } from "./CatalogIcon";
 import { SkillActionIcon, SkillFactIcon } from "./SkillIcons";
+import { SkillFactValue } from "./SkillFactValue";
 
 export function SkillDisplay({
   view,
@@ -98,11 +100,11 @@ function SkillFacts({
           <span
             key={`${fact.label}:${fact.value}`}
             className={`skill-fact-glyph fact-${factKey(fact.label)}`}
-            aria-label={`${fact.label} ${fact.value}`}
-            title={`${fact.label}: ${fact.value}`}
+            aria-label={skillFactAccessibleLabel(fact)}
+            title={skillFactAccessibleLabel(fact)}
           >
             <SkillFactIcon kind={fact.icon} label={fact.label} />
-            <span className="skill-fact-value">{fact.value}</span>
+            <SkillFactValue fact={fact} />
           </span>
         ))}
       </div>
@@ -117,7 +119,9 @@ function SkillFacts({
             <SkillFactIcon kind={fact.icon} label={fact.label} />
             <span>{fact.label}</span>
           </dt>
-          <dd>{fact.value}</dd>
+          <dd aria-label={skillFactAccessibleLabel(fact)}>
+            <SkillFactValue fact={fact} />
+          </dd>
         </div>
       ))}
     </dl>

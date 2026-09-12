@@ -1205,9 +1205,244 @@ h3 {
 
 .inline-template-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 34px;
+  grid-template-columns: minmax(0, 1fr) 34px auto;
   gap: 8px;
   align-items: center;
+}
+
+.template-file-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.template-file-actions button {
+  min-height: 32px;
+  padding: 5px 10px;
+  white-space: nowrap;
+  font-size: 0.84rem;
+}
+
+.modal.template-browser-dialog {
+  width: min(660px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  color: var(--color-text);
+}
+
+.template-browser-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.template-browser-dialog::backdrop {
+  background: var(--color-backdrop);
+}
+
+.template-browser-dialog .modal-heading h2 {
+  margin: 0;
+}
+
+.template-folder-toolbar,
+.template-browser-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.template-folder-toolbar {
+  flex-wrap: wrap;
+}
+
+.template-folder-toolbar button,
+.template-browser-filter button {
+  padding: 5px 10px;
+  font-size: 0.82rem;
+}
+
+.template-folder-location {
+  flex: 1 1 180px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--color-muted);
+  font-size: 0.84rem;
+}
+
+.template-browser-filter input {
+  flex: 1;
+  min-width: 0;
+}
+
+.template-file-list {
+  min-height: 140px;
+  height: min(40vh, 340px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background: var(--color-control);
+}
+
+.template-file-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 0;
+  border-bottom: 1px solid var(--color-border-soft);
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+  font-weight: 500;
+}
+
+.template-file-row:hover,
+.template-file-row[aria-pressed="true"] {
+  background: var(--color-hover);
+}
+
+.template-file-row[aria-pressed="true"] {
+  box-shadow: inset 3px 0 var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+.template-file-row:focus-visible {
+  outline-offset: -3px;
+}
+
+.template-file-label {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.template-file-label small {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-danger-text);
+  font-size: 0.75rem;
+}
+
+.template-file-kind {
+  margin-left: auto;
+  color: var(--color-muted);
+  font-size: 0.72rem;
+}
+
+.template-file-glyph {
+  color: var(--color-muted);
+  font-size: 1.25rem;
+}
+
+.template-browser-empty {
+  margin: 0;
+  padding: 36px 24px;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.template-browser-hint {
+  margin: 0 0 12px;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.template-filename {
+  margin-top: 14px;
+}
+
+.template-filename .template-browser-hint {
+  margin: 0;
+}
+
+.template-browser-error {
+  margin: 12px 0 0;
+  color: var(--color-danger-text);
+  font-size: 0.85rem;
+}
+
+.template-reconnect {
+  margin-bottom: 12px;
+}
+
+.template-preview {
+  position: fixed;
+  z-index: 1;
+  width: min(440px, calc(100vw - 32px));
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid var(--color-border-popover);
+  border-radius: 7px;
+  background: var(--color-panel);
+  box-shadow: var(--shadow-modal);
+}
+
+.template-preview-name {
+  color: var(--color-heading);
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+
+.template-preview p {
+  margin: 4px 0;
+  font-size: 0.84rem;
+}
+
+.template-preview-attributes {
+  color: var(--color-muted);
+}
+
+.template-preview-skills {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.template-preview-slot {
+  display: grid;
+  aspect-ratio: 1;
+  min-width: 0;
+  overflow: hidden;
+  border: 2px solid var(--color-border-strong);
+  border-radius: 3px;
+  background: var(--color-control-disabled);
+  place-items: center;
+}
+
+.template-preview-slot.elite {
+  border-color: #d7ad46;
+}
+
+.template-preview-slot .catalog-icon {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+}
+
+@media (max-width: 540px) {
+  .inline-template-row {
+    grid-template-columns: minmax(0, 1fr) 34px;
+  }
+
+  .template-file-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+
+  .modal.template-browser-dialog {
+    padding: 12px;
+  }
+
+  .template-file-kind {
+    display: none;
+  }
 }
 
 .template-code-input {
@@ -2610,6 +2845,55 @@ textarea {
 .skill-fact-value {
   min-width: 0;
   overflow-wrap: anywhere;
+}
+
+.skill-fact-modified {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.skill-attribute-effect-details {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.skill-attribute-effect-details p {
+  margin: 0;
+}
+
+.gw-skill-tooltip .skill-attribute-effect-details {
+  color: #d6dde4;
+  border-color: rgb(214 221 228 / 30%);
+}
+
+.composer-layout:has([data-attribute-id="23"]:is(:hover, :focus-within))
+  [data-skill-attribute="expertise"],
+.composer-layout:has([data-attribute-id="44"]:is(:hover, :focus-within))
+  [data-skill-attribute="mysticism"],
+.composer-layout:has([data-attribute-id="0"]:is(:hover, :focus-within))
+  [data-skill-attribute="fastCasting"] {
+  color: var(--color-warning-text);
+  background: var(--color-warning-bg);
+  box-shadow: 0 0 0 2px var(--color-focus);
+  border-radius: 2px;
+}
+
+.composer-layout:has([data-attribute-id="23"]:is(:hover, :focus-within))
+  [data-skill-attributes~="expertise"]:is(.skill-slot-card, .focused-skill-icon-tile)
+  .catalog-icon,
+.composer-layout:has([data-attribute-id="44"]:is(:hover, :focus-within))
+  [data-skill-attributes~="mysticism"]:is(.skill-slot-card, .focused-skill-icon-tile)
+  .catalog-icon,
+.composer-layout:has([data-attribute-id="0"]:is(:hover, :focus-within))
+  [data-skill-attributes~="fastCasting"]:is(.skill-slot-card, .focused-skill-icon-tile)
+  .catalog-icon {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
 }
 
 .skill-fact-icon.fact-energy {

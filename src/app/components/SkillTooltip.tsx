@@ -1,5 +1,6 @@
 import {
   useCallback,
+  useEffect,
   useId,
   useLayoutEffect,
   useRef,
@@ -12,7 +13,9 @@ import {
 import { createPortal } from "react-dom";
 
 import type { SkillDisplayView, SkillFactView } from "../editor-selectors";
+import { skillFactAccessibleLabel } from "../skill-fact-text";
 import { SkillDisplay } from "./SkillDisplay";
+import { SkillAttributeEffectDetails, SkillFactValue } from "./SkillFactValue";
 import { SkillFactIcon } from "./SkillIcons";
 
 export type SkillTooltipPlacement = "above" | "left";
@@ -38,6 +41,7 @@ export function SkillTooltipTrigger({
   onMouseLeave,
   onFocusCapture,
   onBlurCapture,
+  onPointerDownCapture,
   "aria-describedby": ariaDescribedBy,
   ...props
 }: SkillTooltipTriggerProps) {
@@ -79,7 +83,29 @@ export function SkillTooltipTrigger({
       window.removeEventListener("resize", updatePosition);
       window.removeEventListener("scroll", updatePosition, true);
     };
-  }, [visible, updatePosition]);
+  }, [visible, updatePosition, view]);
+
+  useEffect(() => {
+    if (!visible) {
+      return undefined;
+    }
+    const dismissOutside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !triggerRef.current?.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    const dismissOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", dismissOutside, true);
+    document.addEventListener("keydown", dismissOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", dismissOutside, true);
+      document.removeEventListener("keydown", dismissOnEscape);
+    };
+  }, [visible]);
 
   const describedBy = [ariaDescribedBy, visible ? tooltipId : null]
     .filter((value): value is string => typeof value === "string" && value.length > 0)
@@ -99,6 +125,20 @@ export function SkillTooltipTrigger({
         className === undefined ? "skill-tooltip-trigger" : `skill-tooltip-trigger ${className}`
       }
       aria-describedby={describedBy.length === 0 ? undefined : describedBy}
+      data-skill-attributes={
+        view.kind === "known"
+          ? [...new Set(view.facts.flatMap((fact) => fact.attributeEffect?.attribute ?? []))].join(
+              " "
+            ) || undefined
+          : undefined
+      }
+      onPointerDownCapture={(event) => {
+        onPointerDownCapture?.(event);
+        if (enabled && event.pointerType === "touch") {
+          setPosition((current) => ({ ...current, ready: false }));
+          setOpen(true);
+        }
+      }}
       onMouseEnter={(event) => {
         onMouseEnter?.(event);
         if (enabled) {
@@ -171,6 +211,7 @@ export function SkillTooltip({
             <p>{view.tooltipText}</p>
             {view.tooltipDetail === null ? null : <p>{view.tooltipDetail}</p>}
           </section>
+          <SkillAttributeEffectDetails facts={view.facts} />
           {view.assumptions.length === 0 ? null : (
             <section>
               <h3>Assumptions</h3>
@@ -233,9 +274,9 @@ function GuildWarsSkillTooltip({
               <span
                 key={`${fact.label}:${fact.value}`}
                 className={`gw-skill-tooltip-fact fact-${fact.icon}`}
-                aria-label={`${fact.label} ${fact.value}`}
+                aria-label={skillFactAccessibleLabel(fact)}
               >
-                <span>{fact.value}</span>
+                <SkillFactValue fact={fact} />
                 <SkillFactIcon kind={fact.icon} label={fact.label} />
               </span>
             ))}
@@ -253,6 +294,7 @@ function GuildWarsSkillTooltip({
       {detailText.length === 0 ? null : (
         <p className="gw-skill-tooltip-detail">{detailText.join(" ")}</p>
       )}
+      <SkillAttributeEffectDetails facts={view.facts} />
     </aside>
   );
 }

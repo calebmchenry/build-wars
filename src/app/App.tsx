@@ -2,11 +2,6 @@ import { useEffect, useMemo, useReducer, useRef, useState, type Dispatch } from 
 
 import { promotedAppCatalogs, type AppCatalogLoadState } from "./catalogs";
 import { BuildComposer } from "./components/BuildComposer";
-import type { EditorWorkspaceTab } from "./components/EditorWorkspaceTabs";
-import { ComposerSecondaryTools } from "./components/ComposerSecondaryTools";
-import { BackupDialog, RestoreDialog } from "./components/LibraryDialogs";
-import { BuildSetTransferDialog } from "./components/BuildSetTransferDialog";
-import { PartyTransferDialog } from "./components/PartyTransferDialog";
 import { SkillTooltip } from "./components/SkillTooltip";
 import { StorageBanner } from "./components/StorageBanner";
 import { ThemeControls } from "./components/ThemeControls";
@@ -44,12 +39,6 @@ export function App() {
     catalogState,
     createWorkspaceFromBrowserStorage
   );
-  const [shareRecordId, setShareRecordId] = useState<string | null>(null);
-  const [backupOpen, setBackupOpen] = useState(false);
-  const [restoreOpen, setRestoreOpen] = useState(false);
-  const [transferOpen, setTransferOpen] = useState(false);
-  const [partyTransferOpen, setPartyTransferOpen] = useState(false);
-  const [workspaceTab, setWorkspaceTab] = useState<EditorWorkspaceTab>("skills");
   const [themePreference, setThemePreference] = useState<ThemePreference>(() =>
     readThemePreference()
   );
@@ -123,6 +112,18 @@ export function App() {
         diagnostics={workspace.storage.diagnostics}
         rejectedPayloadSummary={workspace.storage.rejectedPayloadSummary}
       />
+      {!workspace.draftSession.allowWorkingDraftAutosave &&
+      workspace.draftSession.hydrationSource === "share-url" ? (
+        <div className="share-warning">
+          <strong>Shared draft is not replacing stored draft</strong>
+          <button
+            type="button"
+            onClick={() => workspaceDispatch({ type: "allow-working-draft-autosave" })}
+          >
+            Use as Draft
+          </button>
+        </div>
+      ) : null}
       <BuildComposer
         workspace={workspace}
         catalogs={catalogs}
@@ -135,22 +136,6 @@ export function App() {
             : "discard"
         }
       />
-      <ComposerSecondaryTools
-        workspace={workspace}
-        catalogs={catalogs}
-        validation={validationView}
-        currentFacts={savedWith}
-        editorDispatch={dispatch}
-        workspaceDispatch={workspaceDispatch}
-        workspaceTab={workspaceTab}
-        onWorkspaceTabChange={setWorkspaceTab}
-        shareRecordId={shareRecordId}
-        onShareRecord={setShareRecordId}
-        onOpenBackup={() => setBackupOpen(true)}
-        onOpenRestore={() => setRestoreOpen(true)}
-        onOpenTransfer={() => setTransferOpen(true)}
-        onOpenPartyTransfer={() => setPartyTransferOpen(true)}
-      />
       <SkillTooltip
         view={tooltipView}
         onClose={() => dispatch({ type: "set-tooltip", skillId: null, pinned: false })}
@@ -158,31 +143,6 @@ export function App() {
       <div className="live-region" role="status" aria-live="polite">
         {state.transient?.text ?? ""}
       </div>
-      <BackupDialog
-        open={backupOpen}
-        workspace={workspace}
-        currentFacts={savedWith}
-        dispatch={workspaceDispatch}
-        onClose={() => setBackupOpen(false)}
-      />
-      <RestoreDialog
-        open={restoreOpen}
-        workspace={workspace}
-        dispatch={workspaceDispatch}
-        onClose={() => setRestoreOpen(false)}
-      />
-      <BuildSetTransferDialog
-        open={transferOpen}
-        workspace={workspace}
-        dispatch={workspaceDispatch}
-        onClose={() => setTransferOpen(false)}
-      />
-      <PartyTransferDialog
-        open={partyTransferOpen}
-        workspace={workspace}
-        dispatch={workspaceDispatch}
-        onClose={() => setPartyTransferOpen(false)}
-      />
     </main>
   );
 }

@@ -5,6 +5,9 @@
 - `validateBuild(input)` returns a deterministic `ValidationResult`.
 - `calculateEffectiveAttributeRank(input)` returns either a resolved rank breakdown or typed
   unresolved reasons.
+- `calculateSkillAttributeEffects(input)` projects inherent Expertise, Mysticism, and Fast
+  Casting changes to skill energy, activation, and recharge. See
+  [formulas, presentation, and scope](primary-attribute-skill-effects.md).
 - `summarizeAttributeRuneEffects(catalog, equippedEntries)` converts caller-owned equipped rune
   instances into highest-per-attribute rank adjustments plus independently counted attribute-rune
   health penalties.

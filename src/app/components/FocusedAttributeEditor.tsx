@@ -69,6 +69,7 @@ function AttributeRow({
     <div
       className={`focused-attribute-row${row.retained ? " retained-row" : ""}`}
       data-effective={row.effectiveModified ? "modified" : "base"}
+      data-attribute-id={row.attributeId ?? undefined}
     >
       <AttributeStepButton
         kind="decrement"

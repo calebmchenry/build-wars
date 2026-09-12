@@ -23,6 +23,7 @@ The Compendium is an in-repo documentation system for agents.
 - [Equipment shell](equipment-shell.md)
 - [Template compatibility](template-compatibility.md)
 - [Game rule engine](game-rule-engine.md)
+- [Primary attribute effects on skill costs and timing](primary-attribute-skill-effects.md)
 - [Visual prior art](visual-prior-art.md)
 - [Core build editor](core-build-editor.md)
 - [Focused build composer use case](build-composer-use-case.md)

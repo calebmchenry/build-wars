@@ -267,14 +267,18 @@ export function FocusedSkillCatalog({
           >
             <button
               type="button"
-              onClick={() => setCollapsedGroups((current) => expandedGroupSet(current, visibleGroupIds))}
+              onClick={() =>
+                setCollapsedGroups((current) => expandedGroupSet(current, visibleGroupIds))
+              }
               disabled={allVisibleGroupsExpanded}
             >
               Expand all
             </button>
             <button
               type="button"
-              onClick={() => setCollapsedGroups((current) => collapsedGroupSet(current, visibleGroupIds))}
+              onClick={() =>
+                setCollapsedGroups((current) => collapsedGroupSet(current, visibleGroupIds))
+              }
               disabled={allVisibleGroupsCollapsed}
             >
               Collapse all

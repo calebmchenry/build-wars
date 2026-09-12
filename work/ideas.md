@@ -5,9 +5,10 @@
   - [x] `deals:<fire|cold|lightning|earth|chaos|shadow|holy|life-steal>`
 - [x] Filter on description (including grayed out text)
 - [x] Display filters as chips in the search bar (custom query language?)
-  * (description:"blah blah blah" x) (prof:Warrior x) (prof:Monk x) (mode: PvE) (name:"haste") ???
+  - (description:"blah blah blah" x) (prof:Warrior x) (prof:Monk x) (mode: PvE) (name:"haste") ???
 
 ## Clean up
+
 - [x] Check box and labels for the profession dropdown filter are too small
 - [x] Ideally you should be able to see all of the professions in the profession dropdown filter menu without scrolling. Maybe just fit content then?
 - [x] Menus opened from buttons should probably close when you click outside of the menu (e.g. dropdown filter and profession picker and the like)
