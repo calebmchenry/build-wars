@@ -2,13 +2,15 @@
 id: BW-1903
 title: Effective Ranks and Assumed Effects
 epic: EPIC-19
-status: backlog
+status: done
 priority: high
+planned_sprint: SPRINT-020
+completed_sprint: SPRINT-020
 depends_on:
   - BW-1901
   - BW-1902
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-14
 ---
 
 # BW-1903: Effective Ranks and Assumed Effects
@@ -43,3 +45,10 @@ Meaningful math, mode/split, override lifecycle, unresolved-data, cap, selector,
 
 [Composer attribute adjustments](../../../compendium/attribute-adjustments.md) and the
 [epic contract](EPIC.md). User decisions there override older sprint scope.
+
+## Planning
+
+Planned in [SPRINT-020](../../sprints/SPRINT-020.md), Phase 3: Resolve shared previews and bounded effects.
+The sprint phase checklist and gate implement this ticket's acceptance criteria.
+
+Completed in [SPRINT-020](../../sprints/SPRINT-020.md); see [execution evidence](../../sprints/SPRINT-020-EVIDENCE.md). Shared source-gated projection passes the math, scoped uncertainty, mode/identity, selector, permanent-validation, and owner-memoization tests.

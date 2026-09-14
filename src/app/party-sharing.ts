@@ -1,4 +1,4 @@
-import { hasAuthoredTitleRankOverrides } from "../domain";
+import { hasAuthoredTitleRankOverrides, hasAuthoredAttributeAdjustments } from "../domain";
 import type { AppCatalogViews } from "./catalogs";
 import { selectValidationView } from "./editor-selectors";
 import { selectHasMeaningfulEquipment } from "./equipment-selectors";
@@ -66,6 +66,9 @@ export function projectPartyMultiCodeText(
       "party metadata",
       ...(selectHasMeaningfulEquipment(editor.build.equipment) ? ["equipment"] : []),
       ...(hasAuthoredTitleRankOverrides(editor.build) ? ["title ranks"] : []),
+      ...(hasAuthoredAttributeAdjustments(editor.build.attributeAdjustments)
+        ? ["attribute adjustments"]
+        : []),
       ...(entry.notes !== null ? ["entry notes"] : []),
       ...(slot.notes !== null ? ["slot notes"] : [])
     ];

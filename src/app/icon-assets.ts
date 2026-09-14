@@ -1,3 +1,4 @@
+import generatedRuneIconManifestJson from "./rune-icon-assets.generated.json";
 import type { CatalogProfessionRecord, CatalogSkillRecord } from "../domain";
 import type { SkillFactIconKind } from "./skill-icons";
 
@@ -277,4 +278,28 @@ function publicAssetPath(src: string): string {
 
 function normalizeAssetKey(value: string): string {
   return value.trim().replace(/\s+/g, " ").toLocaleLowerCase("en-US");
+}
+
+export interface RuneIconManifest {
+  readonly assetsByRuneId: Readonly<Record<string, LocalIconAsset | undefined>>;
+}
+
+export function localRuneIconAsset(
+  runeId: number,
+  base = import.meta.env.BASE_URL || "/",
+  manifest: RuneIconManifest = generatedRuneIconManifestJson
+): LocalIconAsset | null {
+  const entry = manifest.assetsByRuneId[String(runeId)];
+  if (
+    entry === undefined ||
+    !/^gww-icons\/runes\/[a-f0-9]{40}\.png$/.test(entry.src) ||
+    !Number.isInteger(entry.width) ||
+    !Number.isInteger(entry.height) ||
+    entry.width < 1 ||
+    entry.height < 1 ||
+    entry.width > 128 ||
+    entry.height > 128
+  )
+    return null;
+  return { ...entry, src: `${base.endsWith("/") ? base : `${base}/`}${entry.src}` };
 }

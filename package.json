@@ -22,7 +22,8 @@
     "data:skill-icons": "PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/cache_skill_icons.py",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run test:run && npm run build && npm run data:test && python3 -m unittest scripts/test_ticket_burn.py"
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run test:run && npm run build && npm run data:test && python3 -m unittest scripts/test_ticket_burn.py",
+    "data:rune-icons": "PYTHONPATH=scripts/data .venv-data/bin/python scripts/data/cache_rune_icons.py"
   },
   "dependencies": {
     "@buildwars/gw-templates": "1.1.1",

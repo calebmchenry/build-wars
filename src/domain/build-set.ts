@@ -239,6 +239,7 @@ export function cloneBuildForBuildSetEntry(build: Build, id: AuthoredDocumentId)
       build.skillBar[7]
     ],
     titleRankOverrides: build.titleRankOverrides.map((override) => ({ ...override })),
+    attributeAdjustments: cloneAttributeAdjustments(build.attributeAdjustments),
     equipment:
       build.equipment === null
         ? null
@@ -417,3 +418,4 @@ function mapBuildSetEntry<Payload>(
   });
   return changed ? next : entries;
 }
+import { cloneAttributeAdjustments } from "./attribute-adjustments";

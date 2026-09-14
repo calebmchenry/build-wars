@@ -2,8 +2,10 @@
 id: EPIC-19
 title: Composer Attribute Adjustments
 track: functional
-status: ready
+status: done
 priority: high
+planned_sprint: SPRINT-020
+completed_sprint: SPRINT-020
 depends_on:
   - EPIC-03
   - EPIC-04
@@ -25,7 +27,7 @@ tickets:
   - BW-1907
   - BW-1908
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-14
 ---
 
 # Composer Attribute Adjustments
@@ -96,16 +98,16 @@ not override this scope.
 
 ## Ticket Order
 
-| Ticket | Work | Depends on |
-| --- | --- | --- |
-| [BW-1901](BW-1901-adjustment-contracts-and-source-rules.md) | Adjustment Contracts and Source Rules | Completed epic dependencies |
-| [BW-1902](BW-1902-authored-state-and-draft-persistence.md) | Authored State and Draft Persistence | BW-1901 |
-| [BW-1903](BW-1903-effective-ranks-and-assumed-effects.md) | Effective Ranks and Assumed Effects | BW-1901, BW-1902 |
-| [BW-1904](BW-1904-local-rune-icon-assets.md) | Local Rune Icon Assets | BW-1901 |
-| [BW-1905](BW-1905-inline-runes-headgear-and-blue-ranks.md) | Inline Runes, Headgear, and Blue Ranks | BW-1902, BW-1903, BW-1904 |
-| [BW-1906](BW-1906-advanced-effect-controls.md) | Advanced Assumed-Effect Controls | BW-1902, BW-1903, BW-1905 |
-| [BW-1907](BW-1907-game-template-and-transfer-boundaries.md) | Game Template and Transfer Boundaries | BW-1902, BW-1905, BW-1906 |
-| [BW-1908](BW-1908-browser-verification-and-closeout.md) | Browser Verification and Closeout | BW-1901, BW-1902, BW-1903, BW-1904, BW-1905, BW-1906, BW-1907 |
+| Ticket                                                      | Work                                   | Depends on                                                    |
+| ----------------------------------------------------------- | -------------------------------------- | ------------------------------------------------------------- |
+| [BW-1901](BW-1901-adjustment-contracts-and-source-rules.md) | Adjustment Contracts and Source Rules  | Completed epic dependencies                                   |
+| [BW-1902](BW-1902-authored-state-and-draft-persistence.md)  | Authored State and Draft Persistence   | BW-1901                                                       |
+| [BW-1903](BW-1903-effective-ranks-and-assumed-effects.md)   | Effective Ranks and Assumed Effects    | BW-1901, BW-1902                                              |
+| [BW-1904](BW-1904-local-rune-icon-assets.md)                | Local Rune Icon Assets                 | BW-1901                                                       |
+| [BW-1905](BW-1905-inline-runes-headgear-and-blue-ranks.md)  | Inline Runes, Headgear, and Blue Ranks | BW-1902, BW-1903, BW-1904                                     |
+| [BW-1906](BW-1906-advanced-effect-controls.md)              | Advanced Assumed-Effect Controls       | BW-1902, BW-1903, BW-1905                                     |
+| [BW-1907](BW-1907-game-template-and-transfer-boundaries.md) | Game Template and Transfer Boundaries  | BW-1902, BW-1905, BW-1906                                     |
+| [BW-1908](BW-1908-browser-verification-and-closeout.md)     | Browser Verification and Closeout      | BW-1901, BW-1902, BW-1903, BW-1904, BW-1905, BW-1906, BW-1907 |
 
 The burn planner may split this epic across sprints if needed. It must respect
 ticket dependencies and keep the epic open until every required ticket is done.
@@ -146,11 +148,20 @@ completed sprint work. The execution contract requires validation; runner-owned
 extra validation is optional (`--validation-command 'npm run verify'`). Do not add
 `--ignore-dependencies`, `--allow-active-sprint`, or `--allow-dirty` for a normal run.
 
-This preparation creates no numbered sprint, active ledger entry, or burn run
-state. The runner chooses the next available sprint number. The old BW-1701
-parking-lot ticket remains under completed EPIC-17 and is not selected.
+All eight tickets completed in [SPRINT-020](../../sprints/SPRINT-020.md).
+[Durable execution evidence](../../sprints/SPRINT-020-EVIDENCE.md) records assets,
+validation, browser scenarios, native folder/fallback files and methodology.
+The ledger is completed; the execution result is separate from successful planning.
+The outer runner owns Git; this execution creates no commit. The parked BW-1701
+remains under completed EPIC-17 and is unchanged.
 
 ## Planning Evidence
+
+- [Final SPRINT-020](../../sprints/SPRINT-020.md), auto-approved under the noninteractive planning contract.
+- [SPRINT-020 merge notes and review decisions](../../sprints/drafts/SPRINT-020-MERGE-NOTES.md).
+- [SPRINT-020 source, catalog, and code audit](../../sprints/drafts/SPRINT-020-PLANNING-EVIDENCE.md).
+
+Earlier backlog-preparation evidence:
 
 - [Conversation intent and orientation](../../sprints/drafts/EPIC-019-INTENT.md)
 - [Independent Codex draft](../../sprints/drafts/EPIC-019-CODEX-DRAFT.md)

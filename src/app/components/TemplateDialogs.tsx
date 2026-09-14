@@ -1,6 +1,7 @@
 import { useEffect, useRef, type Dispatch, type KeyboardEvent, type ReactNode } from "react";
 
-import { hasAuthoredTitleRankOverrides } from "../../domain";
+import { hasAuthoredTitleRankOverrides, hasAuthoredAttributeAdjustments } from "../../domain";
+import { ATTRIBUTE_ADJUSTMENT_OMISSION, templateReplacementWarnings } from "../template-import";
 import type { AppCatalogViews } from "../catalogs";
 import type { ValidationView } from "../editor-selectors";
 import { selectHasMeaningfulEquipment } from "../equipment-selectors";
@@ -99,12 +100,7 @@ function ImportDialog({
               catalogs
             );
             if (imported.ok) {
-              const replacementWarnings = [
-                ...(selectHasMeaningfulEquipment(state.build.equipment)
-                  ? ["authored equipment"]
-                  : []),
-                ...(hasAuthoredTitleRankOverrides(state.build) ? ["authored title ranks"] : [])
-              ];
+              const replacementWarnings = templateReplacementWarnings(state.build);
               if (
                 replacementWarnings.length > 0 &&
                 !window.confirm(importWarning(replacementWarnings))
@@ -156,6 +152,9 @@ function ExportDialog({
 
   return (
     <Modal title="Export skill template" onClose={() => dispatch({ type: "close-dialog" })}>
+      {hasAuthoredAttributeAdjustments(state.build.attributeAdjustments) ? (
+        <p className="warning-text">{ATTRIBUTE_ADJUSTMENT_OMISSION}</p>
+      ) : null}
       {selectHasMeaningfulEquipment(state.build.equipment) ? (
         <p className="warning-text">
           Authored equipment is local-only and is not included in skill template output.

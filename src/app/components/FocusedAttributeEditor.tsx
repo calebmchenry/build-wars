@@ -1,4 +1,12 @@
-import { useState, type Dispatch } from "react";
+import {
+  AttributeAdjustmentControls,
+  AttributeAdjustmentRecovery
+} from "./AttributeAdjustmentControls";
+import { AttributeRankBreakdown } from "./AttributeRankBreakdown";
+import { AssumedAttributeEffects } from "./AssumedAttributeEffects";
+import { selectAttributePreview } from "../attribute-preview-selectors";
+import type { AttributePreview } from "../../domain";
+import { useId, useMemo, useState, type Dispatch } from "react";
 
 import type { AttributeId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
@@ -10,16 +18,23 @@ import { InlineIssues } from "./ProfessionModeEditor";
 export function FocusedAttributeEditor({
   state,
   catalogs,
+  preview,
   validation,
   dispatch
 }: {
   readonly state: EditorState;
   readonly catalogs: AppCatalogViews;
+  readonly preview?: AttributePreview;
   readonly validation: ValidationView;
   readonly dispatch: Dispatch<EditorAction>;
 }) {
+  const resolvedPreview = useMemo(
+    () => preview ?? selectAttributePreview(state.build, catalogs),
+    [preview, state.build, catalogs]
+  );
+  const headgearName = useId();
   const budget = selectAttributeBudgetView(state, catalogs);
-  const rows = selectFocusedAttributeRows(state, catalogs, validation);
+  const rows = selectFocusedAttributeRows(state, catalogs, validation, resolvedPreview);
   const [collapsed, setCollapsed] = useState(false);
   const listId = "focused-attribute-list";
 
@@ -38,7 +53,10 @@ export function FocusedAttributeEditor({
             {collapsed ? "+" : "-"}
           </span>
         </button>
-        <h2 id="focused-attributes-title">Attributes ({attributeBudgetLabel(budget)})</h2>
+        <h2 id="focused-attributes-title">
+          Attributes ({attributeBudgetLabel(budget)})
+          {collapsed ? ` · ${resolvedPreview.activeEffectCount} assumed effects active` : ""}
+        </h2>
         <output className="sr-only" aria-label="Attribute point spend">
           {budget.mode === "evaluated"
             ? `${budget.spend}/${budget.budget ?? 0}`
@@ -47,11 +65,51 @@ export function FocusedAttributeEditor({
       </div>
       {collapsed ? null : (
         <div id={listId} className="focused-attribute-content">
-          <div className="focused-attribute-list">
+          {resolvedPreview.availableAttributes.some(
+            (a) => a.professionId === state.build.primaryProfessionId
+          ) ? (
+            <div className="attribute-gear-heading">
+              <span>Runes / headgear +1</span>
+              <button
+                type="button"
+                onClick={() =>
+                  dispatch({ type: "set-attribute-headgear", override: { kind: "none" } })
+                }
+              >
+                Clear headgear
+              </button>
+              {state.build.attributeAdjustments?.headgearOverride != null ? (
+                <button
+                  type="button"
+                  onClick={() => dispatch({ type: "set-attribute-headgear", override: null })}
+                >
+                  Use equipped headgear
+                </button>
+              ) : null}
+            </div>
+          ) : null}
+          <AttributeAdjustmentRecovery
+            build={state.build}
+            catalogs={catalogs}
+            dispatch={dispatch}
+          />
+          <div className="focused-attribute-list" role="group" aria-label="Headgear bonus choices">
             {rows.map((row) => (
-              <AttributeRow key={row.key} row={row} dispatch={dispatch} />
+              <AttributeRow
+                key={row.key}
+                row={row}
+                dispatch={dispatch}
+                state={state}
+                catalogs={catalogs}
+                headgearName={headgearName}
+              />
             ))}
           </div>
+          <AssumedAttributeEffects
+            preview={resolvedPreview}
+            catalogs={catalogs}
+            dispatch={dispatch}
+          />
         </div>
       )}
     </section>
@@ -60,10 +118,16 @@ export function FocusedAttributeEditor({
 
 function AttributeRow({
   row,
-  dispatch
+  dispatch,
+  state,
+  catalogs,
+  headgearName
 }: {
   readonly row: ReturnType<typeof selectFocusedAttributeRows>[number];
   readonly dispatch: Dispatch<EditorAction>;
+  readonly state: EditorState;
+  readonly catalogs: AppCatalogViews;
+  readonly headgearName: string;
 }) {
   return (
     <div
@@ -91,13 +155,21 @@ function AttributeRow({
         titlePrefix="Invest"
         onClick={() => applyRank(row.buildIndex, row.attributeId, row.rank + 1, dispatch)}
       />
-      <div className="attribute-rank" aria-label={row.effectiveRankLabel}>
-        <strong>{row.effectiveRank ?? row.rank}</strong>
-      </div>
+      <AttributeRankBreakdown rank={row.previewRank} label={row.label} fallback={row.rank} />
       <div className="attribute-copy" title={row.professionLabel}>
         <strong>{row.label}</strong>
         <span className="sr-only">{row.professionLabel}</span>
       </div>
+      {row.previewRank?.gearEligible && !row.retained ? (
+        <AttributeAdjustmentControls
+          rank={row.previewRank}
+          label={row.label}
+          build={state.build}
+          catalogs={catalogs}
+          headgearName={headgearName}
+          dispatch={dispatch}
+        />
+      ) : null}
       {row.issues.length > 0 ? <InlineIssues issues={row.issues} /> : null}
     </div>
   );

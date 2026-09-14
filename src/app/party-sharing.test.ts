@@ -16,6 +16,7 @@ describe("party sharing", () => {
     expect(projection.emptyCount).toBe(1);
     expect(projection.unavailableCount).toBe(0);
     expect(projection.lossyCount).toBeGreaterThan(0);
+    expect(projection.slots[0]?.omitted).toContain("attribute adjustments");
     expect(projection.text).toContain("Build Wars Party Codes");
     expect(projection.text).toContain("Slot 1: Leader");
     expect(projection.text).toContain("Code:");

@@ -320,3 +320,20 @@ Ignored local outputs under `work/runs/data-ingestion`, `data/source-snapshots`,
 and `data/qa` can be deleted after review when no exact-path ticket has approved them. EPIC-11
 production replay requires either the retained selected local snapshot set or a fresh bounded live
 discover/fetch and review. Do not delete tracked README policy files or tracked synthetic fixtures.
+
+## Pinned attribute-rune icons
+
+`npm run data:rune-icons -- --allow-live-network` downloads only the promoted
+EPIC-10 attribute-rune images. The bounded release is 126 rune IDs / 30 PNGs.
+`npm run data:rune-icons` replays verified local cache/public bytes offline.
+Use `--generated-at` for deterministic provenance timestamps; `--cache-dir` must
+remain inside `--root`. Outputs are `public/gww-icons/runes/`,
+`src/app/rune-icon-assets.generated.json`, and
+`data/generated/epic-10/rune-icon-assets.manifest.json` under ADR 0002.
+
+The cache validates host/path/redirects, MIME, PNG signature/CRC/dimensions and exact
+promoted SHA-1 before publishing any release. It preserves original non-square
+images, stages the complete set, publishes immutable binaries before manifests,
+and restores prior manifests on a write failure. It does not promise atomicity
+across directories. Missing or changed pinned bytes fail; catalog refresh is a
+separate reviewed task. No skip-download path can satisfy asset acceptance.

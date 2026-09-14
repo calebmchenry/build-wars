@@ -1,3 +1,4 @@
+import { equipmentActionWithAdjustmentFacts } from "../attribute-adjustment-actions";
 import { useState, type Dispatch } from "react";
 
 import type { AppCatalogViews } from "../catalogs";
@@ -111,7 +112,20 @@ export function ComposerSecondaryTools({
                   activeTab={workspaceTab}
                   onChange={onWorkspaceTabChange}
                   skills={<TitleRankPanel view={titleRankPanelView} dispatch={editorDispatch} />}
-                  equipment={<EquipmentPanel view={equipmentView} dispatch={editorDispatch} />}
+                  equipment={
+                    <EquipmentPanel
+                      view={equipmentView}
+                      dispatch={(action) =>
+                        editorDispatch(
+                          equipmentActionWithAdjustmentFacts(
+                            workspace.editor.build,
+                            catalogs,
+                            action
+                          )
+                        )
+                      }
+                    />
+                  }
                 />
               </>
             ) : null}

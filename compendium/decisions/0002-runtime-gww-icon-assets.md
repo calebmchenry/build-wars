@@ -74,3 +74,25 @@ Approved local files:
 Generated skill icon files must remain under `public/gww-icons/skills/`, must be selected from
 MediaWiki `imageinfo` metadata, and must be referenced in runtime only through the local-path
 manifest.
+
+## SPRINT-020 rune exception (2026-09-14)
+
+Caleb's accepted EPIC-19 request authorizes exactly:
+
+- `public/gww-icons/runes/` for pinned attribute-rune PNG binaries;
+- `src/app/rune-icon-assets.generated.json` for local runtime paths only;
+- `data/generated/epic-10/rune-icon-assets.manifest.json` for provenance.
+
+BW-1904 implements this bounded exception: 126 attribute-rune IDs share 30 authentic
+profession/tier images. The provenance manifest retains file titles, canonical source
+URLs, media/source IDs, remote timestamp/SHA-1, verified SHA-256, original dimensions
+and byte sizes, and local destinations. No unrelated equipment image is approved.
+Catalogs remain unchanged. A catalog promotion or image-identity/hash change requires
+re-review; bytes that do not match the promoted hashes fail closed. Runtime code
+reads only local paths and never fetches the provenance URLs.
+
+The cache verifies the complete release before publishing immutable content-addressed
+binaries, then manifests. Manifest write failure restores the prior manifests;
+previous bytes remain available. This is not a claim of cross-directory crash atomicity.
+Numeric tier controls remain usable when an image fails. Original non-square images
+are neither cropped nor padded.

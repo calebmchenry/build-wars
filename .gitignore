@@ -41,6 +41,7 @@ data/generated/epic-04/*
 data/generated/epic-10/*
 !data/generated/epic-10/runes.catalog.json
 !data/generated/epic-10/runes.catalog.manifest.json
+!data/generated/epic-10/rune-icon-assets.manifest.json
 !data/generated/epic-11/
 data/generated/epic-11/*
 !data/generated/epic-11/insignias.catalog.json

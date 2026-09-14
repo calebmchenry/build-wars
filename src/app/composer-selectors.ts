@@ -1,12 +1,6 @@
-import {
-  calculateEffectiveAttributeRank,
-  collectEquipmentAttributeRankAdjustments,
-  equipmentAdjustmentsForAttribute,
-  purchasedRankCost,
-  type AttributeId,
-  type BuildSetEntryId,
-  type PartySlotId
-} from "../domain";
+import { selectAttributePreview } from "./attribute-preview-selectors";
+import type { AttributePreview, AttributePreviewRank } from "../domain";
+import { purchasedRankCost, type BuildSetEntryId, type PartySlotId } from "../domain";
 import type { AppCatalogViews } from "./catalogs";
 import { legalAttributesForSelectedProfessions } from "./attribute-eligibility";
 import {
@@ -60,6 +54,7 @@ export interface ComposerAttributeStepView {
 }
 
 export interface ComposerAttributeRowView extends AttributeEditorRowView {
+  readonly previewRank: AttributePreviewRank | null;
   readonly effectiveRank: number | null;
   readonly effectiveRankLabel: string;
   readonly effectiveModified: boolean;
@@ -129,28 +124,18 @@ export function selectComposerLoadoutContext(workspace: WorkspaceState): Compose
 export function selectFocusedAttributeRows(
   state: EditorState,
   catalogs: AppCatalogViews,
-  validation: ValidationView
+  validation: ValidationView,
+  preview: AttributePreview = selectAttributePreview(state.build, catalogs)
 ): readonly ComposerAttributeRowView[] {
   const budget = selectAttributeBudgetView(state, catalogs);
   const rows = selectAttributeRows(state, catalogs, validation.result);
   const maxRank =
     catalogs.professionAttributeCatalog.attributePointRules.purchasedRankCosts.at(-1)
       ?.purchasedRank ?? 0;
-  const equipmentAdjustmentSummary = collectEquipmentAttributeRankAdjustments({
-    build: state.build,
-    professionAttributes: catalogs.validation.professionAttributes,
-    ...(catalogs.equipment.validation.runes === undefined
-      ? {}
-      : { runes: catalogs.equipment.validation.runes })
-  });
-
   const focusedRows = rows.map((row) => {
-    const effective = effectiveRankForRow(
-      row.attributeId,
-      state,
-      catalogs,
-      equipmentAdjustmentSummary
-    );
+    const previewRank =
+      row.attributeId === null ? null : (preview.ranks.get(row.attributeId) ?? null);
+    const effective = previewRank?.effective ?? null;
     const decrementCost = previousRefundCost(row.rank, catalogs);
     const incrementCost = nextInvestmentCost(row.rank, catalogs);
     const incrementBlock =
@@ -166,6 +151,7 @@ export function selectFocusedAttributeRows(
 
     return {
       ...row,
+      previewRank,
       effectiveRank: effective,
       effectiveRankLabel:
         effective === null
@@ -173,7 +159,7 @@ export function selectFocusedAttributeRows(
           : effective === row.rank
             ? `Effective rank ${effective}`
             : `Effective rank ${effective}, modified from allocated rank ${row.rank}`,
-      effectiveModified: effective !== null && effective !== row.rank,
+      effectiveModified: effective !== null && effective > row.rank,
       decrement: {
         visible: row.rank > 0 && row.attributeId !== null,
         cost: decrementCost,
@@ -236,24 +222,6 @@ function focusedAttributeOrder(
     return fallbackOffset + fallbackIndex;
   }
   return attributeOrder.get(Number(row.attributeId)) ?? fallbackOffset + fallbackIndex;
-}
-
-function effectiveRankForRow(
-  attributeId: AttributeId | null,
-  state: EditorState,
-  catalogs: AppCatalogViews,
-  equipmentAdjustmentSummary: ReturnType<typeof collectEquipmentAttributeRankAdjustments>
-): number | null {
-  if (attributeId === null) {
-    return null;
-  }
-  const result = calculateEffectiveAttributeRank({
-    build: state.build,
-    professionAttributes: catalogs.validation.professionAttributes,
-    attributeId,
-    adjustments: equipmentAdjustmentsForAttribute(equipmentAdjustmentSummary, attributeId)
-  });
-  return result.kind === "resolved" ? result.finalRank : null;
 }
 
 function previousRefundCost(rank: number, catalogs: AppCatalogViews): number | null {

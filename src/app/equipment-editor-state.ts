@@ -1,3 +1,4 @@
+import { invalidateCompactGear } from "./attribute-adjustment-state";
 import {
   ARMOR_SLOTS,
   MAX_MODIFIERS_PER_HAND_TO_VALIDATE,
@@ -26,6 +27,7 @@ export type ArmorEquipmentField = "headgearAttribute" | "insignia" | "rune";
 export type EquipmentEditorAction =
   | {
       readonly type: "set-armor-rune";
+      readonly affectedRuneAttributeIds?: readonly AttributeId[];
       readonly slot: ArmorSlot;
       readonly selection: EquipmentSelectionState<RuneId>;
     }
@@ -40,6 +42,7 @@ export type EquipmentEditorAction =
     }
   | {
       readonly type: "clear-armor-field";
+      readonly affectedRuneAttributeIds?: readonly AttributeId[];
       readonly slot: ArmorSlot;
       readonly field: ArmorEquipmentField;
     }
@@ -103,9 +106,23 @@ export type EquipmentEditorAction =
     }
   | {
       readonly type: "reset-equipment";
+      readonly affectedRuneAttributeIds?: readonly AttributeId[];
     };
 
 export function reduceEquipmentEditorAction(build: Build, action: EquipmentEditorAction): Build {
+  const next = reduceSemanticEquipmentAction(build, action);
+  if (next === build) return build;
+  const runeIds =
+    "affectedRuneAttributeIds" in action ? (action.affectedRuneAttributeIds ?? []) : [];
+  const headgear =
+    action.type === "set-headgear-attribute" ||
+    (action.type === "clear-armor-field" && action.field === "headgearAttribute") ||
+    (action.type === "reset-equipment" &&
+      (build.equipment?.armor.some((piece) => piece.headgearAttribute !== null) ?? false));
+  return invalidateCompactGear(next, runeIds, headgear);
+}
+
+function reduceSemanticEquipmentAction(build: Build, action: EquipmentEditorAction): Build {
   switch (action.type) {
     case "set-armor-rune":
       return setArmorField(build, action.slot, "rune", action.selection);

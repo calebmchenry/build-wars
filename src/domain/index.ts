@@ -604,3 +604,7 @@ export type {
   PartyStructuralIssueSeverity
 } from "./party";
 export type { Guide, GuideSection, GuideSectionKind } from "./guide";
+export * from "./attribute-adjustments";
+export * from "./assumed-attribute-effects";
+export * from "./attribute-preview";
+export * from "./skill-source-eligibility";

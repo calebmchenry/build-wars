@@ -25,9 +25,53 @@ import {
   workspaceReducer
 } from "./workspace-state";
 
+import { adjustmentProfileFixture } from "./attribute-adjustment-fixtures";
+
 const catalogs = requireReadyCatalogs();
 
 describe("template workflow", () => {
+  it("keeps exact-source bytes and canonical base semantics through unresolved bonus-only edits", () => {
+    const imported = importSkillTemplateToEditor(
+      `[Named;${SKILL_TEMPLATE_PACKAGE_EXAMPLE}]`,
+      createBlankEditorState(),
+      catalogs
+    );
+    if (!imported.ok) throw new Error(imported.error.message);
+    const before = selectValidationView(imported.state, catalogs).exportPolicy;
+    const edited = {
+      ...imported.state,
+      build: {
+        ...imported.state.build,
+        attributeAdjustments: {
+          ...adjustmentProfileFixture(),
+          runeOverrides: [
+            { attributeId: catalogId<"Attribute">(999), runeId: catalogId<"Rune">(999) }
+          ]
+        }
+      }
+    };
+    const after = selectValidationView(edited, catalogs).exportPolicy;
+    expect(after.exactSource).toEqual(before.exactSource);
+    expect(after.canonical).toEqual(before.canonical);
+    expect(projectEditorToSkillTemplate(edited, catalogs, { allowRawOverlay: true })).toEqual(
+      projectEditorToSkillTemplate(imported.state, catalogs, { allowRawOverlay: true })
+    );
+    const invalid = importSkillTemplateToEditor("broken!", edited, catalogs);
+    expect(invalid.state).toBe(edited);
+    const replaced = importSkillTemplateToEditor(SKILL_TEMPLATE_PACKAGE_EXAMPLE, edited, catalogs);
+    expect(replaced.ok && replaced.state.build.attributeAdjustments).toBeNull();
+    expect(replaced.ok && replaced.state.build.equipment).toBeNull();
+    const canonical = playableEditorFixture();
+    expect(
+      selectValidationView(
+        {
+          ...canonical,
+          build: { ...canonical.build, attributeAdjustments: adjustmentProfileFixture() }
+        },
+        catalogs
+      ).exportPolicy.canonical
+    ).toEqual(selectValidationView(canonical, catalogs).exportPolicy.canonical);
+  });
   it("imports bare codes transactionally and exposes exact-source replay", () => {
     const initial = createBlankEditorState();
     const imported = importSkillTemplateToEditor(SKILL_TEMPLATE_PACKAGE_EXAMPLE, initial, catalogs);

@@ -1,4 +1,5 @@
 import {
+  BUILD_SCHEMA_VERSION,
   SKILL_BAR_SLOT_COUNT,
   authoredDocumentId,
   catalogId,
@@ -16,6 +17,12 @@ import {
   type TemplateSourceEnvelope
 } from "../domain";
 import { reduceEquipmentEditorAction, type EquipmentEditorAction } from "./equipment-editor-state";
+
+import {
+  clearCompactGear,
+  reduceAttributeAdjustmentAction,
+  type AttributeAdjustmentAction
+} from "./attribute-adjustment-state";
 
 export type EditableGameMode = Extract<GameMode, "pve" | "pvp">;
 
@@ -164,6 +171,7 @@ const EMPTY_RESOURCE_FILTERS: Readonly<Record<ResourceFilterKind, ResourceFilter
 
 export type EditorAction =
   | EquipmentEditorAction
+  | AttributeAdjustmentAction
   | {
       readonly type: "replace-state";
       readonly state: EditorState;
@@ -336,7 +344,7 @@ export function createBlankEditorState(name = "Untitled Build"): EditorState {
 
 export function createBlankBuild(name = "Untitled Build"): Build {
   return {
-    schemaVersion: 2,
+    schemaVersion: BUILD_SCHEMA_VERSION,
     catalogVersion: null,
     id: authoredDocumentId("build:single-character-editor"),
     name,
@@ -346,6 +354,7 @@ export function createBlankBuild(name = "Untitled Build"): Build {
     attributes: [],
     skillBar: emptySkillBar(),
     titleRankOverrides: [],
+    attributeAdjustments: null,
     equipment: null
   };
 }
@@ -412,6 +421,14 @@ export function unresolvedSkillIdForIndex(index: number): SkillId {
 
 export function editorReducer(state: EditorState, action: EditorAction): EditorState {
   switch (action.type) {
+    case "set-attribute-rune":
+    case "reset-attribute-rune":
+    case "set-attribute-headgear":
+    case "set-assumed-effect":
+    case "reset-assumed-effect": {
+      const build = reduceAttributeAdjustmentAction(state.build, action);
+      return build === state.build ? state : { ...state, build };
+    }
     case "replace-state":
       return action.state;
     case "set-profession":
@@ -580,9 +597,10 @@ function setProfession(
   clearSkillSlotIndexes: readonly number[] = [],
   browserProfessionScope?: BrowserProfessionScope
 ): EditorState {
+  if (field === "primary" && state.build.primaryProfessionId === professionId) return state;
   const build =
     field === "primary"
-      ? { ...state.build, primaryProfessionId: professionId }
+      ? { ...clearCompactGear(state.build), primaryProfessionId: professionId }
       : { ...state.build, secondaryProfessionId: professionId };
   const rawTemplate =
     field === "primary"

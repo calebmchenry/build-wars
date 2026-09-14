@@ -2,12 +2,14 @@
 id: BW-1904
 title: Local Rune Icon Assets
 epic: EPIC-19
-status: backlog
+status: done
 priority: high
+planned_sprint: SPRINT-020
+completed_sprint: SPRINT-020
 depends_on:
   - BW-1901
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-14
 ---
 
 # BW-1904: Local Rune Icon Assets
@@ -40,3 +42,10 @@ Bounded ingestion/cache tests and catalog/icon mapping checks, including source 
 
 [Composer attribute adjustments](../../../compendium/attribute-adjustments.md) and the
 [epic contract](EPIC.md). User decisions there override older sprint scope.
+
+## Planning
+
+Planned in [SPRINT-020](../../sprints/SPRINT-020.md), Phase 4: Cache real rune icons.
+The sprint phase checklist and gate implement this ticket's acceptance criteria.
+
+Completed in [SPRINT-020](../../sprints/SPRINT-020.md); see [execution evidence](../../sprints/SPRINT-020-EVIDENCE.md). All 126 mappings / 30 original PNGs are present and hash-verified, with offline replay, failure recovery, local descriptor/fallback tests, and exact policy allowlists.

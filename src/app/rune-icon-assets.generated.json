@@ -1,0 +1,765 @@
+{
+  "assetsByRuneId": {
+    "123": {
+      "height": 57,
+      "label": "Rune of Minor Mysticism icon",
+      "src": "gww-icons/runes/8e285c2c39e39ba4292882ff9bc4441b88318030.png",
+      "width": 44
+    },
+    "124": {
+      "height": 57,
+      "label": "Rune of Minor Earth Prayers icon",
+      "src": "gww-icons/runes/8e285c2c39e39ba4292882ff9bc4441b88318030.png",
+      "width": 44
+    },
+    "125": {
+      "height": 57,
+      "label": "Rune of Minor Scythe Mastery icon",
+      "src": "gww-icons/runes/8e285c2c39e39ba4292882ff9bc4441b88318030.png",
+      "width": 44
+    },
+    "126": {
+      "height": 57,
+      "label": "Rune of Minor Wind Prayers icon",
+      "src": "gww-icons/runes/8e285c2c39e39ba4292882ff9bc4441b88318030.png",
+      "width": 44
+    },
+    "162": {
+      "height": 62,
+      "label": "Rune of Minor Critical Strikes icon",
+      "src": "gww-icons/runes/d5013884dd1d79c370fbb2b69822f593143294ad.png",
+      "width": 51
+    },
+    "163": {
+      "height": 62,
+      "label": "Rune of Minor Dagger Mastery icon",
+      "src": "gww-icons/runes/d5013884dd1d79c370fbb2b69822f593143294ad.png",
+      "width": 51
+    },
+    "164": {
+      "height": 62,
+      "label": "Rune of Minor Deadly Arts icon",
+      "src": "gww-icons/runes/d5013884dd1d79c370fbb2b69822f593143294ad.png",
+      "width": 51
+    },
+    "165": {
+      "height": 62,
+      "label": "Rune of Minor Shadow Arts icon",
+      "src": "gww-icons/runes/d5013884dd1d79c370fbb2b69822f593143294ad.png",
+      "width": 51
+    },
+    "166": {
+      "height": 62,
+      "label": "Rune of Minor Channeling Magic icon",
+      "src": "gww-icons/runes/44db5099585a86cf2cc4fbc8d1f67ca169bc1d78.png",
+      "width": 51
+    },
+    "167": {
+      "height": 62,
+      "label": "Rune of Minor Restoration Magic icon",
+      "src": "gww-icons/runes/44db5099585a86cf2cc4fbc8d1f67ca169bc1d78.png",
+      "width": 51
+    },
+    "168": {
+      "height": 62,
+      "label": "Rune of Minor Communing icon",
+      "src": "gww-icons/runes/44db5099585a86cf2cc4fbc8d1f67ca169bc1d78.png",
+      "width": 51
+    },
+    "169": {
+      "height": 62,
+      "label": "Rune of Minor Spawning Power icon",
+      "src": "gww-icons/runes/44db5099585a86cf2cc4fbc8d1f67ca169bc1d78.png",
+      "width": 51
+    },
+    "170": {
+      "height": 62,
+      "label": "Rune of Major Critical Strikes icon",
+      "src": "gww-icons/runes/d8abfd2fad90031280253e2d51d3b91ec02defa2.png",
+      "width": 51
+    },
+    "171": {
+      "height": 62,
+      "label": "Rune of Major Dagger Mastery icon",
+      "src": "gww-icons/runes/d8abfd2fad90031280253e2d51d3b91ec02defa2.png",
+      "width": 51
+    },
+    "172": {
+      "height": 62,
+      "label": "Rune of Major Deadly Arts icon",
+      "src": "gww-icons/runes/d8abfd2fad90031280253e2d51d3b91ec02defa2.png",
+      "width": 51
+    },
+    "173": {
+      "height": 62,
+      "label": "Rune of Major Shadow Arts icon",
+      "src": "gww-icons/runes/d8abfd2fad90031280253e2d51d3b91ec02defa2.png",
+      "width": 51
+    },
+    "174": {
+      "height": 62,
+      "label": "Rune of Major Channeling Magic icon",
+      "src": "gww-icons/runes/541d7b971fc71287e7a6edfa2562be83fcb8923f.png",
+      "width": 51
+    },
+    "175": {
+      "height": 62,
+      "label": "Rune of Major Restoration Magic icon",
+      "src": "gww-icons/runes/541d7b971fc71287e7a6edfa2562be83fcb8923f.png",
+      "width": 51
+    },
+    "176": {
+      "height": 62,
+      "label": "Rune of Major Communing icon",
+      "src": "gww-icons/runes/541d7b971fc71287e7a6edfa2562be83fcb8923f.png",
+      "width": 51
+    },
+    "177": {
+      "height": 62,
+      "label": "Rune of Major Spawning Power icon",
+      "src": "gww-icons/runes/541d7b971fc71287e7a6edfa2562be83fcb8923f.png",
+      "width": 51
+    },
+    "178": {
+      "height": 62,
+      "label": "Rune of Superior Critical Strikes icon",
+      "src": "gww-icons/runes/6051aa4e814762004f7ce3b4b93051ebbc0d0de6.png",
+      "width": 51
+    },
+    "179": {
+      "height": 62,
+      "label": "Rune of Superior Dagger Mastery icon",
+      "src": "gww-icons/runes/6051aa4e814762004f7ce3b4b93051ebbc0d0de6.png",
+      "width": 51
+    },
+    "180": {
+      "height": 62,
+      "label": "Rune of Superior Deadly Arts icon",
+      "src": "gww-icons/runes/6051aa4e814762004f7ce3b4b93051ebbc0d0de6.png",
+      "width": 51
+    },
+    "181": {
+      "height": 62,
+      "label": "Rune of Superior Shadow Arts icon",
+      "src": "gww-icons/runes/6051aa4e814762004f7ce3b4b93051ebbc0d0de6.png",
+      "width": 51
+    },
+    "182": {
+      "height": 62,
+      "label": "Rune of Superior Channeling Magic icon",
+      "src": "gww-icons/runes/7b83ddc021ab75af42a6d3c9e38741730caf444c.png",
+      "width": 51
+    },
+    "183": {
+      "height": 62,
+      "label": "Rune of Superior Restoration Magic icon",
+      "src": "gww-icons/runes/7b83ddc021ab75af42a6d3c9e38741730caf444c.png",
+      "width": 51
+    },
+    "184": {
+      "height": 62,
+      "label": "Rune of Superior Communing icon",
+      "src": "gww-icons/runes/7b83ddc021ab75af42a6d3c9e38741730caf444c.png",
+      "width": 51
+    },
+    "185": {
+      "height": 62,
+      "label": "Rune of Superior Spawning Power icon",
+      "src": "gww-icons/runes/7b83ddc021ab75af42a6d3c9e38741730caf444c.png",
+      "width": 51
+    },
+    "198": {
+      "height": 57,
+      "label": "Rune of Minor Leadership icon",
+      "src": "gww-icons/runes/b643b5893b8e730f72bca9649d369d3a2a4c019e.png",
+      "width": 44
+    },
+    "213": {
+      "height": 57,
+      "label": "Rune of Minor Motivation icon",
+      "src": "gww-icons/runes/b643b5893b8e730f72bca9649d369d3a2a4c019e.png",
+      "width": 44
+    },
+    "214": {
+      "height": 57,
+      "label": "Rune of Minor Command icon",
+      "src": "gww-icons/runes/b643b5893b8e730f72bca9649d369d3a2a4c019e.png",
+      "width": 44
+    },
+    "215": {
+      "height": 57,
+      "label": "Rune of Minor Spear Mastery icon",
+      "src": "gww-icons/runes/b643b5893b8e730f72bca9649d369d3a2a4c019e.png",
+      "width": 44
+    },
+    "216": {
+      "height": 52,
+      "label": "Rune of Major Mysticism icon",
+      "src": "gww-icons/runes/f3a0e049699a373af44dafff6e303c415efe850d.png",
+      "width": 38
+    },
+    "217": {
+      "height": 52,
+      "label": "Rune of Major Earth Prayers icon",
+      "src": "gww-icons/runes/f3a0e049699a373af44dafff6e303c415efe850d.png",
+      "width": 38
+    },
+    "218": {
+      "height": 52,
+      "label": "Rune of Major Scythe Mastery icon",
+      "src": "gww-icons/runes/f3a0e049699a373af44dafff6e303c415efe850d.png",
+      "width": 38
+    },
+    "219": {
+      "height": 52,
+      "label": "Rune of Major Wind Prayers icon",
+      "src": "gww-icons/runes/f3a0e049699a373af44dafff6e303c415efe850d.png",
+      "width": 38
+    },
+    "22": {
+      "height": 62,
+      "label": "Rune of Minor Fast Casting icon",
+      "src": "gww-icons/runes/512f39473c7393b754e929cba2b07e1998c308e2.png",
+      "width": 51
+    },
+    "220": {
+      "height": 52,
+      "label": "Rune of Major Leadership icon",
+      "src": "gww-icons/runes/1d479335701c9a018d2acc15b61b6cc4b12446c1.png",
+      "width": 38
+    },
+    "221": {
+      "height": 52,
+      "label": "Rune of Major Motivation icon",
+      "src": "gww-icons/runes/1d479335701c9a018d2acc15b61b6cc4b12446c1.png",
+      "width": 38
+    },
+    "222": {
+      "height": 52,
+      "label": "Rune of Major Command icon",
+      "src": "gww-icons/runes/1d479335701c9a018d2acc15b61b6cc4b12446c1.png",
+      "width": 38
+    },
+    "223": {
+      "height": 52,
+      "label": "Rune of Major Spear Mastery icon",
+      "src": "gww-icons/runes/1d479335701c9a018d2acc15b61b6cc4b12446c1.png",
+      "width": 38
+    },
+    "224": {
+      "height": 62,
+      "label": "Rune of Superior Mysticism icon",
+      "src": "gww-icons/runes/d914f3cbc542bb2b1ab6efbf17a7a2652533eea5.png",
+      "width": 52
+    },
+    "225": {
+      "height": 62,
+      "label": "Rune of Superior Earth Prayers icon",
+      "src": "gww-icons/runes/d914f3cbc542bb2b1ab6efbf17a7a2652533eea5.png",
+      "width": 52
+    },
+    "226": {
+      "height": 62,
+      "label": "Rune of Superior Scythe Mastery icon",
+      "src": "gww-icons/runes/d914f3cbc542bb2b1ab6efbf17a7a2652533eea5.png",
+      "width": 52
+    },
+    "227": {
+      "height": 62,
+      "label": "Rune of Superior Wind Prayers icon",
+      "src": "gww-icons/runes/d914f3cbc542bb2b1ab6efbf17a7a2652533eea5.png",
+      "width": 52
+    },
+    "228": {
+      "height": 62,
+      "label": "Rune of Superior Leadership icon",
+      "src": "gww-icons/runes/ffcae486ff178f650e2d59f5284490ac768e5bcb.png",
+      "width": 52
+    },
+    "229": {
+      "height": 62,
+      "label": "Rune of Superior Motivation icon",
+      "src": "gww-icons/runes/ffcae486ff178f650e2d59f5284490ac768e5bcb.png",
+      "width": 52
+    },
+    "23": {
+      "height": 62,
+      "label": "Rune of Minor Domination Magic icon",
+      "src": "gww-icons/runes/512f39473c7393b754e929cba2b07e1998c308e2.png",
+      "width": 51
+    },
+    "230": {
+      "height": 62,
+      "label": "Rune of Superior Command icon",
+      "src": "gww-icons/runes/ffcae486ff178f650e2d59f5284490ac768e5bcb.png",
+      "width": 52
+    },
+    "231": {
+      "height": 62,
+      "label": "Rune of Superior Spear Mastery icon",
+      "src": "gww-icons/runes/ffcae486ff178f650e2d59f5284490ac768e5bcb.png",
+      "width": 52
+    },
+    "24": {
+      "height": 62,
+      "label": "Rune of Minor Illusion Magic icon",
+      "src": "gww-icons/runes/512f39473c7393b754e929cba2b07e1998c308e2.png",
+      "width": 51
+    },
+    "25": {
+      "height": 62,
+      "label": "Rune of Minor Inspiration Magic icon",
+      "src": "gww-icons/runes/512f39473c7393b754e929cba2b07e1998c308e2.png",
+      "width": 51
+    },
+    "26": {
+      "height": 62,
+      "label": "Rune of Minor Blood Magic icon",
+      "src": "gww-icons/runes/5384d108af55194633ce7593fcb460a642a405ba.png",
+      "width": 51
+    },
+    "27": {
+      "height": 62,
+      "label": "Rune of Minor Death Magic icon",
+      "src": "gww-icons/runes/5384d108af55194633ce7593fcb460a642a405ba.png",
+      "width": 51
+    },
+    "28": {
+      "height": 62,
+      "label": "Rune of Minor Curses icon",
+      "src": "gww-icons/runes/5384d108af55194633ce7593fcb460a642a405ba.png",
+      "width": 51
+    },
+    "29": {
+      "height": 62,
+      "label": "Rune of Minor Soul Reaping icon",
+      "src": "gww-icons/runes/5384d108af55194633ce7593fcb460a642a405ba.png",
+      "width": 51
+    },
+    "30": {
+      "height": 62,
+      "label": "Rune of Minor Energy Storage icon",
+      "src": "gww-icons/runes/e0dc78fc12f7e04bf3e8325becc8e7d5c7631e3a.png",
+      "width": 51
+    },
+    "31": {
+      "height": 62,
+      "label": "Rune of Minor Fire Magic icon",
+      "src": "gww-icons/runes/e0dc78fc12f7e04bf3e8325becc8e7d5c7631e3a.png",
+      "width": 51
+    },
+    "32": {
+      "height": 62,
+      "label": "Rune of Minor Air Magic icon",
+      "src": "gww-icons/runes/e0dc78fc12f7e04bf3e8325becc8e7d5c7631e3a.png",
+      "width": 51
+    },
+    "33": {
+      "height": 62,
+      "label": "Rune of Minor Earth Magic icon",
+      "src": "gww-icons/runes/e0dc78fc12f7e04bf3e8325becc8e7d5c7631e3a.png",
+      "width": 51
+    },
+    "34": {
+      "height": 62,
+      "label": "Rune of Minor Water Magic icon",
+      "src": "gww-icons/runes/e0dc78fc12f7e04bf3e8325becc8e7d5c7631e3a.png",
+      "width": 51
+    },
+    "35": {
+      "height": 62,
+      "label": "Rune of Minor Healing Prayers icon",
+      "src": "gww-icons/runes/fdd3ee09a85cf4d6c47cadc5d744c44dbfae8578.png",
+      "width": 51
+    },
+    "36": {
+      "height": 62,
+      "label": "Rune of Minor Smiting Prayers icon",
+      "src": "gww-icons/runes/fdd3ee09a85cf4d6c47cadc5d744c44dbfae8578.png",
+      "width": 51
+    },
+    "37": {
+      "height": 62,
+      "label": "Rune of Minor Protection Prayers icon",
+      "src": "gww-icons/runes/fdd3ee09a85cf4d6c47cadc5d744c44dbfae8578.png",
+      "width": 51
+    },
+    "38": {
+      "height": 62,
+      "label": "Rune of Minor Divine Favor icon",
+      "src": "gww-icons/runes/fdd3ee09a85cf4d6c47cadc5d744c44dbfae8578.png",
+      "width": 51
+    },
+    "39": {
+      "height": 62,
+      "label": "Rune of Minor Tactics icon",
+      "src": "gww-icons/runes/08ccaf5f9b97f3d26b5dff7f6d3834f6b0361803.png",
+      "width": 51
+    },
+    "40": {
+      "height": 62,
+      "label": "Rune of Minor Strength icon",
+      "src": "gww-icons/runes/08ccaf5f9b97f3d26b5dff7f6d3834f6b0361803.png",
+      "width": 51
+    },
+    "41": {
+      "height": 62,
+      "label": "Rune of Minor Axe Mastery icon",
+      "src": "gww-icons/runes/08ccaf5f9b97f3d26b5dff7f6d3834f6b0361803.png",
+      "width": 51
+    },
+    "42": {
+      "height": 62,
+      "label": "Rune of Minor Hammer Mastery icon",
+      "src": "gww-icons/runes/08ccaf5f9b97f3d26b5dff7f6d3834f6b0361803.png",
+      "width": 51
+    },
+    "43": {
+      "height": 62,
+      "label": "Rune of Minor Swordsmanship icon",
+      "src": "gww-icons/runes/08ccaf5f9b97f3d26b5dff7f6d3834f6b0361803.png",
+      "width": 51
+    },
+    "44": {
+      "height": 62,
+      "label": "Rune of Minor Wilderness Survival icon",
+      "src": "gww-icons/runes/b7ebd1c5ee19bf485044ca99e3a4394b9a2714f8.png",
+      "width": 51
+    },
+    "45": {
+      "height": 62,
+      "label": "Rune of Minor Expertise icon",
+      "src": "gww-icons/runes/b7ebd1c5ee19bf485044ca99e3a4394b9a2714f8.png",
+      "width": 51
+    },
+    "46": {
+      "height": 62,
+      "label": "Rune of Minor Beast Mastery icon",
+      "src": "gww-icons/runes/b7ebd1c5ee19bf485044ca99e3a4394b9a2714f8.png",
+      "width": 51
+    },
+    "47": {
+      "height": 62,
+      "label": "Rune of Minor Marksmanship icon",
+      "src": "gww-icons/runes/b7ebd1c5ee19bf485044ca99e3a4394b9a2714f8.png",
+      "width": 51
+    },
+    "48": {
+      "height": 62,
+      "label": "Rune of Major Fast Casting icon",
+      "src": "gww-icons/runes/89d70a456da70b060c85ce3adf054c9dba85ab71.png",
+      "width": 51
+    },
+    "49": {
+      "height": 62,
+      "label": "Rune of Major Domination Magic icon",
+      "src": "gww-icons/runes/89d70a456da70b060c85ce3adf054c9dba85ab71.png",
+      "width": 51
+    },
+    "50": {
+      "height": 62,
+      "label": "Rune of Major Illusion Magic icon",
+      "src": "gww-icons/runes/89d70a456da70b060c85ce3adf054c9dba85ab71.png",
+      "width": 51
+    },
+    "51": {
+      "height": 62,
+      "label": "Rune of Major Inspiration Magic icon",
+      "src": "gww-icons/runes/89d70a456da70b060c85ce3adf054c9dba85ab71.png",
+      "width": 51
+    },
+    "52": {
+      "height": 62,
+      "label": "Rune of Major Blood Magic icon",
+      "src": "gww-icons/runes/740c852df13acfc31ddfa525f100aac56f782aa8.png",
+      "width": 51
+    },
+    "53": {
+      "height": 62,
+      "label": "Rune of Major Death Magic icon",
+      "src": "gww-icons/runes/740c852df13acfc31ddfa525f100aac56f782aa8.png",
+      "width": 51
+    },
+    "54": {
+      "height": 62,
+      "label": "Rune of Major Curses icon",
+      "src": "gww-icons/runes/740c852df13acfc31ddfa525f100aac56f782aa8.png",
+      "width": 51
+    },
+    "55": {
+      "height": 62,
+      "label": "Rune of Major Soul Reaping icon",
+      "src": "gww-icons/runes/740c852df13acfc31ddfa525f100aac56f782aa8.png",
+      "width": 51
+    },
+    "56": {
+      "height": 62,
+      "label": "Rune of Major Energy Storage icon",
+      "src": "gww-icons/runes/c5360ac4e0e1f44e83e6746fce3d7ec279469bec.png",
+      "width": 51
+    },
+    "57": {
+      "height": 62,
+      "label": "Rune of Major Fire Magic icon",
+      "src": "gww-icons/runes/c5360ac4e0e1f44e83e6746fce3d7ec279469bec.png",
+      "width": 51
+    },
+    "58": {
+      "height": 62,
+      "label": "Rune of Major Air Magic icon",
+      "src": "gww-icons/runes/c5360ac4e0e1f44e83e6746fce3d7ec279469bec.png",
+      "width": 51
+    },
+    "59": {
+      "height": 62,
+      "label": "Rune of Major Earth Magic icon",
+      "src": "gww-icons/runes/c5360ac4e0e1f44e83e6746fce3d7ec279469bec.png",
+      "width": 51
+    },
+    "60": {
+      "height": 62,
+      "label": "Rune of Major Water Magic icon",
+      "src": "gww-icons/runes/c5360ac4e0e1f44e83e6746fce3d7ec279469bec.png",
+      "width": 51
+    },
+    "61": {
+      "height": 62,
+      "label": "Rune of Major Healing Prayers icon",
+      "src": "gww-icons/runes/47ef3e8b13ac34b964c68085296888e4f999a731.png",
+      "width": 51
+    },
+    "62": {
+      "height": 62,
+      "label": "Rune of Major Smiting Prayers icon",
+      "src": "gww-icons/runes/47ef3e8b13ac34b964c68085296888e4f999a731.png",
+      "width": 51
+    },
+    "63": {
+      "height": 62,
+      "label": "Rune of Major Protection Prayers icon",
+      "src": "gww-icons/runes/47ef3e8b13ac34b964c68085296888e4f999a731.png",
+      "width": 51
+    },
+    "64": {
+      "height": 62,
+      "label": "Rune of Major Divine Favor icon",
+      "src": "gww-icons/runes/47ef3e8b13ac34b964c68085296888e4f999a731.png",
+      "width": 51
+    },
+    "65": {
+      "height": 62,
+      "label": "Rune of Major Tactics icon",
+      "src": "gww-icons/runes/f249783b01108ba1cc7c3d9e189e5798141119dc.png",
+      "width": 51
+    },
+    "66": {
+      "height": 62,
+      "label": "Rune of Major Strength icon",
+      "src": "gww-icons/runes/f249783b01108ba1cc7c3d9e189e5798141119dc.png",
+      "width": 51
+    },
+    "67": {
+      "height": 62,
+      "label": "Rune of Major Axe Mastery icon",
+      "src": "gww-icons/runes/f249783b01108ba1cc7c3d9e189e5798141119dc.png",
+      "width": 51
+    },
+    "68": {
+      "height": 62,
+      "label": "Rune of Major Hammer Mastery icon",
+      "src": "gww-icons/runes/f249783b01108ba1cc7c3d9e189e5798141119dc.png",
+      "width": 51
+    },
+    "69": {
+      "height": 62,
+      "label": "Rune of Major Swordsmanship icon",
+      "src": "gww-icons/runes/f249783b01108ba1cc7c3d9e189e5798141119dc.png",
+      "width": 51
+    },
+    "70": {
+      "height": 62,
+      "label": "Rune of Major Wilderness Survival icon",
+      "src": "gww-icons/runes/0e35a0d4419d9b5a84ff49aaf2481c518ff85d5f.png",
+      "width": 51
+    },
+    "71": {
+      "height": 62,
+      "label": "Rune of Major Expertise icon",
+      "src": "gww-icons/runes/0e35a0d4419d9b5a84ff49aaf2481c518ff85d5f.png",
+      "width": 51
+    },
+    "72": {
+      "height": 62,
+      "label": "Rune of Major Beast Mastery icon",
+      "src": "gww-icons/runes/0e35a0d4419d9b5a84ff49aaf2481c518ff85d5f.png",
+      "width": 51
+    },
+    "73": {
+      "height": 62,
+      "label": "Rune of Major Marksmanship icon",
+      "src": "gww-icons/runes/0e35a0d4419d9b5a84ff49aaf2481c518ff85d5f.png",
+      "width": 51
+    },
+    "74": {
+      "height": 62,
+      "label": "Rune of Superior Fast Casting icon",
+      "src": "gww-icons/runes/25517e4e90e7808c5f325bfba1040fc0c6c8155f.png",
+      "width": 51
+    },
+    "75": {
+      "height": 62,
+      "label": "Rune of Superior Domination Magic icon",
+      "src": "gww-icons/runes/25517e4e90e7808c5f325bfba1040fc0c6c8155f.png",
+      "width": 51
+    },
+    "76": {
+      "height": 62,
+      "label": "Rune of Superior Illusion Magic icon",
+      "src": "gww-icons/runes/25517e4e90e7808c5f325bfba1040fc0c6c8155f.png",
+      "width": 51
+    },
+    "77": {
+      "height": 62,
+      "label": "Rune of Superior Inspiration Magic icon",
+      "src": "gww-icons/runes/25517e4e90e7808c5f325bfba1040fc0c6c8155f.png",
+      "width": 51
+    },
+    "78": {
+      "height": 62,
+      "label": "Rune of Superior Blood Magic icon",
+      "src": "gww-icons/runes/ecb7e953e856de629f7584216cde1b164c091399.png",
+      "width": 51
+    },
+    "79": {
+      "height": 62,
+      "label": "Rune of Superior Death Magic icon",
+      "src": "gww-icons/runes/ecb7e953e856de629f7584216cde1b164c091399.png",
+      "width": 51
+    },
+    "80": {
+      "height": 62,
+      "label": "Rune of Superior Curses icon",
+      "src": "gww-icons/runes/ecb7e953e856de629f7584216cde1b164c091399.png",
+      "width": 51
+    },
+    "81": {
+      "height": 62,
+      "label": "Rune of Superior Soul Reaping icon",
+      "src": "gww-icons/runes/ecb7e953e856de629f7584216cde1b164c091399.png",
+      "width": 51
+    },
+    "82": {
+      "height": 62,
+      "label": "Rune of Superior Energy Storage icon",
+      "src": "gww-icons/runes/5283adaacc2ddf6de02497057bc27ba028b61b07.png",
+      "width": 51
+    },
+    "83": {
+      "height": 62,
+      "label": "Rune of Superior Fire Magic icon",
+      "src": "gww-icons/runes/5283adaacc2ddf6de02497057bc27ba028b61b07.png",
+      "width": 51
+    },
+    "84": {
+      "height": 62,
+      "label": "Rune of Superior Air Magic icon",
+      "src": "gww-icons/runes/5283adaacc2ddf6de02497057bc27ba028b61b07.png",
+      "width": 51
+    },
+    "85": {
+      "height": 62,
+      "label": "Rune of Superior Earth Magic icon",
+      "src": "gww-icons/runes/5283adaacc2ddf6de02497057bc27ba028b61b07.png",
+      "width": 51
+    },
+    "86": {
+      "height": 62,
+      "label": "Rune of Superior Water Magic icon",
+      "src": "gww-icons/runes/5283adaacc2ddf6de02497057bc27ba028b61b07.png",
+      "width": 51
+    },
+    "87": {
+      "height": 62,
+      "label": "Rune of Superior Healing Prayers icon",
+      "src": "gww-icons/runes/a18d9ba0c22e68b3fc8593e954dd2770bd968252.png",
+      "width": 51
+    },
+    "88": {
+      "height": 62,
+      "label": "Rune of Superior Smiting Prayers icon",
+      "src": "gww-icons/runes/a18d9ba0c22e68b3fc8593e954dd2770bd968252.png",
+      "width": 51
+    },
+    "89": {
+      "height": 62,
+      "label": "Rune of Superior Protection Prayers icon",
+      "src": "gww-icons/runes/a18d9ba0c22e68b3fc8593e954dd2770bd968252.png",
+      "width": 51
+    },
+    "90": {
+      "height": 62,
+      "label": "Rune of Superior Divine Favor icon",
+      "src": "gww-icons/runes/a18d9ba0c22e68b3fc8593e954dd2770bd968252.png",
+      "width": 51
+    },
+    "91": {
+      "height": 62,
+      "label": "Rune of Superior Tactics icon",
+      "src": "gww-icons/runes/45dde0d5d5f0d222f89cc7af13d76a0b89f89542.png",
+      "width": 51
+    },
+    "92": {
+      "height": 62,
+      "label": "Rune of Superior Strength icon",
+      "src": "gww-icons/runes/45dde0d5d5f0d222f89cc7af13d76a0b89f89542.png",
+      "width": 51
+    },
+    "93": {
+      "height": 62,
+      "label": "Rune of Superior Axe Mastery icon",
+      "src": "gww-icons/runes/45dde0d5d5f0d222f89cc7af13d76a0b89f89542.png",
+      "width": 51
+    },
+    "94": {
+      "height": 62,
+      "label": "Rune of Superior Hammer Mastery icon",
+      "src": "gww-icons/runes/45dde0d5d5f0d222f89cc7af13d76a0b89f89542.png",
+      "width": 51
+    },
+    "95": {
+      "height": 62,
+      "label": "Rune of Superior Swordsmanship icon",
+      "src": "gww-icons/runes/45dde0d5d5f0d222f89cc7af13d76a0b89f89542.png",
+      "width": 51
+    },
+    "96": {
+      "height": 62,
+      "label": "Rune of Superior Wilderness Survival icon",
+      "src": "gww-icons/runes/f7587233a184e893f4eeba565297b1888b810abd.png",
+      "width": 51
+    },
+    "97": {
+      "height": 62,
+      "label": "Rune of Superior Expertise icon",
+      "src": "gww-icons/runes/f7587233a184e893f4eeba565297b1888b810abd.png",
+      "width": 51
+    },
+    "98": {
+      "height": 62,
+      "label": "Rune of Superior Beast Mastery icon",
+      "src": "gww-icons/runes/f7587233a184e893f4eeba565297b1888b810abd.png",
+      "width": 51
+    },
+    "99": {
+      "height": 62,
+      "label": "Rune of Superior Marksmanship icon",
+      "src": "gww-icons/runes/f7587233a184e893f4eeba565297b1888b810abd.png",
+      "width": 51
+    }
+  },
+  "schemaVersion": 1,
+  "summary": {
+    "runeCount": 126,
+    "uniqueAssetCount": 30
+  }
+}

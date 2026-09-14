@@ -221,6 +221,7 @@ describe("build validation context", () => {
       attributes: [{ attributeId: attributeIds.tactics, rank: 0 }],
       skillBar: skillBar(skillIds.healingSignet),
       titleRankOverrides: [],
+      attributeAdjustments: null,
       equipment: null
     };
     const context = createBuildValidationContext({

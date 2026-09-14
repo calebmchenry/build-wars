@@ -1,6 +1,6 @@
 import { useMemo, type Dispatch } from "react";
 
-import { hasAuthoredTitleRankOverrides } from "../../domain";
+import { hasAuthoredTitleRankOverrides, hasAuthoredAttributeAdjustments } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
 import { selectValidationView } from "../editor-selectors";
 import { selectHasMeaningfulEquipment } from "../equipment-selectors";
@@ -81,6 +81,12 @@ export function ShareControls({
       ) : null}
       {share.ok && targetEditor !== null ? (
         <>
+          {hasAuthoredAttributeAdjustments(targetEditor.build.attributeAdjustments) ? (
+            <div className="share-warning">
+              <strong>Attribute adjustments omitted from skill template sharing</strong>
+              <p>Rune, headgear, and assumed-effect choices remain in local saves and backups.</p>
+            </div>
+          ) : null}
           {selectHasMeaningfulEquipment(targetEditor.build.equipment) ? (
             <div className="share-warning">
               <strong>Equipment omitted from skill template sharing</strong>

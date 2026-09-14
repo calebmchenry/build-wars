@@ -1,4 +1,5 @@
-import { useState, type Dispatch } from "react";
+import { selectAttributePreview } from "../attribute-preview-selectors";
+import { useMemo, useState, type Dispatch } from "react";
 
 import { catalogId, isSkillTypeId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
@@ -33,6 +34,10 @@ export function SkillBrowser({
   readonly catalogs: AppCatalogViews;
   readonly dispatch: Dispatch<EditorAction>;
 }) {
+  const resolvedPreview = useMemo(
+    () => selectAttributePreview(state.build, catalogs),
+    [state.build, catalogs]
+  );
   const browser = selectSkillBrowser(state, catalogs);
   const targetSlot = selectedOrFirstEmptySlot(state);
   const [advancedFiltersExpanded, setAdvancedFiltersExpanded] = useState(false);
@@ -225,7 +230,14 @@ export function SkillBrowser({
               <h3 id={`group-${group.id}`}>{group.label}</h3>
               <div className="skill-result-grid">
                 {group.skills.map((skill) => {
-                  const view = selectSkillDisplay(catalogs, state, skill.id, "skill-browser");
+                  const view = selectSkillDisplay(
+                    catalogs,
+                    state,
+                    skill.id,
+                    "skill-browser",
+                    null,
+                    resolvedPreview
+                  );
                   return (
                     <SkillTooltipTrigger key={Number(skill.id)} view={view} placement="left">
                       <SkillDisplay

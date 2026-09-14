@@ -10,7 +10,8 @@ import clipboardTextIcon from "../assets/clipboard-text.svg";
 import type { AppCatalogViews } from "../catalogs";
 import type { ValidationView } from "../editor-selectors";
 import type { EditorAction, EditorState } from "../editor-state";
-import { applyTemplateImport } from "../template-import";
+import { applyTemplateImport, ATTRIBUTE_ADJUSTMENT_OMISSION } from "../template-import";
+import { hasAuthoredAttributeAdjustments } from "../../domain";
 import { TemplateFileControls } from "./TemplateFileControls";
 
 export function InlineTemplateCode({
@@ -97,6 +98,9 @@ export function InlineTemplateCode({
           requestDraftReplacement={requestDraftReplacement}
         />
       </div>
+      {hasAuthoredAttributeAdjustments(state.build.attributeAdjustments) ? (
+        <p className="template-adjustment-notice">{ATTRIBUTE_ADJUSTMENT_OMISSION}</p>
+      ) : null}
       {blockedReasons.length > 0 && output.length === 0 ? (
         <ul className="inline-blocked-reasons">
           {blockedReasons.map((reason, index) => (

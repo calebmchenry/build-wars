@@ -9,9 +9,36 @@ import { TemplateControls } from "./components/TemplateDialogs";
 import { selectValidationView } from "./editor-selectors";
 import { createBlankEditorState, editorReducer, type EditorState } from "./editor-state";
 
+import { adjustmentProfileFixture } from "./attribute-adjustment-fixtures";
+
 const catalogs = requireReadyCatalogs();
 
 describe("TemplateControls", () => {
+  it("mentions authored adjustments in the existing confirmation and omission notice", () => {
+    const confirm = vi.spyOn(window, "confirm").mockReturnValue(false);
+    const blank = createBlankEditorState();
+    render(
+      <Harness
+        initialState={{
+          ...blank,
+          build: { ...blank.build, attributeAdjustments: adjustmentProfileFixture(true) }
+        }}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Import" }));
+    const dialog = screen.getByRole("dialog", { name: "Import skill template" });
+    fireEvent.change(within(dialog).getByLabelText("Skill template code"), {
+      target: { value: SKILL_TEMPLATE_PACKAGE_EXAMPLE }
+    });
+    fireEvent.click(within(dialog).getByRole("button", { name: "Import" }));
+    expect(confirm).toHaveBeenCalledWith(
+      "Importing a skill template will discard authored attribute adjustments from this draft."
+    );
+    expect(screen.getByText("Fresh build")).toBeInTheDocument();
+    fireEvent.click(within(dialog).getByRole("button", { name: "Cancel" }));
+    fireEvent.click(screen.getByRole("button", { name: "Export" }));
+    expect(screen.getByText(/Rune, headgear, and assumed-effect choices stay/)).toBeInTheDocument();
+  });
   it("imports a wrapped skill template and then exposes exact-source export", () => {
     render(<Harness />);
 

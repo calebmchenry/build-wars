@@ -2,12 +2,14 @@
 id: BW-1902
 title: Authored State and Draft Persistence
 epic: EPIC-19
-status: backlog
+status: done
 priority: high
+planned_sprint: SPRINT-020
+completed_sprint: SPRINT-020
 depends_on:
   - BW-1901
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-14
 ---
 
 # BW-1902: Authored State and Draft Persistence
@@ -40,3 +42,10 @@ Focused domain/reducer, persistence-schema, local-storage, workspace, backup, an
 
 [Composer attribute adjustments](../../../compendium/attribute-adjustments.md) and the
 [epic contract](EPIC.md). User decisions there override older sprint scope.
+
+## Planning
+
+Planned in [SPRINT-020](../../sprints/SPRINT-020.md), Phase 2: Author, migrate, and preserve settings.
+The sprint phase checklist and gate implement this ticket's acceptance criteria.
+
+Completed in [SPRINT-020](../../sprints/SPRINT-020.md); see [execution evidence](../../sprints/SPRINT-020-EVIDENCE.md). Non-default profiles survive shared clone, nested transfer, storage, autosave, and pagehide paths. Build, lint, and all 542 tests pass.

@@ -1,4 +1,6 @@
-import { useState, type Dispatch, type DragEvent, type KeyboardEvent } from "react";
+import { selectAttributePreview } from "../attribute-preview-selectors";
+import type { AttributePreview } from "../../domain";
+import { useMemo, useState, type Dispatch, type DragEvent, type KeyboardEvent } from "react";
 
 import { catalogId, isSkillTypeId, type SkillId } from "../../domain";
 import filterIcon from "../assets/funnel.svg";
@@ -59,12 +61,18 @@ const DISPLAY_MODE_OPTIONS: readonly {
 export function FocusedSkillCatalog({
   state,
   catalogs,
+  preview,
   dispatch
 }: {
   readonly state: EditorState;
   readonly catalogs: AppCatalogViews;
+  readonly preview?: AttributePreview;
   readonly dispatch: Dispatch<EditorAction>;
 }) {
+  const resolvedPreview = useMemo(
+    () => preview ?? selectAttributePreview(state.build, catalogs),
+    [preview, state.build, catalogs]
+  );
   const browser = selectSkillBrowser(state, catalogs);
   const [collapsedGroups, setCollapsedGroups] = useState<ReadonlySet<string>>(() => new Set());
   const [filtersExpanded, setFiltersExpanded] = useState(false);
@@ -312,7 +320,14 @@ export function FocusedSkillCatalog({
                     className={`focused-skill-list ${focusedSkillListClass(state.browser.viewMode)}`}
                   >
                     {group.skills.map((skill) => {
-                      const view = selectSkillDisplay(catalogs, state, skill.id, "skill-browser");
+                      const view = selectSkillDisplay(
+                        catalogs,
+                        state,
+                        skill.id,
+                        "skill-browser",
+                        null,
+                        resolvedPreview
+                      );
                       const iconDragHandle = {
                         label: `Drag ${skill.name}`,
                         onDragStart: (event: DragEvent<HTMLSpanElement>) => {

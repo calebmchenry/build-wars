@@ -1,3 +1,4 @@
+import { selectAttributePreview } from "./attribute-preview-selectors";
 import { useEffect, useMemo, useReducer, useRef, useState, type Dispatch } from "react";
 
 import { promotedAppCatalogs, type AppCatalogLoadState } from "./catalogs";
@@ -51,6 +52,14 @@ export function App() {
   const lastFlushTokenRef = useRef(workspace.storage.flushToken);
   const readyCatalogs = catalogState.status === "ready" ? catalogState.catalogs : null;
   const state = workspace.editor;
+  const loadoutContext = selectComposerLoadoutContext(workspace);
+  const preview = useMemo(
+    () =>
+      readyCatalogs === null || !loadoutContext.selected
+        ? null
+        : selectAttributePreview(state.build, readyCatalogs),
+    [state.build, readyCatalogs, loadoutContext.selected]
+  );
   const dispatch: Dispatch<EditorAction> = (action) =>
     workspaceDispatch({ type: "editor", action });
   const validation = readyCatalogs === null ? null : selectValidationView(state, readyCatalogs);
@@ -94,11 +103,17 @@ export function App() {
   if (validationView === null || savedWith === null) {
     throw new Error("Catalog validation view missing after catalog readiness check.");
   }
-  const loadoutContext = selectComposerLoadoutContext(workspace);
   const tooltipView =
     !loadoutContext.selected || state.tooltip.skillId === null
       ? null
-      : selectSkillDisplay(catalogs, state, state.tooltip.skillId, "tooltip");
+      : selectSkillDisplay(
+          catalogs,
+          state,
+          state.tooltip.skillId,
+          "tooltip",
+          null,
+          preview ?? undefined
+        );
 
   return (
     <main className="app-shell editor-shell" aria-label="Build Wars" data-catalog-state="ready">
@@ -128,6 +143,7 @@ export function App() {
         workspace={workspace}
         catalogs={catalogs}
         validation={validationView}
+        preview={preview}
         editorDispatch={dispatch}
         workspaceDispatch={workspaceDispatch}
         requestDraftReplacement={() =>

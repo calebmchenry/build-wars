@@ -44,6 +44,9 @@ export type EquipmentAttributeRankUnresolvedCode =
   | "schema-unsupported";
 
 export interface EquipmentAttributeRankUnresolvedReason {
+  readonly contribution?: "headgear" | "rune" | "both";
+  readonly affectedAttributeIds?: readonly AttributeId[] | null;
+  readonly uncertain?: boolean;
   readonly code: EquipmentAttributeRankUnresolvedCode;
   readonly path: readonly (string | number)[];
   readonly message: string;
@@ -87,6 +90,9 @@ export function collectEquipmentAttributeRankAdjustments(
       unresolved: [
         {
           code: "schema-unsupported",
+          contribution: "both",
+          affectedAttributeIds: null,
+          uncertain: true,
           path: ["equipment", "schemaVersion"],
           message: "Equipment loadout schema version is not supported."
         }
@@ -110,7 +116,12 @@ export function collectEquipmentAttributeRankAdjustments(
       : summarizeAttributeRuneEffects({ runes: input.runes.records }, runeResolution.entries);
   if (runeSummary !== null) {
     for (const reason of runeSummary.unresolved) {
+      const matchingRunes = input.runes?.records.filter((rune) => rune.id === reason.runeId) ?? [];
+      const target = matchingRunes.length === 1 ? matchingRunes[0]?.affectedAttributeId : null;
       unresolved.push({
+        contribution: "rune",
+        affectedAttributeIds: target === null || target === undefined ? null : [target],
+        uncertain: true,
         code: "rune-unresolved",
         path: ["equipment", "armor"],
         message: reason.message
@@ -133,7 +144,7 @@ export function collectEquipmentAttributeRankAdjustments(
       })) ?? [])
     ]),
     runeSummary,
-    unresolved: dedupeUnresolved(unresolved)
+    unresolved: dedupeUnresolved(unresolved).map((reason) => scopeEquipmentReason(reason, input))
   };
 }
 
@@ -394,4 +405,44 @@ function compareNumber(left: number, right: number): number {
 
 function compareString(left: string, right: string): number {
   return left < right ? -1 : left > right ? 1 : 0;
+}
+
+/** Keep permanent arithmetic unchanged while exposing the uncertainty scope to previews. */
+function scopeEquipmentReason(
+  reason: EquipmentAttributeRankUnresolvedReason,
+  input: EquipmentAttributeRankAdjustmentInput
+): EquipmentAttributeRankUnresolvedReason {
+  if (reason.contribution !== undefined) return reason;
+  const contribution =
+    reason.code.startsWith("headgear") || reason.message.startsWith("Headgear")
+      ? "headgear"
+      : "rune";
+  const rowIndex = typeof reason.path[2] === "number" ? reason.path[2] : null;
+  const row = rowIndex === null ? null : input.build.equipment?.armor[rowIndex];
+  let affectedAttributeIds: readonly AttributeId[] | null = null;
+  let uncertain = true;
+  if (contribution === "headgear" && row?.headgearAttribute?.kind === "known") {
+    const selectedId = row.headgearAttribute.id;
+    const matches = input.professionAttributes.attributes.filter((a) => a.id === selectedId);
+    if (matches.length === 1) {
+      affectedAttributeIds = [matches[0]!.id];
+      uncertain =
+        reason.code !== "headgear-attribute-invalid" && reason.code !== "headgear-slot-invalid";
+    }
+  }
+  if (contribution === "rune" && row?.rune?.kind === "known") {
+    const selectedId = row.rune.id;
+    const matches = input.runes?.records.filter((r) => r.id === selectedId) ?? [];
+    if (matches.length === 1) {
+      affectedAttributeIds =
+        matches[0]!.affectedAttributeId === null ? [] : [matches[0]!.affectedAttributeId];
+      uncertain = reason.code !== "rune-restricted";
+    }
+  }
+  // An unselected duplicate elsewhere in the catalog does not affect this loadout.
+  if (reason.code === "duplicate-rune-id") {
+    affectedAttributeIds = [];
+    uncertain = false;
+  }
+  return { ...reason, contribution, affectedAttributeIds, uncertain };
 }

@@ -135,6 +135,7 @@ describe("SkillDisplay and SkillTooltip", () => {
         ...state,
         build: {
           ...state.build,
+          primaryProfessionId: catalogId<"Profession">(3),
           attributes: [{ attributeId: wordOfHealing.attributeId, rank: 1 }]
         }
       },

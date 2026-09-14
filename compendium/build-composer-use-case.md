@@ -1,8 +1,7 @@
 # Focused Build Composer Use Case
 
-This document captures the product direction for the next primary Build Wars
-experience. It is intentionally broader than one implementation ticket and
-should be treated as the durable context for EPIC-18.
+This document describes the focused Build Wars composer and its product direction.
+It provides durable context for EPIC-18 and the attribute adjustments in EPIC-19.
 
 ## Primary Use Case
 
@@ -47,22 +46,11 @@ tab only.
 
 ## Secondary Entry Points
 
-SPRINT-019 preserves mature workflows behind a `Secondary tools` disclosure
-instead of removing them or changing their contracts.
-
-| Workflow                                                                | Secondary entry point                  |
-| ----------------------------------------------------------------------- | -------------------------------------- |
-| Saved records, draft save/update, tags, notes, favorites                | `Local Library` panel                  |
-| Build-set creation, selection, variants, transfer                       | `Build Set` panel                      |
-| Party member ordering, metadata, native party transfer, multi-code copy | `Build Set`/party controls             |
-| Equipment and title ranks                                               | `Editor workspace` tabs                |
-| Share URLs and selected-loadout warnings                                | `Sharing` panel                        |
-| Full validation                                                         | `Validation` panel                     |
-| Backup and restore                                                      | `Local Library` backup/restore actions |
-| Modal template import/export fallback                                   | `Template` panel                       |
-
-The secondary surface remains keyboard reachable from the first screen, and
-existing dialogs retain focus restoration and dirty-guard behavior.
+The current shell mounts only the focused composer, inline code, game-folder
+Load/Save and theme controls. Mature library, party, equipment, title and sharing
+components remain available as internal modules and tested state/transfer paths;
+they are not mounted as a Secondary tools surface. Named local builds and complete
+build transfer interfaces remain deferred.
 
 ## Naming Contract
 
@@ -90,12 +78,10 @@ replaces or removes them.
 
 ## Asset Branch
 
-No exact approved local icon binaries are part of EPIC-18. Runtime icon rendering
-therefore uses one app-owned placeholder primitive backed by deterministic text
-initials and CSS. Catalog media IDs remain provenance metadata only and are not
-passed to `img`, CSS URL, preload, canvas, fetch, service worker, or drag-image
-APIs. Resource/timing facts use product-owned text glyphs with visible or
-assistive labels.
+Profession and skill icons use approved local assets through the app icon boundary.
+SPRINT-020 adds 126 rune mappings to 30 verified local images. Runtime paths stay
+local; provenance remains in dedicated manifests. Missing rune images leave visible
+numeric choices and full accessible names. See [ADR 0002](decisions/0002-runtime-gww-icon-assets.md).
 
 ## Attribute Rows
 
@@ -108,8 +94,16 @@ Attribute editing should resemble the in-game flow:
 
 The decrement affordance is hidden when no points are allocated. The increment
 affordance is hidden when the user cannot invest more because of rank cap or
-remaining points. Allocated rank and effective rank should be separate state so
-later rune/headgear bonuses can make modified ranks render differently.
+remaining points. Allocated ranks remain authored point investments. SPRINT-020 derives effective
+ranks from eligible gear and assumed effects using one shared projection. Primary
+rows offer None/+1/+2/+3 rune radios and one global headgear +1 choice, including
+at base zero. Inherit/reset remains distinct from explicit None. Blue marks resolved
+increases; focus, hover or tap opens the contribution and cap explanation.
+
+The initially collapsed Assumed effects disclosure provides self-effect checkboxes
+and external Refrain strength. Inactive remembered preferences remain editable.
+Both collapsed disclosures show the contributing count, including capped bonuses.
+See [attribute adjustments](attribute-adjustments.md) for persistence and precedence.
 
 ## Skill Bar Rules
 
@@ -151,8 +145,7 @@ The first catalog tab is skills.
 - The initial view should be compact rows: icon, name, and right-aligned modeled
   costs in energy, adrenaline, sacrifice, upkeep, overcast, activation,
   recharge, then other-facts order.
-- Real skill icons and resource/cast/recharge icons remain deferred until exact
-  source-policy approval identifies local asset paths and provenance.
+- Approved local skill/resource icons render through the existing asset boundary.
 
 Avoid starting with a large set of manual filters. Add controls only when the
 default list becomes hard to scan.
@@ -161,13 +154,13 @@ default list becomes hard to scan.
 
 These remain useful but are not part of the focused composer milestone:
 
-- Armor, weapons, runes, insignias, and equipment template workflows.
+- Full armor, weapons, insignias, rune health totals, and equipment template workflows.
 - Saving, storing, editing, backing up, and sharing build libraries.
 - Party, hero, and multi-build workflows.
 - Markdown-style build guides and community build knowledge.
 - Broad search/discovery and advanced build analysis.
 - Touch-specific drag polish.
-- Real icon binaries without exact source-policy approval.
+- Additional icon families without exact source-policy approval.
 - External team codecs, backend sync, accounts, collaboration, hosted sharing,
   PWA behavior, and analytics.
 

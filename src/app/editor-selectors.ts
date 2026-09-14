@@ -1,9 +1,8 @@
+import { selectAttributePreview } from "./attribute-preview-selectors";
+import type { AttributePreview } from "../domain";
 import {
   attributeBudgetForLevel,
-  calculateEffectiveAttributeRank,
   calculateSkillAttributeEffects,
-  collectEquipmentAttributeRankAdjustments,
-  equipmentAdjustmentsForAttribute,
   formatSkillProgressionValue,
   lookupSkillById,
   purchasedRankCost,
@@ -60,7 +59,6 @@ import type {
   ResourceFilterValue
 } from "./editor-state";
 import type { PersistedCatalogFacts } from "./persistence-schema";
-import { selectHasMeaningfulEquipment } from "./equipment-selectors";
 import { evaluateTemplateExport, type ExportWorkflowView } from "./template-workflow";
 
 export interface AttributeBudgetView {
@@ -385,7 +383,8 @@ export function selectSkillBrowser(
 
 export function selectSkillSlotDisplays(
   state: EditorState,
-  catalogs: AppCatalogViews
+  catalogs: AppCatalogViews,
+  preview: AttributePreview = selectAttributePreview(state.build, catalogs)
 ): readonly SkillDisplayView[] {
   return state.build.skillBar.map((skillId, index) =>
     selectSkillDisplay(
@@ -393,7 +392,8 @@ export function selectSkillSlotDisplays(
       state,
       skillId,
       "skill-bar",
-      state.rawTemplate.skillBar[index] ?? null
+      state.rawTemplate.skillBar[index] ?? null,
+      preview
     )
   );
 }
@@ -403,7 +403,8 @@ export function selectSkillDisplay(
   state: EditorState,
   skillId: SkillId | null,
   surface: "skill-browser" | "skill-bar" | "tooltip",
-  raw: RawTemplateOverlayEntry | null = null
+  raw: RawTemplateOverlayEntry | null = null,
+  preview: AttributePreview = selectAttributePreview(state.build, catalogs)
 ): SkillDisplayView {
   if (skillId === null) {
     return {
@@ -427,7 +428,7 @@ export function selectSkillDisplay(
 
   const variant = resolveSkillModeVariant(catalogs.skillCatalog, authoredSkill, state.build.mode);
   const skill = variant.skill;
-  const rankContext = selectTooltipRankContext(state, catalogs, skill);
+  const rankContext = selectTooltipRankContext(state, catalogs, skill, preview);
   const tooltip = renderSkillTooltipText(catalogs.skillCatalog, skill.id, {
     mode: state.build.mode,
     ranks: rankContext.ranks
@@ -485,7 +486,8 @@ export function issuesForLocation(
 function selectTooltipRankContext(
   state: EditorState,
   catalogs: AppCatalogViews,
-  skill: CatalogSkillRecord
+  skill: CatalogSkillRecord,
+  preview: AttributePreview
 ): {
   readonly ranks: Readonly<Record<string, number>>;
   readonly inherentRanks: SkillInherentRanks;
@@ -499,60 +501,29 @@ function selectTooltipRankContext(
     overrides: state.build.titleRankOverrides
   });
   Object.assign(ranks, titleRanks.ranks);
-  const equipmentAdjustmentSummary = collectEquipmentAttributeRankAdjustments({
-    build: state.build,
-    professionAttributes: catalogs.validation.professionAttributes,
-    ...(catalogs.equipment.validation.runes === undefined
-      ? {}
-      : { runes: catalogs.equipment.validation.runes })
-  });
-  if (
-    selectHasMeaningfulEquipment(state.build.equipment) &&
-    equipmentAdjustmentSummary.unresolved.length > 0
-  ) {
-    assumptions.push("Equipment rank adjustments include unresolved authored selections.");
-  }
   for (const seriesId of skill.progressionSeriesIds) {
     const series = catalogs.skillCatalog.progressionSeries.find(
       (candidate) => candidate.id === seriesId
     );
-    if (series === undefined) {
-      continue;
-    }
-    if (series.dependency.kind === "attribute" && series.dependency.attributeId !== null) {
-      const result = calculateEffectiveAttributeRank({
-        build: state.build,
-        professionAttributes: catalogs.validation.professionAttributes,
-        attributeId: series.dependency.attributeId,
-        adjustments: equipmentAdjustmentsForAttribute(
-          equipmentAdjustmentSummary,
-          series.dependency.attributeId
-        )
-      });
-      ranks[`attribute:${Number(series.dependency.attributeId)}`] =
-        result.kind === "resolved" ? result.finalRank : 0;
+    if (series?.dependency.kind === "attribute" && series.dependency.attributeId !== null) {
+      const rank = preview.ranks.get(series.dependency.attributeId);
+      if (rank?.effective !== null && rank?.effective !== undefined)
+        ranks[`attribute:${Number(series.dependency.attributeId)}`] = rank.effective;
+      for (const diagnostic of rank?.diagnostics ?? [])
+        if (!diagnostic.suppressed) assumptions.push(diagnostic.message);
     }
   }
   const inherentRank = (key: SkillEffectAttribute): number | null => {
-    const attribute = catalogs.attributes.find(
+    const matches = catalogs.attributes.filter(
       (candidate) => candidate.id === SKILL_EFFECT_ATTRIBUTES[key].id
     );
-    if (attribute === undefined) {
-      return null;
-    }
-    if (!attributeIsLegalForSelectedProfessions(attribute, state)) {
-      return 0;
-    }
-    if (equipmentAdjustmentSummary.unresolved.length > 0) {
-      return null;
-    }
-    const result = calculateEffectiveAttributeRank({
-      build: state.build,
-      professionAttributes: catalogs.validation.professionAttributes,
-      attributeId: attribute.id,
-      adjustments: equipmentAdjustmentsForAttribute(equipmentAdjustmentSummary, attribute.id)
-    });
-    return result.kind === "resolved" ? result.finalRank : null;
+    const attribute = matches.length === 1 ? matches[0] : undefined;
+    if (attribute === undefined) return null;
+    // An unavailable primary-only inherent attribute is definitely zero. An unresolved
+    // selected primary, however, is not evidence that the inherent rank is zero.
+    if (!attributeIsLegalForSelectedProfessions(attribute, state))
+      return preview.primaryResolved || state.build.primaryProfessionId === null ? 0 : null;
+    return preview.ranks.get(attribute.id)?.effective ?? null;
   };
   return {
     ranks,

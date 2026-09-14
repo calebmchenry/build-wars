@@ -55,6 +55,7 @@ export function buildFixture(overrides: Partial<Build> = {}): Build {
       skillIds.commonThree
     ],
     titleRankOverrides: [],
+    attributeAdjustments: null,
     equipment: null,
     ...overrides
   };

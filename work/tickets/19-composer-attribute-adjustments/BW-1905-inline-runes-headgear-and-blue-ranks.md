@@ -2,14 +2,16 @@
 id: BW-1905
 title: Inline Runes, Headgear, and Blue Ranks
 epic: EPIC-19
-status: backlog
+status: done
 priority: high
+planned_sprint: SPRINT-020
+completed_sprint: SPRINT-020
 depends_on:
   - BW-1902
   - BW-1903
   - BW-1904
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-14
 ---
 
 # BW-1905: Inline Runes, Headgear, and Blue Ranks
@@ -43,3 +45,10 @@ Focused component/workflow tests plus real browser inspection against prior-art/
 
 [Composer attribute adjustments](../../../compendium/attribute-adjustments.md) and the
 [epic contract](EPIC.md). User decisions there override older sprint scope.
+
+## Planning
+
+Planned in [SPRINT-020](../../sprints/SPRINT-020.md), Phase 5: Mount inline gear and explained ranks.
+The sprint phase checklist and gate implement this ticket's acceptance criteria.
+
+Completed in [SPRINT-020](../../sprints/SPRINT-020.md). See [execution evidence](../../sprints/SPRINT-020-EVIDENCE.md).

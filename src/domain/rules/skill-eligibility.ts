@@ -1,3 +1,9 @@
+import {
+  modeFactsConflict,
+  permitsProfessionlessSkill,
+  skillIsPlayerSource,
+  skillSourceProfessionSelected
+} from "../skill-source-eligibility";
 import type { CatalogSkillRecord, SkillModeVariantGroup } from "../catalog";
 import type { BuildValidationContext, SkillSlotContext } from "../validation-context";
 import { resolveTitleRanksForSkill, type TitleRankDiagnostic } from "../title-rank";
@@ -13,7 +19,7 @@ export function validateSkillEligibilityRules(
 ): readonly ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   for (const slot of resolvedSkillSlots(context.skillSlots)) {
-    if (slot.skill.classification.unsupported || slot.skill.classification.nonPlayer) {
+    if (!skillIsPlayerSource(slot.skill)) {
       continue;
     }
     const professionIssue = validateSkillProfession(context, slot);
@@ -64,7 +70,7 @@ function validateSkillProfession(
     context.secondaryProfession.lookup.kind === "resolved"
       ? Number(context.secondaryProfession.lookup.record.id)
       : null;
-  if (skillProfessionId === primaryProfessionId || skillProfessionId === secondaryProfessionId) {
+  if (skillSourceProfessionSelected(context, slot.skill)) {
     return null;
   }
   if (context.secondaryProfession.authoredId === null) {
@@ -449,30 +455,6 @@ function validationCodeForTitleDiagnostic(diagnostic: TitleRankDiagnostic): Vali
     return "skill.title-row-missing";
   }
   return "skill.title-key-missing";
-}
-
-function permitsProfessionlessSkill(skill: CatalogSkillRecord): boolean {
-  const classification = skill.classification;
-  return (
-    classification.common ||
-    classification.special ||
-    classification.title ||
-    classification.noAttribute
-  );
-}
-
-function modeFactsConflict(skill: CatalogSkillRecord): boolean {
-  const classification = skill.classification;
-  if (classification.modeAvailability === "both") {
-    return classification.pveOnly || classification.pvpOnly;
-  }
-  if (classification.modeAvailability === "pve-only") {
-    return !classification.pveOnly || classification.pvpOnly;
-  }
-  if (classification.modeAvailability === "pvp-only") {
-    return !classification.pvpOnly || classification.pveOnly;
-  }
-  return classification.pveOnly || classification.pvpOnly;
 }
 
 function splitAmbiguousIssue(

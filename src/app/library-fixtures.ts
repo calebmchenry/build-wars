@@ -1,3 +1,4 @@
+import { adjustmentProfileFixture } from "./attribute-adjustment-fixtures";
 import {
   PARTY_ANNOTATION_SCHEMA_VERSION,
   authoredDocumentId,
@@ -41,11 +42,19 @@ export const fixtureCatalogFacts: PersistedCatalogFacts = {
 };
 
 export function validSnapshotFixture(): PersistedBuildSnapshot {
-  return createPersistedBuildSnapshot(playableEditorFixture());
+  const state = playableEditorFixture();
+  return createPersistedBuildSnapshot({
+    ...state,
+    build: { ...state.build, attributeAdjustments: adjustmentProfileFixture() }
+  });
 }
 
 export function unresolvedSnapshotFixture(): PersistedBuildSnapshot {
-  return createPersistedBuildSnapshot(importedUnresolvedEditorFixture());
+  const state = importedUnresolvedEditorFixture();
+  return createPersistedBuildSnapshot({
+    ...state,
+    build: { ...state.build, attributeAdjustments: adjustmentProfileFixture(true) }
+  });
 }
 
 export function validBuildSetSnapshotFixture(

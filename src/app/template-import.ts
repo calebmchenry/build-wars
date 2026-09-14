@@ -1,10 +1,27 @@
 import type { Dispatch } from "react";
 
-import { hasAuthoredTitleRankOverrides } from "../domain";
+import {
+  hasAuthoredTitleRankOverrides,
+  hasAuthoredAttributeAdjustments,
+  type Build
+} from "../domain";
 import type { AppCatalogViews } from "./catalogs";
 import type { EditorAction, EditorState } from "./editor-state";
 import { selectHasMeaningfulEquipment } from "./equipment-selectors";
 import { importSkillTemplateToEditor } from "./template-workflow";
+
+export const ATTRIBUTE_ADJUSTMENT_OMISSION =
+  "Rune, headgear, and assumed-effect choices stay in this browser draft. Game codes and template files contain purchased ranks and skills only.";
+
+export function templateReplacementWarnings(build: Build): readonly string[] {
+  return [
+    ...(selectHasMeaningfulEquipment(build.equipment) ? ["authored equipment"] : []),
+    ...(hasAuthoredTitleRankOverrides(build) ? ["authored title ranks"] : []),
+    ...(hasAuthoredAttributeAdjustments(build.attributeAdjustments)
+      ? ["authored attribute adjustments"]
+      : [])
+  ];
+}
 
 export function applyTemplateImport({
   input,
@@ -26,10 +43,7 @@ export function applyTemplateImport({
     dispatch({ type: "set-message", tone: "error", text: imported.error.message });
     return false;
   }
-  const replacementWarnings = [
-    ...(selectHasMeaningfulEquipment(state.build.equipment) ? ["authored equipment"] : []),
-    ...(hasAuthoredTitleRankOverrides(state.build) ? ["authored title ranks"] : [])
-  ];
+  const replacementWarnings = templateReplacementWarnings(state.build);
   if (
     replacementWarnings.length > 0 &&
     !window.confirm(

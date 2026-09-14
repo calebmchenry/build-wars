@@ -9,9 +9,43 @@ import { createBlankEditorState, editorReducer, type EditorState } from "./edito
 import { selectValidationView } from "./editor-selectors";
 import { importSkillTemplateToEditor } from "./template-workflow";
 
+import { adjustmentProfileFixture } from "./attribute-adjustment-fixtures";
+import { elementalBuild } from "../../test/fixtures/attribute-adjustment-builds";
+import { templateReplacementWarnings } from "./template-import";
+
 const catalogs = requireReadyCatalogs();
 
 describe("InlineTemplateCode", () => {
+  it("warns for explicit None/off choices, preserves canceled state, and resets on accepted import", () => {
+    const confirm = vi.spyOn(window, "confirm").mockReturnValue(false);
+    const blank = createBlankEditorState();
+    render(
+      <Harness
+        initialState={{
+          ...blank,
+          build: { ...blank.build, attributeAdjustments: adjustmentProfileFixture(true) }
+        }}
+      />
+    );
+    const paste = () =>
+      fireEvent.paste(screen.getByLabelText("Template code"), {
+        clipboardData: { getData: () => SKILL_TEMPLATE_PACKAGE_EXAMPLE }
+      });
+    paste();
+    expect(confirm).toHaveBeenCalledTimes(1);
+    expect(confirm).toHaveBeenCalledWith(
+      "Importing a skill template will discard authored attribute adjustments from this draft."
+    );
+    expect(screen.getByLabelText("Profile")).toHaveTextContent(
+      JSON.stringify(adjustmentProfileFixture(true))
+    );
+    confirm.mockReturnValue(true);
+    paste();
+    expect(screen.getByLabelText("Profile")).toHaveTextContent("null");
+  });
+  it("does not warn for automatic inference alone", () => {
+    expect(templateReplacementWarnings(elementalBuild({ attributeAdjustments: null }))).toEqual([]);
+  });
   it("imports valid template text when pasted", () => {
     render(<Harness />);
 
@@ -69,6 +103,9 @@ function Harness({
         dispatch={dispatch}
         requestDraftReplacement={() => "discard"}
       />
+      <output role="note" aria-label="Profile">
+        {JSON.stringify(state.build.attributeAdjustments)}
+      </output>
       <div data-testid="build-name">{state.build.name}</div>
       <div data-testid="primary-profession">
         {state.build.primaryProfessionId === null ? "Any" : Number(state.build.primaryProfessionId)}

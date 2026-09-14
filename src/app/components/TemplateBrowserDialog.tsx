@@ -12,7 +12,8 @@ import {
 import type { AppCatalogViews } from "../catalogs";
 import type { EditorAction, EditorState } from "../editor-state";
 import type { ValidationView } from "../editor-selectors";
-import { applyTemplateImport } from "../template-import";
+import { applyTemplateImport, ATTRIBUTE_ADJUSTMENT_OMISSION } from "../template-import";
+import { hasAuthoredAttributeAdjustments } from "../../domain";
 import {
   downloadTemplateFile,
   importedTemplateFolder,
@@ -505,7 +506,11 @@ export function TemplateBrowserDialog({
             }}
           />
           <span id={`${filenameId}-hint`} className="template-browser-hint">
-            Saves the editor’s current professions, attributes, and skills as a .txt template.
+            Saves the editor’s current professions, purchased attribute ranks, and skills as a .txt
+            template.
+            {hasAuthoredAttributeAdjustments(state.build.attributeAdjustments)
+              ? ` ${ATTRIBUTE_ADJUSTMENT_OMISSION}`
+              : ""}
           </span>
         </div>
       ) : null}

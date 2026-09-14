@@ -2,14 +2,16 @@
 id: BW-1907
 title: Game Template and Transfer Boundaries
 epic: EPIC-19
-status: backlog
+status: done
 priority: high
+planned_sprint: SPRINT-020
+completed_sprint: SPRINT-020
 depends_on:
   - BW-1902
   - BW-1905
   - BW-1906
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-14
 ---
 
 # BW-1907: Game Template and Transfer Boundaries
@@ -43,3 +45,10 @@ Existing template compatibility, template-files/browser, import/export, App, sha
 
 [Composer attribute adjustments](../../../compendium/attribute-adjustments.md) and the
 [epic contract](EPIC.md). User decisions there override older sprint scope.
+
+## Planning
+
+Planned in [SPRINT-020](../../sprints/SPRINT-020.md), Phase 7: Prove game and complete-document boundaries.
+The sprint phase checklist and gate implement this ticket's acceptance criteria.
+
+Completed in [SPRINT-020](../../sprints/SPRINT-020.md). See [execution evidence](../../sprints/SPRINT-020-EVIDENCE.md).

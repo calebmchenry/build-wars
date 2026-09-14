@@ -1,4 +1,6 @@
-import type { Dispatch, DragEvent } from "react";
+import { selectAttributePreview } from "../attribute-preview-selectors";
+import type { AttributePreview } from "../../domain";
+import { useMemo, type Dispatch, type DragEvent } from "react";
 
 import { type SkillId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
@@ -13,13 +15,19 @@ import { SkillTooltipTrigger } from "./SkillTooltip";
 export function SkillBar({
   state,
   catalogs,
+  preview,
   dispatch
 }: {
   readonly state: EditorState;
   readonly catalogs: AppCatalogViews;
+  readonly preview?: AttributePreview;
   readonly dispatch: Dispatch<EditorAction>;
 }) {
-  const slots = selectSkillSlotDisplays(state, catalogs);
+  const resolvedPreview = useMemo(
+    () => preview ?? selectAttributePreview(state.build, catalogs),
+    [preview, state.build, catalogs]
+  );
+  const slots = selectSkillSlotDisplays(state, catalogs, resolvedPreview);
 
   return (
     <section className="skillbar-panel" aria-labelledby="skillbar-title">

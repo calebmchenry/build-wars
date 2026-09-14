@@ -1,4 +1,6 @@
 import {
+  cloneAttributeAdjustments,
+  isAttributeAdjustments,
   authoredDocumentId,
   BUILD_SCHEMA_VERSION,
   catalogId,
@@ -1120,6 +1122,19 @@ function validateBuild(
           diagnostics
         );
   const equipment = validateEquipmentLoadout(record.equipment, `${path}.equipment`, diagnostics);
+  const adjustmentsValid =
+    schemaVersion === BUILD_SCHEMA_VERSION
+      ? Object.hasOwn(record, "attributeAdjustments") &&
+        isAttributeAdjustments(record.attributeAdjustments)
+      : !Object.hasOwn(record, "attributeAdjustments");
+  if (!adjustmentsValid) {
+    addDiagnostic(
+      diagnostics,
+      "invalid-attribute-adjustments",
+      `${path}.attributeAdjustments`,
+      "Attribute adjustments must match the Build version and exact bounded authored contract."
+    );
+  }
 
   if (
     schemaVersion === null ||
@@ -1132,7 +1147,8 @@ function validateBuild(
     attributes === null ||
     skillBar === null ||
     titleRankOverrides === null ||
-    equipment === undefined
+    equipment === undefined ||
+    !adjustmentsValid
   ) {
     return null;
   }
@@ -1147,6 +1163,10 @@ function validateBuild(
     attributes,
     skillBar,
     titleRankOverrides,
+    attributeAdjustments:
+      schemaVersion === BUILD_SCHEMA_VERSION && isAttributeAdjustments(record.attributeAdjustments)
+        ? cloneAttributeAdjustments(record.attributeAdjustments)
+        : null,
     equipment
   };
 }
@@ -2350,6 +2370,7 @@ function cloneBuild(build: Build): Build {
     attributes: build.attributes.map((attribute) => ({ ...attribute })),
     skillBar: tupleSkillBar(build.skillBar),
     titleRankOverrides: build.titleRankOverrides.map((override) => ({ ...override })),
+    attributeAdjustments: cloneAttributeAdjustments(build.attributeAdjustments),
     equipment: cloneEquipmentLoadout(build.equipment)
   };
 }

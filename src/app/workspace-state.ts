@@ -1117,6 +1117,7 @@ function cloneRecordDocumentForDuplicate(
 }
 
 function reduceEditorAction(state: WorkspaceState, action: EditorAction): WorkspaceState {
+  if (state.document.kind === "build-set" && state.document.selectedEntryId === null) return state;
   const before = fingerprintPersistedDocument(materializeActiveDocument(state));
   const reducedEditor = editorReducer(state.editor, action);
   const externalReplacement = action.type === "replace-state";

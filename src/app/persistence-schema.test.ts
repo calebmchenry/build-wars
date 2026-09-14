@@ -68,7 +68,7 @@ describe("local persistence schema", () => {
     expect(unresolved?.savedWith.ruleEngineVersion).toBe("rule-engine:v3");
   });
 
-  it("migrates schema-1 builds to runtime schema 2 without marking the library write-blocked", () => {
+  it("migrates schema-1 builds to runtime schema 3 without marking the library write-blocked", () => {
     const parsed = parseLocalLibraryEnvelope(legacySchemaOneEnvelopeFixture());
 
     expect(parsed.ok).toBe(true);
@@ -471,6 +471,7 @@ function legacySchemaOneEnvelopeFixture(): unknown {
   ] as Record<string, unknown>[];
   for (const build of builds) {
     build.schemaVersion = 1;
+    delete build.attributeAdjustments;
     delete build.titleRankOverrides;
   }
   return envelope;

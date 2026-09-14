@@ -29,6 +29,26 @@ afterEach(() => {
 });
 
 describe("App", { timeout: 10_000 }, () => {
+  it.each(["autosave", "pagehide"])(
+    "retains authored adjustments during %s after hydration",
+    (flush) => {
+      vi.useFakeTimers();
+      const envelope = validLocalLibraryEnvelopeFixture();
+      const expected = draftSnapshot(envelope.workingDraft)?.build.attributeAdjustments;
+      localStorage.setItem(LOCAL_LIBRARY_STORAGE_KEY, serializeLocalLibraryEnvelope(envelope));
+      render(<App />);
+      fireEvent.click(screen.getByRole("checkbox", { name: "PvP" }));
+      if (flush === "autosave") act(() => vi.advanceTimersByTime(200));
+      else act(() => window.dispatchEvent(new Event("pagehide")));
+      const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
+      expect(
+        parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.attributeAdjustments : null
+      ).toEqual(expected);
+      expect(parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.mode : null).toBe(
+        "pvp"
+      );
+    }
+  );
   it("renders the catalog-driven editor workspace", () => {
     render(<App />);
 

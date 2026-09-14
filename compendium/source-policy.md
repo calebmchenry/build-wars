@@ -210,3 +210,14 @@ Source-derived runtime data must pass the QA and release gates in
 The release owner must verify attribution, source links, generated-data notices,
 license/source notes, QA dispositions, media restrictions, and exception
 authority for the release scope.
+
+### Approved rune cache exception
+
+The user-authorized EPIC-19/BW-1904 exception dated 2026-09-14 extends
+[ADR 0002](decisions/0002-runtime-gww-icon-assets.md) only to
+`public/gww-icons/runes/`, `src/app/rune-icon-assets.generated.json`, and
+`data/generated/epic-10/rune-icon-assets.manifest.json`. It covers 30 verified
+attribute-rune PNGs mapped to 126 promoted rune IDs. Source/hash provenance is in
+the latter manifest; the runtime map contains local paths only. Hash mismatches
+remain non-waivable. Catalog promotion triggers re-review. Other equipment images,
+raw source payloads, and runtime remote image requests are outside this exception.

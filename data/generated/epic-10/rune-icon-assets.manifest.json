@@ -1,0 +1,931 @@
+{
+  "assets": [
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/c/cc/Rune_Assassin_Major.png",
+      "fileTitle": "File:Rune Assassin Major.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-major-critical-strikes",
+        "remote-media:gww-icon:rune-of-major-dagger-mastery",
+        "remote-media:gww-icon:rune-of-major-deadly-arts",
+        "remote-media:gww-icon:rune-of-major-shadow-arts"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "d8abfd2fad90031280253e2d51d3b91ec02defa2",
+      "remoteTimestamp": "2007-03-04T22:36:53Z",
+      "runeIds": [
+        170,
+        171,
+        172,
+        173
+      ],
+      "sha256": "f01049474e449a28b4a544492088bdc3b63f49392cc11b351dc17b9e24df2eea",
+      "sizeBytes": 5102,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:45136:2692089",
+        "source:gww:epic-10-live:rune:45129:2692091",
+        "source:gww:epic-10-live:rune:45122:2692092",
+        "source:gww:epic-10-live:rune:45114:2692113"
+      ],
+      "src": "gww-icons/runes/d8abfd2fad90031280253e2d51d3b91ec02defa2.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/d/dd/Rune_Assassin_Minor.png",
+      "fileTitle": "File:Rune Assassin Minor.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-minor-critical-strikes",
+        "remote-media:gww-icon:rune-of-minor-dagger-mastery",
+        "remote-media:gww-icon:rune-of-minor-deadly-arts",
+        "remote-media:gww-icon:rune-of-minor-shadow-arts"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "d5013884dd1d79c370fbb2b69822f593143294ad",
+      "remoteTimestamp": "2007-03-04T22:36:43Z",
+      "runeIds": [
+        162,
+        163,
+        164,
+        165
+      ],
+      "sha256": "d5eb7b6b162afe54514c95cc03927e1fd13dec65556311b1107904a65a4753ce",
+      "sizeBytes": 3798,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:45136:2692089",
+        "source:gww:epic-10-live:rune:45129:2692091",
+        "source:gww:epic-10-live:rune:45122:2692092",
+        "source:gww:epic-10-live:rune:45114:2692113"
+      ],
+      "src": "gww-icons/runes/d5013884dd1d79c370fbb2b69822f593143294ad.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/7/75/Rune_Assassin_Sup.png",
+      "fileTitle": "File:Rune Assassin Sup.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-superior-critical-strikes",
+        "remote-media:gww-icon:rune-of-superior-dagger-mastery",
+        "remote-media:gww-icon:rune-of-superior-deadly-arts",
+        "remote-media:gww-icon:rune-of-superior-shadow-arts"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "6051aa4e814762004f7ce3b4b93051ebbc0d0de6",
+      "remoteTimestamp": "2007-03-04T22:37:02Z",
+      "runeIds": [
+        178,
+        179,
+        180,
+        181
+      ],
+      "sha256": "51320f215e17d5525c3384ddc47af3d83feede9b7b1b77287a300e900bf20db5",
+      "sizeBytes": 4010,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:45136:2692089",
+        "source:gww:epic-10-live:rune:45129:2692091",
+        "source:gww:epic-10-live:rune:45122:2692092",
+        "source:gww:epic-10-live:rune:45114:2692113"
+      ],
+      "src": "gww-icons/runes/6051aa4e814762004f7ce3b4b93051ebbc0d0de6.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/4/44/Rune_Dervish_Major.png",
+      "fileTitle": "File:Rune Dervish Major.png",
+      "height": 52,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-major-mysticism",
+        "remote-media:gww-icon:rune-of-major-earth-prayers",
+        "remote-media:gww-icon:rune-of-major-scythe-mastery",
+        "remote-media:gww-icon:rune-of-major-wind-prayers"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "f3a0e049699a373af44dafff6e303c415efe850d",
+      "remoteTimestamp": "2007-03-04T22:39:01Z",
+      "runeIds": [
+        216,
+        217,
+        218,
+        219
+      ],
+      "sha256": "3904a60777d83bb6b72ec3655b739b24acf805663e1adea97a7ed110384e89a1",
+      "sizeBytes": 4108,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43531:2692109",
+        "source:gww:epic-10-live:rune:43526:2692098",
+        "source:gww:epic-10-live:rune:43534:2692112",
+        "source:gww:epic-10-live:rune:43535:2692123"
+      ],
+      "src": "gww-icons/runes/f3a0e049699a373af44dafff6e303c415efe850d.png",
+      "width": 38
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/4/45/Rune_Dervish_Minor.png",
+      "fileTitle": "File:Rune Dervish Minor.png",
+      "height": 57,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-minor-mysticism",
+        "remote-media:gww-icon:rune-of-minor-earth-prayers",
+        "remote-media:gww-icon:rune-of-minor-scythe-mastery",
+        "remote-media:gww-icon:rune-of-minor-wind-prayers"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "8e285c2c39e39ba4292882ff9bc4441b88318030",
+      "remoteTimestamp": "2007-03-04T22:38:50Z",
+      "runeIds": [
+        123,
+        124,
+        125,
+        126
+      ],
+      "sha256": "0898966ea43ff9b167718098cbb6f043e59bf313a25c4743da172f7c75143180",
+      "sizeBytes": 4395,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43531:2692109",
+        "source:gww:epic-10-live:rune:43526:2692098",
+        "source:gww:epic-10-live:rune:43534:2692112",
+        "source:gww:epic-10-live:rune:43535:2692123"
+      ],
+      "src": "gww-icons/runes/8e285c2c39e39ba4292882ff9bc4441b88318030.png",
+      "width": 44
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/e/e1/Rune_Dervish_Sup.png",
+      "fileTitle": "File:Rune Dervish Sup.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-superior-mysticism",
+        "remote-media:gww-icon:rune-of-superior-earth-prayers",
+        "remote-media:gww-icon:rune-of-superior-scythe-mastery",
+        "remote-media:gww-icon:rune-of-superior-wind-prayers"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "d914f3cbc542bb2b1ab6efbf17a7a2652533eea5",
+      "remoteTimestamp": "2007-03-04T22:39:24Z",
+      "runeIds": [
+        224,
+        225,
+        226,
+        227
+      ],
+      "sha256": "220265fa89fadea9df823073445ae73be992c530c68cc437708f7e2a253b791b",
+      "sizeBytes": 4413,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43531:2692109",
+        "source:gww:epic-10-live:rune:43526:2692098",
+        "source:gww:epic-10-live:rune:43534:2692112",
+        "source:gww:epic-10-live:rune:43535:2692123"
+      ],
+      "src": "gww-icons/runes/d914f3cbc542bb2b1ab6efbf17a7a2652533eea5.png",
+      "width": 52
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/1/14/Rune_Elementalist_Major.png",
+      "fileTitle": "File:Rune Elementalist Major.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-major-energy-storage",
+        "remote-media:gww-icon:rune-of-major-fire-magic",
+        "remote-media:gww-icon:rune-of-major-air-magic",
+        "remote-media:gww-icon:rune-of-major-earth-magic",
+        "remote-media:gww-icon:rune-of-major-water-magic"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "c5360ac4e0e1f44e83e6746fce3d7ec279469bec",
+      "remoteTimestamp": "2007-03-04T22:35:50Z",
+      "runeIds": [
+        56,
+        57,
+        58,
+        59,
+        60
+      ],
+      "sha256": "5d58070f346a912ab81eb2391ea4649dbe400d0d7d43bca81767bcf914345ce7",
+      "sizeBytes": 3694,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43157:2692099",
+        "source:gww:epic-10-live:rune:43150:2692102",
+        "source:gww:epic-10-live:rune:43156:2692082",
+        "source:gww:epic-10-live:rune:43155:2692097",
+        "source:gww:epic-10-live:rune:43154:2692121"
+      ],
+      "src": "gww-icons/runes/c5360ac4e0e1f44e83e6746fce3d7ec279469bec.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/6/6f/Rune_Elementalist_Minor.png",
+      "fileTitle": "File:Rune Elementalist Minor.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-minor-energy-storage",
+        "remote-media:gww-icon:rune-of-minor-fire-magic",
+        "remote-media:gww-icon:rune-of-minor-air-magic",
+        "remote-media:gww-icon:rune-of-minor-earth-magic",
+        "remote-media:gww-icon:rune-of-minor-water-magic"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "e0dc78fc12f7e04bf3e8325becc8e7d5c7631e3a",
+      "remoteTimestamp": "2007-03-04T22:35:41Z",
+      "runeIds": [
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "sha256": "a86e1c6c0fb00e349329b76ba3c3c69fa6d05baa0f95e5d67de093cdf7740283",
+      "sizeBytes": 4295,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43157:2692099",
+        "source:gww:epic-10-live:rune:43150:2692102",
+        "source:gww:epic-10-live:rune:43156:2692082",
+        "source:gww:epic-10-live:rune:43155:2692097",
+        "source:gww:epic-10-live:rune:43154:2692121"
+      ],
+      "src": "gww-icons/runes/e0dc78fc12f7e04bf3e8325becc8e7d5c7631e3a.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/8/83/Rune_Elementalist_Sup.png",
+      "fileTitle": "File:Rune Elementalist Sup.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-superior-energy-storage",
+        "remote-media:gww-icon:rune-of-superior-fire-magic",
+        "remote-media:gww-icon:rune-of-superior-air-magic",
+        "remote-media:gww-icon:rune-of-superior-earth-magic",
+        "remote-media:gww-icon:rune-of-superior-water-magic"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "5283adaacc2ddf6de02497057bc27ba028b61b07",
+      "remoteTimestamp": "2007-03-04T22:35:58Z",
+      "runeIds": [
+        82,
+        83,
+        84,
+        85,
+        86
+      ],
+      "sha256": "c913f572d5da9dd73ce17eead5b6b09779964c83c51a693d8ef51033d8616b05",
+      "sizeBytes": 4059,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43157:2692099",
+        "source:gww:epic-10-live:rune:43150:2692102",
+        "source:gww:epic-10-live:rune:43156:2692082",
+        "source:gww:epic-10-live:rune:43155:2692097",
+        "source:gww:epic-10-live:rune:43154:2692121"
+      ],
+      "src": "gww-icons/runes/5283adaacc2ddf6de02497057bc27ba028b61b07.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/f/f9/Rune_Mesmer_Major.png",
+      "fileTitle": "File:Rune Mesmer Major.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-major-fast-casting",
+        "remote-media:gww-icon:rune-of-major-domination-magic",
+        "remote-media:gww-icon:rune-of-major-illusion-magic",
+        "remote-media:gww-icon:rune-of-major-inspiration-magic"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "89d70a456da70b060c85ce3adf054c9dba85ab71",
+      "remoteTimestamp": "2007-03-04T22:35:17Z",
+      "runeIds": [
+        48,
+        49,
+        50,
+        51
+      ],
+      "sha256": "ae559c996eec5d4e89d0acc25c1c90c4e952dc5da22aac8d5ef8263286379950",
+      "sizeBytes": 3753,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:44824:2692101",
+        "source:gww:epic-10-live:rune:44839:2692096",
+        "source:gww:epic-10-live:rune:44831:2692104",
+        "source:gww:epic-10-live:rune:44838:2692105"
+      ],
+      "src": "gww-icons/runes/89d70a456da70b060c85ce3adf054c9dba85ab71.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/6/6c/Rune_Mesmer_Minor.png",
+      "fileTitle": "File:Rune Mesmer Minor.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-minor-fast-casting",
+        "remote-media:gww-icon:rune-of-minor-domination-magic",
+        "remote-media:gww-icon:rune-of-minor-illusion-magic",
+        "remote-media:gww-icon:rune-of-minor-inspiration-magic"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "512f39473c7393b754e929cba2b07e1998c308e2",
+      "remoteTimestamp": "2007-03-04T22:35:08Z",
+      "runeIds": [
+        22,
+        23,
+        24,
+        25
+      ],
+      "sha256": "50e2360f816ec398984453641c9ba038744f4c62608c2870b5745d15d0282239",
+      "sizeBytes": 4427,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:44824:2692101",
+        "source:gww:epic-10-live:rune:44839:2692096",
+        "source:gww:epic-10-live:rune:44831:2692104",
+        "source:gww:epic-10-live:rune:44838:2692105"
+      ],
+      "src": "gww-icons/runes/512f39473c7393b754e929cba2b07e1998c308e2.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/0/08/Rune_Mesmer_Sup.png",
+      "fileTitle": "File:Rune Mesmer Sup.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-superior-fast-casting",
+        "remote-media:gww-icon:rune-of-superior-domination-magic",
+        "remote-media:gww-icon:rune-of-superior-illusion-magic",
+        "remote-media:gww-icon:rune-of-superior-inspiration-magic"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "25517e4e90e7808c5f325bfba1040fc0c6c8155f",
+      "remoteTimestamp": "2007-03-04T22:35:26Z",
+      "runeIds": [
+        74,
+        75,
+        76,
+        77
+      ],
+      "sha256": "2855c6c62905ee5e241930a1b9917a51c57cfedf38aa148e908ef275a0289242",
+      "sizeBytes": 4149,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:44824:2692101",
+        "source:gww:epic-10-live:rune:44839:2692096",
+        "source:gww:epic-10-live:rune:44831:2692104",
+        "source:gww:epic-10-live:rune:44838:2692105"
+      ],
+      "src": "gww-icons/runes/25517e4e90e7808c5f325bfba1040fc0c6c8155f.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/2/27/Rune_Monk_Major.png",
+      "fileTitle": "File:Rune Monk Major.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-major-healing-prayers",
+        "remote-media:gww-icon:rune-of-major-smiting-prayers",
+        "remote-media:gww-icon:rune-of-major-protection-prayers",
+        "remote-media:gww-icon:rune-of-major-divine-favor"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "47ef3e8b13ac34b964c68085296888e4f999a731",
+      "remoteTimestamp": "2007-03-04T22:34:15Z",
+      "runeIds": [
+        61,
+        62,
+        63,
+        64
+      ],
+      "sha256": "178fc48faadcb9e9c5ac7c5bc97b13c59695b09e056990ec4c311e8ea9fd02c1",
+      "sizeBytes": 3891,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:44780:2692049",
+        "source:gww:epic-10-live:rune:44787:2692114",
+        "source:gww:epic-10-live:rune:44795:2692110",
+        "source:gww:epic-10-live:rune:44772:2692094"
+      ],
+      "src": "gww-icons/runes/47ef3e8b13ac34b964c68085296888e4f999a731.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/2/28/Rune_Monk_Minor.png",
+      "fileTitle": "File:Rune Monk Minor.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-minor-healing-prayers",
+        "remote-media:gww-icon:rune-of-minor-smiting-prayers",
+        "remote-media:gww-icon:rune-of-minor-protection-prayers",
+        "remote-media:gww-icon:rune-of-minor-divine-favor"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "fdd3ee09a85cf4d6c47cadc5d744c44dbfae8578",
+      "remoteTimestamp": "2007-03-04T22:34:06Z",
+      "runeIds": [
+        35,
+        36,
+        37,
+        38
+      ],
+      "sha256": "1ec75056564c66fb6d3179fe75a8de7389689e65e0420b4534760dce5e7af23c",
+      "sizeBytes": 4390,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:44780:2692049",
+        "source:gww:epic-10-live:rune:44787:2692114",
+        "source:gww:epic-10-live:rune:44795:2692110",
+        "source:gww:epic-10-live:rune:44772:2692094"
+      ],
+      "src": "gww-icons/runes/fdd3ee09a85cf4d6c47cadc5d744c44dbfae8578.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/e/e5/Rune_Monk_Sup.png",
+      "fileTitle": "File:Rune Monk Sup.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-superior-healing-prayers",
+        "remote-media:gww-icon:rune-of-superior-smiting-prayers",
+        "remote-media:gww-icon:rune-of-superior-protection-prayers",
+        "remote-media:gww-icon:rune-of-superior-divine-favor"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "a18d9ba0c22e68b3fc8593e954dd2770bd968252",
+      "remoteTimestamp": "2007-03-04T22:34:24Z",
+      "runeIds": [
+        87,
+        88,
+        89,
+        90
+      ],
+      "sha256": "a1d623067e8f347a8c33014d6cd23ce567f2f91eb5989d161358fba1be8e1eb9",
+      "sizeBytes": 3987,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:44780:2692049",
+        "source:gww:epic-10-live:rune:44787:2692114",
+        "source:gww:epic-10-live:rune:44795:2692110",
+        "source:gww:epic-10-live:rune:44772:2692094"
+      ],
+      "src": "gww-icons/runes/a18d9ba0c22e68b3fc8593e954dd2770bd968252.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/8/85/Rune_Necromancer_Major.png",
+      "fileTitle": "File:Rune Necromancer Major.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-major-blood-magic",
+        "remote-media:gww-icon:rune-of-major-death-magic",
+        "remote-media:gww-icon:rune-of-major-curses",
+        "remote-media:gww-icon:rune-of-major-soul-reaping"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "740c852df13acfc31ddfa525f100aac56f782aa8",
+      "remoteTimestamp": "2007-06-22T14:35:19Z",
+      "runeIds": [
+        52,
+        53,
+        54,
+        55
+      ],
+      "sha256": "e3509cc224b699c627c7018bb751a724c5995442d50b057934b6a31ba8c9fd81",
+      "sizeBytes": 3758,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43525:2692085",
+        "source:gww:epic-10-live:rune:43538:2692093",
+        "source:gww:epic-10-live:rune:43496:2692090",
+        "source:gww:epic-10-live:rune:43518:2692115"
+      ],
+      "src": "gww-icons/runes/740c852df13acfc31ddfa525f100aac56f782aa8.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/c/c5/Rune_Necromancer_Minor.png",
+      "fileTitle": "File:Rune Necromancer Minor.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-minor-blood-magic",
+        "remote-media:gww-icon:rune-of-minor-death-magic",
+        "remote-media:gww-icon:rune-of-minor-curses",
+        "remote-media:gww-icon:rune-of-minor-soul-reaping"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "5384d108af55194633ce7593fcb460a642a405ba",
+      "remoteTimestamp": "2007-06-22T14:35:22Z",
+      "runeIds": [
+        26,
+        27,
+        28,
+        29
+      ],
+      "sha256": "afd2e9e8431ddd27356e0e0d5eb979d8a529888e8d2f6e365304cc76ea310109",
+      "sizeBytes": 4423,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43525:2692085",
+        "source:gww:epic-10-live:rune:43538:2692093",
+        "source:gww:epic-10-live:rune:43496:2692090",
+        "source:gww:epic-10-live:rune:43518:2692115"
+      ],
+      "src": "gww-icons/runes/5384d108af55194633ce7593fcb460a642a405ba.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/d/d9/Rune_Necromancer_Sup.png",
+      "fileTitle": "File:Rune Necromancer Sup.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-superior-blood-magic",
+        "remote-media:gww-icon:rune-of-superior-death-magic",
+        "remote-media:gww-icon:rune-of-superior-curses",
+        "remote-media:gww-icon:rune-of-superior-soul-reaping"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "ecb7e953e856de629f7584216cde1b164c091399",
+      "remoteTimestamp": "2007-06-22T14:35:11Z",
+      "runeIds": [
+        78,
+        79,
+        80,
+        81
+      ],
+      "sha256": "7bc86962c7072a27add385f398a9b6420bc6ca9d5e2146a0d2a44f8b65ffde3a",
+      "sizeBytes": 4199,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43525:2692085",
+        "source:gww:epic-10-live:rune:43538:2692093",
+        "source:gww:epic-10-live:rune:43496:2692090",
+        "source:gww:epic-10-live:rune:43518:2692115"
+      ],
+      "src": "gww-icons/runes/ecb7e953e856de629f7584216cde1b164c091399.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/9/9a/Rune_Paragon_Major.png",
+      "fileTitle": "File:Rune Paragon Major.png",
+      "height": 52,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-major-leadership",
+        "remote-media:gww-icon:rune-of-major-motivation",
+        "remote-media:gww-icon:rune-of-major-command",
+        "remote-media:gww-icon:rune-of-major-spear-mastery"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "1d479335701c9a018d2acc15b61b6cc4b12446c1",
+      "remoteTimestamp": "2007-03-04T22:38:03Z",
+      "runeIds": [
+        220,
+        221,
+        222,
+        223
+      ],
+      "sha256": "c81efca2aed5ed4c3418a55634b1891c5cb715614364c554a9113aaf50ca330b",
+      "sizeBytes": 3830,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43536:2692106",
+        "source:gww:epic-10-live:rune:43545:2692108",
+        "source:gww:epic-10-live:rune:43537:2692087",
+        "source:gww:epic-10-live:rune:43546:2692117"
+      ],
+      "src": "gww-icons/runes/1d479335701c9a018d2acc15b61b6cc4b12446c1.png",
+      "width": 38
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/e/e8/Rune_Paragon_Minor.png",
+      "fileTitle": "File:Rune Paragon Minor.png",
+      "height": 57,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-minor-leadership",
+        "remote-media:gww-icon:rune-of-minor-motivation",
+        "remote-media:gww-icon:rune-of-minor-command",
+        "remote-media:gww-icon:rune-of-minor-spear-mastery"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "b643b5893b8e730f72bca9649d369d3a2a4c019e",
+      "remoteTimestamp": "2007-03-04T22:37:50Z",
+      "runeIds": [
+        198,
+        213,
+        214,
+        215
+      ],
+      "sha256": "9ebc98a3bac953ce833d4bd92000b2a9b5d6cb4ae5b910682d52bd4da5e03d66",
+      "sizeBytes": 4139,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43536:2692106",
+        "source:gww:epic-10-live:rune:43545:2692108",
+        "source:gww:epic-10-live:rune:43537:2692087",
+        "source:gww:epic-10-live:rune:43546:2692117"
+      ],
+      "src": "gww-icons/runes/b643b5893b8e730f72bca9649d369d3a2a4c019e.png",
+      "width": 44
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/3/35/Rune_Paragon_Sup.png",
+      "fileTitle": "File:Rune Paragon Sup.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-superior-leadership",
+        "remote-media:gww-icon:rune-of-superior-motivation",
+        "remote-media:gww-icon:rune-of-superior-command",
+        "remote-media:gww-icon:rune-of-superior-spear-mastery"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "ffcae486ff178f650e2d59f5284490ac768e5bcb",
+      "remoteTimestamp": "2007-03-04T22:38:25Z",
+      "runeIds": [
+        228,
+        229,
+        230,
+        231
+      ],
+      "sha256": "4ff045ec21cfae3d41ed6b2acecb17c7cb327a89d378ea367634545a30ef804c",
+      "sizeBytes": 4247,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43536:2692106",
+        "source:gww:epic-10-live:rune:43545:2692108",
+        "source:gww:epic-10-live:rune:43537:2692087",
+        "source:gww:epic-10-live:rune:43546:2692117"
+      ],
+      "src": "gww-icons/runes/ffcae486ff178f650e2d59f5284490ac768e5bcb.png",
+      "width": 52
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/8/85/Rune_Ranger_Major.png",
+      "fileTitle": "File:Rune Ranger Major.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-major-wilderness-survival",
+        "remote-media:gww-icon:rune-of-major-expertise",
+        "remote-media:gww-icon:rune-of-major-beast-mastery",
+        "remote-media:gww-icon:rune-of-major-marksmanship"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "0e35a0d4419d9b5a84ff49aaf2481c518ff85d5f",
+      "remoteTimestamp": "2007-03-04T22:33:02Z",
+      "runeIds": [
+        70,
+        71,
+        72,
+        73
+      ],
+      "sha256": "dfbb81ec7de90ef249e00a2ae1230156d3af34b4f37fb8d56698824af1ae2248",
+      "sizeBytes": 3344,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:44764:2692122",
+        "source:gww:epic-10-live:rune:44742:2692100",
+        "source:gww:epic-10-live:rune:44750:2692084",
+        "source:gww:epic-10-live:rune:44757:2692107"
+      ],
+      "src": "gww-icons/runes/0e35a0d4419d9b5a84ff49aaf2481c518ff85d5f.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/1/15/Rune_Ranger_Minor.png",
+      "fileTitle": "File:Rune Ranger Minor.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-minor-wilderness-survival",
+        "remote-media:gww-icon:rune-of-minor-expertise",
+        "remote-media:gww-icon:rune-of-minor-beast-mastery",
+        "remote-media:gww-icon:rune-of-minor-marksmanship"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "b7ebd1c5ee19bf485044ca99e3a4394b9a2714f8",
+      "remoteTimestamp": "2007-03-04T22:32:53Z",
+      "runeIds": [
+        44,
+        45,
+        46,
+        47
+      ],
+      "sha256": "5084b1c8383aee6735035ef0da861283a53a3df90d5e61a3df1c104ce2c50c39",
+      "sizeBytes": 4122,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:44764:2692122",
+        "source:gww:epic-10-live:rune:44742:2692100",
+        "source:gww:epic-10-live:rune:44750:2692084",
+        "source:gww:epic-10-live:rune:44757:2692107"
+      ],
+      "src": "gww-icons/runes/b7ebd1c5ee19bf485044ca99e3a4394b9a2714f8.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/4/4d/Rune_Ranger_Sup.png",
+      "fileTitle": "File:Rune Ranger Sup.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-superior-wilderness-survival",
+        "remote-media:gww-icon:rune-of-superior-expertise",
+        "remote-media:gww-icon:rune-of-superior-beast-mastery",
+        "remote-media:gww-icon:rune-of-superior-marksmanship"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "f7587233a184e893f4eeba565297b1888b810abd",
+      "remoteTimestamp": "2007-03-04T22:33:12Z",
+      "runeIds": [
+        96,
+        97,
+        98,
+        99
+      ],
+      "sha256": "bc78d177fadb7b1ba3f34a742374b08ee8a58a7ea662a951e2c81cea4f68bfc9",
+      "sizeBytes": 4137,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:44764:2692122",
+        "source:gww:epic-10-live:rune:44742:2692100",
+        "source:gww:epic-10-live:rune:44750:2692084",
+        "source:gww:epic-10-live:rune:44757:2692107"
+      ],
+      "src": "gww-icons/runes/f7587233a184e893f4eeba565297b1888b810abd.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/9/90/Rune_Ritualist_Major.png",
+      "fileTitle": "File:Rune Ritualist Major.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-major-channeling-magic",
+        "remote-media:gww-icon:rune-of-major-restoration-magic",
+        "remote-media:gww-icon:rune-of-major-communing",
+        "remote-media:gww-icon:rune-of-major-spawning-power"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "541d7b971fc71287e7a6edfa2562be83fcb8923f",
+      "remoteTimestamp": "2007-03-04T22:37:26Z",
+      "runeIds": [
+        174,
+        175,
+        176,
+        177
+      ],
+      "sha256": "5e9bdc39c9a0ddb9b980709e5b3ce5b5e9db60171b8af116630fc6b3e35333bc",
+      "sizeBytes": 5134,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:45160:2692086",
+        "source:gww:epic-10-live:rune:45152:2692111",
+        "source:gww:epic-10-live:rune:45168:2692088",
+        "source:gww:epic-10-live:rune:45145:2692116"
+      ],
+      "src": "gww-icons/runes/541d7b971fc71287e7a6edfa2562be83fcb8923f.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/c/cb/Rune_Ritualist_Minor.png",
+      "fileTitle": "File:Rune Ritualist Minor.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-minor-channeling-magic",
+        "remote-media:gww-icon:rune-of-minor-restoration-magic",
+        "remote-media:gww-icon:rune-of-minor-communing",
+        "remote-media:gww-icon:rune-of-minor-spawning-power"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "44db5099585a86cf2cc4fbc8d1f67ca169bc1d78",
+      "remoteTimestamp": "2007-03-04T22:37:14Z",
+      "runeIds": [
+        166,
+        167,
+        168,
+        169
+      ],
+      "sha256": "a7aac2d36fe6f1a00d5f17e13d24c178d73cd5a6b9bb60f9b077f0c319d23c5c",
+      "sizeBytes": 3774,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:45160:2692086",
+        "source:gww:epic-10-live:rune:45152:2692111",
+        "source:gww:epic-10-live:rune:45168:2692088",
+        "source:gww:epic-10-live:rune:45145:2692116"
+      ],
+      "src": "gww-icons/runes/44db5099585a86cf2cc4fbc8d1f67ca169bc1d78.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/1/13/Rune_Ritualist_Sup.png",
+      "fileTitle": "File:Rune Ritualist Sup.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-superior-channeling-magic",
+        "remote-media:gww-icon:rune-of-superior-restoration-magic",
+        "remote-media:gww-icon:rune-of-superior-communing",
+        "remote-media:gww-icon:rune-of-superior-spawning-power"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "7b83ddc021ab75af42a6d3c9e38741730caf444c",
+      "remoteTimestamp": "2007-03-04T22:37:37Z",
+      "runeIds": [
+        182,
+        183,
+        184,
+        185
+      ],
+      "sha256": "f20cc74d7bf6fb2cb5d6381828130cb42e84bf1359f771dbb9ace3d3c8e6612c",
+      "sizeBytes": 4001,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:45160:2692086",
+        "source:gww:epic-10-live:rune:45152:2692111",
+        "source:gww:epic-10-live:rune:45168:2692088",
+        "source:gww:epic-10-live:rune:45145:2692116"
+      ],
+      "src": "gww-icons/runes/7b83ddc021ab75af42a6d3c9e38741730caf444c.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/4/46/Rune_Warrior_Major.png",
+      "fileTitle": "File:Rune Warrior Major.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-major-tactics",
+        "remote-media:gww-icon:rune-of-major-strength",
+        "remote-media:gww-icon:rune-of-major-axe-mastery",
+        "remote-media:gww-icon:rune-of-major-hammer-mastery",
+        "remote-media:gww-icon:rune-of-major-swordsmanship"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "f249783b01108ba1cc7c3d9e189e5798141119dc",
+      "remoteTimestamp": "2007-03-04T22:32:24Z",
+      "runeIds": [
+        65,
+        66,
+        67,
+        68,
+        69
+      ],
+      "sha256": "777d17d8547b45b3d78bfb784420af7769b2496b1b6aae90830a0afe0b411753",
+      "sizeBytes": 3978,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43457:2692120",
+        "source:gww:epic-10-live:rune:43464:2692118",
+        "source:gww:epic-10-live:rune:43478:2692083",
+        "source:gww:epic-10-live:rune:43479:2692103",
+        "source:gww:epic-10-live:rune:43468:2729304"
+      ],
+      "src": "gww-icons/runes/f249783b01108ba1cc7c3d9e189e5798141119dc.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/2/2f/Rune_Warrior_Minor.png",
+      "fileTitle": "File:Rune Warrior Minor.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-minor-tactics",
+        "remote-media:gww-icon:rune-of-minor-strength",
+        "remote-media:gww-icon:rune-of-minor-axe-mastery",
+        "remote-media:gww-icon:rune-of-minor-hammer-mastery",
+        "remote-media:gww-icon:rune-of-minor-swordsmanship"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "08ccaf5f9b97f3d26b5dff7f6d3834f6b0361803",
+      "remoteTimestamp": "2007-03-04T22:32:13Z",
+      "runeIds": [
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "sha256": "61b42fc759149546900b68e9234f316b9b3798f401b92addcd90b9a487943af8",
+      "sizeBytes": 4445,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43457:2692120",
+        "source:gww:epic-10-live:rune:43464:2692118",
+        "source:gww:epic-10-live:rune:43478:2692083",
+        "source:gww:epic-10-live:rune:43479:2692103",
+        "source:gww:epic-10-live:rune:43468:2729304"
+      ],
+      "src": "gww-icons/runes/08ccaf5f9b97f3d26b5dff7f6d3834f6b0361803.png",
+      "width": 51
+    },
+    {
+      "canonicalUrl": "https://wiki.guildwars.com/images/3/31/Rune_Warrior_Sup.png",
+      "fileTitle": "File:Rune Warrior Sup.png",
+      "height": 62,
+      "mediaIds": [
+        "remote-media:gww-icon:rune-of-superior-tactics",
+        "remote-media:gww-icon:rune-of-superior-strength",
+        "remote-media:gww-icon:rune-of-superior-axe-mastery",
+        "remote-media:gww-icon:rune-of-superior-hammer-mastery",
+        "remote-media:gww-icon:rune-of-superior-swordsmanship"
+      ],
+      "mimeType": "image/png",
+      "remoteSha1": "45dde0d5d5f0d222f89cc7af13d76a0b89f89542",
+      "remoteTimestamp": "2007-03-04T22:32:38Z",
+      "runeIds": [
+        91,
+        92,
+        93,
+        94,
+        95
+      ],
+      "sha256": "dd7a9cced93322e7528d2a46b58525605cf4ff98ddd7eccc305f9ee37cea1eb9",
+      "sizeBytes": 4124,
+      "sourceIds": [
+        "source:gww:epic-10-live:rune:43457:2692120",
+        "source:gww:epic-10-live:rune:43464:2692118",
+        "source:gww:epic-10-live:rune:43478:2692083",
+        "source:gww:epic-10-live:rune:43479:2692103",
+        "source:gww:epic-10-live:rune:43468:2729304"
+      ],
+      "src": "gww-icons/runes/45dde0d5d5f0d222f89cc7af13d76a0b89f89542.png",
+      "width": 51
+    }
+  ],
+  "catalogSha256": "805d3468abd89a8b6e8211478fb12c993af3ce89080543450b3e34278161470b",
+  "catalogVersion": "runes-58a277f62fe92f2a",
+  "generatedAt": "2026-09-14T02:07:00Z",
+  "schemaVersion": 1,
+  "summary": {
+    "runeCount": 126,
+    "uniqueAssetCount": 30
+  },
+  "useDecision": "approved-by-adr-0002-runtime-gww-icon-assets"
+}

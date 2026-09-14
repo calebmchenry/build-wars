@@ -1,4 +1,6 @@
-import { useRef, type Dispatch } from "react";
+import { selectAttributePreview } from "../attribute-preview-selectors";
+import type { AttributePreview } from "../../domain";
+import { useMemo, useRef, type Dispatch } from "react";
 
 import { type BuildSetEntryId, type PartySlotId } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
@@ -22,6 +24,7 @@ export function BuildComposer({
   workspace,
   catalogs,
   validation,
+  preview,
   editorDispatch,
   workspaceDispatch,
   requestDraftReplacement
@@ -29,16 +32,24 @@ export function BuildComposer({
   readonly workspace: WorkspaceState;
   readonly catalogs: AppCatalogViews;
   readonly validation: ValidationView;
+  readonly preview?: AttributePreview | null;
   readonly editorDispatch: Dispatch<EditorAction>;
   readonly workspaceDispatch: Dispatch<WorkspaceAction>;
   readonly requestDraftReplacement: (() => "cancel" | "discard") | undefined;
 }) {
   const sequenceRef = useRef(1);
   const context = selectComposerLoadoutContext(workspace);
+  const resolvedPreview = useMemo(
+    () =>
+      !context.selected
+        ? null
+        : (preview ?? selectAttributePreview(workspace.editor.build, catalogs)),
+    [context.selected, preview, workspace.editor.build, catalogs]
+  );
   const nextEntryId = () =>
     generateBuildSetEntryId(new Date().toISOString(), sequenceRef.current++);
 
-  if (!context.selected) {
+  if (!context.selected || resolvedPreview === null) {
     return (
       <section className="composer-layout no-selected-layout" aria-labelledby="composer-title">
         <NoSelectedLoadout
@@ -88,9 +99,15 @@ export function BuildComposer({
           state={workspace.editor}
           catalogs={catalogs}
           validation={validation}
+          preview={resolvedPreview}
           dispatch={editorDispatch}
         />
-        <SkillBar state={workspace.editor} catalogs={catalogs} dispatch={editorDispatch} />
+        <SkillBar
+          state={workspace.editor}
+          catalogs={catalogs}
+          dispatch={editorDispatch}
+          preview={resolvedPreview}
+        />
         <InlineTemplateCode
           state={workspace.editor}
           catalogs={catalogs}
@@ -99,7 +116,12 @@ export function BuildComposer({
           requestDraftReplacement={requestDraftReplacement}
         />
       </div>
-      <FocusedSkillCatalog state={workspace.editor} catalogs={catalogs} dispatch={editorDispatch} />
+      <FocusedSkillCatalog
+        state={workspace.editor}
+        catalogs={catalogs}
+        dispatch={editorDispatch}
+        preview={resolvedPreview}
+      />
     </section>
   );
 }

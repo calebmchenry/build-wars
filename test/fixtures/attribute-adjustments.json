@@ -1,0 +1,671 @@
+{
+  "baselineHead": "41b5e41ee3ad18356782425474d4d2f61e9290b2",
+  "catalogs": [
+    {
+      "path": "data/generated/epic-03/professions-attributes.catalog.json",
+      "version": "pa-e5d0d35ad8f30b4c",
+      "sha256": "7a397140d346dbfd1e28e1076132fa209628678682fa2c21322ac91f1807f9fa"
+    },
+    {
+      "path": "data/generated/epic-04/skills.catalog.json",
+      "version": "skills-9396e01d21481cd1",
+      "sha256": "bb43734b5c8493e1a2bd48823e5afb7001ac8152e72d4980aef76125b1bd61c7"
+    },
+    {
+      "path": "data/generated/epic-10/runes.catalog.json",
+      "version": "runes-58a277f62fe92f2a",
+      "sha256": "805d3468abd89a8b6e8211478fb12c993af3ce89080543450b3e34278161470b"
+    }
+  ],
+  "skills": [
+    {
+      "id": 198,
+      "templateId": 198,
+      "name": "Glyph of Elemental Power",
+      "professionId": 6,
+      "splitGroupId": null,
+      "classification": {
+        "common": false,
+        "elite": false,
+        "modeAvailability": "both",
+        "noAttribute": true,
+        "nonPlayer": false,
+        "pveOnly": false,
+        "pvpOnly": false,
+        "sharedPage": false,
+        "special": false,
+        "split": false,
+        "title": false,
+        "unsupported": false
+      }
+    },
+    {
+      "id": 1951,
+      "templateId": 1951,
+      "name": "Elemental Lord (Luxon)",
+      "professionId": 6,
+      "splitGroupId": null,
+      "classification": {
+        "common": false,
+        "elite": false,
+        "modeAvailability": "pve-only",
+        "noAttribute": false,
+        "nonPlayer": false,
+        "pveOnly": true,
+        "pvpOnly": false,
+        "sharedPage": false,
+        "special": true,
+        "split": false,
+        "title": true,
+        "unsupported": false
+      }
+    },
+    {
+      "id": 2094,
+      "templateId": 2094,
+      "name": "Elemental Lord (Kurzick)",
+      "professionId": 6,
+      "splitGroupId": null,
+      "classification": {
+        "common": false,
+        "elite": false,
+        "modeAvailability": "pve-only",
+        "noAttribute": false,
+        "nonPlayer": false,
+        "pveOnly": true,
+        "pvpOnly": false,
+        "sharedPage": false,
+        "special": true,
+        "split": false,
+        "title": true,
+        "unsupported": false
+      }
+    },
+    {
+      "id": 2139,
+      "templateId": 2139,
+      "name": "Masochism",
+      "professionId": 4,
+      "splitGroupId": "split:skill:2139",
+      "classification": {
+        "common": false,
+        "elite": false,
+        "modeAvailability": "pve-only",
+        "noAttribute": false,
+        "nonPlayer": false,
+        "pveOnly": true,
+        "pvpOnly": false,
+        "sharedPage": false,
+        "special": false,
+        "split": true,
+        "title": false,
+        "unsupported": false
+      }
+    },
+    {
+      "id": 3054,
+      "templateId": 3054,
+      "name": "Masochism (PvP)",
+      "professionId": 4,
+      "splitGroupId": "split:skill:2139",
+      "classification": {
+        "common": false,
+        "elite": false,
+        "modeAvailability": "pvp-only",
+        "noAttribute": false,
+        "nonPlayer": false,
+        "pveOnly": false,
+        "pvpOnly": true,
+        "sharedPage": false,
+        "special": false,
+        "split": true,
+        "title": false,
+        "unsupported": false
+      }
+    },
+    {
+      "id": 3431,
+      "templateId": 3431,
+      "name": "Heroic Refrain",
+      "professionId": 9,
+      "splitGroupId": null,
+      "classification": {
+        "common": false,
+        "elite": true,
+        "modeAvailability": "pve-only",
+        "noAttribute": false,
+        "nonPlayer": false,
+        "pveOnly": true,
+        "pvpOnly": false,
+        "sharedPage": false,
+        "special": false,
+        "split": false,
+        "title": false,
+        "unsupported": false
+      }
+    }
+  ],
+  "attributes": [
+    {
+      "id": 0,
+      "templateId": 0,
+      "name": "Fast Casting",
+      "professionId": 5,
+      "isPrimary": true
+    },
+    {
+      "id": 1,
+      "templateId": 1,
+      "name": "Illusion Magic",
+      "professionId": 5,
+      "isPrimary": false
+    },
+    {
+      "id": 2,
+      "templateId": 2,
+      "name": "Domination Magic",
+      "professionId": 5,
+      "isPrimary": false
+    },
+    {
+      "id": 3,
+      "templateId": 3,
+      "name": "Inspiration Magic",
+      "professionId": 5,
+      "isPrimary": false
+    },
+    {
+      "id": 4,
+      "templateId": 4,
+      "name": "Blood Magic",
+      "professionId": 4,
+      "isPrimary": false
+    },
+    {
+      "id": 5,
+      "templateId": 5,
+      "name": "Death Magic",
+      "professionId": 4,
+      "isPrimary": false
+    },
+    {
+      "id": 6,
+      "templateId": 6,
+      "name": "Soul Reaping",
+      "professionId": 4,
+      "isPrimary": true
+    },
+    {
+      "id": 7,
+      "templateId": 7,
+      "name": "Curses",
+      "professionId": 4,
+      "isPrimary": false
+    },
+    {
+      "id": 8,
+      "templateId": 8,
+      "name": "Air Magic",
+      "professionId": 6,
+      "isPrimary": false
+    },
+    {
+      "id": 9,
+      "templateId": 9,
+      "name": "Earth Magic",
+      "professionId": 6,
+      "isPrimary": false
+    },
+    {
+      "id": 10,
+      "templateId": 10,
+      "name": "Fire Magic",
+      "professionId": 6,
+      "isPrimary": false
+    },
+    {
+      "id": 11,
+      "templateId": 11,
+      "name": "Water Magic",
+      "professionId": 6,
+      "isPrimary": false
+    },
+    {
+      "id": 12,
+      "templateId": 12,
+      "name": "Energy Storage",
+      "professionId": 6,
+      "isPrimary": true
+    },
+    {
+      "id": 13,
+      "templateId": 13,
+      "name": "Healing Prayers",
+      "professionId": 3,
+      "isPrimary": false
+    },
+    {
+      "id": 14,
+      "templateId": 14,
+      "name": "Smiting Prayers",
+      "professionId": 3,
+      "isPrimary": false
+    },
+    {
+      "id": 15,
+      "templateId": 15,
+      "name": "Protection Prayers",
+      "professionId": 3,
+      "isPrimary": false
+    },
+    {
+      "id": 16,
+      "templateId": 16,
+      "name": "Divine Favor",
+      "professionId": 3,
+      "isPrimary": true
+    },
+    {
+      "id": 17,
+      "templateId": 17,
+      "name": "Strength",
+      "professionId": 1,
+      "isPrimary": true
+    },
+    {
+      "id": 18,
+      "templateId": 18,
+      "name": "Axe Mastery",
+      "professionId": 1,
+      "isPrimary": false
+    },
+    {
+      "id": 19,
+      "templateId": 19,
+      "name": "Hammer Mastery",
+      "professionId": 1,
+      "isPrimary": false
+    },
+    {
+      "id": 20,
+      "templateId": 20,
+      "name": "Swordsmanship",
+      "professionId": 1,
+      "isPrimary": false
+    },
+    {
+      "id": 21,
+      "templateId": 21,
+      "name": "Tactics",
+      "professionId": 1,
+      "isPrimary": false
+    },
+    {
+      "id": 22,
+      "templateId": 22,
+      "name": "Beast Mastery",
+      "professionId": 2,
+      "isPrimary": false
+    },
+    {
+      "id": 23,
+      "templateId": 23,
+      "name": "Expertise",
+      "professionId": 2,
+      "isPrimary": true
+    },
+    {
+      "id": 24,
+      "templateId": 24,
+      "name": "Wilderness Survival",
+      "professionId": 2,
+      "isPrimary": false
+    },
+    {
+      "id": 25,
+      "templateId": 25,
+      "name": "Marksmanship",
+      "professionId": 2,
+      "isPrimary": false
+    },
+    {
+      "id": 29,
+      "templateId": 29,
+      "name": "Dagger Mastery",
+      "professionId": 7,
+      "isPrimary": false
+    },
+    {
+      "id": 30,
+      "templateId": 30,
+      "name": "Deadly Arts",
+      "professionId": 7,
+      "isPrimary": false
+    },
+    {
+      "id": 31,
+      "templateId": 31,
+      "name": "Shadow Arts",
+      "professionId": 7,
+      "isPrimary": false
+    },
+    {
+      "id": 32,
+      "templateId": 32,
+      "name": "Communing",
+      "professionId": 8,
+      "isPrimary": false
+    },
+    {
+      "id": 33,
+      "templateId": 33,
+      "name": "Restoration Magic",
+      "professionId": 8,
+      "isPrimary": false
+    },
+    {
+      "id": 34,
+      "templateId": 34,
+      "name": "Channeling Magic",
+      "professionId": 8,
+      "isPrimary": false
+    },
+    {
+      "id": 35,
+      "templateId": 35,
+      "name": "Critical Strikes",
+      "professionId": 7,
+      "isPrimary": true
+    },
+    {
+      "id": 36,
+      "templateId": 36,
+      "name": "Spawning Power",
+      "professionId": 8,
+      "isPrimary": true
+    },
+    {
+      "id": 37,
+      "templateId": 37,
+      "name": "Spear Mastery",
+      "professionId": 9,
+      "isPrimary": false
+    },
+    {
+      "id": 38,
+      "templateId": 38,
+      "name": "Command",
+      "professionId": 9,
+      "isPrimary": false
+    },
+    {
+      "id": 39,
+      "templateId": 39,
+      "name": "Motivation",
+      "professionId": 9,
+      "isPrimary": false
+    },
+    {
+      "id": 40,
+      "templateId": 40,
+      "name": "Leadership",
+      "professionId": 9,
+      "isPrimary": true
+    },
+    {
+      "id": 41,
+      "templateId": 41,
+      "name": "Scythe Mastery",
+      "professionId": 10,
+      "isPrimary": false
+    },
+    {
+      "id": 42,
+      "templateId": 42,
+      "name": "Wind Prayers",
+      "professionId": 10,
+      "isPrimary": false
+    },
+    {
+      "id": 43,
+      "templateId": 43,
+      "name": "Earth Prayers",
+      "professionId": 10,
+      "isPrimary": false
+    },
+    {
+      "id": 44,
+      "templateId": 44,
+      "name": "Mysticism",
+      "professionId": 10,
+      "isPrimary": true
+    }
+  ],
+  "runes": [
+    {
+      "id": 22,
+      "professionId": 5,
+      "affectedAttributeId": 0,
+      "familyRank": "minor",
+      "effects": [
+        {
+          "amount": 1,
+          "attributeId": 0,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": ["claim:rune:22:effect:attribute-rank"],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": ["review:epic-10-effect-semantics:2026-09-02"],
+            "sourceIds": ["source:gww:epic-10-live:rune:44824:2692101"]
+          },
+          "stacking": {
+            "groupKey": "attribute:0",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "professionId": 6,
+      "affectedAttributeId": 10,
+      "familyRank": "minor",
+      "effects": [
+        {
+          "amount": 1,
+          "attributeId": 10,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": ["claim:rune:31:effect:attribute-rank"],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": ["review:epic-10-effect-semantics:2026-09-02"],
+            "sourceIds": ["source:gww:epic-10-live:rune:43150:2692102"]
+          },
+          "stacking": {
+            "groupKey": "attribute:10",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "professionId": 5,
+      "affectedAttributeId": 0,
+      "familyRank": "major",
+      "effects": [
+        {
+          "amount": 2,
+          "attributeId": 0,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": ["claim:rune:48:effect:attribute-rank"],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": ["review:epic-10-effect-semantics:2026-09-02"],
+            "sourceIds": ["source:gww:epic-10-live:rune:44824:2692101"]
+          },
+          "stacking": {
+            "groupKey": "attribute:0",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        },
+        {
+          "amount": -35,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": ["claim:rune:48:effect:maximum-health-delta"],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": ["review:epic-10-effect-semantics:2026-09-02"],
+            "sourceIds": ["source:gww:epic-10-live:rune:44824:2692101"]
+          },
+          "stacking": {
+            "groupKey": "attribute-health-penalty:48",
+            "notes": null,
+            "rule": "sum"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "professionId": 6,
+      "affectedAttributeId": 10,
+      "familyRank": "major",
+      "effects": [
+        {
+          "amount": 2,
+          "attributeId": 10,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": ["claim:rune:57:effect:attribute-rank"],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": ["review:epic-10-effect-semantics:2026-09-02"],
+            "sourceIds": ["source:gww:epic-10-live:rune:43150:2692102"]
+          },
+          "stacking": {
+            "groupKey": "attribute:10",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        },
+        {
+          "amount": -35,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": ["claim:rune:57:effect:maximum-health-delta"],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": ["review:epic-10-effect-semantics:2026-09-02"],
+            "sourceIds": ["source:gww:epic-10-live:rune:43150:2692102"]
+          },
+          "stacking": {
+            "groupKey": "attribute-health-penalty:57",
+            "notes": null,
+            "rule": "sum"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ]
+    },
+    {
+      "id": 74,
+      "professionId": 5,
+      "affectedAttributeId": 0,
+      "familyRank": "superior",
+      "effects": [
+        {
+          "amount": 3,
+          "attributeId": 0,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": ["claim:rune:74:effect:attribute-rank"],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": ["review:epic-10-effect-semantics:2026-09-02"],
+            "sourceIds": ["source:gww:epic-10-live:rune:44824:2692101"]
+          },
+          "stacking": {
+            "groupKey": "attribute:0",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        },
+        {
+          "amount": -75,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": ["claim:rune:74:effect:maximum-health-delta"],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": ["review:epic-10-effect-semantics:2026-09-02"],
+            "sourceIds": ["source:gww:epic-10-live:rune:44824:2692101"]
+          },
+          "stacking": {
+            "groupKey": "attribute-health-penalty:74",
+            "notes": null,
+            "rule": "sum"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ]
+    },
+    {
+      "id": 83,
+      "professionId": 6,
+      "affectedAttributeId": 10,
+      "familyRank": "superior",
+      "effects": [
+        {
+          "amount": 3,
+          "attributeId": 10,
+          "kind": "attribute-rank",
+          "provenance": {
+            "claimIds": ["claim:rune:83:effect:attribute-rank"],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": ["review:epic-10-effect-semantics:2026-09-02"],
+            "sourceIds": ["source:gww:epic-10-live:rune:43150:2692102"]
+          },
+          "stacking": {
+            "groupKey": "attribute:10",
+            "notes": null,
+            "rule": "highest"
+          },
+          "target": "attribute",
+          "unit": "rank"
+        },
+        {
+          "amount": -75,
+          "kind": "maximum-health-delta",
+          "provenance": {
+            "claimIds": ["claim:rune:83:effect:maximum-health-delta"],
+            "notes": "Effect normalized from source-backed rune family/rank facts and reviewed Rune stacking rules.",
+            "reviewIds": ["review:epic-10-effect-semantics:2026-09-02"],
+            "sourceIds": ["source:gww:epic-10-live:rune:43150:2692102"]
+          },
+          "stacking": {
+            "groupKey": "attribute-health-penalty:83",
+            "notes": null,
+            "rule": "sum"
+          },
+          "target": "character",
+          "unit": "health"
+        }
+      ]
+    }
+  ],
+  "exactSourceCode": "OAAQIAAAAAAAAAAAAAAA"
+}

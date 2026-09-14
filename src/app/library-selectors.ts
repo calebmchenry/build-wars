@@ -311,7 +311,7 @@ function previewSnapshotForRecord(record: PersistedSavedDocumentRecord): Persist
 function createEmptyPreviewSnapshot(name: string): PersistedBuildSnapshot {
   return {
     build: {
-      schemaVersion: 2,
+      schemaVersion: 3,
       catalogVersion: null,
       id: authoredDocumentId("build:empty-build-set-preview"),
       name,
@@ -321,6 +321,7 @@ function createEmptyPreviewSnapshot(name: string): PersistedBuildSnapshot {
       attributes: [],
       skillBar: [null, null, null, null, null, null, null, null],
       titleRankOverrides: [],
+      attributeAdjustments: null,
       equipment: null
     },
     pveBudget: { level: 20, questBonus: "maximum-applicable" },

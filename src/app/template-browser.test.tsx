@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { useReducer } from "react";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import samples from "../../test/fixtures/skill-template-files.json";
 import { templateDirectory, templateFile, templateHandle } from "../test/template-files";
@@ -10,9 +10,15 @@ import { createBlankEditorState, editorReducer } from "./editor-state";
 import { selectValidationView } from "./editor-selectors";
 import { importSkillTemplateToEditor } from "./template-workflow";
 
+import { adjustmentProfileFixture } from "./attribute-adjustment-fixtures";
+
 const catalogs = requireReadyCatalogs();
 const monkCode = samples["Protection Monk.txt"];
 const heroCode = samples["E Surge Hero.txt"];
+
+beforeEach(() => {
+  vi.spyOn(window, "confirm").mockReturnValue(true);
+});
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -24,7 +30,11 @@ function Harness({ guard = () => "discard" }: { readonly guard?: () => "discard"
   if (!imported.ok) throw new Error(imported.error.message);
   const [state, dispatch] = useReducer(editorReducer, {
     ...imported.state,
-    build: { ...imported.state.build, name: "Current build" }
+    build: {
+      ...imported.state.build,
+      name: "Current build",
+      attributeAdjustments: adjustmentProfileFixture()
+    }
   });
   return (
     <>
@@ -35,6 +45,9 @@ function Harness({ guard = () => "discard" }: { readonly guard?: () => "discard"
         dispatch={dispatch}
         requestDraftReplacement={guard}
       />
+      <output role="note" aria-label="Adjustment profile">
+        {JSON.stringify(state.build.attributeAdjustments)}
+      </output>
       <div data-testid="build-name">{state.build.name}</div>
       <output role="status">{state.transient?.text}</output>
     </>
@@ -58,17 +71,27 @@ describe("template browser", () => {
     expect(screen.getByRole("tooltip")).toHaveTextContent("Mesmer / Ritualist");
     expect(within(screen.getByRole("tooltip")).getAllByRole("img")).toHaveLength(8);
     expect(screen.getByTestId("build-name")).toHaveTextContent("Current build");
+    expect(screen.getByLabelText("Adjustment profile")).toHaveTextContent(
+      JSON.stringify(adjustmentProfileFixture())
+    );
     expect(screen.getByLabelText("Template code")).toHaveValue(monkCode);
+    expect(screen.getByLabelText("Adjustment profile")).toHaveTextContent(
+      JSON.stringify(adjustmentProfileFixture())
+    );
     fireEvent.mouseLeave(file);
     await waitFor(() => expect(screen.queryByRole("tooltip")).not.toBeInTheDocument());
     act(() => file.focus());
     expect(screen.getByRole("tooltip")).toHaveTextContent("Domination Magic 12");
     fireEvent.click(file);
     expect(screen.getByLabelText("Template code")).toHaveValue(monkCode);
+    expect(screen.getByLabelText("Adjustment profile")).toHaveTextContent(
+      JSON.stringify(adjustmentProfileFixture())
+    );
     fireEvent.click(screen.getByRole("button", { name: "Load" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     expect(screen.getByLabelText("Template code")).toHaveValue(heroCode);
     expect(screen.getByTestId("build-name")).toHaveTextContent("E Surge Hero");
+    expect(screen.getByLabelText("Adjustment profile")).toHaveTextContent("null");
   });
 
   it("honors draft replacement cancellation on double-click", async () => {
@@ -79,6 +102,9 @@ describe("template browser", () => {
     await waitFor(() => expect(guard).toHaveBeenCalled());
     expect(screen.getByRole("dialog")).toBeInTheDocument();
     expect(screen.getByLabelText("Template code")).toHaveValue(monkCode);
+    expect(screen.getByLabelText("Adjustment profile")).toHaveTextContent(
+      JSON.stringify(adjustmentProfileFixture())
+    );
   });
 
   it("reloads a changed file from disk before importing", async () => {
@@ -103,6 +129,9 @@ describe("template browser", () => {
     await screen.findByRole("alert");
     expect(screen.getByRole("dialog")).toBeInTheDocument();
     expect(screen.getByLabelText("Template code")).toHaveValue(monkCode);
+    expect(screen.getByLabelText("Adjustment profile")).toHaveTextContent(
+      JSON.stringify(adjustmentProfileFixture())
+    );
   });
 
   it("saves the current edited code under a new name, rather than the previewed file's code", async () => {
@@ -139,6 +168,9 @@ describe("template browser", () => {
     fireEvent.click(screen.getByRole("button", { name: "Save" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     expect(file.text()).toBe(monkCode);
+    expect(screen.getByLabelText("Adjustment profile")).toHaveTextContent(
+      JSON.stringify(adjustmentProfileFixture())
+    );
   });
 
   it("keeps the modal open and reports denied write permission", async () => {
@@ -149,6 +181,9 @@ describe("template browser", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent("Allow editing this folder");
     expect(directory.handle.getFileHandle).not.toHaveBeenCalled();
     expect(screen.getByTestId("build-name")).toHaveTextContent("Current build");
+    expect(screen.getByLabelText("Adjustment profile")).toHaveTextContent(
+      JSON.stringify(adjustmentProfileFixture())
+    );
   });
 
   it("does not report success until the file is closed successfully", async () => {
@@ -167,6 +202,9 @@ describe("template browser", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent("Disk full");
     expect(abort).toHaveBeenCalled();
     expect(screen.getByTestId("build-name")).toHaveTextContent("Current build");
+    expect(screen.getByLabelText("Adjustment profile")).toHaveTextContent(
+      JSON.stringify(adjustmentProfileFixture())
+    );
   });
 
   it("navigates subfolders and saves into the displayed folder", async () => {

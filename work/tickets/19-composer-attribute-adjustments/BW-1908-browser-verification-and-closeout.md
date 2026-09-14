@@ -2,8 +2,10 @@
 id: BW-1908
 title: Browser Verification and Closeout
 epic: EPIC-19
-status: backlog
+status: done
 priority: high
+planned_sprint: SPRINT-020
+completed_sprint: SPRINT-020
 depends_on:
   - BW-1901
   - BW-1902
@@ -13,7 +15,7 @@ depends_on:
   - BW-1906
   - BW-1907
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-14
 ---
 
 # BW-1908: Browser Verification and Closeout
@@ -47,3 +49,10 @@ npm run verify; git diff --check; the real browser evidence matrix above.
 
 [Composer attribute adjustments](../../../compendium/attribute-adjustments.md) and the
 [epic contract](EPIC.md). User decisions there override older sprint scope.
+
+## Planning
+
+Planned in [SPRINT-020](../../sprints/SPRINT-020.md), Phase 8: Browser evidence and closeout.
+The sprint phase checklist and gate implement this ticket's acceptance criteria.
+
+Completed in [SPRINT-020](../../sprints/SPRINT-020.md). See [execution evidence](../../sprints/SPRINT-020-EVIDENCE.md).

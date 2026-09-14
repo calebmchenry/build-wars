@@ -49,3 +49,10 @@ and contain no opaque near-white edge background pixels.
 | `tango-sacrifice.png`            | `https://wiki.guildwars.com/images/7/78/Tango-sacrifice.png`                                                        | Sacrifice fact icon.                    |
 | `tango-upkeep.png`               | `https://wiki.guildwars.com/images/0/01/Tango-upkeep.png`                                                           | Upkeep fact icon.                       |
 | `to-the-limit.jpg`               | `https://wiki.guildwars.com/images/a/a4/%22To_the_Limit%21%22.jpg`                                                  | Default build skill icon.               |
+
+The attribute-rune cache is authorized by EPIC-19/BW-1904 and ADR 0002. Its 30
+original non-square PNGs live under `public/gww-icons/runes/`; 126 IDs map through
+`src/app/rune-icon-assets.generated.json`. Source URLs/file identities, remote
+SHA-1, verified SHA-256 and dimensions are retained in
+`data/generated/epic-10/rune-icon-assets.manifest.json`. Rune controls keep numeric
+labels if an image fails; there is no remote fallback.

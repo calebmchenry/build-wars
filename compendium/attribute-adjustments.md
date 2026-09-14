@@ -1,12 +1,13 @@
 # Composer Attribute Adjustments
 
-Status: accepted product direction; implementation is tracked by
+Status: implemented in [SPRINT-020](../work/sprints/SPRINT-020.md); acceptance is tracked by
 [EPIC-19](../work/tickets/19-composer-attribute-adjustments/EPIC.md).
-This document describes the next milestone, not currently shipped controls.
+The mounted controls and state contract below describe the current implementation.
+[Execution evidence](../work/sprints/SPRINT-020-EVIDENCE.md) records validation and any remaining browser gates.
 
 ## Product contract
 
-The composer should show how the current skill bar performs with intended rune,
+The composer shows how the current skill bar performs with intended rune,
 headgear, and temporary attribute bonuses. Base allocations remain the authored
 point investment. Equipment choices and assumed active effects are additional
 authored inputs; effective ranks are derived.
@@ -35,12 +36,11 @@ The user settled these decisions in the planning conversation on 2026-09-13:
 
 ## State and compatibility
 
-Extend the existing authored `Build`, rather than storing a second editable
-template code or attaching settings globally to a code string. Two builds with
+Choices belong to the existing authored `Build`. Two builds with
 identical game codes may intentionally have different bonuses. Imported raw code
 and overlay evidence remain owned by the existing compatibility layer.
 
-The intended state has two small parts:
+The state has two small parts:
 
 | Part                        | Stored input                                                                                | Derived at runtime                                          |
 | --------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
@@ -54,7 +54,7 @@ dirty the authored build.
 ### Existing equipment precedence
 
 Existing builds may have detailed semantic armor in `Build.equipment`. Preserve
-that data. Implement compact choices as **replacements for the addressed
+that data. Compact choices are **replacements for the addressed
 headgear/rune contribution**, never as an additional equipment bonus layer:
 
 - No override: derive that choice from the existing equipment helper.
@@ -87,11 +87,11 @@ as it already does; cancellation leaves all state unchanged.
 
 ### Persistence
 
-Version the Build schema when adding fields. Migrate existing Build v1/v2 data to
-no compact overrides and no explicit effect preferences. The storage envelope is
-currently v2 under `build-wars:v1`; keep that key and avoid unnecessary envelope
-changes. New readers must accept supported old records and continue blocking
-writes over corrupt/future-version data.
+Build schema v3 requires `attributeAdjustments`. Existing Build v1/v2 data migrates
+to no compact overrides or explicit effect preferences, preserving equipment and
+titles. The envelope remains v2 under `build-wars:v1`. Corrupt/future snapshots
+block writes. Older application versions reject v3; downgrading requires a
+compatible backup, not stripping schema fields.
 
 Validate bounded arrays/IDs, one override per attribute/effect, recognized
 preference values, and Heroic Refrain's supported strength range. Reject malformed
@@ -188,10 +188,10 @@ files, or folder synchronization. Retain existing permissions, fresh file reads,
 overwrite confirmation, write-completion reporting, fallback downloads, and name
 updates. A save success preserves the browser draft's bonus settings.
 
-Extend the existing import replacement message for explicitly authored adjustments
-without adding another confirmation step. A short nonblocking note near game
-export can explain that attribute adjustments are kept in the browser draft and
-are not included in the game file. Automatic defaults alone need no discard
+The existing import replacement message mentions explicitly authored adjustments
+in the same confirmation. Nonblocking notes near game code and file export explain
+that choices stay in the browser draft. Existing share panels and party multi-code
+omission data use the same authored-presence check, including explicit None/off. Automatic defaults alone need no discard
 warning. Existing full-document backup and transfer internals must preserve the
 new fields; new UI or formats for these operations are not required here.
 
@@ -202,12 +202,11 @@ identifies its equipment/effect configuration.
 
 ## Rune assets
 
-The current rune catalog has 126 attribute runes sharing 30 source images: minor,
-major, and superior for ten professions. Use its verified media identities and
-deduplicate cached binaries. Follow the existing local skill-icon mapping pattern.
-Extend [the asset decision](decisions/0002-runtime-gww-icon-assets.md) with a narrow
-rune-path and manifest exception in BW-1904. The user requested these real icons;
-the old skill-only exception does not require asking for the same authorization.
+The 126 attribute runes use 30 verified local PNGs: minor, major and superior for
+ten professions. `npm run data:rune-icons` verifies promoted SHA-1 hashes before
+publishing immutable image paths and runtime/provenance maps; offline replay uses
+verified cached bytes. Original non-square dimensions are retained. See the exact
+paths and provenance exception in [ADR 0002](decisions/0002-runtime-gww-icon-assets.md).
 
 Runtime paths must be local. Preserve source URLs, file titles, hashes, and local
 paths in provenance records. The project must remain usable when an image is
@@ -256,3 +255,37 @@ jsdom tests alone are not real browser evidence.
 Execution must pass `npm run verify` and `git diff --check`. Setup alone does not
 claim implementation or browser verification. The burn owns execution sprint
 numbering, ledger updates, and ticket closeout.
+
+## SPRINT-020 frozen implementation contract
+
+The authored field is `Build.attributeAdjustments: AttributeAdjustments | null`
+in Build v3. Its exact keys are `headgearOverride`, `runeOverrides`, and
+`effectPreferences`. Headgear null inherits, `{ kind: "none" }` suppresses, and
+`{ kind: "attribute", attributeId }` replaces the global choice. Rune rows contain
+`attributeId` and `runeId`; an absent row inherits and a null rune suppresses.
+Canonical profiles sort rune rows by attribute ID and effects by registry order;
+empty profiles normalize to null, while explicit None/off remains authored.
+
+The four effect IDs are versioned contract values. Self rows contain only
+`effectId` and on/off `preference`; external Heroic Refrain also requires integer
+`strength` 1–4. IDs are nonnegative safe integers (including zero), rune rows are
+unique and bounded at 64, and recognized effect rows are unique and bounded at
+four. Exact keys, dense arrays, and all-or-nothing validation prevent partial
+adjustment recovery. Well-formed unknown catalog IDs remain recoverable.
+
+Unknown equipment uncertainty is scoped to its contribution kind and known
+attribute targets. An explicit replacement resolves only its addressed component.
+Hidden rune edits invalidate only the union of proven old/new target attributes;
+headgear edits invalidate the global compact headgear choice. Identical/no-op
+edits preserve overrides, insignias/weapons do not clear them, and equipment reset
+addresses only contributions it actually removes. Actual primary changes clear
+compact gear, preserving effect preferences and semantic/raw equipment evidence;
+same-primary assignment is a no-op and secondary edits retain gear.
+
+Automatic values are re-derived behind per-source mode/profession/identity gates.
+An explicit on request can remain checked but inactive, and can still be unchecked
+or reset without its source present. Refrain retains its chosen strength while
+off; reset removes the preference and resumes off/+1. Ordinary game imports start
+neutral, while complete-document nested readers preserve these choices. Skill
+code fingerprints remain base-only. Build v1/v2 migrate neutrally; v3 requires
+the field, and unsupported/corrupt snapshots keep existing write protection.

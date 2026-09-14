@@ -37,8 +37,14 @@ leaves the editor and original files intact. The modal prevents duplicate operat
 on write failure.
 
 Skill templates contain professions, base attribute allocations, and eight skill slots. Equipment,
-title overrides, party information, and notes do not fit in this format. Existing import guards
-still protect authored equipment/title overrides and unsaved editor changes. Browser draft
+title overrides, rune/headgear choices, assumed effects, party information, and notes do not fit
+in this format. Existing import guards mention authored equipment, title ranks and attribute
+adjustments in the same confirmation, including explicit None/off choices. Automatic inference
+alone adds no discard warning. Successful ordinary Load clears explicit adjustments and equipment,
+then infers eligible self effects from the imported bar; Refrain returns to off/+1. Save preserves
+browser adjustments, even when their preview metadata is unresolved, and writes only the exact
+source or canonical base code. Preview never borrows the editor’s bonuses. Cancel, invalid read,
+or failed write leaves authored fields intact. Browser draft
 autosave remains separate from explicit saves to game files.
 
 ## Verification

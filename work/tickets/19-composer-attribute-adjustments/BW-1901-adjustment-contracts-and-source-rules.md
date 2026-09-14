@@ -2,11 +2,13 @@
 id: BW-1901
 title: Adjustment Contracts and Source Rules
 epic: EPIC-19
-status: backlog
+status: done
 priority: high
+planned_sprint: SPRINT-020
+completed_sprint: SPRINT-020
 depends_on: []
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-14
 ---
 
 # BW-1901: Adjustment Contracts and Source Rules
@@ -38,3 +40,10 @@ Review current sources and promoted catalogs; record source URLs and checks. No 
 
 [Composer attribute adjustments](../../../compendium/attribute-adjustments.md) and the
 [epic contract](EPIC.md). User decisions there override older sprint scope.
+
+## Planning
+
+Planned in [SPRINT-020](../../sprints/SPRINT-020.md), Phase 1: Freeze contracts and evidence.
+The sprint phase checklist and gate implement this ticket's acceptance criteria.
+
+Completed in [SPRINT-020](../../sprints/SPRINT-020.md). Contract types and fixtures are executable; baseline 59 tests, contract/focused 76 tests, full 525 tests, typecheck, build, lint and diff checks passed. See [durable execution evidence](../../sprints/SPRINT-020-EVIDENCE.md) and `work/runs/SPRINT-020/contracts.md`.
