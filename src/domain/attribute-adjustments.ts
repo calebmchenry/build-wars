@@ -1,6 +1,6 @@
 import type { AttributeId, RuneId } from "./ids";
 
-export const MAX_ATTRIBUTE_RUNE_OVERRIDES = 64;
+export const MAX_ATTRIBUTE_RUNES = 64;
 export const ASSUMED_EFFECT_IDS = [
   "glyph-of-elemental-power",
   "elemental-lord",
@@ -17,28 +17,24 @@ export type AssumedEffectPreference =
       readonly preference: "on" | "off";
       readonly strength: RefrainStrength;
     };
-export type HeadgearOverride =
-  | null
-  | { readonly kind: "none" }
-  | { readonly kind: "attribute"; readonly attributeId: AttributeId };
 export interface AttributeAdjustments {
-  readonly headgearOverride: HeadgearOverride;
-  readonly runeOverrides: readonly {
+  readonly headgearAttributeId: AttributeId | null;
+  readonly runes: readonly {
     readonly attributeId: AttributeId;
-    readonly runeId: RuneId | null;
+    readonly runeId: RuneId;
   }[];
   readonly effectPreferences: readonly AssumedEffectPreference[];
 }
 
 export function emptyAttributeAdjustments(): AttributeAdjustments {
-  return { headgearOverride: null, runeOverrides: [], effectPreferences: [] };
+  return { headgearAttributeId: null, runes: [], effectPreferences: [] };
 }
 
 export function hasAuthoredAttributeAdjustments(value: AttributeAdjustments | null): boolean {
   return (
     value !== null &&
-    (value.headgearOverride !== null ||
-      value.runeOverrides.length > 0 ||
+    (value.headgearAttributeId !== null ||
+      value.runes.length > 0 ||
       value.effectPreferences.length > 0)
   );
 }
@@ -49,10 +45,8 @@ export function cloneAttributeAdjustments(
 ): AttributeAdjustments | null {
   if (value === null || !hasAuthoredAttributeAdjustments(value)) return null;
   return {
-    headgearOverride: value.headgearOverride === null ? null : { ...value.headgearOverride },
-    runeOverrides: value.runeOverrides
-      .map((row) => ({ ...row }))
-      .sort((a, b) => a.attributeId - b.attributeId),
+    headgearAttributeId: value.headgearAttributeId,
+    runes: value.runes.map((row) => ({ ...row })).sort((a, b) => a.attributeId - b.attributeId),
     effectPreferences: value.effectPreferences
       .map((row) => ({ ...row }))
       .sort(
@@ -74,29 +68,20 @@ export function isRefrainStrength(value: unknown): value is RefrainStrength {
 /** Structural validation is deliberately independent of the current catalogs. */
 export function isAttributeAdjustments(value: unknown): value is AttributeAdjustments | null {
   if (value === null) return true;
-  if (!exactObject(value, ["headgearOverride", "runeOverrides", "effectPreferences"])) return false;
-  const head = value.headgearOverride;
-  if (
-    head !== null &&
-    !(exactObject(head, ["kind"]) && head.kind === "none") &&
-    !(
-      exactObject(head, ["kind", "attributeId"]) &&
-      head.kind === "attribute" &&
-      isAdjustmentCatalogId(head.attributeId)
-    )
-  )
+  if (!exactObject(value, ["headgearAttributeId", "runes", "effectPreferences"])) return false;
+  if (value.headgearAttributeId !== null && !isAdjustmentCatalogId(value.headgearAttributeId))
     return false;
   if (
-    !denseArray(value.runeOverrides, MAX_ATTRIBUTE_RUNE_OVERRIDES) ||
+    !denseArray(value.runes, MAX_ATTRIBUTE_RUNES) ||
     !denseArray(value.effectPreferences, ASSUMED_EFFECT_IDS.length)
   )
     return false;
   const attributes = new Set<number>();
-  for (const row of value.runeOverrides) {
+  for (const row of value.runes) {
     if (
       !exactObject(row, ["attributeId", "runeId"]) ||
       !isAdjustmentCatalogId(row.attributeId) ||
-      (row.runeId !== null && !isAdjustmentCatalogId(row.runeId)) ||
+      !isAdjustmentCatalogId(row.runeId) ||
       attributes.has(row.attributeId)
     )
       return false;

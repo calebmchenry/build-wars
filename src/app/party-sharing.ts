@@ -1,7 +1,6 @@
 import { hasAuthoredTitleRankOverrides, hasAuthoredAttributeAdjustments } from "../domain";
 import type { AppCatalogViews } from "./catalogs";
 import { selectValidationView } from "./editor-selectors";
-import { selectHasMeaningfulEquipment } from "./equipment-selectors";
 import { hydrateEditorFromSnapshot, type PersistedBuildSetSnapshot } from "./persistence-schema";
 import { selectShareTemplateExport } from "./template-workflow";
 
@@ -64,7 +63,6 @@ export function projectPartyMultiCodeText(
     const omitted = [
       "sibling members",
       "party metadata",
-      ...(selectHasMeaningfulEquipment(editor.build.equipment) ? ["equipment"] : []),
       ...(hasAuthoredTitleRankOverrides(editor.build) ? ["title ranks"] : []),
       ...(hasAuthoredAttributeAdjustments(editor.build.attributeAdjustments)
         ? ["attribute adjustments"]

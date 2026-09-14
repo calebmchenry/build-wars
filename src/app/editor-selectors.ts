@@ -217,7 +217,7 @@ export function selectAttributeBudgetPolicy(state: EditorState): AttributeBudget
 export function selectCatalogFreshnessView(
   savedWith: PersistedCatalogFacts,
   currentFacts: PersistedCatalogFacts,
-  options: { readonly includeEquipment?: boolean } = {}
+  options: { readonly includeRunes?: boolean } = {}
 ): CatalogFreshnessView {
   const messages: string[] = [];
   compareCatalogFact(
@@ -238,30 +238,12 @@ export function selectCatalogFreshnessView(
     savedWith.ruleEngineVersion,
     currentFacts.ruleEngineVersion
   );
-  if (options.includeEquipment === true) {
+  if (options.includeRunes === true) {
     compareCatalogFact(
       messages,
       "rune catalog",
       savedWith.runeCatalogVersion ?? null,
       currentFacts.runeCatalogVersion ?? null
-    );
-    compareCatalogFact(
-      messages,
-      "insignia catalog",
-      savedWith.insigniaCatalogVersion ?? null,
-      currentFacts.insigniaCatalogVersion ?? null
-    );
-    compareCatalogFact(
-      messages,
-      "weapon catalog",
-      savedWith.weaponCatalogVersion ?? null,
-      currentFacts.weaponCatalogVersion ?? null
-    );
-    compareCatalogFact(
-      messages,
-      "weapon modifier catalog",
-      savedWith.weaponModifierCatalogVersion ?? null,
-      currentFacts.weaponModifierCatalogVersion ?? null
     );
   }
   if (messages.some((message) => message.includes("unknown"))) {
@@ -509,8 +491,7 @@ function selectTooltipRankContext(
       const rank = preview.ranks.get(series.dependency.attributeId);
       if (rank?.effective !== null && rank?.effective !== undefined)
         ranks[`attribute:${Number(series.dependency.attributeId)}`] = rank.effective;
-      for (const diagnostic of rank?.diagnostics ?? [])
-        if (!diagnostic.suppressed) assumptions.push(diagnostic.message);
+      for (const diagnostic of rank?.diagnostics ?? []) assumptions.push(diagnostic.message);
     }
   }
   const inherentRank = (key: SkillEffectAttribute): number | null => {

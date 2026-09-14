@@ -2,12 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { useReducer } from "react";
 import { describe, expect, it } from "vitest";
 
-import {
-  catalogId,
-  createEmptyEquipmentLoadout,
-  knownEquipmentSelection,
-  type RuneId
-} from "../domain";
+import { catalogId, type RuneId } from "../domain";
 import { requireReadyCatalogs } from "./catalogs";
 import { selectFocusedAttributeRows } from "./composer-selectors";
 import { FocusedAttributeEditor } from "./components/FocusedAttributeEditor";
@@ -196,16 +191,14 @@ function cappedAndOverBudgetState(): EditorState {
 
 function stateWithStrengthRune(): EditorState {
   const state = playableEditorFixture();
-  const equipment = createEmptyEquipmentLoadout();
   return {
     ...state,
     build: {
       ...state.build,
-      equipment: {
-        ...equipment,
-        armor: equipment.armor.map((piece) =>
-          piece.slot === "head" ? { ...piece, rune: knownEquipmentSelection(40 as RuneId) } : piece
-        )
+      attributeAdjustments: {
+        headgearAttributeId: null,
+        runes: [{ attributeId: catalogId<"Attribute">(17), runeId: 40 as RuneId }],
+        effectPreferences: []
       }
     }
   };

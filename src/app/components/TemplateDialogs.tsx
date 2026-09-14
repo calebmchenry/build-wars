@@ -4,7 +4,6 @@ import { hasAuthoredTitleRankOverrides, hasAuthoredAttributeAdjustments } from "
 import { ATTRIBUTE_ADJUSTMENT_OMISSION, templateReplacementWarnings } from "../template-import";
 import type { AppCatalogViews } from "../catalogs";
 import type { ValidationView } from "../editor-selectors";
-import { selectHasMeaningfulEquipment } from "../equipment-selectors";
 import type { EditorAction, EditorState } from "../editor-state";
 import { importSkillTemplateToEditor } from "../template-workflow";
 
@@ -155,11 +154,7 @@ function ExportDialog({
       {hasAuthoredAttributeAdjustments(state.build.attributeAdjustments) ? (
         <p className="warning-text">{ATTRIBUTE_ADJUSTMENT_OMISSION}</p>
       ) : null}
-      {selectHasMeaningfulEquipment(state.build.equipment) ? (
-        <p className="warning-text">
-          Authored equipment is local-only and is not included in skill template output.
-        </p>
-      ) : null}
+
       {hasAuthoredTitleRankOverrides(state.build) ? (
         <p className="warning-text">
           Authored title ranks are local-only and are not included in skill template output.

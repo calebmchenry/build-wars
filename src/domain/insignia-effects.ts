@@ -5,7 +5,7 @@ import type {
   InsigniaEffectCombination,
   InsigniaSlotOutcome
 } from "./catalog";
-import type { ArmorSlot } from "./equipment";
+import type { ArmorSlot } from "./catalog";
 import type { InsigniaId } from "./ids";
 
 export type InsigniaSlotResolutionIssueCode =

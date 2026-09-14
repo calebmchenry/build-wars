@@ -18,10 +18,10 @@ describe("local rune assets", () => {
       createElement(
         "button",
         { "aria-label": "Superior rune +3" },
-        createElement(RuneIcon, { asset }),
-        "+3"
+        createElement(RuneIcon, { asset, fallback: "+3" })
       )
     );
+    expect(screen.getByRole("button", { name: "Superior rune +3" })).not.toHaveTextContent("+3");
     fireEvent.error(container.querySelector("img")!);
     expect(container.querySelector("img")).toBeNull();
     expect(screen.getByRole("button", { name: "Superior rune +3" })).toHaveTextContent("+3");

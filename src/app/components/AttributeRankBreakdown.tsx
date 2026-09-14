@@ -94,19 +94,12 @@ export function AttributeRankBreakdown({
           <ul>
             {rank?.contributions.map((c, index) => (
               <li key={`${c.sourceId}:${index}`}>
-                {c.suppressed
-                  ? "Replaced equipped contribution"
-                  : c.source === "inherited"
-                    ? "Equipped"
-                    : c.source === "assumed"
-                      ? "Assumed"
-                      : "Selected"}
-                : {c.label} +{c.amount}
-                {c.suppressed ? " (not added)" : !c.active ? " (inactive; not added)" : ""}
+                {c.source === "assumed" ? "Assumed" : "Selected"}: {c.label} +{c.amount}
+                {!c.active ? " (inactive; not added)" : ""}
               </li>
             ))}
           </ul>
-          <p>Equipment-adjusted: {rank?.equipmentAdjusted ?? "unresolved"}</p>
+          <p>With runes and headgear: {rank?.equipmentAdjusted ?? "unresolved"}</p>
           <p>
             Uncapped total: {rank?.uncapped ?? "unresolved"}. Preview: {value ?? "unresolved"} (cap
             20).
@@ -114,7 +107,6 @@ export function AttributeRankBreakdown({
           {(rank?.clipped ?? 0) > 0 ? <p>{rank?.clipped} ranks clipped by the cap.</p> : null}
           {rank?.diagnostics.map((d, index) => (
             <p className="rank-diagnostic" key={index}>
-              {d.suppressed ? "Replaced evidence: " : ""}
               {d.message}
             </p>
           ))}

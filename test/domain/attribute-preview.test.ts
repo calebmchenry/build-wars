@@ -1,50 +1,13 @@
 import { describe, expect, it } from "vitest";
-import {
-  catalogId,
-  createEmptyEquipmentLoadout,
-  knownEquipmentSelection,
-  projectAttributePreview,
-  unresolvedEquipmentSelection,
-  type Build
-} from "../../src/domain";
+import { catalogId, projectAttributePreview, type Build } from "../../src/domain";
 import {
   elementalBuild,
   fireId,
-  fireRune,
   adjustmentPreviewInput
 } from "../fixtures/attribute-adjustment-builds";
 
 const preview = (build: Build) => projectAttributePreview(adjustmentPreviewInput(build));
 const fire = (build: Build) => preview(build).ranks.get(fireId)!;
-function gear(rune: number | "unknown", head: number | "unknown" | null = null) {
-  const blank = createEmptyEquipmentLoadout();
-  return {
-    ...blank,
-    armor: blank.armor.map((piece) =>
-      piece.slot !== "head"
-        ? piece
-        : {
-            ...piece,
-            rune:
-              rune === "unknown"
-                ? unresolvedEquipmentSelection({
-                    label: "Unknown rune",
-                    reason: "Retained evidence"
-                  })
-                : knownEquipmentSelection(catalogId<"Rune">(rune)),
-            headgearAttribute:
-              head === null
-                ? null
-                : head === "unknown"
-                  ? unresolvedEquipmentSelection({
-                      label: "Unknown headgear",
-                      reason: "Retained evidence"
-                    })
-                  : knownEquipmentSelection(catalogId<"Attribute">(head))
-          }
-    )
-  };
-}
 describe("shared attribute preview", () => {
   it("keeps equipment 16, assumed 19, uncapped 23/capped 20 with all three effects counted", () => {
     const base = elementalBuild();
@@ -90,64 +53,16 @@ describe("shared attribute preview", () => {
         .map((c) => c.amount)
     ).toEqual([1, 3, 2, 1, 4]);
   });
-  it("replaces inherited highest runes without double counting and distinguishes None/inherit", () => {
-    const equipment = gear(Number(fireRune("minor").id), 10);
-    const inherited = elementalBuild({ equipment, attributeAdjustments: null });
-    expect(fire(inherited).effective).toBe(14);
-    const replaced = elementalBuild({ equipment });
-    expect(fire(replaced).effective).toBe(16);
-    expect(
-      fire(replaced)
-        .contributions.filter((c) => c.suppressed)
-        .map((c) => c.amount)
-    ).toEqual([1, 1]);
-    const none = elementalBuild({
-      equipment,
-      attributeAdjustments: {
-        headgearOverride: { kind: "none" },
-        runeOverrides: [{ attributeId: fireId, runeId: null }],
-        effectPreferences: []
-      }
-    });
-    expect(fire(none).effective).toBe(12);
-    expect(none.equipment).toBe(equipment);
-  });
   it("supports unallocated primary ranks without allocating points", () => {
     const build = elementalBuild({ attributes: [] });
     expect(fire(build)).toMatchObject({ base: 0, effective: 4 });
     expect(build.attributes).toEqual([]);
   });
-  it("scopes unknown inherited rune/headgear evidence and resolves only overridden components", () => {
+  it("does not grant incompatible runes and leaves unknown selections unresolved", () => {
     const build = elementalBuild({
-      equipment: gear("unknown", "unknown"),
-      attributeAdjustments: null
-    });
-    expect(fire(build).effective).toBeNull();
-    expect(preview(build).ranks.get(catalogId<"Attribute">(5))?.effective).toBe(0);
-    const runeOnly = {
-      ...build,
       attributeAdjustments: {
-        headgearOverride: null,
-        runeOverrides: [{ attributeId: fireId, runeId: null }],
-        effectPreferences: []
-      }
-    };
-    expect(fire(runeOnly).effective).toBeNull();
-    const both = elementalBuild({ equipment: build.equipment });
-    expect(fire(both).effective).toBe(16);
-    expect(preview(both).ranks.get(catalogId<"Attribute">(8))?.effective).toBeNull();
-    expect(
-      fire(both)
-        .diagnostics.filter((d) => d.uncertain)
-        .every((d) => d.suppressed)
-    ).toBe(true);
-  });
-  it("does not grant incompatible compact runes or revive suppressed legacy contributions", () => {
-    const build = elementalBuild({
-      equipment: gear(Number(fireRune("minor").id)),
-      attributeAdjustments: {
-        headgearOverride: null,
-        runeOverrides: [{ attributeId: fireId, runeId: catalogId<"Rune">(22) }],
+        headgearAttributeId: null,
+        runes: [{ attributeId: fireId, runeId: catalogId<"Rune">(22) }],
         effectPreferences: []
       }
     });
@@ -157,7 +72,7 @@ describe("shared attribute preview", () => {
       ...build,
       attributeAdjustments: {
         ...build.attributeAdjustments!,
-        runeOverrides: [{ attributeId: fireId, runeId: catalogId<"Rune">(99999) }]
+        runes: [{ attributeId: fireId, runeId: catalogId<"Rune">(99999) }]
       }
     };
     expect(fire(unknown).effective).toBeNull();

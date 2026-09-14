@@ -13,9 +13,9 @@ import skills from "../../data/generated/epic-04/skills.catalog.json";
 import runes from "../../data/generated/epic-10/runes.catalog.json";
 
 const profile: AttributeAdjustments = {
-  headgearOverride: { kind: "none" },
-  runeOverrides: [
-    { attributeId: catalogId<"Attribute">(10), runeId: null },
+  headgearAttributeId: null,
+  runes: [
+    { attributeId: catalogId<"Attribute">(10), runeId: catalogId<"Rune">(99999) },
     { attributeId: catalogId<"Attribute">(0), runeId: catalogId<"Rune">(0) }
   ],
   effectPreferences: [
@@ -24,20 +24,20 @@ const profile: AttributeAdjustments = {
   ]
 };
 describe("attribute adjustment contract", () => {
-  it("normalizes neutral state, preserves explicit None/off, and clones canonically", () => {
+  it("normalizes neutral state, preserves explicit selections/off, and clones canonically", () => {
     expect(cloneAttributeAdjustments(emptyAttributeAdjustments())).toBeNull();
     const cloned = cloneAttributeAdjustments(profile)!;
     expect(hasAuthoredAttributeAdjustments(cloned)).toBe(true);
     expect(cloned).toEqual(
       cloneAttributeAdjustments({
         ...profile,
-        runeOverrides: [...profile.runeOverrides].reverse(),
+        runes: [...profile.runes].reverse(),
         effectPreferences: [...profile.effectPreferences].reverse()
       })
     );
     expect(cloned).not.toBe(profile);
-    expect(cloned.runeOverrides[0]?.attributeId).toBe(0);
-    expect(cloned.runeOverrides[1]?.runeId).toBeNull();
+    expect(cloned.runes[0]?.attributeId).toBe(0);
+    expect(cloned.runes[1]?.runeId).toBe(99999);
     expect(cloned.effectPreferences[1]).toEqual({
       effectId: "heroic-refrain",
       preference: "off",
@@ -49,7 +49,7 @@ describe("attribute adjustment contract", () => {
     expect(
       isAttributeAdjustments({
         ...profile,
-        runeOverrides: [{ attributeId: Number.MAX_SAFE_INTEGER, runeId: 999999 }]
+        runes: [{ attributeId: Number.MAX_SAFE_INTEGER, runeId: 999999 }]
       })
     ).toBe(true);
   });
@@ -57,16 +57,16 @@ describe("attribute adjustment contract", () => {
     undefined,
     {},
     { ...profile, extra: true },
-    { ...profile, headgearOverride: { kind: "none", attributeId: 0 } },
-    { ...profile, runeOverrides: [...profile.runeOverrides, profile.runeOverrides[0]] },
-    { ...profile, runeOverrides: [{ attributeId: -1, runeId: null }] },
-    { ...profile, runeOverrides: [{ attributeId: 0.5, runeId: null }] },
-    { ...profile, runeOverrides: [{ attributeId: 0, runeId: Infinity }] },
+    { ...profile, headgearAttributeId: { kind: "none", attributeId: 0 } },
+    { ...profile, runes: [...profile.runes, profile.runes[0]] },
+    { ...profile, runes: [{ attributeId: -1, runeId: null }] },
+    { ...profile, runes: [{ attributeId: 0.5, runeId: null }] },
+    { ...profile, runes: [{ attributeId: 0, runeId: Infinity }] },
     {
       ...profile,
-      runeOverrides: Array.from({ length: 65 }, (_, attributeId) => ({ attributeId, runeId: null }))
+      runes: Array.from({ length: 65 }, (_, attributeId) => ({ attributeId, runeId: null }))
     },
-    { ...profile, runeOverrides: Array(2) },
+    { ...profile, runes: Array(2) },
     { ...profile, effectPreferences: [{ effectId: "unknown", preference: "on" }] },
     { ...profile, effectPreferences: [{ effectId: "masochism", preference: "auto" }] },
     { ...profile, effectPreferences: [{ effectId: "masochism", preference: "on", strength: 2 }] },

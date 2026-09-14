@@ -65,29 +65,6 @@ export function FocusedAttributeEditor({
       </div>
       {collapsed ? null : (
         <div id={listId} className="focused-attribute-content">
-          {resolvedPreview.availableAttributes.some(
-            (a) => a.professionId === state.build.primaryProfessionId
-          ) ? (
-            <div className="attribute-gear-heading">
-              <span>Runes / headgear +1</span>
-              <button
-                type="button"
-                onClick={() =>
-                  dispatch({ type: "set-attribute-headgear", override: { kind: "none" } })
-                }
-              >
-                Clear headgear
-              </button>
-              {state.build.attributeAdjustments?.headgearOverride != null ? (
-                <button
-                  type="button"
-                  onClick={() => dispatch({ type: "set-attribute-headgear", override: null })}
-                >
-                  Use equipped headgear
-                </button>
-              ) : null}
-            </div>
-          ) : null}
           <AttributeAdjustmentRecovery
             build={state.build}
             catalogs={catalogs}

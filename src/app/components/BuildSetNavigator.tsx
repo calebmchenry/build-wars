@@ -277,7 +277,6 @@ function BuildSetEntryCard({
       <div className="entry-summary-grid">
         <span>{entry.professionPair}</span>
         <span>{entry.modeLabel}</span>
-        <span>{entry.equipmentIndicator}</span>
         <span>{entry.titleIndicator}</span>
         <span>{entry.notesPresent ? "notes" : "no notes"}</span>
       </div>

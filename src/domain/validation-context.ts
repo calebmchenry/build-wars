@@ -20,13 +20,8 @@ import {
   type TitleRankCatalog,
   type TitleRankOverride
 } from "./title-rank";
-import {
-  MAX_ARMOR_ROWS_TO_VALIDATE,
-  MAX_MODIFIERS_PER_HAND_TO_VALIDATE,
-  MAX_WEAPON_SET_ROWS_TO_VALIDATE
-} from "./equipment";
-import type { EquipmentRuneCatalogView } from "./equipment-attribute-rank";
-import type { EquipmentWeaponCatalogView, EquipmentWeaponModifierCatalogView } from "./weapon-set";
+import type { RuneCatalogView } from "./rune-effects";
+
 import type { AttributeId, ProfessionId, SkillId } from "./ids";
 import {
   RULE_ENGINE_VERSION,
@@ -62,7 +57,7 @@ export interface EquipmentInsigniaCatalogView {
 }
 
 export interface EquipmentValidationCatalogs {
-  readonly runes?: EquipmentRuneCatalogView;
+  readonly runes?: RuneCatalogView;
   readonly insignias?: EquipmentInsigniaCatalogView;
   readonly weapons?: EquipmentWeaponCatalogView;
   readonly weaponModifiers?: EquipmentWeaponModifierCatalogView;
@@ -337,8 +332,7 @@ export function createBuildValidationContext(input: BuildValidationInput): Build
     truncation:
       skillBar.truncation ??
       attributeRowsTruncation(input.build, options.maxAttributeRows) ??
-      titleRankOverridesTruncation(input.build) ??
-      equipmentRowsTruncation(input.build)
+      titleRankOverridesTruncation(input.build)
   };
 }
 
@@ -879,60 +873,6 @@ function titleOverrideMessage(
   return "Title rank override is malformed and cannot be applied.";
 }
 
-function equipmentRowsTruncation(build: Build): ValidationTruncation | null {
-  const equipment = (build as unknown as Readonly<Record<string, unknown>>).equipment;
-  if (equipment === null || equipment === undefined || !isRecord(equipment)) {
-    return null;
-  }
-  if (Array.isArray(equipment.armor) && equipment.armor.length > MAX_ARMOR_ROWS_TO_VALIDATE) {
-    return {
-      kind: "armor-row-cap",
-      limit: MAX_ARMOR_ROWS_TO_VALIDATE,
-      observed: equipment.armor.length,
-      path: ["equipment", "armor"]
-    };
-  }
-  if (
-    Array.isArray(equipment.weaponSets) &&
-    equipment.weaponSets.length > MAX_WEAPON_SET_ROWS_TO_VALIDATE
-  ) {
-    return {
-      kind: "weapon-set-row-cap",
-      limit: MAX_WEAPON_SET_ROWS_TO_VALIDATE,
-      observed: equipment.weaponSets.length,
-      path: ["equipment", "weaponSets"]
-    };
-  }
-  if (!Array.isArray(equipment.weaponSets)) {
-    return null;
-  }
-  for (
-    let setIndex = 0;
-    setIndex < Math.min(equipment.weaponSets.length, MAX_WEAPON_SET_ROWS_TO_VALIDATE);
-    setIndex += 1
-  ) {
-    const set = equipment.weaponSets[setIndex];
-    if (!isRecord(set)) {
-      continue;
-    }
-    for (const hand of ["mainHand", "offHand"] as const) {
-      const handSelection = set[hand];
-      if (!isRecord(handSelection) || !Array.isArray(handSelection.modifiers)) {
-        continue;
-      }
-      if (handSelection.modifiers.length > MAX_MODIFIERS_PER_HAND_TO_VALIDATE) {
-        return {
-          kind: "weapon-modifier-cap",
-          limit: MAX_MODIFIERS_PER_HAND_TO_VALIDATE,
-          observed: handSelection.modifiers.length,
-          path: ["equipment", "weaponSets", setIndex, hand, "modifiers"]
-        };
-      }
-    }
-  }
-  return null;
-}
-
 function createSkillSlots(
   build: Build,
   skillIndex: NumericIndex<CatalogSkillRecord>,
@@ -1140,4 +1080,17 @@ function stringValue(value: unknown, fallback: string): string {
 
 function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+export interface EquipmentWeaponCatalogView {
+  readonly catalogVersion: string | null;
+  readonly catalogSetVersion: string | null;
+  readonly catalogSetDigest: string | null;
+  readonly records: readonly CatalogWeaponBaseRecord[];
+}
+export interface EquipmentWeaponModifierCatalogView {
+  readonly catalogVersion: string | null;
+  readonly catalogSetVersion: string | null;
+  readonly catalogSetDigest: string | null;
+  readonly records: readonly CatalogWeaponModRecord[];
 }

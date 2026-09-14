@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { useReducer } from "react";
 import { describe, expect, it } from "vitest";
-import { catalogId, createEmptyEquipmentLoadout, knownEquipmentSelection } from "../domain";
+import { catalogId } from "../domain";
 import { requireReadyCatalogs } from "./catalogs";
 import { FocusedAttributeEditor } from "./components/FocusedAttributeEditor";
 import { SkillBar } from "./components/SkillBar";
@@ -25,22 +25,14 @@ describe("attribute-adjusted skill display", () => {
 
   it("includes headgear and runes and excludes retained secondary primary ranks", () => {
     const state = attributeState(2, 23, 11);
-    const empty = createEmptyEquipmentLoadout();
     const equipped: EditorState = {
       ...state,
       build: {
         ...state.build,
-        equipment: {
-          ...empty,
-          armor: empty.armor.map((piece) =>
-            piece.slot === "head"
-              ? {
-                  ...piece,
-                  headgearAttribute: knownEquipmentSelection(catalogId<"Attribute">(23)),
-                  rune: knownEquipmentSelection(catalogId<"Rune">(45))
-                }
-              : piece
-          )
+        attributeAdjustments: {
+          headgearAttributeId: catalogId<"Attribute">(23),
+          runes: [{ attributeId: catalogId<"Attribute">(23), runeId: catalogId<"Rune">(45) }],
+          effectPreferences: []
         }
       }
     };

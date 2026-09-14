@@ -1,5 +1,10 @@
 # Equipment Shell
 
+> Historical prototype, retired 2026-09-14. The authored equipment model and its
+> editors have been removed. These notes describe the former implementation and
+> are not current requirements. See [attribute adjustments](attribute-adjustments.md)
+> for the direct rune/headgear model, Build v4, and saved-data migration.
+
 SPRINT-014 ships EPIC-13's framework-neutral semantic equipment shell for one authored
 single-character `Build`.
 

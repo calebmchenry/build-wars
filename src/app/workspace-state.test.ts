@@ -1,11 +1,7 @@
+import { adjustmentProfileFixture } from "./attribute-adjustment-fixtures";
 import { describe, expect, it } from "vitest";
 
-import {
-  catalogId,
-  createEmptyEquipmentLoadout,
-  knownEquipmentSelection,
-  type RuneId
-} from "../domain";
+import { catalogId } from "../domain";
 import { playableEditorFixture } from "./editor-fixtures";
 import {
   fixtureCatalogFacts,
@@ -139,20 +135,12 @@ describe("workspace state", () => {
     expect(deleted.editor.build.name).toBe(recordSnapshot(record)?.build.name);
   });
 
-  it("preserves semantic equipment through save, duplicate, and load", () => {
-    const equipment = createEmptyEquipmentLoadout();
+  it("preserves attribute adjustments through save, duplicate, and load", () => {
     const editor = {
       ...playableEditorFixture(),
       build: {
         ...playableEditorFixture().build,
-        equipment: {
-          ...equipment,
-          armor: equipment.armor.map((piece) =>
-            piece.slot === "head"
-              ? { ...piece, rune: knownEquipmentSelection(40 as RuneId) }
-              : piece
-          )
-        }
+        attributeAdjustments: adjustmentProfileFixture()
       }
     };
     const saved = workspaceReducer(
@@ -162,30 +150,30 @@ describe("workspace state", () => {
       },
       {
         type: "save-new",
-        id: localBuildRecordId("local-equipment"),
-        name: "Equipment Save",
+        id: localBuildRecordId("local-adjustments"),
+        name: "Adjustment Save",
         now: NOW,
         savedWith: fixtureCatalogFacts
       }
     );
     const duplicated = workspaceReducer(saved, {
       type: "duplicate-record",
-      id: localBuildRecordId("local-equipment"),
-      newId: localBuildRecordId("local-equipment-copy"),
+      id: localBuildRecordId("local-adjustments"),
+      newId: localBuildRecordId("local-adjustments-copy"),
       now: LATER
     });
     const loaded = workspaceReducer(duplicated, {
       type: "load-record",
-      id: localBuildRecordId("local-equipment-copy"),
+      id: localBuildRecordId("local-adjustments-copy"),
       decision: "discard"
     });
 
     expect(duplicated.library.records).toHaveLength(2);
-    expect(recordSnapshot(duplicated.library.records[1])?.build.equipment).toEqual(
-      recordSnapshot(saved.library.records[0])?.build.equipment
+    expect(recordSnapshot(duplicated.library.records[1])?.build.attributeAdjustments).toEqual(
+      recordSnapshot(saved.library.records[0])?.build.attributeAdjustments
     );
-    expect(loaded.editor.build.equipment).toEqual(
-      recordSnapshot(saved.library.records[0])?.build.equipment
+    expect(loaded.editor.build.attributeAdjustments).toEqual(
+      recordSnapshot(saved.library.records[0])?.build.attributeAdjustments
     );
   });
 

@@ -1,13 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  authoredDocumentId,
-  buildSetEntryId,
-  catalogId,
-  createEmptyEquipmentLoadout,
-  knownEquipmentSelection,
-  type RuneId
-} from "../domain";
+import { authoredDocumentId, buildSetEntryId, catalogId } from "../domain";
 import { SKILL_TEMPLATE_PACKAGE_EXAMPLE } from "../template-compatibility";
 import { requireReadyCatalogs } from "./catalogs";
 import { playableEditorFixture } from "./editor-fixtures";
@@ -44,9 +37,7 @@ describe("template workflow", () => {
         ...imported.state.build,
         attributeAdjustments: {
           ...adjustmentProfileFixture(),
-          runeOverrides: [
-            { attributeId: catalogId<"Attribute">(999), runeId: catalogId<"Rune">(999) }
-          ]
+          runes: [{ attributeId: catalogId<"Attribute">(999), runeId: catalogId<"Rune">(999) }]
         }
       }
     };
@@ -60,7 +51,7 @@ describe("template workflow", () => {
     expect(invalid.state).toBe(edited);
     const replaced = importSkillTemplateToEditor(SKILL_TEMPLATE_PACKAGE_EXAMPLE, edited, catalogs);
     expect(replaced.ok && replaced.state.build.attributeAdjustments).toBeNull();
-    expect(replaced.ok && replaced.state.build.equipment).toBeNull();
+    expect(replaced.ok && replaced.state.build).not.toHaveProperty("equipment");
     const canonical = playableEditorFixture();
     expect(
       selectValidationView(
@@ -226,32 +217,6 @@ describe("template workflow", () => {
     expect(canonical.ok ? canonical.source : null).toBe("canonical");
     expect(blocked.ok).toBe(false);
     expect(blocked.ok ? [] : blocked.blockedReasons.length).toBeGreaterThan(0);
-  });
-
-  it("does not block canonical skill-template export on equipment-only validation errors", () => {
-    const base = playableEditorFixture();
-    const equipment = createEmptyEquipmentLoadout();
-    const state = {
-      ...base,
-      build: {
-        ...base.build,
-        equipment: {
-          ...equipment,
-          armor: equipment.armor.map((piece) =>
-            piece.slot === "head"
-              ? { ...piece, rune: knownEquipmentSelection(catalogId<"Rune">(9999) as RuneId) }
-              : piece
-          )
-        }
-      }
-    };
-    const validation = selectValidationView(state, catalogs);
-
-    expect(validation.result.issues.some((issue) => issue.code.startsWith("equipment."))).toBe(
-      true
-    );
-    expect(validation.exportPolicy.canonical.available).toBe(true);
-    expect(selectShareTemplateExport(validation.exportPolicy).ok).toBe(true);
   });
 
   it("replaces only the selected build-set entry snapshot on template import", () => {

@@ -86,9 +86,9 @@ The retained title-rank component derives relevant rows from selected skill slot
 titles in a disclosure, and stores only non-default per-build overrides. Opening the all-title
 disclosure or rendering title controls does not create authored override state.
 
-The retained equipment components implement the EPIC-14 semantic equipment editor. Opening a panel does not
-materialize `Build.equipment`; only the first meaningful equipment edit creates canonical equipment
-state.
+Rune and headgear selections now belong directly to the inline attribute controls.
+The prototype armor/weapon model and editors have been removed; see
+[attribute adjustments](attribute-adjustments.md) for the current state contract.
 
 The template file browser uses a native modal dialog with an inert background, Escape close, Tab
 containment, trigger focus restoration, and bounded viewport height. Escape dismisses a visible
@@ -141,8 +141,8 @@ Local library persistence, storage migrations, tags, favorites, backup/restore, 
 saved template workflows are documented in [Local library and sharing](local-library-and-sharing.md).
 Build-set selection, inactive snapshots, variants, comparison, and transfer are documented in
 [Multi-build workspace](multi-build-workspace.md). Title-rank behavior is documented in
-[Title ranks](title-ranks.md). Equipment editor behavior is documented in
-[Equipment editor](equipment-editor.md). Later epics own account-wide title profiles, title
+[Title ranks](title-ranks.md). Direct rune/headgear behavior is documented in
+[Attribute adjustments](attribute-adjustments.md). Later epics own account-wide title profiles, title
 ownership, allegiance side selection, hero catalogs, henchmen, portraits, hero AI behavior,
 paw-ned2/team-template compatibility, guide authoring, recommendations, remote icon loading,
 analytics, auth, deployment, and PWA behavior.

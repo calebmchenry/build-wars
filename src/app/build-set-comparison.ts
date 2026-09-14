@@ -1,29 +1,11 @@
-import {
-  ARMOR_SLOTS,
-  WEAPON_SET_SLOTS,
-  type ArmorPiece,
-  type AttributeId,
-  type Build,
-  type BuildSetEntryId,
-  type EquipmentSelectionState,
-  type WeaponHandSelection,
-  type WeaponSet
-} from "../domain";
+import { type AttributeId, type Build, type BuildSetEntryId } from "../domain";
 import type { AppCatalogViews } from "./catalogs";
 import type { RawTemplateOverlayEntry } from "./editor-state";
 import type { PersistedBuildSetEntrySnapshot, PersistedBuildSnapshot } from "./persistence-schema";
 import { materializeActiveBuildSetSnapshot, type WorkspaceState } from "./workspace-state";
 
 export type BuildSetComparisonGroupKey =
-  | "identity"
-  | "professions"
-  | "mode"
-  | "skills"
-  | "attributes"
-  | "pve"
-  | "titles"
-  | "equipment"
-  | "raw";
+  "identity" | "professions" | "mode" | "skills" | "attributes" | "pve" | "titles" | "raw";
 
 export type BuildSetComparisonValueStatus =
   "empty" | "configured" | "stale" | "retained" | "unresolved";
@@ -80,7 +62,6 @@ const GROUP_LABELS: Record<BuildSetComparisonGroupKey, string> = {
   attributes: "Attributes",
   pve: "PvE Budget",
   titles: "Title Ranks",
-  equipment: "Equipment",
   raw: "Raw Facts"
 };
 
@@ -92,7 +73,6 @@ const GROUP_ORDER: readonly BuildSetComparisonGroupKey[] = [
   "attributes",
   "pve",
   "titles",
-  "equipment",
   "raw"
 ];
 
@@ -210,7 +190,6 @@ function compareBuild(
   compareAttributes(rows, leftBuild, rightBuild, catalogs);
   comparePveBudget(rows, left, right);
   compareTitleRanks(rows, leftBuild, rightBuild, catalogs);
-  compareEquipment(rows, leftBuild, rightBuild, catalogs);
   compareRawFacts(rows, left, right);
 }
 
@@ -307,132 +286,6 @@ function compareTitleRanks(
       titleRankValue(key, rightRanks.get(key) ?? null, catalogs)
     );
   }
-}
-
-function compareEquipment(
-  rows: BuildSetComparisonRow[],
-  left: Build,
-  right: Build,
-  catalogs: AppCatalogViews
-): void {
-  addRow(
-    rows,
-    "equipment",
-    "build.equipment",
-    "Equipment loadout",
-    left.equipment === null ? emptyValue() : configuredValue("configured", "equipment:present"),
-    right.equipment === null ? emptyValue() : configuredValue("configured", "equipment:present")
-  );
-  for (const slot of ARMOR_SLOTS) {
-    const leftPiece = left.equipment?.armor.find((piece) => piece.slot === slot) ?? null;
-    const rightPiece = right.equipment?.armor.find((piece) => piece.slot === slot) ?? null;
-    compareArmorPiece(rows, slot, leftPiece, rightPiece, catalogs);
-  }
-  for (const slot of WEAPON_SET_SLOTS) {
-    const leftSet = left.equipment?.weaponSets.find((set) => set.slot === slot) ?? null;
-    const rightSet = right.equipment?.weaponSets.find((set) => set.slot === slot) ?? null;
-    compareWeaponSet(rows, slot, leftSet, rightSet, catalogs);
-  }
-}
-
-function compareArmorPiece(
-  rows: BuildSetComparisonRow[],
-  slot: string,
-  left: ArmorPiece | null,
-  right: ArmorPiece | null,
-  catalogs: AppCatalogViews
-): void {
-  addRow(
-    rows,
-    "equipment",
-    `build.equipment.armor.${slot}.headgearAttribute`,
-    `${titleCase(slot)} headgear`,
-    selectionValue(left?.headgearAttribute ?? null, catalogs.attributes, "attribute"),
-    selectionValue(right?.headgearAttribute ?? null, catalogs.attributes, "attribute")
-  );
-  addRow(
-    rows,
-    "equipment",
-    `build.equipment.armor.${slot}.insignia`,
-    `${titleCase(slot)} insignia`,
-    selectionValue(left?.insignia ?? null, catalogs.equipment.insignias, "insignia"),
-    selectionValue(right?.insignia ?? null, catalogs.equipment.insignias, "insignia")
-  );
-  addRow(
-    rows,
-    "equipment",
-    `build.equipment.armor.${slot}.rune`,
-    `${titleCase(slot)} rune`,
-    selectionValue(left?.rune ?? null, catalogs.equipment.runes, "rune"),
-    selectionValue(right?.rune ?? null, catalogs.equipment.runes, "rune")
-  );
-}
-
-function compareWeaponSet(
-  rows: BuildSetComparisonRow[],
-  slot: string,
-  left: WeaponSet | null,
-  right: WeaponSet | null,
-  catalogs: AppCatalogViews
-): void {
-  compareWeaponHand(
-    rows,
-    `${slot}.mainHand`,
-    `${titleCase(slot)} main hand`,
-    left?.mainHand ?? null,
-    right?.mainHand ?? null,
-    catalogs
-  );
-  compareWeaponHand(
-    rows,
-    `${slot}.offHand`,
-    `${titleCase(slot)} off hand`,
-    left?.offHand ?? null,
-    right?.offHand ?? null,
-    catalogs
-  );
-}
-
-function compareWeaponHand(
-  rows: BuildSetComparisonRow[],
-  path: string,
-  label: string,
-  left: WeaponHandSelection | null,
-  right: WeaponHandSelection | null,
-  catalogs: AppCatalogViews
-): void {
-  addRow(
-    rows,
-    "equipment",
-    `build.equipment.weaponSets.${path}.weapon`,
-    `${label} weapon`,
-    selectionValue(left?.weapon ?? null, catalogs.equipment.weapons, "weapon"),
-    selectionValue(right?.weapon ?? null, catalogs.equipment.weapons, "weapon")
-  );
-  addRow(
-    rows,
-    "equipment",
-    `build.equipment.weaponSets.${path}.modifiers`,
-    `${label} modifiers`,
-    selectionListValue(
-      left?.modifiers ?? [],
-      catalogs.equipment.weaponModifiers,
-      "weapon modifier"
-    ),
-    selectionListValue(
-      right?.modifiers ?? [],
-      catalogs.equipment.weaponModifiers,
-      "weapon modifier"
-    )
-  );
-  addRow(
-    rows,
-    "equipment",
-    `build.equipment.weaponSets.${path}.requirement`,
-    `${label} requirement`,
-    requirementValue(left, catalogs),
-    requirementValue(right, catalogs)
-  );
 }
 
 function compareRawFacts(
@@ -565,63 +418,6 @@ function titleRankValue(
   return configuredValue(`${definition.label} rank ${rank}`, `${key}:${rank}`);
 }
 
-function selectionValue<Id>(
-  selection: EquipmentSelectionState<Id> | null,
-  records: readonly CatalogRecord<Id>[],
-  noun: string
-): BuildSetComparisonValue {
-  if (selection === null) {
-    return emptyValue();
-  }
-  if (selection.kind === "unresolved") {
-    return {
-      status: "unresolved",
-      label: selection.label ?? `Unresolved ${noun}`,
-      normalized: `${noun}:unresolved:${selection.candidateCatalogId ?? ""}:${selection.label ?? ""}:${selection.reason}`
-    };
-  }
-  const record = records.find((candidate) => Number(candidate.id) === Number(selection.id));
-  if (record === undefined) {
-    return {
-      status: "retained",
-      label: `Retained ${noun} ${Number(selection.id)}`,
-      normalized: `${noun}:${Number(selection.id)}`
-    };
-  }
-  return configuredValue(record.name, `${noun}:${Number(selection.id)}`);
-}
-
-function selectionListValue<Id>(
-  selections: readonly EquipmentSelectionState<Id>[],
-  records: readonly CatalogRecord<Id>[],
-  noun: string
-): BuildSetComparisonValue {
-  if (selections.length === 0) {
-    return emptyValue();
-  }
-  const values = selections.map((selection) => selectionValue(selection, records, noun));
-  return {
-    status: combineStatuses(values),
-    label: values.map((value) => value.label).join(", "),
-    normalized: values.map((value) => value.normalized).join("|")
-  };
-}
-
-function requirementValue(
-  hand: WeaponHandSelection | null,
-  catalogs: AppCatalogViews
-): BuildSetComparisonValue {
-  if (hand?.requirement === null || hand?.requirement === undefined) {
-    return emptyValue();
-  }
-  const attribute = selectionValue(hand.requirement.attribute, catalogs.attributes, "attribute");
-  return {
-    status: attribute.status === "empty" ? "configured" : attribute.status,
-    label: `${attribute.label} ${hand.requirement.rank ?? "any"} (${hand.requirement.reason})`,
-    normalized: `${attribute.normalized}:${hand.requirement.rank ?? ""}:${hand.requirement.reason}`
-  };
-}
-
 function rawValue(entry: RawTemplateOverlayEntry | null): BuildSetComparisonValue {
   if (entry === null) {
     return emptyValue();
@@ -651,24 +447,6 @@ function emptyValue(): BuildSetComparisonValue {
 
 function configuredValue(label: string, normalized: string): BuildSetComparisonValue {
   return { status: "configured", label, normalized };
-}
-
-function combineStatuses(
-  values: readonly BuildSetComparisonValue[]
-): BuildSetComparisonValueStatus {
-  if (values.some((value) => value.status === "unresolved")) {
-    return "unresolved";
-  }
-  if (values.some((value) => value.status === "retained")) {
-    return "retained";
-  }
-  if (values.some((value) => value.status === "stale")) {
-    return "stale";
-  }
-  if (values.every((value) => value.status === "empty")) {
-    return "empty";
-  }
-  return "configured";
 }
 
 function isMeaningfulRaw(entry: RawTemplateOverlayEntry | null): boolean {
@@ -707,11 +485,4 @@ function compareRows(left: BuildSetComparisonRow, right: BuildSetComparisonRow):
 
 function groupRank(group: BuildSetComparisonGroupKey): number {
   return GROUP_ORDER.indexOf(group);
-}
-
-function titleCase(value: string): string {
-  return value
-    .split("-")
-    .map((part) => `${part.slice(0, 1).toUpperCase()}${part.slice(1)}`)
-    .join(" ");
 }

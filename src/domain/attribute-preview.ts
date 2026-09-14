@@ -2,10 +2,7 @@ import type { Build } from "./build";
 import type { CatalogAttributeRecord, SkillCatalog } from "./catalog";
 import type { AttributeId } from "./ids";
 import { calculateEffectiveAttributeRank } from "./effective-attribute-rank";
-import {
-  collectEquipmentAttributeRankAdjustments,
-  type EquipmentRuneCatalogView
-} from "./equipment-attribute-rank";
+import type { RuneCatalogView } from "./rune-effects";
 import { summarizeAttributeRuneEffects } from "./rune-effects";
 import {
   resolveAssumedAttributeEffects,
@@ -23,15 +20,13 @@ export interface AttributePreviewDiagnostic {
   readonly attributeIds: readonly AttributeId[] | null;
   readonly contribution: "base" | "rune" | "headgear" | "both";
   readonly uncertain: boolean;
-  readonly suppressed: boolean;
 }
 export interface AttributePreviewContribution {
   readonly kind: "headgear" | "rune" | "temporary";
-  readonly source: "inherited" | "override" | "assumed";
+  readonly source: "selected" | "assumed";
   readonly label: string;
   readonly amount: number;
   readonly active: boolean;
-  readonly suppressed: boolean;
   readonly sourceId: string | null;
 }
 export interface AttributePreviewRank {
@@ -58,7 +53,7 @@ export interface AttributePreviewInput {
   readonly build: Build;
   readonly professionAttributes: ProfessionAttributeValidationCatalog;
   readonly skillCatalog: SkillCatalog;
-  readonly runes?: EquipmentRuneCatalogView;
+  readonly runes?: RuneCatalogView;
 }
 
 export function projectAttributePreview(input: AttributePreviewInput): AttributePreview {
@@ -90,59 +85,12 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
     .filter((a) => primary !== null && a.professionId === primary)
     .map((a) => a.id);
   const effects = resolveAssumedAttributeEffects({ context, skillCatalog, availableAttributes });
-  const equipment = collectEquipmentAttributeRankAdjustments({
-    build,
-    professionAttributes,
-    ...(input.runes === undefined ? {} : { runes: input.runes })
-  });
   const profile = build.attributeAdjustments;
-  const runeOverrides = new Map(profile?.runeOverrides.map((row) => [row.attributeId, row]) ?? []);
-  const head = profile?.headgearOverride ?? null;
+  const head = profile?.headgearAttributeId ?? null;
   const diagnostics: AttributePreviewDiagnostic[] = [];
   const additions = new Map<AttributeId, AttributePreviewContribution[]>();
   const add = (id: AttributeId, contribution: AttributePreviewContribution) =>
     additions.set(id, [...(additions.get(id) ?? []), contribution]);
-  for (const item of equipment.adjustments) {
-    const suppressed =
-      item.source === "headgear" ? head !== null : runeOverrides.has(item.attributeId);
-    add(item.attributeId, {
-      kind: item.source,
-      source: "inherited",
-      label: item.adjustment.label ?? "Equipped bonus",
-      amount: item.adjustment.amount,
-      sourceId: item.adjustment.sourceId ?? null,
-      active: !suppressed && primaryIds.includes(item.attributeId),
-      suppressed
-    });
-  }
-  for (const reason of equipment.unresolved) {
-    const ids = reason.affectedAttributeIds ?? primaryIds;
-    // Split broad evidence by contribution and target so a partial override only resolves itself.
-    for (const kind of reason.contribution === "both"
-      ? (["headgear", "rune"] as const)
-      : [reason.contribution ?? "rune"]) {
-      for (const id of ids) {
-        const suppressed = kind === "headgear" ? head !== null : runeOverrides.has(id);
-        diagnostics.push({
-          code: reason.code,
-          message: reason.message,
-          attributeIds: [id],
-          contribution: kind,
-          uncertain: (reason.uncertain ?? true) && primaryIds.includes(id),
-          suppressed
-        });
-      }
-      if (ids.length === 0)
-        diagnostics.push({
-          code: reason.code,
-          message: reason.message,
-          attributeIds: [],
-          contribution: kind,
-          uncertain: false,
-          suppressed: false
-        });
-    }
-  }
   const diagnose = (
     code: string,
     message: string,
@@ -155,16 +103,15 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
       message,
       attributeIds: ids,
       contribution: kind,
-      uncertain,
-      suppressed: false
+      uncertain
     });
   };
-  if (head?.kind === "attribute") {
-    const target = uniqueAttributes.find((a) => a.id === head.attributeId);
+  if (head !== null) {
+    const target = uniqueAttributes.find((a) => a.id === head);
     if (target === undefined)
       diagnose(
         "headgear-unknown",
-        `Unknown headgear attribute ${head.attributeId}.`,
+        `Unknown headgear attribute ${head}.`,
         primaryIds,
         "headgear",
         true
@@ -180,16 +127,15 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
     else
       add(target.id, {
         kind: "headgear",
-        source: "override",
-        label: "Headgear +1 (replacement)",
+        source: "selected",
+        label: "Headgear",
         amount: 1,
         active: true,
-        suppressed: false,
+
         sourceId: "compact:headgear"
       });
   }
-  for (const row of runeOverrides.values()) {
-    if (row.runeId === null) continue;
+  for (const row of profile?.runes ?? []) {
     const matches = input.runes?.records.filter((r) => r.id === row.runeId) ?? [];
     const rune = matches.length === 1 ? matches[0] : undefined;
     if (rune === undefined) {
@@ -233,11 +179,11 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
     }
     add(row.attributeId, {
       kind: "rune",
-      source: "override",
-      label: `${rune.name} (replacement)`,
+      source: "selected",
+      label: `${rune.name}`,
       amount: summary.attributeContributions[0]!.amount,
       active: true,
-      suppressed: false,
+
       sourceId: `compact:rune:${rune.id}`
     });
   }
@@ -249,7 +195,7 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
         label: effect.definition.label,
         amount: effect.amount,
         active: true,
-        suppressed: false,
+
         sourceId: effect.definition.id
       });
     }
@@ -257,9 +203,9 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
   const ids = new Set([
     ...professionAttributes.attributes.map((a) => a.id),
     ...build.attributes.map((a) => a.attributeId),
-    ...runeOverrides.keys()
+    ...(profile?.runes.map((row) => row.attributeId) ?? [])
   ]);
-  if (head?.kind === "attribute") ids.add(head.attributeId);
+  if (head !== null) ids.add(head);
   const purchasedRanks = new Set(
     professionAttributes.attributePointRules.purchasedRankCosts.map((row) => row.purchasedRank)
   );
@@ -276,8 +222,7 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
           message: reason.message,
           attributeIds: [id],
           contribution: "base" as const,
-          uncertain: true,
-          suppressed: false
+          uncertain: true
         }))
       );
     if (base.baseRank !== null && !purchasedRanks.has(base.baseRank))
@@ -286,8 +231,7 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
         message: "Purchased rank is outside the supported allocation range.",
         attributeIds: [id],
         contribution: "base",
-        uncertain: true,
-        suppressed: false
+        uncertain: true
       });
     if (!availableIds.has(id) && build.attributes.some((a) => a.attributeId === id))
       rowDiagnostics.push({
@@ -295,10 +239,9 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
         message: "Retained allocation is unavailable for the selected professions.",
         attributeIds: [id],
         contribution: "base",
-        uncertain: true,
-        suppressed: false
+        uncertain: true
       });
-    const uncertain = rowDiagnostics.some((d) => d.uncertain && !d.suppressed);
+    const uncertain = rowDiagnostics.some((d) => d.uncertain);
     const equipmentResult = calculateEffectiveAttributeRank({
       build,
       professionAttributes,

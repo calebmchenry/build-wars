@@ -15,8 +15,8 @@ export function elementalBuild(overrides: Partial<Build> = {}): Build {
     secondaryProfessionId: catalogId<"Profession">(4),
     attributes: [{ attributeId: fireId, rank: 12 }],
     attributeAdjustments: {
-      headgearOverride: { kind: "attribute", attributeId: fireId },
-      runeOverrides: [{ attributeId: fireId, runeId: fireRune("superior").id }],
+      headgearAttributeId: fireId,
+      runes: [{ attributeId: fireId, runeId: fireRune("superior").id }],
       effectPreferences: []
     },
     ...overrides

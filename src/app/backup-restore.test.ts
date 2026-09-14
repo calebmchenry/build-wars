@@ -1,6 +1,5 @@
+import { adjustmentProfileFixture } from "./attribute-adjustment-fixtures";
 import { describe, expect, it } from "vitest";
-
-import { createEmptyEquipmentLoadout, knownEquipmentSelection, type RuneId } from "../domain";
 import { localBuildRecordId, selectedPersistedBuildSnapshot } from "./persistence-schema";
 import {
   corruptRecordEnvelopeFixture,
@@ -41,21 +40,13 @@ describe("backup and restore", () => {
     );
   });
 
-  it("round-trips semantic equipment and partially skips malformed backup records", () => {
-    const equipment = createEmptyEquipmentLoadout();
+  it("round-trips attribute adjustments and partially skips malformed backup records", () => {
     const record = validSavedRecordFixture({
       snapshot: {
         ...recordSnapshot(validSavedRecordFixture())!,
         build: {
           ...recordSnapshot(validSavedRecordFixture())!.build,
-          equipment: {
-            ...equipment,
-            armor: equipment.armor.map((piece) =>
-              piece.slot === "head"
-                ? { ...piece, rune: knownEquipmentSelection(40 as RuneId) }
-                : piece
-            )
-          }
+          attributeAdjustments: adjustmentProfileFixture()
         }
       }
     });
@@ -73,8 +64,8 @@ describe("backup and restore", () => {
     expect(parsed.ok).toBe(true);
     expect(parsed.ok ? parsed.backup.savedDocuments : []).toHaveLength(1);
     expect(
-      parsed.ok ? recordSnapshot(parsed.backup.savedDocuments[0])?.build.equipment : null
-    ).toEqual(recordSnapshot(record)?.build.equipment);
+      parsed.ok ? recordSnapshot(parsed.backup.savedDocuments[0])?.build.attributeAdjustments : null
+    ).toEqual(recordSnapshot(record)?.build.attributeAdjustments);
     expect(parsed.diagnostics.some((issue) => issue.code === "invalid-record")).toBe(true);
   });
 

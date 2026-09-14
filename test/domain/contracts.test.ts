@@ -4,14 +4,12 @@ import {
   FOUNDATION_SCHEMA_VERSION,
   BUILD_SCHEMA_VERSION,
   SKILL_BAR_SLOT_COUNT,
-  type ArmorPiece,
   type Attribute,
   type Build,
   type CatalogInsigniaRecord,
   type CatalogRuneRecord,
   type CatalogWeaponBaseRecord,
   type CatalogWeaponModRecord,
-  type EquipmentTemplate,
   type Guide,
   type Insignia,
   PARTY_ANNOTATION_SCHEMA_VERSION,
@@ -37,10 +35,8 @@ import {
   templateAttributeId,
   templateProfessionId,
   templateSkillId,
-  type Weapon,
   type WeaponBaseCatalog,
-  type WeaponModCatalog,
-  type WeaponModifier
+  type WeaponModCatalog
 } from "../../src/domain";
 import {
   syntheticAttribute,
@@ -76,11 +72,7 @@ describe("domain contracts", () => {
       | SkillProgression
       | Rune
       | Insignia
-      | ArmorPiece
-      | Weapon
-      | WeaponModifier
       | Build
-      | EquipmentTemplate
       | PartyAnnotations
       | Guide
       | SkillTemplateDocument

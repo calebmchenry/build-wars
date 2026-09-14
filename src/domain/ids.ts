@@ -20,7 +20,6 @@ export type AttributeId = CatalogId<"Attribute">;
 export type SkillId = CatalogId<"Skill">;
 export type RuneId = CatalogId<"Rune">;
 export type InsigniaId = CatalogId<"Insignia">;
-export type ArmorPieceId = CatalogId<"ArmorPiece">;
 export type WeaponId = CatalogId<"Weapon">;
 export type WeaponModifierId = CatalogId<"WeaponModifier">;
 

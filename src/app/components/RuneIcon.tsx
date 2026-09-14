@@ -1,10 +1,18 @@
 import { useState } from "react";
 import type { LocalIconAsset } from "../icon-assets";
 
-/** Decorative only: the control always carries its numeric tier and accessible name. */
-export function RuneIcon({ asset }: { readonly asset: LocalIconAsset | null }) {
+/** The parent control supplies the accessible name; failed images retain a visible tier. */
+export function RuneIcon({
+  asset,
+  fallback
+}: {
+  readonly asset: LocalIconAsset | null;
+  readonly fallback: string;
+}) {
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
-  return asset === null || failedSrc === asset.src ? null : (
+  return asset === null || failedSrc === asset.src ? (
+    <span aria-hidden="true">{fallback}</span>
+  ) : (
     <img
       className="rune-icon"
       src={asset.src}

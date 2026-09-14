@@ -56,7 +56,6 @@ export function buildFixture(overrides: Partial<Build> = {}): Build {
     ],
     titleRankOverrides: [],
     attributeAdjustments: null,
-    equipment: null,
     ...overrides
   };
 }

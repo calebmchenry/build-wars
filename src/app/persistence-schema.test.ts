@@ -1,15 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  BUILD_SCHEMA_VERSION,
-  createEmptyEquipmentLoadout,
-  knownEquipmentSelection,
-  unresolvedEquipmentSelection,
-  type EquipmentLoadout,
-  type RuneId,
-  type WeaponId,
-  type WeaponModifierId
-} from "../domain";
+import { BUILD_SCHEMA_VERSION } from "../domain";
 import { createBlankEditorState } from "./editor-state";
 import {
   corruptRecordEnvelopeFixture,
@@ -27,7 +18,6 @@ import {
   LOCAL_LIBRARY_STORAGE_KEY,
   PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION,
   createPersistedBuildSnapshot,
-  fingerprintPersistedSnapshot,
   hydrateEditorFromSnapshot,
   parseLocalLibraryEnvelope,
   parseLocalLibraryJson,
@@ -68,7 +58,7 @@ describe("local persistence schema", () => {
     expect(unresolved?.savedWith.ruleEngineVersion).toBe("rule-engine:v3");
   });
 
-  it("migrates schema-1 builds to runtime schema 3 without marking the library write-blocked", () => {
+  it("migrates schema-1 builds to runtime schema 4 without marking the library write-blocked", () => {
     const parsed = parseLocalLibraryEnvelope(legacySchemaOneEnvelopeFixture());
 
     expect(parsed.ok).toBe(true);
@@ -162,37 +152,6 @@ describe("local persistence schema", () => {
 
     expect(parsed.ok).toBe(false);
     expect(parsed.diagnostics[0]?.code).toBe("malformed-json");
-  });
-
-  it("round-trips canonical semantic equipment through snapshots and parsing", () => {
-    const state = createBlankEditorState();
-    const equipment = canonicalEquipmentFixture();
-    const snapshot = createPersistedBuildSnapshot({
-      ...state,
-      build: { ...state.build, equipment }
-    });
-    const parsed = parseLocalLibraryEnvelope(
-      validLocalLibraryEnvelopeFixture({
-        workingDraft: {
-          ...validWorkingDraftFixture({ snapshot }),
-          associatedRecordId: null
-        },
-        savedDocuments: [validSavedRecordFixture({ snapshot })]
-      })
-    );
-
-    expect(snapshot.build.equipment).not.toBe(equipment);
-    expect(snapshot.build.equipment?.armor[0]?.rune).toEqual(knownEquipmentSelection(101));
-    expect(parsed.ok).toBe(true);
-    expect(parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.equipment : null).toEqual(
-      snapshot.build.equipment
-    );
-    expect(
-      parsed.ok ? recordSnapshot(parsed.envelope.savedDocuments[0])?.build.equipment : null
-    ).toEqual(snapshot.build.equipment);
-    expect(fingerprintPersistedSnapshot(snapshot)).not.toBe(
-      fingerprintPersistedSnapshot(validSnapshotFixture())
-    );
   });
 
   it("round-trips canonical title overrides through snapshots and parsing", () => {
@@ -337,98 +296,7 @@ describe("local persistence schema", () => {
       ).codes
     ).toContain("oversized-collection");
   });
-
-  it("rejects malformed persisted equipment with bounded diagnostics", () => {
-    expect(parseSingleEquipment({ anything: true }).codes).toContain("invalid-equipment-topology");
-    expect(
-      parseSingleEquipment({
-        ...canonicalEquipmentFixture(),
-        armor: canonicalEquipmentFixture().armor.toReversed()
-      }).codes
-    ).toContain("noncanonical-equipment-topology");
-    expect(
-      parseSingleEquipment({
-        ...canonicalEquipmentFixture(),
-        weaponSets: [
-          {
-            ...canonicalEquipmentFixture().weaponSets[0]!,
-            mainHand: { weapon: null, modifiers: [], requirement: null }
-          },
-          ...canonicalEquipmentFixture().weaponSets.slice(1)
-        ]
-      }).codes
-    ).toContain("noncanonical-equipment-topology");
-    expect(
-      parseSingleEquipment({
-        ...canonicalEquipmentFixture(),
-        weaponSets: [
-          {
-            ...canonicalEquipmentFixture().weaponSets[0]!,
-            mainHand: {
-              weapon: knownEquipmentSelection(301 as WeaponId),
-              modifiers: [
-                knownEquipmentSelection(401 as WeaponModifierId),
-                knownEquipmentSelection(401 as WeaponModifierId)
-              ],
-              requirement: null
-            }
-          },
-          ...canonicalEquipmentFixture().weaponSets.slice(1)
-        ]
-      }).codes
-    ).toContain("duplicate-equipment-selection");
-    expect(
-      parseSingleEquipment({
-        ...canonicalEquipmentFixture(),
-        weaponSets: [
-          {
-            ...canonicalEquipmentFixture().weaponSets[0]!,
-            mainHand: {
-              weapon: knownEquipmentSelection(301 as WeaponId),
-              modifiers: Array.from({ length: 17 }, (_, index) =>
-                knownEquipmentSelection((401 + index) as WeaponModifierId)
-              ),
-              requirement: null
-            }
-          },
-          ...canonicalEquipmentFixture().weaponSets.slice(1)
-        ]
-      }).codes
-    ).toContain("oversized-collection");
-  });
 });
-
-function canonicalEquipmentFixture(): EquipmentLoadout {
-  const base = createEmptyEquipmentLoadout();
-  return {
-    ...base,
-    armor: base.armor.map((piece) =>
-      piece.slot === "head"
-        ? {
-            ...piece,
-            rune: knownEquipmentSelection(101 as RuneId),
-            headgearAttribute: unresolvedEquipmentSelection({
-              label: "Retained attribute",
-              reason: "catalog unresolved",
-              candidateCatalogId: 17
-            })
-          }
-        : piece
-    ),
-    weaponSets: base.weaponSets.map((set) =>
-      set.slot === "set-1"
-        ? {
-            ...set,
-            mainHand: {
-              weapon: knownEquipmentSelection(301 as WeaponId),
-              modifiers: [knownEquipmentSelection(401 as WeaponModifierId)],
-              requirement: null
-            }
-          }
-        : set
-    )
-  };
-}
 
 function legacySchemaOneEnvelopeFixture(): unknown {
   const current = validLocalLibraryEnvelopeFixture();
@@ -508,29 +376,6 @@ function parseSingleTitleOverrides(overrides: unknown): { readonly codes: readon
             build: {
               ...snapshot.build,
               titleRankOverrides: overrides as never
-            }
-          }
-        })
-      ]
-    })
-  );
-
-  expect(parsed.ok).toBe(true);
-  expect(parsed.writeBlocked).toBe(true);
-  return { codes: parsed.diagnostics.map((issue) => issue.code) };
-}
-
-function parseSingleEquipment(equipment: unknown): { readonly codes: readonly string[] } {
-  const snapshot = validSnapshotFixture();
-  const parsed = parseLocalLibraryEnvelope(
-    validLocalLibraryEnvelopeFixture({
-      savedDocuments: [
-        validSavedRecordFixture({
-          snapshot: {
-            ...snapshot,
-            build: {
-              ...snapshot.build,
-              equipment: equipment as EquipmentLoadout
             }
           }
         })

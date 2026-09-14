@@ -1,6 +1,5 @@
 import { authoredDocumentId, type GameMode, type ProfessionId } from "../domain";
 import type { AppCatalogViews } from "./catalogs";
-import { selectHasMeaningfulEquipment } from "./equipment-selectors";
 import { selectCatalogFreshnessView, selectValidationView } from "./editor-selectors";
 import {
   hydrateEditorFromSnapshot,
@@ -128,8 +127,8 @@ export function summarizeLibraryRecord(
     )
   );
   const freshness = selectCatalogFreshnessView(record.savedWith, currentFacts, {
-    includeEquipment: snapshots.some((snapshot) =>
-      selectHasMeaningfulEquipment(snapshot.build.equipment)
+    includeRunes: snapshots.some(
+      (snapshot) => (snapshot.build.attributeAdjustments?.runes.length ?? 0) > 0
     )
   });
   const diagnostics: LibraryDiagnostics = {
@@ -311,7 +310,7 @@ function previewSnapshotForRecord(record: PersistedSavedDocumentRecord): Persist
 function createEmptyPreviewSnapshot(name: string): PersistedBuildSnapshot {
   return {
     build: {
-      schemaVersion: 3,
+      schemaVersion: 4,
       catalogVersion: null,
       id: authoredDocumentId("build:empty-build-set-preview"),
       name,
@@ -321,8 +320,7 @@ function createEmptyPreviewSnapshot(name: string): PersistedBuildSnapshot {
       attributes: [],
       skillBar: [null, null, null, null, null, null, null, null],
       titleRankOverrides: [],
-      attributeAdjustments: null,
-      equipment: null
+      attributeAdjustments: null
     },
     pveBudget: { level: 20, questBonus: "maximum-applicable" },
     rawTemplate: {

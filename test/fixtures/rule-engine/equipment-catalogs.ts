@@ -7,7 +7,7 @@ import {
   type CatalogRuneRecord,
   type CatalogWeaponBaseRecord,
   type CatalogWeaponModRecord,
-  type EquipmentRuneCatalogView,
+  type RuneCatalogView,
   type InsigniaCondition,
   type InsigniaEffectCombination,
   type RuneId,
@@ -94,7 +94,7 @@ export const equipmentRuneCatalog = {
       ]
     } satisfies CatalogRuneRecord
   ]
-} satisfies EquipmentRuneCatalogView;
+} satisfies RuneCatalogView;
 
 function attributeRune(input: {
   readonly id: RuneId;

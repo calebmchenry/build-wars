@@ -53,12 +53,17 @@ describe("inline attribute choices", () => {
       .getAllByRole("radio")
       .filter((r) => r.getAttribute("aria-label")?.includes("headgear"));
     expect(new Set(heads.map((r) => r.getAttribute("name"))).size).toBe(1);
-    fireEvent.click(screen.getByRole("button", { name: "Clear headgear" }));
+    fireEvent.click(screen.getByRole("radio", { name: "Air Magic headgear +1" }));
     expect(heads.some((r) => (r as HTMLInputElement).checked)).toBe(false);
+    const headgear = screen.getByRole("radio", { name: "Air Magic headgear +1" });
+    fireEvent.keyDown(headgear, { key: " " });
+    expect(headgear).toBeChecked();
+    fireEvent.keyDown(headgear, { key: " " });
+    expect(headgear).not.toBeChecked();
     expect(screen.getByLabelText("Base code").textContent).toBe(code);
     expect(screen.getByLabelText("Attribute point spend").textContent).toBe(spend);
   });
-  it("keeps zero-base gear editable and removes overrides independently", () => {
+  it("keeps zero-base gear editable and clears selections independently", () => {
     render(
       <Harness
         initial={{ ...createBlankEditorState(), build: elementalBuild({ attributes: [] }) }}
@@ -68,7 +73,11 @@ describe("inline attribute choices", () => {
     expect(
       screen.getByRole("button", { name: /Air Magic: effective rank 3, base 0/ })
     ).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Use equipped rune for Air Magic" }));
+    fireEvent.click(screen.getByRole("radio", { name: "Air Magic rune None" }));
+    expect(screen.queryByText(/equipped/i)).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Air Magic: effective rank 0, base 0/ })
+    ).toBeInTheDocument();
     expect(screen.getByRole("radio", { name: "Air Magic rune None" })).toBeChecked();
     expect(screen.getByLabelText("Attribute point spend")).toHaveTextContent("0/200");
   });
@@ -79,8 +88,8 @@ describe("inline attribute choices", () => {
           ...createBlankEditorState(),
           build: elementalBuild({
             attributeAdjustments: {
-              headgearOverride: { kind: "attribute", attributeId: catalogId<"Attribute">(999) },
-              runeOverrides: [
+              headgearAttributeId: catalogId<"Attribute">(999),
+              runes: [
                 { attributeId: catalogId<"Attribute">(888), runeId: catalogId<"Rune">(9999) }
               ],
               effectPreferences: []

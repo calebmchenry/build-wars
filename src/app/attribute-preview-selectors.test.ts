@@ -28,8 +28,8 @@ describe("shared preview consumers", () => {
         secondaryProfessionId: catalogId<"Profession">(4),
         attributes: [{ attributeId: catalogId<"Attribute">(23), rank: 12 }],
         attributeAdjustments: {
-          headgearOverride: null,
-          runeOverrides: [],
+          headgearAttributeId: null,
+          runes: [],
           effectPreferences: [{ effectId: "heroic-refrain", preference: "on", strength: 4 }]
         }
       })
@@ -53,10 +53,8 @@ describe("shared preview consumers", () => {
       ...base,
       build: elementalBuild({
         attributeAdjustments: {
-          headgearOverride: null,
-          runeOverrides: [
-            { attributeId: catalogId<"Attribute">(10), runeId: catalogId<"Rune">(99999) }
-          ],
+          headgearAttributeId: null,
+          runes: [{ attributeId: catalogId<"Attribute">(10), runeId: catalogId<"Rune">(99999) }],
           effectPreferences: []
         }
       })

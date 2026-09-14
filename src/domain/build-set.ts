@@ -239,59 +239,7 @@ export function cloneBuildForBuildSetEntry(build: Build, id: AuthoredDocumentId)
       build.skillBar[7]
     ],
     titleRankOverrides: build.titleRankOverrides.map((override) => ({ ...override })),
-    attributeAdjustments: cloneAttributeAdjustments(build.attributeAdjustments),
-    equipment:
-      build.equipment === null
-        ? null
-        : {
-            schemaVersion: build.equipment.schemaVersion,
-            armor: build.equipment.armor.map((piece) => ({
-              slot: piece.slot,
-              rune: piece.rune === null ? null : { ...piece.rune },
-              insignia: piece.insignia === null ? null : { ...piece.insignia },
-              headgearAttribute:
-                piece.headgearAttribute === null ? null : { ...piece.headgearAttribute }
-            })),
-            weaponSets: build.equipment.weaponSets.map((set) => ({
-              slot: set.slot,
-              mainHand:
-                set.mainHand === null
-                  ? null
-                  : {
-                      weapon: set.mainHand.weapon === null ? null : { ...set.mainHand.weapon },
-                      modifiers: set.mainHand.modifiers.map((modifier) => ({ ...modifier })),
-                      requirement:
-                        set.mainHand.requirement === null
-                          ? null
-                          : {
-                              attribute:
-                                set.mainHand.requirement.attribute === null
-                                  ? null
-                                  : { ...set.mainHand.requirement.attribute },
-                              rank: set.mainHand.requirement.rank,
-                              reason: set.mainHand.requirement.reason
-                            }
-                    },
-              offHand:
-                set.offHand === null
-                  ? null
-                  : {
-                      weapon: set.offHand.weapon === null ? null : { ...set.offHand.weapon },
-                      modifiers: set.offHand.modifiers.map((modifier) => ({ ...modifier })),
-                      requirement:
-                        set.offHand.requirement === null
-                          ? null
-                          : {
-                              attribute:
-                                set.offHand.requirement.attribute === null
-                                  ? null
-                                  : { ...set.offHand.requirement.attribute },
-                              rank: set.offHand.requirement.rank,
-                              reason: set.offHand.requirement.reason
-                            }
-                    }
-            }))
-          }
+    attributeAdjustments: cloneAttributeAdjustments(build.attributeAdjustments)
   };
 }
 

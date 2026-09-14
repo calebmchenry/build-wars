@@ -526,7 +526,19 @@ describe("editor selectors", () => {
     };
     expect(selectCatalogFreshnessView(equipmentOld, equipmentCurrent).status).toBe("fresh");
     expect(
-      selectCatalogFreshnessView(equipmentOld, equipmentCurrent, { includeEquipment: true }).status
+      selectCatalogFreshnessView(
+        {
+          ...equipmentCurrent,
+          insigniaCatalogVersion: "old",
+          weaponCatalogVersion: "old",
+          weaponModifierCatalogVersion: "old"
+        },
+        equipmentCurrent,
+        { includeRunes: true }
+      ).status
+    ).toBe("fresh");
+    expect(
+      selectCatalogFreshnessView(equipmentOld, equipmentCurrent, { includeRunes: true }).status
     ).toBe("stale");
   });
 });

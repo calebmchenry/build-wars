@@ -8,7 +8,6 @@ import {
   type PartySlotId
 } from "../domain";
 import type { AppCatalogViews } from "./catalogs";
-import { selectEquipmentSummary } from "./equipment-selectors";
 import { selectSkillSlotDisplays, type SkillDisplayView } from "./editor-selectors";
 import {
   hydrateEditorFromSnapshot,
@@ -43,7 +42,6 @@ export interface PartySlotView {
   readonly mode: GameMode | "empty";
   readonly modeLabel: string;
   readonly skills: readonly PartySkillSummary[];
-  readonly equipmentIndicator: string;
   readonly titleIndicator: string;
   readonly status: string;
   readonly issueCount: number;
@@ -99,12 +97,8 @@ export function selectPartyWorkspaceView(
         : (snapshot.entries.find((candidate) => candidate.id === slot.entryId) ?? null);
     const editor = entry === null ? null : hydrateEditorFromSnapshot(entry.snapshot);
     const memberValidation = validation?.members.find((member) => member.slotId === slot.id);
-    const validationResult = memberValidation?.validation?.result;
     const skillDisplays = editor === null ? [] : selectSkillSlotDisplays(editor, catalogs);
-    const equipment =
-      editor === null || validationResult === undefined
-        ? null
-        : selectEquipmentSummary(editor, catalogs, validationResult);
+
     const selected = slot.id === snapshot.lastSelectedPartySlotId;
     return {
       id: slot.id,
@@ -131,12 +125,7 @@ export function selectPartyWorkspaceView(
         label: skill.title,
         state: skill.kind
       })),
-      equipmentIndicator:
-        editor === null
-          ? "no loadout"
-          : equipment?.hasMeaningfulEquipment === true
-            ? "equipment"
-            : "no equipment",
+
       titleIndicator:
         editor === null
           ? "no loadout"

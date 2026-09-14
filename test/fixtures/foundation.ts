@@ -55,6 +55,5 @@ export const syntheticFoundationBuild: Build = {
   attributes: [{ attributeId: syntheticAttributeId, rank: 0 }],
   skillBar: [syntheticUnknownSkillId, null, null, null, null, null, null, null],
   titleRankOverrides: [],
-  attributeAdjustments: null,
-  equipment: null
+  attributeAdjustments: null
 };

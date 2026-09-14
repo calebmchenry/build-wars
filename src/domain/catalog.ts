@@ -21,7 +21,7 @@ import type {
   RemoteMediaMetadata,
   SourceReference
 } from "./source";
-import type { ArmorSlot } from "./equipment";
+export type ArmorSlot = "head" | "chest" | "hands" | "legs" | "feet";
 import type { SkillTypeId } from "./skill-types";
 
 export interface CatalogRecord<Id> {

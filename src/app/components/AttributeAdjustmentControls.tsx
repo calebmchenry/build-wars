@@ -21,7 +21,7 @@ export function AttributeAdjustmentControls({
   readonly dispatch: Dispatch<EditorAction>;
 }) {
   if (!rank.gearEligible || build.primaryProfessionId === null) return null;
-  const override = build.attributeAdjustments?.runeOverrides.find(
+  const selected = build.attributeAdjustments?.runes.find(
     (row) => row.attributeId === rank.attributeId
   );
   const options = runeTierOptions(
@@ -29,13 +29,8 @@ export function AttributeAdjustmentControls({
     build.primaryProfessionId,
     rank.attributeId
   );
-  const inherited = rank.contributions.find((c) => c.kind === "rune" && c.active);
-  const unresolvedRune = rank.diagnostics.some(
-    (d) => d.contribution === "rune" && d.uncertain && !d.suppressed
-  );
   const headSelected = rank.contributions.some((c) => c.kind === "headgear" && c.active);
-  const noneSelected =
-    override !== undefined ? override.runeId === null : !unresolvedRune && inherited === undefined;
+  const noneSelected = selected === undefined;
   return (
     <div className="attribute-gear-controls">
       <fieldset className="rune-options">
@@ -68,12 +63,7 @@ export function AttributeAdjustmentControls({
               name={`rune-${headgearName}-${rank.attributeId}`}
               aria-label={`${option.rune?.name ?? `${label} rune`} +${option.amount}; ${option.healthPenalty ?? "unknown"} maximum Health`}
               disabled={option.rune === null}
-              checked={
-                option.rune !== null &&
-                (override === undefined
-                  ? !unresolvedRune && inherited?.amount === option.amount
-                  : override.runeId === option.rune.id)
-              }
+              checked={option.rune !== null && selected?.runeId === option.rune.id}
               onChange={() => {
                 if (option.rune !== null)
                   dispatch({
@@ -83,21 +73,33 @@ export function AttributeAdjustmentControls({
                   });
               }}
             />
-            <RuneIcon asset={option.icon} />
-            <span>+{option.amount}</span>
+            <RuneIcon asset={option.icon} fallback={`+${option.amount}`} />
           </label>
         ))}
       </fieldset>
-      <label className="headgear-option" title={`${label} headgear +1`}>
+      <label className="headgear-option" title={`${label} headgear +1. Select again to clear.`}>
         <input
           type="radio"
           name={headgearName}
           aria-label={`${label} headgear +1`}
+          aria-description="Select again to clear the headgear bonus."
           checked={headSelected}
+          onClick={() => {
+            if (headSelected) dispatch({ type: "set-attribute-headgear", attributeId: null });
+          }}
+          onKeyDown={(event) => {
+            if (event.key !== " ") return;
+            event.preventDefault();
+            if (!event.repeat)
+              dispatch({
+                type: "set-attribute-headgear",
+                attributeId: headSelected ? null : rank.attributeId
+              });
+          }}
           onChange={() =>
             dispatch({
               type: "set-attribute-headgear",
-              override: { kind: "attribute", attributeId: rank.attributeId }
+              attributeId: rank.attributeId
             })
           }
         />
@@ -105,27 +107,6 @@ export function AttributeAdjustmentControls({
           +1<span className="sr-only"> headgear</span>
         </span>
       </label>
-      <div className="gear-inheritance">
-        {override === undefined ? (
-          <span>
-            {unresolvedRune
-              ? "Equipped rune unresolved"
-              : inherited === undefined
-                ? "No equipped rune"
-                : "Equipped rune"}
-          </span>
-        ) : (
-          <button
-            type="button"
-            onClick={() =>
-              dispatch({ type: "reset-attribute-rune", attributeId: rank.attributeId })
-            }
-            aria-label={`Use equipped rune for ${label}`}
-          >
-            Use equipped rune
-          </button>
-        )}
-      </div>
     </div>
   );
 }
@@ -141,18 +122,16 @@ export function AttributeAdjustmentRecovery({
 }) {
   const profile = build.attributeAdjustments;
   if (profile === null) return null;
-  const head = profile.headgearOverride;
+  const head = profile.headgearAttributeId;
   const invalidHead =
-    head?.kind === "attribute" &&
-    catalogs.attributes.filter(
-      (a) => a.id === head.attributeId && a.professionId === build.primaryProfessionId
-    ).length !== 1;
-  const invalidRunes = profile.runeOverrides.filter((row) => {
+    head !== null &&
+    catalogs.attributes.filter((a) => a.id === head && a.professionId === build.primaryProfessionId)
+      .length !== 1;
+  const invalidRunes = profile.runes.filter((row) => {
     const attribute = catalogs.attributes.find(
       (a) => a.id === row.attributeId && a.professionId === build.primaryProfessionId
     );
     if (attribute === undefined) return true;
-    if (row.runeId === null) return false;
     return !runeTierOptions(catalogs.equipment.runes, attribute.professionId, attribute.id).some(
       (o) => o.rune?.id === row.runeId
     );
@@ -160,12 +139,12 @@ export function AttributeAdjustmentRecovery({
   if (!invalidHead && invalidRunes.length === 0) return null;
   return (
     <div className="adjustment-recovery" aria-label="Unresolved attribute adjustments">
-      {invalidHead && head?.kind === "attribute" ? (
+      {invalidHead && head !== null ? (
         <p>
-          Retained headgear attribute {head.attributeId}.{" "}
+          Retained headgear attribute {head}.{" "}
           <button
             type="button"
-            onClick={() => dispatch({ type: "set-attribute-headgear", override: null })}
+            onClick={() => dispatch({ type: "set-attribute-headgear", attributeId: null })}
           >
             Remove retained headgear
           </button>
@@ -173,10 +152,12 @@ export function AttributeAdjustmentRecovery({
       ) : null}
       {invalidRunes.map((row) => (
         <p key={row.attributeId}>
-          Retained rune {row.runeId ?? "None"} for attribute {row.attributeId}.{" "}
+          Retained rune {row.runeId} for attribute {row.attributeId}.{" "}
           <button
             type="button"
-            onClick={() => dispatch({ type: "reset-attribute-rune", attributeId: row.attributeId })}
+            onClick={() =>
+              dispatch({ type: "set-attribute-rune", attributeId: row.attributeId, runeId: null })
+            }
           >
             Remove retained rune for attribute {row.attributeId}
           </button>

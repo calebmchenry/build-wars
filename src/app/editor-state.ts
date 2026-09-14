@@ -16,10 +16,9 @@ import {
   type TitleRankOverrideMutationFacts,
   type TemplateSourceEnvelope
 } from "../domain";
-import { reduceEquipmentEditorAction, type EquipmentEditorAction } from "./equipment-editor-state";
 
 import {
-  clearCompactGear,
+  clearAttributeGear,
   reduceAttributeAdjustmentAction,
   type AttributeAdjustmentAction
 } from "./attribute-adjustment-state";
@@ -170,7 +169,6 @@ const EMPTY_RESOURCE_FILTERS: Readonly<Record<ResourceFilterKind, ResourceFilter
 };
 
 export type EditorAction =
-  | EquipmentEditorAction
   | AttributeAdjustmentAction
   | {
       readonly type: "replace-state";
@@ -354,8 +352,7 @@ export function createBlankBuild(name = "Untitled Build"): Build {
     attributes: [],
     skillBar: emptySkillBar(),
     titleRankOverrides: [],
-    attributeAdjustments: null,
-    equipment: null
+    attributeAdjustments: null
   };
 }
 
@@ -422,7 +419,6 @@ export function unresolvedSkillIdForIndex(index: number): SkillId {
 export function editorReducer(state: EditorState, action: EditorAction): EditorState {
   switch (action.type) {
     case "set-attribute-rune":
-    case "reset-attribute-rune":
     case "set-attribute-headgear":
     case "set-assumed-effect":
     case "reset-assumed-effect": {
@@ -484,24 +480,6 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
       return clearSkillSlot(state, action.slotIndex);
     case "apply-skill-bar-plan":
       return applySkillBarPlan(state, action);
-    case "set-armor-rune":
-    case "set-armor-insignia":
-    case "set-headgear-attribute":
-    case "clear-armor-field":
-    case "set-weapon":
-    case "set-authored-unresolved-weapon":
-    case "clear-weapon":
-    case "set-weapon-modifier":
-    case "set-authored-unresolved-modifier":
-    case "clear-weapon-modifier":
-    case "set-weapon-requirement":
-    case "clear-weapon-hand":
-    case "clear-weapon-set":
-    case "reset-equipment":
-      return {
-        ...state,
-        build: reduceEquipmentEditorAction(state.build, action)
-      };
     case "select-slot":
       return {
         ...state,
@@ -600,7 +578,7 @@ function setProfession(
   if (field === "primary" && state.build.primaryProfessionId === professionId) return state;
   const build =
     field === "primary"
-      ? { ...clearCompactGear(state.build), primaryProfessionId: professionId }
+      ? { ...clearAttributeGear(state.build), primaryProfessionId: professionId }
       : { ...state.build, secondaryProfessionId: professionId };
   const rawTemplate =
     field === "primary"

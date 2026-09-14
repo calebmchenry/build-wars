@@ -237,7 +237,6 @@ function PartySlotCard({
         <span>{slot.rolePresent ? slot.role : "no role"}</span>
         <span>{slot.professionPair}</span>
         <span>{slot.modeLabel}</span>
-        <span>{slot.equipmentIndicator}</span>
         <span>{slot.titleIndicator}</span>
         <span>{slot.entryNotesPresent ? "entry notes" : "no entry notes"}</span>
         <span>{slot.notesPresent ? "slot notes" : "no slot notes"}</span>

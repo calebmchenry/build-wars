@@ -7,7 +7,6 @@ import {
 } from "../domain";
 import type { AppCatalogViews } from "./catalogs";
 import type { EditorAction, EditorState } from "./editor-state";
-import { selectHasMeaningfulEquipment } from "./equipment-selectors";
 import { importSkillTemplateToEditor } from "./template-workflow";
 
 export const ATTRIBUTE_ADJUSTMENT_OMISSION =
@@ -15,7 +14,6 @@ export const ATTRIBUTE_ADJUSTMENT_OMISSION =
 
 export function templateReplacementWarnings(build: Build): readonly string[] {
   return [
-    ...(selectHasMeaningfulEquipment(build.equipment) ? ["authored equipment"] : []),
     ...(hasAuthoredTitleRankOverrides(build) ? ["authored title ranks"] : []),
     ...(hasAuthoredAttributeAdjustments(build.attributeAdjustments)
       ? ["authored attribute adjustments"]

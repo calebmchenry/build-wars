@@ -109,16 +109,12 @@ describe("assumed effects controls", () => {
     fireEvent.click(check("Glyph of Elemental Power"));
     fireEvent.click(screen.getByRole("button", { name: "Remove Glyph" }));
     expect(check("Glyph of Elemental Power")).toBeChecked();
-    expect(screen.getByText(/Required legal skill is absent/)).toBeInTheDocument();
+    expect(check("Glyph of Elemental Power")).toHaveAccessibleDescription(
+      /Required legal skill is absent/
+    );
     fireEvent.click(check("Glyph of Elemental Power"));
     fireEvent.click(screen.getByRole("button", { name: "Add Glyph" }));
     expect(check("Glyph of Elemental Power")).not.toBeChecked();
-    fireEvent.click(screen.getByRole("button", { name: "Remove Glyph" }));
-    fireEvent.click(screen.getByRole("button", { name: "Reset Glyph of Elemental Power" }));
-    expect(
-      screen.queryByRole("checkbox", { name: "Glyph of Elemental Power" })
-    ).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /Assumed effects/ })).toHaveFocus();
   });
   it("gates remembered preferences by mode and profession while preserving them", () => {
     render(<Harness />);
@@ -127,7 +123,9 @@ describe("assumed effects controls", () => {
     fireEvent.click(check("Elemental Lord"));
     fireEvent.click(screen.getByRole("button", { name: "Change mode" }));
     expect(check("Elemental Lord")).toBeChecked();
-    expect(screen.getAllByText(/Unavailable in the current game mode/).length).toBeGreaterThan(0);
+    expect(check("Elemental Lord")).toHaveAccessibleDescription(
+      /Unavailable in the current game mode/
+    );
     expect(screen.getByRole("button", { name: "Assumed effects (1 active)" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Change mode" }));
     expect(screen.getByRole("button", { name: "Assumed effects (2 active)" })).toBeInTheDocument();
@@ -140,9 +138,8 @@ describe("assumed effects controls", () => {
     open();
     expect(check("Heroic Refrain")).not.toBeChecked();
     const strength = screen.getByRole("combobox", { name: "Heroic Refrain strength" });
-    expect(strength).toHaveValue("1");
+    expect(strength).toHaveValue("4");
     fireEvent.click(check("Heroic Refrain"));
-    fireEvent.change(strength, { target: { value: "4" } });
     expect(screen.getByRole("button", { name: "Assumed effects (3 active)" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /Fire Magic: effective rank 20/ }));
     expect(
@@ -154,8 +151,8 @@ describe("assumed effects controls", () => {
     expect(strength).toHaveValue("4");
     fireEvent.change(strength, { target: { value: "2" } });
     expect(check("Heroic Refrain")).not.toBeChecked();
-    fireEvent.click(screen.getByRole("button", { name: "Reset Heroic Refrain" }));
-    expect(strength).toHaveValue("1");
+    fireEvent.click(check("Heroic Refrain"));
+    expect(strength).toHaveValue("2");
   });
   it("shows no active count when an external request has no eligible targets", () => {
     const blank = createBlankEditorState();
@@ -165,8 +162,8 @@ describe("assumed effects controls", () => {
         ...blank.build,
         primaryProfessionId: catalogId<"Profession">(999),
         attributeAdjustments: {
-          headgearOverride: null,
-          runeOverrides: [],
+          headgearAttributeId: null,
+          runes: [],
           effectPreferences: [{ effectId: "heroic-refrain", preference: "on", strength: 4 }]
         }
       }
@@ -175,6 +172,6 @@ describe("assumed effects controls", () => {
     open();
     expect(check("Heroic Refrain")).toBeChecked();
     expect(screen.getByRole("button", { name: "Assumed effects (0 active)" })).toBeInTheDocument();
-    expect(screen.getByText(/No eligible attributes/)).toBeInTheDocument();
+    expect(check("Heroic Refrain")).toHaveAccessibleDescription(/No eligible attributes/);
   });
 });

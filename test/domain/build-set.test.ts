@@ -14,12 +14,7 @@ import {
   validateBuildSetShape,
   type BuildSetEntry
 } from "../../src/domain";
-import {
-  createEmptyEquipmentLoadout,
-  knownEquipmentSelection,
-  type RuneId,
-  type WeaponModifierId
-} from "../../src/domain";
+import { type RuneId } from "../../src/domain";
 import { syntheticFoundationBuild } from "../fixtures/foundation";
 
 describe("build set domain contracts", () => {
@@ -150,29 +145,17 @@ describe("build set domain contracts", () => {
     );
   });
 
-  it("deep-clones nested build, skill, attribute, title, equipment, and modifier arrays on re-key", () => {
-    const equipment = createEmptyEquipmentLoadout();
+  it("deep-clones nested build, skill, attribute, title, and attribute adjustment arrays on re-key", () => {
     const build = {
       ...syntheticFoundationBuild,
       titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 3 }],
       attributes: [{ attributeId: syntheticFoundationBuild.attributes[0]!.attributeId, rank: 9 }],
-      equipment: {
-        ...equipment,
-        armor: equipment.armor.map((piece) =>
-          piece.slot === "head" ? { ...piece, rune: knownEquipmentSelection(40 as RuneId) } : piece
-        ),
-        weaponSets: equipment.weaponSets.map((set) =>
-          set.slot === "set-1"
-            ? {
-                ...set,
-                mainHand: {
-                  weapon: null,
-                  modifiers: [knownEquipmentSelection(401 as WeaponModifierId)],
-                  requirement: null
-                }
-              }
-            : set
-        )
+      attributeAdjustments: {
+        headgearAttributeId: null,
+        runes: [
+          { attributeId: syntheticFoundationBuild.attributes[0]!.attributeId, runeId: 40 as RuneId }
+        ],
+        effectPreferences: []
       }
     };
     const copy = cloneBuildForBuildSetEntry(build, authoredDocumentId("nested-copy"));
@@ -184,11 +167,11 @@ describe("build set domain contracts", () => {
     expect(copy.attributes).not.toBe(build.attributes);
     expect(copy.titleRankOverrides).toEqual(build.titleRankOverrides);
     expect(copy.titleRankOverrides).not.toBe(build.titleRankOverrides);
-    expect(copy.equipment).toEqual(build.equipment);
-    expect(copy.equipment).not.toBe(build.equipment);
-    expect(copy.equipment?.armor).not.toBe(build.equipment?.armor);
-    expect(copy.equipment?.weaponSets[0]?.mainHand?.modifiers).not.toBe(
-      build.equipment?.weaponSets[0]?.mainHand?.modifiers
+    expect(copy.attributeAdjustments).toEqual(build.attributeAdjustments);
+    expect(copy.attributeAdjustments).not.toBe(build.attributeAdjustments);
+    expect(copy.attributeAdjustments?.runes).not.toBe(build.attributeAdjustments?.runes);
+    expect(copy.attributeAdjustments?.effectPreferences).not.toBe(
+      build.attributeAdjustments?.effectPreferences
     );
   });
 });

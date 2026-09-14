@@ -1,5 +1,10 @@
 # Equipment Editor
 
+> Historical prototype, retired 2026-09-14. The authored equipment model and its
+> editors have been removed. These notes describe the former implementation and
+> are not current requirements. See [attribute adjustments](attribute-adjustments.md)
+> for the direct rune/headgear model, Build v4, and saved-data migration.
+
 SPRINT-015 ships EPIC-14's user-facing semantic equipment editor for the single-character app
 workspace.
 

@@ -1,12 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  catalogId,
-  knownEquipmentSelection,
-  type RuneId,
-  type WeaponId,
-  type WeaponModifierId
-} from "../domain";
+import { catalogId } from "../domain";
 import {
   createBlankEditorState,
   createRawOverlayEntry,
@@ -187,77 +181,5 @@ describe("editor state reducer", () => {
     expect(lowered.build.skillBar).toBe(state.build.skillBar);
     expect(removedAtMax.build.titleRankOverrides).toEqual([]);
     expect(ignored.build).toBe(removedAtMax.build);
-  });
-
-  it("keeps null equipment untouched for no-op clears and materializes on first meaningful edit", () => {
-    const state = createBlankEditorState();
-    const noOp = editorReducer(state, {
-      type: "clear-armor-field",
-      slot: "head",
-      field: "rune"
-    });
-    const edited = editorReducer(state, {
-      type: "set-armor-rune",
-      slot: "head",
-      selection: knownEquipmentSelection(101 as RuneId)
-    });
-
-    expect(noOp.build).toBe(state.build);
-    expect(noOp.build.equipment).toBeNull();
-    expect(edited.build.equipment?.armor).toHaveLength(5);
-    expect(edited.build.equipment?.weaponSets).toHaveLength(4);
-    expect(edited.build.equipment?.armor[0]?.rune).toEqual(knownEquipmentSelection(101 as RuneId));
-  });
-
-  it("clears ordinary equipment back to canonical empty state and resets explicitly to null", () => {
-    const edited = editorReducer(createBlankEditorState(), {
-      type: "set-armor-rune",
-      slot: "head",
-      selection: knownEquipmentSelection(101 as RuneId)
-    });
-    const cleared = editorReducer(edited, {
-      type: "clear-armor-field",
-      slot: "head",
-      field: "rune"
-    });
-    const reset = editorReducer(cleared, { type: "reset-equipment" });
-
-    expect(cleared.build.equipment).not.toBeNull();
-    expect(cleared.build.equipment?.armor.every((piece) => piece.rune === null)).toBe(true);
-    expect(reset.build.equipment).toBeNull();
-  });
-
-  it("preserves modifiers when clearing a weapon and rejects sparse modifier writes", () => {
-    const withWeapon = editorReducer(createBlankEditorState(), {
-      type: "set-weapon",
-      setSlot: "set-1",
-      hand: "mainHand",
-      selection: knownEquipmentSelection(301 as WeaponId)
-    });
-    const withModifier = editorReducer(withWeapon, {
-      type: "set-weapon-modifier",
-      setSlot: "set-1",
-      hand: "mainHand",
-      modifierIndex: 0,
-      selection: knownEquipmentSelection(401 as WeaponModifierId)
-    });
-    const sparseWrite = editorReducer(withModifier, {
-      type: "set-weapon-modifier",
-      setSlot: "set-1",
-      hand: "mainHand",
-      modifierIndex: 2,
-      selection: knownEquipmentSelection(402 as WeaponModifierId)
-    });
-    const clearedWeapon = editorReducer(sparseWrite, {
-      type: "clear-weapon",
-      setSlot: "set-1",
-      hand: "mainHand"
-    });
-
-    expect(sparseWrite.build).toBe(withModifier.build);
-    expect(clearedWeapon.build.equipment?.weaponSets[0]?.mainHand?.weapon).toBeNull();
-    expect(clearedWeapon.build.equipment?.weaponSets[0]?.mainHand?.modifiers).toEqual([
-      knownEquipmentSelection(401 as WeaponModifierId)
-    ]);
   });
 });

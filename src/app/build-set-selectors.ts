@@ -6,7 +6,6 @@ import {
   type ProfessionId
 } from "../domain";
 import type { AppCatalogViews } from "./catalogs";
-import { selectEquipmentSummary } from "./equipment-selectors";
 import {
   selectSkillSlotDisplays,
   selectValidationView,
@@ -34,7 +33,6 @@ export interface BuildSetEntrySummary {
   readonly mode: GameMode;
   readonly modeLabel: string;
   readonly skills: readonly BuildSetSkillSummary[];
-  readonly equipmentIndicator: string;
   readonly titleIndicator: string;
   readonly validationStatus: BuildSetEntryAttention;
   readonly issueCount: number;
@@ -81,7 +79,6 @@ export function selectBuildSetNavigatorView(
   const entries = materialized.entries.map((entry) => {
     const editor = hydrateEditorFromSnapshot(entry.snapshot);
     const validation = selectValidationView(editor, catalogs).result;
-    const equipment = selectEquipmentSummary(editor, catalogs, validation);
     const skillDisplays = selectSkillSlotDisplays(editor, catalogs);
     const catalogUnavailable = validation.issues.some((issue) =>
       issue.code.includes("catalog-unavailable")
@@ -106,9 +103,6 @@ export function selectBuildSetNavigatorView(
         label: skill.title,
         state: skill.kind
       })),
-      equipmentIndicator: equipment.hasMeaningfulEquipment
-        ? `${equipment.selectedUpgradeCount} equipment`
-        : "no equipment",
       titleIndicator:
         editor.build.titleRankOverrides.length === 0
           ? "default titles"

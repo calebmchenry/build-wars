@@ -4,7 +4,6 @@ import {
   authoredDocumentId,
   BUILD_SCHEMA_VERSION,
   calculateEffectiveAttributeRank,
-  createEmptyEquipmentLoadout,
   validateBuild,
   type Build,
   type ProfessionAttributeValidationCatalog,
@@ -60,13 +59,13 @@ describe("build validation context", () => {
       buildCatalogVersion: "fixture-build-v1",
       professionAttributeCatalogVersion: "fixture-pa-v1",
       skillCatalogVersion: "fixture-skills-v1",
-      ruleEngineVersion: "rule-engine:v3"
+      ruleEngineVersion: "rule-engine:v4"
     });
   });
 
   it("preserves optional equipment catalog indexes and version evidence", () => {
     const context = createBuildValidationContext({
-      build: buildFixture({ equipment: createEmptyEquipmentLoadout() }),
+      build: buildFixture(),
       professionAttributes: professionAttributeCatalog,
       skills: skillsCatalog,
       equipmentCatalogs: {
@@ -221,8 +220,7 @@ describe("build validation context", () => {
       attributes: [{ attributeId: attributeIds.tactics, rank: 0 }],
       skillBar: skillBar(skillIds.healingSignet),
       titleRankOverrides: [],
-      attributeAdjustments: null,
-      equipment: null
+      attributeAdjustments: null
     };
     const context = createBuildValidationContext({
       build,

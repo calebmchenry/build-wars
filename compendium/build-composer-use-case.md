@@ -96,14 +96,16 @@ The decrement affordance is hidden when no points are allocated. The increment
 affordance is hidden when the user cannot invest more because of rank cap or
 remaining points. Allocated ranks remain authored point investments. SPRINT-020 derives effective
 ranks from eligible gear and assumed effects using one shared projection. Primary
-rows offer None/+1/+2/+3 rune radios and one global headgear +1 choice, including
-at base zero. Inherit/reset remains distinct from explicit None. Blue marks resolved
+rows offer None and three rune icon radios, with tier/bonus details in tooltips,
+and one global headgear +1 choice aligned horizontally, including
+at base zero. None removes the rune bonus; selecting the current headgear option again clears it. Blue marks resolved
 increases; focus, hover or tap opens the contribution and cap explanation.
 
 The initially collapsed Assumed effects disclosure provides self-effect checkboxes
-and external Refrain strength. Inactive remembered preferences remain editable.
+and skill icons in horizontal groups, plus an inline external Refrain selector
+that defaults to +4. Inactive remembered preferences remain editable.
 Both collapsed disclosures show the contributing count, including capped bonuses.
-See [attribute adjustments](attribute-adjustments.md) for persistence and precedence.
+See [attribute adjustments](attribute-adjustments.md) for persistence and selection rules.
 
 ## Skill Bar Rules
 
@@ -132,7 +134,7 @@ The template code should be visible directly under the skill bar.
 - Existing exact-source and canonical export policies still apply.
 - In build-set or party contexts, inline template import/export affects only the
   selected occupied loadout and warns that sibling entries, party metadata,
-  equipment, title ranks, and notes require JSON transfer or backup.
+  attribute adjustments, title ranks, and notes require JSON transfer or backup.
 
 ## Skills Catalog
 

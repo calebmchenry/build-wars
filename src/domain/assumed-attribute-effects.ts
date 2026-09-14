@@ -84,7 +84,12 @@ export function resolveAssumedAttributeEffects(input: {
   return ASSUMED_ATTRIBUTE_EFFECTS.map((definition) => {
     const preferences = context.build.attributeAdjustments?.effectPreferences ?? [];
     const preference = preferences.find((row) => row.effectId === definition.id) ?? null;
-    const strength = preference?.effectId === "heroic-refrain" ? preference.strength : 1;
+    const strength =
+      preference?.effectId === "heroic-refrain"
+        ? preference.strength
+        : definition.id === "heroic-refrain"
+          ? 4
+          : 1;
     const targets = availableAttributes
       .filter(
         (attribute) =>

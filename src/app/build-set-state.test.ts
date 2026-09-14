@@ -1,12 +1,7 @@
+import { adjustmentProfileFixture } from "./attribute-adjustment-fixtures";
 import { describe, expect, it } from "vitest";
 
-import {
-  authoredDocumentId,
-  buildSetEntryId,
-  catalogId,
-  createEmptyEquipmentLoadout,
-  knownEquipmentSelection
-} from "../domain";
+import { authoredDocumentId, buildSetEntryId, catalogId } from "../domain";
 import { fixtureCatalogFacts, validSavedRecordFixture } from "./library-fixtures";
 import { localBuildRecordId, selectedPersistedBuildSnapshot } from "./persistence-schema";
 import {
@@ -113,7 +108,6 @@ describe("build set workspace state", () => {
       entryId: entryA,
       decision: "discard"
     });
-    const equipment = createEmptyEquipmentLoadout();
     const sourceWithNestedState = {
       ...set,
       editor: {
@@ -136,14 +130,7 @@ describe("build set workspace state", () => {
           ...set.editor.build,
           attributes: [{ attributeId: catalogId<"Attribute">(17), rank: 10 }],
           titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 4 }],
-          equipment: {
-            ...equipment,
-            armor: equipment.armor.map((piece) =>
-              piece.slot === "head"
-                ? { ...piece, rune: knownEquipmentSelection(catalogId<"Rune">(1)) }
-                : piece
-            )
-          }
+          attributeAdjustments: adjustmentProfileFixture()
         }
       }
     };
@@ -176,7 +163,9 @@ describe("build set workspace state", () => {
     expect(copySnapshot?.build.titleRankOverrides).not.toBe(
       sourceSnapshot?.build.titleRankOverrides
     );
-    expect(copySnapshot?.build.equipment).not.toBe(sourceSnapshot?.build.equipment);
+    expect(copySnapshot?.build.attributeAdjustments).not.toBe(
+      sourceSnapshot?.build.attributeAdjustments
+    );
     expect(copySnapshot?.rawTemplate.attributes).not.toBe(sourceSnapshot?.rawTemplate.attributes);
     expect(source.document.kind === "build-set" ? source.document.comparisonEntryId : null).toBe(
       entryB

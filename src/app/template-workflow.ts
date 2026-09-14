@@ -353,9 +353,7 @@ function canonicalOption(
   projection: TemplateProjectionResult,
   validation: ValidationResult
 ): ExportOptionView {
-  const validationErrors = validation.issues.filter(
-    (issue) => issue.severity === "error" && !issue.code.startsWith("equipment.")
-  );
+  const validationErrors = validation.issues.filter((issue) => issue.severity === "error");
   if (validationErrors.length > 0) {
     return {
       available: false,

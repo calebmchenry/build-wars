@@ -4,8 +4,6 @@ import {
   buildSetEntryId,
   catalogId,
   cloneBuildForBuildSetEntry,
-  createEmptyEquipmentLoadout,
-  knownEquipmentSelection,
   type AttributeAdjustments
 } from "../domain";
 import { adjustmentProfileFixture } from "./attribute-adjustment-fixtures";
@@ -46,20 +44,21 @@ function transformBuilds(
   function visit(value: unknown) {
     if (typeof value !== "object" || value === null) return;
     const record = value as Record<string, unknown>;
-    if ("equipment" in record && "skillBar" in record) change(record);
+    if ("primaryProfessionId" in record && "skillBar" in record) change(record);
     Object.values(record).forEach(visit);
   }
   visit(copy);
   return copy;
 }
 
-describe("Build v3 persistence and complete-document boundaries", () => {
+describe("Build v4 persistence and complete-document boundaries", () => {
   it.each([1, 2])(
     "migrates nested v%i neutrally while preserving other authored evidence",
     (version) => {
       const original = validLocalLibraryEnvelopeFixture();
       const input = transformBuilds(original, (b) => {
         b.schemaVersion = version;
+        b.equipment = { armor: ["prototype"], weaponSets: ["prototype"] };
         delete b.attributeAdjustments;
         if (version === 1) delete b.titleRankOverrides;
       });
@@ -73,9 +72,104 @@ describe("Build v3 persistence and complete-document boundaries", () => {
       expect(parsed.ok ? parsed.envelope : null).toEqual(expected);
     }
   );
+  it("migrates explicit v3 choices in every nested build and drops prototype equipment", () => {
+    const original = validLocalLibraryEnvelopeFixture();
+    let migratedCount = 0;
+    const input = transformBuilds(original, (b) => {
+      const profile = b.attributeAdjustments as AttributeAdjustments | null;
+      b.schemaVersion = 3;
+      b.equipment = { armor: [{ rune: { kind: "known", id: 40 } }], weaponSets: [] };
+      b.attributeAdjustments =
+        profile === null
+          ? null
+          : {
+              headgearOverride:
+                profile.headgearAttributeId === null
+                  ? { kind: "none" }
+                  : { kind: "attribute", attributeId: profile.headgearAttributeId },
+              runeOverrides: [...profile.runes, { attributeId: 999, runeId: null }],
+              effectPreferences: profile.effectPreferences
+            };
+      migratedCount += 1;
+    });
+    expect(migratedCount).toBeGreaterThan(1);
+    const parsed = parseLocalLibraryEnvelope(input);
+    expect(parsed.ok, JSON.stringify(parsed.diagnostics)).toBe(true);
+    expect(parsed.writeBlocked).toBe(false);
+    expect(parsed.ok ? parsed.envelope : null).toEqual(original);
+    if (!parsed.ok) return;
+    const saved = serializeLocalLibraryEnvelope(parsed.envelope);
+    expect(saved).not.toMatch(/"(?:equipment|headgearOverride|runeOverrides)"/);
+    expect(parseLocalLibraryJson(saved)).toEqual(parsed);
+  });
+  it.each([null, { kind: "none" }])(
+    "never imports inherited gear for v3 headgear %j",
+    (headgearOverride) => {
+      const input = transformBuilds(validLocalLibraryEnvelopeFixture(), (b) => {
+        b.schemaVersion = 3;
+        b.equipment = { armor: [{ slot: "head", headgearAttribute: 0, rune: 22 }] };
+        b.attributeAdjustments = { headgearOverride, runeOverrides: [], effectPreferences: [] };
+      });
+      const parsed = parseLocalLibraryEnvelope(input);
+      const expected = transformBuilds(validLocalLibraryEnvelopeFixture(), (b) => {
+        b.attributeAdjustments = null;
+      });
+      expect(parsed.ok ? parsed.envelope : null).toEqual(expected);
+    }
+  );
+  it("preserves unknown well-formed v3 rune and attribute IDs for recovery", () => {
+    const input = transformBuilds(validLocalLibraryEnvelopeFixture(), (b) => {
+      b.schemaVersion = 3;
+      b.attributeAdjustments = {
+        headgearOverride: { kind: "attribute", attributeId: 0 },
+        runeOverrides: [{ attributeId: 999, runeId: 99999 }],
+        effectPreferences: []
+      };
+    });
+    const expected = transformBuilds(validLocalLibraryEnvelopeFixture(), (b) => {
+      b.attributeAdjustments = {
+        headgearAttributeId: 0,
+        runes: [{ attributeId: 999, runeId: 99999 }],
+        effectPreferences: []
+      };
+    });
+    const parsed = parseLocalLibraryEnvelope(input);
+    expect(parsed.ok ? parsed.envelope : null).toEqual(expected);
+  });
+  it.each([
+    undefined,
+    {
+      headgearOverride: { kind: "attribute", attributeId: -1 },
+      runeOverrides: [],
+      effectPreferences: []
+    },
+    {
+      headgearOverride: null,
+      runeOverrides: [
+        { attributeId: 0, runeId: 22 },
+        { attributeId: 0, runeId: null }
+      ],
+      effectPreferences: []
+    },
+    { headgearOverride: null, runeOverrides: [null], effectPreferences: [] },
+    {
+      headgearOverride: null,
+      runeOverrides: [],
+      effectPreferences: [{ effectId: "heroic-refrain", preference: "on", strength: 5 }]
+    }
+  ])("protects malformed v3 adjustment data %#", (profile) => {
+    const input = transformBuilds(validLocalLibraryEnvelopeFixture(), (b) => {
+      b.schemaVersion = 3;
+      b.attributeAdjustments = profile;
+    });
+    expect(parseLocalLibraryEnvelope(input).writeBlocked).toBe(true);
+  });
   it.each([
     (b: Record<string, unknown>) => {
-      b.schemaVersion = 4;
+      b.equipment = null;
+    },
+    (b: Record<string, unknown>) => {
+      b.schemaVersion = 5;
     },
     (b: Record<string, unknown>) => {
       delete b.attributeAdjustments;
@@ -120,7 +214,7 @@ describe("Build v3 persistence and complete-document boundaries", () => {
                 ...entry,
                 snapshot: {
                   ...entry.snapshot,
-                  build: { ...entry.snapshot.build, schemaVersion: 4 }
+                  build: { ...entry.snapshot.build, schemaVersion: 5 }
                 }
               }
             : entry
@@ -129,12 +223,12 @@ describe("Build v3 persistence and complete-document boundaries", () => {
     };
     expect(parseBuildSetTransferJson(JSON.stringify(invalid)).ok).toBe(false);
   });
-  it("round-trips 16 maximum-size profiles with representative equipment/title/raw metadata through both transfers and backups", () => {
+  it("round-trips 16 maximum-size profiles with representative title/raw metadata through both transfers and backups", () => {
     const profile: AttributeAdjustments = {
-      headgearOverride: { kind: "none" },
-      runeOverrides: Array.from({ length: 64 }, (_, i) => ({
+      headgearAttributeId: null,
+      runes: Array.from({ length: 64 }, (_, i) => ({
         attributeId: catalogId<"Attribute">(i),
-        runeId: i % 2 === 0 ? null : catalogId<"Rune">(90000 + i)
+        runeId: catalogId<"Rune">(90000 + i)
       })),
       effectPreferences: [
         { effectId: "glyph-of-elemental-power", preference: "off" },
@@ -155,18 +249,6 @@ describe("Build v3 persistence and complete-document boundaries", () => {
           ...seed.entries[index % 2]!.snapshot,
           build: {
             ...seed.entries[index % 2]!.snapshot.build,
-            equipment: {
-              ...createEmptyEquipmentLoadout(),
-              armor: createEmptyEquipmentLoadout().armor.map((piece) =>
-                piece.slot === "head"
-                  ? {
-                      ...piece,
-                      headgearAttribute: knownEquipmentSelection(catalogId<"Attribute">(0)),
-                      rune: knownEquipmentSelection(catalogId<"Rune">(22))
-                    }
-                  : piece
-              )
-            },
             id: authoredDocumentId(`max-build-${index}`),
             attributeAdjustments: profile,
             titleRankOverrides: [{ key: "title:lightbringer-rank", rank: 3 }]

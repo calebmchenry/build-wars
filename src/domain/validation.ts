@@ -1,4 +1,4 @@
-export const RULE_ENGINE_VERSION = "rule-engine:v3";
+export const RULE_ENGINE_VERSION = "rule-engine:v4";
 
 export type ValidationSeverity = "error" | "warning" | "info";
 export type ValidationPathSegment = string | number;

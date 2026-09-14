@@ -3,7 +3,6 @@ import { useMemo, type Dispatch } from "react";
 import { hasAuthoredTitleRankOverrides, hasAuthoredAttributeAdjustments } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
 import { selectValidationView } from "../editor-selectors";
-import { selectHasMeaningfulEquipment } from "../equipment-selectors";
 import {
   hydrateEditorFromSnapshot,
   selectedPersistedBuildSnapshot,
@@ -74,8 +73,8 @@ export function ShareControls({
         <div className="share-warning">
           <strong>Selected loadout only</strong>
           <p>
-            Sibling entries, party metadata, equipment, title overrides, and notes use native JSON
-            transfer or backup.
+            Sibling entries, party metadata, attribute adjustments, title overrides, and notes use
+            native JSON transfer or backup.
           </p>
         </div>
       ) : null}
@@ -87,12 +86,7 @@ export function ShareControls({
               <p>Rune, headgear, and assumed-effect choices remain in local saves and backups.</p>
             </div>
           ) : null}
-          {selectHasMeaningfulEquipment(targetEditor.build.equipment) ? (
-            <div className="share-warning">
-              <strong>Equipment omitted from skill template sharing</strong>
-              <p>Authored equipment remains in local saves and backups.</p>
-            </div>
-          ) : null}
+
           {hasAuthoredTitleRankOverrides(targetEditor.build) ? (
             <div className="share-warning">
               <strong>Title ranks omitted from skill template sharing</strong>

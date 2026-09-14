@@ -340,3 +340,8 @@ function compareNumber(left: number, right: number): number {
 function compareString(left: string, right: string): number {
   return left < right ? -1 : left > right ? 1 : 0;
 }
+
+export interface RuneCatalogView {
+  readonly catalogVersion: string | null;
+  readonly records: readonly CatalogRuneRecord[];
+}

@@ -89,7 +89,7 @@ describe("bounded assumed attribute effects", () => {
     expect(effect(build, "heroic-refrain")).toMatchObject({
       requested: false,
       active: false,
-      strength: 1
+      strength: 4
     });
     const on = {
       ...build,

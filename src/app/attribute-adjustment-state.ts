@@ -7,7 +7,6 @@ import {
   type AttributeId,
   type AttributeAdjustments,
   type Build,
-  type HeadgearOverride,
   type RuneId
 } from "../domain";
 
@@ -17,8 +16,7 @@ export type AttributeAdjustmentAction =
       readonly attributeId: AttributeId;
       readonly runeId: RuneId | null;
     }
-  | { readonly type: "reset-attribute-rune"; readonly attributeId: AttributeId }
-  | { readonly type: "set-attribute-headgear"; readonly override: HeadgearOverride }
+  | { readonly type: "set-attribute-headgear"; readonly attributeId: AttributeId | null }
   | { readonly type: "set-assumed-effect"; readonly value: AssumedEffectPreference }
   | { readonly type: "reset-assumed-effect"; readonly effectId: AssumedEffectId };
 
@@ -31,18 +29,18 @@ export function reduceAttributeAdjustmentAction(
     case "set-attribute-rune":
       return withAttributeAdjustments(build, {
         ...current,
-        runeOverrides: [
-          ...current.runeOverrides.filter((row) => row.attributeId !== action.attributeId),
-          { attributeId: action.attributeId, runeId: action.runeId }
+        runes: [
+          ...current.runes.filter((row) => row.attributeId !== action.attributeId),
+          ...(action.runeId === null
+            ? []
+            : [{ attributeId: action.attributeId, runeId: action.runeId }])
         ]
       });
-    case "reset-attribute-rune":
+    case "set-attribute-headgear":
       return withAttributeAdjustments(build, {
         ...current,
-        runeOverrides: current.runeOverrides.filter((row) => row.attributeId !== action.attributeId)
+        headgearAttributeId: action.attributeId
       });
-    case "set-attribute-headgear":
-      return withAttributeAdjustments(build, { ...current, headgearOverride: action.override });
     case "set-assumed-effect":
       return withAttributeAdjustments(build, {
         ...current,
@@ -61,28 +59,12 @@ export function reduceAttributeAdjustmentAction(
   }
 }
 
-export function clearCompactGear(build: Build): Build {
+export function clearAttributeGear(build: Build): Build {
   if (build.attributeAdjustments === null) return build;
   return withAttributeAdjustments(build, {
     ...build.attributeAdjustments,
-    headgearOverride: null,
-    runeOverrides: []
-  });
-}
-
-export function invalidateCompactGear(
-  build: Build,
-  runeAttributeIds: readonly AttributeId[],
-  headgear: boolean
-): Build {
-  const current = build.attributeAdjustments;
-  if (current === null) return build;
-  return withAttributeAdjustments(build, {
-    ...current,
-    headgearOverride: headgear ? null : current.headgearOverride,
-    runeOverrides: current.runeOverrides.filter(
-      (row) => !runeAttributeIds.includes(row.attributeId)
-    )
+    headgearAttributeId: null,
+    runes: []
   });
 }
 
