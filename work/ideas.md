@@ -21,3 +21,14 @@
 - [x] Have icon button for picking the display mode for skills: as rows, as small icons only (match the size of the icons during row display), or as large icons only (match the size of the icons as they show up in the skill bar). Making sure to handling wrapping and such. Here are some screenshots: [icon and button menu](../prior-art/gw-skills-and-attributes-refs/icon-display-menu-options.png), [small icons](../prior-art/gw-skills-and-attributes-refs/small-grid-skills-view.png), [large icons](../prior-art/gw-skills-and-attributes-refs/large-grid-skill-view.png)
 - [ ] Dark theme kinda has a green vibe. I don't think this matches the gw or gw reforged aesthetic
 - [ ] Equipment codes
+
+## Next milestone
+
+- [ ] [EPIC-19: Composer attribute adjustments](tickets/19-composer-attribute-adjustments/EPIC.md)
+  - Inline primary-profession rune segments and one optional headgear selection.
+  - Real cached rune icons and blue increased ranks with contribution breakdowns.
+  - Inferred self-buff checkboxes, persistent overrides, and opt-in external buffs.
+  - Working-draft persistence with unchanged Guild Wars template Load/Save.
+
+Named local saves and complete-build transfer are follow-ups described in the
+[design brief](../compendium/attribute-adjustments.md).

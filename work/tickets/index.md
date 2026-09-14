@@ -23,6 +23,14 @@ Epics are ordered roughly by implementation dependency. The `track` column keeps
 | 16 | functional | [Multi-Build Workspace](16-heroes-and-henchmen/EPIC.md) | View, compare, edit, duplicate, and save multiple complete build loadouts together. |
 | 17 | functional | [Party Semantics and Sharing](17-party-and-hero-builder/EPIC.md) | Add party labels, ordering, validation, and sharing on top of multi-build workspaces. |
 | 18 | functional | [Focused Build Composer](18-focused-build-composer/EPIC.md) | Refocus the primary app experience around creating, importing, editing, and exporting a single build. |
+| 19 | functional | [Composer Attribute Adjustments](19-composer-attribute-adjustments/EPIC.md) | Add inline rune/headgear choices, assumed active effects, blue effective ranks, and working-draft persistence while preserving game template files. |
+
+## Next Burn
+
+EPIC-19 is ready. Run `python3 scripts/ticket-burn.py EPIC-19 --dry-run` to preview,
+then `python3 scripts/ticket-burn.py EPIC-19` from a clean tree to plan and execute.
+The runner owns sprint numbering and ledger updates. Named local saves and new
+complete-build transfer interfaces remain follow-up work.
 
 ## Suggested First Milestone
 

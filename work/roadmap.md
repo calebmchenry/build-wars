@@ -219,6 +219,20 @@ composer feels right.
 
 See `compendium/build-composer-use-case.md` and `work/tickets/18-focused-build-composer/EPIC.md`.
 
+## Next: Composer Attribute Adjustments
+
+EPIC-19 adds inline primary-profession rune/headgear choices, locally cached rune
+icons, supported assumed active effects with inferred defaults and persistent
+overrides, and blue effective ranks with source breakdowns. Authored choices
+autosave with the current draft; the existing Guild Wars template-folder workflow
+continues to import/export ordinary base skill codes.
+
+See `compendium/attribute-adjustments.md` and
+`work/tickets/19-composer-attribute-adjustments/EPIC.md` for the settled scope,
+state/compatibility contract, source rules, and burn-ready ticket sequence. Armor
+slot management, equipment-code integration, named local saves, and new
+complete-build transfer interfaces remain later work.
+
 ## Deferred: Guides and build knowledge
 
 * Add guide authoring.

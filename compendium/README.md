@@ -27,6 +27,7 @@ The Compendium is an in-repo documentation system for agents.
 - [Visual prior art](visual-prior-art.md)
 - [Core build editor](core-build-editor.md)
 - [Focused build composer use case](build-composer-use-case.md)
+- [Composer attribute adjustments (EPIC-19 design)](attribute-adjustments.md)
 - [Title ranks](title-ranks.md)
 - [Equipment editor](equipment-editor.md)
 - [Local library and sharing](local-library-and-sharing.md)
