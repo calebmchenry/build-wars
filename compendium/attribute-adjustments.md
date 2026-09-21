@@ -108,7 +108,9 @@ skill-template field fingerprint.
 
 ## Assumed effects
 
-The first release supports the bounded definitions below. IDs are current
+The initial four effects are listed below. The expanded skill-only registry and
+per-skill tooltip rules are documented in [Skill Boost Previews](skill-boost-previews.md).
+IDs are current
 promoted-catalog template IDs, checked against the repository on 2026-09-13.
 Implementation must assert their identity and variant mapping in fixtures.
 
@@ -142,6 +144,12 @@ checkbox and skill icon, with the Refrain selector in the same row. Skill names
 and eligibility details remain in hover titles and accessible descriptions. There
 are no visible preference/status paragraphs, Reset buttons, external-support
 heading, or Strength label. The selector retains its accessible name.
+
+Show every supported effect, including self effects absent from the skill bar.
+Disable and dim ineligible choices while retaining their saved preferences and
+eligibility explanations. Re-enable them when their requirements are met. Heroic
+Refrain requires no skill on the recipient's bar; its controls are disabled only
+when the current mode or available attributes make it ineligible.
 
 The effect count counts distinct active effects with at least one applicable
 target, including effects whose nominal contribution is clipped by the rank cap.
@@ -262,7 +270,7 @@ Canonical profiles sort rune rows by attribute ID and effects by registry order.
 Empty profiles normalize to null; clearing an already empty choice is a no-op.
 
 IDs are nonnegative safe integers, rune rows are unique and bounded at 64, and
-recognized effect rows are unique and bounded at four. Rune IDs are non-null.
+recognized effect rows are unique and bounded by the effect registry (currently 17). Rune IDs are non-null.
 Exact keys, dense arrays, and all-or-nothing validation protect authored choices.
 Self-effect rows contain only `effectId` and on/off `preference`; Heroic Refrain
 also requires integer `strength` 1–4. Its strength remains saved while off.

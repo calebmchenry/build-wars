@@ -1,5 +1,6 @@
 import {
   cloneAttributeAdjustments,
+  ASSUMED_ATTRIBUTE_EFFECTS,
   emptyAttributeAdjustments,
   isAttributeAdjustments,
   type AssumedEffectId,
@@ -41,14 +42,27 @@ export function reduceAttributeAdjustmentAction(
         ...current,
         headgearAttributeId: action.attributeId
       });
-    case "set-assumed-effect":
+    case "set-assumed-effect": {
+      const definition = ASSUMED_ATTRIBUTE_EFFECTS.find((e) => e.id === action.value.effectId);
+      const alternatives =
+        action.value.preference === "on" && definition?.exclusiveGroup !== undefined
+          ? ASSUMED_ATTRIBUTE_EFFECTS.filter(
+              (e) => e.id !== definition.id && e.exclusiveGroup === definition.exclusiveGroup
+            ).map((e) => e.id)
+          : [];
       return withAttributeAdjustments(build, {
         ...current,
         effectPreferences: [
-          ...current.effectPreferences.filter((row) => row.effectId !== action.value.effectId),
+          ...current.effectPreferences.filter(
+            (row) => row.effectId !== action.value.effectId && !alternatives.includes(row.effectId)
+          ),
+          ...alternatives
+            .filter((effectId) => effectId !== "heroic-refrain")
+            .map((effectId) => ({ effectId, preference: "off" as const })),
           action.value
         ]
       });
+    }
     case "reset-assumed-effect":
       return withAttributeAdjustments(build, {
         ...current,

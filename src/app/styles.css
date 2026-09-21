@@ -3874,7 +3874,8 @@ textarea {
   height: 32px;
   flex: 0 0 auto;
 }
-.assumed-effect-row[data-inactive="true"] .catalog-icon {
+.assumed-effect-row[data-unavailable="true"] .assumed-effect-choice {
+  cursor: not-allowed;
   opacity: 0.55;
 }
 .refrain-strength {

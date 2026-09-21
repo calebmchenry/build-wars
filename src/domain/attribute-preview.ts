@@ -6,6 +6,7 @@ import type { RuneCatalogView } from "./rune-effects";
 import { summarizeAttributeRuneEffects } from "./rune-effects";
 import {
   resolveAssumedAttributeEffects,
+  isAttributeEffect,
   type AssumedAttributeEffectState
 } from "./assumed-attribute-effects";
 import {
@@ -28,6 +29,7 @@ export interface AttributePreviewContribution {
   readonly amount: number;
   readonly active: boolean;
   readonly sourceId: string | null;
+  readonly operation?: "set";
 }
 export interface AttributePreviewRank {
   readonly attributeId: AttributeId;
@@ -84,7 +86,6 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
   const primaryIds = uniqueAttributes
     .filter((a) => primary !== null && a.professionId === primary)
     .map((a) => a.id);
-  const effects = resolveAssumedAttributeEffects({ context, skillCatalog, availableAttributes });
   const profile = build.attributeAdjustments;
   const head = profile?.headgearAttributeId ?? null;
   const diagnostics: AttributePreviewDiagnostic[] = [];
@@ -187,18 +188,6 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
       sourceId: `compact:rune:${rune.id}`
     });
   }
-  for (const effect of effects.filter((e) => e.active))
-    for (const id of effect.targetAttributeIds) {
-      add(id, {
-        kind: "temporary",
-        source: "assumed",
-        label: effect.definition.label,
-        amount: effect.amount,
-        active: true,
-
-        sourceId: effect.definition.id
-      });
-    }
   const ranks = new Map<AttributeId, AttributePreviewRank>();
   const ids = new Set([
     ...professionAttributes.attributes.map((a) => a.id),
@@ -273,6 +262,44 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
       diagnostics: rowDiagnostics
     });
   }
+  const effects = resolveAssumedAttributeEffects({
+    context,
+    skillCatalog,
+    availableAttributes,
+    equipmentRanks: new Map([...ranks].map(([id, rank]) => [id, rank.equipmentAdjusted]))
+  });
+  for (const [id, rank] of ranks) {
+    const applicable = effects.filter(
+      (e) =>
+        e.active && e.amount !== null && isAttributeEffect(e) && e.targetAttributeIds.includes(id)
+    );
+    const set = applicable.find((e) => e.definition.application === "set");
+    const temporary: AttributePreviewContribution[] = applicable.map((e) => ({
+      kind: "temporary",
+      source: "assumed",
+      label: e.definition.label,
+      amount: e.amount!,
+      active: true,
+      sourceId: e.definition.id,
+      ...(e.definition.application === "set" ? { operation: "set" as const } : {})
+    }));
+    const uncapped =
+      rank.equipmentAdjusted === null
+        ? null
+        : (set?.amount ?? rank.equipmentAdjusted) +
+          applicable.filter((e) => e !== set).reduce((sum, e) => sum + e.amount!, 0);
+    ranks.set(id, {
+      ...rank,
+      uncapped,
+      available: rank.available || applicable.some((e) => e.definition.grantsAttributes),
+      effective: uncapped === null ? null : Math.min(ATTRIBUTE_PREVIEW_CAP, uncapped),
+      clipped: uncapped === null ? 0 : Math.max(0, uncapped - ATTRIBUTE_PREVIEW_CAP),
+      contributions: [
+        ...rank.contributions.map((c) => (set === undefined ? c : { ...c, active: false })),
+        ...temporary
+      ]
+    });
+  }
   return {
     ranks,
     effects,
@@ -280,7 +307,7 @@ export function projectAttributePreview(input: AttributePreviewInput): Attribute
     diagnostics: [...ranks.values()]
       .flatMap((r) => r.diagnostics)
       .concat(diagnostics.filter((d) => d.attributeIds?.length === 0)),
-    availableAttributes,
+    availableAttributes: uniqueAttributes.filter((a) => ranks.get(a.id)?.available),
     primaryResolved: primary !== null
   };
 }

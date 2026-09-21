@@ -128,7 +128,25 @@ export function selectFocusedAttributeRows(
   preview: AttributePreview = selectAttributePreview(state.build, catalogs)
 ): readonly ComposerAttributeRowView[] {
   const budget = selectAttributeBudgetView(state, catalogs);
-  const rows = selectAttributeRows(state, catalogs, validation.result);
+  const rows = [...selectAttributeRows(state, catalogs, validation.result)];
+  const grantedIds = new Set<number>();
+  for (const attribute of preview.availableAttributes) {
+    if (rows.some((row) => row.attributeId === attribute.id)) continue;
+    grantedIds.add(Number(attribute.id));
+    rows.push({
+      key: `granted:${attribute.id}`,
+      buildIndex: null,
+      attributeId: attribute.id,
+      attribute,
+      label: attribute.name,
+      professionLabel: "Seven Weapons Stance",
+      rank: 0,
+      spend: 0,
+      retained: true,
+      raw: null,
+      issues: []
+    });
+  }
   const maxRank =
     catalogs.professionAttributeCatalog.attributePointRules.purchasedRankCosts.at(-1)
       ?.purchasedRank ?? 0;
@@ -167,7 +185,10 @@ export function selectFocusedAttributeRows(
         disabledReason: decrementCost === null ? "Refund cost is unavailable." : null
       },
       increment: {
-        visible: row.attributeId !== null && row.rank < maxRank,
+        visible:
+          row.attributeId !== null &&
+          row.rank < maxRank &&
+          !grantedIds.has(Number(row.attributeId)),
         cost: incrementCost,
         disabled: incrementBlock !== null,
         disabledReason: incrementBlock

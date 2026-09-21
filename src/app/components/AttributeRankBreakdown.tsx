@@ -94,11 +94,18 @@ export function AttributeRankBreakdown({
           <ul>
             {rank?.contributions.map((c, index) => (
               <li key={`${c.sourceId}:${index}`}>
-                {c.source === "assumed" ? "Assumed" : "Selected"}: {c.label} +{c.amount}
+                {c.source === "assumed" ? "Assumed" : "Selected"}: {c.label}{" "}
+                {c.operation === "set" ? `sets rank to ${c.amount}` : `+${c.amount}`}
                 {!c.active ? " (inactive; not added)" : ""}
               </li>
             ))}
           </ul>
+          {rank?.contributions.some((c) => c.operation === "set") ? (
+            <p>
+              Master of Magic replaces base and equipment ranks. Other active skill bonuses are
+              assumed applied afterward.
+            </p>
+          ) : null}
           <p>With runes and headgear: {rank?.equipmentAdjusted ?? "unresolved"}</p>
           <p>
             Uncapped total: {rank?.uncapped ?? "unresolved"}. Preview: {value ?? "unresolved"} (cap

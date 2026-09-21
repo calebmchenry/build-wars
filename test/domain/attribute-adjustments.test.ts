@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   ASSUMED_ATTRIBUTE_EFFECTS,
+  ASSUMED_EFFECT_IDS,
   catalogId,
   cloneAttributeAdjustments,
   emptyAttributeAdjustments,
@@ -88,7 +89,7 @@ describe("attribute adjustment contract", () => {
       fixture.skills.filter((s) => s.splitGroupId === "split:skill:2139").map((s) => s.templateId)
     ).toEqual([2139, 3054]);
     expect(
-      ASSUMED_ATTRIBUTE_EFFECTS.map((effect) => [
+      ASSUMED_ATTRIBUTE_EFFECTS.slice(0, 4).map((effect) => [
         effect.id,
         effect.targetTemplateAttributeIds,
         effect.amount
@@ -99,6 +100,14 @@ describe("attribute adjustment contract", () => {
       ["masochism", [5, 6], 2],
       ["heroic-refrain", "available", "configured"]
     ]);
+    expect(ASSUMED_ATTRIBUTE_EFFECTS.map((effect) => effect.id)).toEqual(ASSUMED_EFFECT_IDS);
+    for (const effect of ASSUMED_ATTRIBUTE_EFFECTS) {
+      for (const templateId of effect.templateIds) {
+        const matches = skills.skills.filter((skill) => skill.templateId === templateId);
+        expect(matches).toHaveLength(1);
+        expect(matches[0]!.name.replace(/ \((PvP|Luxon|Kurzick)\)$/, "")).toBe(effect.label);
+      }
+    }
     for (const rune of fixture.runes)
       expect(runes.runes.find((r) => r.id === rune.id)).toMatchObject(rune);
   });

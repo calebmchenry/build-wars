@@ -38,6 +38,8 @@ export type SkillTooltipOutcome =
 export interface SkillTooltipContext {
   readonly mode: SkillMode | "unknown";
   readonly ranks: Readonly<Record<string, number>> | ReadonlyMap<string, number>;
+  /** Attribute substitution for title skills, without changing the authored title rank. */
+  readonly titleAttributeRank?: number;
 }
 
 const progressionSeriesByIdCache = new WeakMap<
@@ -158,6 +160,21 @@ function renderProgressionValue(
   context: SkillTooltipContext,
   tone: "normal" | "muted"
 ): TokenRenderOutcome {
+  if (series.dependency.kind === "title-rank" && context.titleAttributeRank !== undefined) {
+    const value = standardProgressionValue(series, valueSlot, context.titleAttributeRank, true);
+    return value === undefined
+      ? {
+          kind: "unresolved",
+          skill: null,
+          reason: "unsupported-progression",
+          detail: `Progression ${series.id} does not support attribute substitution.`
+        }
+      : {
+          kind: "rendered",
+          value: formatSkillProgressionValue(value, series, valueSlot),
+          tone: tone === "muted" ? "muted" : "variable"
+        };
+  }
   if (series.dependency.kind === "title-rank") {
     const key = series.dependency.titleKey;
     if (key === null || rankValue(context.ranks, key) === undefined) {
@@ -185,7 +202,11 @@ function renderProgressionValue(
   }
 
   const row = series.values.find((candidate) => candidate.rank === rank);
-  const value = row?.values[valueSlot];
+  const value =
+    row?.values[valueSlot] ??
+    (series.dependency.kind === "attribute" && rank > 15
+      ? standardProgressionValue(series, valueSlot, rank, false)
+      : undefined);
   if (value === undefined) {
     return {
       kind: "unresolved",
@@ -200,6 +221,43 @@ function renderProgressionValue(
     value: formatSkillProgressionValue(value, series, valueSlot),
     tone: tone === "muted" ? "muted" : "variable"
   };
+}
+
+/** Only the known linear wiki template supports extrapolation beyond its stored 0..15 rows.
+ * Title templates store the same rank-0/rank-15 endpoints at their declared title bounds.
+ * Custom tables and missing interior rows must remain unresolved.
+ */
+function standardProgressionValue(
+  series: SkillProgressionSeries,
+  slot: number,
+  rank: number,
+  title: boolean
+): number | undefined {
+  if (!Number.isInteger(rank) || rank < 0 || rank > 20) return undefined;
+  const domain = series.dependency.rankDomain;
+  const supported = title
+    ? (series.sourceForm === "skill progression max10" && domain?.max === 10) ||
+      (series.sourceForm === "skill progression max12" && domain?.max === 12)
+    : series.sourceForm === "skill progression" && domain?.max === 15;
+  if (!supported || domain?.min !== 0) return undefined;
+  const first = series.values.find((r) => r.rank === 0)?.values[slot];
+  const last = series.values.find((r) => r.rank === domain.max)?.values[slot];
+  if (first === undefined || last === undefined) return undefined;
+  if (
+    series.values.length !== domain.max + 1 ||
+    new Set(series.values.map((row) => row.rank)).size !== domain.max + 1 ||
+    !series.values.every(
+      (row) =>
+        Number.isInteger(row.rank) &&
+        row.rank >= 0 &&
+        row.rank <= domain.max &&
+        row.values[slot] !== undefined &&
+        Math.abs(row.values[slot]! - (first + ((last - first) * row.rank) / domain.max)) <= 0.001
+    )
+  )
+    return undefined;
+  const value = first + ((last - first) * rank) / 15;
+  return Number.isFinite(value) ? Math.round(value * 1000) / 1000 : undefined;
 }
 
 function descriptionTokenTone(token: SkillDescriptionToken): "normal" | "muted" {

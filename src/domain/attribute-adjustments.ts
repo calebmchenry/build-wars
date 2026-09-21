@@ -5,7 +5,20 @@ export const ASSUMED_EFFECT_IDS = [
   "glyph-of-elemental-power",
   "elemental-lord",
   "masochism",
-  "heroic-refrain"
+  "heroic-refrain",
+  "awaken-the-blood",
+  "aura-of-the-lich",
+  "armor-of-frost",
+  "elemental-attunement",
+  "glyph-of-energy",
+  "experts-dexterity",
+  "trappers-focus",
+  "shadow-theft",
+  "seven-weapons-stance",
+  "master-of-magic",
+  "ritual-lord",
+  "signet-of-illusions",
+  "symbolic-celerity"
 ] as const;
 export type AssumedEffectId = (typeof ASSUMED_EFFECT_IDS)[number];
 export type SelfEffectId = Exclude<AssumedEffectId, "heroic-refrain">;

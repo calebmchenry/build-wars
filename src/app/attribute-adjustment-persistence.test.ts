@@ -4,6 +4,8 @@ import {
   buildSetEntryId,
   catalogId,
   cloneBuildForBuildSetEntry,
+  ASSUMED_EFFECT_IDS,
+  type AssumedEffectPreference,
   type AttributeAdjustments
 } from "../domain";
 import { adjustmentProfileFixture } from "./attribute-adjustment-fixtures";
@@ -230,12 +232,11 @@ describe("Build v4 persistence and complete-document boundaries", () => {
         attributeId: catalogId<"Attribute">(i),
         runeId: catalogId<"Rune">(90000 + i)
       })),
-      effectPreferences: [
-        { effectId: "glyph-of-elemental-power", preference: "off" },
-        { effectId: "elemental-lord", preference: "on" },
-        { effectId: "masochism", preference: "off" },
-        { effectId: "heroic-refrain", preference: "on", strength: 4 }
-      ]
+      effectPreferences: ASSUMED_EFFECT_IDS.map((effectId): AssumedEffectPreference =>
+        effectId === "heroic-refrain"
+          ? { effectId, preference: "on", strength: 4 }
+          : { effectId, preference: "off" }
+      )
     };
     const seed = validPartyBuildSetSnapshotFixture();
     const snapshot = {

@@ -7,6 +7,7 @@ import {
   lookupSkillById,
   purchasedRankCost,
   renderSkillTooltipText,
+  projectSkillEffectRanks,
   resolveSkillModeVariant,
   resolveTitleRanksForSkill,
   skillMetadataTokensForSkill,
@@ -413,7 +414,10 @@ export function selectSkillDisplay(
   const rankContext = selectTooltipRankContext(state, catalogs, skill, preview);
   const tooltip = renderSkillTooltipText(catalogs.skillCatalog, skill.id, {
     mode: state.build.mode,
-    ranks: rankContext.ranks
+    ranks: rankContext.ranks,
+    ...(rankContext.titleAttributeRank === undefined
+      ? {}
+      : { titleAttributeRank: rankContext.titleAttributeRank })
   });
   const professionLabel = professionLabelForSkill(skill, catalogs);
   const attributeLabel = attributeLabelForSkill(skill, catalogs);
@@ -474,6 +478,7 @@ function selectTooltipRankContext(
   readonly ranks: Readonly<Record<string, number>>;
   readonly inherentRanks: SkillInherentRanks;
   readonly assumptions: readonly string[];
+  readonly titleAttributeRank?: number;
 } {
   const ranks: Record<string, number> = {};
   const assumptions: string[] = [];
@@ -506,14 +511,20 @@ function selectTooltipRankContext(
       return preview.primaryResolved || state.build.primaryProfessionId === null ? 0 : null;
     return preview.ranks.get(attribute.id)?.effective ?? null;
   };
+  const skillRanks = projectSkillEffectRanks({
+    skill,
+    catalog: catalogs.skillCatalog,
+    preview,
+    ranks
+  });
   return {
-    ranks,
+    ...skillRanks,
     inherentRanks: {
       expertise: inherentRank("expertise"),
       mysticism: inherentRank("mysticism"),
       fastCasting: inherentRank("fastCasting")
     },
-    assumptions
+    assumptions: [...assumptions, ...skillRanks.assumptions]
   };
 }
 
