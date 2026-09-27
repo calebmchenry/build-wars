@@ -1,0 +1,9 @@
+compositionstart:  data="\nFlare practice\npve; Fire Magic 8\n\nFlare\nEmpty\nEmpty\nEmpty\nEmpty\nEmpty\nEmpty\nEmpty\n" composing=false trusted=true
+compositionupdate:  data="´" composing=false trusted=true
+beforeinput: insertCompositionText data="´" composing=true trusted=true
+input: insertCompositionText data="´" composing=true trusted=true
+compositionupdate:  data="é" composing=false trusted=true
+beforeinput: insertCompositionText data="é" composing=true trusted=true
+input: insertCompositionText data="é" composing=true trusted=true
+compositionend:  data="é" composing=false trusted=false stack=Error
+    at HTMLDocument.w (http://127.0.0.1:4173/assets/GuideFeasibility-Ds_CcELL.js:199:37652)

@@ -1,4 +1,9 @@
 import { migrateLegacyAttributeAdjustments } from "./legacy-attribute-adjustments";
+import { validateGuideDocument } from "../guide/validation";
+import { GUIDE_LIMITS, utf8Bytes } from "../guide/limits";
+import { GuideJsonError, parseGuideJson } from "../guide/strict-json";
+import { serializeGuideMarkdown } from "../guide/markdown";
+import { assertPersistenceBytes, assertPersistenceStructure } from "./persistence-capacity";
 import {
   cloneAttributeAdjustments,
   isAttributeAdjustments,
@@ -62,7 +67,7 @@ import {
 
 export const LOCAL_LIBRARY_STORAGE_KEY = "build-wars:v1";
 export const LOCAL_LIBRARY_KIND = "build-wars-local-library";
-export const LOCAL_LIBRARY_SCHEMA_VERSION = 2;
+export const LOCAL_LIBRARY_SCHEMA_VERSION = 3;
 export const LEGACY_LOCAL_LIBRARY_SCHEMA_VERSION = 1;
 export const PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION = 2;
 export const LEGACY_PERSISTED_BUILD_SET_SNAPSHOT_SCHEMA_VERSION = 1;
@@ -108,7 +113,14 @@ export interface PersistedBuildSetSnapshot {
   readonly lastSelectedPartySlotId: PartySlotId | null;
 }
 
+export interface PersistedGuideSnapshot {
+  readonly schemaVersion: 1;
+  readonly document: import("../domain/guide").GuideDocument<PersistedBuildSnapshot>;
+  readonly recovery: import("./guide-history").GuideRecovery | null;
+  readonly appliedRevision: number;
+}
 export type PersistedDocument =
+  | { readonly kind: "guide"; readonly snapshot: PersistedGuideSnapshot }
   | {
       readonly kind: "build";
       readonly snapshot: PersistedBuildSnapshot;
@@ -304,17 +316,43 @@ export function prepareEnvelopeForWrite(
 
 export function parseLocalLibraryJson(text: string): LocalLibraryParseResult {
   try {
-    return parseLocalLibraryEnvelope(JSON.parse(text) as unknown);
-  } catch {
+    assertPersistenceBytes(text, GUIDE_LIMITS.libraryBytes);
+    return parseLocalLibraryEnvelope(parseGuideJson(text, { depth: 96, tokens: 1000000 }));
+  } catch (error) {
     const diagnostics = [
-      diagnostic("malformed-json", "$", "Stored local library JSON is malformed.")
+      diagnostic(
+        error instanceof GuideJsonError && error.reason === "dangerous-key"
+          ? "dangerous-key"
+          : "malformed-json",
+        "$",
+        error instanceof Error ? error.message : "Stored local library JSON is malformed."
+      )
     ];
     return { ok: false, diagnostics, writeBlocked: true };
   }
 }
 
-export function parseLocalLibraryEnvelope(input: unknown): LocalLibraryParseResult {
+export function parseLocalLibraryEnvelope(
+  input: unknown,
+  byteLimit: number = GUIDE_LIMITS.libraryBytes
+): LocalLibraryParseResult {
   const diagnostics: PersistenceDiagnostic[] = [];
+  try {
+    assertPersistenceStructure(input);
+    assertPersistenceBytes(JSON.stringify(input), byteLimit);
+  } catch (error) {
+    return {
+      ok: false,
+      writeBlocked: true,
+      diagnostics: [
+        diagnostic(
+          "capacity-exceeded",
+          "$",
+          error instanceof Error ? error.message : "Local data exceeds capacity."
+        )
+      ]
+    };
+  }
   if (containsDangerousKey(input)) {
     addDiagnostic(
       diagnostics,
@@ -385,7 +423,12 @@ export function parseLocalLibraryEnvelope(input: unknown): LocalLibraryParseResu
 }
 
 export function serializeLocalLibraryEnvelope(envelope: LocalLibraryEnvelopeV2): string {
-  return JSON.stringify(stableJson(envelope));
+  if (envelope.schemaVersion !== LOCAL_LIBRARY_SCHEMA_VERSION)
+    throw new Error("Only library v3 may be written.");
+  assertPersistenceStructure(envelope);
+  const text = JSON.stringify(stableJson(envelope));
+  assertPersistenceBytes(text, GUIDE_LIMITS.libraryBytes);
+  return text;
 }
 
 export function fingerprintPersistedSnapshot(snapshot: PersistedBuildSnapshot): string {
@@ -393,8 +436,24 @@ export function fingerprintPersistedSnapshot(snapshot: PersistedBuildSnapshot): 
 }
 
 export function fingerprintPersistedDocument(document: PersistedDocument): string {
+  if (document.kind === "guide") {
+    const snapshot = document.snapshot;
+    let encoded = guideFingerprintCache.get(snapshot.document);
+    if (encoded === undefined) {
+      encoded = JSON.stringify(stableJson(snapshot.document));
+      guideFingerprintCache.set(snapshot.document, encoded);
+    }
+    const recovery = snapshot.recovery?.dirty
+      ? {
+          raw: snapshot.recovery.raw,
+          stale: snapshot.recovery.baseRevision !== snapshot.appliedRevision
+        }
+      : null;
+    return `${encoded}\n${JSON.stringify(recovery)}`;
+  }
   return JSON.stringify(stableJson(document));
 }
+const guideFingerprintCache = new WeakMap<object, string>();
 
 export function fingerprintSavedRecord(record: PersistedSavedDocumentRecord): string {
   return JSON.stringify(stableJson(record));
@@ -403,6 +462,7 @@ export function fingerprintSavedRecord(record: PersistedSavedDocumentRecord): st
 export function selectedPersistedBuildSnapshot(
   document: PersistedDocument
 ): PersistedBuildSnapshot | null {
+  if (document.kind === "guide") return null;
   if (document.kind === "build") {
     return document.snapshot;
   }
@@ -435,6 +495,30 @@ function migrateLocalLibraryEnvelope(
   }
   if (root.schemaVersion === LOCAL_LIBRARY_SCHEMA_VERSION) {
     return { ok: true, value: input };
+  }
+  if (root.schemaVersion === 2) {
+    const records = Array.isArray(root.savedDocuments) ? root.savedDocuments : [];
+    const guideDocument = (value: unknown) =>
+      value && typeof value === "object" && (value as Record<string, unknown>).kind === "guide";
+    const draft = root.workingDraft as Record<string, unknown> | null;
+    if (
+      guideDocument(draft?.document) ||
+      records.some(
+        (value) =>
+          value &&
+          typeof value === "object" &&
+          guideDocument((value as Record<string, unknown>).document)
+      )
+    ) {
+      addDiagnostic(
+        diagnostics,
+        "unsupported-schema-version",
+        "$",
+        "Guide documents require library v3; v2 data was not migrated or overwritten."
+      );
+      return { ok: false };
+    }
+    return { ok: true, value: { ...root, schemaVersion: LOCAL_LIBRARY_SCHEMA_VERSION } };
   }
   if (root.schemaVersion === LEGACY_LOCAL_LIBRARY_SCHEMA_VERSION) {
     return { ok: true, value: migrateLegacyLocalLibraryEnvelope(root) };
@@ -590,16 +674,38 @@ function validateSavedRecord(
     return null;
   }
   const id = recordId(record.id, `${path}.id`, diagnostics);
-  const name = stringField(record.name, `${path}.name`, diagnostics, MAX_NAME, {
+  const isGuide =
+    record.document &&
+    typeof record.document === "object" &&
+    (record.document as Record<string, unknown>).kind === "guide";
+  const name = stringField(record.name, `${path}.name`, diagnostics, isGuide ? 160 : MAX_NAME, {
     allowEmpty: false
   });
   const createdAt = timestamp(record.createdAt, `${path}.createdAt`, diagnostics);
   const updatedAt = timestamp(record.updatedAt, `${path}.updatedAt`, diagnostics);
   const favorite = booleanField(record.favorite, `${path}.favorite`, diagnostics);
-  const tags = tagsField(record.tags, `${path}.tags`, diagnostics);
+  const tags =
+    isGuide &&
+    Array.isArray(record.tags) &&
+    record.tags.length <= MAX_TAGS &&
+    record.tags.every((tag) => typeof tag === "string" && tag.length <= 80)
+      ? (record.tags as string[])
+      : tagsField(record.tags, `${path}.tags`, diagnostics);
   const notes = nullableString(record.notes, `${path}.notes`, diagnostics, MAX_NOTES);
   const document = validatePersistedDocument(record.document, `${path}.document`, diagnostics);
   const savedWith = validateCatalogFacts(record.savedWith, `${path}.savedWith`, diagnostics);
+  if (
+    document?.kind === "guide" &&
+    (name !== document.snapshot.document.metadata.title ||
+      JSON.stringify(tags) !== JSON.stringify(document.snapshot.document.metadata.tags))
+  ) {
+    addDiagnostic(
+      diagnostics,
+      "guide-metadata-mismatch",
+      path,
+      "Saved guide name and tags must mirror its authored metadata."
+    );
+  }
 
   if (
     diagnostics.length > startCount ||
@@ -637,6 +743,21 @@ function validatePersistedDocument(
   const record = asRecord(input, path, diagnostics);
   if (record === null) {
     return null;
+  }
+  if (record.kind === "guide") {
+    try {
+      if (Object.keys(record).some((key) => key !== "kind" && key !== "snapshot"))
+        throw new Error("Unknown guide document field.");
+      return { kind: "guide", snapshot: validatePersistedGuideSnapshot(record.snapshot) };
+    } catch (error) {
+      addDiagnostic(
+        diagnostics,
+        "invalid-guide",
+        path,
+        error instanceof Error ? error.message : "Invalid guide snapshot."
+      );
+      return null;
+    }
   }
   if (record.kind === "build") {
     const snapshot = validateSnapshot(record.snapshot, `${path}.snapshot`, diagnostics);
@@ -1989,6 +2110,8 @@ function cloneBuild(build: Build): Build {
 
 export function clonePersistedDocument(document: PersistedDocument): PersistedDocument {
   switch (document.kind) {
+    case "guide":
+      return { kind: "guide", snapshot: clonePersistedGuideSnapshot(document.snapshot) };
     case "build":
       return { kind: "build", snapshot: clonePersistedBuildSnapshot(document.snapshot) };
     case "build-set":
@@ -1997,6 +2120,60 @@ export function clonePersistedDocument(document: PersistedDocument): PersistedDo
         snapshot: clonePersistedBuildSetSnapshot(document.snapshot)
       };
   }
+}
+export function clonePersistedGuideSnapshot(
+  snapshot: PersistedGuideSnapshot
+): PersistedGuideSnapshot {
+  return JSON.parse(JSON.stringify(snapshot)) as PersistedGuideSnapshot;
+}
+
+export function validatePersistedGuideSnapshot(input: unknown): PersistedGuideSnapshot {
+  const object = (value: unknown, allowed: readonly string[]) => {
+    if (
+      !value ||
+      typeof value !== "object" ||
+      Array.isArray(value) ||
+      Object.keys(value).length !== allowed.length ||
+      Object.keys(value).some((key) => !allowed.includes(key))
+    )
+      throw new Error("Guide snapshot has missing or unsupported fields.");
+    return value as Record<string, unknown>;
+  };
+  const snapshot = object(input, ["schemaVersion", "document", "recovery", "appliedRevision"]);
+  if (
+    snapshot.schemaVersion !== 1 ||
+    !Number.isSafeInteger(snapshot.appliedRevision) ||
+    Number(snapshot.appliedRevision) < 0
+  )
+    throw new Error("Guide snapshot version or revision is unsupported.");
+  const appliedRevision = snapshot.appliedRevision as number;
+  const document = validateGuideDocument(snapshot.document, {
+    validate: validateGuideBuildSnapshot,
+    id: (value) => value.build.id,
+    expandTemplate: () => {
+      throw new Error("Stored guide builds must contain complete snapshots.");
+    }
+  });
+  let recovery: PersistedGuideSnapshot["recovery"] = null;
+  if (snapshot.recovery !== null) {
+    const raw = object(snapshot.recovery, ["raw", "baseRevision", "dirty"]);
+    if (
+      typeof raw.raw !== "string" ||
+      utf8Bytes(raw.raw) > GUIDE_LIMITS.rawBytes ||
+      typeof raw.dirty !== "boolean" ||
+      !Number.isSafeInteger(raw.baseRevision) ||
+      Number(raw.baseRevision) < 0 ||
+      Number(raw.baseRevision) > appliedRevision
+    )
+      throw new Error("Guide source recovery is invalid or exceeds capacity.");
+    if (
+      !raw.dirty &&
+      (raw.baseRevision !== appliedRevision || raw.raw !== serializeGuideMarkdown(document))
+    )
+      throw new Error("Clean source recovery must match the applied guide.");
+    recovery = { raw: raw.raw, baseRevision: raw.baseRevision as number, dirty: raw.dirty };
+  }
+  return { schemaVersion: 1, document, recovery, appliedRevision };
 }
 
 export function clonePersistedBuildSnapshot(
@@ -2116,4 +2293,31 @@ function diagnostic(code: string, path: string, message: string): PersistenceDia
 
 function boundString(value: string, max: number): string {
   return value.length <= max ? value : value.slice(0, max);
+}
+
+/** Shared strict snapshot validation for portable guides; no parallel build schema. */
+export function validateGuideBuildSnapshot(input: unknown): PersistedBuildSnapshot {
+  const diagnostics: PersistenceDiagnostic[] = [];
+  if (containsDangerousKey(input)) throw new Error("Unsafe snapshot key.");
+  const value = validateSnapshot(input, "snapshot", diagnostics);
+  if (
+    value === null ||
+    diagnostics.length > 0 ||
+    !input ||
+    typeof input !== "object" ||
+    !("build" in input) ||
+    !input.build ||
+    typeof input.build !== "object" ||
+    !("schemaVersion" in input.build) ||
+    input.build.schemaVersion !== BUILD_SCHEMA_VERSION
+  ) {
+    throw new Error(
+      diagnostics.map((item) => item.message).join(" ") || "Guide snapshots require Build v4."
+    );
+  }
+  if (JSON.stringify(stableJson(input)) !== JSON.stringify(stableJson(value)))
+    throw new Error(
+      "Guide snapshots require the exact supported Build v4 payload; no fields may be stripped or migrated."
+    );
+  return value;
 }

@@ -1,0 +1,213 @@
+- main "Build Wars Guide":
+  - region "Theme":
+    - generic: Theme
+    - 'group "Theme: dark"':
+      - button "System"
+      - button "Light"
+      - button "Dark" [pressed]
+  - navigation "Workspace":
+    - button "Composer"
+    - button "New Guide"
+    - button "Open example guide"
+  - region "Guide workspace":
+    - heading "Dagger workflow verified" [level=1]
+    - paragraph: durable
+    - button "Write"
+    - button "Source"
+    - button "Read" [active] [pressed]
+    - button "Download applied Markdown"
+    - status: Source applied.
+    - navigation "Guide sections and variants":
+      - heading "In this guide" [level=2]
+      - list:
+        - link "A small workshop, not a meta ranking":
+          - /url: "#bw-guide:clipboard-destination:section:0"
+        - link "Read the chain":
+          - /url: "#bw-guide:clipboard-destination:section:2"
+        - link "Independent practice":
+          - /url: "#bw-guide:clipboard-destination:section:4"
+        - 'link "Variant: Independent practice with a deliberately lengthy variant label for narrow reading"':
+          - /url: "#bw-guide:clipboard-destination:build:dagger-independent"
+        - link "Supported practice":
+          - /url: "#bw-guide:clipboard-destination:section:7"
+        - 'link "Variant: Supported practice"':
+          - /url: "#bw-guide:clipboard-destination:build:dagger-supported"
+        - link "Try an edit":
+          - /url: "#bw-guide:clipboard-destination:section:11"
+        - link "Template input":
+          - /url: "#bw-guide:clipboard-destination:section:13"
+        - link "Usage and recommendations":
+          - /url: "#bw-guide:clipboard-destination:section:16"
+        - link "Counters and limits":
+          - /url: "#bw-guide:clipboard-destination:section:19"
+        - link "Keep the complete guide":
+          - /url: "#bw-guide:clipboard-destination:section:22"
+      - paragraph: These links navigate this local guide. Share its Markdown file to send the full guide.
+    - article "Guide reading pane":
+      - paragraph: An original interaction example for editing and comparing complete local guide builds. This is not current meta advice.
+      - heading "A small workshop, not a meta ranking" [level=1]
+      - paragraph: Use this original interaction example to compare two independent snapshots. Both bars leave slot eight open for a deliberate choice. The supported variant assumes outside help; it does not silently add that assumption to the independent variant.
+      - heading "Read the chain" [level=2]
+      - paragraph:
+        - text: Start with
+        - button "Jagged Strike — Generic":
+          - img "Jagged Strike icon":
+          - text: Jagged Strike
+          - generic: (Generic)
+        - text: ", follow with"
+        - button "Fox Fangs — Generic":
+          - img "Fox Fangs icon":
+          - text: Fox Fangs
+          - generic: (Generic)
+        - text: ", then use"
+        - button "Death Blossom — Generic":
+          - img "Death Blossom icon":
+          - text: Death Blossom
+          - generic: (Generic)
+        - text: . These generic references show catalog ranges. A bound reference below uses only its named variant, even while you edit a different card.
+      - heading "Independent practice" [level=2]
+      - region "Independent practice with a deliberately lengthy variant label for narrow reading":
+        - strong: Independent practice with a deliberately lengthy variant label for narrow reading
+        - generic: Assassin / Any · PVE
+        - generic "Independent practice with a deliberately lengthy variant label for narrow reading eight skill slots":
+          - 'button "Independent practice with a deliberately lengthy variant label for narrow reading slot 1: Jagged Strike"':
+            - img "Jagged Strike icon":
+            - generic: Jagged Strike
+          - 'button "Independent practice with a deliberately lengthy variant label for narrow reading slot 2: Fox Fangs"':
+            - img "Fox Fangs icon":
+            - generic: Fox Fangs
+          - 'button "Independent practice with a deliberately lengthy variant label for narrow reading slot 3: Death Blossom"':
+            - img "Death Blossom icon":
+            - generic: Death Blossom
+          - 'button "Independent practice with a deliberately lengthy variant label for narrow reading slot 4: Way of the Assassin"':
+            - img "Way of the Assassin icon":
+            - generic: Way of the Assassin
+          - 'button "Independent practice with a deliberately lengthy variant label for narrow reading slot 5: Critical Eye"':
+            - img "Critical Eye icon":
+            - generic: Critical Eye
+          - 'button "Independent practice with a deliberately lengthy variant label for narrow reading slot 6: Critical Agility"':
+            - img "Critical Agility icon":
+            - generic: Critical Agility
+          - 'button "Independent practice with a deliberately lengthy variant label for narrow reading slot 7: Asuran Scan"':
+            - img "Asuran Scan icon":
+            - generic: Asuran Scan
+          - 'button "Independent practice with a deliberately lengthy variant label for narrow reading slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Independent practice with a deliberately lengthy variant label for narrow reading"
+        - button "Copy Independent practice with a deliberately lengthy variant label for narrow reading template"
+      - paragraph:
+        - text: "Independent result:"
+        - button "Death Blossom — Independent practice with a deliberately lengthy variant label for narrow reading":
+          - img "Death Blossom icon":
+          - text: Death Blossom
+          - generic: (Independent practice with a deliberately lengthy variant label for narrow reading)
+        - text: ". Compare the bound tooltip with the generic reference above. Title preferences are also independent:"
+        - button "Critical Agility — Independent practice with a deliberately lengthy variant label for narrow reading":
+          - img "Critical Agility icon":
+          - text: Critical Agility
+          - generic: (Independent practice with a deliberately lengthy variant label for narrow reading)
+        - text: .
+      - heading "Supported practice" [level=2]
+      - paragraph: This comparison assumes an external Heroic Refrain at strength four. Turn it off to inspect the equipment-only preview. The larger rune carries a health tradeoff; a higher preview number alone does not make this a better build.
+      - region "Supported practice":
+        - strong: Supported practice
+        - generic: Assassin / Any · PVE
+        - generic "Supported practice eight skill slots":
+          - 'button "Supported practice slot 1: Jagged Strike"':
+            - img "Jagged Strike icon":
+            - generic: Jagged Strike
+          - 'button "Supported practice slot 2: Fox Fangs"':
+            - img "Fox Fangs icon":
+            - generic: Fox Fangs
+          - 'button "Supported practice slot 3: Death Blossom"':
+            - img "Death Blossom icon":
+            - generic: Death Blossom
+          - 'button "Supported practice slot 4: Way of the Assassin"':
+            - img "Way of the Assassin icon":
+            - generic: Way of the Assassin
+          - 'button "Supported practice slot 5: Critical Eye"':
+            - img "Critical Eye icon":
+            - generic: Critical Eye
+          - 'button "Supported practice slot 6: Critical Agility"':
+            - img "Critical Agility icon":
+            - generic: Critical Agility
+          - 'button "Supported practice slot 7: Asuran Scan"':
+            - img "Asuran Scan icon":
+            - generic: Asuran Scan
+          - 'button "Supported practice slot 8: Dash"':
+            - img "Dash icon":
+            - generic: Dash
+        - generic "Details for Supported practice"
+        - button "Copy Supported practice template"
+      - paragraph:
+        - text: "Supported result:"
+        - button "Death Blossom — Supported practice":
+          - img "Death Blossom icon":
+          - text: Death Blossom
+          - generic: (Supported practice)
+        - text: ". Compare the bound tooltip with the generic reference above. Title preferences are also independent:"
+        - button "Critical Agility — Supported practice":
+          - img "Critical Agility icon":
+          - text: Critical Agility
+          - generic: (Supported practice)
+        - text: .
+      - heading "Try an edit" [level=2]
+      - list:
+        - paragraph: Select a card and change Dagger Mastery, its headgear or its rune.
+        - paragraph: Inspect that card's bound Death Blossom reference, then the other one.
+        - paragraph: Undo once and check that only the latest authored change returns.
+        - paragraph: Drag a skill from the catalog into the open slot, or choose a text caret and insert a generic reference.
+        - paragraph: Save locally, reload, switch to Read, and download Markdown to carry both variants and their assumptions.
+      - heading "Template input" [level=2]
+      - paragraph: Paste one of these codes into Add a build at end to make another independent build. A game code carries purchased ranks and skills; it does not transfer these rune, headgear, title or outside-effect choices.
+      - code: "Independent: OwBi0xjM5wwwcwEnp/UD+WCAAAAA Supported: OwBi0pjM5wwwcwEnp/UD+WCAAAAA"
+      - heading "Usage and recommendations" [level=2]
+      - paragraph: For a practice run, choose a single target and watch the lead, off-hand and dual-attack sequence before adding more decisions. Leave the optional slot empty until you know what problem you want it to solve. Record the reason for a utility choice beside the bar, so another reader can evaluate your intent.
+      - paragraph: Treat the supported card as a comparison under an explicit team assumption. If that support is absent, turn the assumption off before comparing tooltips. Use the generic reference when discussing a skill without committing to either build.
+      - heading "Counters and limits" [level=2]
+      - paragraph: Blindness, pressure on positioning and interruptions to your attack sequence can make a planned chain unreliable. Observe what actually failed before changing a slot. An assumed-effect preview does not model uptime, enemy movement, team coordination or every combat interaction.
+      - paragraph: This guide demonstrates the workspace. It makes no claim to a current meta ranking, optimal damage or suitability for every area. Check linked mechanics and adapt deliberately.
+      - heading "Keep the complete guide" [level=2]
+      - paragraph: Save the local guide or export Markdown to retain prose, references, exact build identities and bonus assumptions. Copy template is useful for the game; it is intentionally a smaller representation. No external page body, image or rating is embedded in this example.
+      - paragraph:
+        - text: "Practice log:"
+        - button "Dash — Generic":
+          - img "Dash icon":
+          - text: Dash
+          - generic: (Generic)
+      - paragraph: Source review complete.
+      - paragraph:
+        - text: "Copy check:"
+        - button "Death Blossom — Independent practice with a deliberately lengthy variant label for narrow reading":
+          - img "Death Blossom icon":
+          - text: Death Blossom
+          - generic: (Independent practice with a deliberately lengthy variant label for narrow reading)
+      - paragraph:
+        - button "Death Blossom — Detached from dagger-workshop-example / dagger-independent":
+          - img "Death Blossom icon":
+          - text: Death Blossom
+          - generic: (Detached from dagger-workshop-example / dagger-independent)
+      - paragraph:
+        - text: "Missing target:"
+        - button "Death Blossom — Missing build missing-variant":
+          - img "Death Blossom icon":
+          - text: Death Blossom
+          - generic: (Missing build missing-variant)
+        - text: "Unknown:"
+        - button "Unresolved skill 9999999 — Generic":
+          - img "Empty skill slot": "--"
+          - text: Unresolved skill 9999999
+          - generic: (Generic)
+      - heading "Sources and attribution" [level=2]
+      - list:
+        - link "Jagged Strike mechanics":
+          - /url: https://wiki.guildwars.com/wiki/Jagged_Strike
+        - text: — Guild Wars Wiki, linked reference only
+        - paragraph: Identities and mechanics checked against the approved local catalog. Original guide prose; no copied page text.
+        - link "Dagger Mastery reference":
+          - /url: https://wiki.guildwars.com/wiki/Dagger_Mastery
+        - paragraph: Linked reference only; no runtime request.
+        - link "Game template format":
+          - /url: https://wiki.guildwars.com/wiki/Skill_template_format
+        - paragraph: Template codes encode base allocations and skills, not guide bonus assumptions.

@@ -1,0 +1,24 @@
+Browser tab: 1271892741, Title: "Build Wars", URL: "http://127.0.0.1:4173/".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~				22 button Redo guide
+~				39 text entry area (settable) Description: Guide document, Value: Practice timing between attacks.Flare (generic)
+
+
+First step
+
+Second step
+
+Pasted practice notes.
+
+Second pasted line.
+~					55 text Second pasted line.
+The focused UI element is 39 text entry area (settable) Description: Guide document, Value: Practice timing between attacks.Flare (generic)
+
+
+First step
+
+Second step
+
+Pasted practice notes.
+
+Second pasted line.

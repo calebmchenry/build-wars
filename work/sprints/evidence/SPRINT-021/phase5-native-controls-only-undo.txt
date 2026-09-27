@@ -1,0 +1,15 @@
+Browser tab: 1271892741, Title: "Build Wars", URL: "http://127.0.0.1:4173/".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 16, 201-202
++				535 text 1
+~				24 button Redo guide
+~					147 container Attributes (6 unused points)
+~						149 heading Attributes (6 unused points), Value: 2, ID: focused-attributes-title
+~							150 text Attributes ( 6 unused points )
+~							152 text 194/200
+~								199 button Description: Decrease Protection Prayers, Help: Refund 20 points
+~									200 text 20
+~								203 button (collapsed) Description: Protection Prayers: effective rank 12, base 12. Show rank breakdown, Secondary Actions: Expand
+~									204 text 12
+~						254 text field (settable) Description: Card template code, Value: OwAS8YIPXatYAZlcX30tEAA
+The focused UI element is 199 button Description: Decrease Protection Prayers, Help: Refund 20 points

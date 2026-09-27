@@ -1,0 +1,24 @@
+[
+  {
+    "step": "Actual Chrome example workflow",
+    "passed": [
+      "Open original example",
+      "Native typed Practice log",
+      "Actual tab pointer drag Dash into prose, generic reference",
+      "Catalog Dash into addressed Supported slot eight",
+      "Independent superior Dagger rune: effective14 to16",
+      "Undo once: Independent14, Supported Dash unchanged",
+      "Source append and Apply",
+      "Save As Dagger workflow verified",
+      "Reload retained complete authored guide",
+      "Reader hides edit/catalog controls",
+      "Actual native Save dialog wrote phase11-workflow-export.md"
+    ],
+    "unverified": ["Markdown file reimport remains permission-blocked"],
+    "notes": [
+      "Initial native-app-coordinate drag did not insert; correctly mapped tab pointer drag succeeded.",
+      "The first Read click immediately after reload was superseded by hydration; second after settled state passed.",
+      "Download event wait timed out while native Save dialog was open; actual dialog was then completed."
+    ]
+  }
+]

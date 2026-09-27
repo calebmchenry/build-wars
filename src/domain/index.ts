@@ -345,7 +345,11 @@ export type {
   TemplateSkillBar,
   TemplateSourceEnvelope
 } from "./template";
-export { formatSkillProgressionValue, renderSkillTooltipText } from "./skill-tooltip";
+export {
+  formatSkillProgressionValue,
+  renderSkillTooltipText,
+  renderGenericSkillTooltipText
+} from "./skill-tooltip";
 export type {
   SkillTooltipContext,
   SkillTooltipOutcome,
@@ -546,7 +550,21 @@ export type {
   PartyStructuralIssue,
   PartyStructuralIssueSeverity
 } from "./party";
-export type { Guide, GuideSection, GuideSectionKind } from "./guide";
+export { guideBuilds } from "./guide";
+export type {
+  Guide,
+  GuideDocument,
+  GuideMetadata,
+  GuideNode,
+  GuideSkillContext,
+  GuideSource
+} from "./guide";
+export {
+  mapGuideNodes,
+  guideDeletionImpact,
+  copyGuideFragment,
+  resolveGuideContext
+} from "./guide-references";
 export * from "./attribute-adjustments";
 export * from "./assumed-attribute-effects";
 export * from "./attribute-preview";

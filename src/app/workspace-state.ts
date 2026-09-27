@@ -51,6 +51,7 @@ import {
 } from "./editor-state";
 import type { LocalLibraryWriteResult } from "./local-storage";
 import {
+  LOCAL_LIBRARY_SCHEMA_VERSION,
   createPersistedBuildSnapshot,
   clonePersistedBuildSetSnapshot,
   clonePersistedBuildSnapshot,
@@ -70,6 +71,18 @@ import {
   type PersistedSavedDocumentRecord,
   type PersistedWorkingDraft
 } from "./persistence-schema";
+import {
+  createRuntimeGuide,
+  reduceGuide,
+  type GuideCommand,
+  type RuntimeGuideDocument
+} from "./guide-state";
+import type { AppliedGuide } from "./guide-history";
+import { emptyGuide } from "../guide/markdown";
+import { parseGuideMarkdown } from "../guide/markdown";
+import { guideBuildAdapter } from "./guide-build-adapter";
+import type { AppCatalogViews } from "./catalogs";
+import { clonePersistedDocument, type PersistedBuildSnapshot } from "./persistence-schema";
 
 export type HydrationSource =
   | "blank"
@@ -121,6 +134,7 @@ export interface WorkspaceRestoreState {
 }
 
 export type WorkspaceDocument =
+  | RuntimeGuideDocument
   | {
       readonly kind: "build";
     }
@@ -136,6 +150,18 @@ export interface WorkspaceState {
 }
 
 export type WorkspaceAction =
+  | {
+      readonly type: "replace-guide";
+      readonly document: AppliedGuide;
+      readonly session: string;
+      readonly decision: DirtyGuardDecision;
+      readonly capturedBuild?: PersistedBuildSnapshot | null;
+    }
+  | {
+      readonly type: "guide";
+      readonly command: GuideCommand;
+      readonly catalogs?: AppCatalogViews | null;
+    }
   | {
       readonly type: "editor";
       readonly action: EditorAction;
@@ -458,6 +484,53 @@ export function createInitialWorkspaceState(
 
 export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction): WorkspaceState {
   switch (action.type) {
+    case "replace-guide": {
+      if (needsDirtyGuard(state) && action.decision === "cancel") return state;
+      const document = createRuntimeGuide(
+        action.document,
+        action.session,
+        action.capturedBuild ?? null
+      );
+      return {
+        ...state,
+        document,
+        editor: createBlankEditorState(),
+        draftSession: {
+          ...state.draftSession,
+          associatedRecordId: null,
+          hydrationSource: "blank",
+          dirtyState: "clean",
+          durability: pendingFrom(state.draftSession.durability),
+          allowWorkingDraftAutosave: state.draftSession.durability !== "write-blocked",
+          baselineFingerprint: fingerprintPersistedDocument(
+            materializeDocument(document, state.editor)
+          )
+        }
+      };
+    }
+    case "guide": {
+      if (state.document.kind !== "guide") return state;
+      const document = reduceGuide(state.document, action.command, action.catalogs ?? null);
+      if (document === state.document) return state;
+      if (
+        document.history === state.document.history ||
+        document.history.revision === state.document.history.revision
+      )
+        return { ...state, document };
+      return {
+        ...state,
+        document,
+        draftSession: {
+          ...state.draftSession,
+          durability: pendingFrom(state.draftSession.durability),
+          dirtyState:
+            fingerprintPersistedDocument(materializeDocument(document, state.editor)) ===
+            state.draftSession.baselineFingerprint
+              ? "clean"
+              : "dirty"
+        }
+      };
+    }
     case "editor":
       return reduceEditorAction(state, action.action);
     case "replace-draft":
@@ -644,6 +717,20 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
     case "rename-record":
       return renameRecord(state, action.id, action.name, action.now, action.savedWith);
     case "set-record-tags":
+      if (
+        state.library.records.find((record) => record.id === action.id)?.document.kind === "guide"
+      )
+        return updateGuideRecordMetadata(
+          state,
+          action.id,
+          {
+            tags: action.tags
+              .map((tag) => tag.trim().slice(0, 80))
+              .filter(Boolean)
+              .slice(0, 24)
+          },
+          action.now
+        );
       return mutateRecord(state, action.id, action.now, (record) => ({
         ...record,
         tags: normalizeTags(action.tags)
@@ -768,15 +855,15 @@ export function createWorkspaceEnvelope(
   savedWith: PersistedCatalogFacts | null,
   now: string
 ): LocalLibraryEnvelopeV1 {
-  const facts = savedWith ??
-    state.library.records[0]?.savedWith ?? {
+  const facts = (state.document.kind === "guide" ? guideCatalogFacts(state) : savedWith) ??
+    state.storage.preservedWorkingDraft?.savedWith ?? {
       buildCatalogVersion: state.editor.build.catalogVersion,
       professionAttributeCatalogVersion: null,
       skillCatalogVersion: null,
       ruleEngineVersion: null
     };
   return {
-    schemaVersion: 2,
+    schemaVersion: LOCAL_LIBRARY_SCHEMA_VERSION,
     kind: "build-wars-local-library",
     revision: state.storage.revision,
     updatedAt: now,
@@ -799,6 +886,14 @@ export function workspacePersistenceFingerprint(
   state: WorkspaceState,
   savedWith: PersistedCatalogFacts | null
 ): string {
+  if (state.document.kind === "guide") {
+    let libraryRevision = guideLibraryRevisions.get(state.library.records);
+    if (libraryRevision === undefined) {
+      libraryRevision = ++nextGuideLibraryRevision;
+      guideLibraryRevisions.set(state.library.records, libraryRevision);
+    }
+    return `guide:${state.document.history.session}:${state.document.history.revision}:${libraryRevision}:${state.draftSession.associatedRecordId ?? ""}:${state.draftSession.allowWorkingDraftAutosave}`;
+  }
   const envelope = createWorkspaceEnvelope(state, savedWith, "2000-01-01T00:00:00Z");
   return serializeLocalLibraryEnvelope({
     ...envelope,
@@ -810,6 +905,8 @@ export function workspacePersistenceFingerprint(
     }
   });
 }
+const guideLibraryRevisions = new WeakMap<object, number>();
+let nextGuideLibraryRevision = 0;
 
 export function materializeActiveDocument(state: WorkspaceState): PersistedDocument {
   return materializeDocument(state.document, state.editor);
@@ -824,7 +921,26 @@ export function materializeActiveBuildSetSnapshot(
 }
 
 export function needsDirtyGuard(state: WorkspaceState): boolean {
-  return state.draftSession.dirtyState !== "clean";
+  if (state.draftSession.dirtyState !== "clean") return true;
+  if (state.document.kind !== "guide") return false;
+  if (state.document.history.frame.recovery?.dirty) return true;
+  // Hydration marks storage durable, but a working draft may still differ from its named record.
+  const saved = state.library.records.find(
+    (record) => record.id === state.draftSession.associatedRecordId
+  );
+  const baseline: PersistedDocument = saved?.document ?? {
+    kind: "guide",
+    snapshot: {
+      schemaVersion: 1,
+      document: emptyGuide(state.document.history.frame.document.metadata.id),
+      recovery: null,
+      appliedRevision: 0
+    }
+  };
+  return (
+    fingerprintPersistedDocument(materializeActiveDocument(state)) !==
+    fingerprintPersistedDocument(baseline)
+  );
 }
 
 export function generateLocalBuildRecordId(now: string, sequence: number): LocalBuildRecordId {
@@ -860,6 +976,34 @@ function hydrateWorkspaceDocument(document: PersistedDocument): {
   readonly document: WorkspaceDocument;
 } {
   switch (document.kind) {
+    case "guide": {
+      const runtime = createRuntimeGuide(document.snapshot.document, crypto.randomUUID());
+      const recovery = document.snapshot.recovery;
+      const parsed = recovery?.dirty
+        ? parseGuideMarkdown(
+            recovery.raw,
+            guideBuildAdapter(null),
+            () => document.snapshot.document.metadata.id
+          )
+        : null;
+      return {
+        editor: createBlankEditorState(),
+        document: {
+          ...runtime,
+          view: recovery?.dirty ? "source" : "visual",
+          diagnostics: parsed && !parsed.ok ? parsed.diagnostics : [],
+          history: {
+            ...runtime.history,
+            revision: document.snapshot.appliedRevision,
+            frame: {
+              document: document.snapshot.document,
+              recovery: document.snapshot.recovery,
+              appliedRevision: document.snapshot.appliedRevision
+            }
+          }
+        }
+      };
+    }
     case "build":
       return {
         editor: hydrateEditorFromSnapshot(document.snapshot),
@@ -872,6 +1016,16 @@ function hydrateWorkspaceDocument(document: PersistedDocument): {
 
 function materializeDocument(document: WorkspaceDocument, editor: EditorState): PersistedDocument {
   switch (document.kind) {
+    case "guide":
+      return {
+        kind: "guide",
+        snapshot: {
+          schemaVersion: 1,
+          document: document.history.frame.document,
+          recovery: document.history.frame.recovery?.dirty ? document.history.frame.recovery : null,
+          appliedRevision: document.history.frame.appliedRevision ?? 0
+        }
+      };
     case "build":
       return persistedBuildDocument(createPersistedBuildSnapshot(editor));
     case "build-set":
@@ -1034,10 +1188,23 @@ function copyRecordIntoSet(
 }
 
 function activeDocumentName(state: WorkspaceState): string {
+  if (state.document.kind === "guide") return state.document.history.frame.document.metadata.title;
   return state.document.kind === "build-set" ? state.document.name : state.editor.build.name;
 }
 
 function stateWithRecordName(state: WorkspaceState, name: string): WorkspaceState {
+  if (state.document.kind === "guide") {
+    const document = reduceGuide(state.document, {
+      type: "metadata",
+      session: state.document.history.session,
+      revision: state.document.history.revision,
+      metadata: {
+        ...state.document.history.frame.document.metadata,
+        title: name.trim().slice(0, 160) || state.document.history.frame.document.metadata.title
+      }
+    });
+    return { ...state, document };
+  }
   if (state.document.kind === "build-set") {
     return {
       ...state,
@@ -1057,6 +1224,7 @@ function cloneRecordDocumentForDuplicate(
   document: PersistedDocument,
   newId: LocalBuildRecordId
 ): PersistedDocument {
+  if (document.kind === "guide") return clonePersistedDocument(document);
   if (document.kind === "build") {
     const snapshot = clonePersistedBuildSnapshot(document.snapshot);
     return persistedBuildDocument({
@@ -1117,6 +1285,7 @@ function cloneRecordDocumentForDuplicate(
 }
 
 function reduceEditorAction(state: WorkspaceState, action: EditorAction): WorkspaceState {
+  if (state.document.kind === "guide") return state;
   if (state.document.kind === "build-set" && state.document.selectedEntryId === null) return state;
   const before = fingerprintPersistedDocument(materializeActiveDocument(state));
   const reducedEditor = editorReducer(state.editor, action);
@@ -1196,14 +1365,14 @@ function saveNewRecord(
   const document = materializeActiveDocument(renamed);
   const record: PersistedSavedDocumentRecord = {
     id,
-    name: normalizeRecordName(name, activeDocumentName(state)),
+    name: activeDocumentName(renamed),
     createdAt: now,
     updatedAt: now,
     favorite: false,
-    tags: [],
+    tags: document.kind === "guide" ? document.snapshot.document.metadata.tags : [],
     notes: null,
     document,
-    savedWith
+    savedWith: document.kind === "guide" ? guideCatalogFacts(state) : savedWith
   };
   return markDurableMutation(
     {
@@ -1269,8 +1438,9 @@ function updateAssociatedRecord(
     (record) => ({
       ...record,
       name: activeDocumentName(state),
+      tags: document.kind === "guide" ? document.snapshot.document.metadata.tags : record.tags,
       document,
-      savedWith
+      savedWith: document.kind === "guide" ? guideCatalogFacts(state) : savedWith
     }),
     true
   );
@@ -1321,7 +1491,7 @@ function duplicateRecord(
   const copy: PersistedSavedDocumentRecord = {
     ...record,
     id: newId,
-    name: `${record.name} Copy`,
+    name: record.document.kind === "guide" ? record.name : `${record.name} Copy`,
     createdAt: now,
     updatedAt: now,
     document: cloneRecordDocumentForDuplicate(record.document, newId)
@@ -1381,6 +1551,13 @@ function renameRecord(
   now: string,
   savedWith: PersistedCatalogFacts
 ): WorkspaceState {
+  if (state.library.records.find((record) => record.id === id)?.document.kind === "guide")
+    return updateGuideRecordMetadata(
+      state,
+      id,
+      { title: name.trim().slice(0, 160) || "Untitled Guide" },
+      now
+    );
   const nextName = normalizeRecordName(name, "Untitled Build");
   const associatedAndClean =
     state.draftSession.associatedRecordId === id && state.draftSession.dirtyState === "clean";
@@ -1562,4 +1739,78 @@ function summarizeDiagnostics(diagnostics: readonly PersistenceDiagnostic[]): st
     .slice(0, 3)
     .map((diagnostic) => diagnostic.message)
     .join(" ");
+}
+
+/** Retain existing audit facts; an unrelated global editor is not guide validation. */
+export function guideCatalogFacts(state: WorkspaceState): PersistedCatalogFacts {
+  const record = state.library.records.find(
+    (record) => record.id === state.draftSession.associatedRecordId
+  );
+  if (record?.document.kind === "guide") return record.savedWith;
+  const draft = state.storage.preservedWorkingDraft;
+  if (
+    state.document.kind === "guide" &&
+    draft?.document.kind === "guide" &&
+    draft.document.snapshot.document.metadata.id ===
+      state.document.history.frame.document.metadata.id
+  )
+    return draft.savedWith;
+  return {
+    buildCatalogVersion: null,
+    professionAttributeCatalogVersion: null,
+    skillCatalogVersion: null,
+    ruleEngineVersion: null
+  };
+}
+function updateGuideRecordMetadata(
+  state: WorkspaceState,
+  id: LocalBuildRecordId,
+  change: Partial<Pick<AppliedGuide["metadata"], "title" | "tags">>,
+  now: string
+): WorkspaceState {
+  const record = state.library.records.find((record) => record.id === id);
+  if (record?.document.kind !== "guide") return state;
+  const prior = record.document.snapshot;
+  const snapshot = {
+    ...prior,
+    appliedRevision: prior.appliedRevision + 1,
+    document: { ...prior.document, metadata: { ...prior.document.metadata, ...change } }
+  };
+  const document: PersistedDocument = { kind: "guide", snapshot };
+  let next = state;
+  if (state.document.kind === "guide" && state.draftSession.associatedRecordId === id) {
+    if (state.document.composing || state.document.view === "read") return state;
+    const runtime = reduceGuide(state.document, {
+      type: "metadata",
+      session: state.document.history.session,
+      revision: state.document.history.revision,
+      metadata: { ...state.document.history.frame.document.metadata, ...change }
+    });
+    const baselineFingerprint = fingerprintPersistedDocument(document);
+    next = {
+      ...state,
+      document: runtime,
+      draftSession: {
+        ...state.draftSession,
+        baselineFingerprint,
+        dirtyState:
+          fingerprintPersistedDocument(materializeDocument(runtime, state.editor)) ===
+          baselineFingerprint
+            ? "clean"
+            : "dirty"
+      }
+    };
+  }
+  return mutateRecord(
+    next,
+    id,
+    now,
+    (record) => ({
+      ...record,
+      document,
+      name: snapshot.document.metadata.title,
+      tags: snapshot.document.metadata.tags
+    }),
+    true
+  );
 }

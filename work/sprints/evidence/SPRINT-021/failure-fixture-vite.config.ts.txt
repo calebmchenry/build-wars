@@ -1,0 +1,3 @@
+import {defineConfig} from 'vite';
+import react from '@vitejs/plugin-react';
+export default defineConfig({plugins:[react()],build:{outDir:'work/runs/SPRINT-021/failure-preview',emptyOutDir:true,rollupOptions:{input:'work/runs/SPRINT-021/browser-fixture/index.html'}}});

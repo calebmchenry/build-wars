@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" />
+  <title>Native composition control</title>
+  <h1>Native composition control</h1>
+  <label>Plain textarea <textarea aria-label="Plain textarea"></textarea></label>
+  <div contenteditable="true" role="textbox" aria-label="Plain editable paragraph">
+    Native paragraph.
+  </div>
+  <button id="read">Read native events</button>
+  <pre id="trace" aria-label="Native events"></pre>
+  <script>
+    const rows = [];
+    for (const name of [
+      "compositionstart",
+      "compositionupdate",
+      "compositionend",
+      "beforeinput",
+      "input"
+    ]) {
+      document.addEventListener(
+        name,
+        (event) => {
+          rows.push(
+            `${event.type}: ${event.inputType ?? ""} data=${JSON.stringify(event.data ?? null)} composing=${event.isComposing ?? false} trusted=${event.isTrusted}`
+          );
+        },
+        true
+      );
+    }
+    document.getElementById("read").onclick = () => {
+      document.getElementById("trace").textContent = rows.join("\n");
+    };
+  </script>
+</html>

@@ -1,0 +1,3 @@
+Browser tab: 1271892741, Title: "Build Wars", URL: "http://127.0.0.1:4173/".
+There has been no change in the accessibility tree.
+The focused UI element is 24 checkbox Source, Value: 1

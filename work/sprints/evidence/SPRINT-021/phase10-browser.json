@@ -1,0 +1,39 @@
+[
+  {
+    "case": "reader-controls-and-second-variant-anchor",
+    "status": "passed",
+    "catalogAbsent": true,
+    "mutationControlsAbsent": true,
+    "anchor": "bw-guide:886bfda0-8f14-46b7-a0dd-2f5ad77efb33:build:37ca1a1c-477f-40c4-8a31-8a89cff2839e",
+    "secondBase": 11,
+    "secondPreview": 11,
+    "screenshot": "phase10-reader.png"
+  },
+  {
+    "case": "reader-copy-second-variant",
+    "status": "passed",
+    "clipboard": "OwAS8WIPXatYAZlcX30tEAAA",
+    "observation": "Copied message plus native Chrome Find field matched displayed second-variant code."
+  },
+  {
+    "case": "reload-guide-anchor",
+    "status": "passed",
+    "observed": [
+      "0 standard window Build Wars - Part of group 📝 Guide sprint - Google Chrome, Secondary Actions: Raise, URL: 127.0.0.1:4173/#bw-guide:886bfda0-8f14-46b7-a0dd-2f5ad77efb33:build:37ca1a1c-477f-40c4-8a31-8a89cff2839e",
+      "\t\t\t\t\t\t\t\t46 heading Quota second, Value: 1",
+      "\t\t\t\t\t\t\t\t51 toggle button Read, Value: 1"
+    ]
+  },
+  {
+    "case": "reader-copy-first-variant",
+    "status": "passed",
+    "clipboard": "OwAS8YIPXatYAZlcX30tEAA",
+    "observation": "Native Chrome Find field matched the first variant exact-source code, distinct from the second."
+  },
+  {
+    "case": "native-reader-undo-and-200-percent",
+    "status": "passed",
+    "observation": "Native Command-Z kept Quota second in durable Read state; Chrome zoom indicator reported 200%.",
+    "screenshot": "phase10-reader-200pct.png"
+  }
+]

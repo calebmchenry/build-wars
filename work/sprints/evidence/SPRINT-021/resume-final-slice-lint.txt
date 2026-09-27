@@ -1,0 +1,10 @@
+
+> build-wars@0.0.0 lint
+> eslint .
+
+
+/Users/calebmchenry/.codex/worktrees/guide-workspace-burn/build-wars/src/main.tsx
+  7:7  warning  Fast refresh only works when a file has exports. Move your component(s) to a separate file  react-refresh/only-export-components
+
+✖ 1 problem (0 errors, 1 warning)
+

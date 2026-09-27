@@ -1,0 +1,9 @@
+Browser tab: 1271892759, Title: "External drag verification", URL: "http://127.0.0.1:4174/work/runs/SPRINT-021/browser-fixture/drag.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~				6 text External text end trusted=true dropEffect=none
+The focused UI element is 3 button External text
+
+Browser tab: 1271892759, Title: "External drag verification", URL: "http://127.0.0.1:4174/work/runs/SPRINT-021/browser-fixture/drag.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~				6 text Malformed skill end trusted=true dropEffect=none
+The focused UI element is 4 button Malformed skill

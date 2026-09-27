@@ -1,0 +1,3703 @@
+diff --git a/package-lock.json b/package-lock.json
+index 2e999bf..91040d7 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -9,8 +9,16 @@
+       "version": "0.0.0",
+       "dependencies": {
+         "@buildwars/gw-templates": "1.1.1",
++        "@tiptap/core": "3.31.3",
++        "@tiptap/pm": "3.31.3",
++        "@tiptap/react": "3.31.3",
++        "@tiptap/starter-kit": "3.31.3",
+         "react": "^19.2.8",
+-        "react-dom": "^19.2.8"
++        "react-dom": "^19.2.8",
++        "remark-directive": "4.0.0",
++        "remark-parse": "11.0.0",
++        "remark-stringify": "11.0.0",
++        "unified": "11.0.5"
+       },
+       "devDependencies": {
+         "@testing-library/jest-dom": "^7.0.1",
+@@ -1113,6 +1121,34 @@
+         "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+       }
+     },
++    "node_modules/@floating-ui/core": {
++      "version": "1.8.0",
++      "resolved": "https://registry.npmjs.org/@floating-ui/core/-/core-1.8.0.tgz",
++      "integrity": "sha512-0CIZ5itps/8x7BG8dEIhs53BvCUH2PCoogtakwRTut+Arm58sJooJ0AuZhLw2HJYIR5cMLNPBSS728sPho2khQ==",
++      "license": "MIT",
++      "optional": true,
++      "dependencies": {
++        "@floating-ui/utils": "^0.2.12"
++      }
++    },
++    "node_modules/@floating-ui/dom": {
++      "version": "1.8.0",
++      "resolved": "https://registry.npmjs.org/@floating-ui/dom/-/dom-1.8.0.tgz",
++      "integrity": "sha512-yXSrzeHZBTZadLOlfyhCkJHNeLJnHRnRInwdZ40L7ZiaAtrBwoYlsDrX3v5zB1Utk7CLfzcOVnVVWoXEky7Ceg==",
++      "license": "MIT",
++      "optional": true,
++      "dependencies": {
++        "@floating-ui/core": "^1.8.0",
++        "@floating-ui/utils": "^0.2.12"
++      }
++    },
++    "node_modules/@floating-ui/utils": {
++      "version": "0.2.12",
++      "resolved": "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.12.tgz",
++      "integrity": "sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==",
++      "license": "MIT",
++      "optional": true
++    },
+     "node_modules/@humanfs/core": {
+       "version": "0.19.2",
+       "resolved": "https://registry.npmjs.org/@humanfs/core/-/core-0.19.2.tgz",
+@@ -1694,6 +1730,436 @@
+         }
+       }
+     },
++    "node_modules/@tiptap/core": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/core/-/core-3.31.3.tgz",
++      "integrity": "sha512-Cz50pvciQrxdSxgTkHOVz0uD0Yl/8Xt0QatGD6ILm47jW8EzyHR9RkUGs/D5IqzXKuVPntfw1ttaT926vXfiRg==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/pm": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-blockquote": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-blockquote/-/extension-blockquote-3.31.3.tgz",
++      "integrity": "sha512-fyY2XMbyDDDfOTQ1Qdrnqa1qwC9DWE4n7AfE0EKQI0G8MfLV8RaDlLDcOZDJ9JbMPY7/Gx7EjyK4NKxSW9n2hQ==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3",
++        "@tiptap/pm": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-bold": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-bold/-/extension-bold-3.31.3.tgz",
++      "integrity": "sha512-dIuYhKk8TitKU/FeDpoTeWZhU42YgDN5npgWNjAmMmRktPdoxnH3/wGSiwXlqZgJWjehN7kPWDePWpJeAImGpQ==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-bubble-menu": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-bubble-menu/-/extension-bubble-menu-3.31.3.tgz",
++      "integrity": "sha512-EV6ZnwKc++2OM/OcD54n8s1B7C9LP7GKAtdEPwu0t3BYJf3sG8Ueoinf7SgGPO9oMPg96GneOkDNm1urMV167g==",
++      "license": "MIT",
++      "optional": true,
++      "dependencies": {
++        "@floating-ui/dom": "^1.0.0"
++      },
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3",
++        "@tiptap/pm": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-bullet-list": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-bullet-list/-/extension-bullet-list-3.31.3.tgz",
++      "integrity": "sha512-qEyyoPapPef4LO8XKaN83bxtaNzkJ4kFn/IxLnEKd4BJ3Mvi4MH2yJYlyDqwFnMoev4pMA1zBHRAt/C0THRmZw==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/extension-list": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-code": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-code/-/extension-code-3.31.3.tgz",
++      "integrity": "sha512-SzxOqchrD2AcN3uT67PjKmRFEMOU3vNNiwNaamZJUbZrI6Hmy+bvdHJrc3jrIddyyCrAtsnAfRI0cmorW1jGfg==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-code-block": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-code-block/-/extension-code-block-3.31.3.tgz",
++      "integrity": "sha512-nvknt4FhyJQjYcvxptmeUlFsIAc8ibua3E5BN4Pim374/9RWepH4cdE9X0/qUTtguHElLx0iKtSIY3rW2qGTFA==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3",
++        "@tiptap/pm": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-document": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-document/-/extension-document-3.31.3.tgz",
++      "integrity": "sha512-EexgmqnyDNyGlISxo7SMrp5MygpJYmqD+0cY5jB6L1U6L4CpKKRWUt8OO1sWzEHDE1+TTvwt+WIFoIWAziOtEA==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-dropcursor": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-dropcursor/-/extension-dropcursor-3.31.3.tgz",
++      "integrity": "sha512-NWomSfu5CSC7VacnMSDzKT8qm66SzMfZwVPEtwY5bPpRTJgTiT1rNK0neDrrzfMN27MfylGyKWWf7Q5Qf8w/fg==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/extensions": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-floating-menu": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-floating-menu/-/extension-floating-menu-3.31.3.tgz",
++      "integrity": "sha512-rd4VJ9PGSP9Eop8ZTEwaLZcMzMXLuJKe3hUNf58rq+zANpwM+9fI+vB7g9MAc3eXwUNDxNDVACFIL2oeBqpQ3A==",
++      "license": "MIT",
++      "optional": true,
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@floating-ui/dom": "^1.0.0",
++        "@tiptap/core": "3.31.3",
++        "@tiptap/pm": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-gapcursor": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-gapcursor/-/extension-gapcursor-3.31.3.tgz",
++      "integrity": "sha512-EBXKb1FrVStsNYCcRGtd9jmzveCvR+eqgg1rVqoONrqFK6U7bga6LN+1dMKroP1kliDVgveYkP3vRYxqw+rFqg==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/extensions": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-hard-break": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-hard-break/-/extension-hard-break-3.31.3.tgz",
++      "integrity": "sha512-QAdCvNO4+yW9ATwsrej11NTkDYFqPLIEQr3ARNrKOK1qaiS7A0fia2SEukb/hrkP3A6mbozhoQt2r2RGUf/DpQ==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-heading": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-heading/-/extension-heading-3.31.3.tgz",
++      "integrity": "sha512-rk5VHMAeQcg06SLauN6EGdD2jc0O2qY8QkZYPd0LxNvLblw2BxBx+lxUQSYwLAT9Ie5914gKIK2YbRyO2Ts3ig==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-horizontal-rule": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-horizontal-rule/-/extension-horizontal-rule-3.31.3.tgz",
++      "integrity": "sha512-YnHGy2KShRwvCseAmmxl9VP7R0qaj8QMp3DA6DJWZqp7r5gLGvDkAqhedxqqefqsE4Y43hjkBdjtB9Ce78LkIw==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3",
++        "@tiptap/pm": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-italic": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-italic/-/extension-italic-3.31.3.tgz",
++      "integrity": "sha512-ibGvdvAPyfxBMUVNRI43eb9h2/Jka1MRG5GtnGqbcCX/2+Y/y0EOfFrPQPkuYphiWQYyu9+FzPKMB/pjuaLuKQ==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-link": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-link/-/extension-link-3.31.3.tgz",
++      "integrity": "sha512-986wOQzTL9Zr5lf84LCLpm+YOms8A0K39/8DVoqRfebqcOe0/eq4bnztmAlfabOd+kJY92g3AgZERFUx/w+dcw==",
++      "license": "MIT",
++      "dependencies": {
++        "linkifyjs": "^4.3.3"
++      },
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3",
++        "@tiptap/pm": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-list": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-list/-/extension-list-3.31.3.tgz",
++      "integrity": "sha512-LoveGnC0FVdCV4jUNBaG1ZA+KWE07+adzV3kGy6uUYFcJEjbVUHTnPDrBOob3IwOSO3sCwIkvQb6EVYeXn/4yg==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3",
++        "@tiptap/pm": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-list-item": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-list-item/-/extension-list-item-3.31.3.tgz",
++      "integrity": "sha512-4QlKOriJJMvg95QJTEsy9BUYPBQ6UvJyb8WURRwdUtQUkkqb8h32lg/eyQUv2FzW9IT1AdUyNZfVaxH64kRfQA==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/extension-list": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-list-keymap": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-list-keymap/-/extension-list-keymap-3.31.3.tgz",
++      "integrity": "sha512-If8UOEdDZbPJU6iYTvLtH6DOp2KBy6BKxg9UELL1AevVetGHEF/7lW8hP50Gn1tHMVpPRqmhSzVrJRpEJJgb/Q==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/extension-list": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-ordered-list": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-ordered-list/-/extension-ordered-list-3.31.3.tgz",
++      "integrity": "sha512-mp3g11NgA/PYu8rj7J7Ez3l4qBy6WfTSmHIG4PZvEGG5w2oUAIkgb9DU7nPPzjmeme27oazFYZw+AtZA0+u4tw==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/extension-list": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-paragraph": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-paragraph/-/extension-paragraph-3.31.3.tgz",
++      "integrity": "sha512-+iPku7wJfy5hbNDNLX8dveFtYVsZMmh7vztjuq8hT3mipSC4IByDehDbU8fzUCjfXiEzmI7mQn7c8LGmHULuzA==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-strike": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-strike/-/extension-strike-3.31.3.tgz",
++      "integrity": "sha512-G29bhKttYwcKHT+BI6emWVFol3RO/gUXxQVcmr/iT8LXXy7j8J6HFUnsKM+Kg5YlP1rxMRgsa65dbrQVahZi0A==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-text": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-text/-/extension-text-3.31.3.tgz",
++      "integrity": "sha512-gdsWtF+taeaCu6V+5Ct10fGo0ACUy1GnYtbb+mcathBt8OqbT+Ws60p/yEmKesBDz2Hn+B5IcWy6+2BBZl5ZTg==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extension-underline": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extension-underline/-/extension-underline-3.31.3.tgz",
++      "integrity": "sha512-HghdJaOwRqYzsAxqSyNyb+IWyOMcdCl8IoiBETA9BZCJAqdXzFLcuWp7CqCqJPam9dgkWosSoHqTCAO4nTBfpw==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/extensions": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/extensions/-/extensions-3.31.3.tgz",
++      "integrity": "sha512-8sJNPGGUe8f3aDojcOW5cfVL7I5NrBbE0UWxG08qoi9Tea6qWbvQJsCR9tsrOapr/DaLr3kpbGZ9s1gEEfcNcA==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3",
++        "@tiptap/pm": "3.31.3"
++      }
++    },
++    "node_modules/@tiptap/pm": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/pm/-/pm-3.31.3.tgz",
++      "integrity": "sha512-sZime0SWsz/k62W2WvHx5Ig7G2h7kVhrrmnqy+wEgIHfDwEfOlelRjaWCiBCFlF7dxGUntJusCh9FxlLhni0Ag==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-changeset": "^2.4.1",
++        "prosemirror-commands": "^1.7.1",
++        "prosemirror-dropcursor": "^1.8.2",
++        "prosemirror-gapcursor": "^1.4.1",
++        "prosemirror-history": "^1.5.0",
++        "prosemirror-inputrules": "^1.5.1",
++        "prosemirror-keymap": "^1.2.3",
++        "prosemirror-model": "^1.25.11",
++        "prosemirror-schema-list": "^1.5.1",
++        "prosemirror-state": "^1.4.4",
++        "prosemirror-tables": "^1.8.5",
++        "prosemirror-transform": "^1.12.0",
++        "prosemirror-view": "^1.42.3"
++      },
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      }
++    },
++    "node_modules/@tiptap/react": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/react/-/react-3.31.3.tgz",
++      "integrity": "sha512-QiwQqvaLFLm5EMFu5tg7nAgXJxCUiUTLD8EsK+TqVV5P4bqOoMOCM39khbhXTJyahCuYpiFWx5YOSDtC/JiPtg==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/use-sync-external-store": "^0.0.6",
++        "fast-equals": "^5.3.3",
++        "use-sync-external-store": "^1.4.0"
++      },
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      },
++      "optionalDependencies": {
++        "@tiptap/extension-bubble-menu": "^3.31.3",
++        "@tiptap/extension-floating-menu": "^3.31.3"
++      },
++      "peerDependencies": {
++        "@tiptap/core": "3.31.3",
++        "@tiptap/pm": "3.31.3",
++        "@types/react": "^17.0.0 || ^18.0.0 || ^19.0.0",
++        "@types/react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
++        "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
++        "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
++      }
++    },
++    "node_modules/@tiptap/starter-kit": {
++      "version": "3.31.3",
++      "resolved": "https://registry.npmjs.org/@tiptap/starter-kit/-/starter-kit-3.31.3.tgz",
++      "integrity": "sha512-WKof9RewdmGHvWJ1wn0/HVNG2mV+HOgVRyJkKekuM9fgr6BZAAH/xZsWE1eon+94JnQ+KtK2ThydXQM/qc6b2A==",
++      "license": "MIT",
++      "dependencies": {
++        "@tiptap/core": "3.31.3",
++        "@tiptap/extension-blockquote": "3.31.3",
++        "@tiptap/extension-bold": "3.31.3",
++        "@tiptap/extension-bullet-list": "3.31.3",
++        "@tiptap/extension-code": "3.31.3",
++        "@tiptap/extension-code-block": "3.31.3",
++        "@tiptap/extension-document": "3.31.3",
++        "@tiptap/extension-dropcursor": "3.31.3",
++        "@tiptap/extension-gapcursor": "3.31.3",
++        "@tiptap/extension-hard-break": "3.31.3",
++        "@tiptap/extension-heading": "3.31.3",
++        "@tiptap/extension-horizontal-rule": "3.31.3",
++        "@tiptap/extension-italic": "3.31.3",
++        "@tiptap/extension-link": "3.31.3",
++        "@tiptap/extension-list": "3.31.3",
++        "@tiptap/extension-list-item": "3.31.3",
++        "@tiptap/extension-list-keymap": "3.31.3",
++        "@tiptap/extension-ordered-list": "3.31.3",
++        "@tiptap/extension-paragraph": "3.31.3",
++        "@tiptap/extension-strike": "3.31.3",
++        "@tiptap/extension-text": "3.31.3",
++        "@tiptap/extension-underline": "3.31.3",
++        "@tiptap/extensions": "3.31.3",
++        "@tiptap/pm": "3.31.3"
++      },
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/ueberdosis"
++      }
++    },
+     "node_modules/@types/aria-query": {
+       "version": "5.0.4",
+       "resolved": "https://registry.npmjs.org/@types/aria-query/-/aria-query-5.0.4.tgz",
+@@ -1758,6 +2224,15 @@
+         "assertion-error": "^2.0.1"
+       }
+     },
++    "node_modules/@types/debug": {
++      "version": "4.1.13",
++      "resolved": "https://registry.npmjs.org/@types/debug/-/debug-4.1.13.tgz",
++      "integrity": "sha512-KSVgmQmzMwPlmtljOomayoR89W4FynCAi3E8PPs7vmDVPe84hT+vGPKkJfThkmXs0x0jAaa9U8uW8bbfyS2fWw==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/ms": "*"
++      }
++    },
+     "node_modules/@types/deep-eql": {
+       "version": "4.0.2",
+       "resolved": "https://registry.npmjs.org/@types/deep-eql/-/deep-eql-4.0.2.tgz",
+@@ -1779,6 +2254,21 @@
+       "dev": true,
+       "license": "MIT"
+     },
++    "node_modules/@types/mdast": {
++      "version": "4.0.4",
++      "resolved": "https://registry.npmjs.org/@types/mdast/-/mdast-4.0.4.tgz",
++      "integrity": "sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/unist": "*"
++      }
++    },
++    "node_modules/@types/ms": {
++      "version": "2.1.0",
++      "resolved": "https://registry.npmjs.org/@types/ms/-/ms-2.1.0.tgz",
++      "integrity": "sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==",
++      "license": "MIT"
++    },
+     "node_modules/@types/node": {
+       "version": "26.4.0",
+       "resolved": "https://registry.npmjs.org/@types/node/-/node-26.4.0.tgz",
+@@ -1793,7 +2283,6 @@
+       "version": "19.2.18",
+       "resolved": "https://registry.npmjs.org/@types/react/-/react-19.2.18.tgz",
+       "integrity": "sha512-AnzbBERsrLKtk2XSfTbYRLjQPdy116Sty4q+T+Bp3IC4l6jNBvreVPAHmpq9qhXQM7CXZPjLVmGMw9sy+hxQ3w==",
+-      "dev": true,
+       "license": "MIT",
+       "dependencies": {
+         "csstype": "^3.2.2"
+@@ -1803,12 +2292,23 @@
+       "version": "19.2.5",
+       "resolved": "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.2.5.tgz",
+       "integrity": "sha512-fMPwH9v7r/pp43yUd2/Mbiex5KouJwwR3dzHkhLREUC6764VyDsqxhAxv6OFEYR1RhjOyD1naqba8ECDBe7ZQg==",
+-      "dev": true,
+       "license": "MIT",
+       "peerDependencies": {
+         "@types/react": "^19.2.0"
+       }
+     },
++    "node_modules/@types/unist": {
++      "version": "3.0.3",
++      "resolved": "https://registry.npmjs.org/@types/unist/-/unist-3.0.3.tgz",
++      "integrity": "sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==",
++      "license": "MIT"
++    },
++    "node_modules/@types/use-sync-external-store": {
++      "version": "0.0.6",
++      "resolved": "https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.6.tgz",
++      "integrity": "sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==",
++      "license": "MIT"
++    },
+     "node_modules/@typescript-eslint/eslint-plugin": {
+       "version": "8.55.0",
+       "resolved": "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.55.0.tgz",
+@@ -2316,6 +2816,16 @@
+         "node": ">=12"
+       }
+     },
++    "node_modules/bail": {
++      "version": "2.0.2",
++      "resolved": "https://registry.npmjs.org/bail/-/bail-2.0.2.tgz",
++      "integrity": "sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
+     "node_modules/balanced-match": {
+       "version": "1.0.2",
+       "resolved": "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz",
+@@ -2412,6 +2922,16 @@
+       ],
+       "license": "CC-BY-4.0"
+     },
++    "node_modules/ccount": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/ccount/-/ccount-2.0.1.tgz",
++      "integrity": "sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
+     "node_modules/chai": {
+       "version": "6.2.2",
+       "resolved": "https://registry.npmjs.org/chai/-/chai-6.2.2.tgz",
+@@ -2439,14 +2959,54 @@
+         "url": "https://github.com/chalk/chalk?sponsor=1"
+       }
+     },
+-    "node_modules/color-convert": {
+-      "version": "2.0.1",
+-      "resolved": "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz",
+-      "integrity": "sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==",
+-      "dev": true,
++    "node_modules/character-entities": {
++      "version": "2.0.2",
++      "resolved": "https://registry.npmjs.org/character-entities/-/character-entities-2.0.2.tgz",
++      "integrity": "sha512-shx7oQ0Awen/BRIdkjkvz54PnEEI/EjwXDSIZp86/KKdbafHh1Df/RYGBhn4hbe2+uKC9FnT5UCEdyPz3ai9hQ==",
+       "license": "MIT",
+-      "dependencies": {
+-        "color-name": "~1.1.4"
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
++    "node_modules/character-entities-html4": {
++      "version": "2.1.0",
++      "resolved": "https://registry.npmjs.org/character-entities-html4/-/character-entities-html4-2.1.0.tgz",
++      "integrity": "sha512-1v7fgQRj6hnSwFpq1Eu0ynr/CDEw0rXo2B61qXrLNdHZmPKgb7fqS1a2JwF0rISo9q77jDI8VMEHoApn8qDoZA==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
++    "node_modules/character-entities-legacy": {
++      "version": "3.0.0",
++      "resolved": "https://registry.npmjs.org/character-entities-legacy/-/character-entities-legacy-3.0.0.tgz",
++      "integrity": "sha512-RpPp0asT/6ufRm//AJVwpViZbGM/MkjQFxJccQRHmISF/22NBtsHqAWmL+/pmkPWoIUJdWyeVleTl1wydHATVQ==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
++    "node_modules/character-reference-invalid": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/character-reference-invalid/-/character-reference-invalid-2.0.1.tgz",
++      "integrity": "sha512-iBZ4F4wRbyORVsu0jPV7gXkOsGYjGHPmAyv+HiHG8gi5PtC9KI2j1+v8/tlibRvjoWX027ypmG/n0HtO5t7unw==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
++    "node_modules/color-convert": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz",
++      "integrity": "sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "color-name": "~1.1.4"
+       },
+       "engines": {
+         "node": ">=7.0.0"
+@@ -2513,7 +3073,6 @@
+       "version": "3.2.3",
+       "resolved": "https://registry.npmjs.org/csstype/-/csstype-3.2.3.tgz",
+       "integrity": "sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==",
+-      "dev": true,
+       "license": "MIT"
+     },
+     "node_modules/data-urls": {
+@@ -2534,7 +3093,6 @@
+       "version": "4.4.3",
+       "resolved": "https://registry.npmjs.org/debug/-/debug-4.4.3.tgz",
+       "integrity": "sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==",
+-      "dev": true,
+       "license": "MIT",
+       "dependencies": {
+         "ms": "^2.1.3"
+@@ -2555,6 +3113,19 @@
+       "dev": true,
+       "license": "MIT"
+     },
++    "node_modules/decode-named-character-reference": {
++      "version": "1.3.0",
++      "resolved": "https://registry.npmjs.org/decode-named-character-reference/-/decode-named-character-reference-1.3.0.tgz",
++      "integrity": "sha512-GtpQYB283KrPp6nRw50q3U9/VfOutZOe103qlN7BPP6Ad27xYnOIWv4lPzo8HCAL+mMZofJ9KEy30fq6MfaK6Q==",
++      "license": "MIT",
++      "dependencies": {
++        "character-entities": "^2.0.0"
++      },
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
+     "node_modules/deep-is": {
+       "version": "0.1.4",
+       "resolved": "https://registry.npmjs.org/deep-is/-/deep-is-0.1.4.tgz",
+@@ -2566,12 +3137,24 @@
+       "version": "2.0.3",
+       "resolved": "https://registry.npmjs.org/dequal/-/dequal-2.0.3.tgz",
+       "integrity": "sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==",
+-      "dev": true,
+       "license": "MIT",
+       "engines": {
+         "node": ">=6"
+       }
+     },
++    "node_modules/devlop": {
++      "version": "1.1.0",
++      "resolved": "https://registry.npmjs.org/devlop/-/devlop-1.1.0.tgz",
++      "integrity": "sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==",
++      "license": "MIT",
++      "dependencies": {
++        "dequal": "^2.0.0"
++      },
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
+     "node_modules/dom-accessibility-api": {
+       "version": "0.5.16",
+       "resolved": "https://registry.npmjs.org/dom-accessibility-api/-/dom-accessibility-api-0.5.16.tgz",
+@@ -2877,6 +3460,12 @@
+         "node": ">=12.0.0"
+       }
+     },
++    "node_modules/extend": {
++      "version": "3.0.2",
++      "resolved": "https://registry.npmjs.org/extend/-/extend-3.0.2.tgz",
++      "integrity": "sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==",
++      "license": "MIT"
++    },
+     "node_modules/fast-deep-equal": {
+       "version": "3.1.3",
+       "resolved": "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz",
+@@ -2884,6 +3473,15 @@
+       "dev": true,
+       "license": "MIT"
+     },
++    "node_modules/fast-equals": {
++      "version": "5.4.3",
++      "resolved": "https://registry.npmjs.org/fast-equals/-/fast-equals-5.4.3.tgz",
++      "integrity": "sha512-8unmvA0qrfpFWBYUate9BTGtQdKHWBYt+KdAIkag7Vvxe7wz8Q2nJg7fLMC0bJqe0bjP31kca7Ckaawrs4Istg==",
++      "license": "MIT",
++      "engines": {
++        "node": ">=6.0.0"
++      }
++    },
+     "node_modules/fast-json-stable-stringify": {
+       "version": "2.1.0",
+       "resolved": "https://registry.npmjs.org/fast-json-stable-stringify/-/fast-json-stable-stringify-2.1.0.tgz",
+@@ -3146,6 +3744,40 @@
+         "node": ">=8"
+       }
+     },
++    "node_modules/is-alphabetical": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/is-alphabetical/-/is-alphabetical-2.0.1.tgz",
++      "integrity": "sha512-FWyyY60MeTNyeSRpkM2Iry0G9hpr7/9kD40mD/cGQEuilcZYS4okz8SN2Q6rLCJ8gbCt6fN+rC+6tMGS99LaxQ==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
++    "node_modules/is-alphanumerical": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/is-alphanumerical/-/is-alphanumerical-2.0.1.tgz",
++      "integrity": "sha512-hmbYhX/9MUMF5uh7tOXyK/n0ZvWpad5caBA17GsC6vyuCqaWliRG5K1qS9inmUhEMaOBIW7/whAnSwveW/LtZw==",
++      "license": "MIT",
++      "dependencies": {
++        "is-alphabetical": "^2.0.0",
++        "is-decimal": "^2.0.0"
++      },
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
++    "node_modules/is-decimal": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/is-decimal/-/is-decimal-2.0.1.tgz",
++      "integrity": "sha512-AAB9hiomQs5DXWcRB1rqsxGUstbRroFOPPVAomNk/3XHR5JyEZChOyTWe2oayKnsSsr/kcGqF+z6yuH6HHpN0A==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
+     "node_modules/is-extglob": {
+       "version": "2.1.1",
+       "resolved": "https://registry.npmjs.org/is-extglob/-/is-extglob-2.1.1.tgz",
+@@ -3169,6 +3801,28 @@
+         "node": ">=0.10.0"
+       }
+     },
++    "node_modules/is-hexadecimal": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/is-hexadecimal/-/is-hexadecimal-2.0.1.tgz",
++      "integrity": "sha512-DgZQp241c8oO6cA1SbTEWiXeoxV42vlcJxgH+B3hi1AiqqKruZR3ZGF8In3fj4+/y/7rHvlOZLZtgJ/4ttYGZg==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
++    "node_modules/is-plain-obj": {
++      "version": "4.1.0",
++      "resolved": "https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-4.1.0.tgz",
++      "integrity": "sha512-+Pgi+vMuUNkJyExiMBt5IlFoMyKnr5zhJ4Uspz58WOhBF5QoIZkFyNHIbBAtHwzVAgk5RtndVNsDRN61/mmDqg==",
++      "license": "MIT",
++      "engines": {
++        "node": ">=12"
++      },
++      "funding": {
++        "url": "https://github.com/sponsors/sindresorhus"
++      }
++    },
+     "node_modules/is-potential-custom-element-name": {
+       "version": "1.0.1",
+       "resolved": "https://registry.npmjs.org/is-potential-custom-element-name/-/is-potential-custom-element-name-1.0.1.tgz",
+@@ -3324,6 +3978,12 @@
+         "node": ">= 0.8.0"
+       }
+     },
++    "node_modules/linkifyjs": {
++      "version": "4.3.3",
++      "resolved": "https://registry.npmjs.org/linkifyjs/-/linkifyjs-4.3.3.tgz",
++      "integrity": "sha512-P8aEP5U/D1/IlTY2OeYsErdwh9bGuLE30NcXtKEjgdHcahveQoQwM2yZNsioQHsWFz0P7KKudisbrzCgR0sDHg==",
++      "license": "MIT"
++    },
+     "node_modules/locate-path": {
+       "version": "6.0.0",
+       "resolved": "https://registry.npmjs.org/locate-path/-/locate-path-6.0.0.tgz",
+@@ -3331,53 +3991,638 @@
+       "dev": true,
+       "license": "MIT",
+       "dependencies": {
+-        "p-locate": "^5.0.0"
+-      },
+-      "engines": {
+-        "node": ">=10"
+-      },
+-      "funding": {
+-        "url": "https://github.com/sponsors/sindresorhus"
++        "p-locate": "^5.0.0"
++      },
++      "engines": {
++        "node": ">=10"
++      },
++      "funding": {
++        "url": "https://github.com/sponsors/sindresorhus"
++      }
++    },
++    "node_modules/lodash.merge": {
++      "version": "4.6.2",
++      "resolved": "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz",
++      "integrity": "sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/longest-streak": {
++      "version": "3.1.0",
++      "resolved": "https://registry.npmjs.org/longest-streak/-/longest-streak-3.1.0.tgz",
++      "integrity": "sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
++    "node_modules/lru-cache": {
++      "version": "5.1.1",
++      "resolved": "https://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz",
++      "integrity": "sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==",
++      "dev": true,
++      "license": "ISC",
++      "dependencies": {
++        "yallist": "^3.0.2"
++      }
++    },
++    "node_modules/lz-string": {
++      "version": "1.5.0",
++      "resolved": "https://registry.npmjs.org/lz-string/-/lz-string-1.5.0.tgz",
++      "integrity": "sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==",
++      "dev": true,
++      "license": "MIT",
++      "peer": true,
++      "bin": {
++        "lz-string": "bin/bin.js"
++      }
++    },
++    "node_modules/magic-string": {
++      "version": "0.30.21",
++      "resolved": "https://registry.npmjs.org/magic-string/-/magic-string-0.30.21.tgz",
++      "integrity": "sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@jridgewell/sourcemap-codec": "^1.5.5"
++      }
++    },
++    "node_modules/mdast-util-directive": {
++      "version": "3.1.0",
++      "resolved": "https://registry.npmjs.org/mdast-util-directive/-/mdast-util-directive-3.1.0.tgz",
++      "integrity": "sha512-I3fNFt+DHmpWCYAT7quoM6lHf9wuqtI+oCOfvILnoicNIqjh5E3dEJWiXuYME2gNe8vl1iMQwyUHa7bgFmak6Q==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/mdast": "^4.0.0",
++        "@types/unist": "^3.0.0",
++        "ccount": "^2.0.0",
++        "devlop": "^1.0.0",
++        "mdast-util-from-markdown": "^2.0.0",
++        "mdast-util-to-markdown": "^2.0.0",
++        "parse-entities": "^4.0.0",
++        "stringify-entities": "^4.0.0",
++        "unist-util-visit-parents": "^6.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/mdast-util-from-markdown": {
++      "version": "2.0.3",
++      "resolved": "https://registry.npmjs.org/mdast-util-from-markdown/-/mdast-util-from-markdown-2.0.3.tgz",
++      "integrity": "sha512-W4mAWTvSlKvf8L6J+VN9yLSqQ9AOAAvHuoDAmPkz4dHf553m5gVj2ejadHJhoJmcmxEnOv6Pa8XJhpxE93kb8Q==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/mdast": "^4.0.0",
++        "@types/unist": "^3.0.0",
++        "decode-named-character-reference": "^1.0.0",
++        "devlop": "^1.0.0",
++        "mdast-util-to-string": "^4.0.0",
++        "micromark": "^4.0.0",
++        "micromark-util-decode-numeric-character-reference": "^2.0.0",
++        "micromark-util-decode-string": "^2.0.0",
++        "micromark-util-normalize-identifier": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0",
++        "micromark-util-types": "^2.0.0",
++        "unist-util-stringify-position": "^4.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/mdast-util-phrasing": {
++      "version": "4.1.0",
++      "resolved": "https://registry.npmjs.org/mdast-util-phrasing/-/mdast-util-phrasing-4.1.0.tgz",
++      "integrity": "sha512-TqICwyvJJpBwvGAMZjj4J2n0X8QWp21b9l0o7eXyVJ25YNWYbJDVIyD1bZXE6WtV6RmKJVYmQAKWa0zWOABz2w==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/mdast": "^4.0.0",
++        "unist-util-is": "^6.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/mdast-util-to-markdown": {
++      "version": "2.1.2",
++      "resolved": "https://registry.npmjs.org/mdast-util-to-markdown/-/mdast-util-to-markdown-2.1.2.tgz",
++      "integrity": "sha512-xj68wMTvGXVOKonmog6LwyJKrYXZPvlwabaryTjLh9LuvovB/KAH+kvi8Gjj+7rJjsFi23nkUxRQv1KqSroMqA==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/mdast": "^4.0.0",
++        "@types/unist": "^3.0.0",
++        "longest-streak": "^3.0.0",
++        "mdast-util-phrasing": "^4.0.0",
++        "mdast-util-to-string": "^4.0.0",
++        "micromark-util-classify-character": "^2.0.0",
++        "micromark-util-decode-string": "^2.0.0",
++        "unist-util-visit": "^5.0.0",
++        "zwitch": "^2.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/mdast-util-to-string": {
++      "version": "4.0.0",
++      "resolved": "https://registry.npmjs.org/mdast-util-to-string/-/mdast-util-to-string-4.0.0.tgz",
++      "integrity": "sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/mdast": "^4.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/micromark": {
++      "version": "4.0.3",
++      "resolved": "https://registry.npmjs.org/micromark/-/micromark-4.0.3.tgz",
++      "integrity": "sha512-oGYfQzHSG5dOMovQcJ3fyTmZlWAWpi0XA0sJwJs+i6OT88o1+Jtw/8z0CmdowSLxGhhFK89rQ/oXph/wN02PNw==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "@types/debug": "^4.0.0",
++        "debug": "^4.0.0",
++        "decode-named-character-reference": "^1.0.0",
++        "devlop": "^1.0.0",
++        "micromark-core-commonmark": "^2.0.0",
++        "micromark-factory-space": "^2.0.0",
++        "micromark-util-character": "^2.0.0",
++        "micromark-util-chunked": "^2.0.0",
++        "micromark-util-combine-extensions": "^2.0.0",
++        "micromark-util-decode-numeric-character-reference": "^2.0.0",
++        "micromark-util-edit-map": "^1.0.0",
++        "micromark-util-encode": "^2.0.0",
++        "micromark-util-normalize-identifier": "^2.0.0",
++        "micromark-util-resolve-all": "^2.0.0",
++        "micromark-util-sanitize-uri": "^2.0.0",
++        "micromark-util-subtokenize": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0",
++        "micromark-util-types": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-core-commonmark": {
++      "version": "2.0.4",
++      "resolved": "https://registry.npmjs.org/micromark-core-commonmark/-/micromark-core-commonmark-2.0.4.tgz",
++      "integrity": "sha512-wxEeE8v8XVvOrxn1TZj74qYhAtTQsSqufHVS3uNVyT1MupXxhyaHk8/9xDNPh9BmL77QNDgWTkZ3RsYHB2ry7w==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "decode-named-character-reference": "^1.0.0",
++        "devlop": "^1.0.0",
++        "micromark-factory-destination": "^2.0.0",
++        "micromark-factory-label": "^2.0.0",
++        "micromark-factory-space": "^2.1.0",
++        "micromark-factory-title": "^2.0.0",
++        "micromark-factory-whitespace": "^2.0.0",
++        "micromark-util-character": "^2.0.0",
++        "micromark-util-chunked": "^2.0.0",
++        "micromark-util-classify-character": "^2.0.0",
++        "micromark-util-edit-map": "^1.0.0",
++        "micromark-util-html-tag-name": "^2.0.0",
++        "micromark-util-normalize-identifier": "^2.0.0",
++        "micromark-util-resolve-all": "^2.0.0",
++        "micromark-util-subtokenize": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0",
++        "micromark-util-types": "^2.0.3"
++      }
++    },
++    "node_modules/micromark-extension-directive": {
++      "version": "4.0.0",
++      "resolved": "https://registry.npmjs.org/micromark-extension-directive/-/micromark-extension-directive-4.0.0.tgz",
++      "integrity": "sha512-/C2nqVmXXmiseSSuCdItCMho7ybwwop6RrrRPk0KbOHW21JKoCldC+8rFOaundDoRBUWBnJJcxeA/Kvi34WQXg==",
++      "license": "MIT",
++      "dependencies": {
++        "devlop": "^1.0.0",
++        "micromark-factory-space": "^2.0.0",
++        "micromark-factory-whitespace": "^2.0.0",
++        "micromark-util-character": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0",
++        "micromark-util-types": "^2.0.0",
++        "parse-entities": "^4.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/micromark-factory-destination": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-factory-destination/-/micromark-factory-destination-2.0.1.tgz",
++      "integrity": "sha512-Xe6rDdJlkmbFRExpTOmRj9N3MaWmbAgdpSrBQvCFqhezUn4AHqJHbaEnfbVYYiexVSs//tqOdY/DxhjdCiJnIA==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "micromark-util-character": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0",
++        "micromark-util-types": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-factory-label": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-factory-label/-/micromark-factory-label-2.0.1.tgz",
++      "integrity": "sha512-VFMekyQExqIW7xIChcXn4ok29YE3rnuyveW3wZQWWqF4Nv9Wk5rgJ99KzPvHjkmPXF93FXIbBp6YdW3t71/7Vg==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "devlop": "^1.0.0",
++        "micromark-util-character": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0",
++        "micromark-util-types": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-factory-space": {
++      "version": "2.1.0",
++      "resolved": "https://registry.npmjs.org/micromark-factory-space/-/micromark-factory-space-2.1.0.tgz",
++      "integrity": "sha512-fS8hnLIjnjvdQIj39Geug8wWsR0HrYZ43KShKxNfwT7t2LOHo/LbWZEzEaSOjwtjdCsjoE6syHhonEzW0zv0+Q==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "micromark-util-character": "^2.0.0",
++        "micromark-util-types": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-factory-title": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-factory-title/-/micromark-factory-title-2.0.1.tgz",
++      "integrity": "sha512-5bZ+3CjhAd9eChYTHsjy6TGxpOFSKgKKJPJxr293jTbfry2KDoWkhBb6TcPVB4NmzaPhMs1Frm9AZH7OD4Cjzw==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "micromark-factory-space": "^2.0.0",
++        "micromark-util-character": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0",
++        "micromark-util-types": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-factory-whitespace": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-factory-whitespace/-/micromark-factory-whitespace-2.0.1.tgz",
++      "integrity": "sha512-Ob0nuZ3PKt/n0hORHyvoD9uZhr+Za8sFoP+OnMcnWK5lngSzALgQYKMr9RJVOWLqQYuyn6ulqGWSXdwf6F80lQ==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "micromark-factory-space": "^2.0.0",
++        "micromark-util-character": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0",
++        "micromark-util-types": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-util-character": {
++      "version": "2.1.1",
++      "resolved": "https://registry.npmjs.org/micromark-util-character/-/micromark-util-character-2.1.1.tgz",
++      "integrity": "sha512-wv8tdUTJ3thSFFFJKtpYKOYiGP2+v96Hvk4Tu8KpCAsTMs6yi+nVmGh1syvSCsaxz45J6Jbw+9DD6g97+NV67Q==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "micromark-util-symbol": "^2.0.0",
++        "micromark-util-types": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-util-chunked": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-util-chunked/-/micromark-util-chunked-2.0.1.tgz",
++      "integrity": "sha512-QUNFEOPELfmvv+4xiNg2sRYeS/P84pTW0TCgP5zc9FpXetHY0ab7SxKyAQCNCc1eK0459uoLI1y5oO5Vc1dbhA==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "micromark-util-symbol": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-util-classify-character": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-util-classify-character/-/micromark-util-classify-character-2.0.1.tgz",
++      "integrity": "sha512-K0kHzM6afW/MbeWYWLjoHQv1sgg2Q9EccHEDzSkxiP/EaagNzCm7T/WMKZ3rjMbvIpvBiZgwR3dKMygtA4mG1Q==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "micromark-util-character": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0",
++        "micromark-util-types": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-util-combine-extensions": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-util-combine-extensions/-/micromark-util-combine-extensions-2.0.1.tgz",
++      "integrity": "sha512-OnAnH8Ujmy59JcyZw8JSbK9cGpdVY44NKgSM7E9Eh7DiLS2E9RNQf0dONaGDzEG9yjEl5hcqeIsj4hfRkLH/Bg==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "micromark-util-chunked": "^2.0.0",
++        "micromark-util-types": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-util-decode-numeric-character-reference": {
++      "version": "2.0.2",
++      "resolved": "https://registry.npmjs.org/micromark-util-decode-numeric-character-reference/-/micromark-util-decode-numeric-character-reference-2.0.2.tgz",
++      "integrity": "sha512-ccUbYk6CwVdkmCQMyr64dXz42EfHGkPQlBj5p7YVGzq8I7CtjXZJrubAYezf7Rp+bjPseiROqe7G6foFd+lEuw==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "micromark-util-symbol": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-util-decode-string": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-util-decode-string/-/micromark-util-decode-string-2.0.1.tgz",
++      "integrity": "sha512-nDV/77Fj6eH1ynwscYTOsbK7rR//Uj0bZXBwJZRfaLEJ1iGBR6kIfNmlNqaqJf649EP0F3NWNdeJi03elllNUQ==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "decode-named-character-reference": "^1.0.0",
++        "micromark-util-character": "^2.0.0",
++        "micromark-util-decode-numeric-character-reference": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-util-edit-map": {
++      "version": "1.0.0",
++      "resolved": "https://registry.npmjs.org/micromark-util-edit-map/-/micromark-util-edit-map-1.0.0.tgz",
++      "integrity": "sha512-Pa2ljlsEL6sVwFaYeyrOLSYbQt73JvGbPOYFq+9AElXiSnfI5Q4465RRZ1sHv7lDjDOnGRDDaqPXqClqWK/q1Q==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "micromark-util-types": "^2.0.0"
++      }
++    },
++    "node_modules/micromark-util-encode": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-util-encode/-/micromark-util-encode-2.0.1.tgz",
++      "integrity": "sha512-c3cVx2y4KqUnwopcO9b/SCdo2O67LwJJ/UyqGfbigahfegL9myoEFoDYZgkT7f36T0bLrM9hZTAaAyH+PCAXjw==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT"
++    },
++    "node_modules/micromark-util-html-tag-name": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-util-html-tag-name/-/micromark-util-html-tag-name-2.0.1.tgz",
++      "integrity": "sha512-2cNEiYDhCWKI+Gs9T0Tiysk136SnR13hhO8yW6BGNyhOC4qYFnwF1nKfD3HFAIXA5c45RrIG1ub11GiXeYd1xA==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT"
++    },
++    "node_modules/micromark-util-normalize-identifier": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-util-normalize-identifier/-/micromark-util-normalize-identifier-2.0.1.tgz",
++      "integrity": "sha512-sxPqmo70LyARJs0w2UclACPUUEqltCkJ6PhKdMIDuJ3gSf/Q+/GIe3WKl0Ijb/GyH9lOpUkRAO2wp0GVkLvS9Q==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "micromark-util-symbol": "^2.0.0"
+       }
+     },
+-    "node_modules/lodash.merge": {
+-      "version": "4.6.2",
+-      "resolved": "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz",
+-      "integrity": "sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==",
+-      "dev": true,
+-      "license": "MIT"
+-    },
+-    "node_modules/lru-cache": {
+-      "version": "5.1.1",
+-      "resolved": "https://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz",
+-      "integrity": "sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==",
+-      "dev": true,
+-      "license": "ISC",
++    "node_modules/micromark-util-resolve-all": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-util-resolve-all/-/micromark-util-resolve-all-2.0.1.tgz",
++      "integrity": "sha512-VdQyxFWFT2/FGJgwQnJYbe1jjQoNTS4RjglmSjTUlpUMa95Htx9NHeYW4rGDJzbjvCsl9eLjMQwGeElsqmzcHg==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT",
+       "dependencies": {
+-        "yallist": "^3.0.2"
++        "micromark-util-types": "^2.0.0"
+       }
+     },
+-    "node_modules/lz-string": {
+-      "version": "1.5.0",
+-      "resolved": "https://registry.npmjs.org/lz-string/-/lz-string-1.5.0.tgz",
+-      "integrity": "sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==",
+-      "dev": true,
++    "node_modules/micromark-util-sanitize-uri": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-util-sanitize-uri/-/micromark-util-sanitize-uri-2.0.1.tgz",
++      "integrity": "sha512-9N9IomZ/YuGGZZmQec1MbgxtlgougxTodVwDzzEouPKo3qFWvymFHWcnDi2vzV1ff6kas9ucW+o3yzJK9YB1AQ==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
+       "license": "MIT",
+-      "peer": true,
+-      "bin": {
+-        "lz-string": "bin/bin.js"
++      "dependencies": {
++        "micromark-util-character": "^2.0.0",
++        "micromark-util-encode": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0"
+       }
+     },
+-    "node_modules/magic-string": {
+-      "version": "0.30.21",
+-      "resolved": "https://registry.npmjs.org/magic-string/-/magic-string-0.30.21.tgz",
+-      "integrity": "sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==",
+-      "dev": true,
++    "node_modules/micromark-util-subtokenize": {
++      "version": "2.1.0",
++      "resolved": "https://registry.npmjs.org/micromark-util-subtokenize/-/micromark-util-subtokenize-2.1.0.tgz",
++      "integrity": "sha512-XQLu552iSctvnEcgXw6+Sx75GflAPNED1qx7eBJ+wydBb2KCbRZe+NwvIEEMM83uml1+2WSXpBAcp9IUCgCYWA==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
+       "license": "MIT",
+       "dependencies": {
+-        "@jridgewell/sourcemap-codec": "^1.5.5"
++        "devlop": "^1.0.0",
++        "micromark-util-chunked": "^2.0.0",
++        "micromark-util-symbol": "^2.0.0",
++        "micromark-util-types": "^2.0.0"
+       }
+     },
++    "node_modules/micromark-util-symbol": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/micromark-util-symbol/-/micromark-util-symbol-2.0.1.tgz",
++      "integrity": "sha512-vs5t8Apaud9N28kgCrRUdEed4UJ+wWNvicHLPxCa9ENlYuAY31M0ETy5y1vA33YoNPDFTghEbnh6efaE8h4x0Q==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT"
++    },
++    "node_modules/micromark-util-types": {
++      "version": "2.0.3",
++      "resolved": "https://registry.npmjs.org/micromark-util-types/-/micromark-util-types-2.0.3.tgz",
++      "integrity": "sha512-oxB2Ik03hI0gv+VNn9tnh1t1YEe9MDPptViAEgfdf3YQHsn0pzGTgCdlSCJXcwhqm8phaEuM7zeEu3QQzVBrPg==",
++      "funding": [
++        {
++          "type": "GitHub Sponsors",
++          "url": "https://github.com/sponsors/unifiedjs"
++        },
++        {
++          "type": "OpenCollective",
++          "url": "https://opencollective.com/unified"
++        }
++      ],
++      "license": "MIT"
++    },
+     "node_modules/min-indent": {
+       "version": "1.0.1",
+       "resolved": "https://registry.npmjs.org/min-indent/-/min-indent-1.0.1.tgz",
+@@ -3405,7 +4650,6 @@
+       "version": "2.1.3",
+       "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
+       "integrity": "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==",
+-      "dev": true,
+       "license": "MIT"
+     },
+     "node_modules/nanoid": {
+@@ -3483,6 +4727,12 @@
+         "node": ">= 0.8.0"
+       }
+     },
++    "node_modules/orderedmap": {
++      "version": "2.1.1",
++      "resolved": "https://registry.npmjs.org/orderedmap/-/orderedmap-2.1.1.tgz",
++      "integrity": "sha512-TvAWxi0nDe1j/rtMcWcIj94+Ffe6n7zhow33h40SKxmsmozs6dz/e+EajymfoFcHd7sxNn8yHM8839uixMOV6g==",
++      "license": "MIT"
++    },
+     "node_modules/p-limit": {
+       "version": "3.1.0",
+       "resolved": "https://registry.npmjs.org/p-limit/-/p-limit-3.1.0.tgz",
+@@ -3528,6 +4778,31 @@
+         "node": ">=6"
+       }
+     },
++    "node_modules/parse-entities": {
++      "version": "4.0.2",
++      "resolved": "https://registry.npmjs.org/parse-entities/-/parse-entities-4.0.2.tgz",
++      "integrity": "sha512-GG2AQYWoLgL877gQIKeRPGO1xF9+eG1ujIb5soS5gPvLQ1y2o8FL90w2QWNdf9I361Mpp7726c+lj3U0qK1uGw==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/unist": "^2.0.0",
++        "character-entities-legacy": "^3.0.0",
++        "character-reference-invalid": "^2.0.0",
++        "decode-named-character-reference": "^1.0.0",
++        "is-alphanumerical": "^2.0.0",
++        "is-decimal": "^2.0.0",
++        "is-hexadecimal": "^2.0.0"
++      },
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
++    "node_modules/parse-entities/node_modules/@types/unist": {
++      "version": "2.0.11",
++      "resolved": "https://registry.npmjs.org/@types/unist/-/unist-2.0.11.tgz",
++      "integrity": "sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==",
++      "license": "MIT"
++    },
+     "node_modules/parse5": {
+       "version": "7.3.0",
+       "resolved": "https://registry.npmjs.org/parse5/-/parse5-7.3.0.tgz",
+@@ -3673,6 +4948,145 @@
+         "url": "https://github.com/chalk/ansi-styles?sponsor=1"
+       }
+     },
++    "node_modules/prosemirror-changeset": {
++      "version": "2.4.4",
++      "resolved": "https://registry.npmjs.org/prosemirror-changeset/-/prosemirror-changeset-2.4.4.tgz",
++      "integrity": "sha512-Gyuz9jYdrAeA9I7AholyOes9KUmv/lEwsC5O9s5xF5VB3EgTPsXMGUxz4+H1B+wKVPdZbvRcg1Cp3x8qX+8ofA==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-transform": "^1.0.0"
++      }
++    },
++    "node_modules/prosemirror-commands": {
++      "version": "1.7.2",
++      "resolved": "https://registry.npmjs.org/prosemirror-commands/-/prosemirror-commands-1.7.2.tgz",
++      "integrity": "sha512-q6Q6szxqdu9Xd6EcdKsqXghu5nQdZTpB4Q9yd04WRc7/jt763e/rT60Owh0L1GYY+T46o5rD+9lEN36dZS43tw==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-model": "^1.0.0",
++        "prosemirror-state": "^1.0.0",
++        "prosemirror-transform": "^1.10.2"
++      }
++    },
++    "node_modules/prosemirror-dropcursor": {
++      "version": "1.8.4",
++      "resolved": "https://registry.npmjs.org/prosemirror-dropcursor/-/prosemirror-dropcursor-1.8.4.tgz",
++      "integrity": "sha512-VmKxhcA6a+h5oPSYmfF1ZNeQqPbyYaIxqZsKqeYCyTlPtrjUgNaHL3P8vVaO19oqAV0zuaM/axkowZHrB1P3Tg==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-state": "^1.0.0",
++        "prosemirror-transform": "^1.1.0",
++        "prosemirror-view": "^1.1.0"
++      }
++    },
++    "node_modules/prosemirror-gapcursor": {
++      "version": "1.4.1",
++      "resolved": "https://registry.npmjs.org/prosemirror-gapcursor/-/prosemirror-gapcursor-1.4.1.tgz",
++      "integrity": "sha512-pMdYaEnjNMSwl11yjEGtgTmLkR08m/Vl+Jj443167p9eB3HVQKhYCc4gmHVDsLPODfZfjr/MmirsdyZziXbQKw==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-keymap": "^1.0.0",
++        "prosemirror-model": "^1.0.0",
++        "prosemirror-state": "^1.0.0",
++        "prosemirror-view": "^1.0.0"
++      }
++    },
++    "node_modules/prosemirror-history": {
++      "version": "1.5.0",
++      "resolved": "https://registry.npmjs.org/prosemirror-history/-/prosemirror-history-1.5.0.tgz",
++      "integrity": "sha512-zlzTiH01eKA55UAf1MEjtssJeHnGxO0j4K4Dpx+gnmX9n+SHNlDqI2oO1Kv1iPN5B1dm5fsljCfqKF9nFL6HRg==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-state": "^1.2.2",
++        "prosemirror-transform": "^1.0.0",
++        "prosemirror-view": "^1.31.0",
++        "rope-sequence": "^1.3.0"
++      }
++    },
++    "node_modules/prosemirror-inputrules": {
++      "version": "1.5.1",
++      "resolved": "https://registry.npmjs.org/prosemirror-inputrules/-/prosemirror-inputrules-1.5.1.tgz",
++      "integrity": "sha512-7wj4uMjKaXWAQ1CDgxNzNtR9AlsuwzHfdFH1ygEHA2KHF2DOEaXl1CJfNPAKCg9qNEh4rum975QLaCiQPyY6Fw==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-state": "^1.0.0",
++        "prosemirror-transform": "^1.0.0"
++      }
++    },
++    "node_modules/prosemirror-keymap": {
++      "version": "1.2.3",
++      "resolved": "https://registry.npmjs.org/prosemirror-keymap/-/prosemirror-keymap-1.2.3.tgz",
++      "integrity": "sha512-4HucRlpiLd1IPQQXNqeo81BGtkY8Ai5smHhKW9jjPKRc2wQIxksg7Hl1tTI2IfT2B/LgX6bfYvXxEpJl7aKYKw==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-state": "^1.0.0",
++        "w3c-keyname": "^2.2.0"
++      }
++    },
++    "node_modules/prosemirror-model": {
++      "version": "1.25.12",
++      "resolved": "https://registry.npmjs.org/prosemirror-model/-/prosemirror-model-1.25.12.tgz",
++      "integrity": "sha512-Ue2gTmXMa7EhpLNhC7J+h4+ykD8ha12K6rrZFFKKJHBForfIStw5gJ6Zrf1mqqAa9NmpmEB4wp9bKmA4eUVjWg==",
++      "license": "MIT",
++      "dependencies": {
++        "orderedmap": "^2.0.0"
++      }
++    },
++    "node_modules/prosemirror-schema-list": {
++      "version": "1.5.1",
++      "resolved": "https://registry.npmjs.org/prosemirror-schema-list/-/prosemirror-schema-list-1.5.1.tgz",
++      "integrity": "sha512-927lFx/uwyQaGwJxLWCZRkjXG0p48KpMj6ueoYiu4JX05GGuGcgzAy62dfiV8eFZftgyBUvLx76RsMe20fJl+Q==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-model": "^1.0.0",
++        "prosemirror-state": "^1.0.0",
++        "prosemirror-transform": "^1.7.3"
++      }
++    },
++    "node_modules/prosemirror-state": {
++      "version": "1.4.4",
++      "resolved": "https://registry.npmjs.org/prosemirror-state/-/prosemirror-state-1.4.4.tgz",
++      "integrity": "sha512-6jiYHH2CIGbCfnxdHbXZ12gySFY/fz/ulZE333G6bPqIZ4F+TXo9ifiR86nAHpWnfoNjOb3o5ESi7J8Uz1jXHw==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-model": "^1.0.0",
++        "prosemirror-transform": "^1.0.0",
++        "prosemirror-view": "^1.27.0"
++      }
++    },
++    "node_modules/prosemirror-tables": {
++      "version": "1.8.5",
++      "resolved": "https://registry.npmjs.org/prosemirror-tables/-/prosemirror-tables-1.8.5.tgz",
++      "integrity": "sha512-V/0cDCsHKHe/tfWkeCmthNUcEp1IVO3p6vwN8XtwE9PZQLAZJigbw3QoraAdfJPir4NKJtNvOB8oYGKRl+t0Dw==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-keymap": "^1.2.3",
++        "prosemirror-model": "^1.25.4",
++        "prosemirror-state": "^1.4.4",
++        "prosemirror-transform": "^1.10.5",
++        "prosemirror-view": "^1.41.4"
++      }
++    },
++    "node_modules/prosemirror-transform": {
++      "version": "1.12.2",
++      "resolved": "https://registry.npmjs.org/prosemirror-transform/-/prosemirror-transform-1.12.2.tgz",
++      "integrity": "sha512-PE/aY0HEY4zczvmqrilgkUK/WautF0chvMqkmM/iN5/aPHvwrCWaQZjS6CIZp+K84YrvPFqrL+YArrfJX8xX7g==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-model": "^1.21.0"
++      }
++    },
++    "node_modules/prosemirror-view": {
++      "version": "1.42.6",
++      "resolved": "https://registry.npmjs.org/prosemirror-view/-/prosemirror-view-1.42.6.tgz",
++      "integrity": "sha512-3g25f6hKV2bBxo3puH3EcYWmmVNSH0iWmNsMVT7sugDSpA025jgpOLarcDWr39SdzPjYMaiYtRdNtXialPSjEQ==",
++      "license": "MIT",
++      "dependencies": {
++        "prosemirror-model": "^1.25.12",
++        "prosemirror-state": "^1.0.0",
++        "prosemirror-transform": "^1.1.0"
++      }
++    },
+     "node_modules/punycode": {
+       "version": "2.3.1",
+       "resolved": "https://registry.npmjs.org/punycode/-/punycode-2.3.1.tgz",
+@@ -3736,6 +5150,53 @@
+         "node": ">=8"
+       }
+     },
++    "node_modules/remark-directive": {
++      "version": "4.0.0",
++      "resolved": "https://registry.npmjs.org/remark-directive/-/remark-directive-4.0.0.tgz",
++      "integrity": "sha512-7sxn4RfF1o3izevPV1DheyGDD6X4c9hrGpfdUpm7uC++dqrnJxIZVkk7CoKqcLm0VUMAuOol7Mno3m6g8cfMuA==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/mdast": "^4.0.0",
++        "mdast-util-directive": "^3.0.0",
++        "micromark-extension-directive": "^4.0.0",
++        "unified": "^11.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/remark-parse": {
++      "version": "11.0.0",
++      "resolved": "https://registry.npmjs.org/remark-parse/-/remark-parse-11.0.0.tgz",
++      "integrity": "sha512-FCxlKLNGknS5ba/1lmpYijMUzX2esxW5xQqjWxw2eHFfS2MSdaHVINFmhjo+qN1WhZhNimq0dZATN9pH0IDrpA==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/mdast": "^4.0.0",
++        "mdast-util-from-markdown": "^2.0.0",
++        "micromark-util-types": "^2.0.0",
++        "unified": "^11.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/remark-stringify": {
++      "version": "11.0.0",
++      "resolved": "https://registry.npmjs.org/remark-stringify/-/remark-stringify-11.0.0.tgz",
++      "integrity": "sha512-1OSmLd3awB/t8qdoEOMazZkNsfVTeY4fTsgzcQFdXNq8ToTN4ZGwrMnlda4K6smTFKD+GRV6O48i6Z4iKgPPpw==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/mdast": "^4.0.0",
++        "mdast-util-to-markdown": "^2.0.0",
++        "unified": "^11.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
+     "node_modules/resolve-from": {
+       "version": "4.0.0",
+       "resolved": "https://registry.npmjs.org/resolve-from/-/resolve-from-4.0.0.tgz",
+@@ -3792,6 +5253,12 @@
+         "fsevents": "~2.3.2"
+       }
+     },
++    "node_modules/rope-sequence": {
++      "version": "1.3.4",
++      "resolved": "https://registry.npmjs.org/rope-sequence/-/rope-sequence-1.3.4.tgz",
++      "integrity": "sha512-UT5EDe2cu2E/6O4igUr5PSFs23nvvukicWHx6GnOPlHAiiYbzNuCRQCuiUdHJQcqKalLKlrYJnjY0ySGsXNQXQ==",
++      "license": "MIT"
++    },
+     "node_modules/rrweb-cssom": {
+       "version": "0.8.0",
+       "resolved": "https://registry.npmjs.org/rrweb-cssom/-/rrweb-cssom-0.8.0.tgz",
+@@ -3889,6 +5356,20 @@
+       "dev": true,
+       "license": "MIT"
+     },
++    "node_modules/stringify-entities": {
++      "version": "4.0.4",
++      "resolved": "https://registry.npmjs.org/stringify-entities/-/stringify-entities-4.0.4.tgz",
++      "integrity": "sha512-IwfBptatlO+QCJUo19AqvrPNqlVMpW9YEL2LIVY+Rpv2qsjCGxaDLNRgeGsQWJhfItebuJhsGSLjaBbNSQ+ieg==",
++      "license": "MIT",
++      "dependencies": {
++        "character-entities-html4": "^2.0.0",
++        "character-entities-legacy": "^3.0.0"
++      },
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
+     "node_modules/strip-indent": {
+       "version": "3.0.0",
+       "resolved": "https://registry.npmjs.org/strip-indent/-/strip-indent-3.0.0.tgz",
+@@ -4025,6 +5506,16 @@
+         "node": ">=18"
+       }
+     },
++    "node_modules/trough": {
++      "version": "2.2.0",
++      "resolved": "https://registry.npmjs.org/trough/-/trough-2.2.0.tgz",
++      "integrity": "sha512-tmMpK00BjZiUyVyvrBK7knerNgmgvcV/KLVyuma/SC+TQN167GrMRciANTz09+k3zW8L8t60jWO1GpfkZdjTaw==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
++    },
+     "node_modules/ts-api-utils": {
+       "version": "2.5.0",
+       "resolved": "https://registry.npmjs.org/ts-api-utils/-/ts-api-utils-2.5.0.tgz",
+@@ -4096,6 +5587,80 @@
+       "dev": true,
+       "license": "MIT"
+     },
++    "node_modules/unified": {
++      "version": "11.0.5",
++      "resolved": "https://registry.npmjs.org/unified/-/unified-11.0.5.tgz",
++      "integrity": "sha512-xKvGhPWw3k84Qjh8bI3ZeJjqnyadK+GEFtazSfZv/rKeTkTjOJho6mFqh2SM96iIcZokxiOpg78GazTSg8+KHA==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/unist": "^3.0.0",
++        "bail": "^2.0.0",
++        "devlop": "^1.0.0",
++        "extend": "^3.0.0",
++        "is-plain-obj": "^4.0.0",
++        "trough": "^2.0.0",
++        "vfile": "^6.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/unist-util-is": {
++      "version": "6.0.1",
++      "resolved": "https://registry.npmjs.org/unist-util-is/-/unist-util-is-6.0.1.tgz",
++      "integrity": "sha512-LsiILbtBETkDz8I9p1dQ0uyRUWuaQzd/cuEeS1hoRSyW5E5XGmTzlwY1OrNzzakGowI9Dr/I8HVaw4hTtnxy8g==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/unist": "^3.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/unist-util-stringify-position": {
++      "version": "4.0.0",
++      "resolved": "https://registry.npmjs.org/unist-util-stringify-position/-/unist-util-stringify-position-4.0.0.tgz",
++      "integrity": "sha512-0ASV06AAoKCDkS2+xw5RXJywruurpbC4JZSm7nr7MOt1ojAzvyyaO+UxZf18j8FCF6kmzCZKcAgN/yu2gm2XgQ==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/unist": "^3.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/unist-util-visit": {
++      "version": "5.1.0",
++      "resolved": "https://registry.npmjs.org/unist-util-visit/-/unist-util-visit-5.1.0.tgz",
++      "integrity": "sha512-m+vIdyeCOpdr/QeQCu2EzxX/ohgS8KbnPDgFni4dQsfSCtpz8UqDyY5GjRru8PDKuYn7Fq19j1CQ+nJSsGKOzg==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/unist": "^3.0.0",
++        "unist-util-is": "^6.0.0",
++        "unist-util-visit-parents": "^6.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/unist-util-visit-parents": {
++      "version": "6.0.2",
++      "resolved": "https://registry.npmjs.org/unist-util-visit-parents/-/unist-util-visit-parents-6.0.2.tgz",
++      "integrity": "sha512-goh1s1TBrqSqukSc8wrjwWhL0hiJxgA8m4kFxGlQ+8FYQ3C/m11FcTs4YYem7V664AhHVvgoQLk890Ssdsr2IQ==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/unist": "^3.0.0",
++        "unist-util-is": "^6.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
+     "node_modules/update-browserslist-db": {
+       "version": "1.3.2",
+       "resolved": "https://registry.npmjs.org/update-browserslist-db/-/update-browserslist-db-1.3.2.tgz",
+@@ -4137,6 +5702,43 @@
+         "punycode": "^2.1.0"
+       }
+     },
++    "node_modules/use-sync-external-store": {
++      "version": "1.7.0",
++      "resolved": "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.7.0.tgz",
++      "integrity": "sha512-6L+EeigHMQhdaIPNIFUKwfWJSwWFQ8gJbJ2DLOs5sDIegTwR9fRxvnM3uciHKjIZhFz+KAv2emhWMRvDmMcY8A==",
++      "license": "MIT",
++      "peerDependencies": {
++        "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
++      }
++    },
++    "node_modules/vfile": {
++      "version": "6.0.3",
++      "resolved": "https://registry.npmjs.org/vfile/-/vfile-6.0.3.tgz",
++      "integrity": "sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/unist": "^3.0.0",
++        "vfile-message": "^4.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
++    "node_modules/vfile-message": {
++      "version": "4.0.3",
++      "resolved": "https://registry.npmjs.org/vfile-message/-/vfile-message-4.0.3.tgz",
++      "integrity": "sha512-QTHzsGd1EhbZs4AsQ20JX1rC3cOlt/IWJruk893DfLRr57lcnOeMaWG4K0JrRta4mIJZKth2Au3mM3u03/JWKw==",
++      "license": "MIT",
++      "dependencies": {
++        "@types/unist": "^3.0.0",
++        "unist-util-stringify-position": "^4.0.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/unified"
++      }
++    },
+     "node_modules/vite": {
+       "version": "6.4.3",
+       "resolved": "https://registry.npmjs.org/vite/-/vite-6.4.3.tgz",
+@@ -4302,6 +5904,12 @@
+         }
+       }
+     },
++    "node_modules/w3c-keyname": {
++      "version": "2.2.8",
++      "resolved": "https://registry.npmjs.org/w3c-keyname/-/w3c-keyname-2.2.8.tgz",
++      "integrity": "sha512-dpojBhNsCNN7T82Tm7k26A6G9ML3NkhDsnw9n/eoxSRlVBB4CEtIQ/KTCLI2Fwf3ataSXRhYFkQi3SlnFwPvPQ==",
++      "license": "MIT"
++    },
+     "node_modules/w3c-xmlserializer": {
+       "version": "5.0.0",
+       "resolved": "https://registry.npmjs.org/w3c-xmlserializer/-/w3c-xmlserializer-5.0.0.tgz",
+@@ -4493,6 +6101,16 @@
+       "peerDependencies": {
+         "zod": "^3.25.0 || ^4.0.0"
+       }
++    },
++    "node_modules/zwitch": {
++      "version": "2.0.4",
++      "resolved": "https://registry.npmjs.org/zwitch/-/zwitch-2.0.4.tgz",
++      "integrity": "sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==",
++      "license": "MIT",
++      "funding": {
++        "type": "github",
++        "url": "https://github.com/sponsors/wooorm"
++      }
+     }
+   }
+ }
+diff --git a/package.json b/package.json
+index e8e202c..4733378 100644
+--- a/package.json
++++ b/package.json
+@@ -27,8 +27,16 @@
+   },
+   "dependencies": {
+     "@buildwars/gw-templates": "1.1.1",
++    "@tiptap/core": "3.31.3",
++    "@tiptap/pm": "3.31.3",
++    "@tiptap/react": "3.31.3",
++    "@tiptap/starter-kit": "3.31.3",
+     "react": "^19.2.8",
+-    "react-dom": "^19.2.8"
++    "react-dom": "^19.2.8",
++    "remark-directive": "4.0.0",
++    "remark-parse": "11.0.0",
++    "remark-stringify": "11.0.0",
++    "unified": "11.0.5"
+   },
+   "devDependencies": {
+     "@testing-library/jest-dom": "^7.0.1",
+diff --git a/src/app/persistence-schema.ts b/src/app/persistence-schema.ts
+index ec324cd..5f7d644 100644
+--- a/src/app/persistence-schema.ts
++++ b/src/app/persistence-schema.ts
+@@ -2117,3 +2117,25 @@ function diagnostic(code: string, path: string, message: string): PersistenceDia
+ function boundString(value: string, max: number): string {
+   return value.length <= max ? value : value.slice(0, max);
+ }
++
++/** Shared strict snapshot validation for portable guides; no parallel build schema. */
++export function validateGuideBuildSnapshot(input: unknown): PersistedBuildSnapshot {
++  const diagnostics: PersistenceDiagnostic[] = [];
++  const value = validateSnapshot(input, "snapshot", diagnostics);
++  if (
++    value === null ||
++    diagnostics.length > 0 ||
++    !input ||
++    typeof input !== "object" ||
++    !("build" in input) ||
++    !input.build ||
++    typeof input.build !== "object" ||
++    !("schemaVersion" in input.build) ||
++    input.build.schemaVersion !== BUILD_SCHEMA_VERSION
++  ) {
++    throw new Error(
++      diagnostics.map((item) => item.message).join(" ") || "Guide snapshots require Build v4."
++    );
++  }
++  return value;
++}
+diff --git a/src/domain/guide.ts b/src/domain/guide.ts
+index 32a0473..7250031 100644
+--- a/src/domain/guide.ts
++++ b/src/domain/guide.ts
+@@ -19,3 +19,65 @@ export interface Guide extends AuthoredDocumentRoot {
+   readonly title: string;
+   readonly sections: readonly GuideSection[];
+ }
++/** Vendor-independent semantic document. Build payloads are injected at the app boundary. */
++export interface GuideSource {
++  readonly label: string;
++  readonly url: string;
++  readonly attribution?: string;
++  readonly license?: string;
++  readonly licenseUrl?: string;
++  readonly revision?: string;
++  readonly notes?: string;
++}
++export interface GuideMetadata {
++  readonly version: 1;
++  readonly id: string;
++  readonly title: string;
++  readonly summary: string | null;
++  readonly tags: readonly string[];
++  readonly sources: readonly GuideSource[];
++}
++export type GuideSkillContext =
++  | { readonly kind: "generic" }
++  | { readonly kind: "local"; readonly buildId: string }
++  | {
++      readonly kind: "detached";
++      readonly guideId: string;
++      readonly buildId: string;
++      readonly reason: string;
++    };
++export type GuideNode<B> =
++  | { readonly type: "text" | "inlineCode"; readonly value: string }
++  | { readonly type: "break" | "thematicBreak" }
++  | {
++      readonly type: "paragraph" | "emphasis" | "strong" | "blockquote" | "listItem";
++      readonly children: readonly GuideNode<B>[];
++    }
++  | { readonly type: "heading"; readonly depth: number; readonly children: readonly GuideNode<B>[] }
++  | {
++      readonly type: "list";
++      readonly ordered: boolean;
++      readonly start: number;
++      readonly children: readonly GuideNode<B>[];
++    }
++  | {
++      readonly type: "link";
++      readonly url: string;
++      readonly title: string | null;
++      readonly children: readonly GuideNode<B>[];
++    }
++  | { readonly type: "code"; readonly lang: string | null; readonly value: string }
++  | { readonly type: "skill"; readonly skillId: string; readonly context: GuideSkillContext }
++  | { readonly type: "build"; readonly id: string; readonly snapshot: B }
++  | { readonly type: "opaque"; readonly raw: string };
++export interface GuideDocument<B> {
++  readonly metadata: GuideMetadata;
++  readonly nodes: readonly GuideNode<B>[];
++}
++export function guideBuilds<B>(
++  doc: GuideDocument<B>
++): readonly Extract<GuideNode<B>, { type: "build" }>[] {
++  return doc.nodes.filter(
++    (node): node is Extract<GuideNode<B>, { type: "build" }> => node.type === "build"
++  );
++}
+diff --git a/src/main.tsx b/src/main.tsx
+index bcd6f96..4531bc8 100644
+--- a/src/main.tsx
++++ b/src/main.tsx
+@@ -1,9 +1,11 @@
+-import { StrictMode } from "react";
++import { lazy, Suspense, StrictMode } from "react";
+ import { createRoot } from "react-dom/client";
+ 
+ import { App } from "./app/App";
+ import "./app/styles.css";
+ 
++const GuideFeasibility = lazy(() => import("./app/components/guide/GuideFeasibility"));
++
+ const rootElement = document.getElementById("root");
+ 
+ if (!rootElement) {
+@@ -12,6 +14,12 @@ if (!rootElement) {
+ 
+ createRoot(rootElement).render(
+   <StrictMode>
+-    <App />
++    {import.meta.env.VITE_GUIDE_FEASIBILITY === "1" && location.search === "?guide-feasibility" ? (
++      <Suspense fallback="Loading editor…">
++        <GuideFeasibility />
++      </Suspense>
++    ) : (
++      <App />
++    )}
+   </StrictMode>
+ );
+diff --git a/src/app/components/guide/GuideEditor.tsx b/src/app/components/guide/GuideEditor.tsx
+new file mode 100644
+index 0000000..bef0058
+--- /dev/null
++++ b/src/app/components/guide/GuideEditor.tsx
+@@ -0,0 +1,190 @@
++import { createContext, useContext, useEffect, useRef, type ReactNode } from "react";
++import { Node as TiptapNode, type Editor } from "@tiptap/core";
++import {
++  EditorContent,
++  NodeViewWrapper,
++  ReactNodeViewRenderer,
++  useEditor,
++  type NodeViewProps
++} from "@tiptap/react";
++import StarterKit from "@tiptap/starter-kit";
++import type { GuideNode } from "../../../domain/guide";
++import type { AppliedGuide } from "../../guide-history";
++import type { PersistedBuildSnapshot } from "../../persistence-schema";
++import { projectGuideNodes, readGuideNodes } from "../../guide-editor-adapter";
++interface GuideRenderContext {
++  readonly document: AppliedGuide;
++  readonly renderBuild: (id: string) => ReactNode;
++  readonly renderSkill: (
++    node: Extract<GuideNode<PersistedBuildSnapshot>, { type: "skill" }>
++  ) => ReactNode;
++}
++const RenderContext = createContext<GuideRenderContext | null>(null);
++function BuildView({ node }: NodeViewProps) {
++  const context = useContext(RenderContext);
++  return (
++    <NodeViewWrapper contentEditable={false} className="guide-build-embed">
++      {context?.renderBuild(node.attrs.id as string)}
++    </NodeViewWrapper>
++  );
++}
++function MentionView({ node }: NodeViewProps) {
++  const context = useContext(RenderContext);
++  return (
++    <NodeViewWrapper as="span" contentEditable={false} className="guide-mention">
++      {context?.renderSkill({
++        type: "skill",
++        skillId: node.attrs.skillId as string,
++        context: node.attrs.context as Extract<
++          GuideNode<PersistedBuildSnapshot>,
++          { type: "skill" }
++        >["context"]
++      })}
++    </NodeViewWrapper>
++  );
++}
++const BuildNode = TiptapNode.create({
++  name: "guideBuild",
++  group: "block",
++  atom: true,
++  selectable: true,
++  addAttributes: () => ({ id: { default: null } }),
++  parseHTML: () => [],
++  renderHTML: () => ["div", { "data-guide-build": "" }],
++  addNodeView: () => ReactNodeViewRenderer(BuildView)
++});
++const SkillNode = TiptapNode.create({
++  name: "guideSkill",
++  group: "inline",
++  inline: true,
++  atom: true,
++  selectable: true,
++  addAttributes: () => ({ skillId: { default: null }, context: { default: { kind: "generic" } } }),
++  parseHTML: () => [],
++  renderHTML: () => ["span", { "data-guide-skill": "" }],
++  addNodeView: () => ReactNodeViewRenderer(MentionView, { as: "span" })
++});
++const OpaqueNode = TiptapNode.create({
++  name: "guideOpaque",
++  group: "block",
++  atom: true,
++  selectable: true,
++  addAttributes: () => ({ raw: { default: "" } }),
++  parseHTML: () => [],
++  renderHTML: ({ node }) => ["pre", { "data-guide-opaque": "" }, node.attrs.raw as string]
++});
++export function GuideEditor(
++  props: GuideRenderContext & {
++    readonly onChange: (document: AppliedGuide, typing: boolean) => void;
++    readonly onHistory: (direction: "undo" | "redo") => void;
++    readonly onEditor: (editor: Editor | null) => void;
++    readonly onComposition: (active: boolean) => void;
++  }
++) {
++  const latest = useRef(props);
++  const published = useRef(props.document);
++  const composition = useRef<Editor["state"]["doc"] | null>(null);
++  useEffect(() => {
++    latest.current = props;
++  });
++  const editor = useEditor({
++    extensions: [
++      StarterKit.configure({
++        undoRedo: false,
++        link: { openOnClick: false, autolink: false },
++        underline: false,
++        strike: false,
++        trailingNode: false
++      }),
++      BuildNode,
++      SkillNode,
++      OpaqueNode
++    ],
++    content: { type: "doc", content: projectGuideNodes(props.document.nodes) },
++    editorProps: {
++      attributes: { "aria-label": "Guide document", role: "textbox", "aria-multiline": "true" },
++      handleKeyDown: (_view, event) => {
++        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "z") {
++          event.preventDefault();
++          event.stopPropagation();
++          if (!event.isComposing && !composition.current)
++            latest.current.onHistory(event.shiftKey ? "redo" : "undo");
++          return true;
++        }
++        return false;
++      },
++      handleDOMEvents: {
++        compositionstart: (view) => {
++          composition.current ??= view.state.doc;
++          latest.current.onComposition(true);
++          return false;
++        },
++        compositionend: (view) => {
++          // Let ProseMirror's DOM observer consume the final native mutation first.
++          // Intermediate candidates never become semantic history or durable state.
++          setTimeout(() => {
++            const before = composition.current;
++            composition.current = null;
++            if (view.isDestroyed) return;
++            if (before && !before.eq(view.state.doc)) {
++              const document = {
++                ...latest.current.document,
++                nodes: readGuideNodes(
++                  view.state.doc.toJSON().content ?? [],
++                  latest.current.document
++                )
++              };
++              published.current = document;
++              latest.current.onChange(document, false);
++            }
++            latest.current.onComposition(false);
++          }, 0);
++          return false;
++        },
++        beforeinput: (_view, event) => {
++          const input = event as InputEvent;
++          if (input.inputType === "historyUndo" || input.inputType === "historyRedo") {
++            event.preventDefault();
++            if (!composition.current)
++              latest.current.onHistory(input.inputType === "historyUndo" ? "undo" : "redo");
++            return true;
++          }
++          return false;
++        }
++      }
++    },
++    onUpdate: ({ editor, transaction }) => {
++      if (transaction.getMeta("guide-reconcile") || composition.current) return;
++      const document = {
++        ...latest.current.document,
++        nodes: readGuideNodes(editor.getJSON().content ?? [], latest.current.document)
++      };
++      published.current = document;
++      latest.current.onChange(document, true);
++    }
++  });
++  const { onEditor } = props;
++  useEffect(() => {
++    onEditor(editor);
++    return () => onEditor(null);
++  }, [editor, onEditor]);
++  useEffect(() => {
++    if (!editor || composition.current || props.document === published.current) return;
++    const content = editor.schema.nodeFromJSON({
++      type: "doc",
++      content: projectGuideNodes(props.document.nodes)
++    });
++    if (!editor.state.doc.eq(content)) {
++      const transaction = editor.state.tr
++        .replaceWith(0, editor.state.doc.content.size, content.content)
++        .setMeta("guide-reconcile", true);
++      editor.view.dispatch(transaction);
++    }
++    published.current = props.document;
++  }, [editor, props.document]);
++  return (
++    <RenderContext.Provider value={props}>
++      <EditorContent editor={editor} />
++    </RenderContext.Provider>
++  );
++}
+diff --git a/src/app/components/guide/GuideFeasibility.tsx b/src/app/components/guide/GuideFeasibility.tsx
+new file mode 100644
+index 0000000..3aa596d
+--- /dev/null
++++ b/src/app/components/guide/GuideFeasibility.tsx
+@@ -0,0 +1,304 @@
++import { useCallback, useEffect, useRef, useState } from "react";
++import type { Editor } from "@tiptap/core";
++import type { SelectionBookmark } from "@tiptap/pm/state";
++import { catalogId } from "../../../domain";
++import { guideBuilds, type GuideNode } from "../../../domain/guide";
++import { parseGuideMarkdown, serializeGuideMarkdown } from "../../../guide/markdown";
++import { requireReadyCatalogs } from "../../catalogs";
++import { guideBuildAdapter } from "../../guide-build-adapter";
++import { createGuideFixture } from "../../guide-fixture";
++import {
++  commitGuide,
++  createGuideHistory,
++  stepGuideHistory,
++  type AppliedGuide
++} from "../../guide-history";
++import {
++  createPersistedBuildSnapshot,
++  hydrateEditorFromSnapshot,
++  type PersistedBuildSnapshot
++} from "../../persistence-schema";
++import { editorReducer, type EditorAction } from "../../editor-state";
++import { selectSkillDisplay, selectValidationView } from "../../editor-selectors";
++import { ComposerHeader } from "../ComposerHeader";
++import { FocusedAttributeEditor } from "../FocusedAttributeEditor";
++import { GuideEditor } from "./GuideEditor";
++import "./guide.css";
++const catalogs = requireReadyCatalogs();
++export default function GuideFeasibility() {
++  const [history, setHistory] = useState(() =>
++    createGuideHistory(createGuideFixture(), "feasibility-session")
++  );
++  const [source, setSource] = useState("");
++  const [message, setMessage] = useState(
++    "Memory-only feasibility experiment. Existing drafts are untouched."
++  );
++  const [selected, setSelected] = useState("gb-flare");
++  const [composing, setComposing] = useState(false);
++  const [inputEvidence, setInputEvidence] = useState<string[]>([]);
++  const inputTrace = useRef<string[]>([]);
++  useEffect(() => {
++    const record = (event: Event) => {
++      const input = event as InputEvent;
++      const line = `${event.type}: ${input.inputType ?? ""} data=${JSON.stringify(input.data ?? null)} composing=${input.isComposing ?? false} trusted=${event.isTrusted}${event.isTrusted ? "" : ` stack=${new Error().stack}`}`;
++      inputTrace.current = [...inputTrace.current.slice(-49), line];
++    };
++    const names = [
++      "compositionstart",
++      "compositionupdate",
++      "compositionend",
++      "beforeinput",
++      "input"
++    ];
++    for (const name of names) window.document.addEventListener(name, record, true);
++    return () => {
++      for (const name of names) window.document.removeEventListener(name, record, true);
++    };
++  }, []);
++  const editorRef = useRef<Editor | null>(null);
++  const [hasBookmark, setHasBookmark] = useState(false);
++  const bookmark = useRef<SelectionBookmark | null>(null);
++  const document = history.frame.document;
++  const build = guideBuilds(document).find((node) => node.id === selected);
++  const inspector = build ? hydrateEditorFromSnapshot(build.snapshot) : null;
++  const change = (next: AppliedGuide, typing = false) =>
++    setHistory((current) =>
++      commitGuide(current, { document: next, recovery: null }, current, typing ? "typing" : null)
++    );
++  const undo = (direction: "undo" | "redo") =>
++    setHistory((current) => stepGuideHistory(current, direction));
++  const bindEditor = useCallback((editor: Editor | null) => {
++    editorRef.current = editor;
++    if (!editor) return;
++    editor.on("selectionUpdate", ({ editor }) => {
++      bookmark.current = editor.state.selection.getBookmark();
++      setHasBookmark(true);
++    });
++    editor.on("transaction", ({ transaction }) => {
++      if (bookmark.current) bookmark.current = bookmark.current.map(transaction.mapping);
++    });
++  }, []);
++  const edit = (action: EditorAction) => {
++    if (!inspector || !build) return;
++    const next = createPersistedBuildSnapshot(editorReducer(inspector, action));
++    if (JSON.stringify(next) === JSON.stringify(build.snapshot)) return;
++    change({
++      ...document,
++      nodes: document.nodes.map((node) => (node === build ? { ...build, snapshot: next } : node))
++    });
++  };
++  const renderSkill = (node: Extract<GuideNode<PersistedBuildSnapshot>, { type: "skill" }>) => {
++    const sourceBuild =
++      node.context.kind === "local"
++        ? guideBuilds(document).find(
++            (b) => node.context.kind === "local" && b.id === node.context.buildId
++          )
++        : null;
++    const skillId = catalogId<"Skill">(Number(node.skillId.split(":").at(-1)));
++    const skill = catalogs.skills.find((skill) => skill.id === skillId);
++    const view = sourceBuild
++      ? selectSkillDisplay(
++          catalogs,
++          hydrateEditorFromSnapshot(sourceBuild.snapshot),
++          skillId,
++          "tooltip",
++          null
++        )
++      : null;
++    return (
++      <span
++        tabIndex={0}
++        title={
++          view?.kind === "known"
++            ? `${sourceBuild?.snapshot.build.name}: ${view.tooltipText}`
++            : `${node.context.kind}: ${skill?.name ?? node.skillId}`
++        }
++      >
++        {skill?.name ?? node.skillId}{" "}
++        <small>
++          (
++          {node.context.kind === "local"
++            ? (sourceBuild?.snapshot.build.name ?? "missing build")
++            : node.context.kind}
++          )
++        </small>
++      </span>
++    );
++  };
++  return (
++    <main
++      className="guide-experiment"
++      onKeyDown={(event) => {
++        if (
++          event.defaultPrevented ||
++          event.target instanceof HTMLTextAreaElement ||
++          composing ||
++          event.nativeEvent.isComposing
++        )
++          return;
++        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "z") {
++          event.preventDefault();
++          event.stopPropagation();
++          undo(event.shiftKey ? "redo" : "undo");
++        }
++      }}
++    >
++      <header>
++        <h1>Guide feasibility</h1>
++        <p role="status">{message}</p>
++        <p>
++          Revision {history.revision}; undo {history.past.length}; redo {history.future.length}
++        </p>
++        <details>
++          <summary>Native input evidence</summary>
++          <button onClick={() => setInputEvidence([...inputTrace.current])}>
++            Read input trace
++          </button>
++          <pre aria-label="Native input evidence">{inputEvidence.join("\n")}</pre>
++        </details>
++        <button disabled={composing} onClick={() => undo("undo")}>
++          Undo guide
++        </button>
++        <button disabled={composing} onClick={() => undo("redo")}>
++          Redo guide
++        </button>
++        <button disabled={composing} onClick={() => change(createGuideFixture())}>
++          Replace document
++        </button>
++        <button disabled={composing} onClick={() => change(createGuideFixture(true))}>
++          Long fixture
++        </button>
++        <button disabled={composing} onClick={() => setSource(serializeGuideMarkdown(document))}>
++          Open source
++        </button>
++      </header>
++      <div className="guide-experiment-layout">
++        <article>
++          <div className="guide-toolbar">
++            <button onClick={() => editorRef.current?.chain().focus().toggleBold().run()}>
++              Bold
++            </button>
++            <button onClick={() => editorRef.current?.chain().focus().toggleBulletList().run()}>
++              List
++            </button>
++          </div>
++          <GuideEditor
++            document={document}
++            onChange={change}
++            onHistory={undo}
++            onEditor={bindEditor}
++            onComposition={setComposing}
++            renderSkill={renderSkill}
++            renderBuild={(id) => {
++              const card = guideBuilds(document).find((node) => node.id === id);
++              if (!card) return "Missing build";
++              return (
++                <section aria-label={card.snapshot.build.name}>
++                  <button onClick={() => setSelected(id)}>{card.snapshot.build.name}</button>
++                  <p>
++                    {card.snapshot.build.mode}; Fire Magic{" "}
++                    {card.snapshot.build.attributes[0]?.rank ?? 0}
++                  </p>
++                  <div className="guide-bar">
++                    {card.snapshot.build.skillBar.map((skillId, index) => (
++                      <span key={index}>
++                        {skillId
++                          ? (catalogs.skills.find((skill) => skill.id === skillId)?.name ?? skillId)
++                          : "Empty"}
++                      </span>
++                    ))}
++                  </div>
++                </section>
++              );
++            }}
++          />
++        </article>
++        <aside aria-label="Guide catalog">
++          <h2>Skills catalog</h2>
++          <p>{hasBookmark ? "Insert at remembered caret" : "Choose a caret or insert at end"}</p>
++          <button
++            onClick={() => {
++              const editor = editorRef.current;
++              if (!editor || !bookmark.current) {
++                setMessage("Choose a text caret first.");
++                return;
++              }
++              const selection = bookmark.current.resolve(editor.state.doc);
++              editor
++                .chain()
++                .focus()
++                .setTextSelection({ from: selection.from, to: selection.to })
++                .insertContent({
++                  type: "guideSkill",
++                  attrs: { skillId: "catalog:skill:194", context: { kind: "generic" } }
++                })
++                .run();
++            }}
++          >
++            Insert generic Flare at caret
++          </button>
++          <button
++            onClick={() =>
++              editorRef.current
++                ?.chain()
++                .focus("end")
++                .insertContent({
++                  type: "paragraph",
++                  content: [
++                    {
++                      type: "guideSkill",
++                      attrs: { skillId: "catalog:skill:194", context: { kind: "generic" } }
++                    }
++                  ]
++                })
++                .run()
++            }
++          >
++            Insert Flare at end
++          </button>
++          {inspector ? (
++            <section aria-label="Selected build inspector">
++              <ComposerHeader
++                state={inspector}
++                catalogs={catalogs}
++                validation={selectValidationView(inspector, catalogs).result}
++                dispatch={edit}
++              />
++              <FocusedAttributeEditor
++                state={inspector}
++                catalogs={catalogs}
++                validation={selectValidationView(inspector, catalogs)}
++                dispatch={edit}
++              />
++            </section>
++          ) : null}
++        </aside>
++      </div>
++      <section>
++        <label>
++          Markdown source
++          <textarea
++            aria-label="Markdown source"
++            value={source}
++            onChange={(event) => setSource(event.target.value)}
++          />
++        </label>
++        <button
++          onClick={() => {
++            const parsed = parseGuideMarkdown(
++              source,
++              guideBuildAdapter(catalogs),
++              () => "guide-imported"
++            );
++            if (parsed.ok) {
++              change(parsed.document);
++              setMessage("Applied source as one transaction.");
++            } else setMessage(parsed.diagnostics.map((item) => item.message).join(" "));
++          }}
++        >
++          Apply source
++        </button>
++      </section>
++    </main>
++  );
++}
+diff --git a/src/app/components/guide/guide.css b/src/app/components/guide/guide.css
+new file mode 100644
+index 0000000..1c3f02b
+--- /dev/null
++++ b/src/app/components/guide/guide.css
+@@ -0,0 +1,56 @@
++.guide-experiment {
++  max-width: 1500px;
++  margin: auto;
++  padding: 20px;
++}
++.guide-experiment button {
++  margin: 4px;
++}
++.guide-experiment-layout {
++  display: grid;
++  grid-template-columns: minmax(0, 1fr) 400px;
++  gap: 24px;
++}
++.guide-experiment-layout > article,
++.guide-experiment-layout > aside {
++  max-height: 65vh;
++  overflow: auto;
++  padding: 16px;
++  border: 1px solid #888;
++}
++.guide-experiment .tiptap {
++  min-height: 300px;
++  outline: none;
++}
++.guide-experiment .tiptap p {
++  margin: 16px 0;
++}
++.guide-build-embed {
++  border: 1px solid #777;
++  padding: 12px;
++  margin: 16px 0;
++}
++.guide-bar {
++  display: flex;
++  gap: 5px;
++}
++.guide-bar > span {
++  border: 1px solid #888;
++  padding: 3px;
++  font-size: 12px;
++}
++.guide-mention {
++  background: #79663755;
++  border-radius: 4px;
++  padding: 2px;
++}
++.guide-experiment textarea {
++  display: block;
++  width: 100%;
++  min-height: 160px;
++}
++@media (max-width: 800px) {
++  .guide-experiment-layout {
++    grid-template-columns: 1fr;
++  }
++}
+diff --git a/src/app/guide-build-adapter.ts b/src/app/guide-build-adapter.ts
+new file mode 100644
+index 0000000..f1a1c9b
+--- /dev/null
++++ b/src/app/guide-build-adapter.ts
+@@ -0,0 +1,30 @@
++import { authoredDocumentId } from "../domain";
++import type { GuideBuildAdapter } from "../guide/markdown";
++import type { AppCatalogViews } from "./catalogs";
++import { createBlankEditorState } from "./editor-state";
++import {
++  createPersistedBuildSnapshot,
++  validateGuideBuildSnapshot,
++  type PersistedBuildSnapshot
++} from "./persistence-schema";
++import { importSkillTemplateToEditor } from "./template-workflow";
++export function guideBuildAdapter(
++  catalogs: AppCatalogViews | null
++): GuideBuildAdapter<PersistedBuildSnapshot> {
++  return {
++    validate: validateGuideBuildSnapshot,
++    id: (snapshot) => snapshot.build.id,
++    expandTemplate(code, id, mode) {
++      if (!catalogs)
++        throw new Error("Template expansion needs catalogs; complete snapshots remain readable.");
++      const result = importSkillTemplateToEditor(
++        code,
++        { ...createBlankEditorState(), build: { ...createBlankEditorState().build, mode } },
++        catalogs
++      );
++      if (!result.ok) throw new Error(result.error.message);
++      const snapshot = createPersistedBuildSnapshot(result.state);
++      return { ...snapshot, build: { ...snapshot.build, id: authoredDocumentId(id), mode } };
++    }
++  };
++}
+diff --git a/src/app/guide-editor-adapter.ts b/src/app/guide-editor-adapter.ts
+new file mode 100644
+index 0000000..984ce01
+--- /dev/null
++++ b/src/app/guide-editor-adapter.ts
+@@ -0,0 +1,133 @@
++import type { JSONContent } from "@tiptap/core";
++import type { GuideNode } from "../domain/guide";
++import type { AppliedGuide } from "./guide-history";
++import type { PersistedBuildSnapshot } from "./persistence-schema";
++type Node = GuideNode<PersistedBuildSnapshot>;
++const blockNames: Record<string, string> = {
++  listItem: "listItem",
++  blockquote: "blockquote",
++  paragraph: "paragraph",
++  heading: "heading",
++  thematicBreak: "horizontalRule",
++  break: "hardBreak"
++};
++export function projectGuideNodes(nodes: readonly Node[]): JSONContent[] {
++  return nodes.flatMap((node): JSONContent[] => {
++    switch (node.type) {
++      case "text":
++        return node.value ? [{ type: "text", text: node.value }] : [];
++      case "inlineCode":
++        return [{ type: "text", text: node.value, marks: [{ type: "code" }] }];
++      case "strong":
++      case "emphasis":
++      case "link": {
++        const mark =
++          node.type === "link"
++            ? { type: "link", attrs: { href: node.url, title: node.title } }
++            : { type: node.type === "strong" ? "bold" : "italic" };
++        return projectGuideNodes(node.children).map((child) => ({
++          ...child,
++          marks: [...(child.marks ?? []), mark]
++        }));
++      }
++      case "build":
++        return [{ type: "guideBuild", attrs: { id: node.id } }];
++      case "skill":
++        return [{ type: "guideSkill", attrs: { skillId: node.skillId, context: node.context } }];
++      case "opaque":
++        return [{ type: "guideOpaque", attrs: { raw: node.raw } }];
++      case "code":
++        return [
++          {
++            type: "codeBlock",
++            attrs: { language: node.lang },
++            content: node.value ? [{ type: "text", text: node.value }] : []
++          }
++        ];
++      case "list":
++        return [
++          {
++            type: node.ordered ? "orderedList" : "bulletList",
++            attrs: { start: node.start },
++            content: projectGuideNodes(node.children)
++          }
++        ];
++      default:
++        return [
++          {
++            type: blockNames[node.type]!,
++            ...(node.type === "heading" ? { attrs: { level: node.depth } } : {}),
++            ...("children" in node ? { content: projectGuideNodes(node.children) } : {})
++          }
++        ];
++    }
++  });
++}
++export function readGuideNodes(content: JSONContent[], previous: AppliedGuide): Node[] {
++  return content.map((node) => {
++    const children = () => readGuideNodes(node.content ?? [], previous);
++    const attrs = node.attrs ?? {};
++    let result: Node;
++    switch (node.type) {
++      case "text":
++        result = { type: "text", value: node.text ?? "" };
++        break;
++      case "guideBuild": {
++        const build = previous.nodes.find((item) => item.type === "build" && item.id === attrs.id);
++        if (!build) throw new Error("Unknown build projection.");
++        return build;
++      }
++      case "guideSkill":
++        return {
++          type: "skill",
++          skillId: attrs.skillId as string,
++          context: attrs.context as Extract<Node, { type: "skill" }>["context"]
++        };
++      case "guideOpaque":
++        return { type: "opaque", raw: attrs.raw as string };
++      case "heading":
++        result = { type: "heading", depth: attrs.level as number, children: children() };
++        break;
++      case "orderedList":
++      case "bulletList":
++        result = {
++          type: "list",
++          ordered: node.type === "orderedList",
++          start: (attrs.start as number | undefined) ?? 1,
++          children: children()
++        };
++        break;
++      case "codeBlock":
++        return {
++          type: "code",
++          lang: (attrs.language as string | null) ?? null,
++          value: (node.content ?? []).map((child) => child.text ?? "").join("")
++        };
++      case "paragraph":
++      case "blockquote":
++      case "listItem":
++        result = { type: node.type, children: children() };
++        break;
++      case "horizontalRule":
++        return { type: "thematicBreak" };
++      case "hardBreak":
++        return { type: "break" };
++      default:
++        throw new Error(`Unsupported editor projection ${node.type}.`);
++    }
++    for (const mark of node.marks ?? []) {
++      if (mark.type === "code" && result.type === "text")
++        result = { type: "inlineCode", value: result.value };
++      else if (mark.type === "bold" || mark.type === "italic")
++        result = { type: mark.type === "bold" ? "strong" : "emphasis", children: [result] };
++      else if (mark.type === "link")
++        result = {
++          type: "link",
++          url: mark.attrs?.href as string,
++          title: (mark.attrs?.title as string | null) ?? null,
++          children: [result]
++        };
++    }
++    return result;
++  });
++}
+diff --git a/src/app/guide-feasibility.test.ts b/src/app/guide-feasibility.test.ts
+new file mode 100644
+index 0000000..faec3ce
+--- /dev/null
++++ b/src/app/guide-feasibility.test.ts
+@@ -0,0 +1,114 @@
++import { describe, expect, it } from "vitest";
++import { writeFileSync } from "node:fs";
++import { parseGuideMarkdown, serializeGuideMarkdown } from "../guide/markdown";
++import { parseGuideJson } from "../guide/strict-json";
++import { GUIDE_LIMITS, utf8Bytes } from "../guide/limits";
++import { guideBuildAdapter } from "./guide-build-adapter";
++import { createGuideFixture } from "./guide-fixture";
++import { commitGuide, createGuideHistory, stepGuideHistory } from "./guide-history";
++import { requireReadyCatalogs } from "./catalogs";
++const adapter = guideBuildAdapter(requireReadyCatalogs());
++const parse = (source: string) => parseGuideMarkdown(source, adapter, () => "guide-new");
++describe("guide feasibility contracts", () => {
++  it("round trips the complete snapshot and bound context", () => {
++    const document = createGuideFixture();
++    const parsed = parse(serializeGuideMarkdown(document));
++    expect(parsed).toEqual({ ok: true, document, diagnostics: [] });
++  });
++  it("retains literal code and exact opaque CRLF slices after neighboring edits", () => {
++    const opaque = ":::future\r\nunknown:  abc\r\n::: ";
++    const parsed = parse(
++      "Before\n\n" + opaque + "\n\nAfter\n\n```md\n:::bw-build\n{}\n:::\n```\n\n\\:bw-skill[]"
++    );
++    expect(parsed.ok).toBe(true);
++    if (!parsed.ok) return;
++    const document = {
++      ...parsed.document,
++      nodes: [
++        { type: "paragraph" as const, children: [{ type: "text" as const, value: "Edited" }] },
++        ...parsed.document.nodes.slice(1)
++      ]
++    };
++    const output = serializeGuideMarkdown(document);
++    expect(output).toContain(opaque.trimEnd());
++    const roundtrip = parse(output);
++    expect(roundtrip.ok && roundtrip.document).toEqual(document);
++  });
++  it("rejects duplicate JSON keys, nested hazards and conflicting payloads without partial data", () => {
++    for (const raw of ['{"a":1,"a":2}', '{"a":{"__proto__":{}}}', '{"a":1e999}'])
++      expect(() => parseGuideJson(raw)).toThrow();
++    expect(
++      parse(
++        ':::bw-build\n{"version":1,"id":"gb-a","snapshotVersion":1,"snapshot":{},"template":"x"}\n:::'
++      ).ok
++    ).toBe(false);
++    expect(parse("[unsafe](javascript:alert)\n").ok).toBe(false);
++  });
++  it("has one chronological undo for prose and build changes, rejects stale and no-op commits", () => {
++    const initial = createGuideHistory(createGuideFixture(), "session");
++    const text = {
++      ...initial.frame.document,
++      nodes: [
++        ...initial.frame.document.nodes,
++        { type: "paragraph" as const, children: [{ type: "text" as const, value: "Added" }] }
++      ]
++    };
++    const first = commitGuide(initial, { document: text, recovery: null }, initial);
++    const changed = {
++      ...text,
++      nodes: text.nodes.map((node) =>
++        node.type === "build"
++          ? {
++              ...node,
++              snapshot: {
++                ...node.snapshot,
++                build: { ...node.snapshot.build, mode: "pvp" as const }
++              }
++            }
++          : node
++      )
++    };
++    const second = commitGuide(first, { document: changed, recovery: null }, first);
++    const undo = stepGuideHistory(second, "undo");
++    expect(undo.frame.document).toEqual(text);
++    expect(stepGuideHistory(undo, "undo").frame).toEqual(initial.frame);
++    expect(stepGuideHistory(undo, "redo").frame.document).toEqual(changed);
++    expect(commitGuide(second, initial.frame, initial)).toBe(second);
++    expect(commitGuide(second, second.frame, second)).toBe(second);
++    expect(commitGuide(undo, initial.frame, undo).future).toEqual([]);
++  });
++  it("measures representative parse/serialization and retains bounded whole history entries", () => {
++    const fixture = createGuideFixture(true);
++    const start = performance.now();
++    const source = serializeGuideMarkdown(fixture);
++    const serializedMs = performance.now() - start;
++    const parseStart = performance.now();
++    const parsed = parse(source);
++    const parsedMs = performance.now() - parseStart;
++    expect(parsed.ok && parsed.document).toEqual(fixture);
++    expect(utf8Bytes(source)).toBeLessThan(GUIDE_LIMITS.appliedBytes);
++    let history = createGuideHistory(fixture, "capacity");
++    const historyStart = performance.now();
++    for (let i = 0; i < 110; i++)
++      history = commitGuide(
++        history,
++        {
++          document: { ...fixture, metadata: { ...fixture.metadata, title: `Title ${i}` } },
++          recovery: null
++        },
++        history
++      );
++    expect(history.past.length).toBeLessThanOrEqual(GUIDE_LIMITS.historyEntries);
++    writeFileSync(
++      "work/runs/SPRINT-021/partial-capacity.json",
++      JSON.stringify({
++        fixtureBytes: utf8Bytes(source),
++        storageCodeUnits: source.length,
++        serializedMs,
++        parsedMs,
++        historyMs: performance.now() - historyStart,
++        retainedEntries: history.past.length
++      })
++    );
++  });
++});
+diff --git a/src/app/guide-fixture.ts b/src/app/guide-fixture.ts
+new file mode 100644
+index 0000000..10d8e06
+--- /dev/null
++++ b/src/app/guide-fixture.ts
+@@ -0,0 +1,77 @@
++import { authoredDocumentId, catalogId } from "../domain";
++import type { GuideNode } from "../domain/guide";
++import { emptyGuide } from "../guide/markdown";
++import { createBlankEditorState } from "./editor-state";
++import { createPersistedBuildSnapshot, type PersistedBuildSnapshot } from "./persistence-schema";
++import type { AppliedGuide } from "./guide-history";
++export function createGuideFixture(long = false): AppliedGuide {
++  const blank = createBlankEditorState("Flare practice");
++  const snapshot = createPersistedBuildSnapshot({
++    ...blank,
++    build: {
++      ...blank.build,
++      id: authoredDocumentId("gb-flare"),
++      primaryProfessionId: catalogId<"Profession">(6),
++      attributes: [{ attributeId: catalogId<"Attribute">(10), rank: 8 }],
++      skillBar: [catalogId<"Skill">(194), null, null, null, null, null, null, null]
++    }
++  });
++  const nodes: GuideNode<PersistedBuildSnapshot>[] = [
++    { type: "heading", depth: 1, children: [{ type: "text", value: "Practice guide" }] },
++    {
++      type: "paragraph",
++      children: [
++        { type: "text", value: "Practice with " },
++        {
++          type: "skill",
++          skillId: "catalog:skill:194",
++          context: { kind: "local", buildId: "gb-flare" }
++        },
++        { type: "text", value: " before changing the variant." }
++      ]
++    },
++    { type: "build", id: "gb-flare", snapshot },
++    { type: "paragraph", children: [{ type: "text", value: "Write your observations here." }] }
++  ];
++  if (long) {
++    for (let i = 1; i < 16; i++)
++      nodes.push({
++        type: "build",
++        id: `gb-${i}`,
++        snapshot: {
++          ...snapshot,
++          build: { ...snapshot.build, id: authoredDocumentId(`gb-${i}`), name: `Variant ${i}` }
++        }
++      });
++    for (let i = 0; i < 400; i++)
++      nodes.push(
++        i % 4 === 0
++          ? {
++              type: "code",
++              lang: "text",
++              value: `Practice note ${i}\n:bw-skill[]{skill="catalog:skill:194" context="generic"}`
++            }
++          : {
++              type: "paragraph",
++              children: [
++                {
++                  type: "text",
++                  value: `Practice note ${i}. Observe timing and preserve independent attributes. `
++                }
++              ]
++            }
++      );
++    for (let i = 0; i < 599; i++)
++      nodes.push({
++        type: "paragraph",
++        children: [
++          {
++            type: "skill",
++            skillId: "catalog:skill:194",
++            context: { kind: "local", buildId: i % 16 === 0 ? "gb-flare" : `gb-${i % 16}` }
++          }
++        ]
++      });
++  }
++  return { ...emptyGuide<PersistedBuildSnapshot>("guide-practice"), nodes };
++}
+diff --git a/src/app/guide-history.ts b/src/app/guide-history.ts
+new file mode 100644
+index 0000000..416bba0
+--- /dev/null
++++ b/src/app/guide-history.ts
+@@ -0,0 +1,88 @@
++import type { GuideDocument } from "../domain/guide";
++import { GUIDE_LIMITS, utf8Bytes } from "../guide/limits";
++import { serializeGuideMarkdown } from "../guide/markdown";
++import type { PersistedBuildSnapshot } from "./persistence-schema";
++export type AppliedGuide = GuideDocument<PersistedBuildSnapshot>;
++export interface GuideRecovery {
++  readonly raw: string;
++  readonly baseRevision: number;
++  readonly dirty: boolean;
++}
++export interface GuideFrame {
++  readonly document: AppliedGuide;
++  readonly recovery: GuideRecovery | null;
++}
++interface Entry {
++  readonly frame: GuideFrame;
++  readonly bytes: number;
++}
++export interface GuideHistory {
++  readonly session: string;
++  readonly revision: number;
++  readonly frame: GuideFrame;
++  readonly past: readonly Entry[];
++  readonly future: readonly Entry[];
++  readonly group: string | null;
++  readonly time: number;
++}
++export function createGuideHistory(document: AppliedGuide, session: string): GuideHistory {
++  return {
++    session,
++    revision: 0,
++    frame: { document, recovery: null },
++    past: [],
++    future: [],
++    group: null,
++    time: 0
++  };
++}
++function size(frame: GuideFrame) {
++  return utf8Bytes(serializeGuideMarkdown(frame.document)) + utf8Bytes(frame.recovery?.raw ?? "");
++}
++export function commitGuide(
++  history: GuideHistory,
++  frame: GuideFrame,
++  address: { session: string; revision: number },
++  group: string | null = null,
++  now = Date.now()
++): GuideHistory {
++  if (
++    address.session !== history.session ||
++    address.revision !== history.revision ||
++    history.frame === frame ||
++    (history.frame.document === frame.document && history.frame.recovery === frame.recovery)
++  )
++    return history;
++  const bytes = size(frame);
++  if (
++    bytes > GUIDE_LIMITS.historyBytes ||
++    utf8Bytes(serializeGuideMarkdown(frame.document)) > GUIDE_LIMITS.appliedBytes
++  )
++    return history;
++  const merge =
++    group !== null && history.group === group && now - history.time < GUIDE_LIMITS.typingMs;
++  const past = merge
++    ? [...history.past]
++    : [...history.past, { frame: history.frame, bytes: size(history.frame) }];
++  let total = bytes + past.reduce((sum, entry) => sum + entry.bytes, 0);
++  while (
++    past.length &&
++    (past.length > GUIDE_LIMITS.historyEntries || total > GUIDE_LIMITS.historyBytes)
++  )
++    total -= past.shift()!.bytes;
++  return { ...history, frame, revision: history.revision + 1, past, future: [], group, time: now };
++}
++export function stepGuideHistory(history: GuideHistory, direction: "undo" | "redo"): GuideHistory {
++  const stack = direction === "undo" ? history.past : history.future;
++  const entry = stack.at(-1);
++  if (!entry) return history;
++  const current = { frame: history.frame, bytes: size(history.frame) };
++  return {
++    ...history,
++    revision: history.revision + 1,
++    frame: entry.frame,
++    group: null,
++    past: direction === "undo" ? history.past.slice(0, -1) : [...history.past, current],
++    future: direction === "redo" ? history.future.slice(0, -1) : [...history.future, current]
++  };
++}
+diff --git a/src/guide/limits.ts b/src/guide/limits.ts
+new file mode 100644
+index 0000000..4ae4e7c
+--- /dev/null
++++ b/src/guide/limits.ts
+@@ -0,0 +1,26 @@
++/** Provisional until the BW-2001 browser/capacity gate is recorded. */
++export const GUIDE_LIMITS = {
++  appliedBytes: 1024 * 1024,
++  rawBytes: 2 * 1024 * 1024,
++  nodes: 10000,
++  depth: 32,
++  builds: 32,
++  mentions: 2000,
++  sources: 64,
++  metadataBytes: 65536,
++  diagnostics: 100,
++  historyEntries: 100,
++  historyBytes: 16 * 1024 * 1024,
++  typingMs: 750,
++  libraryBytes: 8 * 1024 * 1024,
++  backupBytes: 16 * 1024 * 1024
++} as const;
++export const utf8Bytes = (value: string): number => new TextEncoder().encode(value).length;
++export const validGuideId = (value: unknown): value is string =>
++  typeof value === "string" && /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(value);
++export function safeGuideUrl(value: string): boolean {
++  if (/^#[A-Za-z0-9][A-Za-z0-9._:-]*$/.test(value)) return true;
++  if ([...value].some((char) => char.charCodeAt(0) <= 32 || char.charCodeAt(0) === 127))
++    return false;
++  return /^(https?:\/\/|mailto:)[^\s]+$/i.test(value);
++}
+diff --git a/src/guide/markdown.ts b/src/guide/markdown.ts
+new file mode 100644
+index 0000000..fff8711
+--- /dev/null
++++ b/src/guide/markdown.ts
+@@ -0,0 +1,300 @@
++import { unified } from "unified";
++import remarkParse from "remark-parse";
++import remarkStringify from "remark-stringify";
++import remarkDirective from "remark-directive";
++import type { Root, RootContent } from "mdast";
++import type { Literal } from "unist";
++interface GuideRawNode extends Literal {
++  type: "guideRaw";
++  value: string;
++}
++declare module "mdast" {
++  interface RootContentMap {
++    guideRaw: GuideRawNode;
++  }
++}
++import type { GuideDocument, GuideMetadata, GuideNode, GuideSkillContext } from "../domain/guide";
++import { GUIDE_LIMITS, safeGuideUrl, utf8Bytes, validGuideId } from "./limits";
++import { parseGuideJson } from "./strict-json";
++
++export interface GuideBuildAdapter<B> {
++  readonly validate: (input: unknown) => B;
++  readonly id: (snapshot: B) => string;
++  readonly expandTemplate: (code: string, id: string, mode: "pve" | "pvp") => B;
++}
++export interface GuideDiagnostic {
++  readonly message: string;
++  readonly line: number;
++  readonly column: number;
++}
++export type GuideParseResult<B> =
++  | {
++      readonly ok: true;
++      readonly document: GuideDocument<B>;
++      readonly diagnostics: readonly GuideDiagnostic[];
++    }
++  | { readonly ok: false; readonly diagnostics: readonly GuideDiagnostic[]; readonly raw: string };
++const parser = unified().use(remarkParse).use(remarkDirective);
++const writer = unified()
++  .use(remarkStringify, {
++    bullet: "-",
++    emphasis: "*",
++    strong: "*",
++    fences: true,
++    handlers: { guideRaw: (node) => (node as GuideRawNode).value }
++  })
++  .use(remarkDirective);
++interface ParsedNode {
++  type: string;
++  value?: string;
++  name?: string;
++  attributes?: Record<string, string>;
++  children?: ParsedNode[];
++  depth?: number;
++  ordered?: boolean;
++  start?: number | null;
++  url?: string;
++  title?: string | null;
++  lang?: string | null;
++  position?: { start: { offset?: number; line: number; column: number }; end: { offset?: number } };
++}
++function record(input: unknown): Record<string, unknown> {
++  if (!input || typeof input !== "object" || Array.isArray(input))
++    throw new Error("Expected an object.");
++  return input as Record<string, unknown>;
++}
++function keys(input: Record<string, unknown>, allowed: readonly string[]) {
++  if (Object.keys(input).some((key) => !allowed.includes(key)))
++    throw new Error("Unsupported annotation field.");
++}
++function string(input: unknown, max = 2048): string {
++  if (typeof input !== "string" || input.length > max)
++    throw new Error("Invalid annotation string.");
++  return input;
++}
++function identity(input: unknown): string {
++  if (!validGuideId(input)) throw new Error("Invalid portable identity.");
++  return input;
++}
++export function validateGuideMetadata(input: unknown): GuideMetadata {
++  const meta = record(input);
++  keys(meta, ["version", "id", "title", "summary", "tags", "sources"]);
++  if (meta.version !== 1)
++    throw new Error("Unsupported guide version; keep the source for recovery.");
++  if (utf8Bytes(JSON.stringify(meta)) > GUIDE_LIMITS.metadataBytes)
++    throw new Error("Guide metadata exceeds the byte limit.");
++  if (
++    !Array.isArray(meta.tags) ||
++    meta.tags.length > 24 ||
++    !Array.isArray(meta.sources) ||
++    meta.sources.length > GUIDE_LIMITS.sources
++  )
++    throw new Error("Invalid guide tags or sources.");
++  return {
++    version: 1,
++    id: identity(meta.id),
++    title: string(meta.title, 160),
++    summary: meta.summary === null ? null : string(meta.summary),
++    tags: meta.tags.map((tag) => string(tag, 80)),
++    sources: meta.sources.map((value) => {
++      const source = record(value);
++      keys(source, ["label", "url", "attribution", "license", "licenseUrl", "revision", "notes"]);
++      const url = string(source.url);
++      if (!safeGuideUrl(url)) throw new Error("Unsafe source URL.");
++      const result: Record<string, string> = { label: string(source.label), url };
++      for (const key of ["attribution", "license", "licenseUrl", "revision", "notes"]) {
++        if (source[key] !== undefined) result[key] = string(source[key]);
++      }
++      if (result.licenseUrl && !safeGuideUrl(result.licenseUrl))
++        throw new Error("Unsafe license URL.");
++      return { ...result, label: result.label!, url };
++    })
++  };
++}
++export function emptyGuide<B>(id: string): GuideDocument<B> {
++  return {
++    metadata: { version: 1, id, title: "Untitled Guide", summary: null, tags: [], sources: [] },
++    nodes: [{ type: "paragraph", children: [] }]
++  };
++}
++export function parseGuideMarkdown<B>(
++  raw: string,
++  adapter: GuideBuildAdapter<B>,
++  newId: () => string
++): GuideParseResult<B> {
++  let location = { line: 1, column: 1 };
++  try {
++    if (utf8Bytes(raw) > GUIDE_LIMITS.rawBytes)
++      throw new Error("Source exceeds the raw byte limit; the existing document is unchanged.");
++    const tree = parser.parse(raw) as ParsedNode;
++    let count = 0;
++    let builds = 0;
++    let mentions = 0;
++    let hasMetadata = false;
++    const ids = new Set<string>();
++    let metadata = emptyGuide<B>(newId()).metadata;
++    const slice = (node: ParsedNode) =>
++      raw.slice(node.position?.start.offset, node.position?.end.offset);
++    const directiveJson = (node: ParsedNode) => {
++      const source = slice(node);
++      const first = source.indexOf("\n");
++      const last = source.lastIndexOf("\n");
++      if (first < 0 || last <= first || !/^:::[ \t]*\r?$/.test(source.slice(last + 1)))
++        throw new Error("A block directive requires its own closing ::: line.");
++      return record(parseGuideJson(source.slice(first + 1, last)));
++    };
++    const convert = (node: ParsedNode, depth: number): GuideNode<B> => {
++      location = node.position?.start ?? location;
++      if (++count > GUIDE_LIMITS.nodes || depth > GUIDE_LIMITS.depth)
++        throw new Error("Document node/depth limit exceeded.");
++      const children = () => (node.children ?? []).map((child) => convert(child, depth + 1));
++      switch (node.type) {
++        case "text":
++        case "inlineCode":
++          return { type: node.type, value: node.value ?? "" };
++        case "paragraph":
++        case "emphasis":
++        case "strong":
++        case "blockquote":
++        case "listItem":
++          return { type: node.type, children: children() };
++        case "heading":
++          return { type: "heading", depth: node.depth ?? 1, children: children() };
++        case "list":
++          return {
++            type: "list",
++            ordered: node.ordered ?? false,
++            start: node.start ?? 1,
++            children: children()
++          };
++        case "code":
++          return { type: "code", lang: node.lang ?? null, value: node.value ?? "" };
++        case "break":
++        case "thematicBreak":
++          return { type: node.type };
++        case "link":
++          if (!safeGuideUrl(node.url ?? ""))
++            throw new Error("Unsafe link; edit the retained source to repair it.");
++          return { type: "link", url: node.url!, title: node.title ?? null, children: children() };
++        case "textDirective": {
++          if (node.name !== "bw-skill")
++            throw new Error("Unsupported inline directive; source retained intact.");
++          if (++mentions > GUIDE_LIMITS.mentions) throw new Error("Mention limit exceeded.");
++          const attrs = node.attributes ?? {};
++          keys(attrs, ["skill", "context", "build", "guide", "reason"]);
++          if (
++            !/^catalog:skill:[A-Za-z0-9._:-]{1,160}$/.test(attrs.skill ?? "") ||
++            node.children?.length
++          )
++            throw new Error("Invalid skill annotation.");
++          let context: GuideSkillContext;
++          if (attrs.context === "generic" && Object.keys(attrs).length === 2)
++            context = { kind: "generic" };
++          else if (attrs.build && !attrs.context && Object.keys(attrs).length === 2)
++            context = { kind: "local", buildId: identity(attrs.build) };
++          else if (attrs.context === "detached" && Object.keys(attrs).length === 5)
++            context = {
++              kind: "detached",
++              buildId: identity(attrs.build),
++              guideId: identity(attrs.guide),
++              reason: string(attrs.reason)
++            };
++          else throw new Error("Conflicting or incomplete skill context.");
++          return { type: "skill", skillId: attrs.skill!, context };
++        }
++        case "containerDirective": {
++          if (depth !== 1)
++            throw new Error("Block annotations must be top-level; source retained intact.");
++          if (node.name === "bw-guide")
++            throw new Error("Guide metadata must appear once at the start.");
++          if (node.name === "bw-build") {
++            if (++builds > GUIDE_LIMITS.builds) throw new Error("Build limit exceeded.");
++            const data = directiveJson(node);
++            keys(data, ["version", "id", "snapshotVersion", "snapshot", "template", "mode"]);
++            if (data.version !== 1) throw new Error("Unsupported build directive version.");
++            const id = identity(data.id);
++            if (ids.has(id)) throw new Error("Duplicate guide build identity.");
++            ids.add(id);
++            let snapshot: B;
++            if ("template" in data) {
++              if ("snapshot" in data || "snapshotVersion" in data)
++                throw new Error("Template and snapshot representations conflict.");
++              if (data.mode !== undefined && data.mode !== "pve" && data.mode !== "pvp")
++                throw new Error("Invalid template mode.");
++              snapshot = adapter.expandTemplate(string(data.template), id, data.mode ?? "pve");
++            } else {
++              if (data.snapshotVersion !== 1 || "mode" in data)
++                throw new Error("Unsupported snapshot version or redundant mode.");
++              snapshot = adapter.validate(data.snapshot);
++            }
++            if (adapter.id(snapshot) !== id)
++              throw new Error("Embed and nested build identity must match.");
++            return { type: "build", id, snapshot };
++          }
++          return { type: "opaque", raw: slice(node) };
++        }
++        default:
++          if (depth !== 1)
++            throw new Error(`Unsupported nested ${node.type}; whole source retained intact.`);
++          return { type: "opaque", raw: slice(node) };
++      }
++    };
++    const nodes: GuideNode<B>[] = [];
++    for (const [index, node] of (tree.children ?? []).entries()) {
++      if (node.type === "containerDirective" && node.name === "bw-guide") {
++        if (index !== 0 || hasMetadata)
++          throw new Error("Guide metadata must appear once at the start.");
++        hasMetadata = true;
++        metadata = validateGuideMetadata(directiveJson(node));
++      } else nodes.push(convert(node, 1));
++    }
++    const document = { metadata, nodes };
++    if (utf8Bytes(serializeGuideMarkdown(document)) > GUIDE_LIMITS.appliedBytes)
++      throw new Error("Canonical document exceeds applied byte limit.");
++    return { ok: true, document, diagnostics: [] };
++  } catch (error) {
++    return {
++      ok: false,
++      raw,
++      diagnostics: [
++        {
++          message: error instanceof Error ? error.message : "Invalid guide.",
++          line: location.line,
++          column: location.column
++        }
++      ]
++    };
++  }
++}
++export function serializeGuideMarkdown<B>(document: GuideDocument<B>): string {
++  const convert = (node: GuideNode<B>): unknown => {
++    if (node.type === "build")
++      return {
++        type: "guideRaw",
++        value: `:::bw-build\n${JSON.stringify({ version: 1, id: node.id, snapshotVersion: 1, snapshot: node.snapshot })}\n:::`
++      };
++    if (node.type === "opaque") return { type: "guideRaw", value: node.raw };
++    if (node.type === "skill") {
++      const context = node.context;
++      const attrs =
++        context.kind === "generic"
++          ? { skill: node.skillId, context: "generic" }
++          : context.kind === "local"
++            ? { skill: node.skillId, build: context.buildId }
++            : {
++                skill: node.skillId,
++                context: "detached",
++                build: context.buildId,
++                guide: context.guideId,
++                reason: context.reason
++              };
++      return { type: "textDirective", name: "bw-skill", attributes: attrs, children: [] };
++    }
++    return "children" in node ? { ...node, children: node.children.map(convert) } : { ...node };
++  };
++  const root = {
++    type: "root",
++    children: document.nodes.map(convert) as RootContent[]
++  } satisfies Root;
++  return `:::bw-guide\n${JSON.stringify(document.metadata)}\n:::\n\n${writer.stringify(root)}`;
++}
+diff --git a/src/guide/strict-json.ts b/src/guide/strict-json.ts
+new file mode 100644
+index 0000000..175c115
+--- /dev/null
++++ b/src/guide/strict-json.ts
+@@ -0,0 +1,74 @@
++/** Bounded JSON tokenizer; JSON.parse alone would silently overwrite duplicate keys. */
++export function parseGuideJson(source: string): unknown {
++  let i = 0;
++  let tokens = 0;
++  const fail = (): never => {
++    throw new Error(`Invalid or ambiguous JSON at offset ${i}.`);
++  };
++  const white = () => {
++    while (/\s/.test(source[i] ?? "") && i < source.length) i++;
++  };
++  const string = (): string => {
++    if (source[i] !== '"') return fail();
++    const start = i++;
++    while (i < source.length) {
++      if (source[i] === "\\") {
++        i += 2;
++        continue;
++      }
++      if (source[i++] === '"') return JSON.parse(source.slice(start, i)) as string;
++    }
++    return fail();
++  };
++  const value = (depth: number): void => {
++    if (depth > 32 || ++tokens > 100000) return fail();
++    white();
++    const c = source[i];
++    if (c === '"') {
++      string();
++      return;
++    }
++    if (c === "{" || c === "[") {
++      i++;
++      white();
++      const close = c === "{" ? "}" : "]";
++      const keys = new Set<string>();
++      if (source[i] === close) {
++        i++;
++        return;
++      }
++      while (i < source.length) {
++        white();
++        if (c === "{") {
++          const key = string();
++          if (keys.has(key) || ["__proto__", "prototype", "constructor"].includes(key))
++            return fail();
++          keys.add(key);
++          white();
++          if (source[i++] !== ":") return fail();
++        }
++        value(depth + 1);
++        white();
++        if (source[i] === close) {
++          i++;
++          return;
++        }
++        if (source[i++] !== ",") return fail();
++      }
++      return fail();
++    }
++    const token = /^(?:true|false|null|-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?)/.exec(
++      source.slice(i)
++    )?.[0];
++    if (
++      !token ||
++      (token !== "true" && token !== "false" && token !== "null" && !Number.isFinite(Number(token)))
++    )
++      return fail();
++    i += token.length;
++  };
++  value(0);
++  white();
++  if (i !== source.length) return fail();
++  return JSON.parse(source) as unknown;
++}
+diff --git a/src/app/components/guide/GuideEditor.test.tsx b/src/app/components/guide/GuideEditor.test.tsx
+new file mode 100644
+index 0000000..2b3a7c9
+--- /dev/null
++++ b/src/app/components/guide/GuideEditor.test.tsx
+@@ -0,0 +1,77 @@
++import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
++import { describe, expect, it, vi } from "vitest";
++import type { Editor } from "@tiptap/core";
++import { createGuideFixture } from "../../guide-fixture";
++import { GuideEditor } from "./GuideEditor";
++
++describe("guide editor composition bridge (synthetic unit coverage)", () => {
++  it("routes one keyboard history command without bubbling a second workspace command", () => {
++    const parentHistory = vi.fn();
++    const onHistory = vi.fn();
++    render(
++      <div onKeyDown={parentHistory}>
++        <GuideEditor
++          document={createGuideFixture()}
++          renderBuild={() => null}
++          renderSkill={() => null}
++          onChange={vi.fn()}
++          onHistory={onHistory}
++          onComposition={vi.fn()}
++          onEditor={() => undefined}
++        />
++      </div>
++    );
++    fireEvent.keyDown(screen.getByRole("textbox", { name: "Guide document" }), {
++      key: "z",
++      metaKey: true,
++      shiftKey: true
++    });
++    expect(onHistory.mock.calls).toEqual([["redo"]]);
++    expect(parentHistory).not.toHaveBeenCalled();
++  });
++
++  it("publishes only the final candidate once and prevents native-history routing during composition", async () => {
++    let editor: Editor | null = null;
++    const onChange = vi.fn();
++    const onHistory = vi.fn();
++    const onComposition = vi.fn();
++    render(
++      <GuideEditor
++        document={createGuideFixture()}
++        renderBuild={() => null}
++        renderSkill={() => null}
++        onChange={onChange}
++        onHistory={onHistory}
++        onComposition={onComposition}
++        onEditor={(value) => {
++          editor = value;
++        }}
++      />
++    );
++    await waitFor(() => expect(editor).not.toBeNull());
++    const input = screen.getByRole("textbox", { name: "Guide document" });
++    fireEvent.compositionStart(input);
++    act(() => {
++      editor!.commands.insertContent("´");
++    });
++    expect(onChange).not.toHaveBeenCalled();
++    input.dispatchEvent(
++      new InputEvent("beforeinput", { inputType: "historyUndo", bubbles: true, cancelable: true })
++    );
++    expect(onHistory).not.toHaveBeenCalled();
++    act(() => {
++      editor!.commands.insertContentAt({ from: 1, to: 2 }, "é");
++    });
++    expect(onChange).not.toHaveBeenCalled();
++    fireEvent.compositionEnd(input, { data: "é" });
++    await waitFor(() => expect(onChange).toHaveBeenCalledTimes(1));
++    expect(onChange.mock.calls[0]![1]).toBe(false);
++    expect(JSON.stringify(onChange.mock.calls[0]![0])).toContain("éPractice guide");
++    expect(JSON.stringify(onChange.mock.calls[0]![0])).not.toContain("´");
++    expect(onComposition.mock.calls).toEqual([[true], [false]]);
++    input.dispatchEvent(
++      new InputEvent("beforeinput", { inputType: "historyUndo", bubbles: true, cancelable: true })
++    );
++    expect(onHistory).toHaveBeenCalledWith("undo");
++  });
++});
+diff --git a/public/guide-native-probe.html b/public/guide-native-probe.html
+new file mode 100644
+index 0000000..f216513
+--- /dev/null
++++ b/public/guide-native-probe.html
+@@ -0,0 +1,35 @@
++<!doctype html>
++<html lang="en">
++  <meta charset="utf-8" />
++  <title>Native composition control</title>
++  <h1>Native composition control</h1>
++  <label>Plain textarea <textarea aria-label="Plain textarea"></textarea></label>
++  <div contenteditable="true" role="textbox" aria-label="Plain editable paragraph">
++    Native paragraph.
++  </div>
++  <button id="read">Read native events</button>
++  <pre id="trace" aria-label="Native events"></pre>
++  <script>
++    const rows = [];
++    for (const name of [
++      "compositionstart",
++      "compositionupdate",
++      "compositionend",
++      "beforeinput",
++      "input"
++    ]) {
++      document.addEventListener(
++        name,
++        (event) => {
++          rows.push(
++            `${event.type}: ${event.inputType ?? ""} data=${JSON.stringify(event.data ?? null)} composing=${event.isComposing ?? false} trusted=${event.isTrusted}`
++          );
++        },
++        true
++      );
++    }
++    document.getElementById("read").onclick = () => {
++      document.getElementById("trace").textContent = rows.join("\n");
++    };
++  </script>
++</html>

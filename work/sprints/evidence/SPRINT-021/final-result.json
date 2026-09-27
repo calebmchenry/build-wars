@@ -1,0 +1,41 @@
+{
+  "status": "blocked",
+  "sprint_id": "SPRINT-021",
+  "source_target": "EPIC-20",
+  "source_epic": "EPIC-20",
+  "validation": [
+    {
+      "command": "PATH=\"$PWD/work/runs/toolchain/node_modules/.bin:$PATH\" work/runs/toolchain/node_modules/.bin/npm run verify",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "PATH=\"$PWD/work/runs/toolchain/node_modules/.bin:$PATH\" work/runs/toolchain/node_modules/.bin/npm run format:check",
+      "status": "passed"
+    },
+    {
+      "command": "python3 work/runs/SPRINT-021/check-execution-records.py",
+      "status": "passed"
+    }
+  ],
+  "changed_files_summary": [
+    "src/domain/guide*, src/guide/*, guide-build-adapter and contract/codec fixtures: neutral semantic document, strict versioned Markdown grammar, complete Build v4 snapshots, exact opaque retention, identity rules and measured capacity limits.",
+    "src/app/guide-state/history/editor-adapter/clipboard/placement and components/guide: rendered authoring, metadata, independent embedded builds, shared inspector, contextual skill references, explicit pointer/keyboard placement, one bounded native/keyboard undo history and generation-safe clipboard references.",
+    "src/app/guide-files/template, Source controls and tests: atomic Apply with recoverable raw text, stale captured IO guards, template operations, inert input handling and inspected raw/applied downloads. Actual file-upload acceptance remains blocked.",
+    "src/app/persistence-schema, local-storage, backup-restore, workspace-state, guide-autosave and library controls: guide snapshot v1, backward-compatible library/backup v3, named Save/Open/duplicate, exact invalid-source recovery, mixed backups, anti-wipe/conflict/quota behavior.",
+    "GuideReader, GuideNavigation, guide-navigation and share-url: read-only applied document, details and tooltips, stable namespaced anchors, correct template copy and Source selection/focus restoration.",
+    "src/app/examples, guide-workflow tests and test/fixtures/guides/long-v1.md: original independent dagger variants, integrated automated workflow, frozen 70,233-byte long fixture and actual-browser workflow/download evidence.",
+    "package.json/package-lock.json, AppEntry and main: pinned accepted editor/parser dependency set and lazy guide workspace integration; existing composer and retained build-set/party workflows preserved.",
+    "compendium/guide-workspace.md, ADR 0003, sprint/evidence, tickets and ledger: accepted contracts, final B01–B10 mapping, full validation output, seven completed ticket links, exact unresolved upload gate and preserved historical/native-composition deferral evidence."
+  ],
+  "blocked_reason": "Required actual-browser Markdown upload/reimport/cancel/stale cases (B06) and game-template fallback upload (B08) could not run: chooser/setFiles returned \"Browser security check unavailable. Permission request dismissed before decision; no explicit denial.\" The tool allowed retry only after resolution and prohibited bypasses. Read-only chrome://extensions/ inspection was also rejected by the HTTP(S)-only browser URL policy. No permission resolution was received and no workaround was used. See work/sprints/evidence/SPRINT-021/upload-permission-gap.md. Nine actionable sprint items remain open; native composition is separately user-deferred and is not this blocker.",
+  "followups": [
+    "Resolve the ChatGPT Chrome extension file-upload permission/security review, then resume the normal chooser/setFiles path for actual exported Markdown reimport, canceled/stale import and game-template upload fallback. Verify exact bytes/semantic equality and unchanged prior state/siblings. No replan or patch reapplication is needed.",
+    "Once required file rows pass, close dependent BW-2008–BW-2012 acceptance, remaining sprint items and EPIC-20; retain outer-runner ownership of final validation/commits.",
+    "Native composition completion/cancellation/candidate evidence remains unverified and deferred by user decision per native-composition-deferral.md. Automated composition regressions passed. Do not block this burn or request manual typing on that deferred evidence.",
+    "Public guide discovery, PvX intake, publishing, accounts/collaboration and backend sync remain explicitly outside this sprint."
+  ]
+}

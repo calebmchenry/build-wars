@@ -325,7 +325,9 @@ export function legacyLocalLibraryEnvelopeV1Fixture(): unknown {
           snapshot:
             envelope.workingDraft.document.kind === "build"
               ? envelope.workingDraft.document.snapshot
-              : envelope.workingDraft.document.snapshot.entries[0]?.snapshot,
+              : envelope.workingDraft.document.kind === "build-set"
+                ? envelope.workingDraft.document.snapshot.entries[0]?.snapshot
+                : null,
           associatedRecordId: envelope.workingDraft.associatedRecordId,
           savedWith: envelope.workingDraft.savedWith
         };
@@ -346,7 +348,9 @@ export function legacyLocalLibraryEnvelopeV1Fixture(): unknown {
       snapshot:
         record.document.kind === "build"
           ? record.document.snapshot
-          : record.document.snapshot.entries[0]?.snapshot,
+          : record.document.kind === "build-set"
+            ? record.document.snapshot.entries[0]?.snapshot
+            : null,
       savedWith: record.savedWith
     })),
     metadata: envelope.metadata
@@ -354,5 +358,6 @@ export function legacyLocalLibraryEnvelopeV1Fixture(): unknown {
 }
 
 function documentName(document: PersistedDocument): string {
+  if (document.kind === "guide") return document.snapshot.document.metadata.title;
   return document.kind === "build" ? document.snapshot.build.name : document.snapshot.name;
 }

@@ -68,8 +68,11 @@ export function BackupDialog({
   readonly dispatch: Dispatch<WorkspaceAction>;
   readonly onClose: () => void;
 }) {
-  const backupText = open
-    ? serializeBackupEnvelope(
+  let backupText = "";
+  let backupError: string | null = null;
+  if (open) {
+    try {
+      backupText = serializeBackupEnvelope(
         createBackupEnvelope({
           exportedAt: new Date().toISOString(),
           savedDocuments: workspace.library.records,
@@ -77,8 +80,14 @@ export function BackupDialog({
             .workingDraft,
           savedWith: currentFacts
         })
-      )
-    : "";
+      );
+    } catch (error) {
+      backupError =
+        error instanceof Error
+          ? error.message
+          : "Backup could not be serialized. Current work remains in memory.";
+    }
+  }
 
   if (!open) {
     return null;
@@ -86,12 +95,21 @@ export function BackupDialog({
 
   return (
     <LibraryModal title="Backup local library" onClose={onClose}>
+      {backupError && (
+        <p role="alert">
+          {backupError} Download the current guide separately to retain its source.
+        </p>
+      )}
       <label className="dialog-field">
         <span>Backup JSON</span>
         <textarea readOnly value={backupText} rows={10} />
       </label>
       <div className="dialog-actions">
-        <button type="button" onClick={() => downloadBackup(backupText, dispatch)}>
+        <button
+          type="button"
+          disabled={backupError !== null}
+          onClick={() => downloadBackup(backupText, dispatch)}
+        >
           Download
         </button>
         <button type="button" onClick={onClose}>

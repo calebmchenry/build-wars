@@ -1,0 +1,13 @@
+
+> build-wars@0.0.0 test:run
+> vitest run src/app/attribute-preview-selectors.test.ts
+
+
+ RUN  v4.1.11 /Users/calebmchenry/.codex/worktrees/guide-workspace-burn/build-wars
+
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  20:23:11
+   Duration  4.21s (transform 665ms, setup 83ms, import 820ms, tests 3.00s, environment 202ms)
+

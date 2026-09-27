@@ -1,0 +1,37 @@
+from pathlib import Path
+import hashlib,json,re,subprocess
+root=Path.cwd()
+sprint=Path('work/sprints/SPRINT-021.md').read_text()
+manifest=json.loads(Path('work/runs/ticket-burn/EPIC-20/20260926T232847Z/execute-SPRINT-021-result.json').read_text())
+assert manifest['status']=='blocked' and manifest['blocked_reason']
+assert len(re.findall(r'^- \[ \]',sprint,re.M))==68
+assert not re.search(r'^- \[[xX]\]',sprint,re.M)
+assert 'status: in_progress\n' in sprint and 'execution_status: blocked\n' in sprint
+assert '\n021\tMarkdown Guide Workspace\tin_progress\t' in Path('work/sprints/ledger.tsv').read_text()
+for p in Path('work/tickets/20-markdown-guide-workspace').glob('*.md'):
+ status=re.search(r'^status: (.+)$',p.read_text(),re.M).group(1)
+ expected='in-progress' if p.name=='EPIC.md' else 'blocked' if p.name.startswith('BW-2001-') else 'backlog'
+ assert status==expected,(p,status)
+files=[Path('compendium/decisions/0003-guide-editor-and-markdown-contract.md'),Path('compendium/guide-workspace.md'),Path('work/sprints/SPRINT-021-EVIDENCE.md'),Path('work/sprints/SPRINT-021.md'),Path('work/tickets/20-markdown-guide-workspace/BW-2001-contracts-and-editor-feasibility.md'),Path('work/tickets/20-markdown-guide-workspace/EPIC.md')]
+for p in files:
+ for link in re.findall(r'\]\(([^)]+)\)',p.read_text()):
+  if '://' in link or link.startswith('#'):continue
+  assert (p.parent/link.split('#')[0]).exists(),(p,link)
+assert not subprocess.check_output(['git','diff','--name-only','--','src','package.json','package-lock.json']).strip()
+patch=Path('work/sprints/evidence/SPRINT-021/feasibility-slice.patch')
+assert hashlib.sha256(patch.read_bytes()).hexdigest()==patch.with_suffix('.sha256').read_text().split()[0]
+subprocess.run(['git','apply','--check',str(patch)],check=True)
+resumed=Path('work/sprints/evidence/SPRINT-021/resume-feasibility-slice.patch')
+assert hashlib.sha256(resumed.read_bytes()).hexdigest()==resumed.with_suffix('.sha256').read_text().split()[0]
+subprocess.run(['git','apply','--check',str(resumed)],check=True)
+assert not Path('public/guide-native-probe.html').exists()
+assert not Path('node_modules/@tiptap/react/package.json').exists()
+assert not Path('src/app/components/guide/GuideEditor.tsx').exists()
+assert 'Native Chrome permission now works' in manifest['blocked_reason']
+prior=json.loads(Path('work/sprints/evidence/SPRINT-021/initial-blocked-result.json').read_text())
+assert prior['status']=='blocked' and 'was not approved' in prior['blocked_reason']
+for p in [Path('work/sprints/evidence/SPRINT-021/resume-20260927.md')]:
+ for link in re.findall(r'\]\(([^)]+)\)',p.read_text()):
+  if '://' in link or link.startswith('#'):continue
+  assert (p.parent/link.split('#')[0]).exists(),(p,link)
+print('PASS: blocked manifest, 68 open checklist items, ticket/epic/sprint/ledger status, local links, source/dependency restoration, both archived patches/checksums, historical manifest preserved, native probe and provisional dependency removed.')

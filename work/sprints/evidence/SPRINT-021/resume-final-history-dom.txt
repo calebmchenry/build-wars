@@ -1,0 +1,199 @@
+- main:
+  - heading "Guide feasibility" [level=1]
+  - status: Memory-only feasibility experiment. Existing drafts are untouched.
+  - paragraph: Revision 5; undo 1; redo 1
+  - generic "Native input evidence"
+  - button "Read input trace" [active]
+  - generic "Native input evidence": "compositionstart: data=\"\\nFlare practice\\npve; Fire Magic 8\\n\\nFlare\\nEmpty\\nEmpty\\nEmpty\\nEmpty\\nEmpty\\nEmpty\\nEmpty\\n\" composing=false trusted=true compositionupdate: data=\"´\" composing=false trusted=true beforeinput: insertCompositionText data=\"´\" composing=true trusted=true input: insertCompositionText data=\"´\" composing=true trusted=true compositionupdate: data=\"é\" composing=false trusted=true beforeinput: insertCompositionText data=\"é\" composing=true trusted=true input: insertCompositionText data=\"é\" composing=true trusted=true compositionend: data=\"é\" composing=false trusted=false stack=Error at HTMLDocument.w (http://127.0.0.1:4173/assets/GuideFeasibility-Ds_CcELL.js:199:37652)"
+  - button "Undo guide"
+  - button "Redo guide"
+  - button "Replace document"
+  - button "Long fixture"
+  - button "Open source"
+  - article:
+    - button "Bold"
+    - button "List"
+    - textbox "Guide document":
+      - heading "Practice guide" [level=1]
+      - paragraph:
+        - text: Practice with
+        - 'generic "Flare practice: Spell. Projectile: deals 44 fire damage. If Overcast, strikes adjacent."':
+          - text: Flare
+          - generic: (Flare practice)
+        - text: before changing the variant.é
+      - region "Flare practice":
+        - button "Flare practice"
+        - paragraph: pve; Fire Magic 8
+        - generic: Flare
+        - generic: Empty
+        - generic: Empty
+        - generic: Empty
+        - generic: Empty
+        - generic: Empty
+        - generic: Empty
+        - generic: Empty
+      - paragraph: Write your observations here.
+  - complementary "Guide catalog":
+    - heading "Skills catalog" [level=2]
+    - paragraph: Insert at remembered caret
+    - button "Insert generic Flare at caret"
+    - button "Insert Flare at end"
+    - region "Selected build inspector":
+      - region "Build header":
+        - textbox "Build name": Flare practice
+        - checkbox "PvP"
+        - generic: PvP
+        - generic: Primary
+        - combobox "Primary":
+          - option "Any"
+          - option "Warrior"
+          - option "Ranger"
+          - option "Monk"
+          - option "Necromancer"
+          - option "Mesmer"
+          - option "Elementalist" [selected]
+          - option "Assassin"
+          - option "Ritualist"
+          - option "Paragon"
+          - option "Dervish"
+        - 'button "Primary profession: Elementalist"':
+          - img "Elementalist icon":
+        - generic: /
+        - generic: Secondary
+        - combobox "Secondary":
+          - option "Any" [selected]
+          - option "Warrior"
+          - option "Ranger"
+          - option "Monk"
+          - option "Necromancer"
+          - option "Mesmer"
+          - option "Elementalist"
+          - option "Assassin"
+          - option "Ritualist"
+          - option "Paragon"
+          - option "Dervish"
+        - 'button "Secondary profession: Any"':
+          - img "Any profession": Any
+      - region "Attributes (163 unused points)":
+        - button "Collapse attributes" [expanded]:
+          - generic: "-"
+        - heading "Attributes (163 unused points)" [level=2]
+        - status "Attribute point spend": 37/200
+        - group "Headgear bonus choices":
+          - button "Increase Air Magic":
+            - generic: "1"
+          - 'button "Air Magic: effective rank 0, base 0. Show rank breakdown"':
+            - strong: "0"
+          - generic "Elementalist":
+            - strong: Air Magic
+            - generic: Elementalist
+          - group "Air Magic rune":
+            - generic: Air Magic rune
+            - generic "No rune bonus":
+              - radio "Air Magic rune None" [checked]
+              - generic: None
+            - 'generic "Rune of Minor Air Magic: +1; 0 maximum Health"':
+              - radio "Rune of Minor Air Magic +1; 0 maximum Health"
+            - 'generic "Rune of Major Air Magic: +2; -35 maximum Health"':
+              - radio "Rune of Major Air Magic +2; -35 maximum Health"
+            - 'generic "Rune of Superior Air Magic: +3; -75 maximum Health"':
+              - radio "Rune of Superior Air Magic +3; -75 maximum Health"
+          - generic "Air Magic headgear +1. Select again to clear.":
+            - radio "Air Magic headgear +1"
+            - text: "+1"
+            - generic: headgear
+          - button "Increase Earth Magic":
+            - generic: "1"
+          - 'button "Earth Magic: effective rank 0, base 0. Show rank breakdown"':
+            - strong: "0"
+          - generic "Elementalist":
+            - strong: Earth Magic
+            - generic: Elementalist
+          - group "Earth Magic rune":
+            - generic: Earth Magic rune
+            - generic "No rune bonus":
+              - radio "Earth Magic rune None" [checked]
+              - generic: None
+            - 'generic "Rune of Minor Earth Magic: +1; 0 maximum Health"':
+              - radio "Rune of Minor Earth Magic +1; 0 maximum Health"
+            - 'generic "Rune of Major Earth Magic: +2; -35 maximum Health"':
+              - radio "Rune of Major Earth Magic +2; -35 maximum Health"
+            - 'generic "Rune of Superior Earth Magic: +3; -75 maximum Health"':
+              - radio "Rune of Superior Earth Magic +3; -75 maximum Health"
+          - generic "Earth Magic headgear +1. Select again to clear.":
+            - radio "Earth Magic headgear +1"
+            - text: "+1"
+            - generic: headgear
+          - button "Decrease Fire Magic":
+            - generic: "9"
+          - button "Increase Fire Magic":
+            - generic: "11"
+          - 'button "Fire Magic: effective rank 8, base 8. Show rank breakdown"':
+            - strong: "8"
+          - generic "Elementalist":
+            - strong: Fire Magic
+            - generic: Elementalist
+          - group "Fire Magic rune":
+            - generic: Fire Magic rune
+            - generic "No rune bonus":
+              - radio "Fire Magic rune None" [checked]
+              - generic: None
+            - 'generic "Rune of Minor Fire Magic: +1; 0 maximum Health"':
+              - radio "Rune of Minor Fire Magic +1; 0 maximum Health"
+            - 'generic "Rune of Major Fire Magic: +2; -35 maximum Health"':
+              - radio "Rune of Major Fire Magic +2; -35 maximum Health"
+            - 'generic "Rune of Superior Fire Magic: +3; -75 maximum Health"':
+              - radio "Rune of Superior Fire Magic +3; -75 maximum Health"
+          - generic "Fire Magic headgear +1. Select again to clear.":
+            - radio "Fire Magic headgear +1"
+            - text: "+1"
+            - generic: headgear
+          - button "Increase Water Magic":
+            - generic: "1"
+          - 'button "Water Magic: effective rank 0, base 0. Show rank breakdown"':
+            - strong: "0"
+          - generic "Elementalist":
+            - strong: Water Magic
+            - generic: Elementalist
+          - group "Water Magic rune":
+            - generic: Water Magic rune
+            - generic "No rune bonus":
+              - radio "Water Magic rune None" [checked]
+              - generic: None
+            - 'generic "Rune of Minor Water Magic: +1; 0 maximum Health"':
+              - radio "Rune of Minor Water Magic +1; 0 maximum Health"
+            - 'generic "Rune of Major Water Magic: +2; -35 maximum Health"':
+              - radio "Rune of Major Water Magic +2; -35 maximum Health"
+            - 'generic "Rune of Superior Water Magic: +3; -75 maximum Health"':
+              - radio "Rune of Superior Water Magic +3; -75 maximum Health"
+          - generic "Water Magic headgear +1. Select again to clear.":
+            - radio "Water Magic headgear +1"
+            - text: "+1"
+            - generic: headgear
+          - button "Increase Energy Storage":
+            - generic: "1"
+          - 'button "Energy Storage: effective rank 0, base 0. Show rank breakdown"':
+            - strong: "0"
+          - generic "Elementalist":
+            - strong: Energy Storage
+            - generic: Elementalist
+          - group "Energy Storage rune":
+            - generic: Energy Storage rune
+            - generic "No rune bonus":
+              - radio "Energy Storage rune None" [checked]
+              - generic: None
+            - 'generic "Rune of Minor Energy Storage: +1; 0 maximum Health"':
+              - radio "Rune of Minor Energy Storage +1; 0 maximum Health"
+            - 'generic "Rune of Major Energy Storage: +2; -35 maximum Health"':
+              - radio "Rune of Major Energy Storage +2; -35 maximum Health"
+            - 'generic "Rune of Superior Energy Storage: +3; -75 maximum Health"':
+              - radio "Rune of Superior Energy Storage +3; -75 maximum Health"
+          - generic "Energy Storage headgear +1. Select again to clear.":
+            - radio "Energy Storage headgear +1"
+            - text: "+1"
+            - generic: headgear
+        - region "Assumed attribute effects":
+          - button "Assumed effects (0 active)": + Assumed effects (0 active)
+  - text: Markdown source
+  - textbox "Markdown source"
+  - button "Apply source"

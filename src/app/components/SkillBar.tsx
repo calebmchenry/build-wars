@@ -88,13 +88,13 @@ export function SkillBar({
   );
 }
 
-function handleSlotDragOver(event: DragEvent<HTMLDivElement>): void {
+function handleSlotDragOver(event: DragEvent<HTMLElement>): void {
   event.preventDefault();
   event.dataTransfer.dropEffect = "move";
 }
 
 function handleDrop(
-  event: DragEvent<HTMLDivElement>,
+  event: DragEvent<HTMLElement>,
   slotIndex: number,
   state: EditorState,
   catalogs: AppCatalogViews,

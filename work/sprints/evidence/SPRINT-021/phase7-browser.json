@@ -1,0 +1,217 @@
+[
+  {
+    "case": "catalog-to-prose",
+    "observed": {
+      "dropEffect": "copy",
+      "paragraph": "Place a reference here aFlare (Generic)⋯nd keep both bars intact."
+    },
+    "undo": "Place a reference here and keep both bars intact."
+  },
+  {
+    "case": "cross-build copy into inactive raw slot",
+    "observed": {
+      "bars": [
+        {
+          "id": "acad6b21-49ff-40ab-8949-d2eefcdb4314",
+          "slots": [
+            "Protection A slot 1: Zealous Benediction",
+            "Protection A slot 2: Spirit Bond",
+            "Protection A slot 3: Aegis",
+            "Protection A slot 4: Shielding Hands",
+            "Protection A slot 5: Shield of Absorption",
+            "Protection A slot 6: Dismiss Condition",
+            "Protection A slot 7: Remove Hex",
+            "Protection A slot 8: Empty"
+          ]
+        },
+        {
+          "id": "e9576be9-7585-4dab-b5e3-e70c0d8dfdba",
+          "slots": [
+            "Protection B slot 1: Empty",
+            "Protection B slot 2: Spirit Bond",
+            "Protection B slot 3: Aegis",
+            "Protection B slot 4: Shielding Hands",
+            "Protection B slot 5: Shield of Absorption",
+            "Protection B slot 6: Dismiss Condition",
+            "Protection B slot 7: Remove Hex",
+            "Protection B slot 8: Zealous Benediction"
+          ]
+        }
+      ],
+      "dropEffect": "move",
+      "status": [
+        "Zealous Benediction placed in slot 8. Moved existing copy from slot 1.",
+        "Target: remembered text caret · Generic reference"
+      ]
+    }
+  },
+  {
+    "case": "same-bar raw swap",
+    "rawFile": "phase7-raw-swap.md",
+    "observed": "B7 retains raw template ID 99999; B8 receives catalog/raw Remove Hex 301; A unchanged"
+  },
+  {
+    "case": "bar-to-prose",
+    "observed": {
+      "A": "Protection AMonk / Any · PVEZealous BenedictionSpirit BondAegisShielding HandsShield of AbsorptionDismiss ConditionRemove Hex8EmptyEdit Protection ACopy Protection A templateDuplicate Protection A↑↓Delete Protection A",
+      "dropEffect": "copy",
+      "paragraph": "Place a reference here and kSpirit Bond (Protection A)⋯eep both bars intact."
+    }
+  },
+  {
+    "case": "same-bar move into empty slot",
+    "observed": "Protection AMonk / Any · PVEZealous BenedictionSpirit BondAegisShielding HandsShield of AbsorptionDismiss Condition7EmptyRemove HexEdit Protection ACopy Protection A templateDuplicate Protection A↑↓Delete Protection A"
+  },
+  {
+    "case": "native outside cancellation",
+    "unchanged": true,
+    "dropEffect": "none"
+  },
+  {
+    "case": "native same-document fragment paste",
+    "observed": [
+      {
+        "id": "acad6b21-49ff-40ab-8949-d2eefcdb4314",
+        "name": "Protection A"
+      },
+      {
+        "id": "e9576be9-7585-4dab-b5e3-e70c0d8dfdba",
+        "name": "Protection B"
+      },
+      {
+        "id": "bccd0710-7851-4c7c-87a9-199df6064735",
+        "name": "Protection A"
+      },
+      {
+        "id": "70cff110-9004-47b0-92f0-af82bf55c979",
+        "name": "Protection B"
+      }
+    ]
+  },
+  {
+    "case": "keyboard pick and inactive click placement",
+    "observed": {
+      "bars": [
+        {
+          "id": "acad6b21-49ff-40ab-8949-d2eefcdb4314",
+          "text": "Protection AMonk / Any · PVEZealous BenedictionSpirit BondAegisShielding HandsShield of AbsorptionDismiss ConditionRemove Hex8EmptyEdit Protection ACopy Protection A templateDuplicate Protection A↑↓Delete Protection A"
+        },
+        {
+          "id": "e9576be9-7585-4dab-b5e3-e70c0d8dfdba",
+          "text": "Protection BMonk / Any · PVE1EmptySpirit BondAegisShielding HandsShield of AbsorptionDismiss ConditionRemove HexZealous BenedictionEdit Protection BCopy Protection B templateDuplicate Protection B↑↓Delete Protection B"
+        }
+      ],
+      "status": "Zealous Benediction placed in slot 8. Moved existing copy from slot 1."
+    }
+  },
+  {
+    "case": "picked source becomes stale after Undo",
+    "observed": {
+      "B": "Protection BMonk / Any · PVEZealous BenedictionSpirit BondAegisShielding HandsShield of AbsorptionDismiss ConditionRemove Hex--Unresolved raw skillEdit Protection BCopy Protection B templateDuplicate Protection B↑↓Delete Protection B",
+      "status": "This skill came from an older guide session; pick it again."
+    }
+  },
+  {
+    "case": "stable picked source survives reorder",
+    "observed": {
+      "bars": [
+        {
+          "id": "acad6b21-49ff-40ab-8949-d2eefcdb4314",
+          "text": "Protection AMonk / Any · PVEZealous BenedictionSpirit BondAegisShielding HandsShield of AbsorptionDismiss ConditionRemove Hex8EmptyEdit Protection ACopy Protection A templateDuplicate Protection A↑↓Delete Protection A"
+        },
+        {
+          "id": "e9576be9-7585-4dab-b5e3-e70c0d8dfdba",
+          "text": "Protection BMonk / Any · PVEZealous Benediction2EmptyAegisShielding HandsShield of AbsorptionDismiss ConditionRemove HexSpirit BondEdit Protection BCopy Protection B templateDuplicate Protection B↑↓Delete Protection B"
+        }
+      ],
+      "status": "Spirit Bond placed in slot 8. Moved existing copy from slot 2."
+    }
+  },
+  {
+    "case": "catalog-to-inactive-empty-slot",
+    "observed": {
+      "bars": [
+        {
+          "id": "acad6b21-49ff-40ab-8949-d2eefcdb4314",
+          "text": "Protection AMonk / Any · PVEZealous BenedictionSpirit BondAegisShielding HandsShield of AbsorptionDismiss ConditionRemove Hex8EmptyEdit Protection ACopy Protection A templateDuplicate Protection A↑↓Delete Protection A"
+        },
+        {
+          "id": "e9576be9-7585-4dab-b5e3-e70c0d8dfdba",
+          "text": "Protection BMonk / Any · PVEZealous BenedictionReversal of FortuneAegisShielding HandsShield of AbsorptionDismiss ConditionRemove HexSpirit BondEdit Protection BCopy Protection B templateDuplicate Protection B↑↓Delete Protection B"
+        }
+      ],
+      "status": "Reversal of Fortune placed in slot 2."
+    }
+  },
+  {
+    "case": "catalog-to-between-build-blocks",
+    "observed": [
+      {
+        "tag": "P",
+        "text": "Place a reference here and keep both bars intact."
+      },
+      {
+        "tag": "P",
+        "text": "Between variants."
+      },
+      {
+        "tag": "DIV",
+        "text": "Protection AMonk / Any · PVEZealous BenedictionSpirit BondAegisShielding HandsShield of AbsorptionDi"
+      },
+      {
+        "tag": "P",
+        "text": "Reversal of Fortune (Generic)⋯"
+      },
+      {
+        "tag": "DIV",
+        "text": "Protection BMonk / Any · PVEZealous BenedictionReversal of FortuneAegisShielding HandsShield of Abso"
+      },
+      {
+        "tag": "P",
+        "text": "End of placement practice."
+      }
+    ]
+  },
+  {
+    "case": "own-slot unchanged via keyboard pick",
+    "observed": {
+      "bars": [
+        "Protection AMonk / Any · PVEZealous BenedictionSpirit BondAegisShielding HandsShield of AbsorptionDismiss ConditionRemove Hex8EmptyEdit Protection ACopy Protection A templateDuplicate Protection A↑↓Delete Protection A",
+        "Protection BMonk / Any · PVEZealous BenedictionSpirit BondAegisShielding HandsShield of AbsorptionDismiss ConditionRemove Hex--Unresolved raw skillEdit Protection BCopy Protection B templateDuplicate Protection B↑↓Delete Protection B"
+      ],
+      "status": "Slot 1 already contains that skill."
+    }
+  },
+  {
+    "case": "picked source deleted",
+    "observed": {
+      "cards": 1,
+      "status": "The source slot changed or was deleted; pick it again."
+    }
+  },
+  {
+    "case": "native external text drop",
+    "unchanged": true,
+    "status": ""
+  },
+  {
+    "case": "keyboard Escape",
+    "observed": "Native Enter activated Pick selected slot; Escape disabled Place picked at caret and Cancel placement and returned focus to Guide document; no authored change."
+  },
+  {
+    "case": "standalone outside cancellation retains legacy removal",
+    "observed": [
+      "Drag Spirit Bond from slot 2",
+      "Drag Aegis from slot 3",
+      "Drag Shielding Hands from slot 4",
+      "Drag Shield of Absorption from slot 5",
+      "Drag Dismiss Condition from slot 6",
+      "Drag Remove Hex from slot 7",
+      "Drag Blessed Aura"
+    ]
+  },
+  {
+    "case": "standalone restored after legacy removal",
+    "observed": "Native Enter on Add Zealous Benediction to slot 1 restored the skill. A prior click hit its separate Wiki link; that temporary tab was closed."
+  }
+]

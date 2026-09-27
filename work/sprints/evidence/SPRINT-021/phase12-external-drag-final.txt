@@ -1,0 +1,282 @@
+Browser tab: 1271892759, Title: "External drag verification", URL: "http://127.0.0.1:4174/work/runs/SPRINT-021/browser-fixture/drag.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~				7 text Malformed skill end trusted=true dropEffect=copy
++					392 text Invalid guide skill payload; nothing changed.
+The focused UI element is 5 button Malformed skill
+
+Browser tab: 1271892759, Title: "External drag verification", URL: "http://127.0.0.1:4174/work/runs/SPRINT-021/browser-fixture/drag.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~				7 text External text end trusted=true dropEffect=copy
+~					392 text Drop a skill from this guide, or paste plain text. External drag content was not inserted.
+The focused UI element is 4 button External text
+
+- complementary "External drag fixture":
+  - button "External text" [active]
+  - button "Malformed skill"
+  - status "External drag audit": External text end trusted=true dropEffect=copy
+- main "Build Wars Guide":
+  - region "Theme":
+    - generic: Theme
+    - 'group "Theme: dark"':
+      - button "System" [pressed]
+      - button "Light"
+      - button "Dark"
+  - navigation "Workspace":
+    - button "Composer"
+    - button "New Guide"
+    - button "Open example guide"
+  - region "Guide workspace":
+    - generic: "1"
+    - heading "Untitled Guide" [level=1]
+    - paragraph: durable
+    - generic "Guide details"
+    - generic "Local guide library (0)"
+    - button "Undo guide" [disabled]
+    - button "Redo guide" [disabled]
+    - button "Write" [pressed]
+    - button "Source"
+    - button "Read"
+    - button "Import Markdown"
+    - button "Download applied Markdown"
+    - status: Drop a skill from this guide, or paste plain text. External drag content was not inserted.
+    - article "Guide writing pane":
+      - toolbar "Text formatting":
+        - button "Bold"
+        - button "Italic"
+        - button "Heading"
+        - button "Bullets"
+        - button "Numbered list"
+        - button "Quote"
+        - button "Inline code"
+        - button "Code block"
+        - button "Rule"
+        - button "Link"
+      - generic "Add a build at end"
+      - option "Choose saved build" [selected]
+      - option "PvE" [selected]
+      - option "PvP"
+      - button "Choose caret at end"
+      - generic "Skill placement":
+        - button "Pick from catalog"
+        - button "Pick selected slot" [disabled]
+        - button "Place picked at caret" [disabled]
+        - button "Cancel placement" [disabled]
+        - generic: Select a slot, then Pick selected slot; or Pick from catalog. Choose a destination slot or Place picked at caret. Tab and Enter operate these controls; Escape cancels.
+      - textbox "Guide document":
+        - heading "Practice guide" [level=1]
+        - paragraph:
+          - text: Practice with
+          - button "Flare — Flare practice; edit reference":
+            - img "Flare icon":
+            - text: Flare
+            - generic: (Flare practice)
+          - button "Change context for Flare — Flare practice": ⋯
+          - text: before changing the variant.
+        - region "Flare practice":
+          - strong: Flare practice
+          - generic: Elementalist / Any · PVE
+          - generic "Flare practice eight skill slots":
+            - 'button "Flare practice slot 1: Flare"':
+              - img "Flare icon":
+              - generic: Flare
+            - 'button "Flare practice slot 2: Empty"':
+              - generic: "2"
+              - generic: Empty
+            - 'button "Flare practice slot 3: Empty"':
+              - generic: "3"
+              - generic: Empty
+            - 'button "Flare practice slot 4: Empty"':
+              - generic: "4"
+              - generic: Empty
+            - 'button "Flare practice slot 5: Empty"':
+              - generic: "5"
+              - generic: Empty
+            - 'button "Flare practice slot 6: Empty"':
+              - generic: "6"
+              - generic: Empty
+            - 'button "Flare practice slot 7: Empty"':
+              - generic: "7"
+              - generic: Empty
+            - 'button "Flare practice slot 8: Empty"':
+              - generic: "8"
+              - generic: Empty
+          - button "Edit Flare practice"
+          - button "Copy Flare practice template"
+          - button "Duplicate Flare practice"
+          - button "Move Flare practice up": ↑
+          - button "Move Flare practice down": ↓
+          - button "Delete Flare practice"
+        - paragraph: Write your observations here.
+    - complementary "Guide catalog":
+      - status: No insertion target — choose a text caret
+      - text: New reference context
+      - combobox "New reference context":
+        - option "Generic — catalog ranges" [selected]
+        - option "Flare practice"
+      - region "Skills Catalog":
+        - heading "Skills Catalog" [level=2]
+        - tablist "Catalog tabs":
+          - tab "Skills" [selected]
+        - 'generic "Mode: PvE"':
+          - generic: "Mode: PvE"
+          - 'button "Remove Mode: PvE filter"': x
+        - searchbox "Search"
+        - 'button "Skill display: Rows"':
+        - button "Show skill filters (1 active)":
+          - generic: "1"
+        - group "Attribute group display options":
+          - button "Expand all"
+          - button "Collapse all" [disabled]
+        - button "Expand Air Magic (30 Skills)":
+          - generic: +
+          - generic: Air Magic (30 Skills)
+        - button "Expand Axe Mastery (19 Skills)":
+          - generic: +
+          - generic: Axe Mastery (19 Skills)
+        - button "Expand Beast Mastery (41 Skills)":
+          - generic: +
+          - generic: Beast Mastery (41 Skills)
+        - button "Expand Blood Magic (40 Skills)":
+          - generic: +
+          - generic: Blood Magic (40 Skills)
+        - button "Expand Channeling Magic (29 Skills)":
+          - generic: +
+          - generic: Channeling Magic (29 Skills)
+        - button "Expand Command (19 Skills)":
+          - generic: +
+          - generic: Command (19 Skills)
+        - button "Expand Communing (23 Skills)":
+          - generic: +
+          - generic: Communing (23 Skills)
+        - button "Expand Critical Strikes (18 Skills)":
+          - generic: +
+          - generic: Critical Strikes (18 Skills)
+        - button "Expand Curses (49 Skills)":
+          - generic: +
+          - generic: Curses (49 Skills)
+        - button "Expand Dagger Mastery (28 Skills)":
+          - generic: +
+          - generic: Dagger Mastery (28 Skills)
+        - button "Expand Deadly Arts (29 Skills)":
+          - generic: +
+          - generic: Deadly Arts (29 Skills)
+        - button "Expand Death Magic (42 Skills)":
+          - generic: +
+          - generic: Death Magic (42 Skills)
+        - button "Expand Divine Favor (25 Skills)":
+          - generic: +
+          - generic: Divine Favor (25 Skills)
+        - button "Expand Domination Magic (41 Skills)":
+          - generic: +
+          - generic: Domination Magic (41 Skills)
+        - button "Expand Earth Magic (34 Skills)":
+          - generic: +
+          - generic: Earth Magic (34 Skills)
+        - button "Expand Earth Prayers (17 Skills)":
+          - generic: +
+          - generic: Earth Prayers (17 Skills)
+        - button "Expand Energy Storage (13 Skills)":
+          - generic: +
+          - generic: Energy Storage (13 Skills)
+        - button "Expand Expertise (20 Skills)":
+          - generic: +
+          - generic: Expertise (20 Skills)
+        - button "Expand Fast Casting (11 Skills)":
+          - generic: +
+          - generic: Fast Casting (11 Skills)
+        - button "Expand Fire Magic (33 Skills)":
+          - generic: +
+          - generic: Fire Magic (33 Skills)
+        - button "Expand Hammer Mastery (22 Skills)":
+          - generic: +
+          - generic: Hammer Mastery (22 Skills)
+        - button "Expand Healing Prayers (38 Skills)":
+          - generic: +
+          - generic: Healing Prayers (38 Skills)
+        - button "Expand Illusion Magic (34 Skills)":
+          - generic: +
+          - generic: Illusion Magic (34 Skills)
+        - button "Expand Inspiration Magic (40 Skills)":
+          - generic: +
+          - generic: Inspiration Magic (40 Skills)
+        - button "Expand Leadership (23 Skills)":
+          - generic: +
+          - generic: Leadership (23 Skills)
+        - button "Expand Marksmanship (34 Skills)":
+          - generic: +
+          - generic: Marksmanship (34 Skills)
+        - button "Expand Motivation (20 Skills)":
+          - generic: +
+          - generic: Motivation (20 Skills)
+        - button "Expand Mysticism (28 Skills)":
+          - generic: +
+          - generic: Mysticism (28 Skills)
+        - button "Expand Protection Prayers (36 Skills)":
+          - generic: +
+          - generic: Protection Prayers (36 Skills)
+        - button "Expand Restoration Magic (32 Skills)":
+          - generic: +
+          - generic: Restoration Magic (32 Skills)
+        - button "Expand Scythe Mastery (17 Skills)":
+          - generic: +
+          - generic: Scythe Mastery (17 Skills)
+        - button "Expand Shadow Arts (24 Skills)":
+          - generic: +
+          - generic: Shadow Arts (24 Skills)
+        - button "Expand Smiting Prayers (31 Skills)":
+          - generic: +
+          - generic: Smiting Prayers (31 Skills)
+        - button "Expand Soul Reaping (10 Skills)":
+          - generic: +
+          - generic: Soul Reaping (10 Skills)
+        - button "Expand Spawning Power (26 Skills)":
+          - generic: +
+          - generic: Spawning Power (26 Skills)
+        - button "Expand Spear Mastery (19 Skills)":
+          - generic: +
+          - generic: Spear Mastery (19 Skills)
+        - button "Expand Strength (39 Skills)":
+          - generic: +
+          - generic: Strength (39 Skills)
+        - button "Expand Swordsmanship (19 Skills)":
+          - generic: +
+          - generic: Swordsmanship (19 Skills)
+        - button "Expand Tactics (30 Skills)":
+          - generic: +
+          - generic: Tactics (30 Skills)
+        - button "Expand Water Magic (30 Skills)":
+          - generic: +
+          - generic: Water Magic (30 Skills)
+        - button "Expand Wilderness Survival (40 Skills)":
+          - generic: +
+          - generic: Wilderness Survival (40 Skills)
+        - button "Expand Wind Prayers (23 Skills)":
+          - generic: +
+          - generic: Wind Prayers (23 Skills)
+        - button "Expand Kurzick (10 Skills)":
+          - generic: +
+          - generic: Kurzick (10 Skills)
+        - button "Expand Luxon (10 Skills)":
+          - generic: +
+          - generic: Luxon (10 Skills)
+        - button "Expand Lightbringer (1 Skill)":
+          - generic: +
+          - generic: Lightbringer (1 Skill)
+        - button "Expand Sunspear (10 Skills)":
+          - generic: +
+          - generic: Sunspear (10 Skills)
+        - button "Expand Asura (12 Skills)":
+          - generic: +
+          - generic: Asura (12 Skills)
+        - button "Expand Deldrimor (14 Skills)":
+          - generic: +
+          - generic: Deldrimor (14 Skills)
+        - button "Expand Ebon Vanguard (12 Skills)":
+          - generic: +
+          - generic: Ebon Vanguard (12 Skills)
+        - button "Expand Norn (12 Skills)":
+          - generic: +
+          - generic: Norn (12 Skills)
+        - button "Expand No attribute (73 Skills)":
+          - generic: +
+          - generic: No attribute (73 Skills)

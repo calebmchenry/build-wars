@@ -1,5 +1,17 @@
+import { emptyGuide } from "../guide/markdown";
+import { matchingGuideAnchor } from "./guide-navigation";
+import { loadDaggerExample } from "./examples/dagger-guide";
 import { selectAttributePreview } from "./attribute-preview-selectors";
-import { useEffect, useMemo, useReducer, useRef, useState, type Dispatch } from "react";
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+  type Dispatch
+} from "react";
 
 import { promotedAppCatalogs, type AppCatalogLoadState } from "./catalogs";
 import { BuildComposer } from "./components/BuildComposer";
@@ -9,8 +21,16 @@ import { ThemeControls } from "./components/ThemeControls";
 import { selectComposerLoadoutContext } from "./composer-selectors";
 import { selectSkillDisplay, selectValidationView } from "./editor-selectors";
 import type { EditorAction } from "./editor-state";
-import { browserLocalStorage, readLocalLibrary, writeLocalLibrary } from "./local-storage";
-import { persistedCatalogFactsFromValidation } from "./persistence-schema";
+import {
+  browserLocalStorage,
+  readLocalLibrary,
+  writeLocalLibrary,
+  type LocalStoragePort
+} from "./local-storage";
+import {
+  createPersistedBuildSnapshot,
+  persistedCatalogFactsFromValidation
+} from "./persistence-schema";
 import { consumeShareFragment, parseShareFragment } from "./share-url";
 import { importSkillTemplateToEditor } from "./template-workflow";
 import {
@@ -32,12 +52,21 @@ import {
   type WorkspaceState
 } from "./workspace-state";
 
-export function App() {
-  const catalogState = promotedAppCatalogs;
-  const storage = useMemo(() => browserLocalStorage(), []);
+const GuideWorkspace = lazy(() => import("./components/guide/GuideWorkspace"));
+
+export function App({
+  catalogState = promotedAppCatalogs,
+  storagePort
+}: {
+  readonly catalogState?: AppCatalogLoadState;
+  readonly storagePort?: LocalStoragePort | null;
+} = {}) {
+  const [storage] = useState(() =>
+    storagePort === undefined ? browserLocalStorage() : storagePort
+  );
   const [workspace, workspaceDispatch] = useReducer(
     workspaceReducer,
-    catalogState,
+    { catalogState, storage },
     createWorkspaceFromBrowserStorage
   );
   const [themePreference, setThemePreference] = useState<ThemePreference>(() =>
@@ -62,7 +91,10 @@ export function App() {
   );
   const dispatch: Dispatch<EditorAction> = (action) =>
     workspaceDispatch({ type: "editor", action });
-  const validation = readyCatalogs === null ? null : selectValidationView(state, readyCatalogs);
+  const validation =
+    readyCatalogs === null || workspace.document.kind === "guide"
+      ? null
+      : selectValidationView(state, readyCatalogs);
   const savedWith = useMemo(
     () => (validation === null ? null : persistedCatalogFactsFromValidation(validation.result)),
     [validation]
@@ -81,9 +113,84 @@ export function App() {
   useWorkspaceAutosave(workspace, savedWith, storage, workspaceDispatch, lastFlushTokenRef);
   usePagehideFlush(latestWorkspaceRef, storage, workspaceDispatch);
 
+  const replaceDecision = () =>
+    needsDirtyGuard(workspace) &&
+    !window.confirm("Discard unsaved draft changes, including unapplied source?")
+      ? ("cancel" as const)
+      : ("discard" as const);
+  const navigation = (
+    <nav className="workspace-navigation" aria-label="Workspace">
+      <button
+        type="button"
+        aria-pressed={workspace.document.kind !== "guide"}
+        onClick={() => {
+          if (workspace.document.kind === "guide")
+            workspaceDispatch({ type: "new-draft", decision: replaceDecision() });
+        }}
+      >
+        Composer
+      </button>
+      <button
+        type="button"
+        onClick={() =>
+          workspaceDispatch({
+            type: "replace-guide",
+            document: emptyGuide(crypto.randomUUID()),
+            session: crypto.randomUUID(),
+            decision: replaceDecision(),
+            capturedBuild: loadoutContext.selected ? createPersistedBuildSnapshot(state) : null
+          })
+        }
+      >
+        New Guide
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          const decision = replaceDecision();
+          if (decision === "cancel") return;
+          workspaceDispatch({
+            type: "replace-guide",
+            document: loadDaggerExample(),
+            session: crypto.randomUUID(),
+            decision,
+            capturedBuild: loadoutContext.selected ? createPersistedBuildSnapshot(state) : null
+          });
+        }}
+      >
+        Open example guide
+      </button>
+    </nav>
+  );
+  if (workspace.document.kind === "guide")
+    return (
+      <main className="app-shell guide-shell" aria-label="Build Wars Guide">
+        <ThemeControls
+          preference={themePreference}
+          resolvedTheme={resolvedTheme}
+          onChange={setThemePreference}
+        />
+        {navigation}
+        <StorageBanner
+          durability={workspace.draftSession.durability}
+          diagnostics={workspace.storage.diagnostics}
+          rejectedPayloadSummary={workspace.storage.rejectedPayloadSummary}
+        />
+        <Suspense fallback={<p role="status">Loading guide editor…</p>}>
+          <GuideWorkspace
+            workspace={workspace}
+            guide={workspace.document}
+            catalogs={readyCatalogs}
+            dispatch={workspaceDispatch}
+          />
+        </Suspense>
+      </main>
+    );
+
   if (catalogState.status === "error") {
     return (
       <main className="app-shell catalog-error-shell" aria-labelledby="app-title">
+        {navigation}
         <section className="editor-panel catalog-error-state">
           <p className="eyebrow">Catalog error</p>
           <h1 id="app-title">Build Wars</h1>
@@ -122,6 +229,7 @@ export function App() {
         resolvedTheme={resolvedTheme}
         onChange={setThemePreference}
       />
+      {navigation}
       <StorageBanner
         durability={workspace.draftSession.durability}
         diagnostics={workspace.storage.diagnostics}
@@ -163,18 +271,31 @@ export function App() {
   );
 }
 
-function createWorkspaceFromBrowserStorage(catalogState: AppCatalogLoadState): WorkspaceState {
+function createWorkspaceFromBrowserStorage({
+  catalogState,
+  storage
+}: {
+  readonly catalogState: AppCatalogLoadState;
+  readonly storage: LocalStoragePort | null;
+}): WorkspaceState {
   const parsed =
     catalogState.status === "ready" && typeof window !== "undefined"
       ? parseShareFragment(window.location.hash)
       : ({ ok: true, value: null } as const);
-  const read = readLocalLibrary(browserLocalStorage());
+  const read = readLocalLibrary(storage);
   let workspace = createInitialWorkspaceState({
     envelope: read.envelope,
     writeBlocked: read.writeBlocked,
     diagnostics: read.diagnostics,
     readStatus: read.status
   });
+  if (
+    typeof window !== "undefined" &&
+    workspace.document.kind === "guide" &&
+    matchingGuideAnchor(workspace.document.history.frame.document, window.location.hash)
+  ) {
+    workspace = { ...workspace, document: { ...workspace.document, view: "read" } };
+  }
   if (catalogState.status !== "ready" || typeof window === "undefined") {
     return workspace;
   }
@@ -246,32 +367,52 @@ function useWorkspaceAutosave(
   dispatch: Dispatch<WorkspaceAction>,
   lastFlushTokenRef: { current: number }
 ): void {
+  const latest = useRef({ workspace, savedWith });
   useEffect(() => {
-    if (savedWith === null) {
+    latest.current = { workspace, savedWith };
+  });
+  const token = workspacePersistenceFingerprint(workspace, savedWith);
+  const canSave = savedWith !== null || workspace.document.kind === "guide";
+  const guide = workspace.document.kind === "guide";
+  const lastDurable = workspace.storage.lastDurableFingerprint;
+  const durability = workspace.draftSession.durability;
+  const flushToken = workspace.storage.flushToken;
+  useEffect(() => {
+    if (
+      !canSave ||
+      token === lastDurable ||
+      durability === "write-blocked" ||
+      durability === "conflict"
+    )
       return;
-    }
-    const durableFingerprint = workspacePersistenceFingerprint(workspace, savedWith);
-    if (durableFingerprint === workspace.storage.lastDurableFingerprint) {
-      return;
-    }
-    if (workspace.draftSession.durability === "write-blocked") {
-      return;
-    }
-    const explicitFlush = workspace.storage.flushToken !== lastFlushTokenRef.current;
-    lastFlushTokenRef.current = workspace.storage.flushToken;
-    const delay = explicitFlush ? 0 : 150;
-    const timer = window.setTimeout(() => {
-      const now = new Date().toISOString();
-      const envelope = createWorkspaceEnvelope(workspace, savedWith, now);
-      const result = writeLocalLibrary(storage, envelope, {
-        now,
-        reason: explicitFlush ? "explicit flush" : "autosave",
-        expectedRevision: workspace.storage.revision
-      });
-      dispatch({ type: "storage-write-result", result, durableFingerprint });
-    }, delay);
+    const explicitFlush = flushToken !== lastFlushTokenRef.current;
+    lastFlushTokenRef.current = flushToken;
+    const timer = window.setTimeout(
+      () => {
+        const current = latest.current;
+        const now = new Date().toISOString();
+        const envelope = createWorkspaceEnvelope(current.workspace, current.savedWith, now);
+        const result = writeLocalLibrary(storage, envelope, {
+          now,
+          reason: explicitFlush ? "explicit flush" : "autosave",
+          expectedRevision: current.workspace.storage.revision
+        });
+        dispatch({ type: "storage-write-result", result, durableFingerprint: token });
+      },
+      explicitFlush ? 0 : guide ? 500 : 150
+    );
     return () => window.clearTimeout(timer);
-  }, [dispatch, lastFlushTokenRef, savedWith, storage, workspace]);
+  }, [
+    canSave,
+    dispatch,
+    durability,
+    flushToken,
+    guide,
+    lastDurable,
+    lastFlushTokenRef,
+    storage,
+    token
+  ]);
 }
 
 function usePagehideFlush(
@@ -288,7 +429,7 @@ function usePagehideFlush(
     const flush = () => {
       const latest = latestWorkspaceRef.current;
       if (
-        latest.savedWith === null ||
+        (latest.savedWith === null && latest.workspace.document.kind !== "guide") ||
         latest.workspace.draftSession.durability === "write-blocked"
       ) {
         return;

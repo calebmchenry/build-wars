@@ -1,0 +1,15 @@
+[
+  {
+    "entries": [
+      {
+        "mimeType": "application/x-build-wars-guide-fragment+json",
+        "text": "{\"version\":1,\"session\":\"afe6e9ca-7c33-4ebe-8f4f-fee7551e1fad\",\"guideId\":\"dagger-workshop-example\",\"nodes\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"skill\",\"skillId\":\"catalog:skill:775\",\"context\":{\"kind\":\"local\",\"buildId\":\"dagger-independent\"}}]}]}"
+      },
+      {
+        "mimeType": "text/plain",
+        "text": ":bw-skill{skill=\"catalog:skill:775\" build=\"dagger-independent\"}\n"
+      }
+    ],
+    "presentationStyle": "unspecified"
+  }
+]

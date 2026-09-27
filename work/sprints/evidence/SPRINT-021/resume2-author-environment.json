@@ -1,0 +1,42 @@
+{
+  "time": "2026-09-27T01:58:28.952Z",
+  "url": "http://127.0.0.1:4173/?guide-feasibility",
+  "agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+  "width": 1298,
+  "height": 623,
+  "scale": 1,
+  "resources": [
+    {
+      "name": "http://127.0.0.1:4173/assets/index-BjJw9fl7.js",
+      "duration": 87.09999942779541
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/index-CCQiXRNf.css",
+      "duration": 55.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/GuideFeasibility-Aaz8A4jX.css",
+      "duration": 7.90000057220459
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/GuideFeasibility-DuzUAqgi.js",
+      "duration": 14.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/profession-elementalist-60-LJuOHe-u.png",
+      "duration": 2.6999998092651367
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/runes/e0dc78fc12f7e04bf3e8325becc8e7d5c7631e3a.png",
+      "duration": 1.8999996185302734
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/runes/c5360ac4e0e1f44e83e6746fce3d7ec279469bec.png",
+      "duration": 2.09999942779541
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/runes/5283adaacc2ddf6de02497057bc27ba028b61b07.png",
+      "duration": 2.5
+    }
+  ]
+}

@@ -33,3 +33,4 @@ The Compendium is an in-repo documentation system for agents.
 - [Equipment editor (retired prototype)](equipment-editor.md)
 - [Local library and sharing](local-library-and-sharing.md)
 - [Multi-build workspace](multi-build-workspace.md)
+- [Markdown guide workspace (planned)](guide-workspace.md)

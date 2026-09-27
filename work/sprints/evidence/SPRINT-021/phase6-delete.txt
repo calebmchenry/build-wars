@@ -1,0 +1,698 @@
+Browser tab: 1271892741, Title: "Build Wars", URL: "http://127.0.0.1:4173/".
+0 AXWebArea Build Wars, URL: 127.0.0.1:4173/
+	1 container
+		2 container Build Wars Guide
+			3 container Theme
+				4 text Theme
+				5 container Theme: dark
+					6 checkbox System, Value: 0
+					7 checkbox Light, Value: 0
+					8 checkbox Dark, Value: 1
+			9 container Workspace
+				10 checkbox Composer, Value: 0
+				11 button New Guide
+			12 container Description: Not saved. The editor remains usable, but this browser did not accept the latest write., Help: The editor remains usable, but this browser did not accept the latest write.
+				13 text Not saved
+			14 container Guide workspace
+				15 container
+					16 heading Untitled Guide, Value: 1
+						17 text Untitled Guide
+					18 text Memory-only guide — download Markdown to keep a copy.
+					19 button (collapsed) Guide details, Secondary Actions: Expand
+						20 text Guide details
+					21 button Undo guide
+					22 button (disabled) Redo guide
+					23 checkbox Write, Value: 1
+					24 checkbox Source, Value: 0
+					25 button Download applied Markdown
+				26 container Guide writing pane
+					27 toolbar Text formatting
+						28 button Bold
+						29 button Italic
+						30 button Heading
+						31 button Bullets
+						32 button Numbered list
+						33 button Quote
+						34 button Inline code
+						35 button Code block
+						36 button Rule
+						37 button Link
+					38 button (collapsed) Add a build at end, Secondary Actions: Expand
+						39 text Add a build at end
+					40 button Choose caret at end
+					41 text entry area (settable) Description: Guide document, Value: Before 
+Shielding Hands (Missing build acad6b21-49ff-40ab-8949-d2eefcdb4314), between 
+Shielding Hands (Protection B), generic 
+Shielding Hands (Generic), missing 
+Shielding Hands (Missing build missing-build), detached 
+Shielding Hands (Detached from other-guide / acad6b21-49ff-40ab-8949-d2eefcdb4314) after.
+
+Protection B
+Monk / Any · PVE
+Zealous Benediction
+Spirit Bond
+Aegis
+Shielding Hands
+Shield of Absorption
+Dismiss Condition
+Remove Hex
+8
+Empty
+Edit Protection B
+Copy Protection B template
+Duplicate Protection B
+↑
+↓
+Delete Protection B
+Third selection only
+Monk / Any · PVE
+Zealous Benediction
+Spirit Bond
+Aegis
+Shielding Hands
+Shield of Absorption
+Dismiss Condition
+Remove Hex
+8
+Empty
+Edit Third selection only
+Copy Third selection only template
+Duplicate Third selection only
+↑
+↓
+Delete Third selection only
+						42 container
+							43 text Before 
+							44 button Shielding Hands — Missing build acad6b21-49ff-40ab-8949-d2eefcdb4314; edit reference
+								45 image Shielding Hands icon
+								46 text Shielding Hands
+								47 text (
+								48 text Missing build acad6b21-49ff-40ab-8949-d2eefcdb4314
+								49 text )
+							50 text , between 
+							51 button Shielding Hands — Protection B; edit reference
+								52 image Shielding Hands icon
+								53 text Shielding Hands
+								54 text (
+								55 text Protection B
+								56 text )
+							57 text , generic 
+							58 button Shielding Hands — Generic; edit reference
+								59 image Shielding Hands icon
+								60 text Shielding Hands
+								61 text (
+								62 text Generic
+								63 text )
+							64 text , missing 
+							65 button Shielding Hands — Missing build missing-build; edit reference
+								66 image Shielding Hands icon
+								67 text Shielding Hands
+								68 text (
+								69 text Missing build missing-build
+								70 text )
+							71 text , detached 
+							72 button Shielding Hands — Detached from other-guide / acad6b21-49ff-40ab-8949-d2eefcdb4314; edit reference
+								73 image Shielding Hands icon
+								74 text Shielding Hands
+								75 text (
+								76 text Detached from other-guide / acad6b21-49ff-40ab-8949-d2eefcdb4314
+								77 text )
+							78 text  after.
+						79 container Protection B
+							80 text Protection B
+							81 text Monk  / Any  ·  PVE
+							82 container Protection B eight skill slots
+								83 button Protection B slot 1: Zealous Benediction
+									84 image Zealous Benediction icon
+									85 text Zealous Benediction
+								86 button Protection B slot 2: Spirit Bond
+									87 image Spirit Bond icon
+									88 text Spirit Bond
+								89 button Protection B slot 3: Aegis
+									90 image Aegis icon
+									91 text Aegis
+								92 button Protection B slot 4: Shielding Hands
+									93 image Shielding Hands icon
+									94 text Shielding Hands
+								95 button Protection B slot 5: Shield of Absorption
+									96 image Shield of Absorption icon
+									97 text Shield of Absorption
+								98 button Protection B slot 6: Dismiss Condition
+									99 image Dismiss Condition icon
+									100 text Dismiss Condition
+								101 button Protection B slot 7: Remove Hex
+									102 image Remove Hex icon
+									103 text Remove Hex
+								104 button Protection B slot 8: Empty
+									105 text 8
+									106 text Empty
+							107 checkbox Edit Protection B, Value: 0
+							108 button Copy Protection B template
+								109 text Copy 
+								110 text Protection B
+								111 text  template
+							112 button Duplicate Protection B
+								113 text Duplicate 
+								114 text Protection B
+							115 button Move Protection B up
+							116 button Move Protection B down
+							117 button Delete Protection B
+								118 text Delete 
+								119 text Protection B
+						120 container Third selection only
+							121 text Third selection only
+							122 text Monk  / Any  ·  PVE
+							123 container Third selection only eight skill slots
+								124 button Third selection only slot 1: Zealous Benediction
+									125 image Zealous Benediction icon
+									126 text Zealous Benediction
+								127 button Third selection only slot 2: Spirit Bond
+									128 image Spirit Bond icon
+									129 text Spirit Bond
+								130 button Third selection only slot 3: Aegis
+									131 image Aegis icon
+									132 text Aegis
+								133 button Third selection only slot 4: Shielding Hands
+									134 image Shielding Hands icon
+									135 text Shielding Hands
+								136 button Third selection only slot 5: Shield of Absorption
+									137 image Shield of Absorption icon
+									138 text Shield of Absorption
+								139 button Third selection only slot 6: Dismiss Condition
+									140 image Dismiss Condition icon
+									141 text Dismiss Condition
+								142 button Third selection only slot 7: Remove Hex
+									143 image Remove Hex icon
+									144 text Remove Hex
+								145 button Third selection only slot 8: Empty
+									146 text 8
+									147 text Empty
+							148 checkbox Edit Third selection only, Value: 1
+							149 button Copy Third selection only template
+								150 text Copy 
+								151 text Third selection only
+								152 text  template
+							153 button Duplicate Third selection only
+								154 text Duplicate 
+								155 text Third selection only
+							156 button Move Third selection only up
+							157 button Move Third selection only down
+							158 button Delete Third selection only
+								159 text Delete 
+								160 text Third selection only
+					161 container Selected build inspector
+						162 heading Editing Third selection only, Value: 2
+							163 text Editing  Third selection only
+						164 button Close build inspector
+						165 container Build header
+							166 text field (settable) Description: Build name, Value: Third selection only
+							167 container
+								168 checkbox (settable, integer) Description: PvP, Value: 0
+								169 text PvP
+							170 container
+								171 text Primary
+								172 pop up button (collapsed, settable) Description: Primary, Value: Monk, Secondary Actions: Expand
+									173 menu
+										174 Any
+										175 Warrior
+										176 Ranger
+										177 (selected) Monk
+										178 Necromancer
+										179 Mesmer
+										180 Elementalist
+										181 Assassin
+										182 Ritualist
+										183 Paragon
+										184 Dervish
+								185 pop up button (collapsed) Description: Primary profession: Monk, Secondary Actions: Expand
+									186 image Description: Monk icon, Help: Monk icon (remote-media:gww-icon:monk)
+							187 container
+								188 text Secondary
+								189 pop up button (collapsed, settable) Description: Secondary, Value: Any, Secondary Actions: Expand
+									190 menu
+										191 (selected) Any
+										192 Warrior
+										193 Ranger
+										194 Monk
+										195 Necromancer
+										196 Mesmer
+										197 Elementalist
+										198 Assassin
+										199 Ritualist
+										200 Paragon
+										201 Dervish
+								202 pop up button (collapsed) Description: Secondary profession: Any, Secondary Actions: Expand
+									203 container Any profession
+						204 container Attributes (26 unused points)
+							205 button (expanded) Description: Collapse attributes, Secondary Actions: Collapse
+							206 heading Attributes (26 unused points), Value: 2, ID: focused-attributes-title
+								207 text Attributes ( 26 unused points )
+							208 container Attribute point spend
+								209 text 174/200
+							210 container focused-attribute-list
+								211 container Headgear bonus choices
+									212 button Description: Increase Healing Prayers, Help: Invest 1 points
+										213 text 1
+									214 button (collapsed) Description: Healing Prayers: effective rank 0, base 0. Show rank breakdown, Secondary Actions: Expand
+										215 text 0
+									216 container Monk
+										217 text Healing Prayers
+										218 text Monk
+									219 container Healing Prayers rune
+										220 container
+											221 text Healing Prayers  rune
+										222 container No rune bonus
+											223 radio button (settable, integer) Description: Healing Prayers rune None, Value: 1
+											224 text None
+										225 container Rune of Minor Healing Prayers: +1; 0 maximum Health
+											226 radio button (settable, integer) Description: Rune of Minor Healing Prayers +1; 0 maximum Health, Value: 0
+										227 container Rune of Major Healing Prayers: +2; -35 maximum Health
+											228 radio button (settable, integer) Description: Rune of Major Healing Prayers +2; -35 maximum Health, Value: 0
+										229 container Rune of Superior Healing Prayers: +3; -75 maximum Health
+											230 radio button (settable, integer) Description: Rune of Superior Healing Prayers +3; -75 maximum Health, Value: 0
+									231 container Healing Prayers headgear +1. Select again to clear.
+										232 radio button (settable, integer) Description: Healing Prayers headgear +1, Value: 0
+										233 text +1 headgear
+									234 button Description: Increase Smiting Prayers, Help: Invest 1 points
+										235 text 1
+									236 button (collapsed) Description: Smiting Prayers: effective rank 0, base 0. Show rank breakdown, Secondary Actions: Expand
+										237 text 0
+									238 container Monk
+										239 text Smiting Prayers
+										240 text Monk
+									241 container Smiting Prayers rune
+										242 container
+											243 text Smiting Prayers  rune
+										244 container No rune bonus
+											245 radio button (settable, integer) Description: Smiting Prayers rune None, Value: 1
+											246 text None
+										247 container Rune of Minor Smiting Prayers: +1; 0 maximum Health
+											248 radio button (settable, integer) Description: Rune of Minor Smiting Prayers +1; 0 maximum Health, Value: 0
+										249 container Rune of Major Smiting Prayers: +2; -35 maximum Health
+											250 radio button (settable, integer) Description: Rune of Major Smiting Prayers +2; -35 maximum Health, Value: 0
+										251 container Rune of Superior Smiting Prayers: +3; -75 maximum Health
+											252 radio button (settable, integer) Description: Rune of Superior Smiting Prayers +3; -75 maximum Health, Value: 0
+									253 container Smiting Prayers headgear +1. Select again to clear.
+										254 radio button (settable, integer) Description: Smiting Prayers headgear +1, Value: 0
+										255 text +1 headgear
+									256 button Description: Decrease Protection Prayers, Help: Refund 16 points
+										257 text 16
+									258 button Description: Increase Protection Prayers, Help: Invest 20 points
+										259 text 20
+									260 button (collapsed) Description: Protection Prayers: effective rank 11, base 11. Show rank breakdown, Secondary Actions: Expand
+										261 text 11
+									262 container Monk
+										263 text Protection Prayers
+										264 text Monk
+									265 container Protection Prayers rune
+										266 container
+											267 text Protection Prayers  rune
+										268 container No rune bonus
+											269 radio button (settable, integer) Description: Protection Prayers rune None, Value: 1
+											270 text None
+										271 container Rune of Minor Protection Prayers: +1; 0 maximum Health
+											272 radio button (settable, integer) Description: Rune of Minor Protection Prayers +1; 0 maximum Health, Value: 0
+										273 container Rune of Major Protection Prayers: +2; -35 maximum Health
+											274 radio button (settable, integer) Description: Rune of Major Protection Prayers +2; -35 maximum Health, Value: 0
+										275 container Rune of Superior Protection Prayers: +3; -75 maximum Health
+											276 radio button (settable, integer) Description: Rune of Superior Protection Prayers +3; -75 maximum Health, Value: 0
+									277 container Protection Prayers headgear +1. Select again to clear.
+										278 radio button (settable, integer) Description: Protection Prayers headgear +1, Value: 0
+										279 text +1 headgear
+									280 button Description: Decrease Divine Favor, Help: Refund 20 points
+										281 text 20
+									282 button (collapsed) Description: Divine Favor: effective rank 12, base 12. Show rank breakdown, Secondary Actions: Expand
+										283 text 12
+									284 container Monk
+										285 text Divine Favor
+										286 text Monk
+									287 container Divine Favor rune
+										288 container
+											289 text Divine Favor  rune
+										290 container No rune bonus
+											291 radio button (settable, integer) Description: Divine Favor rune None, Value: 1
+											292 text None
+										293 container Rune of Minor Divine Favor: +1; 0 maximum Health
+											294 radio button (settable, integer) Description: Rune of Minor Divine Favor +1; 0 maximum Health, Value: 0
+										295 container Rune of Major Divine Favor: +2; -35 maximum Health
+											296 radio button (settable, integer) Description: Rune of Major Divine Favor +2; -35 maximum Health, Value: 0
+										297 container Rune of Superior Divine Favor: +3; -75 maximum Health
+											298 radio button (settable, integer) Description: Rune of Superior Divine Favor +3; -75 maximum Health, Value: 0
+									299 container Divine Favor headgear +1. Select again to clear.
+										300 radio button (settable, integer) Description: Divine Favor headgear +1, Value: 0
+										301 text +1 headgear
+								302 container Assumed attribute effects
+									303 button (collapsed)  Assumed effects (0 active), Secondary Actions: Expand
+										304 text  Assumed effects (
+										305 text 0
+										306 text  active)
+						307 button (collapsed) Budget and title ranks, Secondary Actions: Expand
+							308 text Budget and title ranks
+						309 container
+							310 text Card template code
+							311 text field (settable) Description: Card template code, Value: OwAS8WIPXatYAZlcX30tEAAA
+						312 button Apply card template
+						313 button Copy card template
+						314 button Load card template
+						315 button Save card template
+						316 button Download card template
+						317 container
+							318 text Upload card template
+							319 button Upload card template
+						320 text Game codes contain professions, purchased ranks and skills. Guide text, references, rune/headgear, title and assumed-effect choices stay in Markdown/local guides.
+						321 button (collapsed) Build validation, Secondary Actions: Expand
+							322 text Build validation
+				323 container Guide catalog
+					324 text Target: remembered text caret · Generic reference
+					325 container
+						326 text New reference context
+						327 pop up button (collapsed, settable) New reference context, Value: Generic — catalog ranges, Secondary Actions: Expand
+							328 menu
+								329 (selected) Generic — catalog ranges
+								330 Protection B
+								331 Third selection only
+					332 container Skills Catalog
+						333 heading Skills Catalog, Value: 2, ID: catalog-title
+							334 text Skills Catalog
+						335 tab group Catalog tabs
+							336 tab (selected, settable, boolean) Skills, Value: 1
+						337 container
+							338 container Mode: PvE
+								339 text Mode: PvE
+								340 button Remove Mode: PvE filter
+							341 search text field (settable) Search
+						342 pop up button (collapsed) Description: Skill display: Rows, Secondary Actions: Expand
+						343 button (collapsed) Description: Show skill filters (1 active), Secondary Actions: Expand
+						344 container
+							345 container Attribute group display options
+								346 button Expand all
+								347 button (disabled) Collapse all
+							348 button (collapsed) Description: Expand Air Magic (30 Skills), Secondary Actions: Expand
+								349 text Air Magic
+								350 text  (
+								351 text 30 Skills
+								352 text )
+							353 button (collapsed) Description: Expand Axe Mastery (19 Skills), Secondary Actions: Expand
+								354 text Axe Mastery
+								355 text  (
+								356 text 19 Skills
+								357 text )
+							358 button (collapsed) Description: Expand Beast Mastery (41 Skills), Secondary Actions: Expand
+								359 text Beast Mastery
+								360 text  (
+								361 text 41 Skills
+								362 text )
+							363 button (collapsed) Description: Expand Blood Magic (40 Skills), Secondary Actions: Expand
+								364 text Blood Magic
+								365 text  (
+								366 text 40 Skills
+								367 text )
+							368 button (collapsed) Description: Expand Channeling Magic (29 Skills), Secondary Actions: Expand
+								369 text Channeling Magic
+								370 text  (
+								371 text 29 Skills
+								372 text )
+							373 button (collapsed) Description: Expand Command (19 Skills), Secondary Actions: Expand
+								374 text Command
+								375 text  (
+								376 text 19 Skills
+								377 text )
+							378 button (collapsed) Description: Expand Communing (23 Skills), Secondary Actions: Expand
+								379 text Communing
+								380 text  (
+								381 text 23 Skills
+								382 text )
+							383 button (collapsed) Description: Expand Critical Strikes (18 Skills), Secondary Actions: Expand
+								384 text Critical Strikes
+								385 text  (
+								386 text 18 Skills
+								387 text )
+							388 button (collapsed) Description: Expand Curses (49 Skills), Secondary Actions: Expand
+								389 text Curses
+								390 text  (
+								391 text 49 Skills
+								392 text )
+							393 button (collapsed) Description: Expand Dagger Mastery (28 Skills), Secondary Actions: Expand
+								394 text Dagger Mastery
+								395 text  (
+								396 text 28 Skills
+								397 text )
+							398 button (collapsed) Description: Expand Deadly Arts (29 Skills), Secondary Actions: Expand
+								399 text Deadly Arts
+								400 text  (
+								401 text 29 Skills
+								402 text )
+							403 button (collapsed) Description: Expand Death Magic (42 Skills), Secondary Actions: Expand
+								404 text Death Magic
+								405 text  (
+								406 text 42 Skills
+								407 text )
+							408 button (collapsed) Description: Expand Divine Favor (25 Skills), Secondary Actions: Expand
+								409 text Divine Favor
+								410 text  (
+								411 text 25 Skills
+								412 text )
+							413 button (collapsed) Description: Expand Domination Magic (41 Skills), Secondary Actions: Expand
+								414 text Domination Magic
+								415 text  (
+								416 text 41 Skills
+								417 text )
+							418 button (collapsed) Description: Expand Earth Magic (34 Skills), Secondary Actions: Expand
+								419 text Earth Magic
+								420 text  (
+								421 text 34 Skills
+								422 text )
+							423 button (collapsed) Description: Expand Earth Prayers (17 Skills), Secondary Actions: Expand
+								424 text Earth Prayers
+								425 text  (
+								426 text 17 Skills
+								427 text )
+							428 button (collapsed) Description: Expand Energy Storage (13 Skills), Secondary Actions: Expand
+								429 text Energy Storage
+								430 text  (
+								431 text 13 Skills
+								432 text )
+							433 button (collapsed) Description: Expand Expertise (20 Skills), Secondary Actions: Expand
+								434 text Expertise
+								435 text  (
+								436 text 20 Skills
+								437 text )
+							438 button (collapsed) Description: Expand Fast Casting (11 Skills), Secondary Actions: Expand
+								439 text Fast Casting
+								440 text  (
+								441 text 11 Skills
+								442 text )
+							443 button (collapsed) Description: Expand Fire Magic (33 Skills), Secondary Actions: Expand
+								444 text Fire Magic
+								445 text  (
+								446 text 33 Skills
+								447 text )
+							448 button (collapsed) Description: Expand Hammer Mastery (22 Skills), Secondary Actions: Expand
+								449 text Hammer Mastery
+								450 text  (
+								451 text 22 Skills
+								452 text )
+							453 button (collapsed) Description: Expand Healing Prayers (38 Skills), Secondary Actions: Expand
+								454 text Healing Prayers
+								455 text  (
+								456 text 38 Skills
+								457 text )
+							458 button (collapsed) Description: Expand Illusion Magic (34 Skills), Secondary Actions: Expand
+								459 text Illusion Magic
+								460 text  (
+								461 text 34 Skills
+								462 text )
+							463 button (collapsed) Description: Expand Inspiration Magic (40 Skills), Secondary Actions: Expand
+								464 text Inspiration Magic
+								465 text  (
+								466 text 40 Skills
+								467 text )
+							468 button (collapsed) Description: Expand Leadership (23 Skills), Secondary Actions: Expand
+								469 text Leadership
+								470 text  (
+								471 text 23 Skills
+								472 text )
+							473 button (collapsed) Description: Expand Marksmanship (34 Skills), Secondary Actions: Expand
+								474 text Marksmanship
+								475 text  (
+								476 text 34 Skills
+								477 text )
+							478 button (collapsed) Description: Expand Motivation (20 Skills), Secondary Actions: Expand
+								479 text Motivation
+								480 text  (
+								481 text 20 Skills
+								482 text )
+							483 button (collapsed) Description: Expand Mysticism (28 Skills), Secondary Actions: Expand
+								484 text Mysticism
+								485 text  (
+								486 text 28 Skills
+								487 text )
+							488 button (collapsed) Description: Expand Protection Prayers (36 Skills), Secondary Actions: Expand
+								489 text Protection Prayers
+								490 text  (
+								491 text 36 Skills
+								492 text )
+							493 button (collapsed) Description: Expand Restoration Magic (32 Skills), Secondary Actions: Expand
+								494 text Restoration Magic
+								495 text  (
+								496 text 32 Skills
+								497 text )
+							498 button (collapsed) Description: Expand Scythe Mastery (17 Skills), Secondary Actions: Expand
+								499 text Scythe Mastery
+								500 text  (
+								501 text 17 Skills
+								502 text )
+							503 button (collapsed) Description: Expand Shadow Arts (24 Skills), Secondary Actions: Expand
+								504 text Shadow Arts
+								505 text  (
+								506 text 24 Skills
+								507 text )
+							508 button (collapsed) Description: Expand Smiting Prayers (31 Skills), Secondary Actions: Expand
+								509 text Smiting Prayers
+								510 text  (
+								511 text 31 Skills
+								512 text )
+							513 button (collapsed) Description: Expand Soul Reaping (10 Skills), Secondary Actions: Expand
+								514 text Soul Reaping
+								515 text  (
+								516 text 10 Skills
+								517 text )
+							518 button (collapsed) Description: Expand Spawning Power (26 Skills), Secondary Actions: Expand
+								519 text Spawning Power
+								520 text  (
+								521 text 26 Skills
+								522 text )
+							523 button (collapsed) Description: Expand Spear Mastery (19 Skills), Secondary Actions: Expand
+								524 text Spear Mastery
+								525 text  (
+								526 text 19 Skills
+								527 text )
+							528 button (collapsed) Description: Expand Strength (39 Skills), Secondary Actions: Expand
+								529 text Strength
+								530 text  (
+								531 text 39 Skills
+								532 text )
+							533 button (collapsed) Description: Expand Swordsmanship (19 Skills), Secondary Actions: Expand
+								534 text Swordsmanship
+								535 text  (
+								536 text 19 Skills
+								537 text )
+							538 button (collapsed) Description: Expand Tactics (30 Skills), Secondary Actions: Expand
+								539 text Tactics
+								540 text  (
+								541 text 30 Skills
+								542 text )
+							543 button (collapsed) Description: Expand Water Magic (30 Skills), Secondary Actions: Expand
+								544 text Water Magic
+								545 text  (
+								546 text 30 Skills
+								547 text )
+							548 button (collapsed) Description: Expand Wilderness Survival (40 Skills), Secondary Actions: Expand
+								549 text Wilderness Survival
+								550 text  (
+								551 text 40 Skills
+								552 text )
+							553 button (collapsed) Description: Expand Wind Prayers (23 Skills), Secondary Actions: Expand
+								554 text Wind Prayers
+								555 text  (
+								556 text 23 Skills
+								557 text )
+							558 button (collapsed) Description: Expand Kurzick (10 Skills), Secondary Actions: Expand
+								559 text Kurzick
+								560 text  (
+								561 text 10 Skills
+								562 text )
+							563 button (collapsed) Description: Expand Luxon (10 Skills), Secondary Actions: Expand
+								564 text Luxon
+								565 text  (
+								566 text 10 Skills
+								567 text )
+							568 button (collapsed) Description: Expand Lightbringer (1 Skill), Secondary Actions: Expand
+								569 text Lightbringer
+								570 text  (
+								571 text 1 Skill
+								572 text )
+							573 button (collapsed) Description: Expand Sunspear (10 Skills), Secondary Actions: Expand
+								574 text Sunspear
+								575 text  (
+								576 text 10 Skills
+								577 text )
+							578 button (collapsed) Description: Expand Asura (12 Skills), Secondary Actions: Expand
+								579 text Asura
+								580 text  (
+								581 text 12 Skills
+								582 text )
+							583 button (collapsed) Description: Expand Deldrimor (14 Skills), Secondary Actions: Expand
+								584 text Deldrimor
+								585 text  (
+								586 text 14 Skills
+								587 text )
+							588 button (collapsed) Description: Expand Ebon Vanguard (12 Skills), Secondary Actions: Expand
+								589 text Ebon Vanguard
+								590 text  (
+								591 text 12 Skills
+								592 text )
+							593 button (collapsed) Description: Expand Norn (12 Skills), Secondary Actions: Expand
+								594 text Norn
+								595 text  (
+								596 text 12 Skills
+								597 text )
+							598 button (collapsed) Description: Expand No attribute (73 Skills), Secondary Actions: Expand
+								599 text No attribute
+								600 text  (
+								601 text 73 Skills
+								602 text )
+		603 container Zealous Benediction Skill costs and timing Elite Spell. Heals for 140. You gain 7 Energy if target ally was below 50% Health. (Attrib: Protection Prayers)
+			604 text Zealous Benediction
+			605 container Skill costs and timing
+				606 container Cost: Energy 10
+					607 text 10
+				608 container Timing: Activation 3/4
+					609 text 3/4
+				610 container Timing: Recharge 4
+					611 text 4
+			612 container
+				613 text Elite Spell. Heals for  140 . You gain 7 Energy if target ally was below 50% Health.
+			614 text (Attrib: Protection Prayers)
+
+The focused UI element is 41 text entry area (settable) Description: Guide document, Value: Before 
+Shielding Hands (Missing build acad6b21-49ff-40ab-8949-d2eefcdb4314), between 
+Shielding Hands (Protection B), generic 
+Shielding Hands (Generic), missing 
+Shielding Hands (Missing build missing-build), detached 
+Shielding Hands (Detached from other-guide / acad6b21-49ff-40ab-8949-d2eefcdb4314) after.
+
+Protection B
+Monk / Any · PVE
+Zealous Benediction
+Spirit Bond
+Aegis
+Shielding Hands
+Shield of Absorption
+Dismiss Condition
+Remove Hex
+8
+Empty
+Edit Protection B
+Copy Protection B template
+Duplicate Protection B
+↑
+↓
+Delete Protection B
+Third selection only
+Monk / Any · PVE
+Zealous Benediction
+Spirit Bond
+Aegis
+Shielding Hands
+Shield of Absorption
+Dismiss Condition
+Remove Hex
+8
+Empty
+Edit Third selection only
+Copy Third selection only template
+Duplicate Third selection only
+↑
+↓
+Delete Third selection only

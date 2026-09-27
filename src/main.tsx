@@ -1,17 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-
-import { App } from "./app/App";
+import { AppEntry } from "./app/AppEntry";
 import "./app/styles.css";
-
 const rootElement = document.getElementById("root");
-
-if (!rootElement) {
-  throw new Error("Build Wars root element was not found.");
-}
-
+if (!rootElement) throw new Error("Build Wars root element was not found.");
 createRoot(rootElement).render(
   <StrictMode>
-    <App />
+    <AppEntry />
   </StrictMode>
 );

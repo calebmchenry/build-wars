@@ -1,0 +1,1 @@
+PASS: blocked manifest, 68 open checklist items, ticket/epic/sprint/ledger status, local links, source/dependency restoration, both archived patches/checksums, historical manifest preserved, native probe and provisional dependency removed.

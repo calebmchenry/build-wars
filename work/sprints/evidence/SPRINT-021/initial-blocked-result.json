@@ -1,0 +1,40 @@
+{
+  "status": "blocked",
+  "sprint_id": "SPRINT-021",
+  "source_target": "EPIC-20",
+  "source_epic": "EPIC-20",
+  "validation": [
+    {
+      "command": "PATH=\"$PWD/work/runs/toolchain/node_modules/.bin:$PATH\" work/runs/toolchain/node_modules/.bin/npm run verify",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "git apply --check work/sprints/evidence/SPRINT-021/feasibility-slice.patch",
+      "status": "passed"
+    },
+    {
+      "command": "python3 work/runs/SPRINT-021/check-execution-records.py",
+      "status": "passed"
+    }
+  ],
+  "changed_files_summary": [
+    "compendium/decisions/0003-guide-editor-and-markdown-contract.md: deferred ADR with seam audit, provisional editor/codec/history contracts, dependency/chunk observations, known gaps and exact browser blocker.",
+    "compendium/guide-workspace.md: documented the blocked feasibility gate; no shipped behavior claimed.",
+    "work/sprints/SPRINT-021.md and work/sprints/ledger.tsv: sprint started/in_progress with execution_status blocked; all 68 actionable items remain unchecked.",
+    "work/tickets/20-markdown-guide-workspace/BW-2001-contracts-and-editor-feasibility.md: blocked with SPRINT-021 evidence; no BW ticket marked done.",
+    "work/tickets/20-markdown-guide-workspace/EPIC.md: in-progress and linked to the blocked SPRINT-021 attempt; dependent tickets retain backlog status.",
+    "work/sprints/SPRINT-021-EVIDENCE.md and work/sprints/evidence/SPRINT-021/: actual partial Chrome observations, screenshot, five passing focused experiment tests, archived patch/checksum, exact dependency tree, build/capacity output, final validation and transient timeout record.",
+    "Active product source, package.json and package-lock.json restored to their clean execution-entry contents; provisional packages and enabled experiment route removed. Existing planning changes preserved. No commits."
+  ],
+  "blocked_reason": "BW-2001 requires real IME/composition and native undo browser evidence before dependent implementation. cua.getApp('com.google.Chrome') returned 'Computer Use was not approved to use Google Chrome'. Approved Chrome tab Option-E followed by E produced plain e, not demonstrated composition; keyboard undo passed but native menu/beforeinput undo was not verified. Resumption question: Can native Chrome interaction be authorized for actual IME/composition and native Undo verification so BW-2001 can resume without waiving its browser gate?",
+  "followups": [
+    "Restore authorized native browser input access or another supported real composition/native-undo verification surface; do not substitute synthetic events or Unicode paste.",
+    "Review and restore the archived feasibility patch in the isolated worktree. Finish BW-2001 composition/history/caret checks, source grammar and hostile/opaque corpus, representative 400-block fixture, cached edit serialization, aggregate storage/autosave/pagehide measurements, and passing dependency pinning before freezing the ADR.",
+    "Execute BW-2002 through BW-2012 only after BW-2001 passes, including all required B01\u2013B10 production-browser evidence and final verification. Preserve all unchecked completion gates.",
+    "Existing attribute-preview test timed out once under the full suite, then passed focused and unchanged full reruns; retained logs document this transient validation result."
+  ]
+}

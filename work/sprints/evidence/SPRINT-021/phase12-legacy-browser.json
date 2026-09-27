@@ -1,0 +1,10 @@
+{
+  "origin": "http://127.0.0.1:4174",
+  "harness": "retained production components, isolated fixture; no production route",
+  "buildSetTransfer": "Text export, preview, Apply and native confirmation passed",
+  "partyTransfer": "Text export, preview, Apply and native confirmation passed",
+  "setAndPartyPayloadsEqual": true,
+  "storage": "Actual localStorage Save and browser reload",
+  "exactSnapshotAfterReload": true,
+  "initialHarnessError": "The fixture seed started with a revision different from empty storage. Optimistic write correctly rejected it. Corrected test seed to revision zero before the passing save/reload; no production storage bypass."
+}

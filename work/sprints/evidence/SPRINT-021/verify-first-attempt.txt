@@ -1,0 +1,49 @@
+
+> build-wars@0.0.0 verify
+> npm run format:check && npm run lint && npm run typecheck && npm run test:run && npm run build && npm run data:test && python3 -m unittest scripts/test_ticket_burn.py
+
+
+> build-wars@0.0.0 format:check
+> prettier . --check
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> build-wars@0.0.0 lint
+> eslint .
+
+
+> build-wars@0.0.0 typecheck
+> tsc -p tsconfig.domain.json && tsc -p tsconfig.template-compatibility.json && tsc -p tsconfig.app.json && tsc -p tsconfig.node.json
+
+
+> build-wars@0.0.0 test:run
+> vitest run
+
+
+ RUN  v4.1.11 /Users/calebmchenry/.codex/worktrees/guide-workspace-burn/build-wars
+
+ ❯ src/app/attribute-preview-selectors.test.ts (5 tests | 1 failed) 8204ms
+     × computes once for mounted consumers, reuses across filters, and invalidates for Build changes 5261ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/app/attribute-preview-selectors.test.ts > shared preview consumers > computes once for mounted consumers, reuses across filters, and invalidates for Build changes
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/app/attribute-preview-selectors.test.ts:94:3
+     92|     expect(validation(after)).toEqual(validation(before));
+     93|   });
+     94|   it("computes once for mounted consumers, reuses across filters, and …
+       |   ^
+     95|     localStorage.clear();
+     96|     const spy = vi.spyOn(previewSelectors, "selectAttributePreview");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 92 passed (93)
+      Tests  1 failed | 586 passed (587)
+   Start at  20:22:18
+   Duration  30.21s (transform 6.32s, setup 12.51s, import 26.85s, tests 98.60s, environment 33.24s)
+

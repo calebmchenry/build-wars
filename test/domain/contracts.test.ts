@@ -95,6 +95,19 @@ describe("domain contracts", () => {
       syntheticSkill,
       syntheticFoundationBuild,
       {
+        metadata: {
+          version: 1,
+          id: "guide-domain",
+          title: "A neutral guide",
+          summary: null,
+          tags: [],
+          sources: []
+        },
+        nodes: [
+          { type: "build", id: syntheticFoundationBuild.id, snapshot: syntheticFoundationBuild }
+        ]
+      },
+      {
         schemaVersion: PARTY_ANNOTATION_SCHEMA_VERSION,
         enabled: true,
         size: { kind: "preset", size: 2 },
@@ -121,7 +134,7 @@ describe("domain contracts", () => {
       }
     ];
 
-    expect(publicModels).toHaveLength(5);
+    expect(publicModels).toHaveLength(6);
   });
 
   it("requires authored roots to carry a schema version", () => {

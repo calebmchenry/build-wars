@@ -1,0 +1,13 @@
+
+> build-wars@0.0.0 test:run
+> vitest run
+
+
+ RUN  v4.1.11 /Users/calebmchenry/.codex/worktrees/guide-workspace-burn/build-wars
+
+
+ Test Files  101 passed (101)
+      Tests  652 passed (652)
+   Start at  23:06:24
+   Duration  33.58s (transform 6.43s, setup 13.97s, import 31.60s, tests 99.67s, environment 36.09s)
+

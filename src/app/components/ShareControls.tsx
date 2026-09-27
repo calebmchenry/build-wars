@@ -150,6 +150,7 @@ function shareBlockedReasons(share: {
 }
 
 function selectedWorkspaceSnapshot(workspace: WorkspaceState) {
+  if (workspace.document.kind === "guide") return null;
   if (workspace.document.kind === "build") {
     return {
       build: workspace.editor.build,

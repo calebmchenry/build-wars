@@ -1,0 +1,67 @@
+from pathlib import Path
+import hashlib
+import json
+import re
+
+evidence = Path('work/sprints/evidence/SPRINT-021')
+sprint_path = Path('work/sprints/SPRINT-021.md')
+sprint = sprint_path.read_text()
+manifest_path = Path('work/runs/ticket-burn/EPIC-20/20260926T232847Z/execute-SPRINT-021-result.json')
+manifest = json.loads(manifest_path.read_text())
+assert manifest == json.loads((evidence / 'final-result.json').read_text())
+assert manifest['status'] == 'blocked' and manifest['blocked_reason']
+assert manifest['sprint_id'] == 'SPRINT-021'
+assert manifest['source_target'] == manifest['source_epic'] == 'EPIC-20'
+assert 'Browser security check unavailable' in manifest['blocked_reason']
+assert 'native composition is separately user-deferred' in manifest['blocked_reason']
+assert all(row['status'] == 'passed' for row in manifest['validation'])
+assert any('npm run verify' in row['command'] for row in manifest['validation'])
+assert any(row['command'] == 'git diff --check' for row in manifest['validation'])
+open_items = re.findall(r'^- \[ \] (.+)$', sprint, re.M)
+done_items = re.findall(r'^- \[x\] (.+)$', sprint, re.M)
+assert len(open_items) == 9, open_items
+assert len(done_items) == 59
+assert 'status: in_progress\n' in sprint and 'execution_status: blocked\n' in sprint
+assert '\n021\tMarkdown Guide Workspace\tin_progress\t' in Path('work/sprints/ledger.tsv').read_text()
+
+tickets = Path('work/tickets/20-markdown-guide-workspace')
+for number in range(2001, 2013):
+    path, = tickets.glob(f'BW-{number}-*.md')
+    text = path.read_text()
+    status = re.search(r'^status: (.+)$', text, re.M).group(1)
+    assert status == ('done' if number <= 2007 else 'in_progress'), (path, status)
+    assert 'planned_sprint: SPRINT-021\n' in text
+    assert ('completed_sprint: SPRINT-021\n' in text) == (number <= 2007)
+    assert 'updated: 2026-09-27\n' in text
+epic = (tickets / 'EPIC.md').read_text()
+assert 'status: in-progress\n' in epic and 'completed_sprint:' not in epic
+assert 'planned_sprint: SPRINT-021\n' in epic
+
+verify = (evidence / 'final-integrated-verify.txt').read_text()
+for proof in ['All matched files use Prettier code style!', '110 passed (110)', '691 passed (691)', 'Ran 149 tests', 'Ran 21 tests', '> eslint .', '> tsc -p tsconfig.domain.json', 'built in']:
+    assert proof in verify, proof
+assert verify.count('\nOK\n') == 2
+assert not (evidence / 'final-diff-check.txt').read_text()
+assert 'All matched files use Prettier code style!' in (evidence / 'final-format-check.txt').read_text()
+
+for stem in ['initial-blocked-result', 'resume-blocked-result']:
+    assert json.loads((evidence / f'{stem}.json').read_text())['status'] == 'blocked'
+for stem in ['feasibility-slice', 'resume-feasibility-slice']:
+    patch = evidence / f'{stem}.patch'
+    assert hashlib.sha256(patch.read_bytes()).hexdigest() == (evidence / f'{stem}.sha256').read_text().split()[0]
+assert not Path('public/guide-native-probe.html').exists()
+assert Path('src/app/components/guide/GuideEditor.tsx').exists()
+assert Path('node_modules/@tiptap/react/package.json').exists()
+assert 'unverified and deferred by' in (evidence / 'native-composition-deferral.md').read_text()
+assert 'No resolution was received' in (evidence / 'upload-permission-gap.md').read_text()
+assert hashlib.sha256(Path('test/fixtures/guides/long-v1.md').read_bytes()).hexdigest() == 'b8149f13740954f41b16378f9b0e5893e60978c16f8344bff762a716f94cdc52'
+
+documents = [sprint_path, Path('work/sprints/SPRINT-021-EVIDENCE.md'), Path('compendium/guide-workspace.md'), Path('compendium/decisions/0003-guide-editor-and-markdown-contract.md'), *tickets.glob('*.md'), *evidence.glob('phase[0-9]*.md')]
+for path in documents:
+    for link in re.findall(r'\]\(([^)]+)\)', path.read_text()):
+        if '://' in link or link.startswith('#'):
+            continue
+        assert (path.parent / link.split('#')[0]).exists(), (path, link)
+print('PASS: blocked manifests match; 59 checked / 9 actionable open items; BW-2001–BW-2007 done with SPRINT-021 links; BW-2008–BW-2012, epic, sprint and ledger in progress.')
+print('PASS: final 691 Vitest / 149 ingestion / 21 runner results, formatting and diff logs; evidence links; historical manifests and patch checksums; production editor retained; frozen long fixture checksum.')
+print('PASS: upload security gate remains explicit; native composition is unverified/deferred and never counted as passed.')

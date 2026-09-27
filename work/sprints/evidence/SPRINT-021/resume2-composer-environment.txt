@@ -1,0 +1,1013 @@
+Browser tab: 1271892742, Title: "Build Wars", URL: "http://127.0.0.1:4173/".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
++				15538 text {
+  "time": "2026-09-27T01:59:07.616Z",
+  "url": "http://127.0.0.1:4173/",
+  "agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+  "width": 1298,
+  "height": 623,
+  "scale": 1,
+  "resources": [
+    {
+      "name": "http://127.0.0.1:4173/assets/index-BjJw9fl7.js",
+      "duration": 32.09999942779541
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/index-CCQiXRNf.css",
+      "duration": 9.200000762939453
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/air-attunement.jpg",
+      "duration": 97.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/arc-lightning.jpg",
+      "duration": 97.39999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/blinding-flash.jpg",
+      "duration": 120.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/blinding-surge.jpg",
+      "duration": 130.39999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/chain-lightning.jpg",
+      "duration": 131.89999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/chilling-winds.jpg",
+      "duration": 133.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/conjure-lightning.jpg",
+      "duration": 144
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/enervating-charge.jpg",
+      "duration": 145.39999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/gale.jpg",
+      "duration": 144.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/glimmering-mark.jpg",
+      "duration": 146.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/glyph-of-swiftness.jpg",
+      "duration": 146.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/gust.jpg",
+      "duration": 147.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/invoke-lightning.jpg",
+      "duration": 157.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lightning-hammer-pvp.jpg",
+      "duration": 157
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lightning-bolt.jpg",
+      "duration": 158.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lightning-javelin.jpg",
+      "duration": 159.39999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lightning-orb.jpg",
+      "duration": 159.89999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lightning-strike.jpg",
+      "duration": 158.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lightning-surge.jpg",
+      "duration": 172.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lightning-touch.jpg",
+      "duration": 172.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/ride-the-lightning-pvp.jpg",
+      "duration": 171.39999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/mind-shock-pvp.jpg",
+      "duration": 173.39999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/shell-shock.jpg",
+      "duration": 174.39999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/shock.jpg",
+      "duration": 173.70000076293945
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/shock-arrow.jpg",
+      "duration": 184.60000038146973
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/thunderclap.jpg",
+      "duration": 183.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/teinai-s-wind.jpg",
+      "duration": 185.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/storm-djinn-s-haste.jpg",
+      "duration": 186.89999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/windborne-speed.jpg",
+      "duration": 187.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/whirlwind.jpg",
+      "duration": 186.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/axe-rake.jpg",
+      "duration": 196.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/axe-twist.jpg",
+      "duration": 196.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/agonizing-chop.jpg",
+      "duration": 196
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/cleave.jpg",
+      "duration": 197.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/critical-chop.jpg",
+      "duration": 197.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/cyclone-axe.jpg",
+      "duration": 198
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/dismember.jpg",
+      "duration": 207.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/disrupting-chop.jpg",
+      "duration": 208.60000038146973
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/decapitate.jpg",
+      "duration": 208.39999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/eviscerate.jpg",
+      "duration": 208.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/executioner-s-strike.jpg",
+      "duration": 209
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/furious-axe.jpg",
+      "duration": 209.29999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/penetrating-chop.jpg",
+      "duration": 219.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/penetrating-blow.jpg",
+      "duration": 218.79999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/keen-chop.jpg",
+      "duration": 218.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lacerating-chop.jpg",
+      "duration": 217.39999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/swift-chop.jpg",
+      "duration": 219.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/triple-chop.jpg",
+      "duration": 220.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/whirling-axe.jpg",
+      "duration": 227.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/bestial-fury.jpg",
+      "duration": 227.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/bestial-mauling.jpg",
+      "duration": 228
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/bestial-pounce.jpg",
+      "duration": 227
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/call-of-haste-pvp.jpg",
+      "duration": 228.60000038146973
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/brutal-strike.jpg",
+      "duration": 229.70000076293945
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/call-of-protection.jpg",
+      "duration": 236.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/charm-animal-codex.jpg",
+      "duration": 236.39999961853027
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/comfort-animal-pvp.jpg",
+      "duration": 235.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/companionship.jpg",
+      "duration": 237.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/disrupting-lunge.jpg",
+      "duration": 237.29999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/edge-of-extinction.jpg",
+      "duration": 237.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/enraged-lunge-pvp.jpg",
+      "duration": 245.29999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/energizing-wind.jpg",
+      "duration": 245
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/feral-aggression.jpg",
+      "duration": 245.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/feral-lunge.jpg",
+      "duration": 244.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/ferocious-strike.jpg",
+      "duration": 246
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/fertile-season.jpg",
+      "duration": 246.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/heal-as-one-pvp.jpg",
+      "duration": 257.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/heket-s-rampage.jpg",
+      "duration": 257.9000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lacerate.jpg",
+      "duration": 258.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/melandru-s-assault-pvp.jpg",
+      "duration": 258
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/maiming-strike.jpg",
+      "duration": 258.6000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/otyugh-s-cry-pvp.jpg",
+      "duration": 259.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/pounce.jpg",
+      "duration": 268
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/poisonous-bite.jpg",
+      "duration": 268.8999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/predator-s-pounce.jpg",
+      "duration": 268.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/predatory-season.jpg",
+      "duration": 269.79999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/predatory-bond-pvp.jpg",
+      "duration": 270.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/primal-echoes.jpg",
+      "duration": 270.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/rampage-as-one.jpg",
+      "duration": 279.3999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/revive-animal.jpg",
+      "duration": 278.6000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/run-as-one.jpg",
+      "duration": 279.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/savage-pounce.jpg",
+      "duration": 280
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/scavenger-strike.jpg",
+      "duration": 280.3999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/strike-as-one.jpg",
+      "duration": 281.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/symbiosis.jpg",
+      "duration": 288.9000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/symbiotic-bond.jpg",
+      "duration": 289.9000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/tiger-s-fury.jpg",
+      "duration": 289.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/toxicity.jpg",
+      "duration": 290.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/viper-s-nest.jpg",
+      "duration": 291.20000076293945
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/awaken-the-blood.jpg",
+      "duration": 290.70000076293945
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/barbed-signet.jpg",
+      "duration": 301.9000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/blood-is-power.jpg",
+      "duration": 300.79999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/blood-drinker.jpg",
+      "duration": 301.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/blood-bond.jpg",
+      "duration": 300.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/blood-of-the-aggressor.jpg",
+      "duration": 302.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/blood-renewal.jpg",
+      "duration": 302.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/cultist-s-fervor.jpg",
+      "duration": 311.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/blood-ritual.jpg",
+      "duration": 310.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/dark-bond.jpg",
+      "duration": 311.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/dark-fury.jpg",
+      "duration": 311.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/dark-pact.jpg",
+      "duration": 312.1000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/demonic-flesh.jpg",
+      "duration": 312.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/jaundiced-gaze.jpg",
+      "duration": 319.70000076293945
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/life-siphon.jpg",
+      "duration": 320.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/life-transfer.jpg",
+      "duration": 321
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lifebane-strike.jpg",
+      "duration": 320.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/mark-of-fury.jpg",
+      "duration": 321.3999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/mark-of-subversion.jpg",
+      "duration": 322
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/offering-of-blood.jpg",
+      "duration": 329.8999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/oppressive-gaze.jpg",
+      "duration": 329
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/order-of-the-vampire.jpg",
+      "duration": 330.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/order-of-pain.jpg",
+      "duration": 330.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/shadow-strike.jpg",
+      "duration": 330.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/ravenous-gaze.jpg",
+      "duration": 331.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/signet-of-suffering.jpg",
+      "duration": 338.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/signet-of-agony-pvp.jpg",
+      "duration": 339.70000076293945
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/soul-leech.jpg",
+      "duration": 338.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/spoil-victor-pvp.jpg",
+      "duration": 339.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/touch-of-agony.jpg",
+      "duration": 340
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/strip-enchantment.jpg",
+      "duration": 339.29999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/unholy-feast-pvp.jpg",
+      "duration": 349.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/vampiric-gaze.jpg",
+      "duration": 347.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/vampiric-bite.jpg",
+      "duration": 348.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/vampiric-spirit.jpg",
+      "duration": 349.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/vampiric-swarm.jpg",
+      "duration": 350.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/vampiric-touch.jpg",
+      "duration": 350.3999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/wallow-s-bite.jpg",
+      "duration": 357.8999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/well-of-blood.jpg",
+      "duration": 358.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/well-of-power.jpg",
+      "duration": 358.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/agony-pvp.jpg",
+      "duration": 358.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/ancestors-rage-pvp.jpg",
+      "duration": 359.29999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/bloodsong-pvp.jpg",
+      "duration": 360.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/caretaker-s-charge.jpg",
+      "duration": 366.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/channeled-strike.jpg",
+      "duration": 366.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/clamor-of-souls.jpg",
+      "duration": 367.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/cruel-was-daoshen.jpg",
+      "duration": 368.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/destruction-pvp.jpg",
+      "duration": 369.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/destructive-was-glaive-pvp.jpg",
+      "duration": 369.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/gaze-from-beyond.jpg",
+      "duration": 381.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/essence-strike.jpg",
+      "duration": 382.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/gaze-of-fury-pvp.jpg",
+      "duration": 381.70000076293945
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/grasping-was-kuurong.jpg",
+      "duration": 382.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lamentation.jpg",
+      "duration": 383.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/nightmare-weapon.jpg",
+      "duration": 382.6000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/offering-of-spirit.jpg",
+      "duration": 392.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/painful-bond.jpg",
+      "duration": 391.8999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/signet-of-spirits-pvp.jpg",
+      "duration": 393
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/renewing-surge.jpg",
+      "duration": 392.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/spirit-boon-strike.jpg",
+      "duration": 393.3999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/spirit-burn.jpg",
+      "duration": 393.79999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/spirit-rift.jpg",
+      "duration": 402.79999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/spirit-siphon.jpg",
+      "duration": 402
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/splinter-weapon-pvp.jpg",
+      "duration": 402.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/wailing-weapon.jpg",
+      "duration": 403.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/warmonger-s-weapon.jpg",
+      "duration": 403.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/weapon-of-aggression.jpg",
+      "duration": 404
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/weapon-of-fury.jpg",
+      "duration": 412.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/fall-back-pvp.jpg",
+      "duration": 411.8999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/brace-yourself-pvp.jpg",
+      "duration": 413.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/can-t-touch-this-pvp.jpg",
+      "duration": 413.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/wielder-s-strike.jpg",
+      "duration": 414
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/find-their-weakness-pvp.jpg",
+      "duration": 414.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/go-for-the-eyes-pvp.jpg",
+      "duration": 422.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/incoming-pvp.jpg",
+      "duration": 422.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/help-pvp.jpg",
+      "duration": 423.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/make-haste.jpg",
+      "duration": 424
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/never-surrender-pvp.jpg",
+      "duration": 423.3999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/never-give-up-pvp.jpg",
+      "duration": 424.6000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/stand-your-ground-pvp.jpg",
+      "duration": 432.29999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/we-shall-return-pvp.jpg",
+      "duration": 433
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/anthem-of-guidance.jpg",
+      "duration": 433.3999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/anthem-of-envy-pvp.jpg",
+      "duration": 434.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/anthem-of-disruption-pvp.jpg",
+      "duration": 434.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/anthem-of-weariness.jpg",
+      "duration": 434.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/crippling-anthem.jpg",
+      "duration": 445
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/godspeed.jpg",
+      "duration": 444.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/bladeturn-refrain-pvp.jpg",
+      "duration": 446.1000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/armor-of-unfeeling-pvp.jpg",
+      "duration": 444.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/anguish-pvp.jpg",
+      "duration": 445.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/binding-chains.jpg",
+      "duration": 446.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/disenchantment-pvp.jpg",
+      "duration": 453.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/brutal-weapon.jpg",
+      "duration": 454.3999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/dissonance-pvp.jpg",
+      "duration": 454.9000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/displacement-pvp.jpg",
+      "duration": 454.6000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/earthbind-pvp.jpg",
+      "duration": 455.3999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/dulled-weapon.jpg",
+      "duration": 456
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/ghostly-weapon.jpg",
+      "duration": 464.6000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/guided-weapon-pvp.jpg",
+      "duration": 465.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/mighty-was-vorizun.jpg",
+      "duration": 465.29999923706055
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/pain.jpg",
+      "duration": 465.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/restoration-pvp.jpg",
+      "duration": 466.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/shadowsong-pvp.jpg",
+      "duration": 467.1000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/shelter-pvp.jpg",
+      "duration": 474.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/sundering-weapon.jpg",
+      "duration": 475.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/signet-of-ghostly-might-pvp.jpg",
+      "duration": 474.8999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/soothing-pvp.jpg",
+      "duration": 475.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/union-pvp.jpg",
+      "duration": 476.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/vital-weapon.jpg",
+      "duration": 476.80000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/wanderlust.jpg",
+      "duration": 484.1000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/weapon-of-quickening.jpg",
+      "duration": 485.30000019073486
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/assassin-s-remedy-pvp.jpg",
+      "duration": 485.1000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/black-lotus-strike.jpg",
+      "duration": 484.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/critical-defenses.jpg",
+      "duration": 486.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/critical-eye.jpg",
+      "duration": 486.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/deadly-haste.jpg",
+      "duration": 494.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/critical-strike.jpg",
+      "duration": 494.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/dark-apostasy.jpg",
+      "duration": 495.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/locust-s-fury.jpg",
+      "duration": 495.5999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/malicious-strike.jpg",
+      "duration": 495.8999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/palm-strike.jpg",
+      "duration": 495.19999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/seeping-wound.jpg",
+      "duration": 504.1000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/shadow-theft.jpg",
+      "duration": 504.70000076293945
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/sharpen-daggers.jpg",
+      "duration": 505.1000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/unsuspecting-strike.jpg",
+      "duration": 505.3999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/shattering-assault.jpg",
+      "duration": 505.69999980926514
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/twisting-fangs.jpg",
+      "duration": 505.8999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/way-of-the-assassin.jpg",
+      "duration": 518.8999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/way-of-the-master.jpg",
+      "duration": 519.2999992370605
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/atrophy.jpg",
+      "duration": 519.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/barbs.jpg",
+      "duration": 519.6000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/chilblains.jpg",
+      "duration": 520
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/cacophony.jpg",
+      "duration": 519.6999998092651
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/corrupt-enchantment.jpg",
+      "duration": 530
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/defile-flesh.jpg",
+      "duration": 528.3000001907349
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/defile-enchantments.jpg",
+      "duration": 530.4000005722046
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/defile-defenses.jpg",
+      "duration": 530.7000007629395
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/depravity.jpg",
+      "duration": 530.6999998092651
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/desecrate-enchantments.jpg",
+      "duration": 531
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/enfeeble-pvp.jpg",
+      "duration": 532.8000001907349
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/enfeebling-blood.jpg",
+      "duration": 540.6000003814697
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/enfeebling-touch.jpg",
+      "duration": 539.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/envenom-enchantments.jpg",
+      "duration": 541.1999998092651
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/faintheartedness.jpg",
+      "duration": 540.8000001907349
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/feast-of-corruption.jpg",
+      "duration": 541.3000001907349
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/insidious-parasite.jpg",
+      "duration": 542.1999998092651
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/lingering-curse.jpg",
+      "duration": 551.1999998092651
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/meekness.jpg",
+      "duration": 552.3999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/mark-of-pain.jpg",
+      "duration": 552.3000001907349
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/malaise.jpg",
+      "duration": 551.8999996185303
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/order-of-apostasy.jpg",
+      "duration": 552.8000001907349
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/pain-of-disenchantment.jpg",
+      "duration": 553.6999998092651
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/parasitic-bond.jpg",
+      "duration": 574
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/plague-sending.jpg",
+      "duration": 573.6999998092651
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/plague-touch.jpg",
+      "duration": 574.0999994277954
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/plague-signet.jpg",
+      "duration": 573
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/poisoned-heart.jpg",
+      "duration": 574.2999992370605
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/price-of-failure.jpg",
+      "duration": 574.5
+    },
+    {
+      "name": "http://127.0.0.1:4173/gww-icons/skills/reckless-haste.jpg",
+      "duration": 583.6999998092651
+    }
+  ]
+}
+The focused UI element is 15536 button Capture environment

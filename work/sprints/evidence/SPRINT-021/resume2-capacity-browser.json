@@ -1,0 +1,15 @@
+{
+  "blocks": 419,
+  "builds": 16,
+  "sourceBytes": 70233,
+  "sourceCodeUnits": 70233,
+  "serializeMs": 23,
+  "parseMs": 83,
+  "historyMs": 1216,
+  "retainedEntries": 100,
+  "retainedHistoryBytes": 7023308,
+  "envelopeBytes": 1120264,
+  "envelopeCodeUnits": 1120264,
+  "envelopeMs": 1.8000001907348633,
+  "storageRoundTripMs": 3.8000001907348633
+}

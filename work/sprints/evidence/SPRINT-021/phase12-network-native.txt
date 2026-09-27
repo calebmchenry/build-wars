@@ -1,0 +1,89 @@
+container Network panel
+										62 container network
+											63 container
+												64 toolbar
+													65 container Stop recording network log, Help: Stop recording network log - ⌘ E
+														66 toggle button Stop recording network log - ⌘ E, Value: 1
+													67 container Clear network log, Help: Clear network log - Ctrl L - ⌘ K
+														68 button Clear network log - Ctrl L - ⌘ K
+													69 container Filter
+														70 toggle button Filter, Value: 1
+													71 container Search
+														72 toggle button Search, Value: 0
+													73 container
+														74 checkbox Keep log, Value: 0
+														75 text Keep log
+													76 container
+														77 checkbox Disable cache, Value: 0
+														78 text Disable cache
+													79 pop up button Throttling, Value: Disabled: No throttling
+														80 (selected) Disabled: No throttling
+													81 container More network conditions…
+														82 button More network conditions…
+													83 container Import HAR file…
+														84 button Import HAR file…
+													85 container Export HAR (sanitized)…
+														86 button Export HAR (sanitized)…
+													87 container Network settings
+														88 toggle button Network settings, Value: 0
+												89 toolbar
+													90 text entry area (settable) Filter
+														91 text Filter
+												92 container Inverts the search filter
+													93 checkbox Invert, Value: 0
+													94 text Invert
+												95 container Show only/hide requests dropdown
+													96 pop up button Show only/hide requests
+														97 text More filters
+												98 list box Request types to include, Help: ⌘ Click to select multiple types
+													99 text (selected) All Fetch/XHR Doc CSS JS Font Img Media Manifest Socket Wasm Other
+												100 container Overview grid window
+													101 container
+														102 container
+															103 text 0 ms
+															104 text 20 ms
+															105 text 40 ms
+															106 text 60 ms
+															107 text 80 ms
+															108 text 100 ms
+															109 text 120 ms
+															110 text 140 ms
+													111 slider Left Resizer, Value: 0, Details: 0 ms, Secondary Actions: Increment, Decrement
+													112 slider Right Resizer, Value: 100, Details: 136 ms, Secondary Actions: Increment, Decrement
+												113 container
+													114 container
+														115 table
+															116 row
+																117 column header Name - Sortable column. Press enter to apply sorting filter
+																	118 text Name
+																119 column header Status - Sortable column. Press enter to apply sorting filter
+																	120 text Status
+																121 column header Type - Sortable column. Press enter to apply sorting filter
+																	122 text Type
+																123 column header Initiator - Sortable column. Press enter to apply sorting filter
+																	124 text Initiator
+																125 column header Size - Sortable column. Press enter to apply sorting filter
+																	126 text Size
+																127 column header Time - Sortable column. Press enter to apply sorting filter
+																	128 text Time
+															129 row
+																130 cell chrome-extension://eiimnmioipafcokbfikbljfdeojpcgbh/activeContentBlocker.js
+																	131 text activeContentBlocker.js
+																132 cell 200 OK
+																	133 text 200
+																134 cell
+																	135 text script
+																136 cell
+																	137 link content.js:1, Help: chrome-extension://eiimnmioipafcokbfikbljfdeojpcgbh/content.js:1
+																		138 text content.js:1
+																139 cell 38.4 kB transferred over network, resource size: 38.4 kB
+																	140 text 38.4 kB
+																141 cell
+																	142 text 27 ms
+													143 container 1 requests
+														144 text 1 requests
+													145 container 38382 B transferred over network
+														146 text 38.4 kB transferred
+													147 container 38382 B resources loaded by the page
+														148 text 38.4 kB resources
+								149 

@@ -1,0 +1,55 @@
+{
+  "status": "blocked",
+  "sprint_id": "SPRINT-021",
+  "source_target": "EPIC-20",
+  "source_epic": "EPIC-20",
+  "validation": [
+    {
+      "command": "VITE_GUIDE_FEASIBILITY=1 work/runs/toolchain/node_modules/.bin/npm run build",
+      "status": "passed"
+    },
+    {
+      "command": "work/runs/toolchain/node_modules/.bin/npm run test:run -- src/app/guide-feasibility.test.ts src/app/components/guide/GuideEditor.test.tsx",
+      "status": "passed"
+    },
+    {
+      "command": "work/runs/toolchain/node_modules/.bin/npm run lint",
+      "status": "passed"
+    },
+    {
+      "command": "git apply --check work/sprints/evidence/SPRINT-021/feasibility-slice.patch",
+      "status": "passed"
+    },
+    {
+      "command": "git apply --check work/sprints/evidence/SPRINT-021/resume-feasibility-slice.patch",
+      "status": "passed"
+    },
+    {
+      "command": "PATH=\"$PWD/work/runs/toolchain/node_modules/.bin:$PATH\" work/runs/toolchain/node_modules/.bin/npm run verify",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "python3 work/runs/SPRINT-021/check-execution-records.py",
+      "status": "passed"
+    }
+  ],
+  "changed_files_summary": [
+    "work/sprints/evidence/SPRINT-021/resume-feasibility-slice.patch: combined restored experiment with composition buffering, single keyboard-history routing, two regression tests and passive native-input/plain-textarea diagnostics; archived, not shipped.",
+    "work/sprints/evidence/SPRINT-021/resume-20260927.md and resume-* artifacts: dated actual native input/menu-undo observations, untrusted composition-end control result, captures, seven passing focused tests, build/lint and cleanup logs.",
+    "work/sprints/SPRINT-021-EVIDENCE.md and compendium/decisions/0003-guide-editor-and-markdown-contract.md: distinguish historical Chrome permission denial from current native-completion evidence gap; no editor or capacity contract accepted.",
+    "compendium/guide-workspace.md, work/sprints/SPRINT-021.md, BW-2001 ticket and EPIC-20: current blocked feasibility status linked to SPRINT-021; all 68 actionable checklist items remain open, no ticket done, epic/sprint/ledger in progress.",
+    "work/sprints/evidence/SPRINT-021/initial-blocked-result.json: exact prior result preserved; original experiment patch/checksum and failure/partial evidence retained.",
+    "Active product source, package.json and package-lock.json restored to execution-entry baseline; experimental source/probe and provisional dependencies removed; native incognito window, verification tab and preview closed. No commits or main-checkout changes."
+  ],
+  "blocked_reason": "BW-2001 native composition-completion evidence remains unverified. Native Chrome permission now works and Edit > Undo passed from prose and inspector with trusted beforeinput/historyUndo. Native app Option-E then E produced trusted compositionstart/update/input but compositionend.isTrusted=false; this repeated with passive recording and a plain uncontrolled HTML textarea without React/Tiptap, including an incognito comparison. The origin of the untrusted completion is unknown; it is not accepted as fully native completion or replaced by synthetic events. Resumption question: Can an approved native input method complete a real composition in the plain control and guide editor, with verifiable native completion rather than the observed untrusted compositionend, without replacing it with pasted Unicode or synthetic events?",
+  "followups": [
+    "Establish native composition completion/cancellation and IME candidate evidence through an approved input surface. Native Chrome access is already granted; do not repeat permission-only probes or accept partial event trust as the full gate.",
+    "Restore the new combined resume-feasibility-slice.patch on the clean product baseline (not on top of the original patch). Review its partial fixes and rerun BW-2001, including full grammar/hostile/opaque corpus, representative 400-block fixture, revision-cached serialization, aggregate storage/autosave/pagehide and browser checks before freezing the ADR.",
+    "Execute BW-2002 through BW-2012 only after BW-2001 passes. Keep all incomplete ticket/checklist gates and EPIC-20 open until the complete author/read workflow, required B01-B10 evidence and final verification pass.",
+    "Focused composition tests use synthetic events solely as unit coverage; they do not substitute for missing native composition-completion evidence."
+  ]
+}

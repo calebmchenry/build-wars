@@ -1,0 +1,1 @@
+<!doctype html><html><head><meta charset="UTF-8"><title>Guide controlled failure verification</title></head><body><div id="root"></div><script type="module" src="/work/runs/SPRINT-021/browser-fixture/main.tsx"></script></body></html>

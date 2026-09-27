@@ -1,0 +1,28 @@
+{
+  "clipboardAfterFix": "Actual copy, Source identity replacement, and paste yields Detached from dagger-workshop-example / dagger-independent; retained destination build with same ID did not bind",
+  "narrow": {
+    "requestedWidth": 390,
+    "observedClientWidth": 375,
+    "scrollWidth": 375,
+    "contentEditables": 0,
+    "longNameWraps": true,
+    "skillTooltip": "Death Blossom 43 damage"
+  },
+  "sourceReturn": {
+    "before": {
+      "start": 9915,
+      "end": 9916
+    },
+    "after": {
+      "start": 9915,
+      "end": 9916,
+      "focused": true
+    },
+    "rawRetained": true,
+    "lastAppliedNotice": true
+  },
+  "notes": [
+    "Failed native app clipboard rerun pasted earlier test JSON; it was removed by explicit Source replacement. The passing rerun used actual browser key input and structured clipboard on a fresh controlled tab.",
+    "No native composition claim."
+  ]
+}

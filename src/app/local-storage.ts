@@ -7,6 +7,7 @@ import {
   type LocalLibraryEnvelopeV1,
   type PersistenceDiagnostic
 } from "./persistence-schema";
+import { PersistenceCapacityError } from "./persistence-capacity";
 
 export interface LocalStoragePort {
   readonly getItem: (key: string) => string | null;
@@ -152,8 +153,28 @@ export function writeLocalLibrary(
     );
   }
 
+  let serialized: string;
   try {
-    storage.setItem(LOCAL_LIBRARY_STORAGE_KEY, serializeLocalLibraryEnvelope(next));
+    serialized = serializeLocalLibraryEnvelope(next);
+    const candidate = parseLocalLibraryJson(serialized);
+    if (!candidate.ok || candidate.writeBlocked)
+      return writeFailure(
+        "write-blocked",
+        next,
+        "Local data failed validation; existing storage is unchanged.",
+        candidate.diagnostics
+      );
+  } catch (error) {
+    return writeFailure(
+      error instanceof PersistenceCapacityError ? "quota-exceeded" : "write-blocked",
+      next,
+      error instanceof Error
+        ? error.message
+        : "Local data exceeds capacity. Existing storage is unchanged."
+    );
+  }
+  try {
+    storage.setItem(LOCAL_LIBRARY_STORAGE_KEY, serialized);
   } catch (error) {
     if (isQuotaError(error)) {
       return writeFailure(

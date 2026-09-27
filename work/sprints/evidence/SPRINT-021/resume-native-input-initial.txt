@@ -1,0 +1,17 @@
+compositionstart:  data="\nFlare practice\npve; Fire Magic 8\n\nFlare\nEmpty\nEmpty\nEmpty\nEmpty\nEmpty\nEmpty\nEmpty\n" composing=false trusted=true
+compositionupdate:  data="´" composing=false trusted=true
+beforeinput: insertCompositionText data="´" composing=true trusted=true
+input: insertCompositionText data="´" composing=true trusted=true
+compositionupdate:  data="é" composing=false trusted=true
+beforeinput: insertCompositionText data="é" composing=true trusted=true
+input: insertCompositionText data="é" composing=true trusted=true
+compositionend:  data="é" composing=false trusted=false
+beforeinput: historyUndo data=null composing=false trusted=true
+compositionstart:  data="" composing=false trusted=true
+compositionupdate:  data="´" composing=false trusted=true
+beforeinput: insertCompositionText data="´" composing=true trusted=true
+input: insertCompositionText data="´" composing=true trusted=true
+compositionupdate:  data="´" composing=false trusted=true
+beforeinput: insertCompositionText data="´" composing=true trusted=true
+input: insertCompositionText data="´" composing=true trusted=true
+compositionend:  data="´" composing=false trusted=false

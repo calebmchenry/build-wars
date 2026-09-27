@@ -3,9 +3,16 @@ from __future__ import annotations
 import json
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from build_wars_ingest.models import source_reference
-from build_wars_ingest.skill_infobox import extract_skill_infobox, extract_skill_icon_candidates, extract_skill_infobox_ids
+from build_wars_ingest.skill_infobox import (
+    _clean_markup,
+    _description_text_tokens,
+    extract_skill_infobox,
+    extract_skill_icon_candidates,
+    extract_skill_infobox_ids,
+)
 
 FIXTURE_ROOT = Path("test/fixtures/data-ingestion")
 
@@ -179,6 +186,66 @@ class SkillInfoboxTests(unittest.TestCase):
                 },
             ],
         )
+
+    def test_sic_annotations_are_excluded_from_description_and_search_text(self) -> None:
+        text = """{{Skill infobox
+| id = 18
+| name = Annotation Fixture
+| campaign = Core
+| profession = Mesmer
+| attribute = Inspiration Magic
+| type = Stance
+| concise description = Stance. Deals +{{sic|The plus sign is inconsistent}}{{gr|5|20}} damage. {{gray|Disables {{sic|No space between the period and 'Disables'}} other skills for {{gr|1|3}} seconds. {{sic|Says 'seconds' even at 1}}}} Ends{{sic}}.
+}}"""
+
+        extraction = extract_skill_infobox(
+            skill_id=18,
+            template_id=18,
+            requested_title="Annotation Fixture",
+            canonical_title="Annotation Fixture",
+            page_identity=page_identity("Annotation Fixture"),
+            wikitext=text,
+            source_reference=source_ref(),
+            profession_catalog=self.pa_catalog,
+            review_id="review:fixture",
+        )
+
+        description = extraction.record["description"]
+        self.assertEqual(
+            description["searchText"],
+            "Annotation Fixture Stance Mesmer Inspiration Magic "
+            "Stance. Deals + damage. Disables other skills for seconds. Ends.",
+        )
+        rendered = "".join(
+            "<value>" if token["kind"] == "progression-reference"
+            else " " if token["kind"] == "whitespace"
+            else token["value"]
+            for token in description["tokens"]
+        )
+        self.assertEqual(
+            " ".join(rendered.split()),
+            "Stance. Deals +<value> damage. Disables other skills for <value> seconds. Ends.",
+        )
+        self.assertEqual(
+            [token for token in description["tokens"] if token["kind"] == "progression-reference"],
+            [
+                {"kind": "progression-reference", "seriesId": "progression:skill:18:1", "valueSlot": 0},
+                {"kind": "progression-reference", "seriesId": "progression:skill:18:2", "valueSlot": 0, "tone": "muted"},
+            ],
+        )
+        self.assertIn({"kind": "literal", "value": "Disables", "tone": "muted"}, description["tokens"])
+        self.assertIn({"kind": "literal", "value": "Ends."}, description["tokens"])
+
+    def test_simple_fallback_excludes_sic_annotations(self) -> None:
+        text = "Deals +{{ SIC |Editorial note}}5 damage{{sic}}. {{gray|Ends {{sic|Another note}} here.}}"
+        with patch("build_wars_ingest.skill_infobox.mwparserfromhell", None):
+            self.assertEqual(_clean_markup(text), "Deals +5 damage. Ends here.")
+            tokens = _description_text_tokens(text, skill_id=18)
+        self.assertEqual(
+            [token["value"] for token in tokens if token["kind"] == "literal"],
+            ["Deals", "+5", "damage.", "Ends", "here."],
+        )
+        self.assertIn({"kind": "literal", "value": "Ends", "tone": "muted"}, tokens)
 
     def test_missing_infobox_is_explicitly_unsupported(self) -> None:
         extraction = extract_skill_infobox(

@@ -63,6 +63,12 @@ export interface ComposerAttributeRowView extends AttributeEditorRowView {
 }
 
 export function selectComposerLoadoutContext(workspace: WorkspaceState): ComposerLoadoutContext {
+  if (workspace.document.kind === "guide")
+    return {
+      kind: "empty-build-set",
+      label: "Guide edits require an addressed build",
+      selected: false
+    };
   if (workspace.document.kind === "build") {
     return {
       kind: "single-build",

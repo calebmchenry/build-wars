@@ -69,6 +69,7 @@ export function parseShareFragment(hash: string): ShareUrlResult<ShareUrlPayload
   if (fragment.length === 0) {
     return { ok: true, value: null };
   }
+  if (fragment.startsWith("bw-guide:")) return { ok: true, value: null };
   if (!fragment.includes("bw=")) {
     return failure("no-share-fragment", "URL fragment is not a Build Wars share payload.");
   }

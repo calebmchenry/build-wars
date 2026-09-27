@@ -5,7 +5,7 @@ import {
   useLayoutEffect,
   useRef,
   useState,
-  type ComponentPropsWithoutRef,
+  type HTMLAttributes,
   type CSSProperties,
   type MutableRefObject,
   type ReactNode
@@ -26,7 +26,8 @@ interface TooltipPosition {
   readonly ready: boolean;
 }
 
-type SkillTooltipTriggerProps = Omit<ComponentPropsWithoutRef<"div">, "children"> & {
+type SkillTooltipTriggerProps = Omit<HTMLAttributes<HTMLElement>, "children"> & {
+  readonly inline?: boolean;
   readonly view: SkillDisplayView;
   readonly placement: SkillTooltipPlacement;
   readonly children: ReactNode;
@@ -34,6 +35,7 @@ type SkillTooltipTriggerProps = Omit<ComponentPropsWithoutRef<"div">, "children"
 
 export function SkillTooltipTrigger({
   view,
+  inline = false,
   placement,
   children,
   className,
@@ -46,8 +48,9 @@ export function SkillTooltipTrigger({
   ...props
 }: SkillTooltipTriggerProps) {
   const tooltipId = useId();
-  const triggerRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
   const tooltipRef = useRef<HTMLElement | null>(null);
+  const touchOpen = useRef(false);
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState<TooltipPosition>({ top: 0, left: 0, ready: false });
   const enabled = view.kind === "known";
@@ -91,11 +94,13 @@ export function SkillTooltipTrigger({
     }
     const dismissOutside = (event: PointerEvent) => {
       if (event.target instanceof Node && !triggerRef.current?.contains(event.target)) {
+        touchOpen.current = false;
         setOpen(false);
       }
     };
     const dismissOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        touchOpen.current = false;
         setOpen(false);
       }
     };
@@ -117,10 +122,13 @@ export function SkillTooltipTrigger({
     visibility: position.ready ? "visible" : "hidden"
   };
 
+  const Tag = inline ? "span" : "div";
   return (
-    <div
+    <Tag
       {...props}
-      ref={triggerRef}
+      ref={(element) => {
+        triggerRef.current = element;
+      }}
       className={
         className === undefined ? "skill-tooltip-trigger" : `skill-tooltip-trigger ${className}`
       }
@@ -134,33 +142,34 @@ export function SkillTooltipTrigger({
       }
       onPointerDownCapture={(event) => {
         onPointerDownCapture?.(event);
+        touchOpen.current = event.pointerType === "touch";
         if (enabled && event.pointerType === "touch") {
-          setPosition((current) => ({ ...current, ready: false }));
           setOpen(true);
         }
       }}
       onMouseEnter={(event) => {
         onMouseEnter?.(event);
         if (enabled) {
-          setPosition((current) => ({ ...current, ready: false }));
           setOpen(true);
         }
       }}
       onMouseLeave={(event) => {
         onMouseLeave?.(event);
-        setOpen(false);
+        if (!touchOpen.current) setOpen(false);
       }}
       onFocusCapture={(event) => {
         onFocusCapture?.(event);
         if (enabled) {
-          setPosition((current) => ({ ...current, ready: false }));
           setOpen(true);
         }
       }}
       onBlurCapture={(event) => {
         onBlurCapture?.(event);
         const nextTarget = event.relatedTarget;
-        if (!(nextTarget instanceof Node) || !event.currentTarget.contains(nextTarget)) {
+        if (
+          !touchOpen.current &&
+          (!(nextTarget instanceof Node) || !event.currentTarget.contains(nextTarget))
+        ) {
           setOpen(false);
         }
       }}
@@ -178,7 +187,7 @@ export function SkillTooltipTrigger({
             document.body
           )
         : null}
-    </div>
+    </Tag>
   );
 }
 

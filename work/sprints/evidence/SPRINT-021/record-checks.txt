@@ -1,0 +1,1 @@
+PASS: blocked manifest, 68 open checklist items, ticket/epic/sprint/ledger status, local links, source/dependency restoration, archived patch and checksum.

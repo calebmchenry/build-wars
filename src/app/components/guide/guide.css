@@ -1,0 +1,301 @@
+.workspace-navigation,
+.guide-actions,
+.guide-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: 0.75rem;
+}
+.guide-shell {
+  max-width: 1600px;
+}
+.guide-header h1 {
+  overflow-wrap: anywhere;
+}
+.guide-header details {
+  margin-block: 0.6rem;
+}
+.guide-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  gap: 1rem;
+}
+.guide-writing,
+.guide-catalog {
+  min-width: 0;
+  height: 72vh;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  border-radius: 0.6rem;
+  overscroll-behavior: contain;
+}
+.guide-writing .tiptap {
+  min-height: 350px;
+  padding: 0.5rem;
+  outline: none;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.guide-writing .tiptap:focus {
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+.guide-writing .tiptap p {
+  margin-block: 1rem;
+}
+.guide-writing .tiptap ul,
+.guide-writing .tiptap ol {
+  padding-left: 2rem;
+}
+.guide-writing .tiptap pre {
+  white-space: pre-wrap;
+  background: #8882;
+  padding: 1rem;
+}
+.guide-writing .tiptap blockquote {
+  border-left: 3px solid #888;
+  margin-left: 0;
+  padding-left: 1rem;
+}
+.guide-build-embed {
+  border: 1px solid #888;
+  padding: 12px;
+  margin-block: 16px;
+  border-radius: 0.5rem;
+}
+.guide-bar {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 4px;
+}
+.guide-bar > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 0.8rem;
+}
+.guide-mention {
+  background: #aa994444;
+  border-radius: 4px;
+  padding: 2px;
+}
+.guide-mention-button {
+  display: inline;
+  color: inherit;
+  font: inherit;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: start;
+}
+.guide-mention-button .catalog-icon {
+  display: inline-flex;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: text-bottom;
+  margin-right: 0.2em;
+}
+.guide-mention-button .catalog-icon img {
+  width: 100%;
+  height: 100%;
+}
+.guide-reference-missing,
+.guide-reference-detached {
+  text-decoration: underline dotted;
+}
+.guide-reference-context-button {
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  padding: 0 0.25em;
+}
+.guide-bar button.guide-slot-drop,
+.guide-bar button.guide-slot-target {
+  outline: 2px solid #e0c35c;
+  outline-offset: 1px;
+}
+.guide-drop-caret {
+  position: fixed;
+  width: 3px;
+  pointer-events: none;
+  background: #e0c35c;
+  z-index: 130;
+}
+.guide-workspace dialog {
+  max-width: min(36rem, 90vw);
+  color: var(--color-text);
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 0.6rem;
+}
+.guide-workspace dialog label {
+  display: grid;
+  gap: 0.4rem;
+  margin-block: 0.7rem;
+}
+.guide-target {
+  position: sticky;
+  top: -1rem;
+  padding: 0.5rem;
+  background: var(--color-panel);
+  color: var(--color-text);
+  z-index: 2;
+}
+.guide-source textarea {
+  width: 100%;
+  min-height: 55vh;
+  font-family: monospace;
+}
+.guide-metadata {
+  max-width: 650px;
+  display: grid;
+  gap: 0.5rem;
+}
+.guide-metadata label {
+  display: grid;
+  gap: 0.25rem;
+}
+.guide-catalog-toggle,
+.guide-catalog-close {
+  display: none;
+}
+@media (max-width: 850px) {
+  .guide-layout {
+    grid-template-columns: 1fr;
+  }
+  .guide-writing {
+    height: 70vh;
+  }
+  .guide-catalog-toggle,
+  .guide-catalog-close {
+    display: inline-block;
+  }
+  .guide-catalog {
+    display: none;
+  }
+  .guide-catalog.is-open {
+    display: block;
+    position: fixed;
+    inset: 5vh 3vw;
+    height: auto;
+    z-index: 60;
+    background: var(--color-panel);
+    color: var(--color-text);
+    box-shadow: 0 4px 40px #0009;
+  }
+}
+.guide-card-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+.guide-card.selected {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 6px;
+}
+.guide-bar button {
+  display: grid;
+  width: 100%;
+  padding: 3px;
+  gap: 3px;
+}
+.guide-bar img {
+  max-width: 100%;
+  height: auto;
+}
+.guide-bar small {
+  overflow-wrap: anywhere;
+}
+.guide-inspector {
+  margin-top: 1rem;
+  border-top: 3px solid var(--color-border);
+  padding-top: 1rem;
+}
+.guide-inspector .composer-header {
+  display: flex;
+  flex-wrap: wrap;
+}
+.guide-inspector .focused-attribute-panel {
+  margin-block: 1rem;
+}
+.guide-insert-build fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-block: 0.6rem;
+}
+.guide-insert-build label {
+  display: grid;
+}
+
+.guide-native-history {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.guide-workspace dialog textarea {
+  width: 100%;
+  min-height: 14rem;
+  font-family: monospace;
+}
+.guide-source p {
+  max-width: 80ch;
+}
+.guide-reader-layout {
+  display: grid;
+  grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+.guide-navigation {
+  position: sticky;
+  top: 1rem;
+  max-height: 80vh;
+  overflow: auto;
+  overflow-wrap: anywhere;
+}
+.guide-reader {
+  min-width: 0;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.guide-reader pre {
+  white-space: pre-wrap;
+  background: #8882;
+  padding: 1rem;
+}
+.guide-reader blockquote {
+  margin-left: 0;
+  padding-left: 1rem;
+  border-left: 3px solid #888;
+}
+.guide-reader [id] {
+  scroll-margin-top: 1rem;
+}
+.guide-build-details dd {
+  margin-left: 1rem;
+}
+.guide-template-code {
+  user-select: all;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 850px) {
+  .guide-reader-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .guide-navigation {
+    position: static;
+    max-height: none;
+  }
+  .guide-bar {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

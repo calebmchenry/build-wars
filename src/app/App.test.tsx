@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { StrictMode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -29,6 +29,27 @@ afterEach(() => {
 });
 
 describe("App", { timeout: 10_000 }, () => {
+  it("guards transitions away from an unapplied source draft and back to the standalone composer", async () => {
+    const confirm = vi.spyOn(window, "confirm").mockReturnValue(false);
+    render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: "New Guide" }));
+    await screen.findByRole("region", { name: "Guide workspace" });
+    fireEvent.click(screen.getByRole("button", { name: "Source" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Markdown source" }), {
+      target: { value: "# Unapplied notes" }
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Composer" }));
+    expect(confirm).toHaveBeenCalled();
+    expect(screen.getByRole("textbox", { name: "Markdown source" })).toHaveValue(
+      "# Unapplied notes"
+    );
+    confirm.mockReturnValue(true);
+    fireEvent.click(screen.getByRole("button", { name: "Composer" }));
+    await waitFor(() =>
+      expect(screen.getByRole("textbox", { name: "Build name" })).toBeInTheDocument()
+    );
+    await act(async () => undefined);
+  });
   it.each(["autosave", "pagehide"])(
     "retains authored adjustments during %s after hydration",
     (flush) => {

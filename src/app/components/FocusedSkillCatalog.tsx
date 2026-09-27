@@ -9,7 +9,11 @@ import squareIcon from "../assets/square.svg";
 import squaresFourIcon from "../assets/squares-four.svg";
 import type { AppCatalogViews } from "../catalogs";
 import { BUILD_WARS_DRAG_MIME, browserSkillDragPayload } from "../drag-payload";
-import { selectSkillBrowser, selectSkillDisplay } from "../editor-selectors";
+import {
+  selectSkillBrowser,
+  selectSkillDisplay,
+  selectGenericSkillDisplay
+} from "../editor-selectors";
 import type {
   BrowserEliteFilter,
   BrowserSortMode,
@@ -62,19 +66,28 @@ export function FocusedSkillCatalog({
   state,
   catalogs,
   preview,
-  dispatch
+  dispatch,
+  placement
 }: {
   readonly state: EditorState;
   readonly catalogs: AppCatalogViews;
   readonly preview?: AttributePreview;
   readonly dispatch: Dispatch<EditorAction>;
+  readonly placement?: {
+    readonly label: string;
+    readonly place: (skillId: SkillId) => void;
+    readonly dragStart?: (event: DragEvent<HTMLSpanElement>, skillId: SkillId) => void;
+    readonly dragEnd?: (event: DragEvent<HTMLSpanElement>) => void;
+  };
 }) {
   const resolvedPreview = useMemo(
     () => preview ?? selectAttributePreview(state.build, catalogs),
     [preview, state.build, catalogs]
   );
   const browser = selectSkillBrowser(state, catalogs);
-  const [collapsedGroups, setCollapsedGroups] = useState<ReadonlySet<string>>(() => new Set());
+  const [collapsedGroups, setCollapsedGroups] = useState<ReadonlySet<string>>(
+    () => new Set(placement ? browser.groups.map((group) => group.id) : [])
+  );
   const [filtersExpanded, setFiltersExpanded] = useState(false);
   const [advancedFiltersExpanded, setAdvancedFiltersExpanded] = useState(false);
   const visibleGroupIds = browser.groups.map((group) => group.id);
@@ -84,6 +97,15 @@ export function FocusedSkillCatalog({
     visibleGroupCount > 0 && collapsedVisibleGroupCount === visibleGroupCount;
   const allVisibleGroupsExpanded = collapsedVisibleGroupCount === 0;
   const targetSlot = selectedOrFirstEmptySlot(state);
+  const place = (skillId: SkillId) =>
+    placement
+      ? placement.place(skillId)
+      : placeCatalogSkill(state, catalogs, dispatch, skillId, targetSlot);
+  const placeKey = (event: KeyboardEvent<HTMLElement>, skillId: SkillId) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    place(skillId);
+  };
   const activeFilterCount = selectActiveSkillFilterChips(state, catalogs).length;
   const hiddenAdvancedFilterCount = advancedSkillFilterCount(state.browser.filters);
   const hasCustomizedFilters = hasCustomizedSkillFilters(state);
@@ -293,7 +315,9 @@ export function FocusedSkillCatalog({
             </button>
           </div>
           {browser.groups.map((group) => {
-            const collapsed = collapsedGroups.has(group.id);
+            const collapsed =
+              collapsedGroups.has(group.id) &&
+              !(placement && (state.browser.filters.query || state.browser.filters.textQuery));
             const skillCountLabel = `${group.skills.length} ${
               group.skills.length === 1 ? "Skill" : "Skills"
             }`;
@@ -320,17 +344,24 @@ export function FocusedSkillCatalog({
                     className={`focused-skill-list ${focusedSkillListClass(state.browser.viewMode)}`}
                   >
                     {group.skills.map((skill) => {
-                      const view = selectSkillDisplay(
-                        catalogs,
-                        state,
-                        skill.id,
-                        "skill-browser",
-                        null,
-                        resolvedPreview
-                      );
+                      const view = placement
+                        ? selectGenericSkillDisplay(catalogs, skill.id)
+                        : selectSkillDisplay(
+                            catalogs,
+                            state,
+                            skill.id,
+                            "skill-browser",
+                            null,
+                            resolvedPreview
+                          );
                       const iconDragHandle = {
                         label: `Drag ${skill.name}`,
                         onDragStart: (event: DragEvent<HTMLSpanElement>) => {
+                          if (placement) {
+                            if (placement.dragStart) placement.dragStart(event, skill.id);
+                            else event.preventDefault();
+                            return;
+                          }
                           event.dataTransfer.setData(
                             BUILD_WARS_DRAG_MIME,
                             browserSkillDragPayload(skill.id)
@@ -341,7 +372,8 @@ export function FocusedSkillCatalog({
                             drag: { kind: "browser-skill", skillId: skill.id }
                           });
                         },
-                        onDragEnd: () => dispatch({ type: "cancel-drag" })
+                        onDragEnd: (event: DragEvent<HTMLSpanElement>) =>
+                          placement ? placement.dragEnd?.(event) : dispatch({ type: "cancel-drag" })
                       };
                       return state.browser.viewMode === "list" ? (
                         <SkillTooltipTrigger
@@ -351,22 +383,20 @@ export function FocusedSkillCatalog({
                           className="focused-skill-row"
                           role="button"
                           tabIndex={0}
-                          aria-label={`Add ${skill.name} to slot ${targetSlot + 1}`}
-                          onClick={() =>
-                            placeCatalogSkill(state, catalogs, dispatch, skill.id, targetSlot)
+                          aria-label={
+                            placement
+                              ? `${placement.label}: ${skill.name}`
+                              : `Add ${skill.name} to slot ${targetSlot + 1}`
                           }
-                          onKeyDown={(event) =>
-                            placeCatalogSkillFromKeyboard(
-                              event,
-                              state,
-                              catalogs,
-                              dispatch,
-                              skill.id,
-                              targetSlot
-                            )
-                          }
+                          onClick={() => place(skill.id)}
+                          onKeyDown={(event) => placeKey(event, skill.id)}
                         >
-                          <SkillDisplay view={view} compact iconDragHandle={iconDragHandle} />
+                          <SkillDisplay
+                            view={view}
+                            compact
+                            iconDragHandle={iconDragHandle}
+                            linkTitle={!placement}
+                          />
                         </SkillTooltipTrigger>
                       ) : (
                         <SkillTooltipTrigger
@@ -377,20 +407,13 @@ export function FocusedSkillCatalog({
                           data-view-mode={state.browser.viewMode}
                           role="button"
                           tabIndex={0}
-                          aria-label={`Add ${skill.name} to slot ${targetSlot + 1}`}
-                          onClick={() =>
-                            placeCatalogSkill(state, catalogs, dispatch, skill.id, targetSlot)
+                          aria-label={
+                            placement
+                              ? `${placement.label}: ${skill.name}`
+                              : `Add ${skill.name} to slot ${targetSlot + 1}`
                           }
-                          onKeyDown={(event) =>
-                            placeCatalogSkillFromKeyboard(
-                              event,
-                              state,
-                              catalogs,
-                              dispatch,
-                              skill.id,
-                              targetSlot
-                            )
-                          }
+                          onClick={() => place(skill.id)}
+                          onKeyDown={(event) => placeKey(event, skill.id)}
                         >
                           <span
                             className="focused-skill-icon-drag-handle"
@@ -557,19 +580,4 @@ function placeCatalogSkill(
     skillId,
     toIndex: targetSlot
   });
-}
-
-function placeCatalogSkillFromKeyboard(
-  event: KeyboardEvent<HTMLElement>,
-  state: EditorState,
-  catalogs: AppCatalogViews,
-  dispatch: Dispatch<EditorAction>,
-  skillId: SkillId,
-  targetSlot: number
-): void {
-  if (event.key !== "Enter" && event.key !== " ") {
-    return;
-  }
-  event.preventDefault();
-  placeCatalogSkill(state, catalogs, dispatch, skillId, targetSlot);
 }

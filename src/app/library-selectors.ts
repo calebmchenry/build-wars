@@ -8,6 +8,7 @@ import {
   type PersistedSavedDocumentRecord
 } from "./persistence-schema";
 import type { LibrarySortMode, WorkspaceLibraryState } from "./workspace-state";
+import { guideBuilds } from "../domain/guide";
 
 export type FreshnessState = "fresh" | "stale" | "unknown";
 export type ValidationState = "valid" | "invalid";
@@ -33,7 +34,7 @@ export interface LibraryDiagnostics {
 export interface LibraryRecordRow {
   readonly id: string;
   readonly record: PersistedSavedDocumentRecord;
-  readonly recordKind: "build" | "build-set";
+  readonly recordKind: "build" | "build-set" | "guide";
   readonly kindLabel: string;
   readonly partyState: "none" | "enabled" | "dormant";
   readonly partySummary: string | null;
@@ -150,11 +151,11 @@ export function summarizeLibraryRecord(
     kindLabel: kindLabelForRecord(record),
     partyState: partyStateForRecord(record),
     partySummary: partySummaryForRecord(record),
-    entryCount: record.document.kind === "build-set" ? record.document.snapshot.entries.length : 1,
+    entryCount: record.document.kind === "build" ? 1 : snapshots.length,
     name: record.name,
     professionPair: professionPair(preview, catalogs),
-    mode: preview.build.mode,
-    modeLabel: preview.build.mode.toUpperCase(),
+    mode: preview?.build.mode ?? "unknown",
+    modeLabel: preview?.build.mode.toUpperCase() ?? "No builds",
     updatedLabel: formatTimestamp(record.updatedAt),
     favorite: record.favorite,
     tags: record.tags,
@@ -271,7 +272,11 @@ function sortRows(
   });
 }
 
-function professionPair(snapshot: PersistedBuildSnapshot, catalogs: AppCatalogViews): string {
+function professionPair(
+  snapshot: PersistedBuildSnapshot | null,
+  catalogs: AppCatalogViews
+): string {
+  if (!snapshot) return "No builds";
   const build = snapshot.build;
   return [
     professionName(
@@ -290,12 +295,18 @@ function professionPair(snapshot: PersistedBuildSnapshot, catalogs: AppCatalogVi
 function snapshotsForRecord(
   record: PersistedSavedDocumentRecord
 ): readonly PersistedBuildSnapshot[] {
+  if (record.document.kind === "guide")
+    return guideBuilds(record.document.snapshot.document).map((b) => b.snapshot);
   return record.document.kind === "build"
     ? [record.document.snapshot]
     : record.document.snapshot.entries.map((entry) => entry.snapshot);
 }
 
-function previewSnapshotForRecord(record: PersistedSavedDocumentRecord): PersistedBuildSnapshot {
+function previewSnapshotForRecord(
+  record: PersistedSavedDocumentRecord
+): PersistedBuildSnapshot | null {
+  if (record.document.kind === "guide")
+    return guideBuilds(record.document.snapshot.document)[0]?.snapshot ?? null;
   if (record.document.kind === "build") {
     return record.document.snapshot;
   }
@@ -344,6 +355,7 @@ function entryLabels(record: PersistedSavedDocumentRecord): readonly string[] {
 }
 
 function kindLabelForRecord(record: PersistedSavedDocumentRecord): string {
+  if (record.document.kind === "guide") return "Guide";
   if (record.document.kind === "build") {
     return "Build";
   }

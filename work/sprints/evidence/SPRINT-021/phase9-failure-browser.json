@@ -1,0 +1,49 @@
+[
+  {
+    "case": "controlled-missing-catalog",
+    "status": "passed",
+    "method": "production App with explicit catalog-error prop and isolated storage port, not a simulated native network outage",
+    "raw": ":::bw-guide\n{unfinished controlled recovery  \nRetained without catalogs.",
+    "audit": "text Write attempts: 1. Original bytes unchanged: false. Stored bytes: 31544.",
+    "screenshot": "phase9-missing-catalog.png"
+  },
+  {
+    "case": "unapplied-source-read-return",
+    "status": "passed",
+    "observation": "Read showed last-applied notice; Write returned to exact unfinished source without applying or discarding."
+  },
+  {
+    "case": "controlled-write-denial",
+    "status": "passed",
+    "method": "Storage port throws SecurityError; actual Chrome UI and native input",
+    "originalBytesUnchanged": true,
+    "rawRetained": true,
+    "screenshot": "phase9-denied-write.png"
+  },
+  {
+    "case": "controlled-future-schema",
+    "status": "passed",
+    "writes": 0,
+    "observation": "Schema 999 rejected; explicit example remains write-blocked with download available; fixture audit shows no writes."
+  },
+  {
+    "case": "controlled-corrupt-storage",
+    "status": "passed",
+    "writes": 0,
+    "observation": [
+      "\t\t\t\t\t\t\t\t47 text No writes attempted.",
+      "\t\t\t\t\t\t\t59 container Storage needs recovery. Invalid or ambiguous JSON at offset 1., Help: Invalid or ambiguous JSON at offset 1.",
+      "\t\t\t\t\t\t\t\t60 text Storage needs recovery",
+      "\t\t\t\t\t\t\t\t\t63 heading Dagger workshop: two independent variants, Value: 1",
+      "\t\t\t\t\t\t\t\t\t65 text write-blocked",
+      "\t\t\t\t\t\t\t\t\t78 button Download applied Markdown"
+    ]
+  },
+  {
+    "case": "mixed-replacement-restore",
+    "status": "passed",
+    "records": 3,
+    "raw": ":::bw-guide\n{unfinished controlled recovery  \n",
+    "observation": "Original UI-generated backup pasted into Restore; Replace and working draft selected; native confirmation accepted. Record count 6→3 and restored guide association/diagnostic visible."
+  }
+]

@@ -219,7 +219,7 @@ composer feels right.
 
 See `compendium/build-composer-use-case.md` and `work/tickets/18-focused-build-composer/EPIC.md`.
 
-## Next: Composer Attribute Adjustments
+## Completed: Composer Attribute Adjustments
 
 EPIC-19 adds inline primary-profession rune/headgear choices, locally cached rune
 icons, supported assumed active effects with inferred defaults and persistent
@@ -233,7 +233,25 @@ state/compatibility contract, source rules, and burn-ready ticket sequence. Armo
 slot management, equipment-code integration, named local saves, and new
 complete-build transfer interfaces remain later work.
 
-## Deferred: Guides and build knowledge
+## Next: Markdown Guide Workspace
+
+[EPIC-20](tickets/20-markdown-guide-workspace/EPIC.md) turns the guide idea into
+twelve dependency-ordered tickets for the burn script. The
+[design brief](../compendium/guide-workspace.md) defines a rendered document editor
+on the left, the existing skill catalog on the right, annotated Markdown, editable
+build cards, contextual skill mentions, drag/drop and keyboard insertion, coherent
+undo, source editing, local save/recovery and a clean reading view.
+
+The first milestone uses an original two-variant example and preserves the current
+composer. Public discovery, PvX intake, publishing, live-linked builds and full
+equipment/party embeds remain later work. The runner owns sprint numbering; this
+backlog preparation does not start implementation.
+
+## Guide knowledge roadmap
+
+The following broader use cases remain a roadmap. EPIC-20's brief and tickets
+define which authoring/variant behaviors are included now; this list does not
+expand its burn scope.
 
 * Add guide authoring.
   * Simple markdown or lightweight rich text.

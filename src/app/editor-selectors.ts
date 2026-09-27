@@ -7,6 +7,7 @@ import {
   lookupSkillById,
   purchasedRankCost,
   renderSkillTooltipText,
+  renderGenericSkillTooltipText,
   projectSkillEffectRanks,
   resolveSkillModeVariant,
   resolveTitleRanksForSkill,
@@ -390,6 +391,15 @@ export function selectSkillDisplay(
   preview: AttributePreview = selectAttributePreview(state.build, catalogs)
 ): SkillDisplayView {
   if (skillId === null) {
+    if (raw && raw.outcomeKind !== "empty" && raw.outcomeKind !== "none") {
+      return {
+        kind: "unresolved",
+        title: raw.label,
+        subtitle: raw.reason ?? "Retained template entry has no resolved catalog skill.",
+        placeholder: catalogs.placeholders.skill(null, surface),
+        raw
+      };
+    }
     return {
       kind: "empty",
       title: "Empty",
@@ -446,6 +456,43 @@ export function selectSkillDisplay(
     progression: surface === "tooltip" ? progressionViews(skill, catalogs) : [],
     assumptions: rankContext.assumptions,
     raw
+  };
+}
+
+/** The authored catalog entry and full ranges; no selected-build assumptions. */
+export function selectGenericSkillDisplay(
+  catalogs: AppCatalogViews,
+  skillId: SkillId
+): SkillDisplayView {
+  const skill = lookupSkillById(catalogs.skillCatalog, skillId);
+  if (!skill)
+    return {
+      kind: "unresolved",
+      title: `Unresolved skill ${Number(skillId)}`,
+      subtitle: "Skill ID is not resolved in the promoted catalog.",
+      placeholder: catalogs.placeholders.skill(null, "tooltip"),
+      raw: null
+    };
+  const tooltip = renderGenericSkillTooltipText(catalogs.skillCatalog, skill.id);
+  return {
+    kind: "known",
+    skill,
+    title: skill.name,
+    subtitle: `${subtitleForSkill(skill, catalogs)} · Generic`,
+    professionLabel: professionLabelForSkill(skill, catalogs),
+    attributeLabel: attributeLabelForSkill(skill, catalogs),
+    placeholder: catalogs.placeholders.skill(skill, "tooltip"),
+    actionIcon: skillActionIconForType(skill.type),
+    facts: [...costFacts(skill), ...timingFacts(skill)],
+    tooltipText: tooltip.kind === "rendered" ? tooltip.text : tooltip.detail,
+    tooltipSegments: tooltip.kind === "rendered" ? tooltip.segments : [],
+    tooltipState: tooltip.kind,
+    tooltipDetail: tooltip.kind === "rendered" ? null : tooltip.detail,
+    progression: progressionViews(skill, catalogs),
+    assumptions: [
+      "Generic catalog entry: full published ranges and base costs/timings. No build, title rank, bonuses or assumed effects are selected."
+    ],
+    raw: null
   };
 }
 

@@ -1,0 +1,9 @@
+{
+  "case": "actual native quota recovery download",
+  "status": "passed",
+  "bytes": 2097152,
+  "sha256": "87b80202da58620b80369ba496eec20e27b3cd28be0d7d05cc315ddef2b61cbe",
+  "expected": "ASCII prefix # Capacity trial plus two LF, then x to exactly 2097152 bytes",
+  "download_path": "work/runs/SPRINT-021/native-game-files/Quota_second-source.md",
+  "note": "Generated fixture; raw bytes verified independently of browser AX."
+}

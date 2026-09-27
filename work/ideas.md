@@ -32,3 +32,36 @@
 
 Named local saves and complete-build transfer are follow-ups described in the
 [design brief](../compendium/attribute-adjustments.md).
+
+## Tooltip follow-ups — recorded 2026-09-21
+
+Captured for later investigation; not scheduled for implementation yet.
+
+- [ ] Make rune tooltips match the in-game rune tooltips. An in-game screenshot
+      is still needed as the reference for content, layout, and styling.
+- [ ] Investigate skill tooltips that cannot display values at attribute rank 20.
+      The user reports unresolved tooltips for some skills and suggests the wiki
+      may have explicit progression lookup tables. Check those tables and our
+      imported data against the current interpolation/extrapolation behavior;
+      determine whether exact wiki values can resolve the missing high-rank
+      previews. Table availability and coverage still need verification.
+
+## Proposals — recorded 2026-09-21
+
+Ideas for consideration, not approved or scheduled for implementation.
+
+- [ ] **Proposal: Catalog slot markers.** Show the slot number on catalog skills
+      already on the bar, making current selections and potential moves clearer.
+- [ ] **Proposal: Attribute-to-skill highlighting.** Hovering or focusing an
+      attribute highlights affected bar skills, including relationships introduced
+      by Signet of Illusions and other boosts.
+- [ ] **Proposal: Attribute breakpoint previews.** Before spending points, show
+      which skill values would change at the next rank, including duration,
+      target-count, and other rounded-value breakpoints. Build on the rank-20
+      progression-data investigation above.
+- [ ] **Proposal: Side-by-side skill comparison.** Pin the skill occupying a slot
+      while browsing replacements, comparing tooltips using the current build's
+      attributes and boost assumptions.
+- [ ] **Proposal: Preview without skill boosts.** Temporarily suppress all assumed
+      skill effects with one control, restoring individual selections when it is
+      switched back. This helps reveal dependence on boosts and external support.

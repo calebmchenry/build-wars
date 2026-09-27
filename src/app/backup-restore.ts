@@ -8,6 +8,7 @@ import {
   LOCAL_LIBRARY_KIND,
   LOCAL_LIBRARY_SCHEMA_VERSION,
   localBuildRecordId,
+  clonePersistedDocument,
   parseLocalLibraryEnvelope,
   type LocalBuildRecordId,
   type PersistenceDiagnostic,
@@ -16,9 +17,12 @@ import {
   type PersistedSavedDocumentRecord,
   type PersistedWorkingDraft
 } from "./persistence-schema";
+import { GUIDE_LIMITS } from "../guide/limits";
+import { parseGuideJson } from "../guide/strict-json";
+import { assertPersistenceBytes, assertPersistenceStructure } from "./persistence-capacity";
 
 export const BACKUP_KIND = "build-wars-library-backup";
-export const BACKUP_SCHEMA_VERSION = 2;
+export const BACKUP_SCHEMA_VERSION = 3;
 export const LEGACY_BACKUP_SCHEMA_VERSION = 1;
 
 export type RestoreMode = "merge" | "replace";
@@ -109,20 +113,26 @@ export function createBackupEnvelope(input: {
 }
 
 export function serializeBackupEnvelope(backup: LocalLibraryBackupEnvelopeV1): string {
-  return JSON.stringify(stableJson(backup), null, 2);
+  if (backup.schemaVersion !== BACKUP_SCHEMA_VERSION)
+    throw new Error("Only backup v3 may be written.");
+  assertPersistenceStructure(backup);
+  const text = JSON.stringify(stableJson(backup), null, 2);
+  assertPersistenceBytes(text, GUIDE_LIMITS.backupBytes);
+  return text;
 }
 
 export function parseBackupJson(text: string): BackupParseResult {
   try {
-    return parseBackupEnvelope(JSON.parse(text) as unknown);
-  } catch {
+    assertPersistenceBytes(text, GUIDE_LIMITS.backupBytes);
+    return parseBackupEnvelope(parseGuideJson(text, { depth: 96, tokens: 1000000 }));
+  } catch (error) {
     return {
       ok: false,
       diagnostics: [
         {
           code: "malformed-json",
           path: "$",
-          message: "Backup JSON is malformed."
+          message: error instanceof Error ? error.message : "Backup JSON is malformed."
         }
       ]
     };
@@ -130,6 +140,16 @@ export function parseBackupJson(text: string): BackupParseResult {
 }
 
 export function parseBackupEnvelope(input: unknown): BackupParseResult {
+  try {
+    assertPersistenceStructure(input);
+    assertPersistenceBytes(JSON.stringify(input), GUIDE_LIMITS.backupBytes);
+  } catch (error) {
+    return fail(
+      "capacity-exceeded",
+      "$",
+      error instanceof Error ? error.message : "Backup exceeds capacity."
+    );
+  }
   if (containsBuildSetDangerousKey(input)) {
     return fail(
       "dangerous-key",
@@ -145,6 +165,7 @@ export function parseBackupEnvelope(input: unknown): BackupParseResult {
   }
   if (
     input.schemaVersion !== BACKUP_SCHEMA_VERSION &&
+    input.schemaVersion !== 2 &&
     input.schemaVersion !== LEGACY_BACKUP_SCHEMA_VERSION
   ) {
     return fail(
@@ -170,15 +191,18 @@ export function parseBackupEnvelope(input: unknown): BackupParseResult {
       ? migrateLegacyBackupDraft(input.workingDraft)
       : input.workingDraft;
   const declaredRecordCount = Array.isArray(savedDocuments) ? savedDocuments.length : 0;
-  const parsed = parseLocalLibraryEnvelope({
-    schemaVersion: LOCAL_LIBRARY_SCHEMA_VERSION,
-    kind: LOCAL_LIBRARY_KIND,
-    revision: 0,
-    updatedAt: exportedAt,
-    workingDraft: workingDraft ?? null,
-    savedDocuments,
-    metadata: {}
-  });
+  const parsed = parseLocalLibraryEnvelope(
+    {
+      schemaVersion: input.schemaVersion === 2 ? 2 : LOCAL_LIBRARY_SCHEMA_VERSION,
+      kind: LOCAL_LIBRARY_KIND,
+      revision: 0,
+      updatedAt: exportedAt,
+      workingDraft: workingDraft ?? null,
+      savedDocuments,
+      metadata: {}
+    },
+    GUIDE_LIMITS.backupBytes
+  );
   if (!parsed.ok) {
     return { ok: false, diagnostics: parsed.diagnostics };
   }
@@ -348,6 +372,7 @@ function remapRecordDocument(
   document: PersistedDocument,
   newId: LocalBuildRecordId
 ): PersistedDocument {
+  if (document.kind === "guide") return clonePersistedDocument(document);
   if (document.kind === "build") {
     return {
       kind: "build",

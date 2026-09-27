@@ -1,0 +1,1995 @@
+{
+  "exportedAt": "2026-09-27T05:28:16.548Z",
+  "kind": "build-wars-library-backup",
+  "metadata": {
+    "declaredRecordCount": 3,
+    "sourceStorageKey": "build-wars:v1"
+  },
+  "savedDocuments": [
+    {
+      "createdAt": "2026-09-02T19:25:41Z",
+      "document": {
+        "kind": "build",
+        "snapshot": {
+          "build": {
+            "attributeAdjustments": {
+              "effectPreferences": [
+                {
+                  "effectId": "glyph-of-elemental-power",
+                  "preference": "off"
+                },
+                {
+                  "effectId": "heroic-refrain",
+                  "preference": "on",
+                  "strength": 4
+                }
+              ],
+              "headgearAttributeId": 0,
+              "runes": [
+                {
+                  "attributeId": 0,
+                  "runeId": 22
+                }
+              ]
+            },
+            "attributes": [
+              {
+                "attributeId": 17,
+                "rank": 9
+              },
+              {
+                "attributeId": 19,
+                "rank": 10
+              },
+              {
+                "attributeId": 25,
+                "rank": 8
+              }
+            ],
+            "catalogVersion": null,
+            "id": "build:single-character-editor",
+            "mode": "pve",
+            "name": "Hammer and Bow",
+            "primaryProfessionId": 1,
+            "schemaVersion": 4,
+            "secondaryProfessionId": 2,
+            "skillBar": [
+              1,
+              316,
+              319,
+              331,
+              351,
+              391,
+              392,
+              398
+            ],
+            "titleRankOverrides": []
+          },
+          "pveBudget": {
+            "level": 20,
+            "questBonus": "maximum-applicable"
+          },
+          "rawTemplate": {
+            "attributes": [
+              null,
+              null,
+              null
+            ],
+            "primaryProfession": null,
+            "secondaryProfession": null,
+            "skillBar": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "source": null,
+            "templateName": null
+          }
+        }
+      },
+      "favorite": false,
+      "id": "local-fixture-1",
+      "name": "Hammer and Bow",
+      "notes": "Fixture record",
+      "savedWith": {
+        "buildCatalogVersion": "fixture-builds",
+        "insigniaCatalogVersion": "fixture-insignias",
+        "professionAttributeCatalogVersion": "fixture-professions-attributes",
+        "ruleEngineVersion": "rule-engine:v3",
+        "runeCatalogVersion": "fixture-runes",
+        "skillCatalogVersion": "fixture-skills",
+        "weaponCatalogSetDigest": "fixture-weapon-set-digest",
+        "weaponCatalogSetVersion": "fixture-weapon-set",
+        "weaponCatalogVersion": "fixture-weapons",
+        "weaponModifierCatalogSetDigest": "fixture-weapon-set-digest",
+        "weaponModifierCatalogSetVersion": "fixture-weapon-set",
+        "weaponModifierCatalogVersion": "fixture-weapon-mods"
+      },
+      "tags": [
+        "farm",
+        "warrior"
+      ],
+      "updatedAt": "2026-09-02T19:25:41Z"
+    },
+    {
+      "createdAt": "2026-09-02T19:25:41Z",
+      "document": {
+        "kind": "build-set",
+        "snapshot": {
+          "entries": [
+            {
+              "id": "entry-fixture-1",
+              "kind": "build",
+              "label": "Frontline",
+              "notes": "Main loadout",
+              "snapshot": {
+                "build": {
+                  "attributeAdjustments": {
+                    "effectPreferences": [
+                      {
+                        "effectId": "glyph-of-elemental-power",
+                        "preference": "off"
+                      },
+                      {
+                        "effectId": "heroic-refrain",
+                        "preference": "on",
+                        "strength": 4
+                      }
+                    ],
+                    "headgearAttributeId": 0,
+                    "runes": [
+                      {
+                        "attributeId": 0,
+                        "runeId": 22
+                      }
+                    ]
+                  },
+                  "attributes": [
+                    {
+                      "attributeId": 17,
+                      "rank": 9
+                    },
+                    {
+                      "attributeId": 19,
+                      "rank": 10
+                    },
+                    {
+                      "attributeId": 25,
+                      "rank": 8
+                    }
+                  ],
+                  "catalogVersion": null,
+                  "id": "build:single-character-editor",
+                  "mode": "pve",
+                  "name": "Hammer and Bow",
+                  "primaryProfessionId": 1,
+                  "schemaVersion": 4,
+                  "secondaryProfessionId": 2,
+                  "skillBar": [
+                    1,
+                    316,
+                    319,
+                    331,
+                    351,
+                    391,
+                    392,
+                    398
+                  ],
+                  "titleRankOverrides": []
+                },
+                "pveBudget": {
+                  "level": 20,
+                  "questBonus": "maximum-applicable"
+                },
+                "rawTemplate": {
+                  "attributes": [
+                    null,
+                    null,
+                    null
+                  ],
+                  "primaryProfession": null,
+                  "secondaryProfession": null,
+                  "skillBar": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "source": null,
+                  "templateName": null
+                }
+              }
+            },
+            {
+              "id": "entry-fixture-2",
+              "kind": "variant",
+              "label": "Unresolved Variant",
+              "notes": null,
+              "snapshot": {
+                "build": {
+                  "attributeAdjustments": {
+                    "effectPreferences": [
+                      {
+                        "effectId": "glyph-of-elemental-power",
+                        "preference": "on"
+                      },
+                      {
+                        "effectId": "heroic-refrain",
+                        "preference": "off",
+                        "strength": 2
+                      }
+                    ],
+                    "headgearAttributeId": null,
+                    "runes": []
+                  },
+                  "attributes": [
+                    {
+                      "attributeId": -100001,
+                      "rank": 1
+                    }
+                  ],
+                  "catalogVersion": "pa-e5d0d35ad8f30b4c+skills-9396e01d21481cd1",
+                  "id": "build:single-character-editor",
+                  "mode": "pve",
+                  "name": "Imported Build",
+                  "primaryProfessionId": null,
+                  "schemaVersion": 4,
+                  "secondaryProfessionId": null,
+                  "skillBar": [
+                    null,
+                    -200001,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "titleRankOverrides": []
+                },
+                "pveBudget": {
+                  "level": 20,
+                  "questBonus": "maximum-applicable"
+                },
+                "rawTemplate": {
+                  "attributes": [
+                    {
+                      "catalogId": null,
+                      "label": "Reserved attribute 26",
+                      "namespace": "attribute",
+                      "outcomeKind": "reserved",
+                      "reason": "Reserved template attribute gap.",
+                      "templateId": 26
+                    }
+                  ],
+                  "primaryProfession": {
+                    "catalogId": null,
+                    "label": "None",
+                    "namespace": "profession",
+                    "outcomeKind": "none",
+                    "reason": null,
+                    "templateId": 0
+                  },
+                  "secondaryProfession": {
+                    "catalogId": null,
+                    "label": "None",
+                    "namespace": "profession",
+                    "outcomeKind": "none",
+                    "reason": null,
+                    "templateId": 0
+                  },
+                  "skillBar": [
+                    {
+                      "catalogId": null,
+                      "label": "Empty",
+                      "namespace": "skill",
+                      "outcomeKind": "empty",
+                      "reason": null,
+                      "templateId": 0
+                    },
+                    {
+                      "catalogId": null,
+                      "label": "Unknown skill 999999",
+                      "namespace": "skill",
+                      "outcomeKind": "unknown",
+                      "reason": null,
+                      "templateId": 999999
+                    },
+                    {
+                      "catalogId": null,
+                      "label": "Empty",
+                      "namespace": "skill",
+                      "outcomeKind": "empty",
+                      "reason": null,
+                      "templateId": 0
+                    },
+                    {
+                      "catalogId": null,
+                      "label": "Empty",
+                      "namespace": "skill",
+                      "outcomeKind": "empty",
+                      "reason": null,
+                      "templateId": 0
+                    },
+                    {
+                      "catalogId": null,
+                      "label": "Empty",
+                      "namespace": "skill",
+                      "outcomeKind": "empty",
+                      "reason": null,
+                      "templateId": 0
+                    },
+                    {
+                      "catalogId": null,
+                      "label": "Empty",
+                      "namespace": "skill",
+                      "outcomeKind": "empty",
+                      "reason": null,
+                      "templateId": 0
+                    },
+                    {
+                      "catalogId": null,
+                      "label": "Empty",
+                      "namespace": "skill",
+                      "outcomeKind": "empty",
+                      "reason": null,
+                      "templateId": 0
+                    },
+                    {
+                      "catalogId": null,
+                      "label": "Empty",
+                      "namespace": "skill",
+                      "outcomeKind": "empty",
+                      "reason": null,
+                      "templateId": 0
+                    }
+                  ],
+                  "source": {
+                    "fidelity": "exact-source",
+                    "inputKind": "bare",
+                    "normalizedDependencyInput": null,
+                    "originalBareCode": "OAAQIAAAAAAAAAAAAAAA",
+                    "originalInput": "OAAQIAAAAAAAAAAAAAAA",
+                    "semanticFingerprint": "skill-template:v1:7634d052e9b925e3",
+                    "templateKind": "skill",
+                    "templateName": null
+                  },
+                  "templateName": null
+                }
+              }
+            }
+          ],
+          "id": "build-set-fixture",
+          "lastSelectedEntryId": "entry-fixture-1",
+          "lastSelectedPartySlotId": "slot-fixture-1",
+          "name": "Fixture Build Set",
+          "party": {
+            "enabled": true,
+            "schemaVersion": 1,
+            "size": {
+              "kind": "preset",
+              "size": 2
+            },
+            "slots": [
+              {
+                "entryId": "entry-fixture-1",
+                "id": "slot-fixture-1",
+                "memberKind": "player",
+                "memberKindLabel": null,
+                "memberLabel": "Leader",
+                "notes": "Pulls first.",
+                "role": "Frontline"
+              },
+              {
+                "entryId": null,
+                "id": "slot-fixture-2",
+                "memberKind": "unspecified",
+                "memberKindLabel": null,
+                "memberLabel": "Open Slot",
+                "notes": null,
+                "role": null
+              }
+            ]
+          },
+          "schemaVersion": 2
+        }
+      },
+      "favorite": false,
+      "id": "controlled-party",
+      "name": "Fixture Build Set",
+      "notes": "Fixture set",
+      "savedWith": {
+        "buildCatalogVersion": "fixture-builds",
+        "insigniaCatalogVersion": "fixture-insignias",
+        "professionAttributeCatalogVersion": "fixture-professions-attributes",
+        "ruleEngineVersion": "rule-engine:v3",
+        "runeCatalogVersion": "fixture-runes",
+        "skillCatalogVersion": "fixture-skills",
+        "weaponCatalogSetDigest": "fixture-weapon-set-digest",
+        "weaponCatalogSetVersion": "fixture-weapon-set",
+        "weaponCatalogVersion": "fixture-weapons",
+        "weaponModifierCatalogSetDigest": "fixture-weapon-set-digest",
+        "weaponModifierCatalogSetVersion": "fixture-weapon-set",
+        "weaponModifierCatalogVersion": "fixture-weapon-mods"
+      },
+      "tags": [
+        "variants"
+      ],
+      "updatedAt": "2026-09-02T19:25:41Z"
+    },
+    {
+      "createdAt": "2026-09-02T19:25:41Z",
+      "document": {
+        "kind": "guide",
+        "snapshot": {
+          "appliedRevision": 0,
+          "document": {
+            "metadata": {
+              "id": "dagger-workshop-example",
+              "sources": [
+                {
+                  "attribution": "Guild Wars Wiki, linked reference only",
+                  "label": "Jagged Strike mechanics",
+                  "notes": "Identities and mechanics checked against the approved local catalog. Original guide prose; no copied page text.",
+                  "url": "https://wiki.guildwars.com/wiki/Jagged_Strike"
+                },
+                {
+                  "label": "Dagger Mastery reference",
+                  "notes": "Linked reference only; no runtime request.",
+                  "url": "https://wiki.guildwars.com/wiki/Dagger_Mastery"
+                },
+                {
+                  "label": "Game template format",
+                  "notes": "Template codes encode base allocations and skills, not guide bonus assumptions.",
+                  "url": "https://wiki.guildwars.com/wiki/Skill_template_format"
+                }
+              ],
+              "summary": "An original interaction example for editing and comparing complete local guide builds. This is not current meta advice.",
+              "tags": [
+                "example",
+                "daggers",
+                "practice"
+              ],
+              "title": "Dagger workshop: two independent variants",
+              "version": 1
+            },
+            "nodes": [
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A small workshop, not a meta ranking"
+                  }
+                ],
+                "depth": 1,
+                "type": "heading"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Use this original interaction example to compare two independent snapshots. Both bars leave slot eight open for a deliberate choice. The supported variant assumes outside help; it does not silently add that assumption to the independent variant."
+                  }
+                ],
+                "type": "paragraph"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Read the chain"
+                  }
+                ],
+                "depth": 2,
+                "type": "heading"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Start with "
+                  },
+                  {
+                    "context": {
+                      "kind": "generic"
+                    },
+                    "skillId": "catalog:skill:782",
+                    "type": "skill"
+                  },
+                  {
+                    "type": "text",
+                    "value": ", follow with "
+                  },
+                  {
+                    "context": {
+                      "kind": "generic"
+                    },
+                    "skillId": "catalog:skill:780",
+                    "type": "skill"
+                  },
+                  {
+                    "type": "text",
+                    "value": ", then use "
+                  },
+                  {
+                    "context": {
+                      "kind": "generic"
+                    },
+                    "skillId": "catalog:skill:775",
+                    "type": "skill"
+                  },
+                  {
+                    "type": "text",
+                    "value": ". These generic references show catalog ranges. A bound reference below uses only its named variant, even while you edit a different card."
+                  }
+                ],
+                "type": "paragraph"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Independent practice"
+                  }
+                ],
+                "depth": 2,
+                "type": "heading"
+              },
+              {
+                "id": "dagger-independent",
+                "snapshot": {
+                  "build": {
+                    "attributeAdjustments": {
+                      "effectPreferences": [
+                        {
+                          "effectId": "heroic-refrain",
+                          "preference": "off",
+                          "strength": 1
+                        }
+                      ],
+                      "headgearAttributeId": 29,
+                      "runes": [
+                        {
+                          "attributeId": 29,
+                          "runeId": 163
+                        }
+                      ]
+                    },
+                    "attributes": [
+                      {
+                        "attributeId": 29,
+                        "rank": 12
+                      },
+                      {
+                        "attributeId": 35,
+                        "rank": 12
+                      }
+                    ],
+                    "catalogVersion": "pa-e5d0d35ad8f30b4c+skills-9396e01d21481cd1",
+                    "id": "dagger-independent",
+                    "mode": "pve",
+                    "name": "Independent practice",
+                    "primaryProfessionId": 7,
+                    "schemaVersion": 4,
+                    "secondaryProfessionId": null,
+                    "skillBar": [
+                      782,
+                      780,
+                      775,
+                      1649,
+                      1018,
+                      2101,
+                      2415,
+                      null
+                    ],
+                    "titleRankOverrides": [
+                      {
+                        "key": "title:asura-rank",
+                        "rank": 3
+                      },
+                      {
+                        "key": "title:sunspear-rank",
+                        "rank": 4
+                      }
+                    ]
+                  },
+                  "pveBudget": {
+                    "level": 20,
+                    "questBonus": "maximum-applicable"
+                  },
+                  "rawTemplate": {
+                    "attributes": [
+                      {
+                        "catalogId": 29,
+                        "label": "Dagger Mastery",
+                        "namespace": "attribute",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 29
+                      },
+                      {
+                        "catalogId": 35,
+                        "label": "Critical Strikes",
+                        "namespace": "attribute",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 35
+                      }
+                    ],
+                    "primaryProfession": {
+                      "catalogId": 7,
+                      "label": "Assassin",
+                      "namespace": "profession",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 7
+                    },
+                    "secondaryProfession": {
+                      "catalogId": null,
+                      "label": "None",
+                      "namespace": "profession",
+                      "outcomeKind": "none",
+                      "reason": null,
+                      "templateId": 0
+                    },
+                    "skillBar": [
+                      {
+                        "catalogId": 782,
+                        "label": "Jagged Strike",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 782
+                      },
+                      {
+                        "catalogId": 780,
+                        "label": "Fox Fangs",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 780
+                      },
+                      {
+                        "catalogId": 775,
+                        "label": "Death Blossom",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 775
+                      },
+                      {
+                        "catalogId": 1649,
+                        "label": "Way of the Assassin",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 1649
+                      },
+                      {
+                        "catalogId": 1018,
+                        "label": "Critical Eye",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 1018
+                      },
+                      {
+                        "catalogId": 2101,
+                        "label": "Critical Agility",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 2101
+                      },
+                      {
+                        "catalogId": 2415,
+                        "label": "Asuran Scan",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 2415
+                      },
+                      {
+                        "catalogId": null,
+                        "label": "Empty",
+                        "namespace": "skill",
+                        "outcomeKind": "empty",
+                        "reason": null,
+                        "templateId": 0
+                      }
+                    ],
+                    "source": {
+                      "fidelity": "exact-source",
+                      "inputKind": "bare",
+                      "normalizedDependencyInput": null,
+                      "originalBareCode": "OwBi0xjM5wwwcwEnp/UD+WCAAAAA",
+                      "originalInput": "OwBi0xjM5wwwcwEnp/UD+WCAAAAA",
+                      "semanticFingerprint": "skill-template:v1:5c84f181df4ae35c",
+                      "templateKind": "skill",
+                      "templateName": null
+                    },
+                    "templateName": null
+                  }
+                },
+                "type": "build"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Independent result: "
+                  },
+                  {
+                    "context": {
+                      "buildId": "dagger-independent",
+                      "kind": "local"
+                    },
+                    "skillId": "catalog:skill:775",
+                    "type": "skill"
+                  },
+                  {
+                    "type": "text",
+                    "value": ". Compare the bound tooltip with the generic reference above. Title preferences are also independent: "
+                  },
+                  {
+                    "context": {
+                      "buildId": "dagger-independent",
+                      "kind": "local"
+                    },
+                    "skillId": "catalog:skill:2101",
+                    "type": "skill"
+                  },
+                  {
+                    "type": "text",
+                    "value": "."
+                  }
+                ],
+                "type": "paragraph"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Supported practice"
+                  }
+                ],
+                "depth": 2,
+                "type": "heading"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "This comparison assumes an external Heroic Refrain at strength four. Turn it off to inspect the equipment-only preview. The larger rune carries a health tradeoff; a higher preview number alone does not make this a better build."
+                  }
+                ],
+                "type": "paragraph"
+              },
+              {
+                "id": "dagger-supported",
+                "snapshot": {
+                  "build": {
+                    "attributeAdjustments": {
+                      "effectPreferences": [
+                        {
+                          "effectId": "heroic-refrain",
+                          "preference": "on",
+                          "strength": 4
+                        }
+                      ],
+                      "headgearAttributeId": 35,
+                      "runes": [
+                        {
+                          "attributeId": 29,
+                          "runeId": 179
+                        }
+                      ]
+                    },
+                    "attributes": [
+                      {
+                        "attributeId": 29,
+                        "rank": 10
+                      },
+                      {
+                        "attributeId": 35,
+                        "rank": 12
+                      }
+                    ],
+                    "catalogVersion": "pa-e5d0d35ad8f30b4c+skills-9396e01d21481cd1",
+                    "id": "dagger-supported",
+                    "mode": "pve",
+                    "name": "Supported practice",
+                    "primaryProfessionId": 7,
+                    "schemaVersion": 4,
+                    "secondaryProfessionId": null,
+                    "skillBar": [
+                      782,
+                      780,
+                      775,
+                      1649,
+                      1018,
+                      2101,
+                      2415,
+                      null
+                    ],
+                    "titleRankOverrides": [
+                      {
+                        "key": "title:asura-rank",
+                        "rank": 6
+                      },
+                      {
+                        "key": "title:sunspear-rank",
+                        "rank": 8
+                      }
+                    ]
+                  },
+                  "pveBudget": {
+                    "level": 20,
+                    "questBonus": "maximum-applicable"
+                  },
+                  "rawTemplate": {
+                    "attributes": [
+                      {
+                        "catalogId": 29,
+                        "label": "Dagger Mastery",
+                        "namespace": "attribute",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 29
+                      },
+                      {
+                        "catalogId": 35,
+                        "label": "Critical Strikes",
+                        "namespace": "attribute",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 35
+                      }
+                    ],
+                    "primaryProfession": {
+                      "catalogId": 7,
+                      "label": "Assassin",
+                      "namespace": "profession",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 7
+                    },
+                    "secondaryProfession": {
+                      "catalogId": null,
+                      "label": "None",
+                      "namespace": "profession",
+                      "outcomeKind": "none",
+                      "reason": null,
+                      "templateId": 0
+                    },
+                    "skillBar": [
+                      {
+                        "catalogId": 782,
+                        "label": "Jagged Strike",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 782
+                      },
+                      {
+                        "catalogId": 780,
+                        "label": "Fox Fangs",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 780
+                      },
+                      {
+                        "catalogId": 775,
+                        "label": "Death Blossom",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 775
+                      },
+                      {
+                        "catalogId": 1649,
+                        "label": "Way of the Assassin",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 1649
+                      },
+                      {
+                        "catalogId": 1018,
+                        "label": "Critical Eye",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 1018
+                      },
+                      {
+                        "catalogId": 2101,
+                        "label": "Critical Agility",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 2101
+                      },
+                      {
+                        "catalogId": 2415,
+                        "label": "Asuran Scan",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 2415
+                      },
+                      {
+                        "catalogId": null,
+                        "label": "Empty",
+                        "namespace": "skill",
+                        "outcomeKind": "empty",
+                        "reason": null,
+                        "templateId": 0
+                      }
+                    ],
+                    "source": {
+                      "fidelity": "exact-source",
+                      "inputKind": "bare",
+                      "normalizedDependencyInput": null,
+                      "originalBareCode": "OwBi0pjM5wwwcwEnp/UD+WCAAAAA",
+                      "originalInput": "OwBi0pjM5wwwcwEnp/UD+WCAAAAA",
+                      "semanticFingerprint": "skill-template:v1:804e29627d551d36",
+                      "templateKind": "skill",
+                      "templateName": null
+                    },
+                    "templateName": null
+                  }
+                },
+                "type": "build"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Supported result: "
+                  },
+                  {
+                    "context": {
+                      "buildId": "dagger-supported",
+                      "kind": "local"
+                    },
+                    "skillId": "catalog:skill:775",
+                    "type": "skill"
+                  },
+                  {
+                    "type": "text",
+                    "value": ". Compare the bound tooltip with the generic reference above. Title preferences are also independent: "
+                  },
+                  {
+                    "context": {
+                      "buildId": "dagger-supported",
+                      "kind": "local"
+                    },
+                    "skillId": "catalog:skill:2101",
+                    "type": "skill"
+                  },
+                  {
+                    "type": "text",
+                    "value": "."
+                  }
+                ],
+                "type": "paragraph"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Try an edit"
+                  }
+                ],
+                "depth": 2,
+                "type": "heading"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Select a card and change Dagger Mastery, its headgear or its rune."
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "type": "listItem"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Inspect that card's bound Death Blossom reference, then the other one."
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "type": "listItem"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Undo once and check that only the latest authored change returns."
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "type": "listItem"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Drag a skill from the catalog into the open slot, or choose a text caret and insert a generic reference."
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "type": "listItem"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Save locally, reload, switch to Read, and download Markdown to carry both variants and their assumptions."
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "type": "listItem"
+                  }
+                ],
+                "ordered": true,
+                "start": 1,
+                "type": "list"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Template input"
+                  }
+                ],
+                "depth": 2,
+                "type": "heading"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Paste one of these codes into Add a build at end to make another independent build. A game code carries purchased ranks and skills; it does not transfer these rune, headgear, title or outside-effect choices."
+                  }
+                ],
+                "type": "paragraph"
+              },
+              {
+                "lang": "text",
+                "type": "code",
+                "value": "Independent: OwBi0xjM5wwwcwEnp/UD+WCAAAAA\nSupported: OwBi0pjM5wwwcwEnp/UD+WCAAAAA"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Usage and recommendations"
+                  }
+                ],
+                "depth": 2,
+                "type": "heading"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "For a practice run, choose a single target and watch the lead, off-hand and dual-attack sequence before adding more decisions. Leave the optional slot empty until you know what problem you want it to solve. Record the reason for a utility choice beside the bar, so another reader can evaluate your intent."
+                  }
+                ],
+                "type": "paragraph"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Treat the supported card as a comparison under an explicit team assumption. If that support is absent, turn the assumption off before comparing tooltips. Use the generic reference when discussing a skill without committing to either build."
+                  }
+                ],
+                "type": "paragraph"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Counters and limits"
+                  }
+                ],
+                "depth": 2,
+                "type": "heading"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Blindness, pressure on positioning and interruptions to your attack sequence can make a planned chain unreliable. Observe what actually failed before changing a slot. An assumed-effect preview does not model uptime, enemy movement, team coordination or every combat interaction."
+                  }
+                ],
+                "type": "paragraph"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "This guide demonstrates the workspace. It makes no claim to a current meta ranking, optimal damage or suitability for every area. Check linked mechanics and adapt deliberately."
+                  }
+                ],
+                "type": "paragraph"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Keep the complete guide"
+                  }
+                ],
+                "depth": 2,
+                "type": "heading"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Save the local guide or export Markdown to retain prose, references, exact build identities and bonus assumptions. Copy template is useful for the game; it is intentionally a smaller representation. No external page body, image or rating is embedded in this example."
+                  }
+                ],
+                "type": "paragraph"
+              }
+            ]
+          },
+          "recovery": {
+            "baseRevision": 0,
+            "dirty": true,
+            "raw": ":::bw-guide\n{unfinished controlled recovery  \n"
+          },
+          "schemaVersion": 1
+        }
+      },
+      "favorite": false,
+      "id": "controlled-guide",
+      "name": "Dagger workshop: two independent variants",
+      "notes": "Fixture record",
+      "savedWith": {
+        "buildCatalogVersion": "fixture-builds",
+        "insigniaCatalogVersion": "fixture-insignias",
+        "professionAttributeCatalogVersion": "fixture-professions-attributes",
+        "ruleEngineVersion": "rule-engine:v3",
+        "runeCatalogVersion": "fixture-runes",
+        "skillCatalogVersion": "fixture-skills",
+        "weaponCatalogSetDigest": "fixture-weapon-set-digest",
+        "weaponCatalogSetVersion": "fixture-weapon-set",
+        "weaponCatalogVersion": "fixture-weapons",
+        "weaponModifierCatalogSetDigest": "fixture-weapon-set-digest",
+        "weaponModifierCatalogSetVersion": "fixture-weapon-set",
+        "weaponModifierCatalogVersion": "fixture-weapon-mods"
+      },
+      "tags": [
+        "example",
+        "daggers",
+        "practice"
+      ],
+      "updatedAt": "2026-09-02T19:25:41Z"
+    }
+  ],
+  "savedWith": {
+    "buildCatalogVersion": "fixture-builds",
+    "insigniaCatalogVersion": "fixture-insignias",
+    "professionAttributeCatalogVersion": "fixture-professions-attributes",
+    "ruleEngineVersion": "rule-engine:v3",
+    "runeCatalogVersion": "fixture-runes",
+    "skillCatalogVersion": "fixture-skills",
+    "weaponCatalogSetDigest": "fixture-weapon-set-digest",
+    "weaponCatalogSetVersion": "fixture-weapon-set",
+    "weaponCatalogVersion": "fixture-weapons",
+    "weaponModifierCatalogSetDigest": "fixture-weapon-set-digest",
+    "weaponModifierCatalogSetVersion": "fixture-weapon-set",
+    "weaponModifierCatalogVersion": "fixture-weapon-mods"
+  },
+  "schemaVersion": 3,
+  "workingDraft": {
+    "associatedRecordId": "controlled-guide",
+    "document": {
+      "kind": "guide",
+      "snapshot": {
+        "appliedRevision": 0,
+        "document": {
+          "metadata": {
+            "id": "dagger-workshop-example",
+            "sources": [
+              {
+                "attribution": "Guild Wars Wiki, linked reference only",
+                "label": "Jagged Strike mechanics",
+                "notes": "Identities and mechanics checked against the approved local catalog. Original guide prose; no copied page text.",
+                "url": "https://wiki.guildwars.com/wiki/Jagged_Strike"
+              },
+              {
+                "label": "Dagger Mastery reference",
+                "notes": "Linked reference only; no runtime request.",
+                "url": "https://wiki.guildwars.com/wiki/Dagger_Mastery"
+              },
+              {
+                "label": "Game template format",
+                "notes": "Template codes encode base allocations and skills, not guide bonus assumptions.",
+                "url": "https://wiki.guildwars.com/wiki/Skill_template_format"
+              }
+            ],
+            "summary": "An original interaction example for editing and comparing complete local guide builds. This is not current meta advice.",
+            "tags": [
+              "example",
+              "daggers",
+              "practice"
+            ],
+            "title": "Dagger workshop: two independent variants",
+            "version": 1
+          },
+          "nodes": [
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "A small workshop, not a meta ranking"
+                }
+              ],
+              "depth": 1,
+              "type": "heading"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Use this original interaction example to compare two independent snapshots. Both bars leave slot eight open for a deliberate choice. The supported variant assumes outside help; it does not silently add that assumption to the independent variant."
+                }
+              ],
+              "type": "paragraph"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Read the chain"
+                }
+              ],
+              "depth": 2,
+              "type": "heading"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Start with "
+                },
+                {
+                  "context": {
+                    "kind": "generic"
+                  },
+                  "skillId": "catalog:skill:782",
+                  "type": "skill"
+                },
+                {
+                  "type": "text",
+                  "value": ", follow with "
+                },
+                {
+                  "context": {
+                    "kind": "generic"
+                  },
+                  "skillId": "catalog:skill:780",
+                  "type": "skill"
+                },
+                {
+                  "type": "text",
+                  "value": ", then use "
+                },
+                {
+                  "context": {
+                    "kind": "generic"
+                  },
+                  "skillId": "catalog:skill:775",
+                  "type": "skill"
+                },
+                {
+                  "type": "text",
+                  "value": ". These generic references show catalog ranges. A bound reference below uses only its named variant, even while you edit a different card."
+                }
+              ],
+              "type": "paragraph"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Independent practice"
+                }
+              ],
+              "depth": 2,
+              "type": "heading"
+            },
+            {
+              "id": "dagger-independent",
+              "snapshot": {
+                "build": {
+                  "attributeAdjustments": {
+                    "effectPreferences": [
+                      {
+                        "effectId": "heroic-refrain",
+                        "preference": "off",
+                        "strength": 1
+                      }
+                    ],
+                    "headgearAttributeId": 29,
+                    "runes": [
+                      {
+                        "attributeId": 29,
+                        "runeId": 163
+                      }
+                    ]
+                  },
+                  "attributes": [
+                    {
+                      "attributeId": 29,
+                      "rank": 12
+                    },
+                    {
+                      "attributeId": 35,
+                      "rank": 12
+                    }
+                  ],
+                  "catalogVersion": "pa-e5d0d35ad8f30b4c+skills-9396e01d21481cd1",
+                  "id": "dagger-independent",
+                  "mode": "pve",
+                  "name": "Independent practice",
+                  "primaryProfessionId": 7,
+                  "schemaVersion": 4,
+                  "secondaryProfessionId": null,
+                  "skillBar": [
+                    782,
+                    780,
+                    775,
+                    1649,
+                    1018,
+                    2101,
+                    2415,
+                    null
+                  ],
+                  "titleRankOverrides": [
+                    {
+                      "key": "title:asura-rank",
+                      "rank": 3
+                    },
+                    {
+                      "key": "title:sunspear-rank",
+                      "rank": 4
+                    }
+                  ]
+                },
+                "pveBudget": {
+                  "level": 20,
+                  "questBonus": "maximum-applicable"
+                },
+                "rawTemplate": {
+                  "attributes": [
+                    {
+                      "catalogId": 29,
+                      "label": "Dagger Mastery",
+                      "namespace": "attribute",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 29
+                    },
+                    {
+                      "catalogId": 35,
+                      "label": "Critical Strikes",
+                      "namespace": "attribute",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 35
+                    }
+                  ],
+                  "primaryProfession": {
+                    "catalogId": 7,
+                    "label": "Assassin",
+                    "namespace": "profession",
+                    "outcomeKind": "known",
+                    "reason": null,
+                    "templateId": 7
+                  },
+                  "secondaryProfession": {
+                    "catalogId": null,
+                    "label": "None",
+                    "namespace": "profession",
+                    "outcomeKind": "none",
+                    "reason": null,
+                    "templateId": 0
+                  },
+                  "skillBar": [
+                    {
+                      "catalogId": 782,
+                      "label": "Jagged Strike",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 782
+                    },
+                    {
+                      "catalogId": 780,
+                      "label": "Fox Fangs",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 780
+                    },
+                    {
+                      "catalogId": 775,
+                      "label": "Death Blossom",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 775
+                    },
+                    {
+                      "catalogId": 1649,
+                      "label": "Way of the Assassin",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 1649
+                    },
+                    {
+                      "catalogId": 1018,
+                      "label": "Critical Eye",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 1018
+                    },
+                    {
+                      "catalogId": 2101,
+                      "label": "Critical Agility",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 2101
+                    },
+                    {
+                      "catalogId": 2415,
+                      "label": "Asuran Scan",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 2415
+                    },
+                    {
+                      "catalogId": null,
+                      "label": "Empty",
+                      "namespace": "skill",
+                      "outcomeKind": "empty",
+                      "reason": null,
+                      "templateId": 0
+                    }
+                  ],
+                  "source": {
+                    "fidelity": "exact-source",
+                    "inputKind": "bare",
+                    "normalizedDependencyInput": null,
+                    "originalBareCode": "OwBi0xjM5wwwcwEnp/UD+WCAAAAA",
+                    "originalInput": "OwBi0xjM5wwwcwEnp/UD+WCAAAAA",
+                    "semanticFingerprint": "skill-template:v1:5c84f181df4ae35c",
+                    "templateKind": "skill",
+                    "templateName": null
+                  },
+                  "templateName": null
+                }
+              },
+              "type": "build"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Independent result: "
+                },
+                {
+                  "context": {
+                    "buildId": "dagger-independent",
+                    "kind": "local"
+                  },
+                  "skillId": "catalog:skill:775",
+                  "type": "skill"
+                },
+                {
+                  "type": "text",
+                  "value": ". Compare the bound tooltip with the generic reference above. Title preferences are also independent: "
+                },
+                {
+                  "context": {
+                    "buildId": "dagger-independent",
+                    "kind": "local"
+                  },
+                  "skillId": "catalog:skill:2101",
+                  "type": "skill"
+                },
+                {
+                  "type": "text",
+                  "value": "."
+                }
+              ],
+              "type": "paragraph"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Supported practice"
+                }
+              ],
+              "depth": 2,
+              "type": "heading"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "This comparison assumes an external Heroic Refrain at strength four. Turn it off to inspect the equipment-only preview. The larger rune carries a health tradeoff; a higher preview number alone does not make this a better build."
+                }
+              ],
+              "type": "paragraph"
+            },
+            {
+              "id": "dagger-supported",
+              "snapshot": {
+                "build": {
+                  "attributeAdjustments": {
+                    "effectPreferences": [
+                      {
+                        "effectId": "heroic-refrain",
+                        "preference": "on",
+                        "strength": 4
+                      }
+                    ],
+                    "headgearAttributeId": 35,
+                    "runes": [
+                      {
+                        "attributeId": 29,
+                        "runeId": 179
+                      }
+                    ]
+                  },
+                  "attributes": [
+                    {
+                      "attributeId": 29,
+                      "rank": 10
+                    },
+                    {
+                      "attributeId": 35,
+                      "rank": 12
+                    }
+                  ],
+                  "catalogVersion": "pa-e5d0d35ad8f30b4c+skills-9396e01d21481cd1",
+                  "id": "dagger-supported",
+                  "mode": "pve",
+                  "name": "Supported practice",
+                  "primaryProfessionId": 7,
+                  "schemaVersion": 4,
+                  "secondaryProfessionId": null,
+                  "skillBar": [
+                    782,
+                    780,
+                    775,
+                    1649,
+                    1018,
+                    2101,
+                    2415,
+                    null
+                  ],
+                  "titleRankOverrides": [
+                    {
+                      "key": "title:asura-rank",
+                      "rank": 6
+                    },
+                    {
+                      "key": "title:sunspear-rank",
+                      "rank": 8
+                    }
+                  ]
+                },
+                "pveBudget": {
+                  "level": 20,
+                  "questBonus": "maximum-applicable"
+                },
+                "rawTemplate": {
+                  "attributes": [
+                    {
+                      "catalogId": 29,
+                      "label": "Dagger Mastery",
+                      "namespace": "attribute",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 29
+                    },
+                    {
+                      "catalogId": 35,
+                      "label": "Critical Strikes",
+                      "namespace": "attribute",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 35
+                    }
+                  ],
+                  "primaryProfession": {
+                    "catalogId": 7,
+                    "label": "Assassin",
+                    "namespace": "profession",
+                    "outcomeKind": "known",
+                    "reason": null,
+                    "templateId": 7
+                  },
+                  "secondaryProfession": {
+                    "catalogId": null,
+                    "label": "None",
+                    "namespace": "profession",
+                    "outcomeKind": "none",
+                    "reason": null,
+                    "templateId": 0
+                  },
+                  "skillBar": [
+                    {
+                      "catalogId": 782,
+                      "label": "Jagged Strike",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 782
+                    },
+                    {
+                      "catalogId": 780,
+                      "label": "Fox Fangs",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 780
+                    },
+                    {
+                      "catalogId": 775,
+                      "label": "Death Blossom",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 775
+                    },
+                    {
+                      "catalogId": 1649,
+                      "label": "Way of the Assassin",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 1649
+                    },
+                    {
+                      "catalogId": 1018,
+                      "label": "Critical Eye",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 1018
+                    },
+                    {
+                      "catalogId": 2101,
+                      "label": "Critical Agility",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 2101
+                    },
+                    {
+                      "catalogId": 2415,
+                      "label": "Asuran Scan",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 2415
+                    },
+                    {
+                      "catalogId": null,
+                      "label": "Empty",
+                      "namespace": "skill",
+                      "outcomeKind": "empty",
+                      "reason": null,
+                      "templateId": 0
+                    }
+                  ],
+                  "source": {
+                    "fidelity": "exact-source",
+                    "inputKind": "bare",
+                    "normalizedDependencyInput": null,
+                    "originalBareCode": "OwBi0pjM5wwwcwEnp/UD+WCAAAAA",
+                    "originalInput": "OwBi0pjM5wwwcwEnp/UD+WCAAAAA",
+                    "semanticFingerprint": "skill-template:v1:804e29627d551d36",
+                    "templateKind": "skill",
+                    "templateName": null
+                  },
+                  "templateName": null
+                }
+              },
+              "type": "build"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Supported result: "
+                },
+                {
+                  "context": {
+                    "buildId": "dagger-supported",
+                    "kind": "local"
+                  },
+                  "skillId": "catalog:skill:775",
+                  "type": "skill"
+                },
+                {
+                  "type": "text",
+                  "value": ". Compare the bound tooltip with the generic reference above. Title preferences are also independent: "
+                },
+                {
+                  "context": {
+                    "buildId": "dagger-supported",
+                    "kind": "local"
+                  },
+                  "skillId": "catalog:skill:2101",
+                  "type": "skill"
+                },
+                {
+                  "type": "text",
+                  "value": "."
+                }
+              ],
+              "type": "paragraph"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Try an edit"
+                }
+              ],
+              "depth": 2,
+              "type": "heading"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Select a card and change Dagger Mastery, its headgear or its rune."
+                        }
+                      ],
+                      "type": "paragraph"
+                    }
+                  ],
+                  "type": "listItem"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Inspect that card's bound Death Blossom reference, then the other one."
+                        }
+                      ],
+                      "type": "paragraph"
+                    }
+                  ],
+                  "type": "listItem"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Undo once and check that only the latest authored change returns."
+                        }
+                      ],
+                      "type": "paragraph"
+                    }
+                  ],
+                  "type": "listItem"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Drag a skill from the catalog into the open slot, or choose a text caret and insert a generic reference."
+                        }
+                      ],
+                      "type": "paragraph"
+                    }
+                  ],
+                  "type": "listItem"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Save locally, reload, switch to Read, and download Markdown to carry both variants and their assumptions."
+                        }
+                      ],
+                      "type": "paragraph"
+                    }
+                  ],
+                  "type": "listItem"
+                }
+              ],
+              "ordered": true,
+              "start": 1,
+              "type": "list"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Template input"
+                }
+              ],
+              "depth": 2,
+              "type": "heading"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Paste one of these codes into Add a build at end to make another independent build. A game code carries purchased ranks and skills; it does not transfer these rune, headgear, title or outside-effect choices."
+                }
+              ],
+              "type": "paragraph"
+            },
+            {
+              "lang": "text",
+              "type": "code",
+              "value": "Independent: OwBi0xjM5wwwcwEnp/UD+WCAAAAA\nSupported: OwBi0pjM5wwwcwEnp/UD+WCAAAAA"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Usage and recommendations"
+                }
+              ],
+              "depth": 2,
+              "type": "heading"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "For a practice run, choose a single target and watch the lead, off-hand and dual-attack sequence before adding more decisions. Leave the optional slot empty until you know what problem you want it to solve. Record the reason for a utility choice beside the bar, so another reader can evaluate your intent."
+                }
+              ],
+              "type": "paragraph"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Treat the supported card as a comparison under an explicit team assumption. If that support is absent, turn the assumption off before comparing tooltips. Use the generic reference when discussing a skill without committing to either build."
+                }
+              ],
+              "type": "paragraph"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Counters and limits"
+                }
+              ],
+              "depth": 2,
+              "type": "heading"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Blindness, pressure on positioning and interruptions to your attack sequence can make a planned chain unreliable. Observe what actually failed before changing a slot. An assumed-effect preview does not model uptime, enemy movement, team coordination or every combat interaction."
+                }
+              ],
+              "type": "paragraph"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "This guide demonstrates the workspace. It makes no claim to a current meta ranking, optimal damage or suitability for every area. Check linked mechanics and adapt deliberately."
+                }
+              ],
+              "type": "paragraph"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Keep the complete guide"
+                }
+              ],
+              "depth": 2,
+              "type": "heading"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Save the local guide or export Markdown to retain prose, references, exact build identities and bonus assumptions. Copy template is useful for the game; it is intentionally a smaller representation. No external page body, image or rating is embedded in this example."
+                }
+              ],
+              "type": "paragraph"
+            }
+          ]
+        },
+        "recovery": {
+          "baseRevision": 0,
+          "dirty": true,
+          "raw": ":::bw-guide\n{unfinished controlled recovery  \n"
+        },
+        "schemaVersion": 1
+      }
+    },
+    "savedWith": {
+      "buildCatalogVersion": "fixture-builds",
+      "insigniaCatalogVersion": "fixture-insignias",
+      "professionAttributeCatalogVersion": "fixture-professions-attributes",
+      "ruleEngineVersion": "rule-engine:v3",
+      "runeCatalogVersion": "fixture-runes",
+      "skillCatalogVersion": "fixture-skills",
+      "weaponCatalogSetDigest": "fixture-weapon-set-digest",
+      "weaponCatalogSetVersion": "fixture-weapon-set",
+      "weaponCatalogVersion": "fixture-weapons",
+      "weaponModifierCatalogSetDigest": "fixture-weapon-set-digest",
+      "weaponModifierCatalogSetVersion": "fixture-weapon-set",
+      "weaponModifierCatalogVersion": "fixture-weapon-mods"
+    }
+  }
+}

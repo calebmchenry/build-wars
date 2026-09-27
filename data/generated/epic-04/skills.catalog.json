@@ -1,5 +1,5 @@
 {
-  "catalogVersion": "skills-9396e01d21481cd1",
+  "catalogVersion": "skills-f918733369aec777",
   "dependencyDigests": [
     {
       "artifactDigest": "7a397140d346dbfd1e28e1076132fa209628678682fa2c21322ac91f1807f9fa",
@@ -204607,7 +204607,7 @@
       "section": "dispositions"
     },
     {
-      "digest": "67e921678cdb412737abc1dcf8a63d3b2c9ffe1168f8514fd64708121e2eed84",
+      "digest": "8ad0cfcb2fcd8de9bdb64d541f69c4931d97b052fe3fe5f89e1fc89748deb552",
       "section": "skills"
     },
     {
@@ -212436,7 +212436,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Arcane Conundrum Hex Spell Mesmer Illusion Magic Hex Spell. Also hexes foes adjacent to target ( seconds). Doubles spell casting time. End effect: you gain energy. Unlike other skill descriptions, \"energy\" is lowercase here",
+        "searchText": "Arcane Conundrum Hex Spell Mesmer Illusion Magic Hex Spell. Also hexes foes adjacent to target ( seconds). Doubles spell casting time. End effect: you gain energy.",
         "sourceTextDigest": "f05dee0c12b0be96896a5183187d7f016da50391b3fc7438cba9c30fd8413857",
         "state": "reviewed-text",
         "tokens": [
@@ -212582,62 +212582,6 @@
           {
             "kind": "literal",
             "value": "energy."
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "Unlike"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "other"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "skill"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "descriptions,"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"energy\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "lowercase"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "here"
           }
         ]
       },
@@ -219544,7 +219488,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Keystone Signet Signet Mesmer Fast Casting Elite Signet. (20 seconds.) Your next signet[s] interrupt Should be \"interrupts\" when it affects 1 signet and deal damage to other foes adjacent to your target. Initial Effect: \"Effect\" is capitalized unlike most other descriptions with \"Initial effect\" recharges all of your other signets.",
+        "searchText": "Keystone Signet Signet Mesmer Fast Casting Elite Signet. (20 seconds.) Your next signet[s] interrupt and deal damage to other foes adjacent to your target. Initial Effect: recharges all of your other signets.",
         "sourceTextDigest": "cf0a5c6a85b880b0d8e22d364b814ea36c1f07d1b173f46fe6a40dd354ce93d8",
         "state": "reviewed-text",
         "tokens": [
@@ -219608,62 +219552,6 @@
           {
             "kind": "literal",
             "value": "interrupt"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "Should"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "be"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"interrupts\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "when"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "it"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "affects"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "1"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "signet"
           },
           {
             "kind": "whitespace"
@@ -219756,76 +219644,6 @@
           {
             "kind": "literal",
             "value": "Effect:"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"Effect\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "capitalized"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "unlike"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "most"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "other"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "descriptions"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "with"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"Initial"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "effect\""
           },
           {
             "kind": "whitespace"
@@ -259240,7 +259058,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Glimmering Mark Hex Spell Elementalist Air Magic Elite Hex Spell. (10 seconds.) Deals damage each second to target and adjacent foes. Inflicts Blindness Doesn't indicate Blindness duration on foes using attack skills. Ends if you use a skill that targets this foe.",
+        "searchText": "Glimmering Mark Hex Spell Elementalist Air Magic Elite Hex Spell. (10 seconds.) Deals damage each second to target and adjacent foes. Inflicts Blindness on foes using attack skills. Ends if you use a skill that targets this foe.",
         "sourceTextDigest": "00c92fa5e83144645a472e6314843cc0219d5c0d76a2ee89f5083fe0de2b08e1",
         "state": "reviewed-text",
         "tokens": [
@@ -259360,34 +259178,6 @@
           {
             "kind": "literal",
             "value": "Blindness"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "Doesn't"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "indicate"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "Blindness"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "duration"
           },
           {
             "kind": "whitespace"
@@ -262500,7 +262290,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Ward Against Harm Ward Spell Elementalist Water Magic Elite Ward Spell.&nbsp; the description starts with a second space after the skill type( seconds.) Allies in this ward have Health regeneration, armor, and additional armor against elemental damage. Spirits are unaffected. This spell is disabled for 20 seconds.",
+        "searchText": "Ward Against Harm Ward Spell Elementalist Water Magic Elite Ward Spell.&nbsp; ( seconds.) Allies in this ward have Health regeneration, armor, and additional armor against elemental damage. Spirits are unaffected. This spell is disabled for 20 seconds.",
         "sourceTextDigest": "040a0a32d1357c40e596da89d61e1840ed2dd58b713735f5148cf3c1e6c01f21",
         "state": "reviewed-text",
         "tokens": [
@@ -262527,77 +262317,7 @@
           },
           {
             "kind": "literal",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "description"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "starts"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "with"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "a"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "second"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "space"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "after"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "skill"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "type("
+            "value": "("
           },
           {
             "kind": "progression-reference",
@@ -276261,7 +275981,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Shielding Hands Enchantment Spell Monk Protection Prayers Enchantment Spell. (8 seconds.) Reduces incoming damage&nbsp; andthere are two blanks between 'damage' and 'and' life steal by . End effect: heals for",
+        "searchText": "Shielding Hands Enchantment Spell Monk Protection Prayers Enchantment Spell. (8 seconds.) Reduces incoming damage&nbsp; and life steal by . End effect: heals for",
         "sourceTextDigest": "672e593fdc1170521c6d13a23de650e5da79c4cea2159b22b04d4f3cea63c148",
         "state": "reviewed-text",
         "tokens": [
@@ -276316,56 +276036,7 @@
           },
           {
             "kind": "literal",
-            "value": "andthere"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "are"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "two"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "blanks"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "between"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "'damage'"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
             "value": "and"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "'and'"
           },
           {
             "kind": "whitespace"
@@ -315384,7 +315055,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Nature's Renewal Nature Ritual Ranger Wilderness Survival Nature Ritual. Creates a level spirit ( second lifespan). For creatures in range, enchantments and Hexes unlike other descriptions with \"hex\" or \"hexes\" in it, it is capitalized here take twice as long to cast and it costs twice as much Energy to maintain enchantments. Does not affect spirits.",
+        "searchText": "Nature's Renewal Nature Ritual Ranger Wilderness Survival Nature Ritual. Creates a level spirit ( second lifespan). For creatures in range, enchantments and Hexes take twice as long to cast and it costs twice as much Energy to maintain enchantments. Does not affect spirits.",
         "sourceTextDigest": "91eb2dfd00eee6f89126fef9ada206ec6f5242ff21f856ed0daa4247df2b6e6c",
         "state": "reviewed-text",
         "tokens": [
@@ -315509,97 +315180,6 @@
           {
             "kind": "literal",
             "value": "Hexes"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "unlike"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "other"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "descriptions"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "with"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"hex\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "or"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"hexes\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "in"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "it,"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "it"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "capitalized"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "here"
           },
           {
             "kind": "whitespace"
@@ -346878,7 +346458,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Icy Prism Spell Elementalist Water Magic Spell. Deals cold damage. Deals +The \"+\" is inconsistent with other skill descriptions. In this case, the additional damage is dealt to nearby foes, and not to the target cold damage to other nearby foes if target has a Water Magic hex.",
+        "searchText": "Icy Prism Spell Elementalist Water Magic Spell. Deals cold damage. Deals + cold damage to other nearby foes if target has a Water Magic hex.",
         "sourceTextDigest": "c6888ea15151864ba875911326ccc6c89135784036a35303ac1d17f94a8222f4",
         "state": "reviewed-text",
         "tokens": [
@@ -346927,168 +346507,7 @@
           },
           {
             "kind": "literal",
-            "value": "+The"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"+\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "inconsistent"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "with"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "other"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "skill"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "descriptions."
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "In"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "this"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "case,"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "additional"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "damage"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "dealt"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "to"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "nearby"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "foes,"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "and"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "not"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "to"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "target"
+            "value": "+"
           },
           {
             "kind": "progression-reference",
@@ -372869,7 +372288,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Spirit Walk Spell Assassin Spell. Shadow Step to target Spirit. \"Spirit\" is capitalized in concise description",
+        "searchText": "Spirit Walk Spell Assassin Spell. Shadow Step to target Spirit.",
         "sourceTextDigest": "8d1bd3910f0a186b37bc33f3d8887174e61a8bbde02cdf83e6fef8783a9b57ba",
         "state": "reviewed-text",
         "tokens": [
@@ -372911,48 +372330,6 @@
           {
             "kind": "literal",
             "value": "Spirit."
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"Spirit\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "capitalized"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "in"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "concise"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "description"
           }
         ]
       },
@@ -382527,7 +381904,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Star Burst Touch spell Elementalist Fire Magic Elite Touch Spell. Deals fire damage. Inflicts Burning ( seconds). \"Seconds\" is plural even when it's \"1 second\" Gain 2 Energy for each foe struck. Also hits foes in the area.",
+        "searchText": "Star Burst Touch spell Elementalist Fire Magic Elite Touch Spell. Deals fire damage. Inflicts Burning ( seconds). Gain 2 Energy for each foe struck. Also hits foes in the area.",
         "sourceTextDigest": "6d823cb71b4e26aa468aec78e132fc003f8c025c89feb9a90bddc4bc2a609555",
         "state": "reviewed-text",
         "tokens": [
@@ -382610,62 +381987,6 @@
           {
             "kind": "literal",
             "value": "seconds)."
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"Seconds\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "plural"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "even"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "when"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "it's"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"1"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "second\""
           },
           {
             "kind": "whitespace"
@@ -383680,7 +383001,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Teinai's Crystals Spell Elementalist Earth Magic Spell. Deals damage to target. Deals more Descriptions usually don't display '+ [number] more damage'. It's either '+ [number] damage' or '[number] more damage'. damage and causes Cracked Armor ( seconds) nearby if that foe had a Water Magic hex.",
+        "searchText": "Teinai's Crystals Spell Elementalist Earth Magic Spell. Deals damage to target. Deals more damage and causes Cracked Armor ( seconds) nearby if that foe had a Water Magic hex.",
         "sourceTextDigest": "61e7f57cde1bf8e9a01064c613d8d9c6641e70e59a726e3f8de7be60c7f233a6",
         "state": "reviewed-text",
         "tokens": [
@@ -383745,125 +383066,6 @@
           {
             "kind": "literal",
             "value": "more"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "Descriptions"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "usually"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "don't"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "display"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "'+"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "[number]"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "more"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "damage'."
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "It's"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "either"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "'+"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "[number]"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "damage'"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "or"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "'[number]"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "more"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "damage'."
           },
           {
             "kind": "whitespace"
@@ -460053,7 +459255,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Wild Throw Spear Attack Paragon Spear Mastery Spear Attack. Deals damage. Unblockable. Ends target's stance.Disables No space between the period and \"Disables\" your non-spear attack skills for 3 seconds.",
+        "searchText": "Wild Throw Spear Attack Paragon Spear Mastery Spear Attack. Deals damage. Unblockable. Ends target's stance.Disables your non-spear attack skills for 3 seconds.",
         "sourceTextDigest": "5e22d3277a4b56f02bbe55f2923e5d374af44a0528ce4becbeeefc45a18a78d9",
         "state": "reviewed-text",
         "tokens": [
@@ -460122,69 +459324,6 @@
             "kind": "literal",
             "tone": "muted",
             "value": "Disables"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "No"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "space"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "between"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "period"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "and"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "\"Disables\""
           },
           {
             "kind": "whitespace",
@@ -463277,7 +462416,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Lift Enchantment Touch Skill Assassin Touch Skill. Removes one enchantment.No No space between the period and \"No\" effect unless target foe is knocked-down.",
+        "searchText": "Lift Enchantment Touch Skill Assassin Touch Skill. Removes one enchantment.No effect unless target foe is knocked-down.",
         "sourceTextDigest": "aa086271e5057f9d33d8d44874a29a6a518f6a0db44fe2e61a6a69a73b08f3fc",
         "state": "reviewed-text",
         "tokens": [
@@ -463317,69 +462456,6 @@
             "kind": "literal",
             "tone": "muted",
             "value": "No"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "No"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "space"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "between"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "period"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "and"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "\"No\""
           },
           {
             "kind": "whitespace",
@@ -482464,7 +481540,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Harrier's Grasp Flash Enchantment Spell Dervish Wind Prayers Flash Enchantment Spell. ( seconds.) Attacks on moving foes also Cripple them. fails to mention cripple duration Initial Effect: you lose Cripple and 1 other condition. Ends after you apply Cripple times. says \"times\" even if the value is 1",
+        "searchText": "Harrier's Grasp Flash Enchantment Spell Dervish Wind Prayers Flash Enchantment Spell. ( seconds.) Attacks on moving foes also Cripple them. Initial Effect: you lose Cripple and 1 other condition. Ends after you apply Cripple times.",
         "sourceTextDigest": "8cafcfaa4ed8e1b170bfbb9c23a6816ae546c6fb07ba706c5f2854d9519bd59d",
         "state": "reviewed-text",
         "tokens": [
@@ -482553,41 +481629,6 @@
           {
             "kind": "literal",
             "value": "them."
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "fails"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "to"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "mention"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "cripple"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "duration"
           },
           {
             "kind": "whitespace"
@@ -482714,78 +481755,6 @@
             "kind": "literal",
             "tone": "muted",
             "value": "times."
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "says"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "\"times\""
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "even"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "if"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "value"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace",
-            "tone": "muted"
-          },
-          {
-            "kind": "literal",
-            "tone": "muted",
-            "value": "1"
           }
         ]
       },
@@ -504751,7 +503720,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Aura Slicer Melee Attack Dervish Mysticism Melee Attack. ( seconds.)Inflicts No space between the bracket and 'Inflicts' Bleeding condition. Also inflicts Cracked Armor ( second[s]) if you are enchanted.",
+        "searchText": "Aura Slicer Melee Attack Dervish Mysticism Melee Attack. ( seconds.)Inflicts Bleeding condition. Also inflicts Cracked Armor ( second[s]) if you are enchanted.",
         "sourceTextDigest": "a1b67183c053350a3fbdec4a22f2a15ee4df72ccb043addbfba2c2320e39032f",
         "state": "reviewed-text",
         "tokens": [
@@ -504784,55 +503753,6 @@
           {
             "kind": "literal",
             "value": "seconds.)Inflicts"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "No"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "space"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "between"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "bracket"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "and"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "'Inflicts'"
           },
           {
             "kind": "whitespace"
@@ -514417,7 +513337,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Pious Fury Stance Dervish Mysticism Stance. ( second[s].)You No space between the closing bracket and 'You' attack 25% faster and remove 1 of your Dervish enchantments. Removal effect: this stance lasts twice as long.",
+        "searchText": "Pious Fury Stance Dervish Mysticism Stance. ( second[s].)You attack 25% faster and remove 1 of your Dervish enchantments. Removal effect: this stance lasts twice as long.",
         "sourceTextDigest": "9de0547079929557f2ce7a81a0457158e9597031f3a0001c23213d2cb0f0245c",
         "state": "reviewed-text",
         "tokens": [
@@ -514443,62 +513363,6 @@
           {
             "kind": "literal",
             "value": "second[s].)You"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "No"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "space"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "between"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "closing"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "bracket"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "and"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "'You'"
           },
           {
             "kind": "whitespace"
@@ -516627,7 +515491,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Magnetic Surge Enchantment Spell Elementalist Earth Magic Enchantment Spell. Deals damage. If you are Overcast, allies in earshot are enchanted for \"Seconds\" is missing and block the next attack against them.",
+        "searchText": "Magnetic Surge Enchantment Spell Elementalist Earth Magic Enchantment Spell. Deals damage. If you are Overcast, allies in earshot are enchanted for and block the next attack against them.",
         "sourceTextDigest": "e5c90ba9dce8dd74823684144d5abd34659f06952ba3599cb9b0eba027f92d79",
         "state": "reviewed-text",
         "tokens": [
@@ -516741,27 +515605,6 @@
             "kind": "progression-reference",
             "seriesId": "progression:skill:2190:1",
             "valueSlot": 1
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"Seconds\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "missing"
           },
           {
             "kind": "whitespace"
@@ -519713,7 +518556,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Mending Grip Spell Ritualist Restoration Magic Spell. Heals for . Removes one condition if target ally is under a Weapon \"weapon\" is capitalized spell.",
+        "searchText": "Mending Grip Spell Ritualist Restoration Magic Spell. Heals for . Removes one condition if target ally is under a Weapon spell.",
         "sourceTextDigest": "31a9f5806805a05a4ca723ec5dd4e43901f02119b875c5b956868052c115f1b7",
         "state": "reviewed-text",
         "tokens": [
@@ -519816,27 +518659,6 @@
           {
             "kind": "literal",
             "value": "Weapon"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"weapon\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "capitalized"
           },
           {
             "kind": "whitespace"
@@ -535617,7 +534439,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Dwarven Stability Enchantment Spell Deldrimor rank Enchantment Spell. ( seconds.) Your stances last % longer. You cannot be knocked-down if you activated this skill while drunk . There's a space between 'drunk' and the period",
+        "searchText": "Dwarven Stability Enchantment Spell Deldrimor rank Enchantment Spell. ( seconds.) Your stances last % longer. You cannot be knocked-down if you activated this skill while drunk .",
         "sourceTextDigest": "d96865d9d719acfdd3c1b75b0df967617497e5688bb2a2e1d898b18f9524d7ce",
         "state": "reviewed-text",
         "tokens": [
@@ -535774,62 +534596,6 @@
           {
             "kind": "literal",
             "value": "."
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "There's"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "a"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "space"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "between"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "'drunk'"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "and"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "period"
           }
         ]
       },
@@ -574759,7 +573525,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Pious Fury (PvP) Stance Dervish Mysticism Stance. ( second[s].)You No space between the closing bracket and 'You' attack 25% faster and remove 1 of your Dervish enchantments. Removal effect: this stance lasts twice as long.",
+        "searchText": "Pious Fury (PvP) Stance Dervish Mysticism Stance. ( second[s].)You attack 25% faster and remove 1 of your Dervish enchantments. Removal effect: this stance lasts twice as long.",
         "sourceTextDigest": "caf1e9ff199420f1ae413cdc2e436528320361f4687e1d82763a15669bd7cc51",
         "state": "reviewed-text",
         "tokens": [
@@ -574785,62 +573551,6 @@
           {
             "kind": "literal",
             "value": "second[s].)You"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "No"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "space"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "between"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "closing"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "bracket"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "and"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "'You'"
           },
           {
             "kind": "whitespace"
@@ -578136,7 +576846,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "\"Together as One!\" Shout Ranger Expertise Elite Shout. ( seconds.) All party members near you or your pet deal damage Additional damage only applies to attacks and gain Health regeneration. PvE Skill",
+        "searchText": "\"Together as One!\" Shout Ranger Expertise Elite Shout. ( seconds.) All party members near you or your pet deal damage and gain Health regeneration. PvE Skill",
         "sourceTextDigest": "9a920aba9a16a92fd43b7aee135b6fa3a83fde7033b6c58f9a4083330a7519b2",
         "state": "reviewed-text",
         "tokens": [
@@ -578247,48 +576957,6 @@
           {
             "kind": "literal",
             "value": "damage"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "Additional"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "damage"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "only"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "applies"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "to"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "attacks"
           },
           {
             "kind": "whitespace"
@@ -580538,7 +579206,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Nature's Renewal (PvP) Nature Ritual Ranger Wilderness Survival Nature Ritual. Creates a level spirit ( second lifespan). For creatures in range, enchantments and Hexes unlike other descriptions with \"hex\" or \"hexes\" in it, it is capitalized here take as long to cast and it costs twice as much Energy to maintain enchantments. Does not affect spirits.",
+        "searchText": "Nature's Renewal (PvP) Nature Ritual Ranger Wilderness Survival Nature Ritual. Creates a level spirit ( second lifespan). For creatures in range, enchantments and Hexes take as long to cast and it costs twice as much Energy to maintain enchantments. Does not affect spirits.",
         "sourceTextDigest": "673cb3a72f854e26bba27899dd1f02ce0597419f0611d51029754bfbca0b52bb",
         "state": "reviewed-text",
         "tokens": [
@@ -580663,97 +579331,6 @@
           {
             "kind": "literal",
             "value": "Hexes"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "unlike"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "other"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "descriptions"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "with"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"hex\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "or"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"hexes\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "in"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "it,"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "it"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "capitalized"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "here"
           },
           {
             "kind": "whitespace"
@@ -586724,7 +585301,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Harrier's Grasp (PvP) Flash Enchantment Spell Dervish Wind Prayers Flash Enchantment Spell. ( seconds.) Melee attacks on moving foes also Cripple them. fails to mention cripple duration Initial Effect: you lose Cripple and 1 other condition. Ends after you apply Cripple times. says \"times\" even if the value is 1",
+        "searchText": "Harrier's Grasp (PvP) Flash Enchantment Spell Dervish Wind Prayers Flash Enchantment Spell. ( seconds.) Melee attacks on moving foes also Cripple them. Initial Effect: you lose Cripple and 1 other condition. Ends after you apply Cripple times.",
         "sourceTextDigest": "69ed77ca1b8f3218274c1d2f89e088e63ab01692ac2b9162ffbdb45d228eb43e",
         "state": "reviewed-text",
         "tokens": [
@@ -586820,41 +585397,6 @@
           {
             "kind": "literal",
             "value": "them."
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "fails"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "to"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "mention"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "cripple"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "duration"
           },
           {
             "kind": "whitespace"
@@ -586968,62 +585510,6 @@
           {
             "kind": "literal",
             "value": "times."
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "says"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "\"times\""
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "even"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "if"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "value"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "is"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "1"
           }
         ]
       },
@@ -588200,7 +586686,7 @@
       "description": {
         "limitations": [],
         "reviewId": "review:epic-04-reviewed-concise-descriptions:2026-09-04",
-        "searchText": "Aura Slicer (PvP) Melee Attack Dervish Mysticism Melee Attack. ( seconds.)Inflicts No space between the bracket and 'Inflicts' Bleeding condition. Also inflicts Cracked Armor ( second[s]) if you are enchanted.",
+        "searchText": "Aura Slicer (PvP) Melee Attack Dervish Mysticism Melee Attack. ( seconds.)Inflicts Bleeding condition. Also inflicts Cracked Armor ( second[s]) if you are enchanted.",
         "sourceTextDigest": "a1b67183c053350a3fbdec4a22f2a15ee4df72ccb043addbfba2c2320e39032f",
         "state": "reviewed-text",
         "tokens": [
@@ -588233,55 +586719,6 @@
           {
             "kind": "literal",
             "value": "seconds.)Inflicts"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "No"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "space"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "between"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "the"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "bracket"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "and"
-          },
-          {
-            "kind": "whitespace"
-          },
-          {
-            "kind": "literal",
-            "value": "'Inflicts'"
           },
           {
             "kind": "whitespace"

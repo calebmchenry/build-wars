@@ -722,10 +722,14 @@ def _unwrap_inline_text_templates(value: str, *, mark_tone: bool = False) -> str
     while changed:
         changed = False
         for template in list(code.filter_templates(recursive=True)):
-            if normalize_template_name(str(template.name)) not in INLINE_TEXT_TEMPLATE_NAMES:
+            template_name = normalize_template_name(str(template.name))
+            if template_name not in INLINE_TEXT_TEMPLATE_NAMES:
                 continue
-            replacement = str(template.params[0].value) if template.params else ""
-            if mark_tone and normalize_template_name(str(template.name)) in {"gray", "grey"}:
+            # Sic parameters explain source typos; they are not skill description text.
+            replacement = ""
+            if template_name != "sic" and template.params:
+                replacement = str(template.params[0].value)
+            if mark_tone and template_name in {"gray", "grey"}:
                 replacement = f"{MUTED_START_MARKER}{replacement}{MUTED_END_MARKER}"
             code.replace(template, replacement)
             changed = True
@@ -747,7 +751,7 @@ def _unwrap_simple_inline_text_templates(value: str, *, mark_tone: bool = False)
             )
         else:
             text = re.sub(r"\{\{gr[ae]y\|([^{}]+)}}", r"\1", text, flags=re.IGNORECASE)
-        text = re.sub(r"\{\{sic\|([^{}]+)}}", r"\1", text, flags=re.IGNORECASE)
+        text = re.sub(r"\{\{\s*sic\s*(?:\|[^{}]*)?}}", "", text, flags=re.IGNORECASE)
     return text
 
 

@@ -1,0 +1,31 @@
+
+> build-wars@0.0.0 build
+> tsc -p tsconfig.domain.json && tsc -p tsconfig.template-compatibility.json && tsc -p tsconfig.app.json && tsc -p tsconfig.node.json && vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 421 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                          1.13 kB │ gzip:   0.53 kB
+dist/assets/resurrection-signet-CmCQE0U7.jpg             4.28 kB
+dist/assets/to-the-limit-lHsnPXPm.jpg                    4.33 kB
+dist/assets/profession-ranger-60-w1cpp_Yy.png            4.42 kB
+dist/assets/pin-down-Bg5XFcMN.jpg                        4.46 kB
+dist/assets/mighty-blow-BzBRVW1q.jpg                     4.47 kB
+dist/assets/profession-elementalist-60-LJuOHe-u.png      4.62 kB
+dist/assets/profession-assassin-60-ZIzYlROp.png          4.67 kB
+dist/assets/hammer-bash-BpwqA7kd.jpg                     4.83 kB
+dist/assets/profession-mesmer-60-D8EIaZFY.png            4.88 kB
+dist/assets/profession-necromancer-60-DyRVNSvo.png       5.21 kB
+dist/assets/healing-signet-DLPChSEK.jpg                  5.97 kB
+dist/assets/GuideFeasibility-Aaz8A4jX.css                0.79 kB │ gzip:   0.37 kB
+dist/assets/index-CCQiXRNf.css                          63.52 kB │ gzip:  12.23 kB
+dist/assets/GuideFeasibility-iqYDx_6d.js               546.30 kB │ gzip: 171.53 kB
+dist/assets/index-ByfDh-XE.js                        8,140.92 kB │ gzip: 858.84 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.68s

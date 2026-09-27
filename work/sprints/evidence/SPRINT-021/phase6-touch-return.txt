@@ -1,0 +1,368 @@
+Window: "Build Wars", App: Google Chrome.
+0 standard window Build Wars - Part of group 📝 Guide sprint - Google Chrome, URL: 127.0.0.1:4173/, Secondary Actions: Raise
+	1 container Build Wars - Part of group 📝 Guide sprint - Google Chrome, URL: 127.0.0.1:4173/
+		2 container
+			3 toolbar
+				4 button Back
+				5 button (disabled) Forward
+				6 button Reload
+				7 button Home
+				8 container
+					9 pop up button View site information
+					10 text field (settable) Address and search bar, Value: 127.0.0.1:4173, Placeholder: Ask Google or type a URL
+					11 button Bookmark this tab
+				12 container
+					13 pop up button Google Translate
+
+Left-click to translate!
+Right-click for options.
+Has access to this site
+					14 pop up button BlockSite Block Websites & Stay Focused
+Has access to this site
+					15 pop up button React Developer Tools
+Has access to this site
+					16 pop up button Vue DevTools
+Has access to this site
+					17 pop up button Vimium
+Has access to this site
+					18 pop up button LastPass
+Has access to this site
+					19 pop up button ChatGPT
+Has access to this site
+					20 pop up button Extensions
+				21 checkbox Downloads, Value: 0
+				22 button Caleb
+				23 pop up button Chrome
+			24 toolbar Bookmarks
+				25 toolbar Saved Tab Groups
+					26 saved tab group button  📝 Guide sprint group - Opened
+					27 button Tab groups
+				28 splitter Separator
+				29 bookmark folder button Church
+				30 bookmark folder button Leidos
+				31 bookmark button Weekly Chores - Google Docs
+			32 container
+				33 HTML content DevTools, URL: devtools://devtools/bundled/devtools_app.html?remoteBase=https://chrome-devtools-frontend.appspot.com/serve_file/@ab3ecba863fd7852cc9b0fe5736187e19ed52a1c/&targetType=tab&can_dock=true
+					34 container
+						35 container
+							36 container
+								37 toolbar
+									38 text Dimensions:
+									39 pop up button Device type, Value: iPhone 16
+										40 (selected) iPhone 16
+									41 stepper (disabled) Width, Value: 393, Secondary Actions: Increment, Decrement
+									42 text ×
+									43 stepper (disabled) Height (leave empty for full), Value: 852, Secondary Actions: Increment, Decrement
+									44 pop up button Zoom, Value: Fit to window
+										45 (selected) Fit to window
+									46 pop up button Throttling, Value: Disabled: No throttling
+										47 (selected) Disabled: No throttling
+									48 pop up button 'Save-Data': default
+										49 (selected) 'Save-Data': default
+									50 button Rotate
+								51 toolbar
+									52 button More options
+								53 container
+							54 container
+								55 container
+									56 container Main toolbar
+										57 toolbar
+											58 container Select an element in the page to inspect it, Help: Select an element in the page to inspect it - ⌘ ⇧ C
+												59 toggle button Select an element in the page to inspect it - ⌘ ⇧ C, Value: 0
+											60 container Toggle device toolbar, Help: Toggle device toolbar - ⌘ ⇧ M
+												61 toggle button Toggle device toolbar - ⌘ ⇧ M, Value: 1
+										62 container
+											63 tab group Panels
+												64 tab (settable, integer) Elements, Value: 0
+												65 tab (settable, integer) Console, Value: 0
+												66 tab (settable, integer) Sources, Value: 0
+												67 tab (selected) Network, Value: 1
+											68 pop up button More tabs
+										69 toolbar
+											70 container Open Issues to view 23 issues: 23 possible improvements
+												71 button Open Issues to view 23 issues: 23 possible improvements
+											72 button  AI assistance, Help: Open AI assistance panel
+											73 container Settings, Help: Settings - F1 - ⇧ ?
+												74 button Settings - F1 - ⇧ ?
+											75 pop up button Customize and control DevTools
+												76 button Customize and control DevTools
+											77 container Close
+												78 button Close
+									79 container Network panel
+										80 container network
+											81 container
+												82 toolbar
+													83 container Stop recording network log, Help: Stop recording network log - ⌘ E
+														84 toggle button Stop recording network log - ⌘ E, Value: 1
+													85 container Clear network log, Help: Clear network log - Ctrl L - ⌘ K
+														86 button Clear network log - Ctrl L - ⌘ K
+													87 container Filter
+														88 toggle button Filter, Value: 1
+													89 container Search
+														90 toggle button Search, Value: 0
+													91 container
+														92 checkbox Keep log, Value: 0
+														93 text Keep log
+													94 container
+														95 checkbox Disable cache, Value: 0
+														96 text Disable cache
+													97 pop up button Throttling, Value: Disabled: No throttling
+														98 (selected) Disabled: No throttling
+													99 container More network conditions…
+														100 button More network conditions…
+													101 container Import HAR file…
+														102 button Import HAR file…
+													103 container Export HAR (sanitized)…
+														104 button Export HAR (sanitized)…
+													105 container Network settings
+														106 toggle button Network settings, Value: 0
+												107 toolbar
+													108 text entry area (settable) Filter
+														109 text Filter
+												110 container Inverts the search filter
+													111 checkbox Invert, Value: 0
+													112 text Invert
+												113 container Show only/hide requests dropdown
+													114 pop up button Show only/hide requests
+														115 text More filters
+												116 list box Request types to include, Help: ⌘ Click to select multiple types
+													117 text (selected) All Fetch/XHR Doc CSS JS Font Img Media Manifest Socket Wasm Other
+												118 container Overview grid window
+													119 container
+														120 container
+															121 text 0 ms
+															122 text 2,000 ms
+															123 text 4,000 ms
+															124 text 6,000 ms
+															125 text 8,000 ms
+															126 text 10,000 ms
+															127 text 12,000 ms
+															128 text 14,000 ms
+															129 text 16,000 ms
+													130 slider Left Resizer, Value: 0, Details: 0 ms, Secondary Actions: Increment, Decrement
+													131 slider Right Resizer, Value: 100, Details: 14,694 ms, Secondary Actions: Increment, Decrement
+												132 container
+													133 container
+														134 table
+															135 row
+																136 column header Name - Sortable column. Press enter to apply sorting filter
+																	137 text Name
+																138 column header Status - Sortable column. Press enter to apply sorting filter
+																	139 text Status
+																140 column header Type - Sortable column. Press enter to apply sorting filter
+																	141 text Type
+																142 column header Initiator - Sortable column. Press enter to apply sorting filter
+																	143 text Initiator
+																144 column header Size - Sortable column. Press enter to apply sorting filter
+																	145 text Size
+																146 column header Time - Sortable column. Press enter to apply sorting filter
+																	147 text Time
+															148 row
+																149 cell http://127.0.0.1:4173/gww-icons/skills/signet-of-removal.jpg
+																	150 image Image
+																	151 text signet-of-removal.jpg
+																152 cell 200 OK
+																	153 text 200
+																154 cell
+																	155 text jpeg
+																156 cell
+																	157 link index-C93WQa0z.js:49, Help: http://127.0.0.1:4173/assets/index-C93WQa0z.js:49
+																		158 text index-C93WQa0z.js:49
+																159 cell 5.4 kB transferred over network, resource size: 5.2 kB
+																	160 text 5.4 kB
+																161 cell
+																	162 text 9 ms
+															163 row
+																164 cell http://127.0.0.1:4173/gww-icons/skills/succor.jpg
+																	165 image Image
+																	166 text succor.jpg
+																167 cell 200 OK
+																	168 text 200
+																169 cell
+																	170 text jpeg
+																171 cell
+																	172 link index-C93WQa0z.js:49, Help: http://127.0.0.1:4173/assets/index-C93WQa0z.js:49
+																		173 text index-C93WQa0z.js:49
+																174 cell 3.5 kB transferred over network, resource size: 3.2 kB
+																	175 text 3.5 kB
+																176 cell
+																	177 text 6 ms
+															178 row
+																179 cell http://127.0.0.1:4173/gww-icons/skills/sunspear-rebirth-signet.jpg
+																	180 image Image
+																	181 text sunspear-rebirth-signet.jpg
+																182 cell 200 OK
+																	183 text 200
+																184 cell
+																	185 text jpeg
+																186 cell
+																	187 link index-C93WQa0z.js:49, Help: http://127.0.0.1:4173/assets/index-C93WQa0z.js:49
+																		188 text index-C93WQa0z.js:49
+																189 cell 6.2 kB transferred over network, resource size: 6.0 kB
+																	190 text 6.2 kB
+																191 cell
+																	192 text 6 ms
+															193 row
+																194 cell http://127.0.0.1:4173/gww-icons/skills/vengeance.jpg
+																	195 image Image
+																	196 text vengeance.jpg
+																197 cell 200 OK
+																	198 text 200
+																199 cell
+																	200 text jpeg
+																201 cell
+																	202 link index-C93WQa0z.js:49, Help: http://127.0.0.1:4173/assets/index-C93WQa0z.js:49
+																		203 text index-C93WQa0z.js:49
+																204 cell 4.6 kB transferred over network, resource size: 4.3 kB
+																	205 text 4.6 kB
+																206 cell
+																	207 text 6 ms
+															208 row
+																209 cell chrome-extension://nhdogjmejiglipccpnnnanhbledajbpd/dist/detector.js
+																	210 text detector.js
+																211 cell 200 OK
+																	212 text 200
+																213 cell
+																	214 text script
+																215 cell
+																	216 link devtools-overlay.js:1, Help: chrome-extension://nhdogjmejiglipccpnnnanhbledajbpd/dist/devtools-overlay.js:1
+																		217 text devtools-overlay.js:1
+																218 cell 1.3 kB transferred over network, resource size: 1.3 kB
+																	219 text 1.3 kB
+																220 cell
+																	221 text 2 ms
+															222 row
+																223 cell chrome-extension://hehggadaopoacecdllhhajmbjkdcmajg/images/cursor-chat.png
+																	224 image Image
+																	225 text cursor-chat.png
+																226 cell 200 OK
+																	227 text 200
+																228 cell
+																	229 text png
+																230 cell
+																	231 link codex.js:1, Help: chrome-extension://hehggadaopoacecdllhhajmbjkdcmajg/content-scripts/codex.js:1
+																		232 text codex.js:1
+																233 cell 1.8 kB transferred over network, resource size: 1.8 kB
+																	234 text 1.8 kB
+																235 cell
+																	236 text 2 ms
+															237 row
+																238 cell http://127.0.0.1:4173/assets/GuideWorkspace-DHoF4ZZ_.js
+																	239 text GuideWorkspace-DHoF4ZZ_.js
+																240 cell 200 OK
+																	241 text 200
+																242 cell
+																	243 text script
+																244 cell
+																	245 link about:client:1
+																		246 text about:client:1
+																247 cell 143 kB transferred over network, resource size: 450 kB
+																	248 text 143 kB
+																249 cell
+																	250 text 22 ms
+															251 row
+																252 cell http://127.0.0.1:4173/assets/GuideWorkspace-DV3uKT6i.css
+																	253 text GuideWorkspace-DV3uKT6i.css
+																254 cell 200 OK
+																	255 text 200
+																256 cell
+																	257 text stylesheet
+																258 cell
+																	259 link index-C93WQa0z.js:50, Help: http://127.0.0.1:4173/assets/index-C93WQa0z.js:50
+																		260 text index-C93WQa0z.js:50
+																261 cell 1.6 kB transferred over network, resource size: 3.5 kB
+																	262 text 1.6 kB
+																263 cell
+																	264 text 5 ms
+													265 container 219 requests
+														266 text 219 requests
+													267 container 2084608 B transferred over network
+														268 text 2.1 MB transferred
+													269 container 9778719 B resources loaded by the page
+														270 text 9.8 MB resources
+													271 container Finish: 13.51 s
+														272 text Finish: 13.51 s
+													273 container DOMContentLoaded: 351 ms
+														274 text DOMContentLoaded: 351 ms
+													275 container Load: 1.13 s
+														276 text Load: 1.13 s
+								277 container Tool drawer
+									278 container
+										279 toolbar
+											280 pop up button More Tools
+												281 button More Tools
+										282 tab group
+											283 tab (settable, integer) Console, Value: 0
+											284 tab (selected) What’s new, Value: 1
+											285 tab (settable, integer) AI assistance, Value: 0
+										286 toolbar
+											287 container Toggle drawer orientation
+												288 button Toggle drawer orientation
+											289 container Minimize drawer
+												290 button Minimize drawer
+											291 container Close drawer
+												292 button Close drawer
+										293 container What’s new panel
+											294 container whats-new
+												295 container
+													296 text New in DevTools (September 2026)
+													297 button See all new features
+													298 heading DevTools for agents, Value: 3
+														299 link DevTools for agents, Help: https://developer.chrome.com/blog/new-in-devtools-152/#devtools-for-agents
+															300 text DevTools for agents
+													301 container
+														302 text DevTools for agents 1.7 improves memory profiling with the  get_heapsnapshot_object_details  tool and native V8 context filtering.
+													303 heading Soft navigation metrics in Live Metrics, Value: 3
+														304 link Soft navigation metrics in Live Metrics, Help: https://developer.chrome.com/blog/new-in-devtools-152/#performance
+															305 text Soft navigation metrics in Live Metrics
+													306 text The Live Metrics view in the Performance panel now captures and reports metrics like LCP and INP for client-side soft navigations in single-page applications by default.
+													307 heading Nested CSS parent selector interactions, Value: 3
+														308 link Nested CSS parent selector interactions, Help: https://developer.chrome.com/blog/new-in-devtools-152/#nested-selectors
+															309 text Nested CSS parent selector interactions
+													310 container
+														311 text Hovering over parent selectors highlights matching elements on the page, nested rules respond to Styles tab filtering, and  @nested-declarations  include specificity tooltips.
+						312 text Network data available 
+				313 HTML content Build Wars, URL: 127.0.0.1:4173/
+					314 container Skill reference context
+						315 container
+							316 heading Skill reference, Value: 2
+								317 text Skill reference
+							318 text Catalog skill ID
+							319 combo box (settable) Catalog skill ID, Value: catalog:skill:299
+							320 text Reference context
+							321 pop up button Reference context, Value: Generic — catalog ranges
+								322 (selected) Generic — catalog ranges
+							323 button Apply reference
+							324 button Cancel
+			325 container Infobar Container
+				326 container Infobar
+					327 container
+						328 text "ChatGPT" started debugging this browser
+						329 button Cancel
+					330 button Close
+			331 pop up button Tab Search
+			332 container
+				333 tab group
+					334 tab (settable, boolean) New Tab - Memory usage - 194 MB, Value: off
+						335 button Close
+					336 tab group  group 📝 Guide sprint - 1 Tab, •  Build Wars - Expanded
+					337 tab (selected, settable, boolean) Build Wars - Part of group 📝 Guide sprint - Memory usage - 525 MB, Value: on
+						338 button Close
+			339 button New Tab
+			340 button Open Gemini in Chrome
+	341 close button
+	342 full screen button Help: this button also has an action to zoom the window, Secondary Actions: zoom the window
+	343 minimize button
+344 menu bar
+	345 Chrome
+	346 File
+	347 Edit
+	348 View
+	349 History
+	350 Bookmarks
+	351 Profiles
+	352 Tab
+	353 Window
+	354 Help
+
+The focused UI element is 313 HTML content Build Wars, URL: 127.0.0.1:4173/

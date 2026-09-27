@@ -35,7 +35,7 @@ describe("local persistence schema", () => {
 
     expect(LOCAL_LIBRARY_STORAGE_KEY).toBe("build-wars:v1");
     expect(parsed.ok ? parsed.envelope.kind : null).toBe(LOCAL_LIBRARY_KIND);
-    expect(parsed.ok ? parsed.envelope.schemaVersion : null).toBe(2);
+    expect(parsed.ok ? parsed.envelope.schemaVersion : null).toBe(3);
   });
 
   it("round-trips durable build, PvE budget, raw template source, and unresolved overlays", () => {

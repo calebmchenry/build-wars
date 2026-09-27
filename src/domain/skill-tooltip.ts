@@ -47,6 +47,62 @@ const progressionSeriesByIdCache = new WeakMap<
   ReadonlyMap<string, SkillProgressionSeries>
 >();
 
+/** Catalog ranges without assigning an attribute, title rank, or build mode. */
+export function renderGenericSkillTooltipText(
+  catalog: SkillCatalog,
+  skillId: SkillId
+): SkillTooltipOutcome {
+  const skill = lookupSkillById(catalog, skillId);
+  if (!skill)
+    return {
+      kind: "unresolved",
+      skill: null,
+      reason: "unknown-skill",
+      detail: `Unknown skill ID ${Number(skillId)}.`
+    };
+  if (skill.description.state === "unsupported")
+    return {
+      kind: "unresolved",
+      skill,
+      reason: "unsupported-description",
+      detail: `Skill ${skill.name} has unsupported description data.`
+    };
+  const segments: SkillTooltipTextSegment[] = [];
+  for (const token of skill.description.tokens) {
+    if (token.kind !== "progression-reference") {
+      segments.push({
+        text: token.kind === "whitespace" ? " " : token.kind === "line-break" ? "\n" : token.value,
+        tone: token.tone ?? "normal"
+      });
+      continue;
+    }
+    const series = progressionSeriesById(catalog).get(token.seriesId);
+    const values =
+      series?.values.flatMap((row) =>
+        row.values[token.valueSlot] === undefined ? [] : [row.values[token.valueSlot]!]
+      ) ?? [];
+    if (!series || !values.length)
+      return {
+        kind: "unresolved",
+        skill,
+        reason: "unsupported-progression",
+        detail: `Catalog range unavailable for ${token.seriesId}.`
+      };
+    const low = formatSkillProgressionValue(Math.min(...values), series, token.valueSlot);
+    const high = formatSkillProgressionValue(Math.max(...values), series, token.valueSlot);
+    segments.push({ text: low === high ? low : `${low}–${high}`, tone: token.tone ?? "variable" });
+  }
+  return {
+    kind: "rendered",
+    skill,
+    text: segments
+      .map((segment) => segment.text)
+      .join("")
+      .trim(),
+    segments: trimSegments(coalesceSegments(segments))
+  };
+}
+
 export function renderSkillTooltipText(
   catalog: SkillCatalog,
   skillId: SkillId,

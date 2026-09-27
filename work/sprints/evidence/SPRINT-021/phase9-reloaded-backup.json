@@ -1,0 +1,777 @@
+{
+  "exportedAt": "2026-09-27T04:52:07.272Z",
+  "kind": "build-wars-library-backup",
+  "metadata": {
+    "declaredRecordCount": 1,
+    "sourceStorageKey": "build-wars:v1"
+  },
+  "savedDocuments": [
+    {
+      "createdAt": "2026-09-27T04:51:19.803Z",
+      "document": {
+        "kind": "guide",
+        "snapshot": {
+          "appliedRevision": 13,
+          "document": {
+            "metadata": {
+              "id": "886bfda0-8f14-46b7-a0dd-2f5ad77efb33",
+              "sources": [],
+              "summary": null,
+              "tags": [],
+              "title": "Durable variants",
+              "version": 1
+            },
+            "nodes": [
+              {
+                "id": "34f8e19d-9256-408e-9fe7-2bbf60b5ddff",
+                "snapshot": {
+                  "build": {
+                    "attributeAdjustments": {
+                      "effectPreferences": [],
+                      "headgearAttributeId": 15,
+                      "runes": [
+                        {
+                          "attributeId": 15,
+                          "runeId": 37
+                        }
+                      ]
+                    },
+                    "attributes": [
+                      {
+                        "attributeId": 15,
+                        "rank": 12
+                      },
+                      {
+                        "attributeId": 16,
+                        "rank": 12
+                      }
+                    ],
+                    "catalogVersion": "pa-e5d0d35ad8f30b4c+skills-9396e01d21481cd1",
+                    "id": "34f8e19d-9256-408e-9fe7-2bbf60b5ddff",
+                    "mode": "pve",
+                    "name": "Durable A",
+                    "primaryProfessionId": 3,
+                    "schemaVersion": 4,
+                    "secondaryProfessionId": null,
+                    "skillBar": [1687, 1114, 257, 299, 1399, 1691, 301, null],
+                    "titleRankOverrides": []
+                  },
+                  "pveBudget": {
+                    "level": 20,
+                    "questBonus": "maximum-applicable"
+                  },
+                  "rawTemplate": {
+                    "attributes": [
+                      {
+                        "catalogId": 15,
+                        "label": "Protection Prayers",
+                        "namespace": "attribute",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 15
+                      },
+                      {
+                        "catalogId": 16,
+                        "label": "Divine Favor",
+                        "namespace": "attribute",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 16
+                      }
+                    ],
+                    "primaryProfession": {
+                      "catalogId": 3,
+                      "label": "Monk",
+                      "namespace": "profession",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 3
+                    },
+                    "secondaryProfession": {
+                      "catalogId": null,
+                      "label": "None",
+                      "namespace": "profession",
+                      "outcomeKind": "none",
+                      "reason": null,
+                      "templateId": 0
+                    },
+                    "skillBar": [
+                      null,
+                      {
+                        "catalogId": 1114,
+                        "label": "Spirit Bond",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 1114
+                      },
+                      {
+                        "catalogId": 257,
+                        "label": "Aegis",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 257
+                      },
+                      {
+                        "catalogId": 299,
+                        "label": "Shielding Hands",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 299
+                      },
+                      {
+                        "catalogId": 1399,
+                        "label": "Shield of Absorption",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 1399
+                      },
+                      {
+                        "catalogId": 1691,
+                        "label": "Dismiss Condition",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 1691
+                      },
+                      {
+                        "catalogId": 301,
+                        "label": "Remove Hex",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 301
+                      },
+                      {
+                        "catalogId": null,
+                        "label": "Empty",
+                        "namespace": "skill",
+                        "outcomeKind": "empty",
+                        "reason": null,
+                        "templateId": 0
+                      }
+                    ],
+                    "source": {
+                      "fidelity": "exact-source",
+                      "inputKind": "bare",
+                      "normalizedDependencyInput": null,
+                      "originalBareCode": "OwAS8YIPXatYAZlcX30tEAA",
+                      "originalInput": "OwAS8YIPXatYAZlcX30tEAA",
+                      "semanticFingerprint": "skill-template:v1:04ae33c56094d4a5",
+                      "templateKind": "skill",
+                      "templateName": null
+                    },
+                    "templateName": null
+                  }
+                },
+                "type": "build"
+              },
+              {
+                "id": "37ca1a1c-477f-40c4-8a31-8a89cff2839e",
+                "snapshot": {
+                  "build": {
+                    "attributeAdjustments": null,
+                    "attributes": [
+                      {
+                        "attributeId": 15,
+                        "rank": 11
+                      },
+                      {
+                        "attributeId": 16,
+                        "rank": 12
+                      }
+                    ],
+                    "catalogVersion": "pa-e5d0d35ad8f30b4c+skills-9396e01d21481cd1",
+                    "id": "37ca1a1c-477f-40c4-8a31-8a89cff2839e",
+                    "mode": "pve",
+                    "name": "Durable B",
+                    "primaryProfessionId": 3,
+                    "schemaVersion": 4,
+                    "secondaryProfessionId": null,
+                    "skillBar": [1687, 1114, 257, 299, 1399, 1691, 301, null],
+                    "titleRankOverrides": []
+                  },
+                  "pveBudget": {
+                    "level": 20,
+                    "questBonus": "maximum-applicable"
+                  },
+                  "rawTemplate": {
+                    "attributes": [
+                      null,
+                      {
+                        "catalogId": 16,
+                        "label": "Divine Favor",
+                        "namespace": "attribute",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 16
+                      }
+                    ],
+                    "primaryProfession": {
+                      "catalogId": 3,
+                      "label": "Monk",
+                      "namespace": "profession",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 3
+                    },
+                    "secondaryProfession": {
+                      "catalogId": null,
+                      "label": "None",
+                      "namespace": "profession",
+                      "outcomeKind": "none",
+                      "reason": null,
+                      "templateId": 0
+                    },
+                    "skillBar": [
+                      null,
+                      {
+                        "catalogId": 1114,
+                        "label": "Spirit Bond",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 1114
+                      },
+                      {
+                        "catalogId": 257,
+                        "label": "Aegis",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 257
+                      },
+                      {
+                        "catalogId": 299,
+                        "label": "Shielding Hands",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 299
+                      },
+                      {
+                        "catalogId": 1399,
+                        "label": "Shield of Absorption",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 1399
+                      },
+                      {
+                        "catalogId": 1691,
+                        "label": "Dismiss Condition",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 1691
+                      },
+                      {
+                        "catalogId": 301,
+                        "label": "Remove Hex",
+                        "namespace": "skill",
+                        "outcomeKind": "known",
+                        "reason": null,
+                        "templateId": 301
+                      },
+                      {
+                        "catalogId": null,
+                        "label": "Empty",
+                        "namespace": "skill",
+                        "outcomeKind": "empty",
+                        "reason": null,
+                        "templateId": 0
+                      }
+                    ],
+                    "source": {
+                      "fidelity": "exact-source",
+                      "inputKind": "bare",
+                      "normalizedDependencyInput": null,
+                      "originalBareCode": "OwAS8YIPXatYAZlcX30tEAA",
+                      "originalInput": "OwAS8YIPXatYAZlcX30tEAA",
+                      "semanticFingerprint": "skill-template:v1:04ae33c56094d4a5",
+                      "templateKind": "skill",
+                      "templateName": null
+                    },
+                    "templateName": null
+                  }
+                },
+                "type": "build"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Context after reload"
+                  }
+                ],
+                "depth": 1,
+                "type": "heading"
+              },
+              {
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A: "
+                  },
+                  {
+                    "context": {
+                      "buildId": "34f8e19d-9256-408e-9fe7-2bbf60b5ddff",
+                      "kind": "local"
+                    },
+                    "skillId": "catalog:skill:299",
+                    "type": "skill"
+                  },
+                  {
+                    "type": "text",
+                    "value": "; B: "
+                  },
+                  {
+                    "context": {
+                      "buildId": "37ca1a1c-477f-40c4-8a31-8a89cff2839e",
+                      "kind": "local"
+                    },
+                    "skillId": "catalog:skill:299",
+                    "type": "skill"
+                  },
+                  {
+                    "type": "text",
+                    "value": "; generic: "
+                  },
+                  {
+                    "context": {
+                      "kind": "generic"
+                    },
+                    "skillId": "catalog:skill:299",
+                    "type": "skill"
+                  },
+                  {
+                    "type": "text",
+                    "value": "."
+                  }
+                ],
+                "type": "paragraph"
+              }
+            ]
+          },
+          "recovery": {
+            "baseRevision": 11,
+            "dirty": true,
+            "raw": ":::bw-guide\n{unfinished durable draft  \n"
+          },
+          "schemaVersion": 1
+        }
+      },
+      "favorite": false,
+      "id": "48cc96fb-49eb-478a-91c9-8c853740f751",
+      "name": "Durable variants",
+      "notes": null,
+      "savedWith": {
+        "buildCatalogVersion": null,
+        "insigniaCatalogVersion": null,
+        "professionAttributeCatalogVersion": null,
+        "ruleEngineVersion": null,
+        "runeCatalogVersion": null,
+        "skillCatalogVersion": null,
+        "weaponCatalogSetDigest": null,
+        "weaponCatalogSetVersion": null,
+        "weaponCatalogVersion": null,
+        "weaponModifierCatalogSetDigest": null,
+        "weaponModifierCatalogSetVersion": null,
+        "weaponModifierCatalogVersion": null
+      },
+      "tags": [],
+      "updatedAt": "2026-09-27T04:51:19.803Z"
+    }
+  ],
+  "savedWith": {
+    "buildCatalogVersion": null,
+    "insigniaCatalogVersion": null,
+    "professionAttributeCatalogVersion": null,
+    "ruleEngineVersion": null,
+    "runeCatalogVersion": null,
+    "skillCatalogVersion": null,
+    "weaponCatalogSetDigest": null,
+    "weaponCatalogSetVersion": null,
+    "weaponCatalogVersion": null,
+    "weaponModifierCatalogSetDigest": null,
+    "weaponModifierCatalogSetVersion": null,
+    "weaponModifierCatalogVersion": null
+  },
+  "schemaVersion": 3,
+  "workingDraft": {
+    "associatedRecordId": "48cc96fb-49eb-478a-91c9-8c853740f751",
+    "document": {
+      "kind": "guide",
+      "snapshot": {
+        "appliedRevision": 13,
+        "document": {
+          "metadata": {
+            "id": "886bfda0-8f14-46b7-a0dd-2f5ad77efb33",
+            "sources": [],
+            "summary": null,
+            "tags": [],
+            "title": "Durable variants",
+            "version": 1
+          },
+          "nodes": [
+            {
+              "id": "34f8e19d-9256-408e-9fe7-2bbf60b5ddff",
+              "snapshot": {
+                "build": {
+                  "attributeAdjustments": {
+                    "effectPreferences": [],
+                    "headgearAttributeId": 15,
+                    "runes": [
+                      {
+                        "attributeId": 15,
+                        "runeId": 37
+                      }
+                    ]
+                  },
+                  "attributes": [
+                    {
+                      "attributeId": 15,
+                      "rank": 12
+                    },
+                    {
+                      "attributeId": 16,
+                      "rank": 12
+                    }
+                  ],
+                  "catalogVersion": "pa-e5d0d35ad8f30b4c+skills-9396e01d21481cd1",
+                  "id": "34f8e19d-9256-408e-9fe7-2bbf60b5ddff",
+                  "mode": "pve",
+                  "name": "Durable A",
+                  "primaryProfessionId": 3,
+                  "schemaVersion": 4,
+                  "secondaryProfessionId": null,
+                  "skillBar": [1687, 1114, 257, 299, 1399, 1691, 301, null],
+                  "titleRankOverrides": []
+                },
+                "pveBudget": {
+                  "level": 20,
+                  "questBonus": "maximum-applicable"
+                },
+                "rawTemplate": {
+                  "attributes": [
+                    {
+                      "catalogId": 15,
+                      "label": "Protection Prayers",
+                      "namespace": "attribute",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 15
+                    },
+                    {
+                      "catalogId": 16,
+                      "label": "Divine Favor",
+                      "namespace": "attribute",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 16
+                    }
+                  ],
+                  "primaryProfession": {
+                    "catalogId": 3,
+                    "label": "Monk",
+                    "namespace": "profession",
+                    "outcomeKind": "known",
+                    "reason": null,
+                    "templateId": 3
+                  },
+                  "secondaryProfession": {
+                    "catalogId": null,
+                    "label": "None",
+                    "namespace": "profession",
+                    "outcomeKind": "none",
+                    "reason": null,
+                    "templateId": 0
+                  },
+                  "skillBar": [
+                    null,
+                    {
+                      "catalogId": 1114,
+                      "label": "Spirit Bond",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 1114
+                    },
+                    {
+                      "catalogId": 257,
+                      "label": "Aegis",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 257
+                    },
+                    {
+                      "catalogId": 299,
+                      "label": "Shielding Hands",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 299
+                    },
+                    {
+                      "catalogId": 1399,
+                      "label": "Shield of Absorption",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 1399
+                    },
+                    {
+                      "catalogId": 1691,
+                      "label": "Dismiss Condition",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 1691
+                    },
+                    {
+                      "catalogId": 301,
+                      "label": "Remove Hex",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 301
+                    },
+                    {
+                      "catalogId": null,
+                      "label": "Empty",
+                      "namespace": "skill",
+                      "outcomeKind": "empty",
+                      "reason": null,
+                      "templateId": 0
+                    }
+                  ],
+                  "source": {
+                    "fidelity": "exact-source",
+                    "inputKind": "bare",
+                    "normalizedDependencyInput": null,
+                    "originalBareCode": "OwAS8YIPXatYAZlcX30tEAA",
+                    "originalInput": "OwAS8YIPXatYAZlcX30tEAA",
+                    "semanticFingerprint": "skill-template:v1:04ae33c56094d4a5",
+                    "templateKind": "skill",
+                    "templateName": null
+                  },
+                  "templateName": null
+                }
+              },
+              "type": "build"
+            },
+            {
+              "id": "37ca1a1c-477f-40c4-8a31-8a89cff2839e",
+              "snapshot": {
+                "build": {
+                  "attributeAdjustments": null,
+                  "attributes": [
+                    {
+                      "attributeId": 15,
+                      "rank": 11
+                    },
+                    {
+                      "attributeId": 16,
+                      "rank": 12
+                    }
+                  ],
+                  "catalogVersion": "pa-e5d0d35ad8f30b4c+skills-9396e01d21481cd1",
+                  "id": "37ca1a1c-477f-40c4-8a31-8a89cff2839e",
+                  "mode": "pve",
+                  "name": "Durable B",
+                  "primaryProfessionId": 3,
+                  "schemaVersion": 4,
+                  "secondaryProfessionId": null,
+                  "skillBar": [1687, 1114, 257, 299, 1399, 1691, 301, null],
+                  "titleRankOverrides": []
+                },
+                "pveBudget": {
+                  "level": 20,
+                  "questBonus": "maximum-applicable"
+                },
+                "rawTemplate": {
+                  "attributes": [
+                    null,
+                    {
+                      "catalogId": 16,
+                      "label": "Divine Favor",
+                      "namespace": "attribute",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 16
+                    }
+                  ],
+                  "primaryProfession": {
+                    "catalogId": 3,
+                    "label": "Monk",
+                    "namespace": "profession",
+                    "outcomeKind": "known",
+                    "reason": null,
+                    "templateId": 3
+                  },
+                  "secondaryProfession": {
+                    "catalogId": null,
+                    "label": "None",
+                    "namespace": "profession",
+                    "outcomeKind": "none",
+                    "reason": null,
+                    "templateId": 0
+                  },
+                  "skillBar": [
+                    null,
+                    {
+                      "catalogId": 1114,
+                      "label": "Spirit Bond",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 1114
+                    },
+                    {
+                      "catalogId": 257,
+                      "label": "Aegis",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 257
+                    },
+                    {
+                      "catalogId": 299,
+                      "label": "Shielding Hands",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 299
+                    },
+                    {
+                      "catalogId": 1399,
+                      "label": "Shield of Absorption",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 1399
+                    },
+                    {
+                      "catalogId": 1691,
+                      "label": "Dismiss Condition",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 1691
+                    },
+                    {
+                      "catalogId": 301,
+                      "label": "Remove Hex",
+                      "namespace": "skill",
+                      "outcomeKind": "known",
+                      "reason": null,
+                      "templateId": 301
+                    },
+                    {
+                      "catalogId": null,
+                      "label": "Empty",
+                      "namespace": "skill",
+                      "outcomeKind": "empty",
+                      "reason": null,
+                      "templateId": 0
+                    }
+                  ],
+                  "source": {
+                    "fidelity": "exact-source",
+                    "inputKind": "bare",
+                    "normalizedDependencyInput": null,
+                    "originalBareCode": "OwAS8YIPXatYAZlcX30tEAA",
+                    "originalInput": "OwAS8YIPXatYAZlcX30tEAA",
+                    "semanticFingerprint": "skill-template:v1:04ae33c56094d4a5",
+                    "templateKind": "skill",
+                    "templateName": null
+                  },
+                  "templateName": null
+                }
+              },
+              "type": "build"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Context after reload"
+                }
+              ],
+              "depth": 1,
+              "type": "heading"
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "A: "
+                },
+                {
+                  "context": {
+                    "buildId": "34f8e19d-9256-408e-9fe7-2bbf60b5ddff",
+                    "kind": "local"
+                  },
+                  "skillId": "catalog:skill:299",
+                  "type": "skill"
+                },
+                {
+                  "type": "text",
+                  "value": "; B: "
+                },
+                {
+                  "context": {
+                    "buildId": "37ca1a1c-477f-40c4-8a31-8a89cff2839e",
+                    "kind": "local"
+                  },
+                  "skillId": "catalog:skill:299",
+                  "type": "skill"
+                },
+                {
+                  "type": "text",
+                  "value": "; generic: "
+                },
+                {
+                  "context": {
+                    "kind": "generic"
+                  },
+                  "skillId": "catalog:skill:299",
+                  "type": "skill"
+                },
+                {
+                  "type": "text",
+                  "value": "."
+                }
+              ],
+              "type": "paragraph"
+            }
+          ]
+        },
+        "recovery": {
+          "baseRevision": 11,
+          "dirty": true,
+          "raw": ":::bw-guide\n{unfinished durable draft  \n"
+        },
+        "schemaVersion": 1
+      }
+    },
+    "savedWith": {
+      "buildCatalogVersion": null,
+      "insigniaCatalogVersion": null,
+      "professionAttributeCatalogVersion": null,
+      "ruleEngineVersion": null,
+      "runeCatalogVersion": null,
+      "skillCatalogVersion": null,
+      "weaponCatalogSetDigest": null,
+      "weaponCatalogSetVersion": null,
+      "weaponCatalogVersion": null,
+      "weaponModifierCatalogSetDigest": null,
+      "weaponModifierCatalogSetVersion": null,
+      "weaponModifierCatalogVersion": null
+    }
+  }
+}

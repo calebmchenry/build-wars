@@ -1,0 +1,291 @@
+{
+  "buildSet": {
+    "entries": [
+      {
+        "id": "entry-fixture-1",
+        "kind": "build",
+        "label": "Frontline",
+        "notes": "Main loadout",
+        "snapshot": {
+          "build": {
+            "attributeAdjustments": {
+              "effectPreferences": [
+                {
+                  "effectId": "glyph-of-elemental-power",
+                  "preference": "off"
+                },
+                {
+                  "effectId": "heroic-refrain",
+                  "preference": "on",
+                  "strength": 4
+                }
+              ],
+              "headgearAttributeId": 0,
+              "runes": [
+                {
+                  "attributeId": 0,
+                  "runeId": 22
+                }
+              ]
+            },
+            "attributes": [
+              {
+                "attributeId": 17,
+                "rank": 9
+              },
+              {
+                "attributeId": 19,
+                "rank": 10
+              },
+              {
+                "attributeId": 25,
+                "rank": 8
+              }
+            ],
+            "catalogVersion": null,
+            "id": "build:single-character-editor",
+            "mode": "pve",
+            "name": "Hammer and Bow",
+            "primaryProfessionId": 1,
+            "schemaVersion": 4,
+            "secondaryProfessionId": 2,
+            "skillBar": [
+              1,
+              316,
+              319,
+              331,
+              351,
+              391,
+              392,
+              398
+            ],
+            "titleRankOverrides": []
+          },
+          "pveBudget": {
+            "level": 20,
+            "questBonus": "maximum-applicable"
+          },
+          "rawTemplate": {
+            "attributes": [
+              null,
+              null,
+              null
+            ],
+            "primaryProfession": null,
+            "secondaryProfession": null,
+            "skillBar": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "source": null,
+            "templateName": null
+          }
+        }
+      },
+      {
+        "id": "entry-fixture-2",
+        "kind": "variant",
+        "label": "Unresolved Variant",
+        "notes": null,
+        "snapshot": {
+          "build": {
+            "attributeAdjustments": {
+              "effectPreferences": [
+                {
+                  "effectId": "glyph-of-elemental-power",
+                  "preference": "on"
+                },
+                {
+                  "effectId": "heroic-refrain",
+                  "preference": "off",
+                  "strength": 2
+                }
+              ],
+              "headgearAttributeId": null,
+              "runes": []
+            },
+            "attributes": [
+              {
+                "attributeId": -100001,
+                "rank": 1
+              }
+            ],
+            "catalogVersion": "pa-e5d0d35ad8f30b4c+skills-9396e01d21481cd1",
+            "id": "build:single-character-editor",
+            "mode": "pve",
+            "name": "Imported Build",
+            "primaryProfessionId": null,
+            "schemaVersion": 4,
+            "secondaryProfessionId": null,
+            "skillBar": [
+              null,
+              -200001,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "titleRankOverrides": []
+          },
+          "pveBudget": {
+            "level": 20,
+            "questBonus": "maximum-applicable"
+          },
+          "rawTemplate": {
+            "attributes": [
+              {
+                "catalogId": null,
+                "label": "Reserved attribute 26",
+                "namespace": "attribute",
+                "outcomeKind": "reserved",
+                "reason": "Reserved template attribute gap.",
+                "templateId": 26
+              }
+            ],
+            "primaryProfession": {
+              "catalogId": null,
+              "label": "None",
+              "namespace": "profession",
+              "outcomeKind": "none",
+              "reason": null,
+              "templateId": 0
+            },
+            "secondaryProfession": {
+              "catalogId": null,
+              "label": "None",
+              "namespace": "profession",
+              "outcomeKind": "none",
+              "reason": null,
+              "templateId": 0
+            },
+            "skillBar": [
+              {
+                "catalogId": null,
+                "label": "Empty",
+                "namespace": "skill",
+                "outcomeKind": "empty",
+                "reason": null,
+                "templateId": 0
+              },
+              {
+                "catalogId": null,
+                "label": "Unknown skill 999999",
+                "namespace": "skill",
+                "outcomeKind": "unknown",
+                "reason": null,
+                "templateId": 999999
+              },
+              {
+                "catalogId": null,
+                "label": "Empty",
+                "namespace": "skill",
+                "outcomeKind": "empty",
+                "reason": null,
+                "templateId": 0
+              },
+              {
+                "catalogId": null,
+                "label": "Empty",
+                "namespace": "skill",
+                "outcomeKind": "empty",
+                "reason": null,
+                "templateId": 0
+              },
+              {
+                "catalogId": null,
+                "label": "Empty",
+                "namespace": "skill",
+                "outcomeKind": "empty",
+                "reason": null,
+                "templateId": 0
+              },
+              {
+                "catalogId": null,
+                "label": "Empty",
+                "namespace": "skill",
+                "outcomeKind": "empty",
+                "reason": null,
+                "templateId": 0
+              },
+              {
+                "catalogId": null,
+                "label": "Empty",
+                "namespace": "skill",
+                "outcomeKind": "empty",
+                "reason": null,
+                "templateId": 0
+              },
+              {
+                "catalogId": null,
+                "label": "Empty",
+                "namespace": "skill",
+                "outcomeKind": "empty",
+                "reason": null,
+                "templateId": 0
+              }
+            ],
+            "source": {
+              "fidelity": "exact-source",
+              "inputKind": "bare",
+              "normalizedDependencyInput": null,
+              "originalBareCode": "OAAQIAAAAAAAAAAAAAAA",
+              "originalInput": "OAAQIAAAAAAAAAAAAAAA",
+              "semanticFingerprint": "skill-template:v1:7634d052e9b925e3",
+              "templateKind": "skill",
+              "templateName": null
+            },
+            "templateName": null
+          }
+        }
+      }
+    ],
+    "id": "build-set-fixture",
+    "lastSelectedEntryId": "entry-fixture-1",
+    "lastSelectedPartySlotId": "slot-fixture-1",
+    "name": "Fixture Build Set",
+    "party": {
+      "enabled": true,
+      "schemaVersion": 1,
+      "size": {
+        "kind": "preset",
+        "size": 2
+      },
+      "slots": [
+        {
+          "entryId": "entry-fixture-1",
+          "id": "slot-fixture-1",
+          "memberKind": "player",
+          "memberKindLabel": null,
+          "memberLabel": "Leader",
+          "notes": "Pulls first.",
+          "role": "Browser regression frontline"
+        },
+        {
+          "entryId": null,
+          "id": "slot-fixture-2",
+          "memberKind": "unspecified",
+          "memberKindLabel": null,
+          "memberLabel": "Open Slot",
+          "notes": null,
+          "role": null
+        }
+      ]
+    },
+    "schemaVersion": 2
+  },
+  "exportedAt": "2026-09-27T05:55:17.891Z",
+  "kind": "build-wars-party-transfer",
+  "metadata": {
+    "declaredEntryCount": 2,
+    "declaredSlotCount": 2
+  },
+  "schemaVersion": 1
+}

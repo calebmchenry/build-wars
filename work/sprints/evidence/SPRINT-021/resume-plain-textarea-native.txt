@@ -1,0 +1,19 @@
+HTML content Native composition control, URL: 127.0.0.1:4173/guide-native-probe.html
+					23 container
+						24 heading Native composition control, Value: 1
+							25 text Native composition control
+						26 text Plain textarea 
+						27 text entry area (settable) Plain textarea, Value: é
+						28 text entry area (settable) Plain editable paragraph, Value: Native paragraph.
+							29 text Native paragraph.
+						30 button Read native events
+						31 container Native events
+							32 text compositionstart:  data="" composing=false trusted=true
+compositionupdate:  data="´" composing=false trusted=true
+beforeinput: insertCompositionText data="´" composing=true trusted=true
+input: insertCompositionText data="´" composing=true trusted=true
+compositionupdate:  data="é" composing=false trusted=true
+beforeinput: insertCompositionText data="é" composing=true trusted=true
+input: insertCompositionText data="é" composing=true trusted=true
+compositionend:  data="é" composing=false trusted=false
+			33 

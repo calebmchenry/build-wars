@@ -1,0 +1,10 @@
+import React,{useState} from 'react';import {createRoot} from 'react-dom/client';
+import {App} from '../../../../src/app/App';
+import {validLocalLibraryEnvelopeFixture,fixtureCatalogFacts} from '../../../../src/app/library-fixtures';
+import {serializeLocalLibraryEnvelope} from '../../../../src/app/persistence-schema';
+import {createGuideFixture} from '../../../../src/app/guide-fixture';
+import '../../../../src/app/styles.css';
+let raw=serializeLocalLibraryEnvelope(validLocalLibraryEnvelopeFixture({revision:0,savedDocuments:[],workingDraft:{document:{kind:'guide',snapshot:{schemaVersion:1,document:createGuideFixture(),recovery:null,appliedRevision:0}},associatedRecordId:null,savedWith:fixtureCatalogFacts}}));
+const storage={getItem:()=>raw,setItem:(_key:string,value:string)=>{raw=value;}};
+function DragFixture(){const[audit,setAudit]=useState('No drag yet');return <><aside style={{position:'fixed',zIndex:500,top:0,right:0,background:'#fff',color:'#000',padding:12,width:600,height:75}} aria-label="External drag fixture">{['External text','Malformed skill'].map(label=><button key={label} draggable onDragStart={e=>{e.dataTransfer.setData(label==='External text'?'text/plain':'application/x-build-wars-guide-skill+json',label==='External text'?'External inert text':'{"version":99,"slot":-1}');e.dataTransfer.effectAllowed='copy';}} onDragEnd={e=>setAudit(label+' end trusted='+e.isTrusted+' dropEffect='+e.dataTransfer.dropEffect)}>{label}</button>)}<output style={{display:"block"}} aria-label="External drag audit">{audit}</output></aside><App storagePort={storage}/></>}
+createRoot(document.getElementById('root')!).render(<DragFixture/>);

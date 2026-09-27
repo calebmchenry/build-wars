@@ -10,11 +10,13 @@ export function SkillDisplay({
   view,
   action,
   iconDragHandle,
+  linkTitle = true,
   compact = false
 }: {
   readonly view: SkillDisplayView;
   readonly action?: ReactNode;
   readonly iconDragHandle?: SkillIconDragHandle;
+  readonly linkTitle?: boolean;
   readonly compact?: boolean;
 }) {
   const facts = view.kind === "known" ? view.facts : [];
@@ -22,7 +24,7 @@ export function SkillDisplay({
     <article className={compact ? "skill-display compact-skill" : "skill-display"}>
       <SkillDisplayIcon view={view} iconDragHandle={iconDragHandle} />
       <div className="skill-display-body">
-        <SkillDisplayTitle view={view} />
+        <SkillDisplayTitle view={view} linkTitle={linkTitle} />
         <div className="skill-display-subtitle">
           {view.kind === "known" ? <SkillActionIcon icon={view.actionIcon} /> : null}
           <span>{view.subtitle}</span>
@@ -65,8 +67,14 @@ function SkillDisplayIcon({
   );
 }
 
-function SkillDisplayTitle({ view }: { readonly view: SkillDisplayView }) {
-  if (view.kind !== "known") {
+function SkillDisplayTitle({
+  view,
+  linkTitle
+}: {
+  readonly view: SkillDisplayView;
+  readonly linkTitle: boolean;
+}) {
+  if (view.kind !== "known" || !linkTitle) {
     return <strong className="skill-display-title">{view.title}</strong>;
   }
 

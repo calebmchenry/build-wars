@@ -1,0 +1,14 @@
+{
+  "a": [
+    "Shielding Hands51/415Enchantment Spell. (8 seconds.) Reduces incoming damage&nbsp; andthere are two blanks between 'damage' and 'and' life steal by 17. End effect: heals for 47(Attrib: Protection Prayers) Context: Protection A (PVE).",
+    "Spirit Bond101/42Enchantment Spell. (8 seconds.) Heals for 86 whenever target ally takes more than 50 damage. Ends after this ally takes damage from 10 attacks or spells.(Attrib: Protection Prayers)"
+  ],
+  "b": [
+    "Spirit Bond101/42Enchantment Spell. (8 seconds.) Heals for 86 whenever target ally takes more than 50 damage. Ends after this ally takes damage from 10 attacks or spells.(Attrib: Protection Prayers)",
+    "Shielding Hands51/415Enchantment Spell. (8 seconds.) Reduces incoming damage&nbsp; andthere are two blanks between 'damage' and 'and' life steal by 14. End effect: heals for 38(Attrib: Protection Prayers) Context: Protection B (PVE)."
+  ],
+  "generic": [
+    "Spirit Bond101/42Enchantment Spell. (8 seconds.) Heals for 86 whenever target ally takes more than 50 damage. Ends after this ally takes damage from 10 attacks or spells.(Attrib: Protection Prayers)",
+    "Shielding Hands51/415Enchantment Spell. (8 seconds.) Reduces incoming damage&nbsp; andthere are two blanks between 'damage' and 'and' life steal by 3–18. End effect: heals for 5–50(Attrib: Protection Prayers) Context: Generic. Generic catalog entry: full published ranges and base costs/timings. No build, title rank, bonuses or assumed effects are selected."
+  ]
+}

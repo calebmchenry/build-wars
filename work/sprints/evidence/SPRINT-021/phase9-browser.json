@@ -1,0 +1,65 @@
+[
+  {
+    "case": "named save/reload invalid source",
+    "raw": ":::bw-guide\n{unfinished durable draft  \n",
+    "title": "Durable variants",
+    "diagnostics": ["1:1 A block directive requires its own closing ::: line."]
+  },
+  {
+    "case": "Save As reload",
+    "raw": ":::bw-guide\n{unfinished durable draft  \n",
+    "title": "Durable copy"
+  },
+  {
+    "case": "repair copied invalid source",
+    "mentions": [
+      "Shielding Hands (Durable A)\u22ef",
+      "Shielding Hands (Durable B)\u22ef",
+      "Shielding Hands (Generic)\u22ef"
+    ],
+    "builds": [
+      {
+        "id": "34f8e19d-9256-408e-9fe7-2bbf60b5ddff",
+        "name": "Durable A"
+      },
+      {
+        "id": "37ca1a1c-477f-40c4-8a31-8a89cff2839e",
+        "name": "Durable B"
+      }
+    ]
+  },
+  {
+    "case": "open original after repairing copy",
+    "raw": ":::bw-guide\n{unfinished durable draft  \n",
+    "title": "Durable variants"
+  },
+  {
+    "case": "open repaired copy",
+    "unappliedSourceButton": 0,
+    "cards": 2
+  },
+  {
+    "case": "real two-tab conflict",
+    "banner": "Save conflict",
+    "raw": "# Conflict retained in tab B",
+    "downloadEnabled": true
+  },
+  {
+    "case": "conflict did not overwrite winning tab",
+    "title": "Tab A saved draft"
+  },
+  {
+    "case": "native-browser-quota",
+    "status": "passed",
+    "rawLength": 10000,
+    "rawExact": false,
+    "banner": "Not saved. Browser storage quota was exceeded; edits remain in memory.",
+    "records": 4,
+    "screenshot": "phase9-quota.png"
+  },
+  {
+    "case": "quota raw evidence clarification",
+    "status": "passed",
+    "note": "Native AX truncates textarea values at 10000 characters. The earlier rawExact:false is an AX observation, not a changed source. Actual downloaded file independently matched all 2097152 expected bytes; see phase9-quota-download.json."
+  }
+]

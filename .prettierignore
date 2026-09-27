@@ -14,3 +14,24 @@ work/tickets/README.md
 work/tickets/index.md
 work/runs/
 *.log
+
+# Exact browser-exported Markdown bytes; formatting would corrupt evidence.
+work/sprints/evidence/SPRINT-021/phase4-authored.md
+work/sprints/evidence/SPRINT-021/phase5-variants.md
+work/sprints/evidence/SPRINT-021/phase7-placement-result.md
+work/sprints/evidence/SPRINT-021/phase7-raw-swap.md
+work/sprints/evidence/SPRINT-021/phase8-invalid-raw.md
+work/sprints/evidence/SPRINT-021/phase8-applied-expected.md
+work/sprints/evidence/SPRINT-021/phase8-applied-download.md
+
+# Actual downloaded backup bytes retained for evidence comparison.
+work/sprints/evidence/SPRINT-021/phase9-mixed-backup.json
+work/sprints/evidence/SPRINT-021/phase9-mixed-merged.json
+
+# Frozen canonical fixture and exact browser evidence.
+test/fixtures/guides/long-v1.md
+work/sprints/evidence/SPRINT-021/phase11-workflow-export.md
+work/sprints/evidence/SPRINT-021/phase12-clipboard-after.md
+work/sprints/evidence/SPRINT-021/phase12-build-set-export.json
+work/sprints/evidence/SPRINT-021/phase12-party-export.json
+work/sprints/evidence/SPRINT-021/phase12-legacy-reloaded.json

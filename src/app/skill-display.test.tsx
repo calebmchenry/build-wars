@@ -123,6 +123,27 @@ describe("SkillDisplay and SkillTooltip", () => {
     expect(muted).toHaveTextContent("Cannot self-target.");
   });
 
+  it("keeps wiki editorial annotations out of skill tooltips and search text", () => {
+    const wildThrow = catalogs.skills.find((skill) => skill.name === "Wild Throw");
+    if (wildThrow === undefined) throw new Error("Missing Wild Throw catalog entry");
+    const view = selectSkillDisplay(catalogs, playableEditorFixture(), wildThrow.id, "tooltip");
+    render(
+      <SkillTooltipTrigger view={view} placement="left">
+        <button type="button">Hover Wild Throw</button>
+      </SkillTooltipTrigger>
+    );
+    fireEvent.mouseEnter(screen.getByRole("button", { name: "Hover Wild Throw" }).parentElement!);
+
+    const tooltip = screen.getByRole("tooltip", { hidden: true });
+    expect(tooltip).toHaveTextContent("Spear Attack. Deals 5 damage.");
+    expect(tooltip).toHaveTextContent("Disables your non-spear attack skills for 3 seconds.");
+    expect(tooltip).not.toHaveTextContent("No space between");
+    expect(document.querySelector(".gw-skill-tooltip-muted")).toHaveTextContent(
+      "Disables your non-spear attack skills for 3 seconds."
+    );
+    expect(wildThrow.description.searchText).not.toContain("No space between");
+  });
+
   it("rounds interpolated progression values in visible tooltip text", () => {
     const wordOfHealing = catalogs.skills.find((skill) => skill.name === "Word of Healing");
     if (wordOfHealing === undefined || wordOfHealing.attributeId === null) {

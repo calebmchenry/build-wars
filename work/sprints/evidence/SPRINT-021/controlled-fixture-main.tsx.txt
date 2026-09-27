@@ -1,0 +1,21 @@
+import React, {useMemo,useState} from 'react';
+import {createRoot} from 'react-dom/client';
+import {App} from '../../../../src/app/App';
+import {AppCatalogError,promotedAppCatalogs} from '../../../../src/app/catalogs';
+import {loadDaggerExample} from '../../../../src/app/examples/dagger-guide';
+import {validSavedRecordFixture,validBuildSetSavedRecordFixture,validPartyBuildSetSnapshotFixture,validLocalLibraryEnvelopeFixture,fixtureCatalogFacts} from '../../../../src/app/library-fixtures';
+import {localBuildRecordId,serializeLocalLibraryEnvelope} from '../../../../src/app/persistence-schema';
+import '../../../../src/app/styles.css';
+function Fixture(){
+ const [kind,setKind]=useState('Missing catalogs'); const [audit,setAudit]=useState('No writes attempted.');
+ const port=useMemo(()=>{
+  const document=loadDaggerExample();
+  const guide={...validSavedRecordFixture(),id:localBuildRecordId('controlled-guide'),name:document.metadata.title,tags:document.metadata.tags,document:{kind:'guide' as const,snapshot:{schemaVersion:1 as const,document,recovery:{raw:':::bw-guide\n{unfinished controlled recovery  \n',baseRevision:0,dirty:true},appliedRevision:0}}};
+  const envelope=validLocalLibraryEnvelopeFixture({savedDocuments:[validSavedRecordFixture(),validBuildSetSavedRecordFixture({id:localBuildRecordId('controlled-party'),snapshot:validPartyBuildSetSnapshotFixture()}),guide],workingDraft:{document:guide.document,associatedRecordId:guide.id,savedWith:fixtureCatalogFacts}});
+  const original=kind==='Newer schema'?JSON.stringify({...envelope,schemaVersion:999}):kind==='Corrupt bytes'?'{broken stored fixture':serializeLocalLibraryEnvelope(envelope);
+  let raw=original,attempts=0;
+  return {getItem:()=>raw,setItem:(_key:string,value:string)=>{attempts++;if(kind==='Denied writes'){setAudit(`Write attempts: ${attempts}. Original bytes unchanged: ${raw===original}. SecurityError injected by this fixture.`);throw new DOMException('Controlled write denial','SecurityError');} raw=value;setAudit(`Write attempts: ${attempts}. Original bytes unchanged: ${raw===original}. Stored bytes: ${new TextEncoder().encode(raw).length}.`);}};
+ },[kind]);
+ return <><aside style={{padding:'1rem',border:'3px solid orange'}} aria-label="Controlled browser verification"><h1>Controlled failure fixture — real App components</h1><p>These local test ports deliberately return missing catalogs, denied writes or protected bytes. This is fault injection, not evidence of an actual browser permission denial or network outage. Production has no fixture route.</p>{['Missing catalogs','Denied writes','Newer schema','Corrupt bytes','Mixed library'].map(label=><button key={label} onClick={()=>{setAudit('No writes attempted.');setKind(label);}}>{label}</button>)}<p>Current fixture: {kind}</p><output aria-label="Fixture storage audit">{audit}</output></aside><App key={kind} storagePort={port} catalogState={kind==='Missing catalogs'?{status:'error',error:new AppCatalogError(['Controlled catalog failure'])}:promotedAppCatalogs}/></>;
+}
+createRoot(document.getElementById('root')!).render(<Fixture/>);

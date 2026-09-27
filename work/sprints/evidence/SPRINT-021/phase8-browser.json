@@ -1,0 +1,55 @@
+[
+  {
+    "case": "canceled pasted Markdown import",
+    "undoDisabled": true,
+    "prose": ""
+  },
+  {
+    "case": "explicit pasted Markdown import",
+    "prose": "Source lifecycleOriginal practice text.Literal :bw-skill[]{skill=\"catalog:skill:194\"}."
+  },
+  {
+    "case": "invalid Apply during visual transition",
+    "raw": ":::bw-guide\n{broken JSON\n:::",
+    "alerts": ["1:1 Invalid or ambiguous JSON at offset 1."]
+  },
+  {
+    "case": "repaired source Apply",
+    "prose": "Source lifecycleRevised practice text.Literal :bw-skill[]{skill=\"catalog:skill:194\"}."
+  },
+  {
+    "case": "Apply Undo restores pending source",
+    "raw": ":::bw-guide\n{\"version\":1,\"id\":\"0d21c0f9-00c7-48dd-89e6-73b7a5f40a73\",\"title\":\"Untitled Guide\",\"summary\":null,\"tags\":[],\"sources\":[]}\n:::\n\n# Source lifecycle\n\nRevised **practice** text.\n\nLiteral `:bw-skill[]{skill=\"catalog:skill:194\"}`.\n",
+    "sourceDownloadVisible": true
+  },
+  {
+    "case": "Redo after explicit raw resolution",
+    "prose": "Source lifecycleRevised practice text.Literal :bw-skill[]{skill=\"catalog:skill:194\"}.",
+    "rawDownloadPresent": 0
+  },
+  {
+    "case": "source reopened after Redo",
+    "raw": ":::bw-guide\n{\"version\":1,\"id\":\"0d21c0f9-00c7-48dd-89e6-73b7a5f40a73\",\"title\":\"Untitled Guide\",\"summary\":null,\"tags\":[],\"sources\":[]}\n:::\n\n# Source lifecycle\n\nRevised **practice** text.\n\nLiteral `:bw-skill[]{skill=\"catalog:skill:194\"}`.\n"
+  },
+  {
+    "case": "metadata edit makes raw base stale",
+    "applyDisabled": true,
+    "raw": ":::bw-guide\n{\"version\":1,\"id\":\"0d21c0f9-00c7-48dd-89e6-73b7a5f40a73\",\"title\":\"Untitled Guide\",\"summary\":null,\"tags\":[],\"sources\":[]}\n:::\n\n# Source lifecycle\n\nOriginal **practice** text.\n\nLiteral `:bw-skill[]{skill=\"catalog:skill:194\"}`.\n\nPending revision.\n"
+  },
+  {
+    "case": "acknowledged stale whole replacement",
+    "title": "Untitled Guide",
+    "raw": ":::bw-guide\n{\"version\":1,\"id\":\"0d21c0f9-00c7-48dd-89e6-73b7a5f40a73\",\"title\":\"Untitled Guide\",\"summary\":null,\"tags\":[],\"sources\":[]}\n:::\n\n# Source lifecycle\n\nOriginal **practice** text.\n\nLiteral `:bw-skill[]{skill=\"catalog:skill:194\"}`.\n\nPending revision.\n"
+  },
+  {
+    "case": "native source buffer Undo",
+    "typingChanged": true,
+    "undoRestoredRaw": false
+  },
+  {
+    "case": "source native Undo sequence",
+    "steps": 14,
+    "restored": true,
+    "note": "Tool-generated per-character insertion created native character undo units. These Undo events stayed in the raw buffer; semantic guide history was not traversed."
+  }
+]

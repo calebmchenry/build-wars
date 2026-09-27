@@ -1,0 +1,13 @@
+
+> build-wars@0.0.0 test:run
+> vitest run src/app/guide-feasibility.test.ts
+
+
+ RUN  v4.1.11 /Users/calebmchenry/.codex/worktrees/guide-workspace-burn/build-wars
+
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  20:18:21
+   Duration  2.10s (transform 474ms, setup 78ms, import 643ms, tests 1.08s, environment 198ms)
+

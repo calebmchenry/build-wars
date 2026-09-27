@@ -1,0 +1,4 @@
+
+> build-wars@0.0.0 lint
+> eslint .
+

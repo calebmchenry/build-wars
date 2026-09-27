@@ -1,0 +1,17 @@
+# Phase 4 — rendered workspace and catalog
+
+2026-09-27 02:32–02:44 UTC. Chrome 153.0.8010.54 on macOS 15.7.7, production preview `http://127.0.0.1:4173/`, native keyboard/menu and browser tab pointer/keyboard/paste. Default viewport 1298×623; narrow override 390×844; both themes; native Chrome zoom verified at 200% then reset. Final build: GuideWorkspace-QIS4Rz8L.js was followed by the focus-ref correction; raw build log retained with current chunk identities. No commits.
+
+New Guide enters a true lazy-loaded runtime workspace and captures the selected composer snapshot in session memory. Composer/New Guide replacements guard dirty applied or source content; cancellation preserves it. Metadata controls cover title, summary, tags and each provenance field. The successful experiment is promoted and its probe/route components removed. Catalog display/filter state is independent of authored snapshots and requires an explicit text target. No-target insertion is rejected. Missing catalogs preserve writing/source/download controls. Repeated atoms have no duplicate IDs or invalid block wrappers inside paragraphs.
+
+Actual integrated browser observations:
+
+- Typed “Practice timing between attacks.”, selected “timing”, used Command-B, moved the caret after “attacks.”, searched Flare and inserted its generic atom at that caret. Focus returned to the editor; no build exists or is implicitly edited. Canonical source confirms `**timing**` and the generic directive.
+- Created First step with Bullets, pressed native Enter and typed Second step. Exited the list and pasted two plain-text lines. Source retained both list items and paragraphs. Edited title/summary/tags and returned to writing. [Actual authored bytes](phase4-authored.md), [source AX capture](phase4-writing-source.txt).
+- Appended “Native undo check.”, used the native Chrome Edit → Undo menu, observed that appended group removed; Command-Shift-Z restored it. [Undo capture](phase4-native-undo.txt). Existing automated completion/cancellation grouping tests remain passing; native composition is **unverified/deferred by user decision**.
+- Loaded the frozen long source through Source → Apply and returned to Write. Sixteen build blocks and hundreds of prose/mention/code blocks rendered. Document scroll moved 0→24110 while catalog stayed 0; catalog then moved 0→170 while document remained 24110. [Scroll measurements](phase4-scroll.json), [long capture](phase4-long.png).
+- At 390×844, catalog opens to its search field and Close returns focus to Guide document. [Narrow capture](phase4-narrow.png), [focus capture](phase4-narrow-focus.txt). Both [light](phase4-light.png) and [dark](phase4-dark.png) themes checked. [Native 200% value](phase4-zoom-native.txt), [zoom capture](phase4-zoom.png). Temporary viewport/zoom restored.
+
+Validation: production build/all strict TypeScript projects, ESLint and **640 tests in 100 files passed**. New component coverage proves metadata/recovery without catalogs and zero-history no-target/filter behavior; the App suite proves canceled/accepted Composer transitions from unapplied source. A new source-projection no-op/redo regression is covered. The transition test was moved into the existing App suite, using its existing timeout; no assertions weakened. Logs `work/runs/SPRINT-021/phase4-{build,lint,tests}.log`.
+
+Cards are intentionally compact labels at this phase; the dependent Phase 5 adds addressed editing and IO. This is phase evidence, not final B01–B10 closeout.

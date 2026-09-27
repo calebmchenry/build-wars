@@ -35,6 +35,12 @@ import {
 import { importSkillTemplateToEditor, selectShareTemplateExport } from "../template-workflow";
 import { TemplatePreview } from "./TemplatePreview";
 
+export interface TemplateOperationGuard {
+  readonly isCurrent: () => boolean;
+  readonly onStale: (written: string | null) => void;
+  readonly description: string;
+}
+
 export function TemplateBrowserDialog({
   mode,
   folder,
@@ -44,7 +50,8 @@ export function TemplateBrowserDialog({
   catalogs,
   validation,
   dispatch,
-  requestDraftReplacement
+  requestDraftReplacement,
+  operationGuard
 }: {
   readonly mode: "load" | "save";
   readonly folder: TemplateFolder | null;
@@ -55,6 +62,7 @@ export function TemplateBrowserDialog({
   readonly validation: ValidationView;
   readonly dispatch: Dispatch<EditorAction>;
   readonly requestDraftReplacement: (() => "cancel" | "discard") | undefined;
+  readonly operationGuard?: TemplateOperationGuard;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const folderInput = useRef<HTMLInputElement>(null);
@@ -206,11 +214,24 @@ export function TemplateBrowserDialog({
     setPreview(null);
   }
 
+  function checkOperation(written: string | null = null): boolean {
+    if (!operationGuard || operationGuard.isCurrent()) return mounted.current;
+    operationGuard.onStale(written);
+    if (mounted.current)
+      setError(
+        written
+          ? `The captured snapshot was written to ${written}; the changed guide was not renamed.`
+          : "The target build changed. Close and reopen this operation."
+      );
+    return false;
+  }
+
   function loadFile(file: TemplateFileEntry) {
     void run(async () => {
+      if (!checkOperation()) return;
       // Re-read the file: Guild Wars may have changed it since the list was opened.
       const code = file.handle ? await readTemplateFile(await file.handle.getFile()) : file.code;
-      if (!mounted.current) return;
+      if (!checkOperation()) return;
       if (code === null) throw new Error(file.error ?? "This template could not be read.");
       const decoded = importSkillTemplateToEditor(code, state, catalogs);
       if (!decoded.ok) throw new Error(decoded.error.message);
@@ -230,6 +251,7 @@ export function TemplateBrowserDialog({
 
   function saveFile() {
     void run(async () => {
+      if (!checkOperation()) return;
       if (!exported.ok) throw new Error(exported.blockedReasons.join(" "));
       const name = templateFilename(filename);
       const directory = contents?.handle;
@@ -239,22 +261,23 @@ export function TemplateBrowserDialog({
         if ((await directory.requestPermission({ mode: "readwrite" })) !== "granted") {
           throw new Error("Allow editing this folder to save templates, then try Save again.");
         }
-        if (!mounted.current) return;
+        if (!checkOperation()) return;
         let existing: TemplateFileHandle | null = null;
         try {
           existing = await directory.getFileHandle(name);
         } catch (cause) {
           if (!isFileError(cause, "NotFoundError")) throw cause;
         }
-        if (!mounted.current) return;
+        if (!checkOperation()) return;
         if (existing && !window.confirm(`Replace “${existing.name}” with the current build?`))
           return;
         const handle = existing ?? (await directory.getFileHandle(name, { create: true }));
+        if (!checkOperation()) return;
         await writeTemplateFile(handle, exported.bareCode);
       } else {
         downloadTemplateFile(name, exported.bareCode);
       }
-      if (!mounted.current) return;
+      if (!checkOperation(name)) return;
       dispatch({ type: "set-build-name", name: name.replace(/\.txt$/i, "") });
       dispatch({
         type: "set-message",
@@ -333,6 +356,12 @@ export function TemplateBrowserDialog({
           ×
         </button>
       </div>
+      {operationGuard && (
+        <p>
+          {operationGuard.description}. Game codes omit guide text, reference context,
+          rune/headgear, title and effect choices.
+        </p>
+      )}
       <div className="template-folder-toolbar">
         <span
           className="template-folder-location"
