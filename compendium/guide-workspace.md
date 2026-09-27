@@ -1,15 +1,15 @@
 # Markdown Guide Workspace
 
-Status: implemented in the isolated [SPRINT-021](../work/sprints/SPRINT-021.md) worktree; acceptance remains in progress for [EPIC-20](../work/tickets/20-markdown-guide-workspace/EPIC.md). Updated 2026-09-27. The controls below are implemented; final file-upload verification is still blocked.
+Status: [SPRINT-021](../work/sprints/SPRINT-021.md) and [EPIC-20](../work/tickets/20-markdown-guide-workspace/EPIC.md) are complete. Updated 2026-09-27. All twelve tickets passed their dependency and acceptance gates; [18 interactive transfer observations](../work/sprints/evidence/SPRINT-021/interactive-transfer-closeout.md) close the earlier browser upload gaps. The [final audit](../work/sprints/evidence/SPRINT-021/interactive-closeout.md) records validation and completion metadata.
 
-SPRINT-021 resumes with the [user-authorized native composition verification
+SPRINT-021 retains the [user-authorized native composition verification
 deferral](../work/sprints/evidence/SPRINT-021/native-composition-deferral.md).
 Native Chrome access and menu Undo were observed. Native composition completion
 remains unverified; that evidence gap no longer blocks the burn. All other
 feasibility, contract, capacity, browser and validation checks remain required.
 The [ADR](decisions/0003-guide-editor-and-markdown-contract.md) and
 [evidence index](../work/sprints/SPRINT-021-EVIDENCE.md) retain the prior attempts.
-The isolated implementation now includes rendered writing, addressed builds and
+The retained implementation includes rendered writing, addressed builds and
 references, pointer/keyboard placement, atomic Source Apply and Markdown transfer,
 library/backup v3 durability and recovery, and a read-only guide renderer with
 namespaced section/variant anchors. The original dagger example opens only through
@@ -20,9 +20,8 @@ Read shows the last applied guide and preserves unfinished source for return to 
 Game template copying transfers only the game representation; Markdown/local saves
 retain rune/headgear, title, effect and reference metadata.
 
-BW-2001 through BW-2007 passed their phase gates. Remaining acceptance is in
-progress: required file uploads are [unverified due to browser security/permission
-restrictions](../work/sprints/evidence/SPRINT-021/upload-permission-gap.md), with the final integrated results tracked in the [acceptance matrix](../work/sprints/evidence/SPRINT-021/phase12.md).
+Actual Markdown download/reimport preserves both independent variants, invalid/raw and zero-build handling, and the frozen long fixture. Canceled and stale real-file reads preserve the prior guide/source/session. Game-template fallback upload preserves the captured target identity and full sibling snapshot, including selection changes during a delayed read. Deterministic delay coverage uses the explicitly labeled test-only real-file scheduler; production assets are unchanged. Earlier upload failures remain [historical](../work/sprints/evidence/SPRINT-021/upload-permission-gap.md). See the complete [acceptance matrix](../work/sprints/evidence/SPRINT-021/phase12.md).
+
 The accepted ADR and dated evidence define the implementation contract. Clipboard fragments retain local external bindings only when session, generation and guide ID match; older or replaced origins become explicitly detached. Reader return preserves unfinished Source text and its selection. The frozen long fixture has 16 builds and 601 mentions.
 
 ## Product Intent

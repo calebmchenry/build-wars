@@ -1,0 +1,95 @@
+[
+  {
+    "case": "initial exported guide matches source",
+    "passed": true,
+    "bytes": 9478,
+    "sha256": "4f045c842b73644cb5b7e3c5a74f69764b37efc2a4e00937ba54174c87b01140"
+  },
+  {
+    "case": "real exported Markdown upload and cancel preserve guide and disabled undo",
+    "passed": true
+  },
+  {
+    "case": "one undo after reimport restores exact invalid raw source and prior guide",
+    "passed": true,
+    "restoredRawBytes": 28
+  },
+  {
+    "case": "redo after explicit source-discard guard restores exact imported guide",
+    "passed": true
+  },
+  {
+    "case": "actual malformed raw-source export rejected without enabling replacement",
+    "passed": true,
+    "status": "Import Markdown\n\nPaste or upload a self-contained guide. Validation does not change your current guide or source draft.\n\nMarkdown file\nMarkdown to import\n\n1:1 Invalid or ambiguous JSON at offset 1.\n\nValidate Markdown\nReplace guide with Markdown\nCancel"
+  },
+  {
+    "case": "zero-build applied download reimport preserves exact bytes including literal code",
+    "passed": true,
+    "bytes": 237,
+    "sha256": "4338a7351d0478d300748d83ee0c161c0b1936d496d7d111c7cf4c89d11eb28d"
+  },
+  {
+    "case": "long fixture actual file reimport exact source fidelity",
+    "passed": true,
+    "bytes": 70233,
+    "sha256": "b8149f13740954f41b16378f9b0e5893e60978c16f8344bff762a716f94cdc52"
+  },
+  {
+    "case": "undo long-file import restores original exported guide",
+    "passed": true
+  },
+  {
+    "case": "cancel game-template file replacement preserves both full build snapshots",
+    "passed": true
+  },
+  {
+    "case": "fallback uploaded downloaded game code targets only captured build and preserves identity/sibling",
+    "passed": true,
+    "fileBytes": 24,
+    "target": "Protection B",
+    "sibling": "Supported practice"
+  },
+  {
+    "case": "one undo restores exact source after accepted template upload",
+    "passed": true
+  },
+  {
+    "case": "cancel in-flight actual Markdown read is inert after delayed completion",
+    "passed": true,
+    "scheduler": "Released arrayBuffer completion for phase8-applied-download.md (237 bytes)",
+    "controlledScheduling": true
+  },
+  {
+    "case": "stale real Markdown completion after newer raw-source edit cannot replace raw or applied guide",
+    "passed": true,
+    "scheduler": "Released arrayBuffer completion for phase8-applied-download.md (237 bytes)",
+    "controlledScheduling": true
+  },
+  {
+    "case": "stale Markdown read after switching session leaves new empty guide unchanged and Undo disabled",
+    "passed": true,
+    "controlledScheduling": true,
+    "newGuideId": "1a1c4eb9-48ee-4477-b25a-4bf0eb009bc9",
+    "observation": "Native AX before/after: only scheduler changed from Held to Released; new source and disabled Undo unchanged."
+  },
+  {
+    "case": "delayed actual template upload after target edit is rejected without touching sibling",
+    "passed": true,
+    "controlledScheduling": true
+  },
+  {
+    "case": "stale template upload adds no history beyond the target edit",
+    "passed": true
+  },
+  {
+    "case": "selection change during real template read keeps original captured target and preserves selected sibling",
+    "passed": true,
+    "controlledScheduling": true
+  },
+  {
+    "case": "main preview returned to original guide after all transfer checks",
+    "passed": true,
+    "sourceRestoredSha256": "4f045c842b73644cb5b7e3c5a74f69764b37efc2a4e00937ba54174c87b01140"
+  }
+]

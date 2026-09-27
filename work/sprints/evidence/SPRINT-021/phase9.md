@@ -1,5 +1,9 @@
 # Phase 9 — complete local guide durability implementation
 
+Current status: **complete in SPRINT-021**. The [interactive transfer closeout](interactive-transfer-closeout.md) records 18 passing actual-browser observations and closes B06/B08. [Final acceptance](phase12.md) and the [closeout audit](interactive-closeout.md) govern completion. Native composition remains unverified/deferred by user decision.
+
+The phase/retry observations below are preserved as historical evidence; their pending-upload/dependency statements describe the earlier state and are superseded by this closeout.
+
 Status: own implementation and validation passed; dependent ticket acceptance remains in progress while BW-2008 file reimport is unverified. No completion claim overrides the dependency gate.
 
 Library/backup v3 retains the unchanged storage key, strict guide snapshot v1, full Build v4 payloads, exact dirty raw/base/applied revisions and authored metadata. Historical v1/v2 reads do not write. Vendor/editor/history/DOM state is excluded. Unknown audit facts remain unknown; missing catalogs do not supply unrelated composer facts. Named Save, Save As, rename, duplicate, Open, working-draft autosave and pagehide use the established library revision/conflict protocol. Aggregate bytes and structure are bounded before serialization/write; unsafe, newer or corrupt payloads remain protected. Raw and applied downloads remain independent of storage.

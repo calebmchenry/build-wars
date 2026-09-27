@@ -1,0 +1,3647 @@
+- main "Build Wars Guide":
+  - region "Theme":
+    - generic: Theme
+    - 'group "Theme: dark"':
+      - button "System"
+      - button "Light"
+      - button "Dark" [pressed]
+  - navigation "Workspace":
+    - button "Composer"
+    - button "New Guide"
+    - button "Open example guide"
+  - region "Guide workspace":
+    - heading "Untitled Guide" [level=1]
+    - paragraph: durable
+    - button "Write"
+    - button "Source"
+    - button "Read" [active] [pressed]
+    - button "Download applied Markdown"
+    - status: Markdown imported. Undo restores the previous guide and source draft.
+    - navigation "Guide sections and variants":
+      - heading "In this guide" [level=2]
+      - list:
+        - link "Practice guide":
+          - /url: "#bw-guide:guide-practice:section:0"
+        - 'link "Variant: Flare practice"':
+          - /url: "#bw-guide:guide-practice:build:gb-flare"
+        - 'link "Variant: Variant 1"':
+          - /url: "#bw-guide:guide-practice:build:gb-1"
+        - 'link "Variant: Variant 2"':
+          - /url: "#bw-guide:guide-practice:build:gb-2"
+        - 'link "Variant: Variant 3"':
+          - /url: "#bw-guide:guide-practice:build:gb-3"
+        - 'link "Variant: Variant 4"':
+          - /url: "#bw-guide:guide-practice:build:gb-4"
+        - 'link "Variant: Variant 5"':
+          - /url: "#bw-guide:guide-practice:build:gb-5"
+        - 'link "Variant: Variant 6"':
+          - /url: "#bw-guide:guide-practice:build:gb-6"
+        - 'link "Variant: Variant 7"':
+          - /url: "#bw-guide:guide-practice:build:gb-7"
+        - 'link "Variant: Variant 8"':
+          - /url: "#bw-guide:guide-practice:build:gb-8"
+        - 'link "Variant: Variant 9"':
+          - /url: "#bw-guide:guide-practice:build:gb-9"
+        - 'link "Variant: Variant 10"':
+          - /url: "#bw-guide:guide-practice:build:gb-10"
+        - 'link "Variant: Variant 11"':
+          - /url: "#bw-guide:guide-practice:build:gb-11"
+        - 'link "Variant: Variant 12"':
+          - /url: "#bw-guide:guide-practice:build:gb-12"
+        - 'link "Variant: Variant 13"':
+          - /url: "#bw-guide:guide-practice:build:gb-13"
+        - 'link "Variant: Variant 14"':
+          - /url: "#bw-guide:guide-practice:build:gb-14"
+        - 'link "Variant: Variant 15"':
+          - /url: "#bw-guide:guide-practice:build:gb-15"
+      - paragraph: These links navigate this local guide. Share its Markdown file to send the full guide.
+    - article "Guide reading pane":
+      - heading "Practice guide" [level=1]
+      - paragraph:
+        - text: Practice with
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+        - text: before changing the variant.
+      - region "Flare practice":
+        - strong: Flare practice
+        - generic: Elementalist / Any · PVE
+        - generic "Flare practice eight skill slots":
+          - 'button "Flare practice slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Flare practice slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Flare practice slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Flare practice slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Flare practice slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Flare practice slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Flare practice slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Flare practice slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Flare practice"
+        - button "Copy Flare practice template"
+      - paragraph: Write your observations here.
+      - region "Variant 1":
+        - strong: Variant 1
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 1 eight skill slots":
+          - 'button "Variant 1 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 1 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 1 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 1 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 1 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 1 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 1 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 1 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 1"
+        - button "Copy Variant 1 template"
+      - region "Variant 2":
+        - strong: Variant 2
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 2 eight skill slots":
+          - 'button "Variant 2 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 2 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 2 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 2 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 2 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 2 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 2 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 2 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 2"
+        - button "Copy Variant 2 template"
+      - region "Variant 3":
+        - strong: Variant 3
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 3 eight skill slots":
+          - 'button "Variant 3 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 3 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 3 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 3 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 3 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 3 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 3 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 3 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 3"
+        - button "Copy Variant 3 template"
+      - region "Variant 4":
+        - strong: Variant 4
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 4 eight skill slots":
+          - 'button "Variant 4 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 4 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 4 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 4 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 4 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 4 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 4 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 4 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 4"
+        - button "Copy Variant 4 template"
+      - region "Variant 5":
+        - strong: Variant 5
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 5 eight skill slots":
+          - 'button "Variant 5 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 5 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 5 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 5 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 5 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 5 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 5 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 5 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 5"
+        - button "Copy Variant 5 template"
+      - region "Variant 6":
+        - strong: Variant 6
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 6 eight skill slots":
+          - 'button "Variant 6 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 6 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 6 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 6 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 6 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 6 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 6 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 6 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 6"
+        - button "Copy Variant 6 template"
+      - region "Variant 7":
+        - strong: Variant 7
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 7 eight skill slots":
+          - 'button "Variant 7 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 7 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 7 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 7 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 7 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 7 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 7 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 7 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 7"
+        - button "Copy Variant 7 template"
+      - region "Variant 8":
+        - strong: Variant 8
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 8 eight skill slots":
+          - 'button "Variant 8 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 8 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 8 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 8 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 8 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 8 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 8 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 8 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 8"
+        - button "Copy Variant 8 template"
+      - region "Variant 9":
+        - strong: Variant 9
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 9 eight skill slots":
+          - 'button "Variant 9 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 9 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 9 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 9 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 9 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 9 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 9 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 9 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 9"
+        - button "Copy Variant 9 template"
+      - region "Variant 10":
+        - strong: Variant 10
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 10 eight skill slots":
+          - 'button "Variant 10 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 10 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 10 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 10 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 10 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 10 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 10 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 10 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 10"
+        - button "Copy Variant 10 template"
+      - region "Variant 11":
+        - strong: Variant 11
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 11 eight skill slots":
+          - 'button "Variant 11 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 11 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 11 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 11 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 11 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 11 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 11 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 11 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 11"
+        - button "Copy Variant 11 template"
+      - region "Variant 12":
+        - strong: Variant 12
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 12 eight skill slots":
+          - 'button "Variant 12 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 12 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 12 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 12 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 12 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 12 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 12 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 12 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 12"
+        - button "Copy Variant 12 template"
+      - region "Variant 13":
+        - strong: Variant 13
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 13 eight skill slots":
+          - 'button "Variant 13 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 13 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 13 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 13 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 13 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 13 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 13 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 13 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 13"
+        - button "Copy Variant 13 template"
+      - region "Variant 14":
+        - strong: Variant 14
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 14 eight skill slots":
+          - 'button "Variant 14 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 14 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 14 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 14 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 14 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 14 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 14 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 14 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 14"
+        - button "Copy Variant 14 template"
+      - region "Variant 15":
+        - strong: Variant 15
+        - generic: Elementalist / Any · PVE
+        - generic "Variant 15 eight skill slots":
+          - 'button "Variant 15 slot 1: Flare"':
+            - img "Flare icon":
+            - generic: Flare
+          - 'button "Variant 15 slot 2: Empty"':
+            - generic: "2"
+            - generic: Empty
+          - 'button "Variant 15 slot 3: Empty"':
+            - generic: "3"
+            - generic: Empty
+          - 'button "Variant 15 slot 4: Empty"':
+            - generic: "4"
+            - generic: Empty
+          - 'button "Variant 15 slot 5: Empty"':
+            - generic: "5"
+            - generic: Empty
+          - 'button "Variant 15 slot 6: Empty"':
+            - generic: "6"
+            - generic: Empty
+          - 'button "Variant 15 slot 7: Empty"':
+            - generic: "7"
+            - generic: Empty
+          - 'button "Variant 15 slot 8: Empty"':
+            - generic: "8"
+            - generic: Empty
+        - generic "Details for Variant 15"
+        - button "Copy Variant 15 template"
+      - code: "Practice note 0 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 1. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 2. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 3. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 4 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 5. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 6. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 7. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 8 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 9. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 10. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 11. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 12 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 13. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 14. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 15. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 16 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 17. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 18. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 19. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 20 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 21. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 22. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 23. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 24 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 25. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 26. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 27. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 28 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 29. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 30. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 31. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 32 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 33. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 34. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 35. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 36 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 37. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 38. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 39. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 40 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 41. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 42. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 43. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 44 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 45. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 46. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 47. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 48 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 49. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 50. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 51. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 52 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 53. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 54. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 55. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 56 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 57. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 58. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 59. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 60 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 61. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 62. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 63. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 64 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 65. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 66. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 67. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 68 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 69. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 70. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 71. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 72 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 73. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 74. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 75. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 76 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 77. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 78. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 79. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 80 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 81. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 82. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 83. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 84 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 85. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 86. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 87. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 88 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 89. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 90. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 91. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 92 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 93. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 94. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 95. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 96 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 97. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 98. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 99. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 100 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 101. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 102. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 103. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 104 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 105. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 106. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 107. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 108 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 109. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 110. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 111. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 112 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 113. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 114. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 115. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 116 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 117. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 118. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 119. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 120 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 121. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 122. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 123. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 124 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 125. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 126. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 127. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 128 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 129. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 130. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 131. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 132 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 133. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 134. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 135. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 136 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 137. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 138. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 139. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 140 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 141. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 142. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 143. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 144 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 145. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 146. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 147. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 148 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 149. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 150. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 151. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 152 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 153. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 154. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 155. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 156 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 157. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 158. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 159. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 160 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 161. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 162. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 163. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 164 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 165. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 166. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 167. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 168 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 169. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 170. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 171. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 172 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 173. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 174. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 175. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 176 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 177. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 178. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 179. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 180 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 181. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 182. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 183. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 184 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 185. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 186. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 187. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 188 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 189. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 190. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 191. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 192 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 193. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 194. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 195. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 196 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 197. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 198. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 199. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 200 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 201. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 202. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 203. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 204 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 205. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 206. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 207. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 208 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 209. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 210. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 211. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 212 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 213. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 214. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 215. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 216 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 217. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 218. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 219. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 220 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 221. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 222. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 223. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 224 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 225. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 226. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 227. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 228 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 229. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 230. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 231. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 232 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 233. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 234. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 235. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 236 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 237. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 238. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 239. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 240 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 241. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 242. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 243. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 244 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 245. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 246. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 247. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 248 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 249. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 250. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 251. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 252 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 253. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 254. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 255. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 256 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 257. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 258. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 259. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 260 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 261. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 262. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 263. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 264 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 265. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 266. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 267. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 268 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 269. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 270. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 271. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 272 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 273. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 274. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 275. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 276 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 277. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 278. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 279. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 280 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 281. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 282. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 283. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 284 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 285. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 286. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 287. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 288 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 289. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 290. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 291. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 292 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 293. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 294. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 295. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 296 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 297. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 298. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 299. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 300 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 301. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 302. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 303. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 304 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 305. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 306. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 307. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 308 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 309. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 310. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 311. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 312 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 313. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 314. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 315. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 316 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 317. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 318. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 319. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 320 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 321. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 322. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 323. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 324 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 325. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 326. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 327. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 328 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 329. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 330. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 331. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 332 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 333. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 334. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 335. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 336 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 337. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 338. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 339. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 340 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 341. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 342. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 343. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 344 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 345. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 346. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 347. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 348 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 349. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 350. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 351. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 352 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 353. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 354. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 355. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 356 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 357. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 358. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 359. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 360 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 361. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 362. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 363. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 364 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 365. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 366. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 367. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 368 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 369. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 370. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 371. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 372 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 373. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 374. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 375. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 376 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 377. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 378. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 379. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 380 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 381. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 382. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 383. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)
+      - code: "Practice note 384 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 385. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 1":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 1)
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+      - paragraph:
+        - text: Practice note 386. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 2":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 2)
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+      - paragraph:
+        - text: Practice note 387. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 3":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 3)
+        - button "Flare — Variant 4":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 4)
+      - code: "Practice note 388 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 389. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 5":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 5)
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+      - paragraph:
+        - text: Practice note 390. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 6":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 6)
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+      - paragraph:
+        - text: Practice note 391. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 7":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 7)
+        - button "Flare — Variant 8":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 8)
+      - code: "Practice note 392 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 393. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 9":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 9)
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+      - paragraph:
+        - text: Practice note 394. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 10":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 10)
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+      - paragraph:
+        - text: Practice note 395. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 11":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 11)
+        - button "Flare — Variant 12":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 12)
+      - code: "Practice note 396 :bw-skill[]{skill=\"catalog:skill:194\" context=\"generic\"}"
+      - paragraph:
+        - text: Practice note 397. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 13":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 13)
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+      - paragraph:
+        - text: Practice note 398. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 14":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 14)
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+      - paragraph:
+        - text: Practice note 399. Observe timing and preserve independent attributes.
+        - button "Flare — Variant 15":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Variant 15)
+        - button "Flare — Flare practice":
+          - img "Flare icon":
+          - text: Flare
+          - generic: (Flare practice)

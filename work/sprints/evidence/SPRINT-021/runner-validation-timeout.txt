@@ -1,0 +1,55 @@
+# validation: work/runs/toolchain/node_modules/.bin/npm run verify
+# started_at: 2026-09-27T21:08:43Z
+
+
+> build-wars@0.0.0 verify
+> npm run format:check && npm run lint && npm run typecheck && npm run test:run && npm run build && npm run data:test && python3 -m unittest scripts/test_ticket_burn.py
+
+
+> build-wars@0.0.0 format:check
+> prettier . --check
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> build-wars@0.0.0 lint
+> eslint .
+
+
+> build-wars@0.0.0 typecheck
+> tsc -p tsconfig.domain.json && tsc -p tsconfig.template-compatibility.json && tsc -p tsconfig.app.json && tsc -p tsconfig.node.json
+
+
+> build-wars@0.0.0 test:run
+> vitest run
+
+
+ RUN  v4.1.11 /Users/calebmchenry/code/build-wars
+
+ ❯ src/app/build-composer.test.tsx (5 tests | 1 failed) 29551ms
+     × renders an empty build-set no-loadout state until a loadout is explicitly created 6154ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/app/build-composer.test.tsx > BuildComposer > renders an empty build-set no-loadout state until a loadout is explicitly created
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/app/build-composer.test.tsx:85:3
+     83|   );
+     84|
+     85|   it("renders an empty build-set no-loadout state until a loadout is e…
+       |   ^
+     86|     render(<Harness initialState={emptyBuildSetWorkspace()} />);
+     87|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 109 passed (110)
+      Tests  1 failed | 691 passed (692)
+   Start at  17:09:11
+   Duration  43.29s (transform 6.56s, setup 17.73s, import 42.16s, tests 123.68s, environment 46.68s)
+
+
+# finished_at: 2026-09-27T21:09:54Z
+# returncode: 1

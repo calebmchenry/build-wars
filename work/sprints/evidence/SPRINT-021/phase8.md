@@ -1,5 +1,9 @@
 # BW-2008 source and Markdown transfer — implementation verified, file evidence pending
 
+Current status: **complete in SPRINT-021**. The [interactive transfer closeout](interactive-transfer-closeout.md) records 18 passing actual-browser observations and closes B06/B08. [Final acceptance](phase12.md) and the [closeout audit](interactive-closeout.md) govern completion. Native composition remains unverified/deferred by user decision.
+
+The phase/retry observations below are preserved as historical evidence; their pending-upload/dependency statements describe the earlier state and are superseded by this closeout.
+
 2026-09-27 UTC, Chrome 153/macOS 15.7.7, production preview localhost:4173,
 desktop dark/100%. Implementation adds explicit Apply/Keep Editing/Discard,
 whole-document stale-source acknowledgement, line/column diagnostics, staged

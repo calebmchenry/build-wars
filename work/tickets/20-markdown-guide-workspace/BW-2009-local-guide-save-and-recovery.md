@@ -2,8 +2,9 @@
 id: BW-2009
 title: Local Guide Save and Recovery
 epic: EPIC-20
-status: in_progress
+status: done
 planned_sprint: SPRINT-021
+completed_sprint: SPRINT-021
 priority: high
 depends_on:
   - BW-2003
@@ -42,19 +43,33 @@ Add old/new/mixed schema fixtures and storage failure, conflict, backup/restore 
 ## Design Authority
 
 [Markdown Guide Workspace](../../../compendium/guide-workspace.md) and
-[EPIC-20](EPIC.md). This is planned work; the burn runner assigns the executing
-sprint and records completion evidence.
+[EPIC-20](EPIC.md). Completed in [SPRINT-021](../../sprints/SPRINT-021.md); evidence and retained follow-ups are recorded below.
 
-## Planning
+## Planning (historical)
 
 Planned in [SPRINT-021](../../sprints/SPRINT-021.md), Phase 9.
 The sprint preserves this ticket's dependencies, acceptance criteria and verification gates.
 Implementation and required browser evidence remain pending; planning is not completion.
 
-## Execution progress
+## Earlier execution progress (historical)
 
 Implementation and focused/full automated validation are present in SPRINT-021. Own durability/browser evidence is recorded in [Phase 9](../../sprints/evidence/SPRINT-021/phase9.md). Acceptance remains in progress while the required upstream BW-2008 file-upload gate is unresolved; no dependent completion is claimed.
 
-## Final SPRINT-021 execution record
+## Earlier blocked execution record (historical)
 
 Implementation and completed checks are linked in the [final acceptance matrix](../../sprints/evidence/SPRINT-021/phase12.md). Own durability criteria passed with actual and explicitly labeled fault-injection evidence. Acceptance remains in progress because required browser file uploads/reimports and incoming ticket gates are open. The [upload permission gap](../../sprints/evidence/SPRINT-021/upload-permission-gap.md) is separate from native composition, which remains unverified/deferred by user decision. No completion or commit is claimed.
+
+The [main-checkout retry](../../sprints/evidence/SPRINT-021/main-checkout-resume.md)
+reached the normal file chooser after the reported permission fix, but the upload
+security check again reported a dismissed permission request. Fresh repository
+validation passes; required upload evidence and incoming acceptance remain open.
+
+The [second main-checkout retry](../../sprints/evidence/SPRINT-021/main-checkout-retry2.md)
+again failed at the normal upload security check. Required upload evidence and
+dependent acceptance remain open; no additional ticket completion is claimed.
+
+## Completion — SPRINT-021, 2026-09-27 UTC
+
+[Phase 9](../../sprints/evidence/SPRINT-021/phase9.md) proves named Save/Open/reload, exact unfinished-source recovery, mixed legacy backups, quota/conflict behavior and explicitly labeled fault-injection cases. BW-2003 was already done; BW-2008 now passes actual transfer acceptance.
+
+All incoming dependencies and this ticket's acceptance criteria are satisfied. Native composition remains unverified/deferred by user decision; its automated regressions remain covered. Earlier upload failures above are historical, not passing evidence. No commit or push was made; the outer runner owns commits.

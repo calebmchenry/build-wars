@@ -11,6 +11,7 @@ import unittest
 from contextlib import redirect_stdout
 from io import StringIO
 from pathlib import Path
+from unittest.mock import patch
 
 
 SCRIPT_PATH = Path(__file__).with_name("ticket-burn.py")
@@ -66,6 +67,61 @@ class TicketBurnTests(unittest.TestCase):
         epics = ticket_burn.discover_epics(self.tmp, self.target)
 
         self.assertEqual([epic.id for epic in epics], ["EPIC-01"])
+
+    def test_resume_done_epic_finishes_validation_and_commit(self) -> None:
+        self._write_epic("EPIC-01", "done")
+        sprint = self.tmp / "work/sprints/SPRINT-001.md"
+        sprint.write_text("# Sprint 001\n\n- [x] complete\n", encoding="utf-8")
+        run_dir = self.tmp / "work/runs/test"
+        run_dir.mkdir(parents=True)
+        paths = ticket_burn.RunPaths(self.tmp, run_dir, run_dir / "run.json", run_dir / "summary.md")
+        args = ticket_burn.parse_args(["EPIC-01", "--resume", "--validation-command", "verify"])
+
+        for completed_stage in ("executed", "validated"):
+            with self.subTest(stage=completed_stage):
+                state = ticket_burn.new_state(self.target, paths)
+                step = {"epic": "EPIC-01", "sprint": "SPRINT-001", "state": completed_stage, "commit": None}
+                state["steps"] = [step]
+                ticket_burn.write_state(paths.state_path, state)
+
+                def commit(**kwargs):
+                    pending = kwargs["state"]["steps"][0]
+                    pending.update(state="committed", commit="test-commit")
+
+                with (
+                    patch.object(ticket_burn, "repo_root", return_value=self.tmp),
+                    patch.object(ticket_burn, "create_run_paths", return_value=paths),
+                    patch.object(ticket_burn, "ensure_preflight"),
+                    patch.object(ticket_burn, "plan_epic") as plan,
+                    patch.object(ticket_burn, "execute_sprint") as execute,
+                    patch.object(ticket_burn, "run_validations", return_value=[]) as validate,
+                    patch.object(ticket_burn, "commit_sprint", side_effect=commit) as commit_mock,
+                    redirect_stdout(StringIO()),
+                ):
+                    self.assertEqual(ticket_burn.run_burn(args), 0)
+                plan.assert_not_called()
+                execute.assert_not_called()
+                self.assertEqual(validate.call_count, int(completed_stage == "executed"))
+                commit_mock.assert_called_once()
+                result = ticket_burn.load_state(paths.state_path)
+                self.assertEqual(result["steps"][0]["commit"], "test-commit")
+                self.assertEqual(result["status"], "complete")
+
+    def test_resume_closeout_preserves_dependency_gate(self) -> None:
+        self._write_epic("EPIC-00", "backlog")
+        self._write_epic("EPIC-01", "done", depends_on=["EPIC-00"])
+        state = {"steps": [{"epic": "EPIC-01", "sprint": "SPRINT-001", "state": "executed"}]}
+        with self.assertRaisesRegex(ticket_burn.BurnError, "EPIC-00:backlog"):
+            ticket_burn.discover_epics(self.tmp, self.target, resume_state=state)
+
+    def test_resume_does_not_reopen_committed_or_archived_epics(self) -> None:
+        self._write_epic("EPIC-01", "done")
+        self._write_epic("EPIC-02", "archived")
+        state = {"steps": [
+            {"epic": "EPIC-01", "sprint": "SPRINT-001", "state": "committed", "commit": "abc"},
+            {"epic": "EPIC-02", "sprint": "SPRINT-002", "state": "executed"},
+        ]}
+        self.assertEqual(ticket_burn.discover_epics(self.tmp, self.target, resume_state=state), [])
 
     def test_ignore_dependencies_allows_targeted_epic(self) -> None:
         self._write_epic("EPIC-00", "backlog")

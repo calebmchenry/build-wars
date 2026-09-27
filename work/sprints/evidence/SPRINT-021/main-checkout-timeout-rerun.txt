@@ -1,0 +1,13 @@
+
+> build-wars@0.0.0 test:run
+> vitest run src/app/build-composer.test.tsx src/app/focused-skill-catalog.test.tsx
+
+
+ RUN  v4.1.11 /Users/calebmchenry/code/build-wars
+
+
+ Test Files  2 passed (2)
+      Tests  19 passed (19)
+   Start at  08:29:50
+   Duration  14.82s (transform 1.24s, setup 249ms, import 1.64s, tests 21.03s, environment 689ms)
+

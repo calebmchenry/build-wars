@@ -1,0 +1,27 @@
+
+> build-wars@0.0.0 verify
+> npm run format:check && npm run lint && npm run typecheck && npm run test:run && npm run build && npm run data:test && python3 -m unittest scripts/test_ticket_burn.py
+
+
+> build-wars@0.0.0 format:check
+> prettier . --check
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> build-wars@0.0.0 lint
+> eslint .
+
+
+/Users/calebmchenry/code/build-wars/work/sprints/evidence/SPRINT-021/interactive-io-scheduler.js
+  11:24  error  'File' is not defined      no-undef
+  12:5   error  'File' is not defined      no-undef
+  24:3   error  'document' is not defined  no-undef
+  25:19  error  'document' is not defined  no-undef
+  29:17  error  'document' is not defined  no-undef
+  35:21  error  'document' is not defined  no-undef
+  40:14  error  'document' is not defined  no-undef
+  44:5   error  'document' is not defined  no-undef
+
+✖ 8 problems (8 errors, 0 warnings)
+

@@ -2,8 +2,9 @@
 id: EPIC-20
 title: Markdown Guide Workspace
 track: functional
-status: in-progress
+status: done
 planned_sprint: SPRINT-021
+completed_sprint: SPRINT-021
 priority: high
 depends_on:
   - EPIC-01
@@ -47,7 +48,7 @@ The brief distinguishes user direction, implementation defaults and future work.
 It defines behaviors for context, ownership, history and source recovery that
 must not be left to accidental editor-library behavior.
 
-This epic began as backlog work authorized by the user. Product implementation is retained in the isolated SPRINT-021 worktree; acceptance remains incomplete. The current sprint assignment is recorded below; the burn workflow
+This epic began as backlog work authorized by the user. Product implementation and acceptance are complete in SPRINT-021 in the main checkout after the user-authorized relocation. The current sprint assignment is recorded below; the burn workflow
 owns numbered sprints, execution and ledger records.
 Older speculative EPIC-20 search references do not expand this milestone's scope.
 
@@ -192,4 +193,22 @@ burn. All other acceptance criteria and automated composition regressions remain
 required. This amendment supersedes the historical composition-only stop below;
 it does not mark any implementation or evidence complete.
 
+## Earlier transfer-blocked continuations (historical)
+
 BW-2001–BW-2007 are now done and linked to SPRINT-021. The complete local editor, Source, named persistence/recovery, Reader and original example are implemented. BW-2008–BW-2012 remain in progress because required actual Markdown upload/reimport/cancel/stale and template fallback upload are unverified under the browser security restriction. [Final evidence and acceptance mapping](../../sprints/evidence/SPRINT-021/phase12.md) distinguish passed checks, controlled fault injection, blocking upload gaps and the user-deferred native composition evidence. EPIC-20 remains in-progress; no completed_sprint is assigned until its criteria pass.
+
+The [main-checkout continuation](../../sprints/evidence/SPRINT-021/main-checkout-resume.md)
+retried the normal Chrome file chooser after the user reported fixing permissions.
+The upload security check again returned a dismissed permission request. Nine
+actionable SPRINT-021 items and BW-2008–BW-2012 acceptance remain open. No commit,
+original-worktree modification or security workaround was made.
+
+The [second main-checkout retry](../../sprints/evidence/SPRINT-021/main-checkout-retry2.md)
+again encountered a dismissed upload permission request. All nine actionable
+sprint items remain open; EPIC-20 stays in-progress without a completed_sprint.
+
+## Completion — SPRINT-021, 2026-09-27 UTC
+
+All twelve tickets are done with `completed_sprint: SPRINT-021`; all eight prerequisite epics remain done. The [acceptance mapping and B01–B10 matrix](../../sprints/evidence/SPRINT-021/phase12.md) and [interactive transfer evidence](../../sprints/evidence/SPRINT-021/interactive-transfer-closeout.md) satisfy the Done When criteria, including complete author/read/transfer/recovery workflows and existing-workflow compatibility. All 18 interactive observations passed; earlier upload failures remain historical. The [closeout audit](../../sprints/evidence/SPRINT-021/interactive-closeout.md) records final verification, all 68 checked sprint items and synchronized completion metadata/results.
+
+Native composition completion/cancellation/candidate evidence is unverified/deferred by user decision, never passed. Public discovery, PvX intake, publishing and the other explicit exclusions remain future scope. Production source and unrelated local edits were preserved. No commit or push was made; the outer runner owns commits.

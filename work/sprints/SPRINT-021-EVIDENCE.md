@@ -1,13 +1,24 @@
 # SPRINT-021 execution evidence
 
-Status: **implementation retained; BW-2001–BW-2007 done; required file-upload browser evidence blocked**.
-See the [final acceptance mapping and B01–B10 matrix](evidence/SPRINT-021/phase12.md).
-BW-2008–BW-2012, sprint and epic remain incomplete. The historical composition-only blockers below are superseded by the user amendment, not current blockers.
-The [native composition verification deferral](evidence/SPRINT-021/native-composition-deferral.md)
-records the exact decision and retained requirements. Native completion remains
-unverified/deferred; it is not a passed test. No ticket is completed by this
-amendment. The prior attempts and validation below remain historical evidence.
-The outer runner retains commit ownership.
+Status: **completed — BW-2001–BW-2012 and EPIC-20 done in SPRINT-021**.
+See the [final acceptance mapping and B01–B10 matrix](evidence/SPRINT-021/phase12.md),
+[interactive transfer closeout](evidence/SPRINT-021/interactive-transfer-closeout.md)
+and [final record/validation audit](evidence/SPRINT-021/interactive-closeout.md).
+All 18 interactive observations passed; the actual Markdown reimport/cancel/stale
+and game-template fallback upload gaps are closed. All 68 sprint items are checked.
+Native composition completion/cancellation/candidates remain **unverified/deferred
+by user decision**, as recorded in the [amendment](evidence/SPRINT-021/native-composition-deferral.md).
+Automated composition regression coverage remains required. No full native IME
+verification is claimed. The outer runner retains commit ownership.
+
+The [first main-checkout retry](evidence/SPRINT-021/main-checkout-resume.md),
+[second retry](evidence/SPRINT-021/main-checkout-retry2.md) and
+[archived blocked result](evidence/SPRINT-021/main-checkout-retry2-blocked-result.json)
+are historical failed attempts. Their dismissed consent results are not passing
+upload evidence. The later interactive session used the normal permitted chooser
+flow and supersedes their blocker without changing permissions or product code.
+
+[Supervisor runner-resume addendum](evidence/SPRINT-021/runner-resume-closeout.md) records the subsequent validation timeout, unchanged focused rerun and 24 passing runner regression tests. Application code and browser evidence are unchanged.
 
 ## Current phase evidence
 
@@ -20,14 +31,18 @@ The outer runner retains commit ownership.
 - [Phase 6](evidence/SPRINT-021/phase6.md): contextual references, repair and browser touch/atomic editing.
 
 - [Phase 7](evidence/SPRINT-021/phase7.md): pointer and keyboard placement, cancellation and raw moves.
-- [Phase 8](evidence/SPRINT-021/phase8.md): Source and inspected exports; file reimport gate remains open.
+- [Phase 8](evidence/SPRINT-021/phase8.md): Source and inspected exports; actual file reimport/cancel/stale coverage is completed by the interactive closeout.
 - [Phase 9](evidence/SPRINT-021/phase9.md): named records, exact recovery, mixed backups and storage failures.
 - [Phase 10](evidence/SPRINT-021/phase10.md): Reader, variant navigation/copy, narrow/zoom and Source selection.
 - [Phase 11](evidence/SPRINT-021/phase11.md): original dagger workflow, inspected download and frozen long fixture.
 - [Phase 12](evidence/SPRINT-021/phase12.md): final matrix, native clipboard regression/fix, external drops, Network and legacy transfers.
 
-These phase gates do not complete the file-upload/reimport rows. The exact [security restriction](evidence/SPRINT-021/upload-permission-gap.md) remains tracked. The sections
-below are historical and do not supersede the current phase evidence.
+- [Interactive transfer](evidence/SPRINT-021/interactive-transfer-closeout.md): actual uploads, exact source comparisons, real-file delayed-read fixture, cancellation, stale target/session rejection and sibling isolation.
+- [Final closeout](evidence/SPRINT-021/interactive-closeout.md): fresh validation, dependency/checklist audit, preservation checks and completed manifests.
+
+The [upload restriction record](evidence/SPRINT-021/upload-permission-gap.md) retains
+the earlier failures as historical. Everything below describes earlier attempts
+and does not supersede the current completion evidence above.
 
 ## Resumed execution — 2026-09-27 UTC
 
@@ -130,11 +145,11 @@ removed the 113 provisional packages. The initial offline prune without a lockfi
 failed due to missing cached metadata; rerunning with the restored lockfile passed.
 
 There are 68 actionable unchecked sprint items and zero checked items. The
-[result manifest](../runs/ticket-burn/EPIC-20/20260926T232847Z/execute-SPRINT-021-result.json)
+[initial blocked result manifest](evidence/SPRINT-021/initial-blocked-result.json)
 therefore records `blocked`, never `completed`. BW-2001 is blocked, BW-2002–BW-2012
 remain backlog, and EPIC-20/sprint/ledger remain in progress. No commits were made.
 
-## Current resume: BW-2001 gate passed
+## Earlier resume: BW-2001 gate passed (historical)
 
 [Second-resume evidence](evidence/SPRINT-021/resume2-phase1.md) records the restored
 combined slice, non-deferred actual-browser checks, grammar/capacity decisions

@@ -292,10 +292,12 @@ def discover_epics(
     *,
     include_blocked: bool = False,
     ignore_dependencies: bool = False,
+    resume_state: dict[str, Any] | None = None,
 ) -> list[TicketDoc]:
     epics = all_epics(root, target.ticket_dir)
     epic_by_id = {epic.id: epic for epic in epics}
     selected: list[TicketDoc] = []
+    pending_closeout: list[TicketDoc] = []
     for epic in epics:
         if not target_selects_epic(target, epic):
             continue
@@ -304,6 +306,21 @@ def discover_epics(
             raise BurnError(f"{epic.id} has no status")
         if status not in KNOWN_STATUSES:
             raise BurnError(f"{epic.id} has unsupported automation status {status!r}")
+        step = find_step(resume_state, epic.id) if resume_state else None
+        if (
+            status == "done"
+            and step
+            and step.get("sprint")
+            and step.get("state") in {"executed", "validated"}
+            and not step.get("commit")
+        ):
+            # The execution child may mark the epic done before runner validation
+            # or commit fails. Resume those gates before declaring the run complete.
+            blockers = dependency_blockers(epic, epic_by_id)
+            if blockers and not ignore_dependencies:
+                raise BurnError(f"cannot resume closeout for {epic.id}: {', '.join(blockers)}")
+            pending_closeout.append(epic)
+            continue
         if status in TERMINAL_STATUSES:
             continue
         if status == "blocked" and not include_blocked:
@@ -313,7 +330,7 @@ def discover_epics(
         if not ignore_dependencies and dependency_blockers(epic, epic_by_id):
             continue
         selected.append(epic)
-    return sorted(selected, key=lambda doc: issue_number(doc.id))
+    return pending_closeout + sorted(selected, key=lambda doc: issue_number(doc.id))
 
 
 def open_target_epics(root: Path, target: TicketTarget) -> list[TicketDoc]:
@@ -1136,6 +1153,7 @@ def run_burn(args: argparse.Namespace) -> int:
                 target,
                 include_blocked=args.include_blocked,
                 ignore_dependencies=args.ignore_dependencies,
+                resume_state=state if args.resume else None,
             )
             if not remaining:
                 open_epics = open_target_epics(root, target)

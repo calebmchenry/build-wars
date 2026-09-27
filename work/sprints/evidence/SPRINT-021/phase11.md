@@ -1,5 +1,9 @@
 # BW-2011 original example and integrated workflow
 
+Current status: **complete in SPRINT-021**. The [interactive transfer closeout](interactive-transfer-closeout.md) records 18 passing actual-browser observations and closes B06/B08. [Final acceptance](phase12.md) and the [closeout audit](interactive-closeout.md) govern completion. Native composition remains unverified/deferred by user decision.
+
+The phase/retry observations below are preserved as historical evidence; their pending-upload/dependency statements describe the earlier state and are superseded by this closeout.
+
 The original bundled `src/app/examples/dagger-guide.md` contains two complete Assassin snapshots, seven real skills and an optional empty eighth slot. Distinct Dagger/Critical ranks, runes/headgear, title overrides and Heroic Refrain assumptions produce independent contextual values. Both encoded game templates round-trip through the existing compatibility adapter. Prose describes an interaction exercise, not current meta advice. Sources are links only; no copied PvX prose, ratings, remote media or runtime fetching was introduced. The explicit Open example action respects dirty applied/source replacement guards.
 
 `guide-workflow.test.tsx` verifies real catalog IDs/codes and assets, independent contextual values, guarded example opening and an applied guide's replacement guard after autosave/reload. The state/file-port workflow covers writing, bound insertion, addressed Dash placement, effect edit/Undo, Source Apply, named Save As, library serialization/hydration, Reader and exact UTF-8 file reimport. File-port tests are automated coverage, not browser-upload evidence.

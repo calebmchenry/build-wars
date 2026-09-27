@@ -1,0 +1,833 @@
+The following is a diff from the previous accessibility tree for Window: "Build Wars" with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 105-109
+~101 standard window Build Wars - Part of group 🧪 Template target checks - Google Chrome, URL: 127.0.0.1:4174/, Secondary Actions: Raise
+~	102 container Build Wars - Part of group 🧪 Template target checks - Google Chrome, URL: 127.0.0.1:4174/
+~			104 toolbar
++				105 button Back
++				106 button (disabled) Forward
++				107 button Reload
++				108 button Home
++				109 container
++					110 pop up button View site information
++					111 text field (settable) Address and search bar, Value: 127.0.0.1:4174, Placeholder: Ask Google or type a URL
++					112 button Bookmark this tab
++				113 container
++					114 pop up button Google Translate
+
+Left-click to translate!
+Right-click for options.
+Has access to this site
++					115 pop up button BlockSite Block Websites & Stay Focused
+Has access to this site
++					116 pop up button React Developer Tools
+Has access to this site
++					117 pop up button Vue DevTools
+Has access to this site
++					118 pop up button Vimium
+Has access to this site
++					119 pop up button LastPass
+Has access to this site
++					120 pop up button ChatGPT
+Has access to this site
++					121 pop up button Extensions
++				122 button Caleb
++				123 pop up button Chrome
++			124 toolbar Bookmarks
++				125 toolbar Saved Tab Groups
++					126 saved tab group button  🧪 Template target checks group - Opened
++					127 button Tab groups
++				128 splitter Separator
++				129 bookmark folder button Church
++				130 bookmark folder button Leidos
++				131 bookmark button Weekly Chores - Google Docs
++			132 container
++				133 HTML content Build Wars, URL: 127.0.0.1:4174/
++					134 container
++						135 container Build Wars Guide
++							136 container Theme
++								137 text Theme
++								138 container Theme: dark
++									139 toggle button System, Value: 1
++									140 toggle button Light, Value: 0
++									141 toggle button Dark, Value: 0
++							142 container Workspace
++								143 toggle button Composer, Value: 0
++								144 button New Guide
++								145 button Open example guide
++							146 container Saving..., Help: The working draft has local changes waiting to be written.
++								147 text Saving...
++							148 container Guide workspace
++								149 container
++									150 heading Dagger workflow verified, Value: 1
++										151 text Dagger workflow verified
++									152 text pending
++									153 disclosure triangle Guide details
++										154 text Guide details
++									155 disclosure triangle Local guide library (1)
++										156 text Local guide library (
++										157 text 1
++										158 text )
++									159 button Undo guide
++									160 button (disabled) Redo guide
++									161 toggle button Write, Value: 1
++									162 toggle button Source, Value: 0
++									163 toggle button Read, Value: 0
++									164 button Import Markdown
++									165 button Download applied Markdown
++									166 text Loaded “Protection B”.
++								167 container Guide writing pane
++									168 toolbar Text formatting
++										169 button Bold
++										170 button Italic
++										171 button Heading
++										172 button Bullets
++										173 button Numbered list
++										174 button Quote
++										175 button Inline code
++										176 button Code block
++										177 button Rule
++										178 button Link
++									179 disclosure triangle Add a build at end
++										180 text Add a build at end
++									181 button Choose caret at end
++									182 container Skill placement
++										183 button Pick from catalog
++										184 button (disabled) Pick selected slot
++										185 button (disabled) Place picked at caret
++										186 button (disabled) Cancel placement
++										187 text Select a slot, then Pick selected slot; or Pick from catalog. Choose a destination slot or Place picked at caret. Tab and Enter operate these controls; Escape cancels.
++									188 text entry area (settable) Guide document, Value: A small workshop, not a meta ranking
+Use this original interaction example to compare two independent snapshots. Both bars leave slot eight open for a deliberate choice. The supported variant assumes outside help; it does not silently add that assumption to the independent variant.
+Read the chain
+Start with 
+
+Jagged Strike (Generic)⋯, follow with 
+
+Fox Fangs (Generic)⋯, then use 
+
+Death Blossom (Generic)⋯. These generic references show catalog ranges. A bound reference below uses only its named variant, even while you edit a different card.
+Independent practice
+Protection B
+Monk / Any · PVE
+
+Zealous Benediction
+
+Spirit Bond
+
+Aegis
+
+Shielding Hands
+
+Shield of Absorption
+
+Dismiss Condition
+
+Remove Hex
+8
+Empty
+Edit Protection B
+Copy Protection B template
+Duplicate Protection B
+↑
+↓
+Delete Protection B
+Independent result: 
+
+Death Blossom (Protection B)⋯. Compare the bound tooltip with the generic reference above. Title preferences are also independent: 
+
+Critical Agility (Protection B)⋯.
+Supported practice
+This comparison assumes an external Heroic Refrain at strength four. Turn it off to inspect the equipment-only preview. The larger rune carries a health tradeoff; a higher preview number alone does not make this a better build.
+Supported practice
+Assassin / Any · PVE
+
+Jagged Strike
+
+Fox Fangs
+
+Death Blossom
+
+Way of the Assassin
+
+Critical Eye
+
+Critical Agility
+
+Asuran Scan
+
+Dash
+Edit Supported practice
+Copy Supported practice template
+Duplicate Supported practice
+↑
+↓
+Delete Supported practice
+Supported result: 
+
+Death Blossom (Supported practice)⋯. Compare the bound tooltip with the generic reference above. Title preferences are also independent: 
+
+Critical Agility (Supported practice)⋯.
+Try an edit
+1. Select a card and change Dagger Mastery, its headgear or its rune.
+2. Inspect that card's bound Death Blossom reference, then the other one.
+3. Undo once and check that only the latest authored change returns.
+4. Drag a skill from the catalog into the open slot, or choose a text caret and insert a generic reference.
+5. Save locally, reload, switch to Read, and download Markdown to carry both variants and their assumptions.
+Template input
+Paste one of these codes into Add a build at end to make another independent build. A game code carries purchased ranks and skills; it does not transfer these rune, headgear, title or outside-effect choices.
+Independent: OwBi0xjM5wwwcwEnp/UD+WCAAAAA
+Supported: OwBi0pjM5wwwcwEnp/UD+WCAAAAA
+Usage and recommendations
+For a practice run, choose a single target and watch the lead, off-hand and dual-attack sequence before adding more decisions. Leave the optional slot empty until you know what problem you want it to solve. Record the reason for a utility choice beside the bar, so another reader can evaluate your intent.
+Treat the supported card as a comparison under an explicit team assumption. If that support is absent, turn the assumption off before comparing tooltips. Use the generic reference when discussing a skill without committing to either build.
+Counters and limits
+Blindness, pressure on positioning and interruptions to your attack sequence can make a planned chain unreliable. Observe what actually failed before changing a slot. An assumed-effect preview does not model uptime, enemy movement, team coordination or every combat interaction.
+This guide demonstrates the workspace. It makes no claim to a current meta ranking, optimal damage or suitability for every area. Check linked mechanics and adapt deliberately.
+Keep the complete guide
+Save the local guide or export Markdown to retain prose, references, exact build identities and bonus assumptions. Copy template is useful for the game; it is intentionally a smaller representation. No external page body, image or rating is embedded in this example.
+Practice log: 
+
+Dash (Generic)⋯
+Source review complete.
++										189 heading A small workshop, not a meta ranking, Value: 1
++											190 text A small workshop, not a meta ranking
++										191 text Use this original interaction example to compare two independent snapshots. Both bars leave slot eight open for a deliberate choice. The supported variant assumes outside help; it does not silently add that assumption to the independent variant.
++										192 heading Read the chain, Value: 2
++											193 text Read the chain
++										194 container
++											195 text Start with 
++											196 button Jagged Strike — Generic; edit reference
++												197 image Jagged Strike icon
++												198 text Jagged Strike
++												199 text (
++												200 text Generic
++												201 text )
++											202 button Change context for Jagged Strike — Generic
++											203 text , follow with 
++											204 button Fox Fangs — Generic; edit reference
++												205 image Fox Fangs icon
++												206 text Fox Fangs
++												207 text (
++												208 text Generic
++												209 text )
++											210 button Change context for Fox Fangs — Generic
++											211 text , then use 
++											212 button Death Blossom — Generic; edit reference
++												213 image Death Blossom icon
++												214 text Death Blossom
++												215 text (
++												216 text Generic
++												217 text )
++											218 button Change context for Death Blossom — Generic
++											219 text . These generic references show catalog ranges. A bound reference below uses only its named variant, even while you edit a different card.
++										220 heading Independent practice, Value: 2
++											221 text Independent practice
++										222 container Protection B
++											223 text Protection B
++											224 text Monk  / Any  ·  PVE
++											225 container Protection B eight skill slots
++												226 button Protection B slot 1: Zealous Benediction
++													227 image Zealous Benediction icon
++													228 text Zealous Benediction
++												229 button Protection B slot 2: Spirit Bond
++													230 image Spirit Bond icon
++													231 text Spirit Bond
++												232 button Protection B slot 3: Aegis
++													233 image Aegis icon
++													234 text Aegis
++												235 button Protection B slot 4: Shielding Hands
++													236 image Shielding Hands icon
++													237 text Shielding Hands
++												238 button Protection B slot 5: Shield of Absorption
++													239 image Shield of Absorption icon
++													240 text Shield of Absorption
++												241 button Protection B slot 6: Dismiss Condition
++													242 image Dismiss Condition icon
++													243 text Dismiss Condition
++												244 button Protection B slot 7: Remove Hex
++													245 image Remove Hex icon
++													246 text Remove Hex
++												247 button Protection B slot 8: Empty
++													248 text 8
++													249 text Empty
++											250 toggle button Edit Protection B, Value: 0
++											251 button Copy Protection B template
++												252 text Copy 
++												253 text Protection B
++												254 text  template
++											255 button Duplicate Protection B
++												256 text Duplicate 
++												257 text Protection B
++											258 button Move Protection B up
++											259 button Move Protection B down
++											260 button Delete Protection B
++												261 text Delete 
++												262 text Protection B
++										263 container
++											264 text Independent result: 
++											265 button Death Blossom — Protection B; edit reference
++												266 image Death Blossom icon
++												267 text Death Blossom
++												268 text (
++												269 text Protection B
++												270 text )
++											271 button Change context for Death Blossom — Protection B
++											272 text . Compare the bound tooltip with the generic reference above. Title preferences are also independent: 
++											273 button Critical Agility — Protection B; edit reference
++												274 image Critical Agility icon
++												275 text Critical Agility
++												276 text (
++												277 text Protection B
++												278 text )
++											279 button Change context for Critical Agility — Protection B
++											280 text .
++										281 heading Supported practice, Value: 2
++											282 text Supported practice
++										283 text This comparison assumes an external Heroic Refrain at strength four. Turn it off to inspect the equipment-only preview. The larger rune carries a health tradeoff; a higher preview number alone does not make this a better build.
++										284 container Supported practice
++											285 text Supported practice
++											286 text Assassin  / Any  ·  PVE
++											287 container Supported practice eight skill slots
++												288 button Supported practice slot 1: Jagged Strike
++													289 image Jagged Strike icon
++													290 text Jagged Strike
++												291 button Supported practice slot 2: Fox Fangs
++													292 image Fox Fangs icon
++													293 text Fox Fangs
++												294 button Supported practice slot 3: Death Blossom
++													295 image Death Blossom icon
++													296 text Death Blossom
++												297 button Supported practice slot 4: Way of the Assassin
++													298 image Way of the Assassin icon
++													299 text Way of the Assassin
++												300 button Supported practice slot 5: Critical Eye
++													301 image Critical Eye icon
++													302 text Critical Eye
++												303 button Supported practice slot 6: Critical Agility
++													304 image Critical Agility icon
++													305 text Critical Agility
++												306 button Supported practice slot 7: Asuran Scan
++													307 image Asuran Scan icon
++													308 text Asuran Scan
++												309 button Supported practice slot 8: Dash
++													310 image Dash icon
++													311 text Dash
++											312 toggle button Edit Supported practice, Value: 1
++											313 button Copy Supported practice template
++												314 text Copy 
++												315 text Supported practice
++												316 text  template
++											317 button Duplicate Supported practice
++												318 text Duplicate 
++												319 text Supported practice
++											320 button Move Supported practice up
++											321 button Move Supported practice down
++											322 button Delete Supported practice
++												323 text Delete 
++												324 text Supported practice
++										325 container
++											326 text Supported result: 
++											327 button Death Blossom — Supported practice; edit reference
++												328 image Death Blossom icon
++												329 text Death Blossom
++												330 text (
++												331 text Supported practice
++												332 text )
++											333 button Change context for Death Blossom — Supported practice
++											334 text . Compare the bound tooltip with the generic reference above. Title preferences are also independent: 
++											335 button Critical Agility — Supported practice; edit reference
++												336 image Critical Agility icon
++												337 text Critical Agility
++												338 text (
++												339 text Supported practice
++												340 text )
++											341 button Change context for Critical Agility — Supported practice
++											342 text .
++										343 heading Try an edit, Value: 2
++											344 text Try an edit
++										345 content list
++											346 container
++												347 AXListMarker 1. 
++												348 text Select a card and change Dagger Mastery, its headgear or its rune.
++											349 container
++												350 AXListMarker 2. 
++												351 text Inspect that card's bound Death Blossom reference, then the other one.
++											352 container
++												353 AXListMarker 3. 
++												354 text Undo once and check that only the latest authored change returns.
++											355 container
++												356 AXListMarker 4. 
++												357 text Drag a skill from the catalog into the open slot, or choose a text caret and insert a generic reference.
++											358 container
++												359 AXListMarker 5. 
++												360 text Save locally, reload, switch to Read, and download Markdown to carry both variants and their assumptions.
++										361 heading Template input, Value: 2
++											362 text Template input
++										363 text Paste one of these codes into Add a build at end to make another independent build. A game code carries purchased ranks and skills; it does not transfer these rune, headgear, title or outside-effect choices.
++										364 text Independent: OwBi0xjM5wwwcwEnp/UD+WCAAAAA
+Supported: OwBi0pjM5wwwcwEnp/UD+WCAAAAA
++										365 heading Usage and recommendations, Value: 2
++											366 text Usage and recommendations
++										367 text For a practice run, choose a single target and watch the lead, off-hand and dual-attack sequence before adding more decisions. Leave the optional slot empty until you know what problem you want it to solve. Record the reason for a utility choice beside the bar, so another reader can evaluate your intent.
++										368 text Treat the supported card as a comparison under an explicit team assumption. If that support is absent, turn the assumption off before comparing tooltips. Use the generic reference when discussing a skill without committing to either build.
++										369 heading Counters and limits, Value: 2
++											370 text Counters and limits
++										371 text Blindness, pressure on positioning and interruptions to your attack sequence can make a planned chain unreliable. Observe what actually failed before changing a slot. An assumed-effect preview does not model uptime, enemy movement, team coordination or every combat interaction.
++										372 text This guide demonstrates the workspace. It makes no claim to a current meta ranking, optimal damage or suitability for every area. Check linked mechanics and adapt deliberately.
++										373 heading Keep the complete guide, Value: 2
++											374 text Keep the complete guide
++										375 text Save the local guide or export Markdown to retain prose, references, exact build identities and bonus assumptions. Copy template is useful for the game; it is intentionally a smaller representation. No external page body, image or rating is embedded in this example.
++										376 container
++											377 text Practice log: 
++											378 button Dash — Generic; edit reference
++												379 image Dash icon
++												380 text Dash
++												381 text (
++												382 text Generic
++												383 text )
++											384 button Change context for Dash — Generic
++										385 text Source review complete.
++									386 container Selected build inspector
++										387 heading Editing Supported practice, Value: 2
++											388 text Editing  Supported practice
++										389 button Close build inspector
++										390 container Build header
++											391 text field (settable) Build name, Value: Supported practice
++											392 container
++												393 checkbox PvP, Value: 0
++												394 text PvP
++											395 container
++												396 text Primary
++												397 pop up button Primary, Value: Assassin
++													398 (selected) Assassin
++												399 pop up button Primary profession: Assassin
++													400 image Assassin icon, Help: Assassin icon (remote-media:gww-icon:assassin)
++											401 container
++												402 text Secondary
++												403 pop up button Secondary, Value: Any
++													404 (selected) Any
++												405 pop up button Secondary profession: Any
++													406 image Any profession
++										407 container Attributes (42 unused points)
++											408 button Collapse attributes
++											409 heading Attributes (42 unused points), Value: 2
++												410 text Attributes ( 42 unused points )
++											411 container Attribute point spend
++												412 text 158/200
++											413 container
++												414 container Headgear bonus choices
++													415 button Decrease Dagger Mastery, Help: Refund 13 points
++														416 text 13
++													417 button Increase Dagger Mastery, Help: Invest 16 points
++														418 text 16
++													419 button Dagger Mastery: effective rank 17, base 10. Show rank breakdown
++														420 text 17
++													421 container Assassin
++														422 text Dagger Mastery
++														423 text Assassin
++													424 container Dagger Mastery rune
++														425 container
++															426 text Dagger Mastery  rune
++														427 container No rune bonus
++															428 radio button Dagger Mastery rune None, Value: 0
++															429 text None
++														430 container Rune of Minor Dagger Mastery: +1; 0 maximum Health
++															431 radio button Rune of Minor Dagger Mastery +1; 0 maximum Health, Value: 0
++														432 container Rune of Major Dagger Mastery: +2; -35 maximum Health
++															433 radio button Rune of Major Dagger Mastery +2; -35 maximum Health, Value: 0
++														434 container Rune of Superior Dagger Mastery: +3; -75 maximum Health
++															435 radio button Rune of Superior Dagger Mastery +3; -75 maximum Health, Value: 1
++													436 container Dagger Mastery headgear +1. Select again to clear.
++														437 radio button Dagger Mastery headgear +1, Value: 0
++														438 text +1 headgear
++													439 button Increase Deadly Arts, Help: Invest 1 points
++														440 text 1
++													441 button Deadly Arts: effective rank 4, base 0. Show rank breakdown
++														442 text 4
++													443 container Assassin
++														444 text Deadly Arts
++														445 text Assassin
++													446 container Deadly Arts rune
++														447 container
++															448 text Deadly Arts  rune
++														449 container No rune bonus
++															450 radio button Deadly Arts rune None, Value: 1
++															451 text None
++														452 container Rune of Minor Deadly Arts: +1; 0 maximum Health
++															453 radio button Rune of Minor Deadly Arts +1; 0 maximum Health, Value: 0
++														454 container Rune of Major Deadly Arts: +2; -35 maximum Health
++															455 radio button Rune of Major Deadly Arts +2; -35 maximum Health, Value: 0
++														456 container Rune of Superior Deadly Arts: +3; -75 maximum Health
++															457 radio button Rune of Superior Deadly Arts +3; -75 maximum Health, Value: 0
++													458 container Deadly Arts headgear +1. Select again to clear.
++														459 radio button Deadly Arts headgear +1, Value: 0
++														460 text +1 headgear
++													461 button Increase Shadow Arts, Help: Invest 1 points
++														462 text 1
++													463 button Shadow Arts: effective rank 4, base 0. Show rank breakdown
++														464 text 4
++													465 container Assassin
++														466 text Shadow Arts
++														467 text Assassin
++													468 container Shadow Arts rune
++														469 container
++															470 text Shadow Arts  rune
++														471 container No rune bonus
++															472 radio button Shadow Arts rune None, Value: 1
++															473 text None
++														474 container Rune of Minor Shadow Arts: +1; 0 maximum Health
++															475 radio button Rune of Minor Shadow Arts +1; 0 maximum Health, Value: 0
++														476 container Rune of Major Shadow Arts: +2; -35 maximum Health
++															477 radio button Rune of Major Shadow Arts +2; -35 maximum Health, Value: 0
++														478 container Rune of Superior Shadow Arts: +3; -75 maximum Health
++															479 radio button Rune of Superior Shadow Arts +3; -75 maximum Health, Value: 0
++													480 container Shadow Arts headgear +1. Select again to clear.
++														481 radio button Shadow Arts headgear +1, Value: 0
++														482 text +1 headgear
++													483 button Decrease Critical Strikes, Help: Refund 20 points
++														484 text 20
++													485 button Critical Strikes: effective rank 17, base 12. Show rank breakdown
++														486 text 17
++													487 container Assassin
++														488 text Critical Strikes
++														489 text Assassin
++													490 container Critical Strikes rune
++														491 container
++															492 text Critical Strikes  rune
++														493 container No rune bonus
++															494 radio button Critical Strikes rune None, Value: 1
++															495 text None
++														496 container Rune of Minor Critical Strikes: +1; 0 maximum Health
++															497 radio button Rune of Minor Critical Strikes +1; 0 maximum Health, Value: 0
++														498 container Rune of Major Critical Strikes: +2; -35 maximum Health
++															499 radio button Rune of Major Critical Strikes +2; -35 maximum Health, Value: 0
++														500 container Rune of Superior Critical Strikes: +3; -75 maximum Health
++															501 radio button Rune of Superior Critical Strikes +3; -75 maximum Health, Value: 0
++													502 container Critical Strikes headgear +1. Select again to clear.
++														503 radio button Critical Strikes headgear +1, Value: 1
++														504 text +1 headgear
++												505 container Assumed attribute effects
++													506 button  Assumed effects (1 active)
++														507 text  Assumed effects (
++														508 text 1
++														509 text  active)
++										510 disclosure triangle Budget and title ranks
++											511 text Budget and title ranks
++										512 container
++											513 text Card template code
++											514 text field (settable) Card template code, Value: OwBi0pjM5wwwcwEnp/UD+WOBBAAA
++										515 button Apply card template
++										516 button Copy card template
++										517 button Load card template
++										518 button Save card template
++										519 button Download card template
++										520 container
++											521 text Upload card template
++											522 button Upload card template: No file chosen
++										523 text Game codes contain professions, purchased ranks and skills. Guide text, references, rune/headgear, title and assumed-effect choices stay in Markdown/local guides.
++										524 disclosure triangle Build validation
++											525 text Build validation
++								526 container Guide catalog
++									527 text No insertion target — choose a text caret
++									528 container
++										529 text New reference context
++										530 pop up button New reference context, Value: Generic — catalog ranges
++											531 (selected) Generic — catalog ranges
++									532 container Skills Catalog
++										533 heading Skills Catalog, Value: 2
++											534 text Skills Catalog
++										535 tab group Catalog tabs
++											536 tab (selected) Skills, Value: 1
++										537 container
++											538 container Mode: PvE
++												539 text Mode: PvE
++												540 button Remove Mode: PvE filter
++											541 search text field (settable) Search, Placeholder: Search...
++										542 pop up button Skill display: Rows
++										543 button Show skill filters (1 active)
++										544 container
++											545 container Attribute group display options
++												546 button Expand all
++												547 button (disabled) Collapse all
++											548 button Expand Air Magic (30 Skills)
++												549 text Air Magic
++												550 text  (
++												551 text 30 Skills
++												552 text )
++											553 button Expand Axe Mastery (19 Skills)
++												554 text Axe Mastery
++												555 text  (
++												556 text 19 Skills
++												557 text )
++											558 button Expand Beast Mastery (41 Skills)
++												559 text Beast Mastery
++												560 text  (
++												561 text 41 Skills
++												562 text )
++											563 button Expand Blood Magic (40 Skills)
++												564 text Blood Magic
++												565 text  (
++												566 text 40 Skills
++												567 text )
++											568 button Expand Channeling Magic (29 Skills)
++												569 text Channeling Magic
++												570 text  (
++												571 text 29 Skills
++												572 text )
++											573 button Expand Command (19 Skills)
++												574 text Command
++												575 text  (
++												576 text 19 Skills
++												577 text )
++											578 button Expand Communing (23 Skills)
++												579 text Communing
++												580 text  (
++												581 text 23 Skills
++												582 text )
++											583 button Expand Critical Strikes (18 Skills)
++												584 text Critical Strikes
++												585 text  (
++												586 text 18 Skills
++												587 text )
++											588 button Expand Curses (49 Skills)
++												589 text Curses
++												590 text  (
++												591 text 49 Skills
++												592 text )
++											593 button Expand Dagger Mastery (28 Skills)
++												594 text Dagger Mastery
++												595 text  (
++												596 text 28 Skills
++												597 text )
++											598 button Expand Deadly Arts (29 Skills)
++												599 text Deadly Arts
++												600 text  (
++												601 text 29 Skills
++												602 text )
++											603 button Expand Death Magic (42 Skills)
++												604 text Death Magic
++												605 text  (
++												606 text 42 Skills
++												607 text )
++											608 button Expand Divine Favor (25 Skills)
++												609 text Divine Favor
++												610 text  (
++												611 text 25 Skills
++												612 text )
++											613 button Expand Domination Magic (41 Skills)
++												614 text Domination Magic
++												615 text  (
++												616 text 41 Skills
++												617 text )
++											618 button Expand Earth Magic (34 Skills)
++												619 text Earth Magic
++												620 text  (
++												621 text 34 Skills
++												622 text )
++											623 button Expand Earth Prayers (17 Skills)
++												624 text Earth Prayers
++												625 text  (
++												626 text 17 Skills
++												627 text )
++											628 button Expand Energy Storage (13 Skills)
++												629 text Energy Storage
++												630 text  (
++												631 text 13 Skills
++												632 text )
++											633 button Expand Expertise (20 Skills)
++												634 text Expertise
++												635 text  (
++												636 text 20 Skills
++												637 text )
++											638 button Expand Fast Casting (11 Skills)
++												639 text Fast Casting
++												640 text  (
++												641 text 11 Skills
++												642 text )
++											643 button Expand Fire Magic (33 Skills)
++												644 text Fire Magic
++												645 text  (
++												646 text 33 Skills
++												647 text )
++											648 button Expand Hammer Mastery (22 Skills)
++												649 text Hammer Mastery
++												650 text  (
++												651 text 22 Skills
++												652 text )
++											653 button Expand Healing Prayers (38 Skills)
++												654 text Healing Prayers
++												655 text  (
++												656 text 38 Skills
++												657 text )
++											658 button Expand Illusion Magic (34 Skills)
++												659 text Illusion Magic
++												660 text  (
++												661 text 34 Skills
++												662 text )
++											663 button Expand Inspiration Magic (40 Skills)
++												664 text Inspiration Magic
++												665 text  (
++												666 text 40 Skills
++												667 text )
++											668 button Expand Leadership (23 Skills)
++												669 text Leadership
++												670 text  (
++												671 text 23 Skills
++												672 text )
++											673 button Expand Marksmanship (34 Skills)
++												674 text Marksmanship
++												675 text  (
++												676 text 34 Skills
++												677 text )
++											678 button Expand Motivation (20 Skills)
++												679 text Motivation
++												680 text  (
++												681 text 20 Skills
++												682 text )
++											683 button Expand Mysticism (28 Skills)
++												684 text Mysticism
++												685 text  (
++												686 text 28 Skills
++												687 text )
++											688 button Expand Protection Prayers (36 Skills)
++												689 text Protection Prayers
++												690 text  (
++												691 text 36 Skills
++												692 text )
++											693 button Expand Restoration Magic (32 Skills)
++												694 text Restoration Magic
++												695 text  (
++												696 text 32 Skills
++												697 text )
++											698 button Expand Scythe Mastery (17 Skills)
++												699 text Scythe Mastery
++												700 text  (
++												701 text 17 Skills
++												702 text )
++											703 button Expand Shadow Arts (24 Skills)
++												704 text Shadow Arts
++												705 text  (
++												706 text 24 Skills
++												707 text )
++											708 button Expand Smiting Prayers (31 Skills)
++												709 text Smiting Prayers
++												710 text  (
++												711 text 31 Skills
++												712 text )
++											713 button Expand Soul Reaping (10 Skills)
++												714 text Soul Reaping
++												715 text  (
++												716 text 10 Skills
++												717 text )
++											718 button Expand Spawning Power (26 Skills)
++												719 text Spawning Power
++												720 text  (
++												721 text 26 Skills
++												722 text )
++											723 button Expand Spear Mastery (19 Skills)
++												724 text Spear Mastery
++												725 text  (
++												726 text 19 Skills
++												727 text )
++											728 button Expand Strength (39 Skills)
++												729 text Strength
++												730 text  (
++												731 text 39 Skills
++												732 text )
++											733 button Expand Swordsmanship (19 Skills)
++												734 text Swordsmanship
++												735 text  (
++												736 text 19 Skills
++												737 text )
++											738 button Expand Tactics (30 Skills)
++												739 text Tactics
++												740 text  (
++												741 text 30 Skills
++												742 text )
++											743 button Expand Water Magic (30 Skills)
++												744 text Water Magic
++												745 text  (
++												746 text 30 Skills
++												747 text )
++											748 button Expand Wilderness Survival (40 Skills)
++												749 text Wilderness Survival
++												750 text  (
++												751 text 40 Skills
++												752 text )
++											753 button Expand Wind Prayers (23 Skills)
++												754 text Wind Prayers
++												755 text  (
++												756 text 23 Skills
++												757 text )
++											758 button Expand Kurzick (10 Skills)
++												759 text Kurzick
++												760 text  (
++												761 text 10 Skills
++												762 text )
++											763 button Expand Luxon (10 Skills)
++												764 text Luxon
++												765 text  (
++												766 text 10 Skills
++												767 text )
++											768 button Expand Lightbringer (1 Skill)
++												769 text Lightbringer
++												770 text  (
++												771 text 1 Skill
++												772 text )
++											773 button Expand Sunspear (10 Skills)
++												774 text Sunspear
++												775 text  (
++												776 text 10 Skills
++												777 text )
++											778 button Expand Asura (12 Skills)
++												779 text Asura
++												780 text  (
++												781 text 12 Skills
++												782 text )
++											783 button Expand Deldrimor (14 Skills)
++												784 text Deldrimor
++												785 text  (
++												786 text 14 Skills
++												787 text )
++											788 button Expand Ebon Vanguard (12 Skills)
++												789 text Ebon Vanguard
++												790 text  (
++												791 text 12 Skills
++												792 text )
++											793 button Expand Norn (12 Skills)
++												794 text Norn
++												795 text  (
++												796 text 12 Skills
++												797 text )
++											798 button Expand No attribute (73 Skills)
++												799 text No attribute
++												800 text  (
++												801 text 73 Skills
++												802 text )
++						803 container Test file IO scheduler
++							804 button Hold next real file read
++							805 button Release held file read
++							806 container File IO scheduling status
++								807 text Released text completion for Protection B.txt (24 bytes)
++			808 container Infobar Container
++				809 container Infobar
++					810 container
++						811 text "ChatGPT" started debugging this browser
++						812 button Cancel
++					813 button Close
++			814 pop up button Tab Search
++			815 container
++				816 tab group
++					817 tab (settable, boolean) Extensions - ChatGPT - Memory usage - 173 MB, Value: off
++						818 button Close
++					819 tab group  group 🧪 Template target checks - 2 Tabs, •  Build Wars, •  Build Wars - Expanded
++					820 tab (settable, boolean) Build Wars - Part of group 🧪 Template target checks - Memory usage - 256 MB, Value: off
++						821 button Close
++					822 tab (selected, settable, boolean) Build Wars - Part of group 🧪 Template target checks - Memory usage - 231 MB, Value: on
++						823 button Close
++			824 button New Tab
++			825 button Open Gemini in Chrome
++	826 close button
++	827 full screen button Help: this button also has an action to zoom the window, Secondary Actions: zoom the window
++	828 minimize button
+The focused UI element is 805 button Release held file read

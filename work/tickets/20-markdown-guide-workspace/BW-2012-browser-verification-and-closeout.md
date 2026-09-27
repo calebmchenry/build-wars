@@ -2,8 +2,9 @@
 id: BW-2012
 title: Browser Verification and Closeout
 epic: EPIC-20
-status: in_progress
+status: done
 planned_sprint: SPRINT-021
+completed_sprint: SPRINT-021
 priority: high
 depends_on:
   - BW-2001
@@ -51,10 +52,9 @@ Run npm run verify and git diff --check at closeout, alongside the recorded actu
 ## Design Authority
 
 [Markdown Guide Workspace](../../../compendium/guide-workspace.md) and
-[EPIC-20](EPIC.md). This is planned work; the burn runner assigns the executing
-sprint and records completion evidence.
+[EPIC-20](EPIC.md). Completed in [SPRINT-021](../../sprints/SPRINT-021.md); evidence and retained follow-ups are recorded below.
 
-## Planning
+## Planning (historical)
 
 Planned in [SPRINT-021](../../sprints/SPRINT-021.md), Phase 12.
 The sprint preserves this ticket's dependencies, acceptance criteria and verification gates.
@@ -69,6 +69,21 @@ burn. All other acceptance criteria and automated composition regressions remain
 required. This amendment supersedes the historical composition-only stop below;
 it does not mark any implementation or evidence complete.
 
-## Final SPRINT-021 execution record
+## Earlier blocked execution record (historical)
 
 Implementation and completed checks are linked in the [final acceptance matrix](../../sprints/evidence/SPRINT-021/phase12.md). Acceptance remains in progress because required browser file uploads/reimports and incoming ticket gates are open. The [upload permission gap](../../sprints/evidence/SPRINT-021/upload-permission-gap.md) is separate from native composition, which remains unverified/deferred by user decision. No completion or commit is claimed.
+
+The [main-checkout retry](../../sprints/evidence/SPRINT-021/main-checkout-resume.md)
+reached the normal file chooser after the reported permission fix, but the upload
+security check again reported a dismissed permission request. Fresh repository
+validation passes; required upload evidence and incoming acceptance remain open.
+
+The [second main-checkout retry](../../sprints/evidence/SPRINT-021/main-checkout-retry2.md)
+again failed at the normal upload security check. Required upload evidence and
+dependent acceptance remain open; no additional ticket completion is claimed.
+
+## Completion — SPRINT-021, 2026-09-27 UTC
+
+The [final acceptance and B01–B10 matrix](../../sprints/evidence/SPRINT-021/phase12.md) combines retained native browser evidence with [18 passing interactive transfer checks](../../sprints/evidence/SPRINT-021/interactive-transfer-checks.json). BW-2001–BW-2011 are complete in dependency order. [Final closeout](../../sprints/evidence/SPRINT-021/interactive-closeout.md) records repository verification, all 68 checked sprint items and synchronized ticket/epic/ledger/manifests.
+
+All incoming dependencies and this ticket's acceptance criteria are satisfied. Native composition remains unverified/deferred by user decision; its automated regressions remain covered. Earlier upload failures above are historical, not passing evidence. No commit or push was made; the outer runner owns commits.

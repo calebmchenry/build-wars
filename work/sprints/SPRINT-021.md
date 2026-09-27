@@ -1,8 +1,8 @@
 ---
 id: SPRINT-021
 title: Markdown Guide Workspace
-status: in_progress
-execution_status: blocked
+status: completed
+execution_status: completed
 approval: auto-approved
 source_target: EPIC-20
 source_epic: EPIC-20
@@ -38,7 +38,7 @@ Historical blocked attempts below do not reinstate this deferred check.
 
 ## Current execution outcome
 
-Implementation and independent browser checks are complete through the original local guide workflow; [final acceptance mapping](evidence/SPRINT-021/phase12.md) records the evidence. Actual file uploads/reimports remain blocked by the [browser security/permission gate](evidence/SPRINT-021/upload-permission-gap.md). BW-2001–BW-2007 are done; BW-2008–BW-2012 and EPIC-20 remain in progress. No native composition completion is claimed, no patch is re-archived in place of implementation, and no completed result is written with open items.
+SPRINT-021 and EPIC-20 are complete. BW-2001–BW-2012 meet their acceptance criteria in dependency order; all 68 sprint items are checked. The [final acceptance mapping](evidence/SPRINT-021/phase12.md) combines the retained phase evidence with [18 passing interactive transfer observations](evidence/SPRINT-021/interactive-transfer-closeout.md), closing B06/B08. The [closeout audit](evidence/SPRINT-021/interactive-closeout.md) records the nine newly completed items, repository validation and synchronized metadata. Earlier blocked attempts remain historical. Native composition remains **unverified/deferred by user decision**. Production source and unrelated local edits are preserved; the outer runner owns commits.
 
 ## Overview
 
@@ -287,11 +287,11 @@ Complete incoming ticket dependencies and the phase gate before accepting a tick
 - [x] Implement all source lifecycle transitions with explicit Apply/Keep Editing/Discard and line/column diagnostics. Validate the whole candidate, canonical growth and captured revision before one commit.
 - [x] Add validated Markdown upload/paste and self-contained download. Preserve prior document/buffer on cancellation, failed/stale reads or unsupported input; distinguish raw versus last-applied export.
 - [x] Apply identical inert-content, size/depth/count, clipboard and URL rules to every entry path. Preserve exact opaque content or keep recoverable source mode; never partially apply.
-- [ ] Test visual → source → Apply → undo/redo → reopen source and export/reimport, malformed/unknown/conflicting inputs, canonical size growth, code literalness and invalid-source repair. Browser evidence must inspect downloaded bytes and reimport them, including canceled import and unapplied read/visual transitions.
+- [x] Test visual → source → Apply → undo/redo → reopen source and export/reimport, malformed/unknown/conflicting inputs, canonical size growth, code literalness and invalid-source repair. Browser evidence must inspect downloaded bytes and reimport them, including canceled import and unapplied read/visual transitions.
 
 **Gate:** In-memory source recovery and portable semantic/opaque fidelity pass. Reload/autosave integration is explicitly completed by BW-2009, not a circular prerequisite for this ticket.
 
-Implementation validation: 674 tests/lint/build passed. [Phase 8 evidence](evidence/SPRINT-021/phase8.md) records source/download checks; required browser file reimport is pending a dismissed upload permission. Ticket acceptance remains open.
+Implementation validation: 674 tests/lint/build passed at Phase 8. [Phase 8 evidence](evidence/SPRINT-021/phase8.md) records source/download checks; [interactive transfer closeout](evidence/SPRINT-021/interactive-transfer-closeout.md) completes actual reimport, invalid/raw and zero-build files, cancellation and stale reads. BW-2008 acceptance is complete.
 
 ### Phase 9: Named local save, migration and recovery — BW-2009
 
@@ -305,7 +305,7 @@ Implementation validation: 674 tests/lint/build passed. [Phase 8 evidence](evide
 
 **Gate:** Complete guide/source state and legacy records survive all durability paths. No protected stored payload is overwritten and no old-envelope guide write remains possible.
 
-Own Phase 9 evidence: [durability validation](evidence/SPRINT-021/phase9.md). Upstream BW-2008 upload acceptance remains open; dependent ticket statuses stay in progress.
+Phase 9 evidence: [durability validation](evidence/SPRINT-021/phase9.md). BW-2008 now passes its upload gate; BW-2009 acceptance and its incoming dependencies are complete.
 
 ### Phase 10: Reading and variant navigation — BW-2010
 
@@ -324,8 +324,8 @@ Own Phase 9 evidence: [durability validation](evidence/SPRINT-021/phase9.md). Up
 
 - [x] Author original two-variant dagger-themed prose with headings, generic/bound references, optional slots, template input, distinct rune/headgear/title/effect values, usage, recommendations, counters and source links. Verify real IDs/codes; label it an interaction example rather than current meta advice.
 - [x] Load the example only through an explicit guarded action, preserving existing drafts. Use approved local assets and linked-only provenance without copied PvX prose/ratings, remote images or live requests.
-- [ ] Integrate write → reference/drop → build edits → undo → source → save/reload → read → export/reimport, including zero-build, raw/unresolved/detached, ID collision, delayed IO and copied-invalid-source cases.
-- [ ] Finalize the frozen long fixture and representative actual-browser end-to-end run for BW-2012. Assert meaningful state/context equality and inspect transfer bytes.
+- [x] Integrate write → reference/drop → build edits → undo → source → save/reload → read → export/reimport, including zero-build, raw/unresolved/detached, ID collision, delayed IO and copied-invalid-source cases.
+- [x] Finalize the frozen long fixture and representative actual-browser end-to-end run for BW-2012. Assert meaningful state/context equality and inspect transfer bytes.
 
 **Gate:** One repeatable original workflow proves both independent variants and differing reference values survive the full local author/read/transfer journey. Source policy and non-destructive loading pass.
 
@@ -334,7 +334,7 @@ Own Phase 9 evidence: [durability validation](evidence/SPRINT-021/phase9.md). Up
 **Files:** future `work/sprints/SPRINT-021-EVIDENCE.md`, selected durable captures under `work/sprints/evidence/SPRINT-021/`, raw logs under `work/runs/SPRINT-021/`; compendium/README as warranted, source tickets/epic, sprint, ledger and execution result records.
 
 - [x] Map every ticket acceptance criterion to implementation and focused evidence. Re-run early browser scenarios against the final integrated production preview, or document why unchanged evidence still applies.
-- [ ] Execute every non-deferred scenario in the browser matrix below; record environment, fixture, actions, expected/actual outcomes and artifact paths. Fix regressions and repeat affected checks.
+- [x] Execute every non-deferred scenario in the browser matrix below; record environment, fixture, actions, expected/actual outcomes and artifact paths. Fix regressions and repeat affected checks.
 - [x] Run final pinned-toolchain `npm run verify` and `git diff --check`; record actual results. Re-run final verification after any resulting code fixes.
 - [x] Update shipped documentation and retain discovery/PvX intake/publishing follow-ups. Mark tickets done only with their evidence; check completed sprint items individually and synchronize epic/sprint/ledger/result status through the execution contract. The outer runner owns commits.
 
@@ -387,11 +387,11 @@ Do not treat the supplied baseline, a successful download click, static screensh
 - [x] BW-2005 independent complete cards and existing control/rule reuse work; identity/name, targeted async template IO, cancellation and raw-fact preservation pass.
 - [x] BW-2006 generic/bound/local-missing/detached references remain portable and correct through selection, moves, delete/undo, explicit repair and accessible tooltips.
 - [x] BW-2007 every drop/keyboard/click behavior passes with at most one authored transaction, safe cancellation, explicit inactive targeting and preserved standalone behavior.
-- [ ] BW-2008 atomic source Apply/recovery and inspected Markdown export/reimport preserve supported meaning and opaque bytes; no partial or stale replacement occurs.
-- [ ] BW-2009 named durability, migration, mixed backups, source recovery, catalog-independent autosave/pagehide and truthful failure/aggregate-capacity behavior preserve existing records.
-- [ ] BW-2010 reading/navigation/copy uses the same applied meaning, preserves source recovery and has no mutation/dirty/history side effects.
-- [ ] BW-2011 original two-variant and long fixtures prove the integrated local workflow with approved assets, verified identities and no copied runtime prose or remote fetch.
-- [ ] BW-2012 all non-deferred B01–B10 actual-browser evidence and existing regressions pass against the final implementation; no required scenario is substituted or silently waived.
+- [x] BW-2008 atomic source Apply/recovery and inspected Markdown export/reimport preserve supported meaning and opaque bytes; no partial or stale replacement occurs.
+- [x] BW-2009 named durability, migration, mixed backups, source recovery, catalog-independent autosave/pagehide and truthful failure/aggregate-capacity behavior preserve existing records.
+- [x] BW-2010 reading/navigation/copy uses the same applied meaning, preserves source recovery and has no mutation/dirty/history side effects.
+- [x] BW-2011 original two-variant and long fixtures prove the integrated local workflow with approved assets, verified identities and no copied runtime prose or remote fetch.
+- [x] BW-2012 all non-deferred B01–B10 actual-browser evidence and existing regressions pass against the final implementation; no required scenario is substituted or silently waived.
 - [x] Pinned `npm run verify` and `git diff --check` pass after final fixes, with actual results linked.
 - [x] All ticket acceptance, epic/sprint checklists, ledger and execution result agree; the outer runner retains commit ownership and explicit future scope remains open.
 
@@ -432,7 +432,7 @@ All eight prerequisite epics were inspected as done: EPIC-01, EPIC-04, EPIC-05, 
 | BW-2011 / 11   | BW-2005, BW-2006, BW-2007, BW-2008, BW-2009, BW-2010 |
 | BW-2012 / 12   | BW-2001 through BW-2011                              |
 
-Execution needs the existing Node >=22.11.0, pinned npm >=11.10.1 and provisioned `.venv-data`, approved catalogs/local assets, browser access and permission-preserving dependency installation. Reuse `--approve-for-me` for any execution lanes as supported; never bypass approval/sandbox controls or change authentication to force a gate. Stay in the isolated guide-workspace-burn worktree; do not modify the main checkout. The outer runner owns commits.
+Execution needs the existing Node >=22.11.0, pinned npm >=11.10.1 and provisioned `.venv-data`, approved catalogs/local assets, browser access and permission-preserving dependency installation. Reuse `--approve-for-me` for any execution lanes as supported; never bypass approval/sandbox controls or change authentication to force a gate. The user's 2026-09-27 relocation instruction supersedes the original worktree restriction: work only in `/Users/calebmchenry/code/build-wars`, preserving its existing edits, and do not modify the original guide-workspace-burn worktree. Historical launcher records retain their original paths. The outer runner owns commits.
 
 ## Open Questions
 
@@ -471,7 +471,7 @@ evidence remains historical. No ticket is done, all 68 actionable items remain
 open, and sprint/ledger/epic remain in progress with execution blocked. Native
 Chrome permission does not need to be requested again. No commits were made.
 
-## Current execution progress — 2026-09-27 UTC
+## Earlier execution progress — 2026-09-27 UTC (historical)
 
 Orchestrated strategy, no commits. BW-2001 passed its non-deferred feasibility
 gate; [current evidence](evidence/SPRINT-021/resume2-phase1.md) and the accepted ADR

@@ -1,0 +1,7 @@
+[17:05:01] sprint-checklist: no unchecked task items in work/sprints/SPRINT-021.md
+PASS: 68/68 sprint items checked, nine reviewed items completed individually, all 12 tickets and EPIC-20 done with SPRINT-021 links; eight prerequisite epics and ticket dependency DAG satisfied; ledger completed.
+Traceback (most recent call last):
+  File "/Users/calebmchenry/code/build-wars/work/sprints/evidence/SPRINT-021/interactive-closeout-audit.py", line 76, in <module>
+    assert '1a1c4eb9-48ee-4477-b25a-4bf0eb009bc9' in (EVIDENCE / 'interactive-markdown-new-session.txt').read_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

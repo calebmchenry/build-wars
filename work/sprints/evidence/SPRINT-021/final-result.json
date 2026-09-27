@@ -1,5 +1,5 @@
 {
-  "status": "blocked",
+  "status": "completed",
   "sprint_id": "SPRINT-021",
   "source_target": "EPIC-20",
   "source_epic": "EPIC-20",
@@ -9,33 +9,35 @@
       "status": "passed"
     },
     {
-      "command": "git diff --check",
-      "status": "passed"
-    },
-    {
       "command": "PATH=\"$PWD/work/runs/toolchain/node_modules/.bin:$PATH\" work/runs/toolchain/node_modules/.bin/npm run format:check",
       "status": "passed"
     },
     {
-      "command": "python3 work/runs/SPRINT-021/check-execution-records.py",
+      "command": "python3 work/sprints/evidence/SPRINT-021/interactive-closeout-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m unittest scripts/test_ticket_burn.py (supervisor resume regression suite: 24 tests)",
       "status": "passed"
     }
   ],
   "changed_files_summary": [
-    "src/domain/guide*, src/guide/*, guide-build-adapter and contract/codec fixtures: neutral semantic document, strict versioned Markdown grammar, complete Build v4 snapshots, exact opaque retention, identity rules and measured capacity limits.",
-    "src/app/guide-state/history/editor-adapter/clipboard/placement and components/guide: rendered authoring, metadata, independent embedded builds, shared inspector, contextual skill references, explicit pointer/keyboard placement, one bounded native/keyboard undo history and generation-safe clipboard references.",
-    "src/app/guide-files/template, Source controls and tests: atomic Apply with recoverable raw text, stale captured IO guards, template operations, inert input handling and inspected raw/applied downloads. Actual file-upload acceptance remains blocked.",
-    "src/app/persistence-schema, local-storage, backup-restore, workspace-state, guide-autosave and library controls: guide snapshot v1, backward-compatible library/backup v3, named Save/Open/duplicate, exact invalid-source recovery, mixed backups, anti-wipe/conflict/quota behavior.",
-    "GuideReader, GuideNavigation, guide-navigation and share-url: read-only applied document, details and tooltips, stable namespaced anchors, correct template copy and Source selection/focus restoration.",
-    "src/app/examples, guide-workflow tests and test/fixtures/guides/long-v1.md: original independent dagger variants, integrated automated workflow, frozen 70,233-byte long fixture and actual-browser workflow/download evidence.",
-    "package.json/package-lock.json, AppEntry and main: pinned accepted editor/parser dependency set and lazy guide workspace integration; existing composer and retained build-set/party workflows preserved.",
-    "compendium/guide-workspace.md, ADR 0003, sprint/evidence, tickets and ledger: accepted contracts, final B01–B10 mapping, full validation output, seven completed ticket links, exact unresolved upload gate and preserved historical/native-composition deferral evidence."
+    "Retained the complete SPRINT-021 implementation: neutral guide model/codec, full independent Build v4 snapshots, rendered authoring, catalog/contextual references, explicit placement, unified history, Source/Markdown transfer, local persistence/recovery, Reader/navigation and original/long examples. No product source or dependency change during this closeout.",
+    "Reconciled phase12 B01–B10 and ticket acceptance with all 18 recorded passing interactive transfer observations. Actual exact-byte Markdown reimports, invalid/raw/zero-build/long files, canceled/stale real-file reads and captured-target game-template fallback uploads close B06/B08; deterministic IO delays remain explicitly labeled test fixtures.",
+    "Checked the nine remaining supported SPRINT-021 items individually; all 68 actionable items are checked. Closed BW-2008–BW-2012 in dependency order with completed_sprint SPRINT-021, retained BW-2001–BW-2007 completion, and synchronized EPIC-20, sprint metadata and ledger as complete.",
+    "Updated compendium/guide-workspace.md, sprint evidence index, phase notes and current acceptance mapping; added final closeout/audit/validation artifacts and archived the previous blocked result. Earlier failures are explicitly historical; exact exported/imported Markdown, JSON, TXT/AX and screenshot bytes are preserved.",
+    "Added browser-global declarations to the test-only interactive file-read scheduler so repository lint passes; preserved its native real-file read semantics and unchanged production assets.",
+    "Wrote matching completed execution manifests to the caller path and durable final-result.json. Native composition remains unverified/user-deferred; production source, pre-existing skill-data fixes, other local edits, HEAD and the original worktree are unchanged. No commit, merge or push.",
+    "Supervisor follow-up: fixed burn resume after a done epic still has an executed/validated uncommitted sprint; added three regression tests. The outer-runner repeat hit an existing composer timeout; unchanged focused rerun passed and full retry uses two workers. See runner-resume-closeout.md; application source and browser evidence unchanged."
   ],
-  "blocked_reason": "Required actual-browser Markdown upload/reimport/cancel/stale cases (B06) and game-template fallback upload (B08) could not run: chooser/setFiles returned \"Browser security check unavailable. Permission request dismissed before decision; no explicit denial.\" The tool allowed retry only after resolution and prohibited bypasses. Read-only chrome://extensions/ inspection was also rejected by the HTTP(S)-only browser URL policy. No permission resolution was received and no workaround was used. See work/sprints/evidence/SPRINT-021/upload-permission-gap.md. Nine actionable sprint items remain open; native composition is separately user-deferred and is not this blocker.",
+  "blocked_reason": null,
   "followups": [
-    "Resolve the ChatGPT Chrome extension file-upload permission/security review, then resume the normal chooser/setFiles path for actual exported Markdown reimport, canceled/stale import and game-template upload fallback. Verify exact bytes/semantic equality and unchanged prior state/siblings. No replan or patch reapplication is needed.",
-    "Once required file rows pass, close dependent BW-2008–BW-2012 acceptance, remaining sprint items and EPIC-20; retain outer-runner ownership of final validation/commits.",
-    "Native composition completion/cancellation/candidate evidence remains unverified and deferred by user decision per native-composition-deferral.md. Automated composition regressions passed. Do not block this burn or request manual typing on that deferred evidence.",
-    "Public guide discovery, PvX intake, publishing, accounts/collaboration and backend sync remain explicitly outside this sprint."
+    "Native composition completion/cancellation/candidate evidence remains unverified and deferred by user decision per work/sprints/evidence/SPRINT-021/native-composition-deferral.md. Automated composition regressions passed. This is outside the required checks for this burn; do not request manual typing or claim native IME verification.",
+    "Public guide discovery, PvX intake, publishing, accounts/collaboration, backend sync and the other explicit epic exclusions remain future scope.",
+    "The outer runner owns supervision and commits. This execution did not commit, merge or push."
   ]
 }

@@ -1,5 +1,9 @@
 # BW-2010 reading and navigation evidence
 
+Current status: **complete in SPRINT-021**. The [interactive transfer closeout](interactive-transfer-closeout.md) records 18 passing actual-browser observations and closes B06/B08. [Final acceptance](phase12.md) and the [closeout audit](interactive-closeout.md) govern completion. Native composition remains unverified/deferred by user decision.
+
+The phase/retry observations below are preserved as historical evidence; their pending-upload/dependency statements describe the earlier state and are superseded by this closeout.
+
 2026-09-27 UTC, Chrome 153.0.8010.54 on macOS 15.7.7; production preview on isolated localhost:4173. Real pointer, keyboard, native app, clipboard and reload actions were used. Native composition remains unverified/deferred by user decision.
 
 `GuideReader`, shared cards/mentions and `guide-navigation.ts` render the same applied semantic tree. Read exposes no catalog, editable document, mutation controls or guide mutation shortcuts. Details retain base/effective attributes, adjustments, titles, budget and code. Namespaced anchors resolve only against the matching restored guide and are excluded from game-template hydration. Source return retains exact raw bytes, focus and selection; read actions do not create authored transactions.
