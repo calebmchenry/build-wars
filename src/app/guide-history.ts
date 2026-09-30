@@ -3,6 +3,7 @@ import { GUIDE_LIMITS, utf8Bytes } from "../guide/limits";
 import { serializeGuideMarkdown } from "../guide/markdown";
 import type { PersistedBuildSnapshot } from "./persistence-schema";
 export type AppliedGuide = GuideDocument<PersistedBuildSnapshot>;
+/** Legacy draft bytes retained only for storage/backup compatibility; never an editor mode. */
 export interface GuideRecovery {
   readonly raw: string;
   readonly baseRevision: number;

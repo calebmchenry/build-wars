@@ -100,42 +100,23 @@ function skillAttributes(source: string): Record<string, string> {
 }
 export function validateGuideMetadata(input: unknown): GuideMetadata {
   const meta = record(input);
+  // Accept the removed attribution field when loading older files and saves.
   keys(meta, ["version", "id", "title", "summary", "tags", "sources"]);
-  if (meta.version !== 1)
-    throw new Error("Unsupported guide version; keep the source for recovery.");
+  if (meta.version !== 1) throw new Error("Unsupported guide version.");
   if (utf8Bytes(JSON.stringify(meta)) > GUIDE_LIMITS.metadataBytes)
     throw new Error("Guide metadata exceeds the byte limit.");
-  if (
-    !Array.isArray(meta.tags) ||
-    meta.tags.length > 24 ||
-    !Array.isArray(meta.sources) ||
-    meta.sources.length > GUIDE_LIMITS.sources
-  )
-    throw new Error("Invalid guide tags or sources.");
+  if (!Array.isArray(meta.tags) || meta.tags.length > 24) throw new Error("Invalid guide tags.");
   return {
     version: 1,
     id: identity(meta.id),
     title: string(meta.title, 160),
     summary: meta.summary === null ? null : string(meta.summary),
-    tags: meta.tags.map((tag) => string(tag, 80)),
-    sources: meta.sources.map((value) => {
-      const source = record(value);
-      keys(source, ["label", "url", "attribution", "license", "licenseUrl", "revision", "notes"]);
-      const url = string(source.url);
-      if (!safeGuideUrl(url)) throw new Error("Unsafe source URL.");
-      const result: Record<string, string> = { label: string(source.label), url };
-      for (const key of ["attribution", "license", "licenseUrl", "revision", "notes"]) {
-        if (source[key] !== undefined) result[key] = string(source[key]);
-      }
-      if (result.licenseUrl && !safeGuideUrl(result.licenseUrl))
-        throw new Error("Unsafe license URL.");
-      return { ...result, label: result.label!, url };
-    })
+    tags: meta.tags.map((tag) => string(tag, 80))
   };
 }
 export function emptyGuide<B>(id: string): GuideDocument<B> {
   return {
-    metadata: { version: 1, id, title: "Untitled Guide", summary: null, tags: [], sources: [] },
+    metadata: { version: 1, id, title: "Untitled Guide", summary: null, tags: [] },
     nodes: [{ type: "paragraph", children: [] }]
   };
 }
@@ -290,7 +271,7 @@ export function parseGuideMarkdown<B>(
             return { type: "build", id, snapshot };
           }
           if (node.name?.startsWith("bw-"))
-            throw new Error("Unsupported reserved annotation; keep whole source for recovery.");
+            throw new Error("Unsupported reserved guide annotation.");
           return { type: "opaque", raw: opaqueSlice(node) };
         }
         default:
@@ -316,7 +297,7 @@ export function parseGuideMarkdown<B>(
       const checked = parseGuideMarkdown(canonical, adapter, newId, false);
       if (!checked.ok || JSON.stringify(checked.document) !== JSON.stringify(document))
         throw new Error(
-          "Source context cannot be safely reinserted; keep the whole source for recovery."
+          "This Markdown structure cannot be imported without changing its contents."
         );
     }
     return { ok: true, document, diagnostics: [] };

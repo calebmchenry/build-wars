@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import type { GuideNode } from "../../../domain/guide";
 import type { AppCatalogViews } from "../../catalogs";
 import type { AppliedGuide } from "../../guide-history";
@@ -18,7 +17,6 @@ export function GuideSkillMention({
   readonly catalogs: AppCatalogViews | null;
   readonly onEdit?: () => void;
 }) {
-  const touch = useRef(false);
   const projection = catalogs
     ? selectGuideSkill(catalogs, document, node.skillId, node.context)
     : null;
@@ -26,28 +24,33 @@ export function GuideSkillMention({
     projection?.label ??
     (node.context.kind === "generic" ? "Generic" : `${node.context.kind}: ${node.context.buildId}`);
   const title = projection?.view.title ?? node.skillId;
+  const wikiUrl = projection?.view.kind === "known" ? projection.view.skill.wikiUrl : undefined;
+  const skill = (
+    <>
+      {projection && <CatalogIcon descriptor={projection.view.placeholder} />}
+      <span>{title}</span>
+    </>
+  );
   const content = (
     <>
-      <button
-        type="button"
-        className="guide-mention-button"
-        aria-label={`${title} — ${label}${onEdit ? "; edit reference" : ""}`}
-        onPointerDown={(event) => {
-          event.stopPropagation();
-          touch.current = event.pointerType === "touch";
-        }}
-        onMouseDown={(event) => event.stopPropagation()}
-        onKeyDown={() => {
-          touch.current = false;
-        }}
-        onClick={(event) => {
-          event.stopPropagation();
-          if (!touch.current) onEdit?.();
-        }}
-      >
-        {projection && <CatalogIcon descriptor={projection.view.placeholder} />}
-        <span>{title}</span> <small>({label})</small>
-      </button>
+      {wikiUrl ? (
+        <a
+          className="guide-skill-link"
+          href={wikiUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${title} — ${label}`}
+          onPointerDown={(event) => event.stopPropagation()}
+          onMouseDown={(event) => event.stopPropagation()}
+          onClick={(event) => event.stopPropagation()}
+        >
+          {skill}
+        </a>
+      ) : (
+        <span className="guide-skill-link" aria-label={`${title} — ${label}`}>
+          {skill}
+        </span>
+      )}
       {onEdit && (
         <button
           type="button"
@@ -63,13 +66,13 @@ export function GuideSkillMention({
   return projection ? (
     <SkillTooltipTrigger
       inline
-      className={`guide-reference-${projection.status}`}
+      className={`guide-skill-reference guide-reference-${projection.status}`}
       view={projection.view}
       placement="above"
     >
       {content}
     </SkillTooltipTrigger>
   ) : (
-    content
+    <span className="guide-skill-reference">{content}</span>
   );
 }

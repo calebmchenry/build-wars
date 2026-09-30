@@ -79,8 +79,6 @@ import {
 } from "./guide-state";
 import type { AppliedGuide } from "./guide-history";
 import { emptyGuide } from "../guide/markdown";
-import { parseGuideMarkdown } from "../guide/markdown";
-import { guideBuildAdapter } from "./guide-build-adapter";
 import type { AppCatalogViews } from "./catalogs";
 import { clonePersistedDocument, type PersistedBuildSnapshot } from "./persistence-schema";
 
@@ -923,7 +921,6 @@ export function materializeActiveBuildSetSnapshot(
 export function needsDirtyGuard(state: WorkspaceState): boolean {
   if (state.draftSession.dirtyState !== "clean") return true;
   if (state.document.kind !== "guide") return false;
-  if (state.document.history.frame.recovery?.dirty) return true;
   // Hydration marks storage durable, but a working draft may still differ from its named record.
   const saved = state.library.records.find(
     (record) => record.id === state.draftSession.associatedRecordId
@@ -978,20 +975,10 @@ function hydrateWorkspaceDocument(document: PersistedDocument): {
   switch (document.kind) {
     case "guide": {
       const runtime = createRuntimeGuide(document.snapshot.document, crypto.randomUUID());
-      const recovery = document.snapshot.recovery;
-      const parsed = recovery?.dirty
-        ? parseGuideMarkdown(
-            recovery.raw,
-            guideBuildAdapter(null),
-            () => document.snapshot.document.metadata.id
-          )
-        : null;
       return {
         editor: createBlankEditorState(),
         document: {
           ...runtime,
-          view: recovery?.dirty ? "source" : "visual",
-          diagnostics: parsed && !parsed.ok ? parsed.diagnostics : [],
           history: {
             ...runtime.history,
             revision: document.snapshot.appliedRevision,
@@ -1779,7 +1766,7 @@ function updateGuideRecordMetadata(
   const document: PersistedDocument = { kind: "guide", snapshot };
   let next = state;
   if (state.document.kind === "guide" && state.draftSession.associatedRecordId === id) {
-    if (state.document.composing || state.document.view === "read") return state;
+    if (state.document.composing) return state;
     const runtime = reduceGuide(state.document, {
       type: "metadata",
       session: state.document.history.session,

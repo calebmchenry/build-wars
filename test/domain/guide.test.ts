@@ -11,8 +11,7 @@ const doc: GuideDocument<{ id: string; rank: number }> = {
     id: "guide-source",
     title: "Source",
     summary: null,
-    tags: [],
-    sources: []
+    tags: []
   },
   nodes: [
     { type: "build", id: "gb-a", snapshot: { id: "gb-a", rank: 8 } },

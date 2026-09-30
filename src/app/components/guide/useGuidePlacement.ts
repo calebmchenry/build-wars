@@ -1,7 +1,7 @@
-import { useState, type DragEvent as ReactDragEvent, type RefObject } from "react";
+import { useEffect, useState, type DragEvent as ReactDragEvent, type RefObject } from "react";
 import type { Editor } from "@tiptap/core";
 import type { EditorView } from "@tiptap/pm/view";
-import { TextSelection, type SelectionBookmark } from "@tiptap/pm/state";
+import { TextSelection } from "@tiptap/pm/state";
 import { GapCursor } from "@tiptap/pm/gapcursor";
 import type { SkillId } from "../../../domain";
 import type { AppCatalogViews } from "../../catalogs";
@@ -15,41 +15,60 @@ import {
   type GuideSkillPayload
 } from "../../guide-placement";
 import type { GuideDispatch } from "./GuideWorkspace";
+import { precedingGuideBuildContext } from "../../guide-skill-references";
+import { LIBRARY_BUILD_MIME, readLibraryBuildDrop } from "../../guide-library-builds";
+import type { PersistedSavedDocumentRecord } from "../../persistence-schema";
+
+function libraryBuildTarget(view: EditorView, event: DragEvent) {
+  const bounds = view.dom.getBoundingClientRect();
+  let index = view.state.doc.childCount;
+  let top = bounds.top;
+  view.state.doc.forEach((_node, position, childIndex) => {
+    if (index !== view.state.doc.childCount) return;
+    const dom = view.nodeDOM(position);
+    if (!(dom instanceof HTMLElement)) return;
+    const rect = dom.getBoundingClientRect();
+    if (event.clientY < (rect.top + rect.bottom) / 2) {
+      index = childIndex;
+      top = rect.top;
+    } else top = rect.bottom;
+  });
+  return { index, left: bounds.left, top, width: bounds.width, height: 3 };
+}
+
 export function useGuidePlacement({
   getGuide,
+  getLibraryRecords,
   editor,
-  bookmark,
   catalogs,
   send
 }: {
   readonly getGuide: () => RuntimeGuideDocument;
+  readonly getLibraryRecords: () => readonly PersistedSavedDocumentRecord[];
   readonly editor: RefObject<Editor | null>;
-  readonly bookmark: RefObject<SelectionBookmark | null>;
   readonly catalogs: AppCatalogViews | null;
   readonly send: GuideDispatch;
 }) {
-  const [picked, setPicked] = useState<GuideSkillPayload | null>(null);
-  const [pickingCatalog, setPickingCatalog] = useState(false);
   const [lastDropEffect, setLastDropEffect] = useState<string | null>(null);
-  const [marker, setMarker] = useState<{ left: number; top: number; height: number } | null>(null);
+  const [marker, setMarker] = useState<{
+    left: number;
+    top: number;
+    height: number;
+    width?: number;
+  } | null>(null);
+  useEffect(() => {
+    const clear = () => setMarker(null);
+    window.addEventListener("dragend", clear);
+    window.addEventListener("drop", clear);
+    return () => {
+      window.removeEventListener("dragend", clear);
+      window.removeEventListener("drop", clear);
+    };
+  }, []);
   const cancel = () => {
-    setPicked(null);
-    setPickingCatalog(false);
     setMarker(null);
   };
   const announce = (message: string) => send({ type: "message", message });
-  const pickSlot = (buildId: string, index: number) => {
-    const payload = captureGuideSkill(getGuide(), { kind: "bar", buildId, index });
-    if (!payload) {
-      announce("That source slot is empty.");
-      return;
-    }
-    setPicked(payload);
-    setPickingCatalog(false);
-    announce(
-      `Picked slot ${index + 1}. Choose a target slot or Place picked at caret. Escape cancels.`
-    );
-  };
   const place = (
     payload: GuideSkillPayload | null,
     target: GuidePlacementTarget,
@@ -60,6 +79,7 @@ export function useGuidePlacement({
       return;
     }
     const plan = planGuidePlacement(getGuide(), payload, catalogs, target);
+    let message = plan.message;
     if (plan.kind === "slot") {
       if (!send({ type: "build", buildId: plan.buildId, action: plan.action })) {
         cancel();
@@ -67,37 +87,38 @@ export function useGuidePlacement({
       }
     } else if (plan.kind === "mention") {
       const instance = editor.current;
-      if (!instance) return;
-      const selection =
-        position === undefined ? bookmark.current?.resolve(instance.state.doc) : null;
-      if (position === undefined && (!selection || getGuide().intent.kind !== "prose")) {
-        announce("Choose a text caret before placing the picked skill.");
-        return;
-      }
-      const pos = position ?? selection!.from;
+      if (!instance || position === undefined) return;
+      const pos = position;
       const resolved = instance.state.doc.resolve(pos);
       if (resolved.parent.type.spec.code) {
         announce("Skill references cannot be inserted inside literal code.");
         return;
       }
+      const context =
+        payload?.source.kind === "catalog"
+          ? precedingGuideBuildContext(instance.state.doc, pos)
+          : plan.node.context;
+      if (payload?.source.kind === "catalog" && context.kind === "local")
+        message = "Inserted a reference using the preceding build.";
       const before = getGuide().history;
       instance
         .chain()
         .focus()
         .command(({ tr }) => {
-          if (selection) tr.setSelection(selection);
-          else
-            tr.setSelection(
-              resolved.parent.isTextblock
-                ? TextSelection.create(tr.doc, pos)
-                : new GapCursor(tr.doc.resolve(pos))
-            );
+          tr.setSelection(
+            resolved.parent.isTextblock
+              ? TextSelection.create(tr.doc, pos)
+              : new GapCursor(tr.doc.resolve(pos))
+          );
           tr.setMeta("guide-gesture", true);
           return true;
         })
         .insertContent({
           type: "guideSkill",
-          attrs: { skillId: plan.node.skillId, context: plan.node.context }
+          attrs: {
+            skillId: plan.node.skillId,
+            context
+          }
         })
         .run();
       if (getGuide().history === before) {
@@ -105,7 +126,7 @@ export function useGuidePlacement({
         return;
       }
     }
-    announce(plan.message);
+    announce(message);
     cancel();
   };
   const start = (event: ReactDragEvent<HTMLElement>, payload: GuideSkillPayload | null) => {
@@ -116,7 +137,6 @@ export function useGuidePlacement({
     event.stopPropagation();
     event.dataTransfer.effectAllowed = "copyMove";
     event.dataTransfer.setData(GUIDE_SKILL_MIME, JSON.stringify(payload));
-    setPicked(null);
   };
   const payloadAtDrop = (event: DragEvent | ReactDragEvent<HTMLElement>) =>
     readGuideSkillPayload(event.dataTransfer?.getData(GUIDE_SKILL_MIME) ?? "");
@@ -127,32 +147,13 @@ export function useGuidePlacement({
     return hit.pos;
   };
   return {
-    picked,
     lastDropEffect,
-    pickingCatalog,
     marker,
     cancel,
-    armCatalog: () => {
-      setPicked(null);
-      setPickingCatalog(true);
-      announce("Choose a catalog skill to pick, then a slot or text caret. Escape cancels.");
-    },
-    pickCatalog: (skillId: SkillId) => {
-      if (!pickingCatalog) return false;
-      setPicked(captureGuideSkill(getGuide(), { kind: "catalog", skillId }));
-      setPickingCatalog(false);
-      announce("Skill picked. Choose a slot or use Place picked at caret. Escape cancels.");
-      return true;
-    },
-    pickSlot,
     selectSlot: (buildId: string, index: number) => {
-      if (picked) place(picked, { kind: "slot", buildId, index });
-      else {
-        send({ type: "select", buildId });
-        send({ type: "intent", intent: { kind: "slot", buildId, index } });
-      }
+      send({ type: "select", buildId });
+      send({ type: "intent", intent: { kind: "slot", buildId, index } });
     },
-    placeAtCaret: () => place(picked, { kind: "prose" }),
     placeCatalogInSlot: (skillId: SkillId, buildId: string, index: number) =>
       place(captureGuideSkill(getGuide(), { kind: "catalog", skillId }), {
         kind: "slot",
@@ -174,6 +175,14 @@ export function useGuidePlacement({
       place(payloadAtDrop(event), { kind: "slot", buildId, index });
     },
     dragOver: (view: EditorView, event: DragEvent) => {
+      if (event.dataTransfer?.types.includes(LIBRARY_BUILD_MIME)) {
+        event.preventDefault();
+        // The native text drop cursor points inside prose; this gesture inserts blocks.
+        event.stopImmediatePropagation();
+        event.dataTransfer.dropEffect = getGuide().composing ? "none" : "copy";
+        setMarker(getGuide().composing ? null : libraryBuildTarget(view, event));
+        return true;
+      }
       if (!event.dataTransfer?.types.includes(GUIDE_SKILL_MIME)) return false;
       const pos = prosePosition(view, event);
       if (pos === null) return false;
@@ -188,13 +197,53 @@ export function useGuidePlacement({
       return true;
     },
     drop: (view: EditorView, event: DragEvent) => {
+      if (event.dataTransfer?.types.includes(LIBRARY_BUILD_MIME)) {
+        event.preventDefault();
+        event.stopPropagation();
+        cancel();
+        if (getGuide().composing) {
+          announce("Finish composing before inserting a build.");
+          return true;
+        }
+        try {
+          const guide = getGuide();
+          const builds = readLibraryBuildDrop(
+            event.dataTransfer.getData(LIBRARY_BUILD_MIME),
+            getLibraryRecords(),
+            guide.history.session
+          );
+          // An empty editor projects a placeholder paragraph absent from the guide.
+          const index = Math.min(
+            libraryBuildTarget(view, event).index,
+            guide.history.frame.document.nodes.length
+          );
+          if (
+            send({
+              type: "insert-fragment",
+              index,
+              nodes: [...builds, { type: "paragraph", children: [] }]
+            })
+          ) {
+            event.dataTransfer.dropEffect = "copy";
+            editor.current?.commands.focus(undefined, { scrollIntoView: false });
+            announce(
+              builds.length === 1
+                ? "Inserted a copy of the saved build."
+                : "Inserted copies of the saved builds."
+            );
+          }
+        } catch (error) {
+          announce(error instanceof Error ? error.message : "Build insertion failed.");
+        }
+        return true;
+      }
       if (!event.dataTransfer?.types.includes(GUIDE_SKILL_MIME)) {
         if (view.dragging) return false;
         event.preventDefault();
         event.stopPropagation();
         cancel();
         announce(
-          "Drop a skill from this guide, or paste plain text. External drag content was not inserted."
+          "Drop a build from the sidebar, a skill from this guide, or paste plain text. External drag content was not inserted."
         );
         return true;
       }

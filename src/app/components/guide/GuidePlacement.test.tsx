@@ -74,7 +74,10 @@ describe("guide placement component boundaries", () => {
     const destination = screen.getByRole("button", { name: "Inactive slot 8: Empty" });
     const before = guide();
     const data = transfer();
+    fireEvent.mouseEnter(source.parentElement!);
+    expect(screen.getByRole("tooltip", { hidden: true })).toHaveTextContent("Flare");
     fireEvent.dragStart(source, { dataTransfer: data });
+    expect(screen.queryByRole("tooltip", { hidden: true })).toBeNull();
     expect(data.getData(GUIDE_SKILL_MIME)).toContain('"buildId":"gb-flare"');
     fireEvent.dragOver(destination.firstChild!, { dataTransfer: data });
     fireEvent.drop(destination.firstChild!, { dataTransfer: data });
@@ -86,11 +89,10 @@ describe("guide placement component boundaries", () => {
     expect(builds[1]!.snapshot.build.skillBar[7]).toBe(194);
     expect(builds[1]!.snapshot.build.skillBar[0]).toBeNull();
   });
-  it("supports explicit pick then click placement and zero-history Escape/outside/malformed cancellation", async () => {
+  it("supports catalog-to-slot clicks and zero-history Escape/outside/malformed cancellation", async () => {
     render(<Harness />);
     const source = await screen.findByRole("button", { name: "Flare practice slot 1: Flare" });
     fireEvent.click(source);
-    fireEvent.click(screen.getByRole("button", { name: "Pick selected slot" }));
     fireEvent.keyDown(source, { key: "Escape" });
     expect(guide().history.past).toHaveLength(0);
     const data = transfer();
@@ -103,10 +105,13 @@ describe("guide placement component boundaries", () => {
       dataTransfer: invalid
     });
     expect(guide().history.past).toHaveLength(0);
-    fireEvent.click(source);
-    fireEvent.click(screen.getByRole("button", { name: "Pick selected slot" }));
     fireEvent.click(screen.getByRole("button", { name: "Inactive slot 8: Empty" }));
+    fireEvent.change(screen.getByRole("searchbox", { name: "Search" }), {
+      target: { value: "Flare" }
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Place in selected slot: Flare" }));
     expect(guide().history.past).toHaveLength(1);
     expect(guideBuilds(guide().history.frame.document)[0]!.snapshot.build.skillBar[0]).toBe(194);
+    expect(guideBuilds(guide().history.frame.document)[1]!.snapshot.build.skillBar[7]).toBe(194);
   });
 });

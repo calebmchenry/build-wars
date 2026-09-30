@@ -7,7 +7,7 @@ import { requireReadyCatalogs } from "./catalogs";
 import { GuideReader } from "./components/guide/GuideReader";
 import { createGuideFixture } from "./guide-fixture";
 import { guideNavigation, matchingGuideAnchor } from "./guide-navigation";
-import { createRuntimeGuide, guideAddress, reduceGuide, type GuideCommand } from "./guide-state";
+import { createRuntimeGuide } from "./guide-state";
 import { validLocalLibraryEnvelopeFixture, fixtureCatalogFacts } from "./library-fixtures";
 import { LOCAL_LIBRARY_STORAGE_KEY, serializeLocalLibraryEnvelope } from "./persistence-schema";
 import { parseShareFragment } from "./share-url";
@@ -82,35 +82,16 @@ describe("applied guide reading and navigation", () => {
       container.querySelector('[contenteditable], input, textarea, select, [draggable="true"]')
     ).toBeNull();
     expect(screen.queryByRole("button", { name: /Edit |Duplicate |Delete / })).toBeNull();
-    fireEvent.focus(screen.getByRole("button", { name: "Flare — Flare practice" }));
+    fireEvent.focus(screen.getByRole("link", { name: "Flare — Flare practice" }));
     expect(screen.getByRole("tooltip").textContent).toContain("Context: Flare practice");
-    expect(screen.getByRole("button", { name: /Flare — Missing build/ })).toBeTruthy();
-    expect(screen.getByRole("button", { name: "Flare — Generic" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: /Flare — Missing build/ })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Flare — Generic" })).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Copy Second variant template" }));
     expect(copy).toHaveBeenCalledWith("second");
   });
-  it("blocks authored commands in read mode, retains exact raw and copies each addressed template without history", async () => {
-    let state = createRuntimeGuide(fixture(), "reader");
-    state = reduceGuide(state, { ...guideAddress(state), type: "source-open" });
-    state = reduceGuide(state, {
-      ...guideAddress(state),
-      type: "source-edit",
-      raw: ":::bw-guide\n{unfinished  \n"
-    });
-    state = reduceGuide(state, { type: "view", view: "read" });
+  it("copies each addressed template without changing authored history", async () => {
+    const state = createRuntimeGuide(fixture(), "reader");
     const before = state.history;
-    const commands = [
-      { type: "source-edit", raw: "lost" },
-      { type: "source-discard" },
-      { type: "source-apply" },
-      { type: "import-source", raw: "# Lost" },
-      { type: "history", direction: "undo" },
-      { type: "metadata", metadata: { ...state.history.frame.document.metadata, title: "lost" } }
-    ] as const;
-    for (const command of commands) {
-      state = reduceGuide(state, { ...guideAddress(state), ...command } as GuideCommand, catalogs);
-      expect(state.history).toBe(before);
-    }
     const write = vi.fn().mockResolvedValue(undefined);
     await copyGuideTemplate(
       () => state,
@@ -129,10 +110,8 @@ describe("applied guide reading and navigation", () => {
     expect(write).toHaveBeenCalledTimes(2);
     expect(write.mock.calls[0]![0]).not.toBe(write.mock.calls[1]![0]);
     expect(state.history).toBe(before);
-    state = reduceGuide(state, { ...guideAddress(state), type: "source-open" });
-    expect(state.history.frame.recovery?.raw).toBe(":::bw-guide\n{unfinished  \n");
   });
-  it("restores only a matching guide anchor, retains unfinished source and never writes on read navigation", async () => {
+  it("opens old drafts with guide anchors directly in the editor without rewriting storage", async () => {
     const document = fixture();
     const envelope = validLocalLibraryEnvelopeFixture({
       savedDocuments: [],
@@ -156,11 +135,15 @@ describe("applied guide reading and navigation", () => {
     history.replaceState(null, "", hash);
     const write = vi.spyOn(Storage.prototype, "setItem");
     render(<App />);
-    await screen.findByRole("article", { name: "Guide reading pane" });
+    expect(await screen.findByRole("textbox", { name: "Guide document" })).toHaveTextContent(
+      "Practice guide"
+    );
     expect(window.location.hash).toBe(hash);
-    expect(screen.getByText(/Reading the last applied guide\. Unapplied source/)).toBeTruthy();
+    expect(screen.queryByText(/Unapplied source/)).toBeNull();
     expect(screen.queryByRole("button", { name: "Undo guide" })).toBeNull();
-    expect(screen.queryByRole("complementary", { name: "Guide catalog" })).toBeNull();
+    expect(screen.getByRole("complementary", { name: "Guide catalog" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Read" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Write" })).toBeNull();
     fireEvent.keyDown(screen.getByRole("region", { name: "Guide workspace" }), {
       key: "z",
       metaKey: true
@@ -170,22 +153,7 @@ describe("applied guide reading and navigation", () => {
       0
     );
     expect(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY)).toBe(stored);
-    fireEvent.click(screen.getByRole("button", { name: "Write" }));
-    expect(await screen.findByRole("textbox", { name: "Markdown source" })).toHaveValue(
-      ":::bw-guide\n{unfinished"
-    );
-    expect(screen.getByRole("textbox", { name: "Markdown source" })).toHaveFocus();
-    const textarea = screen.getByRole("textbox", {
-      name: "Markdown source"
-    }) as HTMLTextAreaElement;
-    textarea.setSelectionRange(7, 12);
-    fireEvent.select(textarea);
-    fireEvent.click(screen.getByRole("button", { name: "Read" }));
-    fireEvent.click(screen.getByRole("button", { name: "Source" }));
-    const restored = screen.getByRole("textbox", {
-      name: "Markdown source"
-    }) as HTMLTextAreaElement;
-    expect([restored.selectionStart, restored.selectionEnd]).toEqual([7, 12]);
-    expect(restored).toHaveFocus();
+    expect(screen.queryByRole("button", { name: "Source" })).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "Markdown source" })).toBeNull();
   });
 });

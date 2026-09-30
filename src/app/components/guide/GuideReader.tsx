@@ -123,23 +123,6 @@ export function GuideReader({
       <article className="guide-reader" aria-label="Guide reading pane" tabIndex={-1}>
         {document.metadata.summary && <p className="guide-summary">{document.metadata.summary}</p>}
         {render(document.nodes)}
-        {document.metadata.sources.length > 0 && (
-          <footer>
-            <h2>Sources and attribution</h2>
-            <ul>
-              {document.metadata.sources.map((source, index) => (
-                <li key={index}>
-                  <a href={source.url} target="_blank" rel="noopener noreferrer">
-                    {source.label}
-                  </a>
-                  {source.attribution && ` — ${source.attribution}`}
-                  {source.license && ` · ${source.license}`}
-                  {source.notes && <p>{source.notes}</p>}
-                </li>
-              ))}
-            </ul>
-          </footer>
-        )}
       </article>
     </div>
   );

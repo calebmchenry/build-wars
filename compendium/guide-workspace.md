@@ -10,19 +10,108 @@ feasibility, contract, capacity, browser and validation checks remain required.
 The [ADR](decisions/0003-guide-editor-and-markdown-contract.md) and
 [evidence index](../work/sprints/SPRINT-021-EVIDENCE.md) retain the prior attempts.
 The retained implementation includes rendered writing, addressed builds and
-references, pointer/keyboard placement, atomic Source Apply and Markdown transfer,
+references, pointer/keyboard placement, Markdown file import and download,
 library/backup v3 durability and recovery, and a read-only guide renderer with
 namespaced section/variant anchors. The original dagger example opens only through
-an explicit guarded action. Source buffers and complete independent snapshots are
-preserved by local saves; missing catalogs and failed storage retain export paths.
+an explicit guarded action. Complete independent snapshots are preserved by local
+saves; missing catalogs and failed storage retain export paths.
 The Guide library supports Save, Save As, Open, rename, duplicate and mixed backups.
-Read shows the last applied guide and preserves unfinished source for return to Source.
+Guides always open in the rendered editor; there are no Write/Read buttons or raw Markdown editing mode.
 Game template copying transfers only the game representation; Markdown/local saves
 retain rune/headgear, title, effect and reference metadata.
 
 Actual Markdown download/reimport preserves both independent variants, invalid/raw and zero-build handling, and the frozen long fixture. Canceled and stale real-file reads preserve the prior guide/source/session. Game-template fallback upload preserves the captured target identity and full sibling snapshot, including selection changes during a delayed read. Deterministic delay coverage uses the explicitly labeled test-only real-file scheduler; production assets are unchanged. Earlier upload failures remain [historical](../work/sprints/evidence/SPRINT-021/upload-permission-gap.md). See the complete [acceptance matrix](../work/sprints/evidence/SPRINT-021/phase12.md).
 
-The accepted ADR and dated evidence define the implementation contract. Clipboard fragments retain local external bindings only when session, generation and guide ID match; older or replaced origins become explicitly detached. Reader return preserves unfinished Source text and its selection. The frozen long fixture has 16 builds and 601 mentions.
+The accepted ADR and dated evidence define the implementation contract, with subsequent changes recorded below. Clipboard fragments retain local external bindings only when session, generation and guide ID match; older or replaced origins become explicitly detached. The frozen long fixture has 16 builds and 601 mentions.
+
+## Reuse sidebar builds — 2026-09-30
+
+With a guide open, drag a build from the document sidebar into the writing area.
+A horizontal marker shows the insertion point between blocks. Each drop inserts
+an independent copy with its complete saved settings; dragging a build set inserts
+its builds in order. The original library entries remain unchanged. The build row
+menu also offers **Insert into guide**, which appends the copy to the open guide.
+
+Insertion is one undoable edit and uses normal guide autosave. Dropping over an
+existing build inserts beside it without replacing its skill slots. Changed or
+removed sources, drags from a previous guide session, composition, and guide
+capacity limits reject the insertion without partial changes.
+
+## Single guide editor — 2026-09-29
+
+The guide workspace always stays editable, including restored drafts and saved
+guide links. The Write and Read buttons and guide-wide mode state are removed.
+Metadata, the local library, and the skill catalog remain available alongside the
+document. Individual build cards still expand for editing and collapse afterward.
+This supersedes the guide-wide reading mode described in the original milestone.
+
+## Inline writing update — 2026-09-28
+
+Writing now uses a borderless document with live Markdown shortcuts. Type `# ` or
+`## ` for headings, `**bold**` or `*italic*` for emphasis, and `- ` or `1. ` for
+lists. Select prose to reveal the compact formatting toolbar.
+
+Type `/` on a new top-level paragraph to search block commands. Arrow keys choose,
+Enter inserts, and Escape dismisses without changing the text. The menu includes
+headings, lists, quotes, code, dividers, build widgets and skill references.
+Choosing `/build` immediately replaces the command paragraph with an independent
+blank build and leaves the caret in a paragraph below the card. There is no build
+chooser dialog. Undo restores the command with one operation. Code blocks, inline
+code, nested lists and ordinary slashes
+inside prose stay literal.
+
+The skills catalog stays visible in a desktop sidebar, beside the document title,
+tags, summary and writing surface. It shares the composer's 320px minimum catalog
+width and scrolls independently. `/skill` and selecting a build slot focus its
+search. On narrow screens, **Skills catalog** opens a dismissible sheet, which
+closes after inserting a reference. Select a build slot or text caret, then choose
+a catalog skill; drag skills directly between slots or into prose. Composer and
+guide share a document sidebar; theme and library controls live in its Library tools disclosure.
+
+`GuideAuthoring.test.tsx` covers rendered shortcuts, command filtering/keyboard
+selection, dismissal, code/literal cases, selection formatting, insertion position,
+independent snapshots, stale insertion, and undo/redo. Workspace coverage includes
+Strict Mode listener cleanup and immediate blank-build insertion. The Markdown file, clipboard and persistence contracts remain covered.
+
+The document title edits directly in the heading; tags and summary use slim,
+borderless fields. Blur or Enter commits a metadata edit; Escape resets its draft.
+Guide undo and redo use Cmd/Ctrl+Z and Cmd/Ctrl+Shift+Z; there are no history buttons
+in the document toolbar.
+Selecting **Edit build** expands that card with the shared composer header,
+profession controls, attribute/rune/headgear allocation and game-style skill bar.
+Template and advanced controls live in a disclosure inside the same card. Selecting
+a skill slot focuses its catalog. Collapsed cards keep the compact build presentation.
+
+Guide autosave waits for one second of inactivity, with immediate page-exit and
+explicit flush paths preserved. Typing reuses accepted reducer/projection results
+and canonical Markdown fingerprints; unchanged embeds keep their React context.
+The long-guide regression covers 16 builds and 601 mentions without resolving
+mentions or rebuilding the editor projection on prose edits. Durability coverage
+checks that repeated edits postpone storage until idle and save the latest text.
+
+## Rendered-only editing update — 2026-09-28
+
+Raw Markdown editing and guide attribution were removed at the user's request.
+The sidebar offers **Import Markdown** in Library tools and **Download as Markdown** in each guide’s row menu. Markdown
+import accepts files only, previews a validated document, and replaces the guide
+as one undoable edit. There is no pasted-source box, Source view, Apply/Discard
+workflow, attribution form, or attribution section in the reader.
+
+Metadata now consists of title, summary and tags (plus format identity/version).
+Older Markdown and local saves may contain a `sources` field; loading accepts
+that field and omits it from the current document and subsequent exports.
+Legacy raw recovery bytes remain only as storage/backup compatibility data.
+They never block writing, history, build editing or skill placement, and do not
+reopen an editor mode. Existing drafts open their saved rendered document.
+
+Regression coverage checks file import/cancel/undo, old-save compatibility,
+absence of raw editing and attribution controls, rendered typing autosave,
+page-exit flush, and reload without catalogs.
+
+## Original milestone specification (historical)
+
+The planning notes below record the original sprint scope. The rendered-only
+update above supersedes their Source editing and attribution requirements.
 
 ## Product Intent
 
@@ -61,8 +150,9 @@ it without the authoring catalog. The compact standalone composer stays availabl
 - Provide clear entry points for the existing composer and the Guide workspace.
   Switching surfaces must not replace a draft without the existing dirty-data
   handling. A guide is a document kind, not a component pasted over the build draft.
-- The desktop authoring layout has a document on the left and persistent catalog
-  on the right. The document and catalog can scroll without losing the text cursor.
+- The document is the primary writing surface, with metadata in its left column
+  and a persistent skills catalog beside it on desktop. Scrolling and catalog
+  focus preserve the text insertion target.
 - Minimum rich-text vocabulary: paragraphs, headings, emphasis, strong text,
   ordered/unordered lists, links, blockquotes, inline code and fenced code.
 - Authors write into rendered content; keyboard Markdown shortcuts and small
@@ -106,8 +196,15 @@ it without the authoring catalog. The compact standalone composer stays availabl
   shared catalog. Name completion is an authoring convenience, not identity.
   Explicitly distinguish runtime catalog IDs from game-template IDs.
 - A reference can be generic or explicitly associated with a guide-local build.
-  Generic is the default for prose insertion. An author can choose a named build
-  when inserting or editing the mention; the choice is stored in the document.
+  New prose references default to the nearest preceding build, or generic when
+  there is no preceding build. This binding is stored at insertion; moving text
+  does not rebind it. An author can still choose a named build or generic context.
+- Type `[[` in prose or headings to search skills by name, with square icons and
+  profession/attribute labels. Arrow keys and Enter/Tab or clicking choose a result;
+  Escape keeps the literal text. Code remains literal. References display an icon
+  sized relative to the surrounding text and a skill-name link to the wiki. Hover
+  or focus retains the contextual tooltip; the adjacent context control edits the
+  binding without navigating away.
 - A contextual reference uses its named build's base ranks, bonuses, title ranks,
   mode and supported effects even when another card is selected for editing.
   Card selection is never a persisted reference-context change.

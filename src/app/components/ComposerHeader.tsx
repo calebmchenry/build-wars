@@ -1,4 +1,4 @@
-import { useState, type Dispatch, type KeyboardEvent } from "react";
+import { useState, type Dispatch, type KeyboardEvent, type ReactNode } from "react";
 
 import type { ValidationResult } from "../../domain";
 import type { AppCatalogViews } from "../catalogs";
@@ -12,25 +12,40 @@ export function ComposerHeader({
   state,
   catalogs,
   validation,
-  dispatch
+  dispatch,
+  nameActions
 }: {
   readonly state: EditorState;
   readonly catalogs: AppCatalogViews;
   readonly validation: ValidationResult;
   readonly dispatch: Dispatch<EditorAction>;
+  readonly nameActions?: ReactNode;
 }) {
   const professionIssues = [
     ...issuesForLocation(validation.issues, { kind: "profession", field: "primary" }),
     ...issuesForLocation(validation.issues, { kind: "profession", field: "secondary" })
   ];
 
+  const nameField = (
+    <BuildNameField
+      key={`${state.build.id}:${state.build.name}`}
+      name={state.build.name}
+      onCommit={(name) => dispatch({ type: "set-build-name", name })}
+    />
+  );
   return (
-    <section className="composer-header" aria-label="Build header">
-      <BuildNameField
-        key={`${state.build.id}:${state.build.name}`}
-        name={state.build.name}
-        onCommit={(name) => dispatch({ type: "set-build-name", name })}
-      />
+    <section
+      className={`composer-header${nameActions ? " has-name-actions" : ""}`}
+      aria-label="Build header"
+    >
+      {nameActions ? (
+        <div className="composer-name-row">
+          {nameField}
+          {nameActions}
+        </div>
+      ) : (
+        nameField
+      )}
       <label className="pvp-mode-toggle">
         <input
           type="checkbox"

@@ -6,7 +6,6 @@ export const GUIDE_LIMITS = {
   depth: 32,
   builds: 32,
   mentions: 2000,
-  sources: 64,
   metadataBytes: 65536,
   diagnostics: 100,
   historyEntries: 100,

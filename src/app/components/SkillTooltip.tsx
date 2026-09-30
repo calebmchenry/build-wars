@@ -44,6 +44,8 @@ export function SkillTooltipTrigger({
   onFocusCapture,
   onBlurCapture,
   onPointerDownCapture,
+  onDragStartCapture,
+  onDragEndCapture,
   "aria-describedby": ariaDescribedBy,
   ...props
 }: SkillTooltipTriggerProps) {
@@ -51,6 +53,7 @@ export function SkillTooltipTrigger({
   const triggerRef = useRef<HTMLElement | null>(null);
   const tooltipRef = useRef<HTMLElement | null>(null);
   const touchOpen = useRef(false);
+  const dragging = useRef(false);
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState<TooltipPosition>({ top: 0, left: 0, ready: false });
   const enabled = view.kind === "known";
@@ -143,13 +146,28 @@ export function SkillTooltipTrigger({
       onPointerDownCapture={(event) => {
         onPointerDownCapture?.(event);
         touchOpen.current = event.pointerType === "touch";
-        if (enabled && event.pointerType === "touch") {
+        if (enabled && !dragging.current && event.pointerType === "touch") {
           setOpen(true);
         }
       }}
+      onDragStartCapture={(event) => {
+        onDragStartCapture?.(event);
+        dragging.current = true;
+        touchOpen.current = false;
+        setOpen(false);
+        // Descendant drag handlers may cancel the drag after this capture handler.
+        const nativeEvent = event.nativeEvent;
+        queueMicrotask(() => {
+          if (nativeEvent.defaultPrevented) dragging.current = false;
+        });
+      }}
+      onDragEndCapture={(event) => {
+        dragging.current = false;
+        onDragEndCapture?.(event);
+      }}
       onMouseEnter={(event) => {
         onMouseEnter?.(event);
-        if (enabled) {
+        if (enabled && !dragging.current) {
           setOpen(true);
         }
       }}
@@ -159,7 +177,7 @@ export function SkillTooltipTrigger({
       }}
       onFocusCapture={(event) => {
         onFocusCapture?.(event);
-        if (enabled) {
+        if (enabled && !dragging.current) {
           setOpen(true);
         }
       }}

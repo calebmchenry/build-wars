@@ -1,4 +1,12 @@
-import { createContext, useContext, useEffect, useRef, type ReactNode } from "react";
+import {
+  createContext,
+  memo,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode
+} from "react";
 import { Node as TiptapNode, type Editor } from "@tiptap/core";
 import {
   EditorContent,
@@ -17,6 +25,9 @@ import type { PersistedBuildSnapshot } from "../../persistence-schema";
 import { GUIDE_CLIPBOARD_MIME } from "../../guide-clipboard";
 import { GUIDE_LIMITS, utf8Bytes } from "../../../guide/limits";
 import { projectGuideNodes, readGuideNodes } from "../../guide-editor-adapter";
+import { cloneGuideBuild } from "../../guide-build-adapter";
+import { GuideEditorTools } from "./GuideEditorTools";
+import type { AppCatalogViews } from "../../catalogs";
 interface GuideRenderContext {
   readonly document: AppliedGuide;
   readonly renderBuild: (id: string) => ReactNode;
@@ -82,12 +93,51 @@ const OpaqueNode = TiptapNode.create({
   parseHTML: () => [],
   renderHTML: ({ node }) => ["pre", { "data-guide-opaque": "" }, node.attrs.raw as string]
 });
+// The editor owns prose rendering. Its React node views need new context only
+// when a build snapshot or one of their interaction dependencies changes.
+const GuideNodeViews = memo(
+  function GuideNodeViews({
+    editor,
+    context
+  }: {
+    readonly editor: Editor | null;
+    readonly context: GuideRenderContext;
+    readonly contextKey: object | undefined;
+  }) {
+    return (
+      <RenderContext.Provider value={context}>
+        <EditorContent editor={editor} />
+      </RenderContext.Provider>
+    );
+  },
+  (previous, next) => {
+    if (
+      !next.contextKey ||
+      previous.editor !== next.editor ||
+      previous.contextKey !== next.contextKey ||
+      previous.context.document.metadata.id !== next.context.document.metadata.id
+    )
+      return false;
+    const before = previous.context.document.nodes.filter((node) => node.type === "build");
+    const after = next.context.document.nodes.filter((node) => node.type === "build");
+    return (
+      before.length === after.length &&
+      before.every(
+        (build, index) => build.id === after[index]!.id && build.snapshot === after[index]!.snapshot
+      )
+    );
+  }
+);
 export function GuideEditor(
   props: GuideRenderContext & {
-    readonly onChange: (document: AppliedGuide, typing: boolean) => boolean | void;
+    readonly catalogs?: AppCatalogViews | null;
+    readonly renderContextKey?: object;
+    readonly onChange: (document: AppliedGuide, typing: boolean) => boolean | AppliedGuide | void;
     readonly onHistory: (direction: "undo" | "redo") => void;
     readonly onEditor: (editor: Editor | null) => void;
     readonly onComposition: (active: boolean) => void;
+    readonly onInsertBuild?: (insert: (snapshot: PersistedBuildSnapshot) => boolean) => void;
+    readonly onInsertSkill?: () => void;
     readonly onSkillDragOver?: (view: EditorView, event: DragEvent) => boolean;
     readonly onSkillDrop?: (view: EditorView, event: DragEvent) => boolean;
     readonly onSkillDragLeave?: () => void;
@@ -102,6 +152,10 @@ export function GuideEditor(
   }
 ) {
   const latest = useRef(props);
+  const [initialContent] = useState(() => ({
+    type: "doc",
+    content: projectGuideNodes(props.document.nodes)
+  }));
   const published = useRef(props.document);
   const composition = useRef<Editor["state"]["doc"] | null>(null);
   const incoming = useRef<readonly GuideNode<PersistedBuildSnapshot>[]>([]);
@@ -131,6 +185,7 @@ export function GuideEditor(
     latest.current = props;
   });
   const editor: Editor | null = useEditor({
+    shouldRerenderOnTransaction: false,
     extensions: [
       StarterKit.configure({
         undoRedo: false,
@@ -143,7 +198,7 @@ export function GuideEditor(
       SkillNode,
       OpaqueNode
     ],
-    content: { type: "doc", content: projectGuideNodes(props.document.nodes) },
+    content: initialContent,
     editorProps: {
       attributes: { "aria-label": "Guide document", role: "textbox", "aria-multiline": "true" },
       handleKeyDown: (_view, event) => {
@@ -239,7 +294,9 @@ export function GuideEditor(
                 )
               };
               published.current = document;
-              if (latest.current.onChange(document, false) === false) {
+              const accepted = latest.current.onChange(document, false);
+              if (accepted && typeof accepted === "object") published.current = accepted;
+              if (accepted === false) {
                 published.current = latest.current.document;
                 editor?.commands.setContent(
                   { type: "doc", content: projectGuideNodes(latest.current.document.nodes) },
@@ -283,7 +340,9 @@ export function GuideEditor(
           });
           return textOnly;
         });
-      if (latest.current.onChange(document, typing) === false) {
+      const accepted = latest.current.onChange(document, typing);
+      if (accepted && typeof accepted === "object") published.current = accepted;
+      if (accepted === false) {
         published.current = latest.current.document;
         editor.commands.setContent(
           { type: "doc", content: projectGuideNodes(latest.current.document.nodes) },
@@ -332,8 +391,54 @@ export function GuideEditor(
     };
   }, [editor, props.document]);
   return (
-    <RenderContext.Provider value={props}>
-      <EditorContent editor={editor} />
-    </RenderContext.Provider>
+    <>
+      <GuideNodeViews editor={editor} context={props} contextKey={props.renderContextKey} />
+      {editor && (
+        <GuideEditorTools
+          editor={editor}
+          catalogs={props.catalogs ?? null}
+          onSkill={props.onInsertSkill}
+          onBuild={
+            props.onInsertBuild
+              ? (range) => {
+                  const before = editor.state.doc;
+                  const position = editor.state.doc.resolve(range.from);
+                  latest.current.onInsertBuild?.((snapshot) => {
+                    if (editor.isDestroyed || editor.state.doc !== before || composition.current) {
+                      latest.current.clipboard?.message(
+                        "The insertion point changed. Type /build again."
+                      );
+                      return false;
+                    }
+                    const id = crypto.randomUUID();
+                    incoming.current = [
+                      { type: "build", id, snapshot: cloneGuideBuild(snapshot, id) }
+                    ];
+                    try {
+                      editor
+                        .chain()
+                        .focus()
+                        .command(({ tr }) => {
+                          tr.setMeta("guide-gesture", true);
+                          return true;
+                        })
+                        .insertContentAt({ from: position.before(), to: position.after() }, [
+                          { type: "guideBuild", attrs: { id } },
+                          { type: "paragraph" }
+                        ])
+                        .run();
+                      return published.current.nodes.some(
+                        (node) => node.type === "build" && node.id === id
+                      );
+                    } finally {
+                      incoming.current = [];
+                    }
+                  });
+                }
+              : undefined
+          }
+        />
+      )}
+    </>
   );
 }

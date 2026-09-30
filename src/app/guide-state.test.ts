@@ -80,13 +80,12 @@ describe("guide transactions, recovery and single workspace", () => {
       expect(current.history.frame).toEqual(frames[i]!.history.frame);
     }
   });
-  it("does not record a no-op after opening a clean source projection or lose redo on UI actions", () => {
+  it("does not record no-op edits or lose redo on UI actions", () => {
     let state = act(start(), {
       type: "metadata",
       metadata: { ...start().history.frame.document.metadata, title: "Changed" }
     });
     state = act(state, { type: "history", direction: "undo" });
-    state = act(state, { type: "source-open" });
     const prior = state.history;
     state = act(state, {
       type: "build",
@@ -123,54 +122,6 @@ describe("guide transactions, recovery and single workspace", () => {
     state = act(state, { type: "history", direction: "undo" });
     expect(isCurrentGuideBuild(state, capture)).toBe(false);
   });
-  it("retains exact invalid source, source-only dirty state and previous applied data; Apply undo restores recovery", () => {
-    const initial = start();
-    let state = act(initial, { type: "source-open" });
-    expect(state.history.revision).toBe(0);
-    const invalid = ':::bw-guide\r\n{"version":99}\r\n:::';
-    state = act(state, { type: "source-edit", raw: invalid });
-    const prior = state.history;
-    state = act(state, { type: "source-apply" });
-    expect(state.history).toBe(prior);
-    expect(state.history.frame.document).toBe(initial.history.frame.document);
-    expect(state.history.frame.recovery?.raw).toBe(invalid);
-    state = act(state, {
-      type: "source-edit",
-      raw: serializeGuideMarkdown({
-        ...initial.history.frame.document,
-        metadata: { ...initial.history.frame.document.metadata, title: "Applied" }
-      })
-    });
-    const beforeApply = state.history.frame;
-    state = act(state, { type: "source-apply" });
-    expect(state.history.past).toHaveLength(1);
-    expect(state.history.frame.document.metadata.title).toBe("Applied");
-    state = act(state, { type: "history", direction: "undo" });
-    expect(state.history.frame).toEqual(beforeApply);
-    expect(state.view).toBe("source");
-    state = act(state, { type: "source-discard" });
-    state = act(state, { type: "history", direction: "redo" });
-    expect(state.history.frame.document.metadata.title).toBe("Applied");
-  });
-  it("requires explicit acknowledgement when metadata changed under a source draft", () => {
-    let state = act(start(), { type: "source-open" });
-    state = act(state, {
-      type: "source-edit",
-      raw: serializeGuideMarkdown(state.history.frame.document) + "\nSource addition\n"
-    });
-    const raw = state.history.frame.recovery!.raw;
-    state = act(state, {
-      type: "metadata",
-      metadata: { ...state.history.frame.document.metadata, title: "Renamed" }
-    });
-    const before = state.history;
-    state = act(state, { type: "source-apply" });
-    expect(state.history).toBe(before);
-    expect(state.message).toContain("older revision");
-    expect(state.history.frame.recovery?.raw).toBe(raw);
-    state = act(state, { type: "source-apply", acknowledgeReplacement: true });
-    expect(state.history).not.toBe(before);
-  });
   it("validates clipboard content regardless of session and never aliases colliding external references", () => {
     const source = start();
     const raw = writeGuideFragment(source, source.history.frame.document.nodes);
@@ -189,7 +140,7 @@ describe("guide transactions, recovery and single workspace", () => {
       readGuideFragment(raw.replace('"version":1', '"version":99'), source, () => "gb-new")
     ).toThrow();
   });
-  it("detaches a copied external reference after Source replacement even when session and build IDs collide", () => {
+  it("detaches a copied external reference after Markdown import even when session and build IDs collide", () => {
     const source = start();
     const raw = writeGuideFragment(
       source,
@@ -208,12 +159,10 @@ describe("guide transactions, recovery and single workspace", () => {
           title: "Replaced"
         }
       };
-      let destination = act(source, { type: "source-open" });
-      destination = act(destination, {
-        type: "source-edit",
+      const destination = act(source, {
+        type: "import-markdown",
         raw: serializeGuideMarkdown(replacement)
       });
-      destination = act(destination, { type: "source-apply" });
       expect(destination.generation).toBeGreaterThan(source.generation);
       expect(JSON.stringify(readGuideFragment(raw, destination, () => "unused"))).toContain(
         '"kind":"detached"'
@@ -249,7 +198,11 @@ describe("guide transactions, recovery and single workspace", () => {
     ).toBe(workspace);
     workspace = workspaceReducer(workspace, {
       type: "guide",
-      command: { ...guideAddress(workspace.document), type: "source-edit", raw: "bad source only" }
+      command: {
+        ...guideAddress(workspace.document),
+        type: "metadata",
+        metadata: { ...workspace.document.history.frame.document.metadata, title: "Updated guide" }
+      }
     });
     expect(needsDirtyGuard(workspace)).toBe(true);
     expect(materializeActiveDocument(workspace).kind).toBe("guide");

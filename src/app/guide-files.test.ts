@@ -7,22 +7,8 @@ import { GUIDE_LIMITS } from "../guide/limits";
 import { serializeGuideMarkdown } from "../guide/markdown";
 const catalogs = requireReadyCatalogs();
 describe("guarded whole-guide Markdown transfer", () => {
-  it("recognizes a source buffer restored by native text Undo without adding semantic history", () => {
-    let state = createRuntimeGuide(createGuideFixture(), "buffer");
-    state = reduceGuide(state, { ...guideAddress(state), type: "source-open" });
-    const original = state.history.frame.recovery!.raw;
-    state = reduceGuide(state, {
-      ...guideAddress(state),
-      type: "source-edit",
-      raw: original + "x"
-    });
-    expect(state.history.frame.recovery?.dirty).toBe(true);
-    state = reduceGuide(state, { ...guideAddress(state), type: "source-edit", raw: original });
-    expect(state.history.frame.recovery?.dirty).toBe(false);
-    expect(state.history.past).toHaveLength(0);
-  });
-  it("rejects stale file completion after edit, Undo, Apply or document switch", async () => {
-    for (const change of ["edit", "undo", "apply", "switch"] as const) {
+  it("rejects stale file completion after edit, Undo, import or document switch", async () => {
+    for (const change of ["edit", "undo", "import", "switch"] as const) {
       let state = createRuntimeGuide(createGuideFixture(), "file");
       state = reduceGuide(state, {
         ...guideAddress(state),
@@ -54,13 +40,12 @@ describe("guarded whole-guide Markdown transfer", () => {
           type: "metadata",
           metadata: { ...state.history.frame.document.metadata, title: "During read" }
         });
-      if (change === "apply") {
+      if (change === "import") {
         state = reduceGuide(state, {
           ...guideAddress(state),
-          type: "source-edit",
+          type: "import-markdown",
           raw: "# Changed while reading"
         });
-        state = reduceGuide(state, { ...guideAddress(state), type: "source-apply" }, catalogs);
       }
       finish(bytes.buffer);
       await rejected;
@@ -102,17 +87,12 @@ describe("guarded whole-guide Markdown transfer", () => {
     ).toBe(raw);
     expect(validateGuideIntake(raw, null, "new")).toEqual(state.history.frame.document);
   });
-  it("imports once, restores the previous invalid source exactly on Undo, and leaves failures untouched", () => {
+  it("imports once, restores the previous guide on Undo, and leaves failures untouched", () => {
     let state = createRuntimeGuide(createGuideFixture(), "file");
-    state = reduceGuide(state, {
-      ...guideAddress(state),
-      type: "source-edit",
-      raw: ":::bw-guide\r\n{invalid  \r\n"
-    });
     const before = state.history.frame;
     const rejected = reduceGuide(
       state,
-      { ...guideAddress(state), type: "import-source", raw: ':::bw-guide\n{"version":99}\n:::' },
+      { ...guideAddress(state), type: "import-markdown", raw: ':::bw-guide\n{"version":99}\n:::' },
       catalogs
     );
     expect(rejected.history).toBe(state.history);
@@ -120,7 +100,7 @@ describe("guarded whole-guide Markdown transfer", () => {
       state,
       {
         ...guideAddress(state),
-        type: "import-source",
+        type: "import-markdown",
         raw: "# Imported\n\nLiteral `:bw-skill[]{skill=bad}`."
       },
       catalogs
@@ -133,6 +113,5 @@ describe("guarded whole-guide Markdown transfer", () => {
       catalogs
     );
     expect(state.history.frame).toEqual(before);
-    expect(state.view).toBe("source");
   });
 });

@@ -1,22 +1,12 @@
 import type { Build } from "./build";
 
 /** Vendor-independent semantic document. Build payloads are injected at the app boundary. */
-export interface GuideSource {
-  readonly label: string;
-  readonly url: string;
-  readonly attribution?: string;
-  readonly license?: string;
-  readonly licenseUrl?: string;
-  readonly revision?: string;
-  readonly notes?: string;
-}
 export interface GuideMetadata {
   readonly version: 1;
   readonly id: string;
   readonly title: string;
   readonly summary: string | null;
   readonly tags: readonly string[];
-  readonly sources: readonly GuideSource[];
 }
 export type GuideSkillContext =
   | { readonly kind: "generic" }

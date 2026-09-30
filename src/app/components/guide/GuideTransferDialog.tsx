@@ -7,7 +7,6 @@ import {
   readGuideMarkdownFile,
   validateGuideIntake
 } from "../../guide-files";
-import { GUIDE_LIMITS, utf8Bytes } from "../../../guide/limits";
 import { guideBuilds } from "../../../domain/guide";
 export function GuideDialog({
   title,
@@ -74,16 +73,13 @@ export function GuideTransferDialog({
       getGuide().history.frame.document.metadata.id
     );
     setMessage(
-      `Ready: ${document.metadata.title}; ${guideBuilds(document).length} builds. Replaces the applied guide and any unapplied source. Undo can restore both.`
+      `Ready: ${document.metadata.title}; ${guideBuilds(document).length} builds. Replaces the current guide. Undo restores it.`
     );
     setValidated(true);
   };
   return (
     <GuideDialog title="Import Markdown" onClose={onClose}>
-      <p>
-        Paste or upload a self-contained guide. Validation does not change your current guide or
-        source draft.
-      </p>
+      <p>Choose a Markdown file. Previewing it does not change your current guide.</p>
       <label>
         Markdown file
         <input
@@ -114,39 +110,8 @@ export function GuideTransferDialog({
           }}
         />
       </label>
-      <label>
-        Markdown to import
-        <textarea
-          autoFocus
-          spellCheck={false}
-          value={raw}
-          onChange={(event) => {
-            const value = event.target.value;
-            if (utf8Bytes(value) > GUIDE_LIMITS.rawBytes) {
-              setMessage("Markdown exceeds the 2 MiB input limit.");
-              return;
-            }
-            setRaw(value);
-            setValidated(false);
-            setMessage("");
-          }}
-        />
-      </label>
       <p role="status">{reading ? "Reading Markdown…" : message}</p>
       <div className="guide-actions">
-        <button
-          disabled={reading}
-          onClick={() => {
-            try {
-              validate(raw);
-            } catch (error) {
-              setValidated(false);
-              setMessage(error instanceof Error ? error.message : "Invalid Markdown.");
-            }
-          }}
-        >
-          Validate Markdown
-        </button>
         <button
           disabled={reading || !validated}
           onClick={() => {

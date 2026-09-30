@@ -192,9 +192,7 @@ export function validateGuideDocument<B>(
         parsed.document.nodes.filter((node) => node.type === "opaque").map((node) => node.raw)
       ) !== JSON.stringify(opaque)
     )
-      throw new Error(
-        "Opaque source cannot be safely reinserted here; retain the source document."
-      );
+      throw new Error("Unsupported content cannot be safely preserved in this position.");
   }
   return document;
 }

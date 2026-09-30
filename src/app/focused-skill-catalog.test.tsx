@@ -356,42 +356,58 @@ describe("FocusedSkillCatalog", () => {
     expect(screen.getByRole("status")).toHaveTextContent("");
   });
 
-  it("starts focused catalog drags from the skill icon", () => {
-    render(
-      <Harness
-        initialState={{
-          ...createBlankEditorState(),
-          build: {
-            ...createBlankEditorState().build,
-            primaryProfessionId: catalogId<"Profession">(1)
-          },
-          browser: {
-            ...createBlankEditorState().browser,
-            filters: { ...createBlankEditorState().browser.filters, query: "Healing Signet" }
-          }
-        }}
-      />
-    );
+  it.each(["list", "small-grid", "large-grid"] as const)(
+    "starts %s catalog drags from the icon and hides the tooltip until dragging ends",
+    (viewMode) => {
+      render(
+        <Harness
+          initialState={{
+            ...createBlankEditorState(),
+            build: {
+              ...createBlankEditorState().build,
+              primaryProfessionId: catalogId<"Profession">(1)
+            },
+            browser: {
+              ...createBlankEditorState().browser,
+              viewMode,
+              filters: { ...createBlankEditorState().browser.filters, query: "Healing Signet" }
+            }
+          }}
+        />
+      );
 
-    const row = screen.getByRole("button", { name: "Add Healing Signet to slot 1" });
-    const dataTransfer = createDataTransfer();
+      const row = screen.getByRole("button", { name: "Add Healing Signet to slot 1" });
+      const dataTransfer = createDataTransfer();
+      const handle = screen.getByTitle("Drag Healing Signet");
 
-    expect(row).not.toHaveAttribute("draggable", "true");
-    fireEvent.dragStart(screen.getByTitle("Drag Healing Signet"), { dataTransfer });
+      expect(row).not.toHaveAttribute("draggable", "true");
+      fireEvent.mouseEnter(row);
+      expect(screen.getByRole("tooltip", { hidden: true })).toHaveTextContent("Healing Signet");
+      fireEvent.dragStart(handle, { dataTransfer });
+      expect(screen.queryByRole("tooltip", { hidden: true })).toBeNull();
+      expect(row).not.toHaveAttribute("aria-describedby");
+      fireEvent.focus(row);
+      fireEvent.mouseEnter(row);
+      expect(screen.queryByRole("tooltip", { hidden: true })).toBeNull();
 
-    expect(parseDragPayload(dataTransfer.getData(BUILD_WARS_DRAG_MIME))).toEqual({
-      kind: "browser-skill",
-      skillId: catalogId<"Skill">(1)
-    });
-    expect(dataTransfer.setDragImage).toHaveBeenCalledTimes(1);
-    const [preview, hotspotX, hotspotY] = dataTransfer.setDragImage.mock.calls[0]!;
-    expect(preview).toBeInstanceOf(HTMLSpanElement);
-    expect((preview as HTMLElement).className).toBe("skill-drag-preview-icon");
-    expect((preview as HTMLElement).style.width).toBe("76px");
-    expect((preview as HTMLElement).querySelector(".catalog-icon")).not.toBeNull();
-    expect(hotspotX).toBe(38);
-    expect(hotspotY).toBe(38);
-  });
+      expect(parseDragPayload(dataTransfer.getData(BUILD_WARS_DRAG_MIME))).toEqual({
+        kind: "browser-skill",
+        skillId: catalogId<"Skill">(1)
+      });
+      expect(dataTransfer.setDragImage).toHaveBeenCalledTimes(1);
+      const [preview, hotspotX, hotspotY] = dataTransfer.setDragImage.mock.calls[0]!;
+      expect(preview).toBeInstanceOf(HTMLSpanElement);
+      expect((preview as HTMLElement).className).toBe("skill-drag-preview-icon");
+      expect((preview as HTMLElement).style.width).toBe("76px");
+      expect((preview as HTMLElement).querySelector(".catalog-icon")).not.toBeNull();
+      expect(hotspotX).toBe(38);
+      expect(hotspotY).toBe(38);
+      fireEvent.dragEnd(handle, { dataTransfer });
+      fireEvent.mouseLeave(row);
+      fireEvent.mouseEnter(row);
+      expect(screen.getByRole("tooltip", { hidden: true })).toHaveTextContent("Healing Signet");
+    }
+  );
 
   it("shows skill tooltips beside skill menu rows", () => {
     render(

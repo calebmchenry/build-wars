@@ -32,6 +32,7 @@ const catalogs = requireReadyCatalogs();
 afterEach(() => {
   vi.restoreAllMocks();
   localStorage.clear();
+  window.history.replaceState(null, "", "/");
 });
 describe("original guide workflow", () => {
   it("guards an autosaved applied guide after reload even when storage itself is clean", () => {
@@ -59,12 +60,12 @@ describe("original guide workflow", () => {
       })
     ).toBe(restored);
   });
-  it("uses real complete catalog snapshots with distinct contextual values, explicit provenance and no remote content", () => {
+  it("uses real complete catalog snapshots with distinct contextual values, portable Markdown metadata and no remote content", () => {
     const document = loadDaggerExample();
     const builds = guideBuilds(document);
     expect(builds).toHaveLength(2);
     expect(document.metadata.summary).toContain("not current meta advice");
-    expect(document.metadata.sources.length).toBeGreaterThan(0);
+    expect(document.metadata).not.toHaveProperty("sources");
     expect(exampleSource).not.toMatch(/!\[|<img|<iframe|<script|gwpvx\.fandom|rating\s*:/i);
     for (const node of builds) {
       expect(node.snapshot.build.skillBar[7]).toBeNull();
@@ -93,7 +94,7 @@ describe("original guide workflow", () => {
       expect(media.getAttribute("src")).not.toMatch(/^https?:/);
     expect(container.querySelector("iframe,video,script")).toBeNull();
   });
-  it("preserves independent variants and contexts through write, placement, bonus edit, Undo, Source, named save, reload, Read and byte reimport", async () => {
+  it("preserves independent variants and contexts through writing, placement, bonus edit, Undo, Markdown import, named save, reload, rendering and byte reimport", async () => {
     let workspace = workspaceReducer(createInitialWorkspaceState(), {
       type: "replace-guide",
       document: loadDaggerExample(),
@@ -155,14 +156,12 @@ describe("original guide workflow", () => {
     expect(guideBuilds(guide().history.frame.document)[0]).not.toEqual(guideBuilds(beforeBonus)[0]);
     send({ type: "history", direction: "undo" });
     expect(guide().history.frame.document).toEqual(beforeBonus);
-    send({ type: "source-open" });
     send({
-      type: "source-edit",
+      type: "import-markdown",
       raw:
-        guide().history.frame.recovery!.raw +
+        serializeGuideMarkdown(guide().history.frame.document) +
         "\n## Local observations\n\nKeep this original note.\n"
     });
-    send({ type: "source-apply" });
     expect(guide().history.frame.recovery).toBeNull();
     workspace = workspaceReducer(workspace, {
       type: "save-as-new",
@@ -179,8 +178,7 @@ describe("original guide workflow", () => {
     if (!parsed.ok) throw Error("fixture");
     workspace = createInitialWorkspaceState({ envelope: parsed.envelope });
     expect(materializeActiveDocument(workspace)).toEqual(expected);
-    const beforeRead = workspacePersistence(workspace);
-    send({ type: "view", view: "read" });
+    const beforeRender = workspacePersistence(workspace);
     const { container } = render(
       <GuideReader
         document={guide().history.frame.document}
@@ -190,7 +188,7 @@ describe("original guide workflow", () => {
     );
     expect(container.textContent).toContain("My local timing note");
     expect(container.textContent).toContain("Local observations");
-    expect(workspacePersistence(workspace)).toBe(beforeRead);
+    expect(workspacePersistence(workspace)).toBe(beforeRender);
     const raw = serializeGuideMarkdown(guide().history.frame.document);
     const bytes = new TextEncoder().encode(raw);
     const read = await readGuideMarkdownFile(
@@ -215,7 +213,7 @@ describe("original guide workflow", () => {
       })
     );
   });
-  it("loads only on explicit action and honors cancellation before replacing hydrated source", async () => {
+  it("opens the example as a separate document while retaining a hydrated guide", async () => {
     const document = createGuideFixture();
     const envelope = validLocalLibraryEnvelopeFixture({
       savedDocuments: [],
@@ -234,26 +232,27 @@ describe("original guide workflow", () => {
       }
     });
     localStorage.setItem(LOCAL_LIBRARY_STORAGE_KEY, serializeLocalLibraryEnvelope(envelope));
-    const confirm = vi.spyOn(window, "confirm").mockReturnValue(false);
+    const confirm = vi.spyOn(window, "confirm");
     render(<App />);
-    const source = await screen.findByRole("textbox", { name: "Markdown source" });
-    expect(source).toHaveValue("# My unfinished draft");
-    expect(
-      screen.queryByRole("heading", { name: "Dagger workshop: two independent variants" })
-    ).toBeNull();
-    fireEvent.click(screen.getByRole("button", { name: "Open example guide" }));
-    expect(confirm).toHaveBeenCalledOnce();
-    expect(source).toHaveValue("# My unfinished draft");
-    act(() => window.dispatchEvent(new Event("pagehide")));
-    const original = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY)!);
-    expect(original.ok && original.envelope.workingDraft?.document).toEqual(
-      envelope.workingDraft?.document
+    expect(await screen.findByRole("textbox", { name: "Guide document" })).toHaveTextContent(
+      "Practice guide"
     );
-    confirm.mockReturnValue(true);
+    fireEvent.click(screen.getByRole("button", { name: "Open document sidebar" }));
+    fireEvent.click(screen.getByText("Library tools"));
     fireEvent.click(screen.getByRole("button", { name: "Open example guide" }));
+    expect(await screen.findByRole("textbox", { name: "Guide title" })).toHaveValue(
+      "Dagger workshop: two independent variants"
+    );
+    expect(confirm).not.toHaveBeenCalled();
+    act(() => window.dispatchEvent(new Event("pagehide")));
+    const saved = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY)!);
     expect(
-      await screen.findByRole("heading", { name: "Dagger workshop: two independent variants" })
-    ).toBeTruthy();
+      saved.ok &&
+        saved.envelope.savedDocuments.some(
+          (record) =>
+            JSON.stringify(record.document) === JSON.stringify(envelope.workingDraft?.document)
+        )
+    ).toBe(true);
   });
 });
 function workspacePersistence(workspace: Parameters<typeof materializeActiveDocument>[0]) {

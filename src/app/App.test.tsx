@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { StrictMode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -29,25 +29,23 @@ afterEach(() => {
 });
 
 describe("App", { timeout: 10_000 }, () => {
-  it("guards transitions away from an unapplied source draft and back to the standalone composer", async () => {
-    const confirm = vi.spyOn(window, "confirm").mockReturnValue(false);
+  it("keeps guide edits when switching documents before autosave", async () => {
+    const confirm = vi.spyOn(window, "confirm");
     render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: "Open document sidebar" }));
     fireEvent.click(screen.getByRole("button", { name: "New Guide" }));
     await screen.findByRole("region", { name: "Guide workspace" });
-    fireEvent.click(screen.getByRole("button", { name: "Source" }));
-    fireEvent.change(screen.getByRole("textbox", { name: "Markdown source" }), {
-      target: { value: "# Unapplied notes" }
+    fireEvent.change(screen.getByRole("textbox", { name: "Guide title" }), {
+      target: { value: "Field notes" }
     });
-    fireEvent.click(screen.getByRole("button", { name: "Composer" }));
-    expect(confirm).toHaveBeenCalled();
-    expect(screen.getByRole("textbox", { name: "Markdown source" })).toHaveValue(
-      "# Unapplied notes"
-    );
-    confirm.mockReturnValue(true);
-    fireEvent.click(screen.getByRole("button", { name: "Composer" }));
-    await waitFor(() =>
-      expect(screen.getByRole("textbox", { name: "Build name" })).toBeInTheDocument()
-    );
+    fireEvent.blur(screen.getByRole("textbox", { name: "Guide title" }));
+    fireEvent.click(screen.getByRole("button", { name: "Open document sidebar" }));
+    fireEvent.click(screen.getByRole("button", { name: "Untitled Build" }));
+    expect(screen.getByRole("textbox", { name: "Build name" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Open document sidebar" }));
+    fireEvent.click(screen.getByRole("button", { name: "Field notes" }));
+    expect(await screen.findByRole("textbox", { name: "Guide title" })).toHaveValue("Field notes");
+    expect(confirm).not.toHaveBeenCalled();
     await act(async () => undefined);
   });
   it.each(["autosave", "pagehide"])(
@@ -88,6 +86,8 @@ describe("App", { timeout: 10_000 }, () => {
   it("applies and persists the selected theme preference", () => {
     render(<App />);
 
+    fireEvent.click(screen.getByRole("button", { name: "Open document sidebar" }));
+    fireEvent.click(screen.getByText("Library tools"));
     fireEvent.click(screen.getByRole("button", { name: "Dark" }));
 
     expect(document.documentElement).toHaveAttribute("data-theme", "dark");
@@ -126,7 +126,7 @@ describe("App", { timeout: 10_000 }, () => {
     ).toBeInTheDocument();
   });
 
-  it("coalesces draft autosave without creating a saved library record", () => {
+  it("coalesces edits into the active document record", () => {
     vi.useFakeTimers();
     render(<App />);
 
@@ -141,7 +141,10 @@ describe("App", { timeout: 10_000 }, () => {
     }
     expect(draftSnapshot(parsed.envelope.workingDraft)?.build.primaryProfessionId).toBe(1);
     expect(draftSnapshot(parsed.envelope.workingDraft)?.build.secondaryProfessionId).toBe(2);
-    expect(parsed.envelope.savedDocuments).toHaveLength(0);
+    expect(parsed.envelope.savedDocuments).toHaveLength(1);
+    expect(parsed.envelope.savedDocuments[0]?.id).toBe(
+      parsed.envelope.workingDraft?.associatedRecordId
+    );
   });
 
   it("does not overwrite corrupt local data through autosave", () => {
@@ -184,7 +187,7 @@ describe("App", { timeout: 10_000 }, () => {
     ).toBe(1);
   });
 
-  it("imports a valid share URL into an unassociated draft and consumes the fragment", () => {
+  it("imports a valid share URL into a new document and consumes the fragment", () => {
     vi.useFakeTimers();
     const shared = buildShareUrl({
       baseUrl: window.location.href,
@@ -204,8 +207,8 @@ describe("App", { timeout: 10_000 }, () => {
     act(() => vi.advanceTimersByTime(160));
     const parsed = parseLocalLibraryJson(localStorage.getItem(LOCAL_LIBRARY_STORAGE_KEY) ?? "");
     expect(parsed.ok ? draftSnapshot(parsed.envelope.workingDraft)?.build.mode : null).toBe("pvp");
-    expect(parsed.ok ? parsed.envelope.workingDraft?.associatedRecordId : "error").toBeNull();
-    expect(parsed.ok ? parsed.envelope.savedDocuments : []).toHaveLength(0);
+    expect(parsed.ok ? parsed.envelope.workingDraft?.associatedRecordId : null).toBeTruthy();
+    expect(parsed.ok ? parsed.envelope.savedDocuments : []).toHaveLength(1);
   });
 
   it("preserves a stored draft when a share URL opens over it until explicitly accepted", () => {

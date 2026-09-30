@@ -5,6 +5,44 @@ SPRINT-017 advances the payload to schema 2 so the same local-first library can 
 build sets. SPRINT-018 adds optional party metadata inside those build-set documents without
 changing the outer storage key or library envelope schema.
 
+## Document sidebar update — 2026-09-29
+
+The app now uses a floating document sidebar, opened by the left-edge chevron button.
+Guides and Builds are collapsible sections; their plus buttons create persistent entries.
+Build sets appear under Builds. Row menus provide duplicate, rename, confirmed delete,
+open in new tab, guide Markdown download, and build template copying. For a build set,
+template copying uses its selected loadout. Library tools contain theme, backup/restore,
+Markdown import, example guides, and build-set/party management.
+
+`document-library.ts` wraps the existing workspace reducer. It adopts legacy working drafts
+in memory, keeps active document records current as edits arrive, and retains those records
+when navigating before the storage debounce completes. Guide duplicates get distinct document
+identities. Deleting the active document selects another entry, or leaves a blank composer
+when the library is empty. The old manual-save reducer APIs remain for compatibility; they
+are no longer the app's primary navigation or save workflow.
+
+`use-document-persistence.ts` debounces writes (one second for guides, 150ms for builds),
+flushes explicit operations and page exit, and coordinates tabs. The storage key remains
+`build-wars:v1` with the existing schema-3 envelope; no destructive migration is required.
+A `?document=<record-id>` URL opens a particular local entry, independently of the shared
+last working draft. URLs identify documents on the same browser/device; they do not upload
+or share their contents. Existing guide anchor fragments are retained for the current guide.
+
+Storage events refresh clean records and the active clean document. A three-way merge against
+the last observed records combines edits to different documents, including deletes. Concurrent
+edits or edit/delete conflicts on the same document keep local work in memory and block writes;
+the sidebar offers a library backup before reload. Autosaves use Web Locks where available.
+Synchronous page-exit and open-in-new-tab flushes, and browsers without Web Locks, still use
+best-effort read/merge/revision checks rather than atomic compare-and-swap.
+
+Regression coverage: `document-library.test.ts`, `document-sidebar.test.tsx`, `App.test.tsx`,
+and the existing guide durability, anchor, import and workflow suites.
+
+## Earlier storage and manual-library contracts
+
+The sections below document the earlier implementation. The sidebar update above supersedes
+manual-save UI behavior and adds guide documents and tab synchronization.
+
 ## Storage Contract
 
 The MVP uses exactly one browser `localStorage` key:

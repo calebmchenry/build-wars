@@ -168,13 +168,14 @@ describe("addressed guide reference projections", () => {
       </p>
     );
     expect(container.querySelector("p div")).toBeNull();
-    const mention = screen.getByRole("button", { name: "Flare — Flare practice" });
+    const mention = screen.getByRole("link", { name: "Flare — Flare practice" });
+    expect(mention).toHaveAttribute("href", "https://wiki.guildwars.com/wiki/Flare");
     fireEvent.focus(mention);
     expect(screen.getByRole("tooltip").textContent).toContain("Context: Flare practice");
     fireEvent.keyDown(mention, { key: "Escape" });
     expect(screen.queryByRole("tooltip")).toBeNull();
     fireEvent.pointerDown(mention, { pointerType: "touch" });
-    expect(container.textContent).toBe("Before Flare (Flare practice) after.");
+    expect(container.textContent).toBe("Before Flare after.");
   });
   it("keeps a touch tooltip open and offers a separate context action", () => {
     const onEdit = vi.fn();
@@ -186,7 +187,8 @@ describe("addressed guide reference projections", () => {
         onEdit={onEdit}
       />
     );
-    const mention = screen.getByRole("button", { name: "Flare — Generic; edit reference" });
+    const mention = screen.getByRole("link", { name: "Flare — Generic" });
+    expect(mention).toHaveAttribute("target", "_blank");
     const pointer = createEvent.pointerDown(mention);
     Object.defineProperty(pointer, "pointerType", { value: "touch" });
     fireEvent(mention, pointer);

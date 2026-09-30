@@ -71,7 +71,47 @@ function mixed() {
   });
 }
 describe("v3 guide library durability", () => {
-  it("round-trips mixed legacy, party and guide records and hydrates exact invalid source with fresh diagnostics", () => {
+  it("loads old attribution and clean source projections without reviving either feature", () => {
+    const original = mixed();
+    const guide = snapshot();
+    const legacyDocument = {
+      ...guide.document,
+      metadata: {
+        ...guide.document.metadata,
+        sources: [{ label: "Old attribution", url: "https://example.com" }]
+      }
+    };
+    const parsed = parseLocalLibraryJson(
+      serializeLocalLibraryEnvelope({
+        ...original,
+        workingDraft: {
+          ...original.workingDraft!,
+          document: {
+            kind: "guide",
+            snapshot: {
+              ...guide,
+              document: legacyDocument,
+              recovery: {
+                raw: serializeGuideMarkdown(legacyDocument),
+                baseRevision: 6,
+                dirty: false
+              }
+            }
+          }
+        }
+      })
+    );
+    expect(parsed.ok).toBe(true);
+    expect(parsed.writeBlocked).toBe(false);
+    if (!parsed.ok) throw Error("fixture");
+    const hydrated = createInitialWorkspaceState({ envelope: parsed.envelope });
+    if (hydrated.document.kind !== "guide") throw Error("fixture");
+    expect(hydrated.document.history.frame.document.metadata).not.toHaveProperty("sources");
+    expect(serializeGuideMarkdown(hydrated.document.history.frame.document)).not.toContain(
+      '"sources"'
+    );
+  });
+  it("round-trips mixed legacy, party and guide records and opens the rendered document while retaining legacy draft bytes", () => {
     const original = mixed();
     const parsed = parseLocalLibraryJson(serializeLocalLibraryEnvelope(original));
     expect(parsed.ok).toBe(true);
@@ -81,8 +121,7 @@ describe("v3 guide library durability", () => {
     const hydrated = createInitialWorkspaceState({ envelope: parsed.envelope });
     expect(hydrated.document.kind).toBe("guide");
     if (hydrated.document.kind !== "guide") throw Error("fixture");
-    expect(hydrated.document.view).toBe("source");
-    expect(hydrated.document.diagnostics.length).toBeGreaterThan(0);
+    expect(hydrated.document.diagnostics).toEqual([]);
     expect(hydrated.document.history.frame.recovery?.raw).toBe(raw);
     expect(hydrated.document.history.past).toHaveLength(0);
     expect(hydrated.document.history.revision).toBe(6);
@@ -128,7 +167,7 @@ describe("v3 guide library durability", () => {
       }).writeBlocked
     ).toBe(true);
   });
-  it("preserves invalid raw and internal identities on duplicate and backup conflict, then repairs after reload", () => {
+  it("preserves invalid raw and internal identities on duplicate and backup conflict, then imports a replacement after reload", () => {
     let state = createInitialWorkspaceState({ envelope: mixed() });
     state = workspaceReducer(state, {
       type: "duplicate-record",
@@ -173,35 +212,17 @@ describe("v3 guide library durability", () => {
       type: "guide",
       command: {
         ...guideAddress(state.document),
-        type: "source-edit",
+        type: "import-markdown",
         raw: serializeGuideMarkdown(snapshot().document)
       }
     });
     if (state.document.kind !== "guide") throw Error("fixture");
-    state = workspaceReducer(state, {
-      type: "guide",
-      command: {
-        ...guideAddress(state.document),
-        type: "source-apply",
-        acknowledgeReplacement: true
-      }
-    });
     if (state.document.kind !== "guide") throw Error("fixture");
     expect(state.document.history.frame.recovery).toBeNull();
     expect(state.document.history.frame.document).toEqual(snapshot().document);
   });
   it("maps Save As and saved rename to authored metadata while retaining stale raw and unknown audit facts", () => {
-    let state = workspaceReducer(createInitialWorkspaceState(), {
-      type: "replace-guide",
-      document: createGuideFixture(),
-      session: "named",
-      decision: "discard"
-    });
-    if (state.document.kind !== "guide") throw Error("fixture");
-    state = workspaceReducer(state, {
-      type: "guide",
-      command: { ...guideAddress(state.document), type: "source-edit", raw }
-    });
+    let state = createInitialWorkspaceState({ envelope: mixed() });
     state = workspaceReducer(state, {
       type: "save-as-new",
       name: "Saved name",
@@ -209,7 +230,7 @@ describe("v3 guide library durability", () => {
       now,
       savedWith: fixtureCatalogFacts
     });
-    expect(state.library.records[0]?.savedWith.skillCatalogVersion).toBeNull();
+    expect(state.library.records.at(-1)?.savedWith).toEqual(fixtureCatalogFacts);
     state = workspaceReducer(state, {
       type: "rename-record",
       id: localBuildRecordId("named"),
@@ -217,7 +238,7 @@ describe("v3 guide library durability", () => {
       now,
       savedWith: fixtureCatalogFacts
     });
-    const saved = state.library.records[0]!;
+    const saved = state.library.records.at(-1)!;
     if (saved.document.kind !== "guide" || state.document.kind !== "guide") throw Error("fixture");
     expect(saved.name).toBe(saved.document.snapshot.document.metadata.title);
     expect(state.document.history.frame.document.metadata.title).toBe("Renamed");

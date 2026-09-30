@@ -64,12 +64,10 @@ describe("captured guide template operations", () => {
       if (kind === "delete")
         runtime.send({ type: "delete-build", buildId: "gb-flare", retainUnresolved: true });
       if (kind === "apply") {
-        runtime.send({ type: "source-open" });
         runtime.send({
-          type: "source-edit",
+          type: "import-markdown",
           raw: serializeGuideMarkdown(runtime.get().history.frame.document) + "\nAfter source\n"
         });
-        runtime.send({ type: "source-apply" });
       }
       if (kind === "undo") {
         runtime.send({

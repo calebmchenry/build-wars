@@ -118,8 +118,7 @@ export function planGuidePlacement(
   const reject = (message: string): GuidePlacementPlan => ({ kind: "rejected", message });
   if (!payload || !readGuideSkillPayload(JSON.stringify(payload)))
     return reject("Invalid guide skill payload; nothing changed.");
-  if (state.view !== "visual" || state.composing || state.history.frame.recovery?.dirty)
-    return reject("Finish editing source or composing before placing a skill.");
+  if (state.composing) return reject("Finish composing before placing a skill.");
   if (
     payload.session !== state.history.session ||
     payload.generation !== state.generation ||

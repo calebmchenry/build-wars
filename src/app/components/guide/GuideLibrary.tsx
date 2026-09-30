@@ -31,7 +31,7 @@ export function GuideLibrary({
   const associated = workspace.library.records.find(
     (record) => record.id === workspace.draftSession.associatedRecordId
   );
-  const readonly = guide.view === "read" || guide.composing;
+  const readonly = guide.composing;
   const now = () => new Date().toISOString();
   const open = (id: LocalBuildRecordId) =>
     dispatch({ type: "load-record", id, decision: "discard" });
@@ -44,8 +44,8 @@ export function GuideLibrary({
     <details className="guide-library">
       <summary>Local guide library ({workspace.library.records.length})</summary>
       <p>
-        Saved guides keep independent complete builds and exact unapplied source. Game template
-        files contain less information.{" "}
+        Saved guides keep your writing and complete independent builds. Game template files contain
+        less information.{" "}
         {associated
           ? `Current record: ${associated.name}.`
           : "This guide has no named saved record."}
@@ -86,9 +86,6 @@ export function GuideLibrary({
         {workspace.library.records.map((record) => (
           <li key={record.id}>
             <strong>{record.name}</strong> <span>({record.document.kind})</span>
-            {record.document.kind === "guide" && record.document.snapshot.recovery?.dirty && (
-              <span> · source draft retained</span>
-            )}
             <div className="guide-actions">
               <button
                 disabled={guide.composing}
@@ -125,8 +122,8 @@ export function GuideLibrary({
       {pendingOpen && !nameDialog && (
         <GuideDialog title="Keep current guide before opening" onClose={() => setPendingOpen(null)}>
           <p>
-            This guide has unsaved edits or unapplied source. Save or download them before replacing
-            the working document.
+            This guide has unsaved edits. Save or download them before replacing the working
+            document.
           </p>
           <div className="guide-actions">
             <button
@@ -145,20 +142,8 @@ export function GuideLibrary({
                 downloadGuide(serializeGuideMarkdown(document), document.metadata.title)
               }
             >
-              Download current applied guide
+              Download current guide as Markdown
             </button>
-            {guide.history.frame.recovery?.dirty && (
-              <button
-                onClick={() =>
-                  downloadGuide(
-                    guide.history.frame.recovery!.raw,
-                    document.metadata.title + "-source"
-                  )
-                }
-              >
-                Download current source draft
-              </button>
-            )}
             <button
               onClick={() => {
                 open(pendingOpen);
@@ -214,10 +199,7 @@ export function GuideLibrary({
                 onChange={(event) => setNameDialog({ ...nameDialog, name: event.target.value })}
               />
             </label>
-            <p>
-              For guides, the saved name is the authored title. Renaming marks an existing source
-              draft as based on an older revision without changing its raw bytes.
-            </p>
+            <p>For guides, the saved name is the document title.</p>
             <div className="guide-actions">
               <button type="submit">Save named guide</button>
               <button type="button" onClick={() => setNameDialog(null)}>

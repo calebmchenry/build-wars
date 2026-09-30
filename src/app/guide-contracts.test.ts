@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { guideBuildAdapter } from "./guide-build-adapter";
 import { createGuideFixture } from "./guide-fixture";
 import { commitGuide, createGuideHistory } from "./guide-history";
-import { createGuideAutosave } from "./guide-autosave";
+import { createGuideAutosave, GUIDE_AUTOSAVE_DELAY_MS } from "./guide-autosave";
 import { GUIDE_LIMITS } from "../guide/limits";
 import { parseGuideMarkdown, serializeGuideMarkdown } from "../guide/markdown";
 import frozenLongSource from "../../test/fixtures/guides/long-v1.md?raw";
@@ -14,7 +14,9 @@ describe("frozen guide grammar and capacity contracts", () => {
     const parsed = parse(frozenLongSource);
     expect(parsed.ok).toBe(true);
     if (parsed.ok) expect(parsed.document).toEqual(createGuideFixture(true));
-    expect(serializeGuideMarkdown(createGuideFixture(true))).toBe(frozenLongSource);
+    expect(serializeGuideMarkdown(createGuideFixture(true))).toBe(
+      frozenLongSource.replace(',"sources":[]', "")
+    );
   });
   it.each([
     "# Heading\n\nA **strong** and *emphasized* [link](https://example.com) with `code`.\n\n> Quote\n\n- One\n- Two\n\n3. Three\n4. Four\n\n```js\nconst value = 1;\n```\n",
@@ -87,7 +89,7 @@ describe("frozen guide grammar and capacity contracts", () => {
     autosave.schedule(2);
     autosave.schedule(2);
     expect(flush).not.toHaveBeenCalled();
-    vi.advanceTimersByTime(500);
+    vi.advanceTimersByTime(GUIDE_AUTOSAVE_DELAY_MS);
     expect(flush.mock.calls).toEqual([[2]]);
     autosave.schedule(2);
     autosave.flush();

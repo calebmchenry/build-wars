@@ -87,18 +87,7 @@ describe("portable guide model and full snapshot codec", () => {
         ...fixture.metadata,
         title: "Two independent variants",
         summary: "Original tests",
-        tags: ["timing", "practice"],
-        sources: [
-          {
-            label: "Skill reference",
-            url: "https://wiki.guildwars.com/wiki/Skill",
-            attribution: "Linked reference",
-            license: "No copied prose",
-            licenseUrl: "https://example.com/terms",
-            revision: "2026-09-27",
-            notes: "Original authored content"
-          }
-        ]
+        tags: ["timing", "practice"]
       },
       nodes: [
         { type: "build" as const, id: "gb-one", snapshot: first },
@@ -126,6 +115,25 @@ describe("portable guide model and full snapshot codec", () => {
     expect(validateGuideDocument(document, adapter)).toEqual(document);
     expect(first.rawTemplate.source).not.toBeNull();
     expect(source).not.toContain('"template":');
+  });
+  it("loads legacy attribution metadata but omits it from the guide and subsequent exports", () => {
+    const document = createGuideFixture();
+    const legacy = {
+      ...document,
+      metadata: {
+        ...document.metadata,
+        sources: [
+          { label: "Old reference", url: "https://example.com", attribution: "Old attribution" }
+        ]
+      }
+    };
+    const raw = serializeGuideMarkdown(legacy);
+    const parsed = parseGuideMarkdown(raw, guideBuildAdapter(null), () => "unused");
+    expect(parsed.ok).toBe(true);
+    if (!parsed.ok) throw Error("fixture");
+    expect(parsed.document).toEqual(document);
+    expect(serializeGuideMarkdown(parsed.document)).not.toContain('"sources"');
+    expect(validateGuideDocument(legacy, adapter)).toEqual(document);
   });
   it("expands input shorthand once in its own mode and exports only full snapshots", () => {
     for (const mode of ["pvp", "pve"] as const) {

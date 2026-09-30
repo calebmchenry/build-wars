@@ -1,5 +1,10 @@
+export const GUIDE_AUTOSAVE_DELAY_MS = 1000;
+
 /** A revision signal schedules work; serialization happens only at flush time. */
-export function createGuideAutosave(flush: (revision: number) => void, delay = 500) {
+export function createGuideAutosave(
+  flush: (revision: number) => void,
+  delay = GUIDE_AUTOSAVE_DELAY_MS
+) {
   let pending: number | null = null;
   let completed: number | null = null;
   let timer: ReturnType<typeof setTimeout> | null = null;

@@ -100,8 +100,7 @@ describe("domain contracts", () => {
           id: "guide-domain",
           title: "A neutral guide",
           summary: null,
-          tags: [],
-          sources: []
+          tags: []
         },
         nodes: [
           { type: "build", id: syntheticFoundationBuild.id, snapshot: syntheticFoundationBuild }

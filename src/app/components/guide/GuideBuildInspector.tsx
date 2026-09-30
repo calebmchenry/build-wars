@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, type ReactNode } from "react";
 import type { EditorAction } from "../../editor-state";
 import type { AppCatalogViews } from "../../catalogs";
 import { selectAttributePreview } from "../../attribute-preview-selectors";
@@ -26,13 +26,17 @@ export function GuideBuildInspector({
   snapshot,
   catalogs,
   getGuide,
-  send
+  send,
+  actions,
+  children
 }: {
   readonly id: string;
   readonly snapshot: PersistedBuildSnapshot;
   readonly catalogs: AppCatalogViews;
   readonly getGuide: () => RuntimeGuideDocument;
   readonly send: GuideDispatch;
+  readonly actions: ReactNode;
+  readonly children: ReactNode;
 }) {
   const state = useMemo(() => hydrateEditorFromSnapshot(snapshot), [snapshot]);
   const preview = useMemo(
@@ -52,13 +56,12 @@ export function GuideBuildInspector({
   const edit = (action: EditorAction) => send({ type: "build", buildId: id, action });
   return (
     <section className="guide-inspector" aria-label="Selected build inspector">
-      <h2>Editing {snapshot.build.name}</h2>
-      <button onClick={() => send({ type: "select", buildId: null })}>Close build inspector</button>
       <ComposerHeader
         state={state}
         catalogs={catalogs}
         validation={validation.result}
         dispatch={edit}
+        nameActions={actions}
       />
       <FocusedAttributeEditor
         state={state}
@@ -67,158 +70,162 @@ export function GuideBuildInspector({
         validation={validation}
         dispatch={edit}
       />
-      <details>
-        <summary>Budget and title ranks</summary>
+      {children}
+      <details className="guide-build-advanced">
+        <summary>Template and advanced settings</summary>
+        <details>
+          <summary>Budget and title ranks</summary>
+          <label>
+            Character level
+            <input
+              type="number"
+              min={1}
+              max={20}
+              value={state.pveBudget.level}
+              onChange={(event) =>
+                edit({ type: "set-pve-budget", level: Number(event.target.value) })
+              }
+            />
+          </label>
+          <label>
+            Attribute quests
+            <select
+              value={state.pveBudget.questBonus}
+              onChange={(event) =>
+                edit({
+                  type: "set-pve-budget",
+                  questBonus: event.target.value as "none" | "maximum-applicable"
+                })
+              }
+            >
+              <option value="none">None</option>
+              <option value="maximum-applicable">Maximum applicable</option>
+            </select>
+          </label>
+          <TitleRankPanel
+            view={selectTitleRankPanelView(state, catalogs, validation.result)}
+            dispatch={edit}
+          />
+        </details>
         <label>
-          Character level
+          Card template code
           <input
-            type="number"
-            min={1}
-            max={20}
-            value={state.pveBudget.level}
-            onChange={(event) =>
-              edit({ type: "set-pve-budget", level: Number(event.target.value) })
-            }
+            aria-label="Card template code"
+            value={visibleTemplate}
+            onChange={(event) => setTemplate({ id, value: event.target.value })}
+            onKeyDown={(event) => {
+              if (event.key === "Escape") setTemplate(null);
+            }}
           />
         </label>
-        <label>
-          Attribute quests
-          <select
-            value={state.pveBudget.questBonus}
-            onChange={(event) =>
-              edit({
-                type: "set-pve-budget",
-                questBonus: event.target.value as "none" | "maximum-applicable"
-              })
-            }
-          >
-            <option value="none">None</option>
-            <option value="maximum-applicable">Maximum applicable</option>
-          </select>
-        </label>
-        <TitleRankPanel
-          view={selectTitleRankPanelView(state, catalogs, validation.result)}
-          dispatch={edit}
-        />
-      </details>
-      <label>
-        Card template code
-        <input
-          aria-label="Card template code"
-          value={visibleTemplate}
-          onChange={(event) => setTemplate({ id, value: event.target.value })}
-          onKeyDown={(event) => {
-            if (event.key === "Escape") setTemplate(null);
-          }}
-        />
-      </label>
-      <div className="guide-actions">
-        <button
-          onClick={() => {
-            if (output.ok && visibleTemplate.trim() === output.bareCode) {
-              setTemplate(null);
-              return;
-            }
-            const op = createGuideTemplateOperation(getGuide, id, catalogs, send);
-            if (!op) return;
-            if (
-              applyTemplateImport({
-                input: visibleTemplate,
-                state: op.state,
-                catalogs,
-                dispatch: op.dispatch,
-                requestDraftReplacement: () =>
-                  window.confirm(`Replace “${snapshot.build.name}” from this game code?`)
-                    ? "discard"
-                    : "cancel"
-              })
-            )
-              setTemplate(null);
-          }}
-        >
-          Apply card template
-        </button>
-        <button onClick={() => void copyGuideTemplate(getGuide, id, catalogs, send)}>
-          Copy card template
-        </button>
-        {(["load", "save"] as const).map((mode) => (
+        <div className="guide-actions">
           <button
-            key={mode}
+            onClick={() => {
+              if (output.ok && visibleTemplate.trim() === output.bareCode) {
+                setTemplate(null);
+                return;
+              }
+              const op = createGuideTemplateOperation(getGuide, id, catalogs, send);
+              if (!op) return;
+              if (
+                applyTemplateImport({
+                  input: visibleTemplate,
+                  state: op.state,
+                  catalogs,
+                  dispatch: op.dispatch,
+                  requestDraftReplacement: () =>
+                    window.confirm(`Replace “${snapshot.build.name}” from this game code?`)
+                      ? "discard"
+                      : "cancel"
+                })
+              )
+                setTemplate(null);
+            }}
+          >
+            Apply card template
+          </button>
+          <button onClick={() => void copyGuideTemplate(getGuide, id, catalogs, send)}>
+            Copy card template
+          </button>
+          {(["load", "save"] as const).map((mode) => (
+            <button
+              key={mode}
+              onClick={() => {
+                const op = createGuideTemplateOperation(getGuide, id, catalogs, send);
+                if (op) setOperation({ mode, op });
+              }}
+            >
+              {mode === "load" ? "Load card template" : "Save card template"}
+            </button>
+          ))}
+        </div>
+        <div className="guide-actions">
+          <button
             onClick={() => {
               const op = createGuideTemplateOperation(getGuide, id, catalogs, send);
-              if (op) setOperation({ mode, op });
+              if (!op) return;
+              if (!op.output.ok) {
+                send({ type: "message", message: op.output.blockedReasons.join(" ") });
+                return;
+              }
+              try {
+                downloadTemplateFile(templateFilename(op.state.build.name), op.output.bareCode);
+                send({
+                  type: "message",
+                  message: `Download started for captured “${op.state.build.name}” (${op.output.fidelity}). Game codes omit guide and bonus metadata.`
+                });
+              } catch (error) {
+                send({ type: "message", message: templateFileError(error) });
+              }
             }}
           >
-            {mode === "load" ? "Load card template" : "Save card template"}
+            Download card template
           </button>
-        ))}
-      </div>
-      <div className="guide-actions">
-        <button
-          onClick={() => {
-            const op = createGuideTemplateOperation(getGuide, id, catalogs, send);
-            if (!op) return;
-            if (!op.output.ok) {
-              send({ type: "message", message: op.output.blockedReasons.join(" ") });
-              return;
-            }
-            try {
-              downloadTemplateFile(templateFilename(op.state.build.name), op.output.bareCode);
-              send({
-                type: "message",
-                message: `Download started for captured “${op.state.build.name}” (${op.output.fidelity}). Game codes omit guide and bonus metadata.`
-              });
-            } catch (error) {
-              send({ type: "message", message: templateFileError(error) });
-            }
-          }}
-        >
-          Download card template
-        </button>
-        <label>
-          Upload card template
-          <input
-            type="file"
-            accept=".txt,text/plain"
-            onClick={() => {
-              uploadCapture.current = createGuideTemplateOperation(getGuide, id, catalogs, send);
-            }}
-            onChange={(event) => {
-              const file = event.currentTarget.files?.[0];
-              const op = uploadCapture.current;
-              event.currentTarget.value = "";
-              if (!file || !op) return;
-              void readTemplateFile(file)
-                .then((code) => {
-                  if (!op.guard.isCurrent()) {
-                    op.guard.onStale(null);
-                    return;
-                  }
-                  applyTemplateImport({
-                    input: code,
-                    name: file.name.replace(/\.txt$/i, ""),
-                    state: op.state,
-                    catalogs,
-                    dispatch: op.dispatch,
-                    requestDraftReplacement: () =>
-                      window.confirm(`Replace captured “${op.state.build.name}”?`)
-                        ? "discard"
-                        : "cancel"
-                  });
-                })
-                .catch((error) => send({ type: "message", message: templateFileError(error) }));
-            }}
-          />
-        </label>
-      </div>
-      <p>
-        Game codes contain professions, purchased ranks and skills. Guide text, references,
-        rune/headgear, title and assumed-effect choices stay in Markdown/local guides.
-      </p>
-      {!output.ok && <p>{output.blockedReasons.join(" ")}</p>}
-      <details>
-        <summary>Build validation</summary>
-        <ValidationPanel validation={validation} />
+          <label>
+            Upload card template
+            <input
+              type="file"
+              accept=".txt,text/plain"
+              onClick={() => {
+                uploadCapture.current = createGuideTemplateOperation(getGuide, id, catalogs, send);
+              }}
+              onChange={(event) => {
+                const file = event.currentTarget.files?.[0];
+                const op = uploadCapture.current;
+                event.currentTarget.value = "";
+                if (!file || !op) return;
+                void readTemplateFile(file)
+                  .then((code) => {
+                    if (!op.guard.isCurrent()) {
+                      op.guard.onStale(null);
+                      return;
+                    }
+                    applyTemplateImport({
+                      input: code,
+                      name: file.name.replace(/\.txt$/i, ""),
+                      state: op.state,
+                      catalogs,
+                      dispatch: op.dispatch,
+                      requestDraftReplacement: () =>
+                        window.confirm(`Replace captured “${op.state.build.name}”?`)
+                          ? "discard"
+                          : "cancel"
+                    });
+                  })
+                  .catch((error) => send({ type: "message", message: templateFileError(error) }));
+              }}
+            />
+          </label>
+        </div>
+        <p>
+          Game codes contain professions, purchased ranks and skills. Guide text, references,
+          rune/headgear, title and assumed-effect choices stay in Markdown/local guides.
+        </p>
+        {!output.ok && <p>{output.blockedReasons.join(" ")}</p>}
+        <details>
+          <summary>Build validation</summary>
+          <ValidationPanel validation={validation} />
+        </details>
       </details>
       {operation && (
         <TemplateBrowserDialog

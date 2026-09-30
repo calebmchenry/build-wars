@@ -2,7 +2,7 @@ import { migrateLegacyAttributeAdjustments } from "./legacy-attribute-adjustment
 import { validateGuideDocument } from "../guide/validation";
 import { GUIDE_LIMITS, utf8Bytes } from "../guide/limits";
 import { GuideJsonError, parseGuideJson } from "../guide/strict-json";
-import { serializeGuideMarkdown } from "../guide/markdown";
+import { parseGuideMarkdown, serializeGuideMarkdown } from "../guide/markdown";
 import { assertPersistenceBytes, assertPersistenceStructure } from "./persistence-capacity";
 import {
   cloneAttributeAdjustments,
@@ -440,7 +440,9 @@ export function fingerprintPersistedDocument(document: PersistedDocument): strin
     const snapshot = document.snapshot;
     let encoded = guideFingerprintCache.get(snapshot.document);
     if (encoded === undefined) {
-      encoded = JSON.stringify(stableJson(snapshot.document));
+      // Validation/history already produced this canonical representation.
+      // Reuse it instead of walking every build snapshot again on each keystroke.
+      encoded = serializeGuideMarkdown(snapshot.document);
       guideFingerprintCache.set(snapshot.document, encoded);
     }
     const recovery = snapshot.recovery?.dirty
@@ -2166,11 +2168,27 @@ export function validatePersistedGuideSnapshot(input: unknown): PersistedGuideSn
       Number(raw.baseRevision) > appliedRevision
     )
       throw new Error("Guide source recovery is invalid or exceeds capacity.");
-    if (
-      !raw.dirty &&
-      (raw.baseRevision !== appliedRevision || raw.raw !== serializeGuideMarkdown(document))
-    )
-      throw new Error("Clean source recovery must match the applied guide.");
+    if (!raw.dirty) {
+      // Older projections include attribution metadata removed by validation.
+      // Compare meaning, so legacy key ordering and fields cannot block loading.
+      const parsed = parseGuideMarkdown(
+        raw.raw,
+        {
+          validate: validateGuideBuildSnapshot,
+          id: (value) => value.build.id,
+          expandTemplate: () => {
+            throw new Error("Stored guides require complete builds.");
+          }
+        },
+        () => document.metadata.id
+      );
+      if (
+        raw.baseRevision !== appliedRevision ||
+        !parsed.ok ||
+        serializeGuideMarkdown(parsed.document) !== serializeGuideMarkdown(document)
+      )
+        throw new Error("Clean source recovery must match the applied guide.");
+    }
     recovery = { raw: raw.raw, baseRevision: raw.baseRevision as number, dirty: raw.dirty };
   }
   return { schemaVersion: 1, document, recovery, appliedRevision };

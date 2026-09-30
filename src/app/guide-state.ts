@@ -4,7 +4,6 @@ import { guideDeletionImpact } from "../domain/guide-references";
 import { parseGuideMarkdown, serializeGuideMarkdown } from "../guide/markdown";
 import type { GuideDiagnostic } from "../guide/markdown";
 import { validateGuideDocument } from "../guide/validation";
-import { GUIDE_LIMITS, utf8Bytes } from "../guide/limits";
 import { guideBuildAdapter, cloneGuideBuild } from "./guide-build-adapter";
 import {
   commitGuide,
@@ -30,7 +29,6 @@ export interface RuntimeGuideDocument {
   readonly generation: number;
   readonly selectedBuildId: string | null;
   readonly intent: GuideIntent;
-  readonly view: "visual" | "source" | "read";
   readonly composing: boolean;
   readonly capturedBuild: PersistedBuildSnapshot | null;
   readonly message: string | null;
@@ -40,7 +38,6 @@ export type GuideCommand =
   | { type: "select"; buildId: string | null }
   | { type: "intent"; intent: GuideIntent }
   | { type: "composition"; active: boolean }
-  | { type: "view"; view: RuntimeGuideDocument["view"] }
   | { type: "message"; message: string }
   | ({ session: string; revision: number } & (
       | { type: "edit"; document: AppliedGuide; typing?: boolean; retainUnresolved?: boolean }
@@ -50,11 +47,7 @@ export type GuideCommand =
       | { type: "delete-build"; buildId: string; retainUnresolved: boolean }
       | { type: "move-build"; buildId: string; direction: -1 | 1 }
       | { type: "metadata"; metadata: GuideMetadata }
-      | { type: "source-open" }
-      | { type: "source-edit"; raw: string }
-      | { type: "source-discard" }
-      | { type: "source-apply"; acknowledgeReplacement?: boolean }
-      | { type: "import-source"; raw: string }
+      | { type: "import-markdown"; raw: string }
       | { type: "history"; direction: "undo" | "redo" }
       | {
           type: "insert-fragment";
@@ -73,7 +66,6 @@ export function createRuntimeGuide(
     generation: 0,
     selectedBuildId: null,
     intent: { kind: "none" },
-    view: "visual",
     composing: false,
     capturedBuild,
     message: null,
@@ -83,7 +75,29 @@ export function createRuntimeGuide(
 export function guideAddress(state: RuntimeGuideDocument) {
   return { session: state.history.session, revision: state.history.revision };
 }
+// The workspace preflights a command synchronously so the editor can reject it.
+// Reuse that immutable result when React dispatches the exact same command (and
+// when Strict Mode replays the reducer), rather than validating/encoding twice.
+const reductions = new WeakMap<
+  GuideCommand,
+  {
+    state: RuntimeGuideDocument;
+    catalogs: AppCatalogViews | null;
+    result: RuntimeGuideDocument;
+  }
+>();
 export function reduceGuide(
+  state: RuntimeGuideDocument,
+  command: GuideCommand,
+  catalogs: AppCatalogViews | null = null
+): RuntimeGuideDocument {
+  const cached = reductions.get(command);
+  if (cached?.state === state && cached.catalogs === catalogs) return cached.result;
+  const result = applyGuideCommand(state, command, catalogs);
+  reductions.set(command, { state, catalogs, result });
+  return result;
+}
+function applyGuideCommand(
   state: RuntimeGuideDocument,
   command: GuideCommand,
   catalogs: AppCatalogViews | null = null
@@ -107,70 +121,7 @@ export function reduceGuide(
         : null
     };
   if (command.type === "intent") return { ...state, intent: command.intent };
-  if (command.type === "view") {
-    if (command.view === "visual" && history.frame.recovery?.dirty)
-      return message("Apply source or explicitly discard it before visual editing.");
-    return { ...state, view: command.view, intent: { kind: "none" } };
-  }
-  if (command.type === "source-open")
-    return {
-      ...state,
-      view: "source",
-      intent: { kind: "none" },
-      history: {
-        ...history,
-        group: null,
-        frame: {
-          ...history.frame,
-          recovery: history.frame.recovery ?? {
-            raw: serializeGuideMarkdown(doc),
-            baseRevision: history.frame.appliedRevision ?? 0,
-            dirty: false
-          }
-        }
-      }
-    };
-  if (state.view === "read") return message("Return to editing to change the guide.");
-  if (command.type === "source-edit") {
-    if (utf8Bytes(command.raw) > GUIDE_LIMITS.rawBytes)
-      return message("Raw source capacity exceeded; the existing buffer is unchanged.");
-    const prior = history.frame.recovery;
-    if (prior?.raw === command.raw) return state;
-    return {
-      ...state,
-      diagnostics: [],
-      history: {
-        ...history,
-        revision: history.revision + 1,
-        group: null,
-        frame: {
-          ...history.frame,
-          recovery: {
-            raw: command.raw,
-            baseRevision: prior?.baseRevision ?? history.frame.appliedRevision ?? 0,
-            dirty:
-              (prior?.baseRevision ?? history.frame.appliedRevision ?? 0) !==
-                (history.frame.appliedRevision ?? 0) || command.raw !== serializeGuideMarkdown(doc)
-          }
-        }
-      }
-    };
-  }
-  if (command.type === "source-discard")
-    return {
-      ...state,
-      view: "visual",
-      diagnostics: [],
-      history: {
-        ...history,
-        revision: history.revision + 1,
-        group: null,
-        frame: { ...history.frame, recovery: null }
-      }
-    };
   if (command.type === "history") {
-    if (history.frame.recovery?.dirty)
-      return message("Apply source or explicitly discard it before guide Undo/Redo.");
     const next = stepGuideHistory(history, command.direction);
     if (next === history) return state;
     return {
@@ -178,7 +129,6 @@ export function reduceGuide(
       history: next,
       generation: state.generation + 1,
       intent: { kind: "none" },
-      view: next.frame.recovery?.dirty ? "source" : state.view,
       diagnostics: [],
       message: null
     };
@@ -205,7 +155,7 @@ export function reduceGuide(
       return message(error instanceof Error ? error.message : "Guide edit rejected.");
     }
   };
-  if (command.type === "import-source") {
+  if (command.type === "import-markdown") {
     const parsed = parseGuideMarkdown(
       command.raw,
       guideBuildAdapter(catalogs),
@@ -215,7 +165,7 @@ export function reduceGuide(
       return {
         ...state,
         diagnostics: parsed.diagnostics,
-        message: "Markdown was not imported. The guide and source draft are unchanged."
+        message: "Markdown was not imported. The guide is unchanged."
       };
     const next = publish(parsed.document, false, null);
     return next.history === history
@@ -225,46 +175,9 @@ export function reduceGuide(
           generation: state.generation + 1,
           intent: { kind: "none" },
           selectedBuildId: null,
-          view: "visual",
-          message: "Markdown imported. Undo restores the previous guide and source draft."
+          message: "Markdown imported. Undo restores the previous guide."
         };
   }
-  if (command.type === "source-apply") {
-    const recovery = history.frame.recovery;
-    if (!recovery) return state;
-    if (
-      recovery.baseRevision !== (history.frame.appliedRevision ?? 0) &&
-      !command.acknowledgeReplacement
-    )
-      return message(
-        "The source is based on an older revision. Confirm whole-document replacement to Apply it."
-      );
-    const parsed = parseGuideMarkdown(
-      recovery.raw,
-      guideBuildAdapter(catalogs),
-      () => doc.metadata.id
-    );
-    if (!parsed.ok)
-      return {
-        ...state,
-        view: "source",
-        diagnostics: parsed.diagnostics,
-        message: "Source was not applied. The last applied guide is unchanged."
-      };
-    const next = publish(parsed.document, false, null);
-    if (next.history === history) return next;
-    return next === state
-      ? state
-      : {
-          ...next,
-          generation: state.generation + 1,
-          intent: { kind: "none" },
-          message: "Source applied.",
-          view: "source"
-        };
-  }
-  if (history.frame.recovery?.dirty && command.type !== "metadata")
-    return message("Apply or discard the source draft before editing the guide.");
   switch (command.type) {
     case "edit": {
       const remaining = new Set(guideBuilds(command.document).map((build) => build.id));

@@ -1,6 +1,3 @@
-import { emptyGuide } from "../guide/markdown";
-import { matchingGuideAnchor } from "./guide-navigation";
-import { loadDaggerExample } from "./examples/dagger-guide";
 import { selectAttributePreview } from "./attribute-preview-selectors";
 import {
   lazy,
@@ -17,20 +14,20 @@ import { promotedAppCatalogs, type AppCatalogLoadState } from "./catalogs";
 import { BuildComposer } from "./components/BuildComposer";
 import { SkillTooltip } from "./components/SkillTooltip";
 import { StorageBanner } from "./components/StorageBanner";
+import { DocumentSidebar } from "./components/DocumentSidebar";
+import {
+  documentLibraryReducer,
+  initializeDocumentLibrary,
+  type DocumentWorkspace
+} from "./document-library";
+import { useDocumentPersistence } from "./use-document-persistence";
+import { GuideTransferDialog } from "./components/guide/GuideTransferDialog";
 import { ThemeControls } from "./components/ThemeControls";
 import { selectComposerLoadoutContext } from "./composer-selectors";
 import { selectSkillDisplay, selectValidationView } from "./editor-selectors";
 import type { EditorAction } from "./editor-state";
-import {
-  browserLocalStorage,
-  readLocalLibrary,
-  writeLocalLibrary,
-  type LocalStoragePort
-} from "./local-storage";
-import {
-  createPersistedBuildSnapshot,
-  persistedCatalogFactsFromValidation
-} from "./persistence-schema";
+import { browserLocalStorage, readLocalLibrary, type LocalStoragePort } from "./local-storage";
+import { persistedCatalogFactsFromValidation } from "./persistence-schema";
 import { consumeShareFragment, parseShareFragment } from "./share-url";
 import { importSkillTemplateToEditor } from "./template-workflow";
 import {
@@ -44,11 +41,8 @@ import {
 } from "./theme";
 import {
   createInitialWorkspaceState,
-  createWorkspaceEnvelope,
   needsDirtyGuard,
-  workspacePersistenceFingerprint,
   workspaceReducer,
-  type WorkspaceAction,
   type WorkspaceState
 } from "./workspace-state";
 
@@ -65,9 +59,9 @@ export function App({
     storagePort === undefined ? browserLocalStorage() : storagePort
   );
   const [workspace, workspaceDispatch] = useReducer(
-    workspaceReducer,
+    documentLibraryReducer,
     { catalogState, storage },
-    createWorkspaceFromBrowserStorage
+    createDocumentWorkspaceFromBrowserStorage
   );
   const [themePreference, setThemePreference] = useState<ThemePreference>(() =>
     readThemePreference()
@@ -78,7 +72,7 @@ export function App({
     readonly workspace: WorkspaceState;
     readonly savedWith: ReturnType<typeof persistedCatalogFactsFromValidation> | null;
   }>({ workspace, savedWith: null });
-  const lastFlushTokenRef = useRef(workspace.storage.flushToken);
+  const [guideTransferOpen, setGuideTransferOpen] = useState(false);
   const readyCatalogs = catalogState.status === "ready" ? catalogState.catalogs : null;
   const state = workspace.editor;
   const loadoutContext = selectComposerLoadoutContext(workspace);
@@ -110,67 +104,42 @@ export function App({
   useEffect(() => {
     writeThemePreference(themePreference);
   }, [themePreference]);
-  useWorkspaceAutosave(workspace, savedWith, storage, workspaceDispatch, lastFlushTokenRef);
-  usePagehideFlush(latestWorkspaceRef, storage, workspaceDispatch);
-
-  const replaceDecision = () =>
-    needsDirtyGuard(workspace) &&
-    !window.confirm("Discard unsaved draft changes, including unapplied source?")
-      ? ("cancel" as const)
-      : ("discard" as const);
-  const navigation = (
-    <nav className="workspace-navigation" aria-label="Workspace">
-      <button
-        type="button"
-        aria-pressed={workspace.document.kind !== "guide"}
-        onClick={() => {
-          if (workspace.document.kind === "guide")
-            workspaceDispatch({ type: "new-draft", decision: replaceDecision() });
-        }}
-      >
-        Composer
-      </button>
-      <button
-        type="button"
-        onClick={() =>
-          workspaceDispatch({
-            type: "replace-guide",
-            document: emptyGuide(crypto.randomUUID()),
-            session: crypto.randomUUID(),
-            decision: replaceDecision(),
-            capturedBuild: loadoutContext.selected ? createPersistedBuildSnapshot(state) : null
-          })
+  const openInTab = useDocumentPersistence(workspace, savedWith, storage, workspaceDispatch);
+  const activeName =
+    workspace.document.kind === "guide"
+      ? workspace.document.history.frame.document.metadata.title
+      : workspace.document.kind === "build-set"
+        ? workspace.document.name
+        : workspace.editor.build.name;
+  const header = (
+    <>
+      <DocumentSidebar
+        workspace={workspace}
+        catalogs={readyCatalogs}
+        dispatch={workspaceDispatch}
+        onOpenTab={openInTab}
+        onImportGuide={() => setGuideTransferOpen(true)}
+        themeControls={
+          <ThemeControls
+            preference={themePreference}
+            resolvedTheme={resolvedTheme}
+            onChange={setThemePreference}
+          />
         }
-      >
-        New Guide
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          const decision = replaceDecision();
-          if (decision === "cancel") return;
-          workspaceDispatch({
-            type: "replace-guide",
-            document: loadDaggerExample(),
-            session: crypto.randomUUID(),
-            decision,
-            capturedBuild: loadoutContext.selected ? createPersistedBuildSnapshot(state) : null
-          });
-        }}
-      >
-        Open example guide
-      </button>
-    </nav>
+      />
+      <header className="document-workspace-header">
+        <span className="document-breadcrumb-type">
+          {workspace.document.kind === "guide" ? "Guides" : "Builds"}
+        </span>
+        <span aria-hidden="true">/</span>
+        <span className="document-breadcrumb">{activeName}</span>
+      </header>
+    </>
   );
   if (workspace.document.kind === "guide")
     return (
-      <main className="app-shell guide-shell" aria-label="Build Wars Guide">
-        <ThemeControls
-          preference={themePreference}
-          resolvedTheme={resolvedTheme}
-          onChange={setThemePreference}
-        />
-        {navigation}
+      <main className="app-shell editor-shell guide-shell" aria-label="Build Wars Guide">
+        {header}
         <StorageBanner
           durability={workspace.draftSession.durability}
           diagnostics={workspace.storage.diagnostics}
@@ -178,19 +147,45 @@ export function App({
         />
         <Suspense fallback={<p role="status">Loading guide editor…</p>}>
           <GuideWorkspace
+            key={workspace.document.history.session}
             workspace={workspace}
             guide={workspace.document}
             catalogs={readyCatalogs}
             dispatch={workspaceDispatch}
           />
         </Suspense>
+        {guideTransferOpen && (
+          <GuideTransferDialog
+            getGuide={() => {
+              const document = latestWorkspaceRef.current.workspace.document;
+              if (document.kind !== "guide") throw new Error("The guide is no longer open.");
+              return document;
+            }}
+            catalogs={readyCatalogs}
+            onImport={(raw) => {
+              if (workspace.document.kind !== "guide") return false;
+              workspaceDispatch({
+                type: "guide",
+                command: {
+                  type: "import-markdown",
+                  raw,
+                  session: workspace.document.history.session,
+                  revision: workspace.document.history.revision
+                },
+                catalogs: readyCatalogs
+              });
+              return true;
+            }}
+            onClose={() => setGuideTransferOpen(false)}
+          />
+        )}
       </main>
     );
 
   if (catalogState.status === "error") {
     return (
       <main className="app-shell catalog-error-shell" aria-labelledby="app-title">
-        {navigation}
+        {header}
         <section className="editor-panel catalog-error-state">
           <p className="eyebrow">Catalog error</p>
           <h1 id="app-title">Build Wars</h1>
@@ -224,12 +219,7 @@ export function App({
 
   return (
     <main className="app-shell editor-shell" aria-label="Build Wars" data-catalog-state="ready">
-      <ThemeControls
-        preference={themePreference}
-        resolvedTheme={resolvedTheme}
-        onChange={setThemePreference}
-      />
-      {navigation}
+      {header}
       <StorageBanner
         durability={workspace.draftSession.durability}
         diagnostics={workspace.storage.diagnostics}
@@ -289,13 +279,6 @@ function createWorkspaceFromBrowserStorage({
     diagnostics: read.diagnostics,
     readStatus: read.status
   });
-  if (
-    typeof window !== "undefined" &&
-    workspace.document.kind === "guide" &&
-    matchingGuideAnchor(workspace.document.history.frame.document, window.location.hash)
-  ) {
-    workspace = { ...workspace, document: { ...workspace.document, view: "read" } };
-  }
   if (catalogState.status !== "ready" || typeof window === "undefined") {
     return workspace;
   }
@@ -360,97 +343,29 @@ function createWorkspaceFromBrowserStorage({
   return workspace;
 }
 
-function useWorkspaceAutosave(
-  workspace: WorkspaceState,
-  savedWith: ReturnType<typeof persistedCatalogFactsFromValidation> | null,
-  storage: ReturnType<typeof browserLocalStorage>,
-  dispatch: Dispatch<WorkspaceAction>,
-  lastFlushTokenRef: { current: number }
-): void {
-  const latest = useRef({ workspace, savedWith });
-  useEffect(() => {
-    latest.current = { workspace, savedWith };
-  });
-  const token = workspacePersistenceFingerprint(workspace, savedWith);
-  const canSave = savedWith !== null || workspace.document.kind === "guide";
-  const guide = workspace.document.kind === "guide";
-  const lastDurable = workspace.storage.lastDurableFingerprint;
-  const durability = workspace.draftSession.durability;
-  const flushToken = workspace.storage.flushToken;
-  useEffect(() => {
-    if (
-      !canSave ||
-      token === lastDurable ||
-      durability === "write-blocked" ||
-      durability === "conflict"
-    )
-      return;
-    const explicitFlush = flushToken !== lastFlushTokenRef.current;
-    lastFlushTokenRef.current = flushToken;
-    const timer = window.setTimeout(
-      () => {
-        const current = latest.current;
-        const now = new Date().toISOString();
-        const envelope = createWorkspaceEnvelope(current.workspace, current.savedWith, now);
-        const result = writeLocalLibrary(storage, envelope, {
-          now,
-          reason: explicitFlush ? "explicit flush" : "autosave",
-          expectedRevision: current.workspace.storage.revision
-        });
-        dispatch({ type: "storage-write-result", result, durableFingerprint: token });
-      },
-      explicitFlush ? 0 : guide ? 500 : 150
-    );
-    return () => window.clearTimeout(timer);
-  }, [
-    canSave,
-    dispatch,
-    durability,
-    flushToken,
-    guide,
-    lastDurable,
-    lastFlushTokenRef,
-    storage,
-    token
-  ]);
-}
-
-function usePagehideFlush(
-  latestWorkspaceRef: {
-    current: {
-      readonly workspace: WorkspaceState;
-      readonly savedWith: ReturnType<typeof persistedCatalogFactsFromValidation> | null;
-    };
-  },
-  storage: ReturnType<typeof browserLocalStorage>,
-  dispatch: Dispatch<WorkspaceAction>
-): void {
-  useEffect(() => {
-    const flush = () => {
-      const latest = latestWorkspaceRef.current;
-      if (
-        (latest.savedWith === null && latest.workspace.document.kind !== "guide") ||
-        latest.workspace.draftSession.durability === "write-blocked"
-      ) {
-        return;
-      }
-      const durableFingerprint = workspacePersistenceFingerprint(
-        latest.workspace,
-        latest.savedWith
-      );
-      if (durableFingerprint === latest.workspace.storage.lastDurableFingerprint) {
-        return;
-      }
-      const now = new Date().toISOString();
-      const envelope = createWorkspaceEnvelope(latest.workspace, latest.savedWith, now);
-      const result = writeLocalLibrary(storage, envelope, {
-        now,
-        reason: "pagehide",
-        expectedRevision: latest.workspace.storage.revision
+function createDocumentWorkspaceFromBrowserStorage(
+  input: Parameters<typeof createWorkspaceFromBrowserStorage>[0]
+): DocumentWorkspace {
+  const hasFragment = window.location.hash.length > 0;
+  const requested = new URL(window.location.href).searchParams.get("document");
+  let workspace = initializeDocumentLibrary(createWorkspaceFromBrowserStorage(input));
+  if (requested && !hasFragment) {
+    const record = workspace.library.records.find((record) => record.id === requested);
+    if (record)
+      workspace = documentLibraryReducer(workspace, { type: "open-document", id: record.id });
+    else
+      workspace = documentLibraryReducer(workspace, {
+        type: "set-storage-diagnostics",
+        durability: workspace.draftSession.durability,
+        diagnostics: [
+          {
+            code: "missing-document",
+            path: "location.search",
+            message:
+              "This document is no longer in this device’s library. Choose another entry from the sidebar."
+          }
+        ]
       });
-      dispatch({ type: "storage-write-result", result, durableFingerprint });
-    };
-    window.addEventListener("pagehide", flush);
-    return () => window.removeEventListener("pagehide", flush);
-  }, [dispatch, latestWorkspaceRef, storage]);
+  }
+  return workspace;
 }

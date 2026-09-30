@@ -78,11 +78,12 @@ export function readGuideNodes(content: JSONContent[], previous: AppliedGuide): 
         return build;
       }
       case "guideSkill":
-        return {
+        result = {
           type: "skill",
           skillId: attrs.skillId as string,
           context: attrs.context as Extract<Node, { type: "skill" }>["context"]
         };
+        break;
       case "guideOpaque":
         return { type: "opaque", raw: attrs.raw as string };
       case "heading":

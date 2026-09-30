@@ -551,14 +551,7 @@ export type {
   PartyStructuralIssueSeverity
 } from "./party";
 export { guideBuilds } from "./guide";
-export type {
-  Guide,
-  GuideDocument,
-  GuideMetadata,
-  GuideNode,
-  GuideSkillContext,
-  GuideSource
-} from "./guide";
+export type { Guide, GuideDocument, GuideMetadata, GuideNode, GuideSkillContext } from "./guide";
 export {
   mapGuideNodes,
   guideDeletionImpact,

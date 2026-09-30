@@ -1,5 +1,5 @@
 :::bw-guide
-{"version":1,"id":"dagger-workshop-example","title":"Dagger workshop: two independent variants","summary":"An original interaction example for editing and comparing complete local guide builds. This is not current meta advice.","tags":["example","daggers","practice"],"sources":[{"label":"Jagged Strike mechanics","url":"https://wiki.guildwars.com/wiki/Jagged_Strike","attribution":"Guild Wars Wiki, linked reference only","notes":"Identities and mechanics checked against the approved local catalog. Original guide prose; no copied page text."},{"label":"Dagger Mastery reference","url":"https://wiki.guildwars.com/wiki/Dagger_Mastery","notes":"Linked reference only; no runtime request."},{"label":"Game template format","url":"https://wiki.guildwars.com/wiki/Skill_template_format","notes":"Template codes encode base allocations and skills, not guide bonus assumptions."}]}
+{"version":1,"id":"dagger-workshop-example","title":"Dagger workshop: two independent variants","summary":"An original interaction example for editing and comparing complete local guide builds. This is not current meta advice.","tags":["example","daggers","practice"]}
 :::
 
 # A small workshop, not a meta ranking
@@ -34,11 +34,11 @@ Supported result: :bw-skill{skill="catalog:skill:775" build="dagger-supported"}.
 2. Inspect that card's bound Death Blossom reference, then the other one.
 3. Undo once and check that only the latest authored change returns.
 4. Drag a skill from the catalog into the open slot, or choose a text caret and insert a generic reference.
-5. Save locally, reload, switch to Read, and download Markdown to carry both variants and their assumptions.
+5. Save locally, reload, and download Markdown to carry both variants and their assumptions.
 
 ## Template input
 
-Paste one of these codes into Add a build at end to make another independent build. A game code carries purchased ranks and skills; it does not transfer these rune, headgear, title or outside-effect choices.
+Use `/build` to insert a blank build, then edit its card. Open **Template and advanced settings**, paste one of these codes into **Card template code**, and choose **Apply card template**. A game code carries purchased ranks and skills; it does not transfer these rune, headgear, title or outside-effect choices.
 
 ```text
 Independent: OwBi0xjM5wwwcwEnp/UD+WCAAAAA

@@ -205,6 +205,15 @@ h3 {
   --app-shell-padding: 20px;
   --editor-shell-gap: 16px;
   --theme-controls-block-size: 38px;
+  --skill-catalog-min-width: 320px;
+  --skill-catalog-height: calc(
+    100vh - var(--app-shell-padding) - var(--app-shell-padding) - var(--theme-controls-block-size) -
+      var(--editor-shell-gap)
+  );
+  --skill-catalog-height: calc(
+    100dvh - var(--app-shell-padding) - var(--app-shell-padding) -
+      var(--theme-controls-block-size) - var(--editor-shell-gap)
+  );
   min-height: 100vh;
   padding: var(--app-shell-padding);
   background: var(--surface-page);
@@ -216,12 +225,26 @@ h3 {
   gap: var(--editor-shell-gap);
 }
 
+.app-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+
+.workspace-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .theme-controls {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
-  align-self: flex-end;
+  margin-inline-start: auto;
+  justify-content: flex-end;
   min-height: var(--theme-controls-block-size);
   color: var(--color-muted);
   font-size: 0.82rem;
@@ -270,7 +293,7 @@ h3 {
 
 .composer-layout {
   display: grid;
-  grid-template-columns: minmax(0, 675px) minmax(320px, 1fr);
+  grid-template-columns: minmax(0, 675px) minmax(var(--skill-catalog-min-width), 1fr);
   gap: 16px;
   align-items: start;
 }
@@ -293,14 +316,7 @@ h3 {
 
 .focused-skill-catalog {
   display: flex;
-  max-height: calc(
-    100vh - var(--app-shell-padding) - var(--app-shell-padding) - var(--theme-controls-block-size) -
-      var(--editor-shell-gap)
-  );
-  max-height: calc(
-    100dvh - var(--app-shell-padding) - var(--app-shell-padding) -
-      var(--theme-controls-block-size) - var(--editor-shell-gap)
-  );
+  max-height: var(--skill-catalog-height);
   flex-direction: column;
   overflow: hidden;
 }
